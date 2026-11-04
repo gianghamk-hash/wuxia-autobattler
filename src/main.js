@@ -9,7 +9,18 @@ import { GameEngine } from './core/GameEngine.js';
 const C = CONFIG.COLORS;
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
-const W = canvas.width, H = canvas.height;
+const W = CONFIG.VIEW.WIDTH, H = CONFIG.VIEW.HEIGHT;
+// Keep logical coordinates stable; scale backing pixels for sharp HiDPI rendering.
+function resizeCanvas() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
+  const scale = canvas.getBoundingClientRect().width / W * dpr;
+  canvas.width = Math.max(1, Math.round(W * scale));
+  canvas.height = Math.max(1, Math.round(H * scale));
+  ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+}
+if (!ctx) throw new Error('Trình duyệt không hỗ trợ Canvas 2D.');
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 const engine = new GameEngine();
 window.__engine = engine; // tiện kiểm thử trong console: __engine.setTimeScale(3)
@@ -66,6 +77,7 @@ const btnPause = document.getElementById('btn-pause');
 const speedBtns = [...document.querySelectorAll('[data-scale]')];
 
 function syncButtons() {
+  document.getElementById('engine-status').textContent = engine.paused ? 'Đã tạm dừng' : `Đang chạy ×${engine.timeScale}`;
   btnPause.setAttribute('aria-pressed', String(engine.paused));
   btnPause.textContent = engine.paused ? 'Tiếp tục' : 'Tạm dừng';
   speedBtns.forEach((b) => b.setAttribute('aria-pressed', String(!engine.paused && Number(b.dataset.scale) === engine.timeScale)));
@@ -75,6 +87,7 @@ bus.on(EVT.TIMESCALE_CHANGED, syncButtons);
 btnPause.addEventListener('click', () => engine.togglePause());
 speedBtns.forEach((b) => b.addEventListener('click', () => engine.setTimeScale(Number(b.dataset.scale))));
 window.addEventListener('keydown', (e) => {
+  if (e.repeat || e.ctrlKey || e.altKey || e.metaKey || e.target.closest('button, input, textarea, select, summary, [contenteditable]')) return;
   if (e.code === 'Space') { e.preventDefault(); engine.togglePause(); }
   else if (['Digit1', 'Digit2', 'Digit3'].includes(e.code)) engine.setTimeScale(Number(e.code.slice(-1)));
 });
@@ -94,4 +107,5 @@ bus.on(EVT.TICK, ({ dt, simTime, timeScale }) => {
 
 syncButtons();
 engine.start();
+document.getElementById('loading-screen').hidden = true;
 console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 1 sẵn sàng. Thử: __engine.setTimeScale(3)`);

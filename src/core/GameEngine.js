@@ -24,7 +24,7 @@ export class GameEngine {
     this.fps = 0;
 
     this._rafId = 0;
-    this._lastTs = 0;
+    this._lastTs = null;
     this._accumulator = 0;
     this._fpsAcc = 0;
     this._fpsFrames = 0;
@@ -45,7 +45,7 @@ export class GameEngine {
   start() {
     if (this.running) return;
     this.running = true;
-    this._lastTs = 0; // frame đầu tiên chỉ lấy mốc
+    this._lastTs = null; // frame đầu tiên chỉ lấy mốc
     document.addEventListener('visibilitychange', this._onVisibility);
     this._rafId = requestAnimationFrame(this._loop);
     this.bus.emit(EVT.ENGINE_START, { timeScale: this.timeScale });
@@ -82,16 +82,17 @@ export class GameEngine {
   resetClock() { this.simTime = 0; this.tickCount = 0; this._accumulator = 0; this._logAcc = 0; }
 
   _onVisibility() {
-    if (document.hidden) this._lastTs = 0; // tránh dt khổng lồ khi quay lại tab
+    this._lastTs = null; // tránh dt khổng lồ khi quay lại tab
   }
 
   _loop(ts) {
     if (!this.running) return;
     this._rafId = requestAnimationFrame(this._loop);
 
-    if (this._lastTs === 0) { this._lastTs = ts; return; }
+    if (document.hidden) { this._lastTs = null; return; }
+    if (this._lastTs === null) { this._lastTs = ts; return; }
     const T = CONFIG.TIME;
-    const frameDt = Math.min((ts - this._lastTs) / 1000, T.MAX_FRAME_DELTA); // giây thực, đã chặn trần
+    const frameDt = Math.max(0, Math.min((ts - this._lastTs) / 1000, T.MAX_FRAME_DELTA)); // giây thực, đã chặn trần
     this._lastTs = ts;
     this.realTime += frameDt;
     this.frameCount++;

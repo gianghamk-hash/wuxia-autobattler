@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Võ Lâm Hài Hiệp Truyện - AutoBattler</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Võ Lâm Hài Hiệp Truyện — Sprint 1</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="game-container">
-        <!-- Lớp Render Canvas cho lưới trận địa và hiệu ứng -->
-        <canvas id="game-canvas"></canvas>
-        
-        <!-- Lớp UI DOM đè lên trên Canvas (Chứa HUD, Menu, Dialogue) -->
-        <div id="ui-layer">
-            <div id="loading-screen" class="screen active">
-                <h1>Võ Lâm Hài Hiệp Truyện</h1>
-                <p>Đang tụ khí đan điền...</p>
-            </div>
-            <!-- Các screen khác (MainMenu, Roster, Formation) sẽ được thêm ở Sprint sau -->
-        </div>
-    </div>
-
-    <!-- Load file main dưới dạng ES6 Module -->
-    <script type="module" src="./src/main.js"></script>
+  <main id="game-container">
+    <header>
+      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 1</p>
+      <h1>Diễn võ trường</h1>
+      <p>Kiểm tra nền tảng thời gian và bàn cờ chiến thuật.</p>
+    </header>
+    <section class="arena" aria-label="Bàn cờ chiến thuật">
+      <canvas id="game-canvas" width="960" height="540" role="img" aria-label="Lưới 6 cột, 3 hàng. Chấm vàng minh họa tốc độ mô phỏng."></canvas>
+      <div id="loading-screen" role="status">
+        <p>Đang tụ khí đan điền…</p>
+        <noscript>Vui lòng bật JavaScript để chạy game.</noscript>
+      </div>
+    </section>
+    <section class="controls" aria-label="Điều khiển mô phỏng">
+      <button id="btn-pause" type="button" aria-pressed="false">Tạm dừng</button>
+      <div class="speeds" role="group" aria-label="Tốc độ">
+        <button type="button" data-scale="1" aria-pressed="true">×1</button>
+        <button type="button" data-scale="2" aria-pressed="false">×2</button>
+        <button type="button" data-scale="3" aria-pressed="false">×3</button>
+      </div>
+      <span id="engine-status" role="status">Đang khởi động</span>
+    </section>
+    <p class="hint">Phím 1 / 2 / 3: đổi tốc độ · Space: tạm dừng / tiếp tục.</p>
+    <details>
+      <summary>Nhật ký mô phỏng (tối đa 40 dòng)</summary>
+      <ol id="tick-log" aria-label="Nhật ký tick"></ol>
+    </details>
+    <footer>Bản kiểm thử engine · Nhân vật và chiến đấu sẽ được bổ sung ở các sprint tiếp theo.</footer>
+  </main>
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
