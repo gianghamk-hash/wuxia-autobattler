@@ -1,3 +1,4 @@
+import { CombatEngine } from '../combat/CombatEngine.js';
 import { Hero } from '../entities/Hero.js';
 import { Companion } from '../entities/Companion.js';
 import { GridSystem } from '../combat/GridSystem.js';
@@ -21,14 +22,54 @@ export function mountTacticsUI({ engine }) {
   for (let y = 0; y < 3; y++) for (let x = 0; x < 6; x++) option(cellSelect, `${x},${y}`, `(${x}, ${y}) · ${x < 3 ? 'Sân nhà' : 'Sân địch'}`);
   cellSelect.value = '1,1'; strategy.value = 'role';
   let grid, units, selectedId = 'hero', orders = new Map(), infoTime = 0;
+  let combat = null, floating = [];
   const statuses = new StatusEngine();
+  const manualIds = ['btn-tactics-place', 'btn-tactics-move', 'btn-tactics-approach', 'btn-status-poison', 'btn-status-bleed', 'btn-status-stun', 'btn-status-shield', 'btn-status-cleanse', 'btn-status-damage'];
+  function lockControls() {
+    manualIds.forEach(id => { el(id).disabled = Boolean(combat); });
+    [heroSelect, ally1, ally2, el('battle-seed')].forEach(node => { node.disabled = combat?.state === 'running'; });
+    el('btn-battle-start').disabled = Boolean(combat);
+    strategy.disabled = cellSelect.disabled = Boolean(combat);
+  }
+  function eventLog(event) {
+    const names = id => units.find(u => u.id === id)?.name ?? 'Hiệu ứng';
+    const messages = {
+      start: `Khai chiến · Mã trận ${event.seed}`,
+      cast: `${names(event.actorId)} chuẩn bị ${event.skill}`,
+      ultimate: `${names(event.actorId)} tung ${event.name}!`,
+      damage: `${names(event.targetId)} nhận ${Math.ceil(event.amount ?? 0)} sát thương${event.crit ? ' (bạo kích)' : ''}${event.absorbed ? ` · Khiên đỡ ${Math.ceil(event.absorbed)}` : ''}`,
+      heal: `${names(event.targetId)} hồi ${Math.ceil(event.amount ?? 0)} HP`,
+      death: `${names(event.targetId)} bị hạ`,
+      miss: `${names(event.actorId)} đánh hụt`,
+      synergy: `${event.team === 'home' ? 'Đội nhà' : 'Đội địch'} kích duyên ${event.name}`,
+      passive: `${names(event.actorId)} kích hoạt ${event.name}`
+    };
+    if (messages[event.type]) {
+      const row = document.createElement('li'); row.textContent = `${event.time.toFixed(1)}s · ${messages[event.type]}`;
+      const log = el('battle-log'); log.prepend(row); while (log.children.length > 80) log.lastChild.remove();
+    }
+    if (['damage', 'heal', 'miss'].includes(event.type) && event.position) {
+      floating.push({ ...event, life: .8 }); if (floating.length > 30) floating.shift();
+    }
+    if (event.type === 'result') {
+      const label = event.reason === 'aborted' ? 'Đã dừng trận' : event.reason === 'timeout' ? 'Hòa: hết thời gian' : event.winner === 'home' ? 'Chiến thắng!' : event.winner === 'enemy' ? 'Thất bại' : 'Hòa';
+      el('battle-result').textContent = `${label} · ${event.duration.toFixed(1)} giây · Mã trận ${event.seed}`;
+      say(`${label}. Dựng lại bàn thử để chơi trận mới.`);
+      const list = el('battle-stats'); list.replaceChildren();
+      for (const stat of event.statistics) {
+        const row = document.createElement('li'); row.textContent = `${stat.name}: ${Math.ceil(stat.damage)} sát thương · ${Math.ceil(stat.healing)} hồi máu · ${stat.kills} hạ gục · ${stat.ultimates} tuyệt kỹ`;
+        list.append(row);
+      }
+      lockControls();
+    }
+  }
   const say = (text, error = false) => { message.textContent = text; message.dataset.error = String(error); };
   const actor = () => units.find(unit => unit.id === selectedId);
-  const target = unit => TargetSelector.select(unit, units, grid, strategy.value);
+  const target = unit => !unit.alive ? null : combat ? units.find(u => u.id === combat.brains.get(unit.id)?.targetId && u.alive) ?? null : TargetSelector.select(unit, units, grid, strategy.value);
   const position = () => { const [x, y] = cellSelect.value.split(',').map(Number); return { x, y }; };
   function refreshInfo() {
     const unit = actor(), selected = target(unit);
-    const status = unit.statusEffects.map(e => `${({ poison: 'Độc', bleed: 'Xuất huyết', stun: 'Choáng', shield: 'Khiên', taunt: 'Khiêu khích' })[e.type]} ${e.remaining.toFixed(1)}s${e.stacks ? ` ×${e.stacks}` : ''}`).join(', ') || 'Không có';
+    const status = unit.statusEffects.map(e => `${({ poison: 'Độc', bleed: 'Xuất huyết', stun: 'Choáng', shield: 'Khiên', taunt: 'Khiêu khích', regen: 'Hồi phục', attack_up: 'Tăng công', dodge_up: 'Né tránh', accuracy_down: 'Mù', physical_defense_down: 'Giảm giáp', melee_reflect: 'Phản sát thương', charm: 'Mê hoặc' })[e.type]} ${e.remaining.toFixed(1)}s${e.stacks ? ` ×${e.stacks}` : ''}`).join(', ') || 'Không có';
     info.textContent = `${unit.name} · ${unit.alive ? `Ô (${unit.gridPosition.x}, ${unit.gridPosition.y})` : 'Đã bị hạ'} · HP ${Math.ceil(unit.stats.hp)}/${unit.stats.maxHp} · Khiên ${Math.ceil(unit.shield)} · Nộ ${unit.stats.energy.toFixed(1)} · ${status}. Mục tiêu: ${selected?.name ?? 'Không có'}.`;
   }
   function reset() {
@@ -43,9 +84,12 @@ export function mountTacticsUI({ engine }) {
     nextUnits[3].stats.hp *= .8; nextUnits[5].stats.hp *= .25;
     const positions = [{ x: 1, y: 1 }, { x: 2, y: 0 }, { x: 0, y: 2 }, { x: 3, y: 1 }, { x: 5, y: 0 }, { x: 4, y: 2 }];
     nextUnits.forEach((unit, i) => nextGrid.place(unit, positions[i]));
+    combat?.abort(); combat = null; floating = [];
+    el('battle-result').textContent = 'Sẵn sàng khai chiến · Trận thử không nhận thưởng hay thay đổi cốt truyện.';
+    el('battle-log').replaceChildren(); el('battle-stats').replaceChildren();
     grid = nextGrid; units = nextUnits; orders = new Map(); selectedId = 'hero';
     actorSelect.replaceChildren(); units.forEach(unit => option(actorSelect, unit.id, unit.name)); actorSelect.value = selectedId;
-    refreshInfo(); say('Bàn thử đã sẵn sàng. Chọn nhân vật rồi thử xếp ô, tìm mục tiêu hoặc hiệu ứng.');
+    lockControls(); refreshInfo(); say('Bàn thử đã sẵn sàng. Chọn nhân vật rồi thử xếp ô, tìm mục tiêu hoặc hiệu ứng.');
   }
   function safely(action) { return () => { try { action(); refreshInfo(); } catch (error) { say(error.message, true); } }; }
   el('btn-tactics-reset').addEventListener('click', safely(reset));
@@ -82,7 +126,23 @@ export function mountTacticsUI({ engine }) {
     if (!actor().alive) throw new Error('Nhân vật đã bị hạ. Hãy dựng lại bàn thử.');
     action(); say('Đã áp dụng thử nghiệm lên nhân vật đang chọn.');
   }));
+  el('battle-seed').value = '12345';
+  el('btn-battle-start').addEventListener('click', safely(() => {
+    if (combat) throw new Error('Hãy dựng lại bàn thử để bắt đầu trận mới.');
+    const rawSeed = el('battle-seed').value.trim(), seed = Number(rawSeed);
+    if (!rawSeed || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Mã trận phải là số nguyên từ 0 đến 4294967295.');
+    if (units.some(u => !u.alive)) throw new Error('Có nhân vật đã bị hạ; hãy dựng lại bàn thử.');
+    units.forEach(u => { u.stats.hp = u.stats.maxHp; u.stats.energy = 0; u.statusEffects = []; u.state = 'IDLE'; });
+    units.find(u => u.id === 'enemy_03').name = 'Địch thích khách';
+    actorSelect.replaceChildren(); units.forEach(u => option(actorSelect, u.id, u.name)); actorSelect.value = selectedId;
+    orders.clear(); floating = []; el('battle-log').replaceChildren(); el('battle-stats').replaceChildren();
+    combat = new CombatEngine({ units, grid, seed, onEvent: eventLog });
+    combat.start(); lockControls();
+    el('battle-result').textContent = 'Đang giao chiến…';
+    say(engine.paused ? 'Trận đã sẵn sàng. Bấm Tiếp tục để chạy.' : 'Hai phe đang tự động giao chiến.');
+  }));
   engine.addUpdater(dt => {
+    if (combat) { combat.update(dt); return; }
     units.forEach(unit => statuses.update(unit, dt)); grid.removeDead();
     for (const [id, order] of orders) {
       const unit = units.find(u => u.id === id);
@@ -102,11 +162,17 @@ export function mountTacticsUI({ engine }) {
       }
     }
   });
-  engine.addRenderer((_alpha, frameDt) => { infoTime += frameDt; if (infoTime >= .1) { infoTime = 0; refreshInfo(); } });
+  engine.addRenderer((_alpha, frameDt) => {
+    floating = floating.map(item => ({ ...item, life: item.life - frameDt })).filter(item => item.life > 0);
+    if (combat?.state === 'running') {
+      const text = `${engine.paused ? 'Tạm dừng' : 'Đang giao chiến'} · ${Math.floor(combat.elapsed)} / ${combat.maxDuration} giây`;
+      if (el('battle-result').textContent !== text) el('battle-result').textContent = text;
+    }
+    infoTime += frameDt; if (infoTime >= .1) { infoTime = 0; refreshInfo(); } });
   reset();
   return {
     // Expose an inspection API for console checks; gameplay state is kept separate.
-    get grid() { return grid; }, get units() { return units; },
+    get combat() { return combat; }, get grid() { return grid; }, get units() { return units; },
     draw(ctx, { x, y, cellW, cellH }) {
       const chosen = actor(), selected = target(chosen);
       for (const unit of units.filter(u => u.alive)) {
@@ -124,6 +190,12 @@ export function mountTacticsUI({ engine }) {
         ctx.fillStyle = '#334155'; ctx.fillRect(cx - barW / 2, cy + 33, barW, 6);
         ctx.fillStyle = '#6fb59b'; ctx.fillRect(cx - barW / 2, cy + 33, barW * unit.hpRatio, 6);
         ctx.fillStyle = '#d4af37'; ctx.fillRect(cx - barW / 2, cy + 42, barW * unit.stats.energy / unit.stats.maxEnergy, 3);
+      }
+      for (const item of floating) {
+        const p = item.position;
+        ctx.font = 'bold 18px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillStyle = item.type === 'heal' ? '#91efb6' : item.crit ? '#ffd45b' : item.damageType === 'magical' ? '#d49aff' : '#ff9a8e';
+        ctx.fillText(item.type === 'miss' ? 'Hụt' : `${item.type === 'heal' ? '+' : '-'}${Math.ceil(item.amount)}`, x + (p.x + .5) * cellW, y + p.y * cellH + 18 - (1 - item.life / .8) * 20);
       }
       ctx.textAlign = 'left'; ctx.lineWidth = 1;
     }

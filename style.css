@@ -69,3 +69,9 @@ input:focus-visible, select:focus-visible, .codex-grid:focus-visible { outline: 
 #tactics-message { min-height: 1.6em; color: #6fb59b; }
 #tactics-message[data-error="true"] { color: #ffad9f; }
 .tactics-panel .codex-filters label { flex: 1 1 180px; }
+
+#battle-result { color: var(--gold); font-size: 1.1rem; min-height: 1.6em; }
+#battle-stats, #battle-log { font-size: .85rem; line-height: 1.8; overflow-wrap: anywhere; }
+#battle-log { max-height: 240px; overflow: auto; padding-left: 18px; }
+#battle-seed { width: 150px; }
+.battle-controls label { margin: 0; }

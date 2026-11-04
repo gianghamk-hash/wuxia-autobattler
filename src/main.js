@@ -1,5 +1,5 @@
 /**
- * main.js — Bản thử Sprint 4: engine, lưu trữ và kỳ phổ giang hồ.
+ * main.js — Bản thử Sprint 5: engine, lưu trữ và kỳ phổ giang hồ.
  * Sẽ được thay bằng bootstrap hoàn chỉnh ở Sprint 10.
  */
 import { CONFIG } from './config.js';
@@ -145,4 +145,4 @@ window.__storage = await mountSaveUI({ getSnapshot, restoreSnapshot, engine,
   resetSession() { restoreSnapshot(newSession()); } });
 engine.start();
 document.getElementById('loading-screen').hidden = true;
-console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 4 sẵn sàng. Thử: __engine.setTimeScale(3)`);
+console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 5 sẵn sàng. Thử: __engine.setTimeScale(3)`);

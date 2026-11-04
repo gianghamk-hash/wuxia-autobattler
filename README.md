@@ -124,3 +124,53 @@ này chỉ để kiểm tra. Độc tái áp dụng làm mới thời lượng c
 và mức sát thương/tầng cao hơn; xuất huyết không cộng tầng. Khiên hết hạn ở
 cùng thời điểm một tick sát thương sẽ được gỡ trước tick đó. Mọi hiệu ứng có
 chung một timeline, không phụ thuộc thứ tự được thêm hoặc độ dài bước cập nhật.
+
+## Sprint 5 — chiến đấu tự động
+
+Bấm **Khai chiến** trong Bàn thử chiến thuật. Trận dùng vị trí đang xếp, hồi đầy
+HP, xóa hiệu ứng thử và đưa nộ về 0. Mỗi phe tối đa ba nhân vật. Trong trận,
+các nút sửa vị trí/HP/hiệu ứng bị khóa; vẫn có thể xem nhân vật, tạm dừng hoặc
+đổi ×1/×2/×3. **Dựng lại bàn thử** hủy trận hiện tại, khôi phục bố cục mẫu và
+cho chọn đội mới. Kết quả có thắng/thua/hòa, thời gian và thống kê từng người.
+Giới hạn trận là 120 giây mô phỏng; hết thời gian xử hòa, không suy diễn thắng
+bằng lượng HP còn lại. Nhật ký giữ 80 dòng, số sát thương/hồi máu nổi trên bàn.
+
+- `AIBehavior.js`: FSM Idle → Move → Attack/Ultimate; Stunned và Dead chặn
+  hành động. Đòn thường có windup 0.2s, tuyệt kỹ 0.35s; sát thương xảy ra ở
+  impact. Nộ được trừ lúc chiêu chạm, không trừ khi mục tiêu chết giữa windup.
+  Khi mục tiêu chết/hết hợp lệ, tìm lại ở tick tiếp theo. Nếu hậu tuyến bị
+  chắn, AI thử mục tiêu địch có đường tiếp cận, không bỏ qua khiêu khích hợp lệ.
+- `CombatEngine.js`: bước cố định 1/60s, RNG có seed riêng. Với cùng đội hình,
+  vị trí, chỉ số ban đầu và mã trận, mọi tốc độ cho cùng kết quả và chuỗi sự
+  kiện. Thứ tự hành động theo tốc đánh rồi ID để xử lý cùng thời điểm ổn định.
+  Không dùng thời gian thực, `Math.random`, `setTimeout` cho logic chiến đấu.
+- `CombatMath.js`: giảm sát thương theo giáp GDD; crit tối đa 75%, hệ số crit
+  theo Kình Lực; nhịp đánh dùng BaseInterval/(1+Thân Pháp×0.015)/attackSpeed.
+  Đỡ đòn giảm 50% sát thương; mù và né tránh kết hợp, tối đa 95% tránh/hụt.
+  Đánh thường trúng/hồi phục nhận 15 nộ, sát thương HP nhận theo tỷ lệ ×40,
+  hạ gục nhận 25 nộ. Khiên không được tính là HP mất để tích nộ phòng thủ.
+- Thực thi hiệu ứng của đủ 20 đồng đội: heal/HoT, taunt/stun, buff/cleanse,
+  mù, ba tia xuyên thấu, năm nhát liên hoàn, dịch chuyển, độc, phản sát thương,
+  mê hoặc, tiếp nộ, đẩy lùi, kết liễu và bình rượu ngẫu nhiên.
+- Năm phái có bộ kỹ năng khởi đầu trong `HeroSkillsData.js` dùng cơ chế đã có
+  của đồng đội cùng phái. Đây là nền trước cây kỹ năng Sprint 6.
+- Áp bốn kích duyên và nội tại: khiên vào trận, tăng nộ/tăng sát thương,
+  giảm giáp, đòn thứ tư Cái Bang, độc Đường Môn nổ ở năm tầng, Nga Mi giải
+  khống chế khi tung tuyệt kỹ, hộ thể Thiếu Lâm và nội lực/phản kích Võ Đang.
+
+Các thông số chưa có trong GDD hiện là dữ liệu cân bằng thử: hộ thể Thiếu Lâm
+kích một lần/trận, kéo dài 6s; nội lực Võ Đang ban đầu bằng 3×nội công, tiêu
+hao để đỡ 40%, phản kích bằng 30% nội công (qua nội phòng, không lặp phản ứng).
+Độc cơ bản Đường Môn là 15% ngoại công/tầng/giây, nổ bằng 150% ngoại công.
+Ba tia ưu tiên mục tiêu cùng hàng rồi các hàng kế; vùng 3×3 là Chebyshev một ô
+quanh tâm. Khi chưa có ô trống, đẩy lùi không đổi vị trí. Mê hoặc đảo mục tiêu
+công kích sang đồng đội cũ, không biến hồi máu thành hồi cho đối phương.
+Các giá trị này cần tiếp tục cân bằng qua chơi thử.
+
+Bản Sprint 5 vẫn là trận thử độc lập: không cộng XP/vật phẩm/cờ nhiệm vụ và
+không lưu trận đang đánh; save tiến trình Sprint 2–4 vẫn tương thích. Sprint
+6 thêm cây kỹ năng/trang bị; Sprint 7 hoàn thiện giao diện và xếp trận.
+
+Kiểm thử mới bao gồm: mô phỏng đủ 20 vai trò, tác dụng từng tuyệt kỹ, thay
+mục tiêu giữa windup, rage, stun, các kết quả trận, giới hạn nhật ký và so
+sánh chính xác kết quả/sự kiện ở ×1/×2/×3 qua GameEngine thật.

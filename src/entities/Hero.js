@@ -1,4 +1,5 @@
 import { Unit } from './Unit.js';
+import { HERO_SKILLS } from '../data/HeroSkillsData.js';
 import { SECTS } from '../data/SectsData.js';
 const ROLES = { ThieuLam: 'Tank', VoDang: 'SubTank', CaiBang: 'Bruiser', NgaMi: 'Healer', DuongMon: 'RangedDPS' };
 export class Hero extends Unit {
@@ -9,6 +10,7 @@ export class Hero extends Unit {
       growthPerLevel: sect.growthPerLevel }, { id: 'hero', ...options });
     this.passive = structuredClone(sect.passive);
     // Skill tree allocation and active hero skills are implemented in Sprint 6.
+    this.skills = structuredClone(HERO_SKILLS[sectId]);
     this.allocatedSkills = [];
   }
 }

@@ -18,6 +18,7 @@ export class Unit {
     }
     stats.hp = stats.maxHp; stats.energy = 0;
     this.stats = stats; this.skills = structuredClone(definition.skills ?? {});
+    this.energyGainMultiplier = 1; this.damageMultiplier = 1;
     this.gridPosition = null; this.statusEffects = []; this.state = 'IDLE';
   }
   get alive() { return this.stats.hp > 0; }
@@ -28,7 +29,7 @@ export class Unit {
     if (!Number.isFinite(amount) || amount < 0) throw new Error('Nộ khí không hợp lệ.');
     if (!this.alive || this.stunned) return 0;
     const before = this.stats.energy;
-    this.stats.energy = Math.min(this.stats.maxEnergy, before + amount);
+    this.stats.energy = Math.min(this.stats.maxEnergy, before + amount * this.energyGainMultiplier);
     return this.stats.energy - before;
   }
   heal(amount) {

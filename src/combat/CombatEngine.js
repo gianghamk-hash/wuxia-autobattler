@@ -1,0 +1,245 @@
+import { CONFIG } from '../config.js';
+import { AIBehavior } from './AIBehavior.js';
+import { StatusEngine } from './StatusEngine.js';
+import { TargetSelector } from './TargetSelector.js';
+import { calculateDamage, modifier, seededRandom } from './CombatMath.js';
+import { SECTS } from '../data/SectsData.js';
+import { getActiveSynergies } from '../data/SynergiesData.js';
+
+const FRIENDLY = ['self', 'all_allies', 'lowest_hp_ally', 'stunned_ally', 'hero_ally'];
+export class CombatEngine {
+  constructor({ units, grid, seed = 12345, maxDuration = 120, onEvent = () => {} }) {
+    if (!Array.isArray(units) || !units.length || new Set(units.map(u => u.id)).size !== units.length ||
+        !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff || !Number.isFinite(maxDuration) || maxDuration <= 0) {
+      throw new Error('Cấu hình trận đấu không hợp lệ.');
+    }
+    for (const unit of units.filter(u => u.alive)) {
+      if (!unit.skills.autoAttack || !unit.skills.ultimate || grid.units.get(unit.id) !== unit || !unit.gridPosition) throw new Error('Nhân vật chưa sẵn sàng chiến đấu.');
+    }
+    for (const team of ['home', 'enemy']) if (units.filter(u => u.team === team).length > 3) throw new Error('Mỗi phe tối đa ba nhân vật.');
+    this.units = units; this.grid = grid; this.seed = seed; this.random = seededRandom(seed);
+    this.maxDuration = maxDuration; this.onEvent = onEvent; this.state = 'idle'; this.result = null;
+    this.ticks = 0; this.elapsed = 0; this.accumulator = 0; this.events = [];
+    this.brains = new Map(units.map(u => [u.id, new AIBehavior(u)]));
+    this.records = new Map(units.map(u => [u.id, { id: u.id, name: u.name, team: u.team, damage: 0, healing: 0, kills: 0, ultimates: 0 }]));
+    this.passives = new Map(units.map(u => [u.id, { attacks: 0, shieldUsed: false, internalForce: u.sect === 'VoDang' ? u.stats.magicalAtk * 3 : 0 }]));
+    this.teamSynergies = {};
+    this.statuses = new StatusEngine({ onPeriodic: (unit, amount, effect) => {
+      const source = this.units.find(u => u.id === effect.sourceId);
+      if (effect.type === 'regen') this.heal(source, unit, amount);
+      else this.dealDamage(source, unit, amount, { damageType: 'true', periodic: true });
+    } });
+  }
+  emit(event) {
+    const entry = { ...event, time: this.elapsed };
+    this.events.push(entry); if (this.events.length > 200) this.events.shift();
+    this.onEvent(entry);
+  }
+  start() {
+    if (this.state !== 'idle') return false;
+    this.state = 'running';
+    for (const unit of this.units) { unit.energyGainMultiplier = 1; unit.damageMultiplier = 1; }
+    for (const team of ['home', 'enemy']) {
+      const members = this.units.filter(u => u.team === team && u.alive);
+      const active = getActiveSynergies(members.map(u => u.sect)); this.teamSynergies[team] = active.map(s => s.id);
+      for (const synergy of active) {
+        for (const unit of members) {
+          if (synergy.id === 'thai_son_bac_dau') this.statuses.apply(unit, { type: 'shield', amount: unit.stats.maxHp * .15, duration: this.maxDuration + 1 });
+          if (synergy.id === 'am_duong_giao_hoa') unit.energyGainMultiplier = 1.25;
+          if (synergy.id === 'doc_ba_vo_lam') unit.damageMultiplier = 1.2;
+        }
+        this.emit({ type: 'synergy', team, name: synergy.name });
+      }
+    }
+    this.emit({ type: 'start', seed: this.seed }); this.checkResult(); return true;
+  }
+  update(dt) {
+    if (!Number.isFinite(dt) || dt < 0) throw new Error('Thời gian trận đấu không hợp lệ.');
+    if (this.state !== 'running') return;
+    this.accumulator += dt;
+    const step = CONFIG.TIME.FIXED_STEP;
+    while (this.accumulator >= step - 1e-9 && this.state === 'running') {
+      this.accumulator = Math.max(0, this.accumulator - step); this.ticks++; this.elapsed = this.ticks * step;
+      for (const unit of this.units) this.statuses.update(unit, step);
+      this.grid.removeDead();
+      if (this.checkResult()) break;
+      // Stable initiative order; speed controls never alter iteration or random calls.
+      const initiative = [...this.units].sort((a, b) => b.stats.attackSpeed - a.stats.attackSpeed || a.id.localeCompare(b.id));
+      for (const unit of initiative) {
+        this.brains.get(unit.id).update(step, this); this.grid.removeDead();
+        if (this.checkResult()) break;
+      }
+      if (this.state === 'running' && this.elapsed >= this.maxDuration - 1e-9) this.finish(null, 'timeout');
+    }
+  }
+  checkResult() {
+    const home = this.units.some(u => u.team === 'home' && u.alive), enemy = this.units.some(u => u.team === 'enemy' && u.alive);
+    if (!home || !enemy) { this.finish(home ? 'home' : enemy ? 'enemy' : null, 'elimination'); return true; }
+    return false;
+  }
+  finish(winner, reason) {
+    if (this.state !== 'running') return;
+    this.state = 'finished';
+    this.result = { winner, reason, duration: this.elapsed, seed: this.seed, statistics: structuredClone([...this.records.values()]) };
+    this.emit({ type: 'result', ...this.result });
+  }
+  abort() { if (this.state === 'running') this.finish(null, 'aborted'); }
+  friendly(skill) { return FRIENDLY.includes(skill.targetType); }
+  opponents(actor) {
+    const charmed = actor.statusEffects.some(e => e.type === 'charm' && e.remaining > 0);
+    return this.units.filter(u => u.alive && u.gridPosition && u.id !== actor.id && (charmed ? u.team === actor.team : u.team !== actor.team));
+  }
+  allies(actor) { return this.units.filter(u => u.alive && u.gridPosition && u.team === actor.team); }
+  validTarget(actor, target, skill) {
+    if (!target?.alive || !target.gridPosition) return false;
+    return this.friendly(skill) ? target.team === actor.team : this.opponents(actor).includes(target);
+  }
+  range(actor, skill) { return this.friendly(skill) || skill.effects?.some(e => e.type === 'blink') ? 6 : skill.targetType === 'farthest_enemy' ? 4 : actor.stats.attackRange; }
+  inRange(actor, target, skill) { return target?.gridPosition && this.grid.distance(actor.gridPosition, target.gridPosition) <= this.range(actor, skill); }
+  chooseTarget(actor, skill, basic = false) {
+    if (!skill) return null;
+    const allies = this.allies(actor), enemies = this.opponents(actor);
+    const distance = (a, b) => this.grid.distance(actor.gridPosition, a.gridPosition) - this.grid.distance(actor.gridPosition, b.gridPosition) || a.id.localeCompare(b.id);
+    const hp = (a, b) => a.hpRatio - b.hpRatio || distance(a, b);
+    if (skill.targetType === 'self' || skill.targetType === 'all_allies') return actor;
+    if (skill.targetType === 'hero_ally') return allies.find(u => u.templateId === 'hero') ?? null;
+    if (skill.targetType === 'stunned_ally') return allies.filter(u => u.stunned).sort(hp)[0] ?? null;
+    if (skill.targetType === 'lowest_hp_ally') return allies.filter(u => u.hpRatio < 1).sort(hp)[0] ?? null;
+    const taunt = [...actor.statusEffects].reverse().find(e => e.type === 'taunt' && e.remaining > 0 && enemies.some(u => u.id === e.sourceId));
+    if (taunt) return enemies.find(u => u.id === taunt.sourceId);
+    if (skill.targetType === 'farthest_enemy') return enemies.sort((a, b) => -distance(a, b))[0] ?? null;
+    if (skill.targetType === 'lowest_hp_enemy') return enemies.sort(hp)[0] ?? null;
+    if (skill.targetType === 'front_enemy') return enemies.sort((a, b) => (actor.team === 'home' ? a.gridPosition.x - b.gridPosition.x : b.gridPosition.x - a.gridPosition.x) || distance(a, b))[0] ?? null;
+    if (basic) {
+      // Reuse the role selector. A charmed attacker sees its former allies as enemies.
+      const view = new Proxy(actor, { get: (unit, key) => key === 'team' && enemies[0]?.team === actor.team ? (actor.team === 'home' ? 'enemy' : 'home') : Reflect.get(unit, key) });
+      return TargetSelector.select(view, enemies, this.grid, ['Healer', 'Support', 'Buffer', 'Battery'].includes(actor.role) ? 'nearest' : 'role');
+    }
+    return enemies.sort(distance)[0] ?? null;
+  }
+  reachableAlternative(actor, skill) {
+    const taunted = actor.statusEffects.some(e => e.type === 'taunt' && e.remaining > 0 && this.opponents(actor).some(u => u.id === e.sourceId));
+    if (taunted) return null; // A valid taunt cannot be bypassed just because the source is screened.
+    const candidates = this.friendly(skill) ? this.allies(actor) : this.opponents(actor);
+    return candidates.filter(u => this.grid.pathToRange(actor, u, this.range(actor, skill)) !== null)
+      .sort((a, b) => this.grid.distance(actor.gridPosition, a.gridPosition) - this.grid.distance(actor.gridPosition, b.gridPosition) || a.id.localeCompare(b.id))[0] ?? null;
+  }
+  heal(source, target, amount) {
+    const restored = target.heal(amount);
+    if (source) this.records.get(source.id).healing += restored;
+    if (restored > 0) this.emit({ type: 'heal', actorId: source?.id, targetId: target.id, amount: restored, position: { ...target.gridPosition } });
+    return restored;
+  }
+  dealDamage(source, target, amount, options = {}) {
+    if (!target.alive) return { hpDamage: 0, absorbed: 0, killed: false };
+    const { damageType = 'physical', reaction = false, periodic = false, ignoreShield = false, crit = false } = options;
+    if (damageType === 'true') amount *= source?.damageMultiplier ?? 1;
+    const position = { ...target.gridPosition };
+    const passive = this.passives.get(target.id);
+    if (target.sect === 'VoDang' && passive.internalForce > 0) {
+      const redirected = Math.min(passive.internalForce, amount * .4); amount -= redirected; passive.internalForce -= redirected;
+    }
+    const result = target.takeDamage(amount, { ignoreShield });
+    if (source) this.records.get(source.id).damage += result.hpDamage;
+    this.emit({ type: 'damage', actorId: source?.id, targetId: target.id, amount: result.hpDamage, absorbed: result.absorbed, damageType, crit, position });
+    if (result.killed) {
+      if (source) { source.gainEnergy(CONFIG.COMBAT.ENERGY_ON_KILL); this.records.get(source.id).kills++; }
+      this.emit({ type: 'death', targetId: target.id });
+    }
+    if (target.alive && target.sect === 'ThieuLam' && target.hpRatio < .3 && !passive.shieldUsed) {
+      passive.shieldUsed = true;
+      this.statuses.apply(target, { type: 'shield', duration: 6, amount: target.stats.maxHp * .5 });
+      this.statuses.apply(target, { type: 'melee_reflect', duration: 6, ratio: .25 });
+      this.emit({ type: 'passive', actorId: target.id, name: SECTS.ThieuLam.passive.name });
+    }
+    if (source?.alive && !reaction && !periodic && damageType !== 'true' && result.hpDamage > 0) {
+      const melee = source.gridPosition && position && this.grid.distance(source.gridPosition, position) <= 1;
+      const reflected = melee ? modifier(target, 'melee_reflect') : 0;
+      if (reflected > 0) this.dealDamage(target, source, result.hpDamage * reflected, { damageType: 'true', reaction: true });
+      if (target.alive && target.sect === 'VoDang' && source.alive) this.dealDamage(target, source, target.stats.magicalAtk * .3 *
+        (1000 / (1000 + source.stats.magicalDef * CONFIG.MATH.ARMOR_CONSTANT)), { damageType: 'magical', reaction: true });
+    }
+    return result;
+  }
+  hit(actor, target, skill) {
+    if (!actor.alive || !target.alive) return false;
+    const result = calculateDamage(actor, target, skill, this.random);
+    if (result.missed) { this.emit({ type: 'miss', actorId: actor.id, targetId: target.id, position: { ...target.gridPosition } }); return false; }
+    this.dealDamage(actor, target, result.amount, { damageType: skill.type, crit: result.crit }); return true;
+  }
+  effect(actor, target, effect) {
+    if (!target.alive) return;
+    const apply = data => this.statuses.apply(target, { ...data, sourceId: actor.id });
+    switch (effect.type) {
+      case 'heal': this.heal(actor, target, actor.stats[effect.scalingStat] * effect.multiplier); break;
+      case 'heal_over_time': apply({ type: 'regen', duration: effect.duration, damagePerStack: actor.stats[effect.scalingStat] * effect.multiplier }); break;
+      case 'shield': apply({ type: 'shield', duration: effect.duration, amount: target.stats.maxHp * effect.maxHpRatio }); break;
+      case 'stun': case 'taunt': case 'charm': apply({ type: effect.type, duration: effect.duration }); break;
+      case 'attack_up': case 'accuracy_down': case 'dodge_up': case 'melee_reflect': apply({ type: effect.type, duration: effect.duration, ratio: effect.ratio }); break;
+      case 'poison': apply({ type: 'poison', duration: effect.duration, damagePerStack: actor.stats.magicalAtk * .15, stacks: effect.stacks }); break;
+      case 'cleanse': this.statuses.cleanse(target, effect.statuses); break;
+      case 'energy_restore': target.gainEnergy(effect.amount); break;
+      case 'knockback': {
+        const columns = target.team === 'enemy' ? [5, 4, 3] : [0, 1, 2];
+        const cell = columns.map(x => ({ x, y: target.gridPosition.y })).find(p => !this.grid.at(p));
+        if (cell) this.grid.place(target, cell, { formation: false }); break;
+      }
+      case 'execute': if (target.hpRatio < effect.hpThreshold) this.dealDamage(actor, target, target.stats.hp + target.shield, { damageType: 'true', ignoreShield: true }); break;
+      default: throw new Error(`Hiệu ứng chưa được xử lý: ${effect.type}`);
+    }
+    this.emit({ type: 'effect', actorId: actor.id, targetId: target.id, name: effect.type });
+  }
+  resolveSkill(actor, anchor, skill, ultimate) {
+    if (!actor.alive || actor.stunned || !this.validTarget(actor, anchor, skill)) return;
+    if (ultimate) { this.records.get(actor.id).ultimates++; this.emit({ type: 'ultimate', actorId: actor.id, name: skill.name }); }
+    const effects = skill.effects ?? [];
+    const random = effects.find(e => e.type === 'random_choice');
+    if (random) {
+      let roll = this.random() * random.choices.reduce((sum, c) => sum + c.weight, 0);
+      const choice = random.choices.find(c => { roll -= c.weight; return roll < 0; }) ?? random.choices.at(-1);
+      if (choice.type === 'full_heal') {
+        const ally = this.allies(actor).sort((a, b) => a.hpRatio - b.hpRatio || a.id.localeCompare(b.id))[0];
+        if (ally) this.heal(actor, ally, ally.stats.maxHp);
+      } else this.hit(actor, anchor, { ...skill, dmgMultiplier: choice.dmgMultiplier });
+      return;
+    }
+    if (effects.some(e => e.type === 'blink')) {
+      const p = anchor.gridPosition;
+      const cell = [{ x: p.x + (anchor.team === 'enemy' ? 1 : -1), y: p.y }, ...this.grid.neighbors(p, actor)].find(p => this.grid.isInside(p) && !this.grid.at(p));
+      if (cell) this.grid.place(actor, cell, { formation: false });
+    }
+    let targets = skill.targetType === 'all_allies' ? this.allies(actor) : [anchor];
+    const area = effects.find(e => e.type === 'area_damage' || e.radius !== undefined);
+    if (area) {
+      const center = skill.targetType === 'self' ? actor.gridPosition : anchor.gridPosition;
+      const radius = area.radius ?? Math.floor(area.width / 2);
+      targets = this.opponents(actor).filter(u => this.grid.distance(center, u.gridPosition) <= radius);
+    }
+    if (effects.some(e => e.type === 'piercing_projectiles')) {
+      const count = effects.find(e => e.type === 'piercing_projectiles').count;
+      targets = this.opponents(actor).sort((a, b) => Math.abs(a.gridPosition.y - anchor.gridPosition.y) - Math.abs(b.gridPosition.y - anchor.gridPosition.y) || a.id.localeCompare(b.id)).slice(0, count);
+    }
+    const state = this.passives.get(actor.id);
+    if (!ultimate && actor.sect === 'CaiBang' && (state.attacks + 1) % 4 === 0) targets = this.opponents(actor).filter(u => u.gridPosition.y === anchor.gridPosition.y);
+    let connected = false;
+    for (const target of targets) {
+      if (!actor.alive) break;
+      let landed = skill.dmgMultiplier <= 0;
+      const hits = effects.find(e => e.type === 'multi_hit')?.hits ?? 1;
+      for (let i = 0; i < hits && target.alive && actor.alive && skill.dmgMultiplier > 0; i++) landed = this.hit(actor, target, skill) || landed;
+      connected ||= landed;
+      if (landed) {
+        for (const effect of effects.filter(e => !['area_damage', 'multi_hit', 'piercing_projectiles', 'blink'].includes(e.type))) this.effect(actor, target, effect);
+        if (!ultimate && target.alive && target.team !== actor.team) {
+          if (actor.sect === 'DuongMon') {
+            const poison = this.statuses.apply(target, { type: 'poison', duration: 5, damagePerStack: actor.stats.physicalAtk * .15, sourceId: actor.id });
+            if (poison.stacks >= 5) { this.statuses.cleanse(target, ['poison']); this.dealDamage(actor, target, actor.stats.physicalAtk * 1.5, { damageType: 'true' }); }
+          }
+          if (this.teamSynergies[actor.team]?.includes('hiep_nghia_giang_ho') && this.random() < .2) this.statuses.apply(target, { type: 'physical_defense_down', ratio: .3, duration: 3 });
+        }
+      }
+    }
+    if (!ultimate && connected) { state.attacks++; actor.gainEnergy(skill.energyGain); }
+    if (ultimate && actor.sect === 'NgaMi') for (const ally of this.allies(actor)) this.statuses.cleanse(ally, ['stun', 'charm', 'taunt']);
+  }
+}
