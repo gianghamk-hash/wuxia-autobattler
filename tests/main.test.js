@@ -7,7 +7,9 @@ test('real HTML and bootstrap connect canvas, controls, resize and bounded tick 
   const nodes = new Map();
   function element() {
     return {
-      children: [], handlers: {}, attributes: {}, hidden: false,
+      children: [], handlers: {}, attributes: {}, dataset: {}, value: '', hidden: false,
+      append(child) { this.children.push(child); },
+      replaceChildren() { this.children = []; },
       addEventListener(type, fn) { this.handlers[type] = fn; },
       setAttribute(key, value) { this.attributes[key] = value; },
       prepend(child) { this.children.unshift(child); child.remove = () => this.children.pop(); },
@@ -16,6 +18,9 @@ test('real HTML and bootstrap connect canvas, controls, resize and bounded tick 
   }
   for (const match of html.matchAll(/id="([^"]+)"/g)) nodes.set(match[1], element());
   const speeds = [...html.matchAll(/data-scale="(\d+)"/g)].map(m => Object.assign(element(), { dataset: { scale: m[1] } }));
+  nodes.get('save-slot').value = '1'; nodes.get('save-name').value = 'Tiểu Hiệp';
+  const local = new Map();
+  globalThis.localStorage = { getItem: k => local.get(k) ?? null, setItem: (k, v) => local.set(k, v), removeItem: k => local.delete(k) };
   const canvas = nodes.get('game-canvas');
   let drawCalls = 0;
   const ctx = new Proxy({}, { get: () => (...args) => {

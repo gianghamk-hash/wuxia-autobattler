@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Võ Lâm Hài Hiệp Truyện — Sprint 1</title>
+  <title>Võ Lâm Hài Hiệp Truyện — Sprint 2</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <main id="game-container">
     <header>
-      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 1</p>
+      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 2</p>
       <h1>Diễn võ trường</h1>
       <p>Kiểm tra nền tảng thời gian và bàn cờ chiến thuật.</p>
     </header>
@@ -35,6 +35,32 @@
       <summary>Nhật ký mô phỏng (tối đa 40 dòng)</summary>
       <ol id="tick-log" aria-label="Nhật ký tick"></ol>
     </details>
+    <section class="save-panel" aria-labelledby="save-title">
+      <h2 id="save-title">Lưu tiến trình</h2>
+      <p id="storage-backend">Đang mở kho lưu…</p>
+      <p class="hint">Bản thử hiện lưu tên hiệp khách, thời gian chơi, vị trí chấm và tốc độ. Tự khôi phục ô tự lưu khi mở lại.</p>
+      <label for="save-name">Tên hiệp khách</label>
+      <input id="save-name" type="text" maxlength="80" value="Tiểu Hiệp" autocomplete="off">
+      <label for="save-slot">Ô lưu</label>
+      <select id="save-slot">
+        <option value="0">Tự lưu (chỉ tải)</option>
+        <option value="1" selected>Ô thủ công 1</option>
+        <option value="2">Ô thủ công 2</option>
+        <option value="3">Ô thủ công 3</option>
+        <option value="4">Ô thủ công 4</option>
+        <option value="5">Ô thủ công 5</option>
+      </select>
+      <div class="controls">
+        <button id="btn-save" type="button" disabled>Lưu</button>
+        <button id="btn-load" type="button" disabled>Tải</button>
+        <button id="btn-export" type="button" disabled>Xuất .wuxia</button>
+        <button id="btn-import" type="button" disabled>Nhập .wuxia</button>
+        <button id="btn-new-session" type="button" disabled>Bản thử mới</button>
+      </div>
+      <input id="save-file" type="file" accept=".wuxia,application/json" hidden>
+      <p id="save-message" role="status" aria-live="polite"></p>
+      <ul id="save-slots" aria-label="Danh sách bản lưu"></ul>
+    </section>
     <footer>Bản kiểm thử engine · Nhân vật và chiến đấu sẽ được bổ sung ở các sprint tiếp theo.</footer>
   </main>
   <script type="module" src="./src/main.js"></script>

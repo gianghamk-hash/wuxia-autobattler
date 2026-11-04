@@ -35,3 +35,13 @@ footer { margin-top: 22px; }
   #engine-status { width: 100%; margin-left: 0; }
   button { padding-inline: 14px; }
 }
+
+.save-panel { margin-top: 22px; padding: 18px; border: 1px solid #354154; border-radius: 12px; }
+h2 { font: 1.5rem Georgia, serif; margin: 0 0 12px; }
+.save-panel label { display: block; margin: 12px 0 6px; }
+input, select { font: inherit; color: var(--text); background: #172237; border: 1px solid #526078; border-radius: 6px; padding: 10px; max-width: 100%; }
+input[type="text"] { width: 100%; user-select: text; }
+button:disabled { cursor: default; opacity: .45; }
+#save-message { min-height: 1.6em; color: #6fb59b; }
+#save-message[data-error="true"] { color: #ffad9f; }
+#save-slots { padding-left: 20px; font-size: .85rem; line-height: 1.8; overflow-wrap: anywhere; }

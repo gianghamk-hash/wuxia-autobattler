@@ -59,6 +59,16 @@ export class GameEngine {
     this.bus.emit(EVT.ENGINE_STOP, { simTime: this.simTime });
   }
 
+  get resumeScale() { return this._lastScale; }
+
+  restoreClock(simTime, tickCount) {
+    if (!Number.isFinite(simTime) || simTime < 0 || !Number.isInteger(tickCount) || tickCount < 0) {
+      throw new Error('Đồng hồ bản lưu không hợp lệ.');
+    }
+    this.resetClock(); this.simTime = simTime; this.tickCount = tickCount;
+    this._lastTs = null;
+  }
+
   get paused() { return this.timeScale === 0; }
 
   /** Đặt hệ số thời gian: 0 (pause), 1, 2, 3. */

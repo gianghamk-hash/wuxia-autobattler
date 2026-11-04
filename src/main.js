@@ -1,10 +1,11 @@
 /**
- * main.js — BẢN TẠM cho Sprint 1: chỉ để kiểm thử engine.
+ * main.js — Bản thử Sprint 2: engine và lưu/khôi phục tiến trình.
  * Sẽ được thay bằng bootstrap hoàn chỉnh ở Sprint 10.
  */
 import { CONFIG } from './config.js';
 import { bus, EVT } from './core/EventBus.js';
 import { GameEngine } from './core/GameEngine.js';
+import { mountSaveUI } from './ui/SaveUI.js';
 
 const C = CONFIG.COLORS;
 const canvas = document.getElementById('game-canvas');
@@ -27,6 +28,33 @@ window.__engine = engine; // tiện kiểm thử trong console: __engine.setTime
 
 // ---- Trạng thái demo: 1 chấm chạy qua lại để thấy rõ TimeScale ----
 const demo = { x: 0, dir: 1 };
+function newSession() {
+  return {
+    schemaVersion: 1, version: CONFIG.VERSION, playtimeSeconds: 0,
+    hero: { name: 'Tiểu Hiệp', sect: null, level: 1, exp: 0, freeAttributePoints: 0,
+      attributes: {}, allocatedSkills: [], equippedGear: {} },
+    party: { active: [], unlocked: [], formation: {} }, inventory: [], companionsAffinity: {},
+    storyProgress: { currentAct: 1, activeQuestId: null, questFlags: {}, karmaScore: 0 }
+  };
+}
+let session = newSession();
+bus.on(EVT.FRAME, ({ frameDt }) => {
+  if (!engine.paused && !document.hidden) session.playtimeSeconds += frameDt;
+});
+function getSnapshot() {
+  return { ...structuredClone(session), timestamp: Date.now(), engineDemo: { x: demo.x, dir: demo.dir,
+    simTime: engine.simTime, tickCount: engine.tickCount, timeScale: engine.timeScale,
+    resumeScale: engine.paused ? engine.resumeScale : engine.timeScale } };
+}
+function restoreSnapshot(data) {
+  session = structuredClone(data);
+  const saved = session.engineDemo; delete session.engineDemo;
+  demo.x = saved?.x ?? 0; demo.dir = saved?.dir ?? 1;
+  engine.restoreClock(saved?.simTime ?? 0, saved?.tickCount ?? 0);
+  engine.setTimeScale(saved?.resumeScale ?? 1);
+  engine.setTimeScale(saved?.timeScale ?? 1);
+  logAcc = 0; logEl.replaceChildren();
+}
 const SPEED = 1.0; // vòng/giây mô phỏng (cả đi lẫn về = 1 chu kỳ)
 engine.addUpdater((dt) => {
   demo.x += demo.dir * dt * SPEED * 2;
@@ -106,6 +134,9 @@ bus.on(EVT.TICK, ({ dt, simTime, timeScale }) => {
 });
 
 syncButtons();
+// Restore the auto-save before starting the clock, so startup cannot overwrite it.
+window.__storage = await mountSaveUI({ getSnapshot, restoreSnapshot, engine,
+  resetSession() { restoreSnapshot(newSession()); } });
 engine.start();
 document.getElementById('loading-screen').hidden = true;
-console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 1 sẵn sàng. Thử: __engine.setTimeScale(3)`);
+console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 2 sẵn sàng. Thử: __engine.setTimeScale(3)`);
