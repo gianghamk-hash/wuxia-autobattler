@@ -1,39 +1,27 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Võ Lâm Hài Hiệp Truyện</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Võ Lâm Hài Hiệp Truyện - AutoBattler</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app" id="app">
-    <header class="titlebar">
-      <h1>Võ Lâm Hài Hiệp Truyện</h1>
-      <p class="subtitle">Bản dựng Sprint 1: khung engine và vòng lặp game</p>
-    </header>
+    <div id="game-container">
+        <!-- Lớp Render Canvas cho lưới trận địa và hiệu ứng -->
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- Lớp UI DOM đè lên trên Canvas (Chứa HUD, Menu, Dialogue) -->
+        <div id="ui-layer">
+            <div id="loading-screen" class="screen active">
+                <h1>Võ Lâm Hài Hiệp Truyện</h1>
+                <p>Đang tụ khí đan điền...</p>
+            </div>
+            <!-- Các screen khác (MainMenu, Roster, Formation) sẽ được thêm ở Sprint sau -->
+        </div>
+    </div>
 
-    <section class="stage" aria-label="Sàn đấu">
-      <canvas id="game-canvas" width="960" height="540"></canvas>
-    </section>
-
-    <section class="controls" aria-label="Điều khiển thời gian">
-      <button type="button" class="btn" id="btn-pause" data-action="pause" aria-pressed="false">Tạm dừng</button>
-      <div class="speed" role="group" aria-label="Tốc độ">
-        <button type="button" class="btn" data-scale="1" aria-pressed="true">x1</button>
-        <button type="button" class="btn" data-scale="2" aria-pressed="false">x2</button>
-        <button type="button" class="btn" data-scale="3" aria-pressed="false">x3</button>
-      </div>
-      <p class="hint">Phím tắt: Space tạm dừng, 1 2 3 đổi tốc độ</p>
-    </section>
-
-    <section class="log" aria-label="Nhật ký tick">
-      <h2>Nhật ký tick</h2>
-      <ol id="tick-log" aria-live="off"></ol>
-    </section>
-  </main>
-
-  <noscript>Game cần bật JavaScript để chạy.</noscript>
-  <script type="module" src="src/main.js"></script>
+    <!-- Load file main dưới dạng ES6 Module -->
+    <script type="module" src="./src/main.js"></script>
 </body>
 </html>
