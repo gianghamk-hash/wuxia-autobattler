@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Võ Lâm Hài Hiệp Truyện — Sprint 2</title>
+  <title>Võ Lâm Hài Hiệp Truyện — Sprint 3</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <main id="game-container">
     <header>
-      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 2</p>
+      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 3</p>
       <h1>Diễn võ trường</h1>
       <p>Kiểm tra nền tảng thời gian và bàn cờ chiến thuật.</p>
     </header>
@@ -34,6 +34,38 @@
     <details>
       <summary>Nhật ký mô phỏng (tối đa 40 dòng)</summary>
       <ol id="tick-log" aria-label="Nhật ký tick"></ol>
+    </details>
+    <details class="codex-panel" open>
+      <summary>Giang hồ kỳ phổ · 5 môn phái · 20 đồng đội</summary>
+      <p class="hint">Tra cứu nhân vật, điều kiện chiêu mộ và kỹ năng. Chiêu mộ, trang bị và giao chiến sẽ mở ở các sprint tiếp theo.</p>
+      <div class="codex-filters">
+        <label>Danh mục
+          <select id="catalog-view">
+            <option value="companions">Đồng đội</option>
+            <option value="sects">Môn phái</option>
+            <option value="synergies">Kích duyên</option>
+            <option value="equipment">Trang bị</option>
+          </select>
+        </label>
+        <label>Môn phái
+          <select id="catalog-sect"><option value="">Tất cả</option></select>
+        </label>
+        <label class="codex-search">Tìm kiếm
+          <input id="catalog-search" type="search" maxlength="100" placeholder="Tên, kỹ năng, nhiệm vụ…">
+        </label>
+      </div>
+      <p id="catalog-count" role="status" aria-live="polite"></p>
+      <div id="catalog-results" class="codex-grid" role="region" aria-label="Kết quả tra cứu" tabindex="0"></div>
+      <section class="synergy-lab" aria-labelledby="synergy-title">
+        <h2 id="synergy-title">Thử phối hợp môn phái</h2>
+        <p class="hint">Chọn phái cho một nhân vật chính và hai đồng đội để xem kích duyên. Phần thử này không thay đổi bản lưu.</p>
+        <div class="codex-filters">
+          <label>Nhân vật chính<select id="preview-hero"><option value="">Chưa chọn</option></select></label>
+          <label>Đồng đội 1<select id="preview-ally-1"><option value="">Chưa chọn</option></select></label>
+          <label>Đồng đội 2<select id="preview-ally-2"><option value="">Chưa chọn</option></select></label>
+        </div>
+        <div id="synergy-preview" role="status" aria-live="polite"></div>
+      </section>
     </details>
     <section class="save-panel" aria-labelledby="save-title">
       <h2 id="save-title">Lưu tiến trình</h2>

@@ -45,3 +45,22 @@ button:disabled { cursor: default; opacity: .45; }
 #save-message { min-height: 1.6em; color: #6fb59b; }
 #save-message[data-error="true"] { color: #ffad9f; }
 #save-slots { padding-left: 20px; font-size: .85rem; line-height: 1.8; overflow-wrap: anywhere; }
+
+.codex-panel > summary { color: var(--gold); font-size: 1.1rem; line-height: 1.5; }
+.codex-filters { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.codex-filters label { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.codex-search { flex: 1; }
+.codex-filters select, .codex-filters input { min-height: 44px; width: 100%; }
+.codex-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-height: 620px; overflow-y: auto; padding: 2px; }
+.codex-card { border: 1px solid #354154; border-radius: 8px; padding: 16px; background: #101a2b; overflow-wrap: anywhere; }
+.codex-card h3 { margin: 0 0 10px; color: #d4af37; font-size: 1.1rem; }
+.codex-card p { font-size: .88rem; }
+.codex-card details { margin-top: 12px; padding: 10px; }
+.codex-card summary { font-size: .85rem; }
+.synergy-lab { border-top: 1px solid #354154; margin-top: 20px; padding-top: 20px; }
+#synergy-preview { color: #b7dbca; font-size: .9rem; }
+input:focus-visible, select:focus-visible, .codex-grid:focus-visible { outline: 3px solid #6fb59b; outline-offset: 2px; }
+@media (max-width: 600px) {
+  .codex-grid { grid-template-columns: 1fr; max-height: 520px; }
+  .codex-filters label { flex: 1 1 100%; }
+}

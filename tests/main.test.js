@@ -8,7 +8,7 @@ test('real HTML and bootstrap connect canvas, controls, resize and bounded tick 
   function element() {
     return {
       children: [], handlers: {}, attributes: {}, dataset: {}, value: '', hidden: false,
-      append(child) { this.children.push(child); },
+      append(...children) { this.children.push(...children); },
       replaceChildren() { this.children = []; },
       addEventListener(type, fn) { this.handlers[type] = fn; },
       setAttribute(key, value) { this.attributes[key] = value; },
@@ -18,6 +18,7 @@ test('real HTML and bootstrap connect canvas, controls, resize and bounded tick 
   }
   for (const match of html.matchAll(/id="([^"]+)"/g)) nodes.set(match[1], element());
   const speeds = [...html.matchAll(/data-scale="(\d+)"/g)].map(m => Object.assign(element(), { dataset: { scale: m[1] } }));
+  nodes.get('catalog-view').value = 'companions';
   nodes.get('save-slot').value = '1'; nodes.get('save-name').value = 'Tiểu Hiệp';
   const local = new Map();
   globalThis.localStorage = { getItem: k => local.get(k) ?? null, setItem: (k, v) => local.set(k, v), removeItem: k => local.delete(k) };
@@ -30,12 +31,13 @@ test('real HTML and bootstrap connect canvas, controls, resize and bounded tick 
   canvas.getContext = () => ctx;
   let width = 960; canvas.getBoundingClientRect = () => ({ width });
   globalThis.document = { hidden: false, getElementById: id => nodes.get(id), querySelectorAll: () => speeds,
-    createElement: element, addEventListener() {}, removeEventListener() {} };
+    createTextNode: text => ({ textContent: text }), createElement: element, addEventListener() {}, removeEventListener() {} };
   const handlers = {};
   globalThis.window = { devicePixelRatio: 2, addEventListener: (type, fn) => handlers[type] = fn };
   globalThis.requestAnimationFrame = () => 1; globalThis.cancelAnimationFrame = () => {};
   await import('../src/main.js');
   const e = window.__engine;
+  assert.equal(nodes.get('catalog-results').children.length, 20);
   assert.ok(e.running); assert.equal(nodes.get('loading-screen').hidden, true);
   e._loop(0); e._loop(20); assert.ok(drawCalls > 0);
   assert.equal(canvas.width, 1920);

@@ -1,10 +1,11 @@
 /**
- * main.js — Bản thử Sprint 2: engine và lưu/khôi phục tiến trình.
+ * main.js — Bản thử Sprint 3: engine, lưu trữ và kỳ phổ giang hồ.
  * Sẽ được thay bằng bootstrap hoàn chỉnh ở Sprint 10.
  */
 import { CONFIG } from './config.js';
 import { bus, EVT } from './core/EventBus.js';
 import { GameEngine } from './core/GameEngine.js';
+import { mountCodexUI } from './ui/CodexUI.js';
 import { mountSaveUI } from './ui/SaveUI.js';
 
 const C = CONFIG.COLORS;
@@ -42,7 +43,7 @@ bus.on(EVT.FRAME, ({ frameDt }) => {
   if (!engine.paused && !document.hidden) session.playtimeSeconds += frameDt;
 });
 function getSnapshot() {
-  return { ...structuredClone(session), timestamp: Date.now(), engineDemo: { x: demo.x, dir: demo.dir,
+  return { ...structuredClone(session), version: CONFIG.VERSION, timestamp: Date.now(), engineDemo: { x: demo.x, dir: demo.dir,
     simTime: engine.simTime, tickCount: engine.tickCount, timeScale: engine.timeScale,
     resumeScale: engine.paused ? engine.resumeScale : engine.timeScale } };
 }
@@ -134,9 +135,10 @@ bus.on(EVT.TICK, ({ dt, simTime, timeScale }) => {
 });
 
 syncButtons();
+mountCodexUI();
 // Restore the auto-save before starting the clock, so startup cannot overwrite it.
 window.__storage = await mountSaveUI({ getSnapshot, restoreSnapshot, engine,
   resetSession() { restoreSnapshot(newSession()); } });
 engine.start();
 document.getElementById('loading-screen').hidden = true;
-console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 2 sẵn sàng. Thử: __engine.setTimeScale(3)`);
+console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 3 sẵn sàng. Thử: __engine.setTimeScale(3)`);

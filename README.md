@@ -54,3 +54,36 @@ Chạy kiểm tra: `npm ci` rồi `npm test` (Node.js 22+). `fake-indexeddb` ch�
 trong kiểm thử; game vẫn là ES modules thuần, không có dependency runtime.
 Kiểm thử bao gồm cả IndexedDB và LocalStorage, khôi phục sau tải lại, cách ly
 sáu ô, Unicode, checksum sai, file quá lớn, hết dung lượng và kho bị chặn.
+
+
+## Sprint 3 — dữ liệu và Giang hồ kỳ phổ
+
+- `SectsData.js`: năm môn phái, vai trò, chỉ số cấp 1, tăng trưởng theo cấp,
+  nội tại và tham số hiệu ứng. `TuDo` là nhóm đồng đội không thuộc phái,
+  không phải môn phái thứ sáu để nhân vật chính gia nhập.
+- `CompanionsData.js`: đủ 20 đồng đội theo thứ tự GDD; ID ổn định
+  `companion_01` đến `companion_20`. Có chỉ số, kỹ năng đánh thường/tuyệt kỹ,
+  điều kiện chiêu mộ có cấu trúc, mã nhiệm vụ riêng và nhãn vai trò.
+- `SynergiesData.js`: bốn kích duyên đúng GDD; `getActiveSynergies(sectIds)`
+  kiểm tra tối đa ba thành viên, phái trùng tính một lần, có thể kích hoạt
+  nhiều tổ hợp cùng lúc. Tự Do không tự thay thế phái còn thiếu.
+- `EquipmentData.js`: 18 món khởi tạo (ba món dùng chung và năm bộ ba món),
+  ba ô vũ khí/áo giáp/phụ kiện, phẩm cấp và chỉ số cộng theo bộ.
+- Dữ liệu tĩnh được đóng băng sâu; các hệ thống sau cần `structuredClone`
+  để tạo trạng thái HP/nộ/hiệu ứng riêng cho từng thực thể.
+
+Mở **Giang hồ kỳ phổ** dưới bàn cờ để xem bốn danh mục, lọc phái và tìm kiếm
+không dấu theo tên/kỹ năng/nhiệm vụ. Phần **Thử phối hợp môn phái** cho xem
+các kích duyên của một nhân vật chính và hai đồng đội, tách khỏi bản lưu.
+
+Tên nhân vật, kịch bản chiêu mộ, cơ chế nội tại và các tỷ lệ đã ghi trong GDD
+được giữ nguyên. Chỉ số tăng trưởng, thời lượng chưa đặc tả, tỷ lệ ngẫu nhiên,
+tên một số tuyệt kỹ và toàn bộ trang bị là dữ liệu cân bằng ban đầu, cần thử
+khi có combat. Nội tại Thiếu Lâm tạm giới hạn một lần mỗi trận; cơ chế nội lực
+Võ Đang sẽ cần tài nguyên riêng, không tự dùng chung thanh nộ. ID sự kiện,
+vật phẩm nhiệm vụ và kẻ địch ở điều kiện chiêu mộ là hợp đồng cho Sprint 8,
+chưa phải nhiệm vụ đang thực thi.
+
+Sprint 3 cung cấp **dữ liệu và tra cứu**; chưa triển khai áp dụng chỉ số,
+phát skill, thưởng trang bị hay chiêu mộ. Không tự mở khóa đồng đội trong save.
+Bản lưu Sprint 2 (schema 1) vẫn đọc được; không đổi định dạng file `.wuxia`.
