@@ -87,3 +87,40 @@ chưa phải nhiệm vụ đang thực thi.
 Sprint 3 cung cấp **dữ liệu và tra cứu**; chưa triển khai áp dụng chỉ số,
 phát skill, thưởng trang bị hay chiêu mộ. Không tự mở khóa đồng đội trong save.
 Bản lưu Sprint 2 (schema 1) vẫn đọc được; không đổi định dạng file `.wuxia`.
+
+## Sprint 4 — thực thể, bàn cờ và hiệu ứng
+
+- `Unit`, `Hero`, `Companion`: tạo bản sao chiến đấu riêng từ dữ liệu Sprint 3,
+  tăng chỉ số theo cấp, quản lý HP/nộ/khiên, sống/chết. Chưa có cây kỹ năng Hero.
+- `GridSystem`: tọa độ toàn sân x=0..5, y=0..2. Phe nhà x=0..2, địch x=3..5
+  khi xếp trận; được vượt sân trong di chuyển. Dùng khoảng cách Chebyshev
+  (chéo một ô = cự ly 1) để thống nhất với tám hướng đi. BFS tìm đường ngắn
+  tránh ô có người và không cắt góc giữa vật cản. `null` = không có đường,
+  `[]` = đã ở đích/trong tầm. Nhân vật chết được gỡ khỏi lưới.
+- `TargetSelector`: đỡ đòn chọn địch gần nhất; thích khách/kết liễu ưu tiên
+  phần trăm HP thấp; Đường Môn ưu tiên hậu tuyến; y sư chọn đồng đội bị thương
+  (kể cả bản thân). Khiêu khích hợp lệ ưu tiên trước chiến lược; bỏ mục tiêu
+  chết và tự chọn lại ở lần quét kế tiếp. Đồng hạng phân xử theo khoảng cách/ID.
+- `StatusEngine`: độc tối đa năm tầng, xuất huyết một tầng, tick một giây;
+  choáng chặn di chuyển và tích nộ; khiên hấp thụ trước HP rồi hết hạn;
+  khiêu khích tham chiếu nguồn. Giải hiệu ứng xấu không xóa khiên.
+  Timer dùng giây mô phỏng nên tuân theo tạm dừng và ×1/×2/×3.
+
+**Bàn thử chiến thuật** nằm dưới canvas. Dựng một nhân vật chính + hai đồng
+đội và ba địch mẫu, chọn nhân vật/ô đích, xếp trận hoặc ra lệnh đi tới ô,
+tiếp cận mục tiêu và thử độc/choáng/khiên/xuất huyết/sát thương. Chọn hai
+đồng đội trùng nhau sẽ báo lỗi và giữ bàn hiện tại. Viền vàng là nhân vật đang
+chọn, viền trắng là mục tiêu. Có thể thử bằng chuột, bàn phím hoặc cảm ứng.
+
+Bàn thử là sandbox: không mở khóa đồng đội, không ghi đè đội hình/cốt truyện
+trong save. Dựng lại hoặc tải lại trang sẽ reset bàn thử; save Sprint 2–3 vẫn
+đọc bình thường. Tốc độ và các điều khiển lưu game cũ vẫn hoạt động.
+
+Chưa có AI tự di chuyển/đánh thường/tuyệt kỹ, tính giáp/chí mạng, áp nội tại,
+kích duyên hoặc kết quả trận đấu. Đó là công việc Sprint 5–6. `takeDamage`
+nhận sát thương đã tính toán; độc/xuất huyết bỏ qua giáp nhưng vẫn được khiên
+hấp thụ. Trong bản thử, độc là 20/tầng/giây, xuất huyết 15/giây; các giá trị
+này chỉ để kiểm tra. Độc tái áp dụng làm mới thời lượng chung, giữ nhịp tick
+và mức sát thương/tầng cao hơn; xuất huyết không cộng tầng. Khiên hết hạn ở
+cùng thời điểm một tick sát thương sẽ được gỡ trước tick đó. Mọi hiệu ứng có
+chung một timeline, không phụ thuộc thứ tự được thêm hoặc độ dài bước cập nhật.

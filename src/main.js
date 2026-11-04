@@ -1,10 +1,11 @@
 /**
- * main.js — Bản thử Sprint 3: engine, lưu trữ và kỳ phổ giang hồ.
+ * main.js — Bản thử Sprint 4: engine, lưu trữ và kỳ phổ giang hồ.
  * Sẽ được thay bằng bootstrap hoàn chỉnh ở Sprint 10.
  */
 import { CONFIG } from './config.js';
 import { bus, EVT } from './core/EventBus.js';
 import { GameEngine } from './core/GameEngine.js';
+import { mountTacticsUI } from './ui/TacticsUI.js';
 import { mountCodexUI } from './ui/CodexUI.js';
 import { mountSaveUI } from './ui/SaveUI.js';
 
@@ -25,6 +26,8 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
 const engine = new GameEngine();
+const tactics = mountTacticsUI({ engine });
+window.__tactics = tactics;
 window.__engine = engine; // tiện kiểm thử trong console: __engine.setTimeScale(3)
 
 // ---- Trạng thái demo: 1 chấm chạy qua lại để thấy rõ TimeScale ----
@@ -88,6 +91,7 @@ function render() {
   ctx.fillStyle = C.seal; ctx.textAlign = 'right'; ctx.fillText('Địch', W - PAD, 30); ctx.textAlign = 'left';
 
   drawGrid();
+  tactics.draw(ctx, { x: PAD, y: GRID_Y, cellW, cellH });
 
   // Thanh chạy: chấm di chuyển theo thời gian mô phỏng
   const barY = GRID_Y + GRID_H + 40, barX = PAD, barW = GRID_W;
@@ -141,4 +145,4 @@ window.__storage = await mountSaveUI({ getSnapshot, restoreSnapshot, engine,
   resetSession() { restoreSnapshot(newSession()); } });
 engine.start();
 document.getElementById('loading-screen').hidden = true;
-console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 3 sẵn sàng. Thử: __engine.setTimeScale(3)`);
+console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 4 sẵn sàng. Thử: __engine.setTimeScale(3)`);

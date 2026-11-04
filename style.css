@@ -64,3 +64,8 @@ input:focus-visible, select:focus-visible, .codex-grid:focus-visible { outline: 
   .codex-grid { grid-template-columns: 1fr; max-height: 520px; }
   .codex-filters label { flex: 1 1 100%; }
 }
+
+#tactics-info { font-size: .9rem; line-height: 1.8; color: #b7dbca; overflow-wrap: anywhere; }
+#tactics-message { min-height: 1.6em; color: #6fb59b; }
+#tactics-message[data-error="true"] { color: #ffad9f; }
+.tactics-panel .codex-filters label { flex: 1 1 180px; }

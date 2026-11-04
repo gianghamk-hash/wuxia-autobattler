@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Võ Lâm Hài Hiệp Truyện — Sprint 3</title>
+  <title>Võ Lâm Hài Hiệp Truyện — Sprint 4</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <main id="game-container">
     <header>
-      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 3</p>
+      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 4</p>
       <h1>Diễn võ trường</h1>
       <p>Kiểm tra nền tảng thời gian và bàn cờ chiến thuật.</p>
     </header>
     <section class="arena" aria-label="Bàn cờ chiến thuật">
-      <canvas id="game-canvas" width="960" height="540" role="img" aria-label="Lưới 6 cột, 3 hàng. Chấm vàng minh họa tốc độ mô phỏng."></canvas>
+      <canvas id="game-canvas" width="960" height="540" role="img" aria-label="Lưới 6 cột, 3 hàng. Sáu nhân vật mẫu để thử di chuyển và chọn mục tiêu."></canvas>
       <div id="loading-screen" role="status">
         <p>Đang tụ khí đan điền…</p>
         <noscript>Vui lòng bật JavaScript để chạy game.</noscript>
@@ -31,6 +31,43 @@
       <span id="engine-status" role="status">Đang khởi động</span>
     </section>
     <p class="hint">Phím 1 / 2 / 3: đổi tốc độ · Space: tạm dừng / tiếp tục.</p>
+    <section class="save-panel tactics-panel" aria-labelledby="tactics-title">
+      <h2 id="tactics-title">Bàn thử chiến thuật</h2>
+      <p class="hint">Vàng: nhân vật đang chọn. Trắng: mục tiêu. Bàn thử không chiêu mộ nhân vật hay thay đổi bản lưu; dựng lại khi cần. Chưa có đánh tự động.</p>
+      <div class="codex-filters">
+        <label>Phái nhân vật chính<select id="tactics-sect"></select></label>
+        <label>Đồng đội 1<select id="tactics-ally-1"></select></label>
+        <label>Đồng đội 2<select id="tactics-ally-2"></select></label>
+      </div>
+      <button id="btn-tactics-reset" type="button">Dựng lại bàn thử</button>
+      <div class="codex-filters">
+        <label>Nhân vật điều khiển<select id="tactics-unit"></select></label>
+        <label>Ô đích (cột, hàng)<select id="tactics-cell"></select></label>
+        <label>Chọn mục tiêu<select id="tactics-strategy">
+          <option value="role">Theo vai trò</option>
+          <option value="nearest">Địch gần nhất</option>
+          <option value="lowest_hp">Địch có % máu thấp nhất</option>
+          <option value="backline">Địch ở hậu tuyến</option>
+          <option value="lowest_hp_ally">Đồng đội có % máu thấp nhất</option>
+        </select></label>
+      </div>
+      <div class="controls">
+        <button id="btn-tactics-place" type="button">Xếp vào ô</button>
+        <button id="btn-tactics-move" type="button">Đi tới ô đích</button>
+        <button id="btn-tactics-approach" type="button">Tiếp cận mục tiêu</button>
+      </div>
+      <p id="tactics-info"></p>
+      <p class="hint">Lệnh đi và thời lượng hiệu ứng tuân theo tốc độ ×1/×2/×3, tạm dừng. Xếp trận chỉ cho phép ô trống thuộc phe mình; di chuyển có thể vượt nửa sân.</p>
+      <div class="controls" role="group" aria-label="Thử hiệu ứng lên nhân vật đang chọn">
+        <button id="btn-status-poison" type="button">Độc 5s (+1 tầng)</button>
+        <button id="btn-status-bleed" type="button">Xuất huyết 4s</button>
+        <button id="btn-status-stun" type="button">Choáng 3s</button>
+        <button id="btn-status-shield" type="button">Khiên 200 / 5s</button>
+        <button id="btn-status-damage" type="button">Nhận 100 sát thương</button>
+        <button id="btn-status-cleanse" type="button">Giải hiệu ứng xấu</button>
+      </div>
+      <p id="tactics-message" role="status" aria-live="polite"></p>
+    </section>
     <details>
       <summary>Nhật ký mô phỏng (tối đa 40 dòng)</summary>
       <ol id="tick-log" aria-label="Nhật ký tick"></ol>
