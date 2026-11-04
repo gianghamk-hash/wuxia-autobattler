@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Võ Lâm Hài Hiệp Truyện</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="titlebar">
+      <h1>Võ Lâm Hài Hiệp Truyện</h1>
+      <p class="subtitle">Bản dựng Sprint 1: khung engine và vòng lặp game</p>
+    </header>
+
+    <section class="stage" aria-label="Sàn đấu">
+      <canvas id="game-canvas" width="960" height="540"></canvas>
+    </section>
+
+    <section class="controls" aria-label="Điều khiển thời gian">
+      <button type="button" class="btn" id="btn-pause" data-action="pause" aria-pressed="false">Tạm dừng</button>
+      <div class="speed" role="group" aria-label="Tốc độ">
+        <button type="button" class="btn" data-scale="1" aria-pressed="true">x1</button>
+        <button type="button" class="btn" data-scale="2" aria-pressed="false">x2</button>
+        <button type="button" class="btn" data-scale="3" aria-pressed="false">x3</button>
+      </div>
+      <p class="hint">Phím tắt: Space tạm dừng, 1 2 3 đổi tốc độ</p>
+    </section>
+
+    <section class="log" aria-label="Nhật ký tick">
+      <h2>Nhật ký tick</h2>
+      <ol id="tick-log" aria-live="off"></ol>
+    </section>
+  </main>
+
+  <noscript>Game cần bật JavaScript để chạy.</noscript>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

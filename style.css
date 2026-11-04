@@ -1,0 +1,67 @@
+/* style.css — Giao diện cổ phong: mực tàu, ngọc bích, ấn đỏ. */
+:root {
+  --ink: #12171b;
+  --mist: #1d252b;
+  --slate: #2c373f;
+  --jade: #6fb59b;
+  --paper: #e7e3d6;
+  --paper-dim: #a9a79d;
+  --seal: #c2412f;
+  --gold: #e0b84e;
+  --radius: 6px;
+  --font: "Noto Serif", "Songti SC", "Source Han Serif", "Times New Roman", serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; background: var(--ink); color: var(--paper); font-family: var(--font); }
+
+body {
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  background:
+    radial-gradient(1200px 500px at 50% -10%, rgba(111, 181, 155, 0.10), transparent 60%),
+    var(--ink);
+}
+
+.app { max-width: 1000px; margin: 0 auto; padding: 16px; display: grid; gap: 14px; }
+
+.titlebar h1 {
+  margin: 0; font-size: clamp(1.4rem, 4.5vw, 2.2rem); font-weight: 700; letter-spacing: 0.04em;
+  border-left: 6px solid var(--seal); padding-left: 12px; line-height: 1.2;
+}
+.subtitle { margin: 6px 0 0 18px; color: var(--paper-dim); font-size: 0.95rem; }
+
+.stage { background: var(--mist); border: 1px solid var(--slate); border-radius: var(--radius); overflow: hidden; }
+#game-canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; touch-action: none; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.speed { display: flex; gap: 6px; }
+
+.btn {
+  font: inherit; color: var(--paper); background: var(--slate); border: 1px solid #3b4953;
+  border-radius: var(--radius); padding: 10px 16px; min-height: 44px; min-width: 52px; cursor: pointer;
+}
+.btn:hover { background: #36444e; }
+.btn[aria-pressed="true"] { background: var(--jade); color: #0d1a15; border-color: var(--jade); font-weight: 700; }
+#btn-pause[aria-pressed="true"] { background: var(--seal); border-color: var(--seal); color: #fff; }
+.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.hint { margin: 0; color: var(--paper-dim); font-size: 0.85rem; }
+
+.log { background: var(--mist); border: 1px solid var(--slate); border-radius: var(--radius); padding: 10px 14px; }
+.log h2 { margin: 0 0 8px; font-size: 1rem; font-weight: 600; }
+#tick-log {
+  margin: 0; padding: 0; list-style: none; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--paper-dim); max-height: 150px; overflow-y: auto; display: flex; flex-direction: column-reverse;
+}
+#tick-log li { padding: 2px 0; border-bottom: 1px dashed var(--slate); white-space: nowrap; }
+
+@media (max-width: 520px) {
+  .app { padding: 10px; }
+  .hint { display: none; }
+  .controls { justify-content: space-between; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
