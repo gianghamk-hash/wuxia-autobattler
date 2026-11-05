@@ -33,6 +33,7 @@ import { renderJourneyRoster, renderBattleAdvice } from '../ui/JourneyUI.js';
 import { battleScene } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
 import { renderMissionStatus } from '../ui/MissionUI.js';
+import { mountUsability } from '../ui/UsabilityUI.js';
 const el = (id) => document.getElementById(id);
 function node(tag, text, className) {
   const result = document.createElement(tag);
@@ -133,6 +134,7 @@ export class App {
     );
     el('btn-main-quest').after(caseButton);
     this.gacha = mountGachaUI(this);
+    this.usability = mountUsability(this);
     this.ready = true;
     this.storage = await mountSaveUI({
       getSnapshot: () => this.snapshot(),
@@ -307,7 +309,7 @@ export class App {
         this.run(() => this.setView('title'))
       );
     el('btn-camp-roster').addEventListener('click', () =>
-      this.run(() => this.setView('roster'))
+      this.run(() => {this.usability?.openRoster('formation');this.setView('roster');})
     );
     el('btn-main-quest').addEventListener('click', () =>
       this.run(() => this.showMain())
@@ -429,6 +431,7 @@ export class App {
       if (this.states.current !== target && !this.states.go(target))
         throw new Error('Không thể chuyển màn hình lúc này.');
     }
+    this.usability?.beforeView(this.view,view);
     this.view = view;
     document.body.dataset.scene = view;
     for (const id of Object.keys(STATES)) el(`view-${id}`).hidden = id !== view;
@@ -453,13 +456,14 @@ export class App {
             : 'camp'
     );
     if (view === 'battle') this.renderer.resize();
-    if (view === 'profile') this.selectProfileTab('gear');
+    if (view === 'profile'&&!this.usability) this.selectProfileTab('gear');
     if (view === 'ending') this.renderEnding();
     if (['tavern', 'dungeons'].includes(view)) this.world?.refreshCalendar();
     const section = el(`view-${view}`);
     section.tabIndex = -1;
     section.focus({ preventScroll: true });
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    if(this.usability)this.usability.afterView(view);
+    else window.scrollTo({ top: 0, behavior: 'instant' });
   }
   snapshot() {
     const data = this.model.snapshot();
@@ -990,6 +994,7 @@ export class App {
         this.run(() => {
           if (id === 'invite') {
             this.model.recruit(quest.id);
+            this.usability?.openRoster('companions');
             this.setView('roster');
             this.toast(
               `${quest.title} đã đồng hành. Nhận XP và bạc của nhiệm vụ.`
@@ -1076,9 +1081,10 @@ export class App {
       const status = node('p'),
         inspect = node(
           'button',
-          unit.missionAsset ? 'Xem mục tiêu' : 'Thông tin / Tuyệt kỹ'
+          unit.missionAsset ? 'Xem mục tiêu' : 'Thông tin'
         );
       inspect.type = 'button';
+      inspect.dataset.uiIcon=unit.missionAsset?'focus':'help';
       inspect.addEventListener('click', () => {
         this.world.inspect(unit);
       });
@@ -1094,6 +1100,10 @@ export class App {
       intent.dataset.intent = unit.id;
       card.append(intent);
       this.intentNodes.set(unit.id, intent);
+      if(unit.team==='home'&&!unit.isObject){
+        const cast=node('button','Tung tuyệt kỹ');cast.type='button';cast.dataset.manualUltimate=unit.id;cast.dataset.uiIcon='sword';cast.hidden=battle.autoUltimate;
+        cast.addEventListener('click',()=>{if(battle.orderUltimate(unit.id))this.toast('Đã chọn tuyệt kỹ của '+unit.name+' khi có mục tiêu hợp lệ.');this.updateBattleStatus();});card.append(cast);
+      }
       if (unit.team === 'enemy') {
         const focus = node('button', 'Tập trung mục tiêu');
         focus.type = 'button';
@@ -1116,6 +1126,10 @@ export class App {
   updateBattleStatus() {
     const battle = this.model.battle;
     if (!battle || this.view !== 'battle') return;
+    this.usability?.updateBattle();
+    for(const button of document.querySelectorAll('[data-manual-ultimate]')){
+      const u=battle.units.find(u=>u.id===button.dataset.manualUltimate);button.hidden=battle.autoUltimate;button.disabled=!this.model.running||!u?.alive||u.stats.energy<(u.skills.ultimate.energyCost??100);
+    }
     renderMissionStatus(this);
     for (const unit of battle.units)
       if (this.intentNodes.has(unit.id)) {
@@ -1395,7 +1409,7 @@ export class App {
         const row = node('article', undefined, 'ending-dialogue-line');
         const copy = node('div');
         copy.append(node('strong', speaker), node('p', text));
-        row.append(speakerPortrait(speaker, this.model.session.hero), copy);
+        row.append(speakerPortrait(speaker, this.model.session.hero,{chapter:12,episode:20}), copy);
         root.append(row);
       }
     }

@@ -37,7 +37,8 @@ export function renderMissionStatus(app) {
     button.onclick = () => {
       if (battle.mission.requestRescue('hero')) app.updateBattleStatus();
     };
-    root.replaceChildren(title, desc, status, meter, assets, button);
+    const help=n('details'),summary=n('summary','Cách hoàn thành');help.append(summary,desc,n('p','Thất bại: '+s.failure));
+    root.replaceChildren(title, status, meter, assets, button,help);
   }
   for (const key of ['title', 'description', 'status'])
     root.querySelector('[data-field="' + key + '"]').textContent = s[key];

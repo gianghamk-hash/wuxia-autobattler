@@ -1,0 +1,715 @@
+{
+  "method": "Static authored lines in main/recruit/bond/endings, each once; mentions count once per line per actor; main-story enemy slots. Priority = 3*speaker lines + mentioned lines + enemy slots. Not player telemetry or a claim of actual play time.",
+  "characters": [
+    {
+      "id": "tay_sai",
+      "name": "Tay sai thu tô",
+      "portrait": "assets/images/npcs/tay_sai.webp",
+      "speakerLines": 0,
+      "mentionedLines": 35,
+      "battleAppearances": 279,
+      "hasMotion": true,
+      "priority": 314
+    },
+    {
+      "id": "companion_03",
+      "name": "Tiểu Muội Nga Mi",
+      "portrait": "assets/images/companions/companion_03.webp",
+      "speakerLines": 35,
+      "mentionedLines": 34,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 139
+    },
+    {
+      "id": "companion_01",
+      "name": "Lão Tam Ăn Mày",
+      "portrait": "assets/images/companions/companion_01.webp",
+      "speakerLines": 37,
+      "mentionedLines": 24,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 135
+    },
+    {
+      "id": "vu_binh",
+      "name": "Vũ Bình",
+      "portrait": "assets/images/npcs/vu_binh.webp",
+      "speakerLines": 10,
+      "mentionedLines": 39,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 69
+    },
+    {
+      "id": "tho_bay",
+      "name": "Thợ Bảy",
+      "portrait": "assets/images/npcs/tho_bay.webp",
+      "speakerLines": 12,
+      "mentionedLines": 16,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 52
+    },
+    {
+      "id": "kha_van",
+      "name": "Kha Vân",
+      "portrait": "assets/images/npcs/kha_van.webp",
+      "speakerLines": 11,
+      "mentionedLines": 11,
+      "battleAppearances": 1,
+      "hasMotion": true,
+      "priority": 45
+    },
+    {
+      "id": "ba_tu",
+      "name": "Bà Tư",
+      "portrait": "assets/images/npcs/ba_tu.webp",
+      "speakerLines": 10,
+      "mentionedLines": 14,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 44
+    },
+    {
+      "id": "cam_tu",
+      "name": "Cẩm Tú",
+      "portrait": "assets/images/npcs/cam_tu.webp",
+      "speakerLines": 9,
+      "mentionedLines": 16,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 43
+    },
+    {
+      "id": "trinh_nghiem",
+      "name": "Trịnh Nghiêm",
+      "portrait": "assets/images/npcs/trinh_nghiem.webp",
+      "speakerLines": 5,
+      "mentionedLines": 26,
+      "battleAppearances": 1,
+      "hasMotion": true,
+      "priority": 42
+    },
+    {
+      "id": "do_mau",
+      "name": "Đỗ Mậu",
+      "portrait": "assets/images/npcs/do_mau.webp",
+      "speakerLines": 5,
+      "mentionedLines": 21,
+      "battleAppearances": 1,
+      "hasMotion": true,
+      "priority": 37
+    },
+    {
+      "id": "nguoi_phu",
+      "name": "Người phu",
+      "portrait": "assets/images/npcs/nguoi_phu.webp",
+      "speakerLines": 6,
+      "mentionedLines": 16,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 34
+    },
+    {
+      "id": "quan_chu",
+      "name": "Quán chủ",
+      "portrait": "assets/images/npcs/quan_chu.webp",
+      "speakerLines": 5,
+      "mentionedLines": 13,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 28
+    },
+    {
+      "id": "doc_le",
+      "name": "Đốc Lệ",
+      "portrait": "assets/images/npcs/doc_le.webp",
+      "speakerLines": 2,
+      "mentionedLines": 18,
+      "battleAppearances": 1,
+      "hasMotion": true,
+      "priority": 25
+    },
+    {
+      "id": "be_na",
+      "name": "Bé Na",
+      "portrait": "assets/images/npcs/be_na.webp",
+      "speakerLines": 6,
+      "mentionedLines": 5,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 23
+    },
+    {
+      "id": "thu_lai",
+      "name": "Thư lại",
+      "portrait": "assets/images/npcs/thu_lai.webp",
+      "speakerLines": 4,
+      "mentionedLines": 6,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 18
+    },
+    {
+      "id": "companion_02",
+      "name": "Huyền Đạo Trưởng",
+      "portrait": "assets/images/companions/companion_02.webp",
+      "speakerLines": 4,
+      "mentionedLines": 3,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 15
+    },
+    {
+      "id": "companion_04",
+      "name": "Đường Thập Nhị",
+      "portrait": "assets/images/companions/companion_04.webp",
+      "speakerLines": 4,
+      "mentionedLines": 3,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 15
+    },
+    {
+      "id": "companion_08",
+      "name": "Hồng Nương Tử",
+      "portrait": "assets/images/companions/companion_08.webp",
+      "speakerLines": 4,
+      "mentionedLines": 3,
+      "battleAppearances": 0,
+      "hasMotion": true,
+      "priority": 15
+    },
+    {
+      "id": "cha_tieu_muoi",
+      "name": "Cha Tiểu Muội",
+      "portrait": "assets/images/npcs/cha_tieu_muoi.webp",
+      "speakerLines": 2,
+      "mentionedLines": 8,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 14
+    },
+    {
+      "id": "nguoi_lai_do",
+      "name": "Người lái đò",
+      "portrait": "assets/images/npcs/nguoi_lai_do.webp",
+      "speakerLines": 3,
+      "mentionedLines": 5,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 14
+    },
+    {
+      "id": "nguoi_danh_xe",
+      "name": "Người đánh xe",
+      "portrait": "assets/images/npcs/nguoi_danh_xe.webp",
+      "speakerLines": 2,
+      "mentionedLines": 4,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 10
+    },
+    {
+      "id": "tho_giay",
+      "name": "Thợ giấy",
+      "portrait": "assets/images/npcs/tho_giay.webp",
+      "speakerLines": 2,
+      "mentionedLines": 4,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 10
+    },
+    {
+      "id": "ba_cu_giu_kho",
+      "name": "Bà cụ giữ kho",
+      "portrait": "assets/images/npcs/ba_cu_giu_kho.webp",
+      "speakerLines": 3,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 9
+    },
+    {
+      "id": "truong_xom",
+      "name": "Trưởng xóm",
+      "portrait": "assets/images/npcs/truong_xom.webp",
+      "speakerLines": 1,
+      "mentionedLines": 4,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 7
+    },
+    {
+      "id": "companion_21",
+      "name": "Chú Tễu Giữ Cầu",
+      "portrait": "assets/images/companions/companion_21.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_22",
+      "name": "Sen Non Gánh Thuốc",
+      "portrait": "assets/images/companions/companion_22.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_23",
+      "name": "Mộc An Quét Lá",
+      "portrait": "assets/images/companions/companion_23.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_24",
+      "name": "Lam Nhi Học Kiếm",
+      "portrait": "assets/images/companions/companion_24.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_25",
+      "name": "Tín Còi Đưa Thư",
+      "portrait": "assets/images/companions/companion_25.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_26",
+      "name": "Bàu Rách Gõ Mõ",
+      "portrait": "assets/images/companions/companion_26.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_27",
+      "name": "Bảy Cò Giữ Bến",
+      "portrait": "assets/images/companions/companion_27.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_28",
+      "name": "Mận Chua Tung Đá",
+      "portrait": "assets/images/companions/companion_28.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_29",
+      "name": "Tùng Gầy Gác Cổng",
+      "portrait": "assets/images/companions/companion_29.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_30",
+      "name": "Cúc Mộc Vá Áo",
+      "portrait": "assets/images/companions/companion_30.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_31",
+      "name": "Phúc Đồng Thiết Chưởng",
+      "portrait": "assets/images/companions/companion_31.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_32",
+      "name": "Liễu Thanh Kiếm Khách",
+      "portrait": "assets/images/companions/companion_32.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_33",
+      "name": "Trúc Yên Y Sư",
+      "portrait": "assets/images/companions/companion_33.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_34",
+      "name": "Vân Rổ Đan Bẫy",
+      "portrait": "assets/images/companions/companion_34.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_35",
+      "name": "Sáu Chén Túy Quyền",
+      "portrait": "assets/images/companions/companion_35.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_36",
+      "name": "Hạc Nâu Tĩnh Tọa",
+      "portrait": "assets/images/companions/companion_36.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_37",
+      "name": "Bạch Liên Châm Sư",
+      "portrait": "assets/images/companions/companion_37.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_38",
+      "name": "Hải Âu Phi Tiêu",
+      "portrait": "assets/images/companions/companion_38.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_39",
+      "name": "Minh Khuê Kiếm Sử",
+      "portrait": "assets/images/companions/companion_39.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_40",
+      "name": "Sơn Lâm Hộ Viện",
+      "portrait": "assets/images/companions/companion_40.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_41",
+      "name": "Đào Hồng Tửu Hiệp",
+      "portrait": "assets/images/companions/companion_41.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_42",
+      "name": "Đỗ Quyên Huyền Châm",
+      "portrait": "assets/images/companions/companion_42.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_43",
+      "name": "Nguyệt Cầm Chưởng Môn",
+      "portrait": "assets/images/companions/companion_43.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_44",
+      "name": "Lôi Chấn Thiền Sư",
+      "portrait": "assets/images/companions/companion_44.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_45",
+      "name": "Yên Vũ Thiên Cơ",
+      "portrait": "assets/images/companions/companion_45.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_46",
+      "name": "Phong Trần Lãng Khách",
+      "portrait": "assets/images/companions/companion_46.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_47",
+      "name": "Tố Tâm Liên Sứ",
+      "portrait": "assets/images/companions/companion_47.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_48",
+      "name": "Lạc Hồng Long Quyền",
+      "portrait": "assets/images/companions/companion_48.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_49",
+      "name": "Thiên Hương Phượng Vũ",
+      "portrait": "assets/images/companions/companion_49.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "companion_50",
+      "name": "Trường Sơn Vô Cực",
+      "portrait": "assets/images/companions/companion_50.webp",
+      "speakerLines": 2,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 6
+    },
+    {
+      "id": "doi_truong",
+      "name": "Đội trưởng",
+      "portrait": "assets/images/npcs/doi_truong.webp",
+      "speakerLines": 1,
+      "mentionedLines": 1,
+      "battleAppearances": 1,
+      "hasMotion": false,
+      "priority": 5
+    },
+    {
+      "id": "co_gai",
+      "name": "Con gái Đỗ Mậu",
+      "portrait": "assets/images/npcs/co_gai.webp",
+      "speakerLines": 1,
+      "mentionedLines": 1,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 4
+    },
+    {
+      "id": "companion_05",
+      "name": "Đại Lực Kim Cang",
+      "portrait": "assets/images/companions/companion_05.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_06",
+      "name": "Lý Độc Thủ",
+      "portrait": "assets/images/companions/companion_06.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_07",
+      "name": "Thôi Mệnh Thư Sinh",
+      "portrait": "assets/images/companions/companion_07.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_09",
+      "name": "Tịnh Không Sư Thái",
+      "portrait": "assets/images/companions/companion_09.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_10",
+      "name": "Bách Bộ Thần Thương",
+      "portrait": "assets/images/companions/companion_10.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_11",
+      "name": "Mộng Cô Bán Trà",
+      "portrait": "assets/images/companions/companion_11.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_12",
+      "name": "Bất Khắc Kiếm Khách",
+      "portrait": "assets/images/companions/companion_12.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_13",
+      "name": "Quy Tức Lão Nhân",
+      "portrait": "assets/images/companions/companion_13.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_14",
+      "name": "Thiềm Thừ Bà Bà",
+      "portrait": "assets/images/companions/companion_14.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_15",
+      "name": "Phi Thiên Đạo Tặc",
+      "portrait": "assets/images/companions/companion_15.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_16",
+      "name": "Hoa Khôi Lầu Xanh",
+      "portrait": "assets/images/companions/companion_16.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_17",
+      "name": "Luyện Đan Đồng Tử",
+      "portrait": "assets/images/companions/companion_17.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_18",
+      "name": "Thiết Đầu Công",
+      "portrait": "assets/images/companions/companion_18.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_19",
+      "name": "Vô Danh Kiếm Nô",
+      "portrait": "assets/images/companions/companion_19.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    },
+    {
+      "id": "companion_20",
+      "name": "Tửu Tiên Bất Tỉnh",
+      "portrait": "assets/images/companions/companion_20.webp",
+      "speakerLines": 1,
+      "mentionedLines": 0,
+      "battleAppearances": 0,
+      "hasMotion": false,
+      "priority": 3
+    }
+  ]
+}

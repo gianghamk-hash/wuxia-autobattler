@@ -27,7 +27,7 @@ export function renderJourneyRoster(app) {
   if (!root) {
     root = n('section', undefined, 'panel');
     root.id = 'journey-roster';
-    document.getElementById('roster-list').before(root);
+    (document.getElementById('roster-loadouts-anchor')??document.getElementById('roster-list')).before(root);
   }
   const s = app.model.session;
   root.replaceChildren(n('h2', 'Đội hình của ta'));
