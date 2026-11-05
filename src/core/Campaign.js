@@ -1,6 +1,9 @@
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
 import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
-import { storyEnemy, applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
+import { MISSIONS } from '../data/MissionsData.js';
+import { enemyLineup } from './EncounterFactory.js';
+import { bossGuide } from '../combat/BossDirector.js';
+import { applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
 import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
 import {
@@ -121,7 +124,7 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '3.1.0',
+    version: '3.2.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -278,6 +281,13 @@ export function validateCampaign(session) {
     if (pending.preparation !== undefined)
       validatePreparation(pending.preparation);
     if (
+      pending.missionId !== undefined &&
+      (pending.kind !== 'main' ||
+        pending.missionId !== pending.questId ||
+        !Object.hasOwn(MISSIONS, pending.missionId))
+    )
+      fail('Mục tiêu trận đang chờ không hợp lệ.');
+    if (
       pending.kind === 'dungeon' &&
       (!session.adventure?.dungeon ||
         pending.questId !== session.adventure.dungeon.id ||
@@ -386,7 +396,7 @@ export function migrateCampaign(input) {
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
-  next.version = '3.1.0';
+  next.version = '3.2.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
@@ -576,6 +586,31 @@ export class Campaign {
       fail('Đồng đội đã được chiêu mộ.');
     return quest;
   }
+  scoutMain() {
+    const quest = this.mainQuest();
+    if (!quest?.encounter) return null;
+    const encounter = ENCOUNTERS[quest.encounter],
+      pending = this.session.storyProgress.pendingEncounter;
+    const enemies = enemyLineup({
+      quest,
+      encounter,
+      count: encounter.count ?? encounter.templates.length,
+      main: true
+    });
+    const missionId = pending
+      ? pending.kind === 'main'
+        ? pending.missionId
+        : null
+      : MISSIONS[quest.id]?.id;
+    if (['protect', 'rescue'].includes(MISSIONS[missionId]?.type) && enemies[0])
+      enemies[0].targetPriority = 'objective';
+    return {
+      name: encounter.name,
+      enemies,
+      guides: enemies.map((u) => bossGuide(u.characterId)).filter(Boolean),
+      objective: MISSIONS[missionId] ?? null
+    };
+  }
   challengeRecruit(id, approach = 'help') {
     this._guard();
     const quest = this._recruitQuest(id);
@@ -660,6 +695,8 @@ export class Campaign {
         forging: next.adventure.forging
       }
     };
+    if (kind === 'main' && Object.hasOwn(MISSIONS, questId))
+      next.storyProgress.pendingEncounter.missionId = questId;
     if (kind === 'dungeon') {
       const d = next.adventure.dungeon;
       next.storyProgress.pendingEncounter.preparation = {
@@ -756,49 +793,21 @@ export class Campaign {
       grid.place(guide, cell);
       units.push(guide);
     }
-    const enemyTemplates = [...encounter.templates];
     const enemyCount =
       pending.kind === 'main'
-        ? (encounter.count ?? enemyTemplates.length)
+        ? (encounter.count ?? encounter.templates.length)
         : pending.kind === 'practice'
           ? units.length
           : Math.min(3, (quest.act ?? 1) + 1);
-    if (!encounter.guide)
-      while (enemyTemplates.length < enemyCount)
-        enemyTemplates.push(
-          encounter.templates[
-            enemyTemplates.length % encounter.templates.length
-          ]
-        );
-    enemyTemplates.forEach((id, index) => {
-      const unit = new Companion(id, {
-        id: `enemy_${index}`,
-        team: 'enemy',
-        level: encounter.level
-      });
-      unit.stats.maxHp = Math.round(unit.stats.maxHp * encounter.hpScale);
-      unit.stats.hp = unit.stats.maxHp;
-      unit.stats.physicalAtk *= encounter.attackScale;
-      unit.stats.magicalAtk *= encounter.attackScale;
-      unit.name = `${pending.kind === 'main' && quest.id === 'Q303' && index === 2 ? 'Thân vệ Trịnh Nghiêm' : COMPANIONS_BY_ID[id].name}`;
-      if (pending.kind === 'main') {
-        const identity = storyEnemy(quest, index, enemyTemplates.length);
-        applyStoryIdentity(unit, identity);
-        if (identity.id === 'tay_sai') unit.name += ` ${index + 1}`;
-      }
-      grid.place(
-        unit,
-        [
-          { x: 3, y: 1 },
-          { x: 5, y: 0 },
-          { x: 4, y: 2 },
-          { x: 3, y: 2 },
-          { x: 4, y: 0 },
-          { x: 5, y: 2 }
-        ][index]
-      );
-      units.push(unit);
-    });
+    units.push(
+      ...enemyLineup({
+        quest,
+        encounter,
+        count: enemyCount,
+        grid,
+        main: pending.kind === 'main'
+      })
+    );
     this.prepareUnits(units, pending);
     this.lastResult = null;
     this.battleToken = pending.token;
@@ -806,6 +815,7 @@ export class Campaign {
       units,
       grid,
       seed: pending.seed,
+      missionId: pending.missionId ?? null,
       onEvent: this.onBattleEvent
     });
     this.battle.encounterName = encounter.name;

@@ -1,5 +1,6 @@
 import { renderStoryArchive } from './StoryArchive.js';
 import { renderBonds } from './JourneyUI.js';
+import { renderCasebook } from './CasebookUI.js';
 import { NPCS, NPCS_BY_ID, findNPC } from '../data/NPCData.js';
 import { EQUIPMENT_BY_ID } from '../data/EquipmentData.js';
 import {
@@ -258,6 +259,12 @@ export function mountWorldUI(app) {
     const s = app.model.session,
       root = el('unit-sheet-content');
     root.replaceChildren();
+    if(unit.missionAsset) {
+      root.removeAttribute('data-tier');
+      const live=n('p',Math.ceil(unit.stats.hp)+'/'+Math.ceil(unit.stats.maxHp)+' HP','hint');live.id='sheet-live-stats';
+      root.append(portrait(unit,'sheet-portrait'),n('h2',unit.name),n('p',app.model.battle.mission.definition.description),n('p','Đây là mục tiêu của trận, không dùng tuyệt kỹ và không tính vào sáu người xuất chiến.','hint'),live);
+      el('unit-sheet').showModal();return;
+    }
     const id = unit.id ?? 'hero',
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
     root.removeAttribute('data-tier');
@@ -368,6 +375,7 @@ export function mountWorldUI(app) {
       arena: 'Đại hội',
       guild: 'Bang hội',
       story: 'Truyện ký',
+      casebook: 'Sổ đầu mối',
       bonds: 'Đồng hành',
       characters: 'Người đã gặp',
       journal: 'Nhật ký'
@@ -380,7 +388,10 @@ export function mountWorldUI(app) {
       b.setAttribute('aria-pressed', String(tab === id));
       tabs.append(b);
     }
+    const activeTab=tabs.querySelector('[aria-pressed="true"]');
+    if(activeTab&&tabs.clientWidth)tabs.scrollLeft+=activeTab.getBoundingClientRect().left-tabs.getBoundingClientRect().left-(tabs.clientWidth-activeTab.clientWidth)/2;
     if (tab === 'bonds') renderBonds(app, root);
+    if (tab === 'casebook') renderCasebook(app,root);
     if (tab === 'activities') {
       const daily = panel(
         'Điểm danh & nhiệm vụ',
@@ -735,6 +746,7 @@ export function mountWorldUI(app) {
     }
   }
   return {
+    openCasebook() {app.setView('tavern');tab='casebook';renderWorld();},
     inspect,
     syncBattleSheet() {
       if (!el('unit-sheet').open) return;

@@ -31,6 +31,8 @@ import { mountSaveUI } from '../ui/SaveUI.js';
 import { SoundManager } from '../audio/SoundManager.js';
 import { renderJourneyRoster, renderBattleAdvice } from '../ui/JourneyUI.js';
 import { battleScene } from '../data/PresentationData.js';
+import { battleIntent } from '../combat/BattleIntent.js';
+import { renderMissionStatus } from '../ui/MissionUI.js';
 const el = (id) => document.getElementById(id);
 function node(tag, text, className) {
   const result = document.createElement(tag);
@@ -68,6 +70,7 @@ export class App {
     this.hasLoaded = false;
     this.frameTime = 0;
     this.unitNodes = new Map();
+    this.intentNodes = new Map();
     this.lastSfx = 0;
     this.renderer = new BattleRenderer(el('game-canvas'));
     this.dialogue = new DialogueUI(el('dialogue-root'));
@@ -122,6 +125,13 @@ export class App {
         () => this.renderRoster()
       );
     this.world = mountWorldUI(this);
+    const caseButton = node('button', 'Sổ đầu mối vụ án');
+    caseButton.type = 'button';
+    caseButton.id = 'btn-casebook';
+    caseButton.addEventListener('click', () =>
+      this.run(() => this.world.openCasebook())
+    );
+    el('btn-main-quest').after(caseButton);
     this.gacha = mountGachaUI(this);
     this.ready = true;
     this.storage = await mountSaveUI({
@@ -895,6 +905,7 @@ export class App {
                 : '')
           }));
     this.dialogue.show({
+      brief: this.model.scoutMain(),
       ...this.readerOptions('main:' + quest.id),
       title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
       quest,
@@ -1013,6 +1024,30 @@ export class App {
       onFont: (size) => this.run(() => this.model.setReaderFont(size))
     };
   }
+  openCaseSource(id) {
+    const s = this.model.session,
+      q = MAIN_QUESTS.find((q) => q.id === id);
+    if (!q || !s.storyProgress.completedQuests.includes(id)) {
+      this.toast('Nguồn này chưa được mở.', true);
+      return;
+    }
+    this.dialogue.show({
+      ...this.readerOptions('archive:' + id),
+      title:
+        'Nguồn đầu mối · Chương ' +
+        q.chapter +
+        ' · Hồi ' +
+        q.episode +
+        ' · ' +
+        q.title,
+      quest: q,
+      hero: s.hero,
+      lines: storyLines(q, s, MAIN_QUESTS, COMPANIONS_BY_ID),
+      note: 'Xem lại nguồn đã hoàn thành; giữ nguyên lựa chọn và phần thưởng.',
+      onBack: () => this.world.openCasebook()
+    });
+    this.setView('dialogue');
+  }
   enterBattle() {
     const battle = this.model.battle;
     battle.scene = battleScene(
@@ -1034,11 +1069,15 @@ export class App {
     const root = el('battle-unit-list');
     root.replaceChildren();
     this.unitNodes.clear();
+    this.intentNodes.clear();
     for (const unit of battle.units) {
       const card = node('article', undefined, 'battle-unit-card');
       card.dataset.team = unit.team;
       const status = node('p'),
-        inspect = node('button', 'Thông tin / Tuyệt kỹ');
+        inspect = node(
+          'button',
+          unit.missionAsset ? 'Xem mục tiêu' : 'Thông tin / Tuyệt kỹ'
+        );
       inspect.type = 'button';
       inspect.addEventListener('click', () => {
         this.world.inspect(unit);
@@ -1051,6 +1090,10 @@ export class App {
         status,
         inspect
       );
+      const intent = node('p', undefined, 'unit-intent');
+      intent.dataset.intent = unit.id;
+      card.append(intent);
+      this.intentNodes.set(unit.id, intent);
       if (unit.team === 'enemy') {
         const focus = node('button', 'Tập trung mục tiêu');
         focus.type = 'button';
@@ -1073,6 +1116,13 @@ export class App {
   updateBattleStatus() {
     const battle = this.model.battle;
     if (!battle || this.view !== 'battle') return;
+    renderMissionStatus(this);
+    for (const unit of battle.units)
+      if (this.intentNodes.has(unit.id)) {
+        const text = battleIntent(battle, unit).text,
+          e = this.intentNodes.get(unit.id);
+        if (e.textContent !== text) e.textContent = text;
+      }
     el('battle-clock').textContent =
       `${this.engine.paused ? 'Tạm dừng · ' : ''}${battle.elapsed.toFixed(1)} / 120 giây`;
     let warnings = el('battle-warnings');
@@ -1147,11 +1197,21 @@ export class App {
               ''
             )}${unit.shield > 0 ? ` · Khiên ${Math.ceil(unit.shield)}` : ''}`;
     this.world?.syncBattleSheet();
+    for (const u of battle.units.filter((u) => u.missionAsset))
+      if (this.unitNodes.has(u.id))
+        this.unitNodes.get(u.id).textContent = u.alive
+          ? Math.ceil(u.stats.hp) +
+            '/' +
+            Math.ceil(u.stats.maxHp) +
+            ' HP' +
+            (u.shield ? ' · Khiên ' + Math.ceil(u.shield) : '')
+          : 'Đã bị phá / bị hạ';
   }
   battleEvent(event) {
     this.renderer.event(event);
     if (event.type === 'boss:summon' && this.view === 'battle')
       this.renderBattleCards();
+    if (event.type.startsWith('mission:')) this.toast(event.name);
     const effects =
       (this.model.session.settings.effects ?? true) &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1243,13 +1303,15 @@ export class App {
     const label =
       result.reason === 'aborted'
         ? 'Đã rút lui'
-        : result.reason === 'timeout'
-          ? 'Hòa — hết thời gian'
-          : result.winner === 'home'
-            ? 'Chiến thắng!'
-            : result.winner === 'enemy'
-              ? 'Thất bại'
-              : 'Hòa';
+        : result.reason === 'objective_timeout'
+          ? 'Thất bại — hết giờ nhiệm vụ'
+          : result.reason === 'timeout'
+            ? 'Hòa — hết thời gian'
+            : result.winner === 'home'
+              ? 'Chiến thắng!'
+              : result.winner === 'enemy'
+                ? 'Thất bại'
+                : 'Hòa';
     el('battle-result').textContent =
       `${label} · ${result.duration.toFixed(1)} giây`;
     el('battle-rewards').textContent =
@@ -1290,6 +1352,19 @@ export class App {
     }
     table.append(body);
     el('battle-stats').replaceChildren(table);
+    if (result.objective) {
+      const p = node(
+        'p',
+        (result.winner === 'home'
+          ? 'Đã hoàn thành: '
+          : 'Mục tiêu chưa hoàn thành: ') +
+          result.objective.title +
+          ' · ' +
+          result.objective.status,
+        'mission-result'
+      );
+      el('battle-stats').prepend(p);
+    }
     renderBattleAdvice(this, result);
     this.sound.setTrack(result.winner === 'home' ? 'ending' : 'camp');
     this.sound.sfx(result.winner === 'home' ? 'victory' : 'defeat');

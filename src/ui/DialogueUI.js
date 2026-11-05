@@ -2,6 +2,7 @@ import { COMPANIONS } from '../data/CompanionsData.js';
 import { portrait, icon } from './Visuals.js';
 import { findNPC } from '../data/NPCData.js';
 import { expressionFor, sceneFor } from '../data/PresentationData.js';
+import { renderBattleBrief } from './BattleBriefUI.js';
 const node = (tag, text, className) => {
   const e = document.createElement(tag);
   if (text !== undefined) e.textContent = text;
@@ -53,7 +54,8 @@ export class DialogueUI {
     readerKey,
     getReader,
     onRead,
-    onFont
+    onFont,
+    brief
   }) {
     const pages = lines.length
       ? lines
@@ -66,6 +68,7 @@ export class DialogueUI {
     this.root.className = 'panel classic-dialogue';
     this.root.parentElement.classList.add('has-classic-dialogue');
     this.root.append(node('h2', title, 'classic-title'));
+    renderBattleBrief(this.root, brief);
     if (quest?.chapterGoal) {
       this.root.append(
         node('p', `Mục tiêu chương: ${quest.chapterGoal}`, 'classic-goal')
