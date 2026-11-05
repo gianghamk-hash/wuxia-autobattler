@@ -1,0 +1,212 @@
+[
+  {
+    "id": "be_na",
+    "file": "assets/images/npcs/be_na.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 63368,
+    "sha256": "35f3dfbd73b025767d8c9dd28d38ada0b4bf0c600e48184d5ff22e86802f21c9",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone portrait for a classic RPG dialogue, portrait canvas 1024x1536. One character only, chest-up, face fully visible and large in upper half, three-quarter view facing slightly toward viewer's right. Fictional premodern Vietnamese setting, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive face, polished collectible wuxia game art. Muted painterly plain jade background, no scene collage, no border, no frame, no words, no watermark, no readable writing. Character: Bé Na, a Vietnamese girl aged nine, short black bob with uneven bangs, round expressive eyes, patched muted-ochre cross-collar shirt and a red thread at the wrist. Small rice bowl held close to her chest. Worried but brave, no makeup, no armor, no weapon. Child helping at an inn and searching for her missing father."
+  },
+  {
+    "id": "ba_tu",
+    "file": "assets/images/npcs/ba_tu.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 66938,
+    "sha256": "0eea2ad3f10cd76718cb1f77edccf6cb68ccfc2ff5f71de5244e5207fa85a2f0",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone portrait for a classic RPG dialogue, portrait canvas 1024x1536. One character only, chest-up, face fully visible and large in upper half, three-quarter view facing slightly toward viewer's right. Fictional premodern Vietnamese setting, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive face, polished collectible wuxia game art. Muted painterly plain jade background, no scene collage, no border, no frame, no words, no watermark, no readable writing. Character: Bà Tư, an elderly Vietnamese rice farmer woman, weathered warm face, gray hair in a practical small bun, indigo head cloth, plain dark brown blouse. Holding a folded tax receipt with no legible writing and a tiny sheaf of rice. Tired, resolute, dignified, no caricature."
+  },
+  {
+    "id": "quan_chu",
+    "file": "assets/images/npcs/quan_chu.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 75284,
+    "sha256": "2c6f05fc565ab10a588a8c3b514fcc8b31194aa105a575b96858ff83b6b06db0",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone portrait for a classic RPG dialogue, portrait canvas 1024x1536. One character only, chest-up, face fully visible and large in upper half, three-quarter view facing slightly toward viewer's right. Fictional premodern Vietnamese setting, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive face, polished collectible wuxia game art. Muted painterly plain jade background, no scene collage, no border, no frame, no words, no watermark, no readable writing. Character: The elderly Vietnamese innkeeper of Rong Lua, man aged sixty, long gray mustache and short beard, gray hair in a simple topknot, plain warm brown cross-collar robe, linen towel over one shoulder. Kind but firm, holds a wooden soup ladle, a defender of his guests. Face clearly front three-quarter view."
+  },
+  {
+    "id": "trinh_nghiem",
+    "file": "assets/images/npcs/trinh_nghiem.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 55244,
+    "sha256": "27b71c2276413e63be5f66c8e6956db393bff22030a92c241aec75cd1f5fd96d",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone portrait for a classic RPG dialogue, portrait canvas 1024x1536. One character only, chest-up, face fully visible and large in upper half, three-quarter view facing slightly toward viewer's right. Fictional premodern Vietnamese setting, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive face, polished collectible wuxia game art. Muted painterly plain jade background, no scene collage, no border, no frame, no words, no watermark, no readable writing. Character: Trịnh Nghiêm, main antagonist of a fictional Vietnamese wuxia story. Man aged fifty, lean symmetrical face, narrow calculating eyes, black hair with silver temples, neat thin mustache and small pointed beard. Elegant black and deep burgundy silk robe with restrained gold geometry, dark jade ring, folded black fan held at chest. Quiet intimidating intelligence and self-control rather than monstrous evil. His power comes from trade contracts and martial alliances."
+  },
+  {
+    "id": "doc_le",
+    "file": "assets/images/npcs/doc_le.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 71924,
+    "sha256": "60f8648b6ef8dcd14b28b7ec1080dc1cf787b75ce8fee4daed7f74b72e87230a",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Đốc Lệ, male enforcer commanding forced labor in the U Minh forest, forty-five, broad sunburned face, shaved sides and tied short black hair, a healed brow scar, dark green rain cape over worn brown armor, rope coil at shoulder, stern conflicted expression. Not a monster, no gore."
+  },
+  {
+    "id": "do_mau",
+    "file": "assets/images/npcs/do_mau.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 46662,
+    "sha256": "5add6dcb90e0e51eec653acfa85dabe565831cd6d3ddedf6574cf6bf99946540",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Đỗ Mậu, provincial official in Hoa Lu, fifty-five, full tired face, thin graying mustache, worried intelligent eyes, formal muted navy Vietnamese cross-collar robe and dark cloth official cap, holding a closed document case, one worn pale hair ribbon belonging to his ill daughter peeks from his cuff. Dignified compromised authority, no readable writing."
+  },
+  {
+    "id": "kha_van",
+    "file": "assets/images/npcs/kha_van.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 65406,
+    "sha256": "3a91dafd2c93217b13d04c352d8f7848b85127bd6e11436aae853add6497927b",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Kha Vân, a young Vietnamese woman martial tournament fighter, twenty-six, athletic shoulders, short tied black ponytail, determined sharp eyes, faded red scarf, ivory and dark teal fighting tunic, wooden practice sword across one shoulder, resolute but approachable."
+  },
+  {
+    "id": "doi_truong",
+    "file": "assets/images/npcs/doi_truong.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 56016,
+    "sha256": "703b3d4ab2497c7e15245cb0e602a78d7f8a7d81cc76591b6d20635ce4523765",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Tax collection captain, Vietnamese man thirty-eight, square face, narrow short mustache, tied black topknot, dark indigo uniform with deep red sash, small bronze command token and sheathed short saber, stern arrogant expression, a human authority figure without monstrous features."
+  },
+  {
+    "id": "truong_xom",
+    "file": "assets/images/npcs/truong_xom.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 68132,
+    "sha256": "4a027b2ab51949cbd6c14b85c724dd6c223eaa36c092a6825b3679bdcc69d9e7",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Village headman of Thanh Khe, Vietnamese man sixty, slightly stooped, round lined face, salt and pepper hair under a brown turban, plain brown robe, folded land deed held in both hands, anxious ashamed but ready to confess."
+  },
+  {
+    "id": "nguoi_danh_xe",
+    "file": "assets/images/npcs/nguoi_danh_xe.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 71630,
+    "sha256": "c3edb5aec8a7c09040d88a4ec40cdb4db79b391f24eefad5d61bc4895196ad60",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Vietnamese hired ox-cart driver, man thirty-two, strong wiry arms, dark tan skin, cropped messy hair, straw hat hanging behind shoulders, faded olive work tunic, wooden cart pin held at chest, earnest exhausted expression."
+  },
+  {
+    "id": "nguoi_lai_do",
+    "file": "assets/images/npcs/nguoi_lai_do.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 55726,
+    "sha256": "8eb01068efc46e99180cf2321ff0b66322db07a2fa3059083b6b6ceff5025fc3",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Vietnamese river ferryman, woman forty, sun-browned oval face, black hair under a dark blue headscarf, plain indigo boat-worker clothes, bamboo oar resting over shoulder, practical wry expression, clearly different from elderly Ba Tu."
+  },
+  {
+    "id": "vu_binh",
+    "file": "assets/images/npcs/vu_binh.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 73382,
+    "sha256": "ea303afe7e19353a6da66ddd3a9c3baf1b89e9db9e23be57626a558edafa6253",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Vũ Bình, Vietnamese tax ledger scribe and missing father of a young girl, man thirty-six, slender tired face, unshaven stubble, loosened scholar topknot, plain ink-stained gray-beige robe, blue ink stain on fingers holding a closed cloth ledger, frightened but determined, no writing."
+  },
+  {
+    "id": "nguoi_phu",
+    "file": "assets/images/npcs/nguoi_phu.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 74518,
+    "sha256": "f013d97cd50d0e0d73f2aa61c7a2f7df014cee3e49bbdb6354c30de0d345947e",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Vietnamese forced grain porter, man forty, sturdy exhausted face, short black hair with a rough cloth headband, plain dark brown shirt, padded carrying yoke on shoulders, bandaged wrist, resilient and humane, no chains or gore."
+  },
+  {
+    "id": "cha_tieu_muoi",
+    "file": "assets/images/npcs/cha_tieu_muoi.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 86896,
+    "sha256": "a48bdba4bbb42e472d0ccbc978de64c1f10afbd53e5a83ed58e381093fe7d799",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Father of Tieu Muoi, Vietnamese male farmer fifty-two, gentle long face, graying short beard, black-gray hair under a faded pale turban, mended pale blue peasant robe, small herbal medicine sachet held in one hand, thin tired but relieved expression."
+  },
+  {
+    "id": "ba_cu_giu_kho",
+    "file": "assets/images/npcs/ba_cu_giu_kho.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 73902,
+    "sha256": "03fd78b54fbe49c9d50914b9d1361544fd3ec8612367bc667d5f97d2b560b67b",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Elderly Vietnamese woman keeper of a communal grain store, seventy, square kind weathered face, silver hair in a tight braid loop, plain moss-green robe and cream headcloth, large old iron key in one hand, alert practical expression, visually distinct from Ba Tu."
+  },
+  {
+    "id": "thu_lai",
+    "file": "assets/images/npcs/thu_lai.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 55486,
+    "sha256": "eaba659e1c15cbed2615978e444ffec78171350570d9806f32689f222ab37d9a",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Vietnamese county clerk, man twenty-eight, narrow clean-shaven face, neat black hair bun under a small gray cloth cap, modest blue-gray scholar robe, counting bamboo tally sticks held at chest, nervous earnest eyes, no writing."
+  },
+  {
+    "id": "tho_giay",
+    "file": "assets/images/npcs/tho_giay.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 78082,
+    "sha256": "a43d1bc2a276c5b0b8d1a0afecf1e830371c45770cf3965747e20167f28f0b20",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Vietnamese paper-maker woman thirty-four, round face, strong working hands, black hair tied high with a cream cloth band, pale ochre apron over indigo shirt, holding a blank fibrous handmade paper sheet and bamboo screen edge, patient observant expression."
+  },
+  {
+    "id": "tho_bay",
+    "file": "assets/images/npcs/tho_bay.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 66474,
+    "sha256": "293f7c2d793cd51f6c2c10ac677eaa6293cbc756d075d8825315ac7b7348e85f",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Thợ Bảy, Vietnamese master blacksmith man fifty, thick muscular forearms, warm weathered face, broad gray mustache and short swept black-gray hair, dark leather apron over charcoal tunic, small forging hammer at shoulder, sparks limited to soft warm reflected light, serious craftsman."
+  },
+  {
+    "id": "co_gai",
+    "file": "assets/images/npcs/co_gai.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 66346,
+    "sha256": "efe9b5a2098aba65163aea253985f4d3e6ce44e5260af4bfd8f8eb99592ae446",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: The adult daughter of official Do Mau, Vietnamese woman twenty-two, delicate pale oval face, long black hair half tied with a worn pale ribbon, simple light blue robe rather than luxurious silk, a small medicine bowl in both hands, thoughtful firm expression, recovering from illness, no glamour."
+  },
+  {
+    "id": "cam_tu",
+    "file": "assets/images/npcs/cam_tu.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 63932,
+    "sha256": "e6e9ac493d65c3b3eba9482eb0a0965a12be155bea9ebda0985c5be6922844ef",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: Cẩm Tú, Vietnamese traveling acrobat woman twenty-seven, expressive bright eyes, black hair in a high practical braid, muted plum performance tunic with a teal sash and patched shoulder, silk acrobatic ribbon coiled over one arm, upright proud posture, not sexualized."
+  },
+  {
+    "id": "tay_sai",
+    "file": "assets/images/npcs/tay_sai.webp",
+    "width": 480,
+    "height": 720,
+    "bytes": 65448,
+    "sha256": "27f306255f466666870ded2cd4a55eab82d58d6259026b2e92eac32f0164a174",
+    "generator": "built-in image_gen",
+    "prompt": "Use case: illustration-story. Asset type: standalone classic RPG dialogue portrait, portrait canvas 1024x1536. One character only, chest-up, entire face large and fully visible in upper half, three-quarter view slightly facing viewer's right. Fictional premodern Vietnamese wuxia, confident hand-ink lines, gouache texture, jade shadows and warm amber light, detailed expressive human face, same coherent collectible game art style. Muted plain painterly jade backdrop, no border, no frame, no words, no watermark, no readable writing, no collage. Character: A Vietnamese tax collector hired guard, man twenty-nine, weathered lean face, dark short hair under a plain indigo headband, practical brown padded vest over indigo shirt and red armband, bamboo staff held upright, wary expression, no official ornaments, visibly distinct from his captain."
+  }
+]

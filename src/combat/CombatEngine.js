@@ -633,6 +633,12 @@ export class CombatEngine {
       !this.validTarget(actor, anchor, skill)
     )
       return;
+    const origin = { ...actor.gridPosition };
+    const announce = targets => this.emit({
+      type: 'skill:cast', actorId: actor.id, skillId: skill.id ?? skill.name,
+      name: skill.name, ultimate, ownerId: actor.characterId ?? (actor.templateId === 'hero' ? actor.sect : actor.templateId),
+      origin, targets: targets.map(target => ({ id: target.id, position: { ...target.gridPosition } }))
+    });
     if (ultimate) {
       this.records.get(actor.id).ultimates++;
       this.emit({ type: 'ultimate', actorId: actor.id, name: skill.name });
@@ -651,12 +657,12 @@ export class CombatEngine {
         const ally = this.allies(actor).sort(
           (a, b) => a.hpRatio - b.hpRatio || a.id.localeCompare(b.id)
         )[0];
-        if (ally) this.heal(actor, ally, ally.stats.maxHp);
+        if (ally) { announce([ally]); this.heal(actor, ally, ally.stats.maxHp); }
       } else
-        this.hit(actor, anchor, {
+        { announce([anchor]); this.hit(actor, anchor, {
           ...skill,
           dmgMultiplier: choice.dmgMultiplier
-        });
+        }); }
       return;
     }
     if (effects.some((e) => e.type === 'blink')) {
@@ -705,6 +711,7 @@ export class CombatEngine {
       targets = this.opponents(actor).filter(
         (u) => u.gridPosition.y === anchor.gridPosition.y
       );
+    announce(targets);
     let connected = false;
     for (const target of targets) {
       if (!actor.alive) break;

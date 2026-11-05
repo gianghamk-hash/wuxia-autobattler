@@ -1,23 +1,23 @@
 import { COMPANIONS } from '../data/CompanionsData.js';
 import { portrait, icon } from './Visuals.js';
+import { findNPC } from '../data/NPCData.js';
 const node = (tag, text, className) => {
   const e = document.createElement(tag);
   if (text !== undefined) e.textContent = text;
   if (className) e.className = className;
   return e;
 };
-function speakerPortrait(speaker, hero) {
+export function speakerPortrait(speaker, hero) {
   const name = speaker.trim().normalize('NFC');
-  if (name === 'Bạn' || name === hero?.name) return portrait(hero?.sect ?? 'VoDang', 'classic-portrait');
+  if (name === 'Bạn') return portrait(hero?.sect ?? 'VoDang', 'classic-portrait');
   const companion = COMPANIONS.find(c => c.name === name || (name.length >= 3 && c.name.startsWith(name + ' ')));
   if (companion) return portrait(companion, 'classic-portrait');
+  const npc = findNPC(name);
+  if (npc) return portrait(npc, 'classic-portrait');
   const result = node('span', undefined, 'classic-portrait');
   result.setAttribute('aria-hidden', 'true');
-  if (name === 'Quán chủ') result.classList.add('portrait-innkeeper');
-  else {
-    result.classList.add('portrait-symbol');
-    result.append(icon(['Người kể', 'Trước đó'].includes(name) ? 'codex' : 'roster'));
-  }
+  result.classList.add('portrait-symbol');
+  result.append(icon(['Người kể', 'Trước đó'].includes(name) ? 'codex' : 'roster'));
   return result;
 }
 /** Classic portrait-and-text dialogue. Reading never calls a campaign action. */
@@ -30,6 +30,12 @@ export class DialogueUI {
     this.root.className = 'panel classic-dialogue';
     this.root.parentElement.classList.add('has-classic-dialogue');
     this.root.append(node('h2', title, 'classic-title'));
+    if (quest?.chapterGoal) {
+      this.root.append(node('p', `Mục tiêu chương: ${quest.chapterGoal}`, 'classic-goal'));
+      const recap = node('details', undefined, 'classic-recap');
+      recap.append(node('summary', 'Nhắc lại câu chuyện'), node('p', quest.chapterSummary));
+      this.root.append(recap);
+    }
     const scene = node('div', undefined, 'classic-scene');
     scene.setAttribute('aria-hidden', 'true');
     scene.append(node('span', quest?.location ?? 'Giang hồ ký sự', 'classic-location'));
@@ -38,9 +44,10 @@ export class DialogueUI {
     frame.type = 'button'; frame.id = 'dialogue-advance';
     const copy = node('span', undefined, 'classic-copy');
     const name = node('strong', undefined, 'classic-speaker'); name.id = 'dialogue-speaker';
+    const role = node('span', undefined, 'classic-role');
     const text = node('span', undefined, 'classic-text'); text.id = 'dialogue-text';
     copy.setAttribute('aria-live', 'polite'); copy.setAttribute('aria-atomic', 'true');
-    copy.append(name, text);
+    copy.append(name, role, text);
     const indicator = node('span', '▸', 'classic-indicator'); indicator.setAttribute('aria-hidden', 'true');
     const controls = node('div', undefined, 'classic-controls');
     const previous = node('button', '◂ Trước'); previous.type = 'button'; previous.id = 'dialogue-previous';
@@ -62,6 +69,9 @@ export class DialogueUI {
       const [speaker, line] = pages[index], last = index === pages.length - 1;
       frame.replaceChildren(speakerPortrait(speaker, hero), copy, indicator);
       name.textContent = speaker; text.textContent = line;
+      const npc = findNPC(speaker);
+      role.textContent = npc?.role ?? ''; role.hidden = !npc;
+      frame.title = npc?.bio ?? '';
       frame.setAttribute('aria-label', last ? `${speaker}: ${line}` : `${speaker}: ${line}. Bấm để đọc tiếp.`);
       indicator.hidden = last;
       count.textContent = `${index + 1} / ${pages.length}`;

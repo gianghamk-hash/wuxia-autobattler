@@ -1,4 +1,5 @@
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
+import { storyEnemy, applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
 import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
 import {
@@ -737,7 +738,11 @@ export class Campaign {
       guide.name =
         pending.kind === 'recruit'
           ? `${COMPANIONS_BY_ID[helper].name} (hỗ trợ)`
-          : 'Quán chủ (hỗ trợ)';
+          : 'Lão Tam (hỗ trợ)';
+      if (pending.kind === 'main' && quest.id === 'Q101') {
+        applyStoryIdentity(guide, NPCS_BY_ID.quan_chu);
+        guide.name = 'Quán chủ (hỗ trợ)';
+      }
       const cell = [
         { x: 1, y: 0 },
         { x: 0, y: 2 },
@@ -772,6 +777,11 @@ export class Campaign {
       unit.stats.physicalAtk *= encounter.attackScale;
       unit.stats.magicalAtk *= encounter.attackScale;
       unit.name = `${pending.kind === 'main' && quest.id === 'Q303' && index === 2 ? 'Thân vệ Trịnh Nghiêm' : COMPANIONS_BY_ID[id].name}`;
+      if (pending.kind === 'main') {
+        const identity = storyEnemy(quest, index, enemyTemplates.length);
+        applyStoryIdentity(unit, identity);
+        if (identity.id === 'tay_sai') unit.name += ` ${index + 1}`;
+      }
       grid.place(
         unit,
         [

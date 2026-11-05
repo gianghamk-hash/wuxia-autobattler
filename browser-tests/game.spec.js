@@ -55,7 +55,7 @@ for (const width of [320, 390, 1280]) {
     for (let i = 0; i < 10 && await page.locator('#dialogue-speaker').textContent() !== 'Quán chủ'; i++)
       await page.locator('#dialogue-next').click();
     await expect(page.locator('#dialogue-speaker')).toHaveText('Quán chủ');
-    await expect(page.locator('.portrait-innkeeper')).toHaveCount(1);
+    await expect(page.locator('.classic-portrait[data-character-id="quan_chu"]')).toHaveCount(1);
     expect(await page.evaluate(() => JSON.stringify(window.__game.model.session.storyProgress))).toBe(before);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.locator('#dialogue-root').screenshot({ path: testInfo.outputPath(`dialogue-${width}.png`), animations: 'disabled', style: '.app-header, .main-nav, #app-message { visibility: hidden !important; }' });
@@ -173,6 +173,9 @@ test('real opening battle checkpoint resumes after reload; archive reading award
   await expect(page.locator('#battle-result')).toContainText('Chiến thắng');
   await page.locator('#btn-battle-camp').click();
   await page.locator('[data-view="tavern"]').first().click();
+  await page.getByRole('button', { name: 'Người đã gặp', exact: true }).click();
+  await expect(page.locator('[data-character="quan_chu"]')).toHaveCount(1);
+  await expect(page.locator('[data-character="trinh_nghiem"]')).toHaveCount(0);
   await page.getByRole('button', { name: 'Truyện ký', exact: true }).click();
   const before = await page.evaluate(() => JSON.stringify({ inventory: window.__game.model.session.inventory, story: window.__game.model.session.storyProgress }));
   await page.locator('[data-episode="Q101"]').click();

@@ -1,6 +1,6 @@
 # Dẫn truyện bằng webtoon — cảnh thử mở đầu
 
-**Lưu trữ lịch sử:** giao diện này đã được thay bằng [hộp thoại chân dung cổ điển](DIALOGUE.md) theo yêu cầu cập nhật. Giữ tài liệu này để ghi nguồn/prompt của ảnh đang dùng cho chân dung Quán chủ.
+**Lưu trữ lịch sử:** giao diện này đã được thay bằng [hộp thoại chân dung cổ điển](DIALOGUE.md). Quán chủ và các NPC đã có bộ chân dung mới trong `assets/images/npcs/`; trang tranh này không còn được dùng làm chân dung trong game. Giữ tài liệu để ghi nguồn/prompt của bản thử trước.
 
 Phạm vi: **Q101, cảnh mở đầu chương 1**, gồm ba khung minh họa theo chiều dọc. Các hồi khác tiếp tục dùng hội thoại hiện có; chưa có bộ tranh cho toàn bộ 240 hồi.
 

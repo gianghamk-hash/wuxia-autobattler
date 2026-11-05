@@ -27,10 +27,6 @@
   background-size: 500% 100%; background-position: var(--portrait-x, 25%) center;
   box-shadow: inset 0 0 0 2px #132c34;
 }
-.classic-line .portrait-innkeeper {
-  background-image: url('./assets/images/story/chapter01-opening.webp');
-  background-size: 640% auto; background-position: 64% 79%;
-}
 .classic-line .portrait-symbol { background-image: none; display: grid; place-items: center; color: #a0c6b9; }
 .portrait-symbol svg { width: 40px; height: 40px; }
 .classic-copy { display: block; min-width: 0; padding: 0 12px 14px 0; }
@@ -43,6 +39,18 @@
 .classic-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
 .classic-controls button { min-height: 44px; min-width: 82px; font-size: .8rem; }
 .classic-step { color: #9abbb0; font-size: .75rem; font-variant-numeric: tabular-nums; }
+.classic-role { display: block; color: #a5c5b7; font-size: .72rem; line-height: 1.5; margin: -6px 0 10px; font-weight: 400; }
+.classic-goal { color: #dfd6b6; padding: 10px 12px; border-left: 2px solid #c4ac70; background: #163238; font-size: .82rem; line-height: 1.7; }
+.classic-recap { margin: 12px 0; font-size: .8rem; color: #becfc2; }
+.classic-recap summary { cursor: pointer; padding: 8px 0; min-height: 44px; }
+.classic-recap p { line-height: 1.8; }
+.story-cast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+.story-cast-card { padding: 16px; border: 1px solid #4d7168; border-radius: 12px; background: #0c252b; }
+.story-cast-card .story-cast-portrait { display: block; width: 100%; height: 180px; border-radius: 8px; margin-bottom: 14px; background-position: center 18%; }
+.story-cast-card p { font-size: .82rem; line-height: 1.8; }
+.ending-dialogue-line { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 14px; padding: 14px; margin: 18px 0; background: #0e2d33; border: 1px solid #658e83; border-radius: 8px; }
+.ending-dialogue-line .classic-portrait { width: 62px; height: 76px; border: 1px solid #7bb2af; border-radius: 4px; }
+.ending-dialogue-line p { margin: 8px 0 0; }
 .classic-back { margin-top: 16px; min-height: 44px; font-size: .8rem; }
 .classic-note { margin: 20px 0 0; line-height: 1.8; }
 .classic-dialogue .dialogue-choices { margin-top: 20px; }

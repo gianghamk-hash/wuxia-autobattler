@@ -1,5 +1,7 @@
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { SECT_ART } from './Visuals.js';
+import { getSkillVisual } from '../data/SkillVisualsData.js';
+import { paintSkillEffect } from './SkillEffects.js';
 const COLORS = { home: '#90ddbf', enemy: '#f4a18d' };
 function rounded(ctx, x, y, width, height, radius = 5) {
   ctx.beginPath();
@@ -29,6 +31,7 @@ export class BattleRenderer {
     this.positions = new Map();
     this.floating = [];
     this.effects = [];
+    this.skillEffects = [];
     this.portrait = false;
     this.width = 960;
     this.height = 540;
@@ -53,25 +56,24 @@ export class BattleRenderer {
     this.positions.clear();
     this.floating = [];
     this.effects = [];
+    this.skillEffects = [];
   }
   event(event) {
+    const enabled = document.body.dataset.cardEffects !== 'false';
+    if (event.type === 'skill:cast' && enabled) {
+      const profile = getSkillVisual(event);
+      if (profile) {
+        // Reserve room for ultimates when many basic attacks resolve in one tick.
+        if (!profile.ultimate && this.skillEffects.filter(e => !e.profile.ultimate).length >= 8) return;
+        this.skillEffects.push({ ...event, profile, life: profile.duration });
+        if (this.skillEffects.length > 18) this.skillEffects.splice(this.skillEffects.findIndex(e => !e.profile.ultimate) >= 0 ? this.skillEffects.findIndex(e => !e.profile.ultimate) : 0, 1);
+      }
+    }
     if (['damage', 'heal', 'miss'].includes(event.type) && event.position) {
       this.floating.push({ ...event, life: 0.85 });
       if (this.floating.length > 30) this.floating.shift();
-      if (event.type !== 'miss')
+      if (event.type !== 'miss' && enabled)
         this.effects.push({ ...event, life: 0.3, duration: 0.3 });
-    }
-    if (event.type === 'ultimate') {
-      const actor = this.battle?.units.find(
-        (unit) => unit.id === event.actorId
-      );
-      if (actor?.gridPosition)
-        this.effects.push({
-          type: 'ultimate',
-          position: { ...actor.gridPosition },
-          life: 0.6,
-          duration: 0.6
-        });
     }
     if (this.effects.length > 24) this.effects.shift();
   }
@@ -187,6 +189,8 @@ export class BattleRenderer {
   }
   render(dt = 0) {
     const ctx = this.ctx;
+    const enabled = document.body.dataset.cardEffects !== 'false';
+    const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
     ctx.drawImage(this.drawBoard(), 0, 0);
     if (!this.battle) return;
     for (const unit of this.battle.units.filter(
@@ -218,14 +222,16 @@ export class BattleRenderer {
       ctx.save();
       rounded(ctx, p.x - w / 2, top, w, h, 9);
       ctx.clip();
-      let individual = this.companionImages.get(unit.templateId);
-      if (!individual && COMPANIONS_BY_ID[unit.templateId]) {
+      const artId = unit.characterId ?? unit.templateId;
+      const portraitPath = unit.portrait ?? COMPANIONS_BY_ID[unit.templateId]?.portrait;
+      let individual = this.companionImages.get(artId);
+      if (!individual && portraitPath) {
         individual = new Image();
         individual.src = new URL(
-          '../../' + COMPANIONS_BY_ID[unit.templateId].portrait,
+          '../../' + portraitPath,
           import.meta.url
         ).href;
-        this.companionImages.set(unit.templateId, individual);
+        this.companionImages.set(artId, individual);
       }
       if (individual?.complete && individual.naturalWidth) {
         const sourceHeight = (individual.naturalWidth * h) / w;
@@ -240,7 +246,7 @@ export class BattleRenderer {
           w,
           h
         );
-      } else if (this.atlas.complete && this.atlas.naturalWidth) {
+      } else if (!unit.characterId && this.atlas.complete && this.atlas.naturalWidth) {
         const part = this.atlas.width / 5;
         ctx.drawImage(
           this.atlas,
@@ -300,12 +306,15 @@ export class BattleRenderer {
         ctx.fill();
       }
     }
+    if (!enabled) { this.effects = []; this.skillEffects = []; }
+    this.skillEffects = this.skillEffects.map(e => ({ ...e, life: e.life - dt })).filter(e => e.life > 0);
+    for (const effect of this.skillEffects) paintSkillEffect(ctx, effect, 1 - effect.life / effect.profile.duration, position => this.project(position), reduced);
     this.effects = this.effects
       .map((item) => ({ ...item, life: item.life - dt }))
       .filter((item) => item.life > 0);
     for (const effect of this.effects) {
       const p = this.project(effect.position),
-        t = 1 - effect.life / effect.duration;
+        t = reduced ? .5 : 1 - effect.life / effect.duration;
       ctx.save();
       ctx.globalAlpha = 1 - t;
       ctx.strokeStyle =
@@ -362,7 +371,7 @@ export class BattleRenderer {
       ctx.textAlign = 'center';
       ctx.lineWidth = 4;
       ctx.strokeStyle = '#183237';
-      const textY = p.y - 37 - (1 - item.life / 0.85) * 40;
+      const textY = p.y - 37 - (enabled && !reduced ? (1 - item.life / 0.85) * 40 : 0);
       ctx.strokeText(text, p.x, textY);
       ctx.fillStyle =
         item.type === 'heal'
