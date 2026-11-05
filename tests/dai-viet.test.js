@@ -45,6 +45,7 @@ test('400 full authored episodes have distinct scenes, complete speaker portrait
  assert.equal(new Set(DAI_VIET_CAST.map(p=>p.portrait)).size,DAI_VIET_CAST.length);
  for(const p of DAI_VIET_CAST)assert.ok(existsSync(new URL('../'+p.portrait,import.meta.url)),p.name);
  assert.equal(DAI_VIET_HOME_CHAPTER.scenes.length,20);
+ assert.equal(DAI_VIET_QUESTS[0].scene,'modern');assert.match(DAI_VIET_QUESTS[0].location,/Hiện đại/);assert.match(DAI_VIET_QUESTS[1].location,/Tây Bắc/);
 });
 test('all five selected paths play the actual one-enemy unarmed opening without prematurely learning an ultimate',()=>{
  for(const sect of SECT_IDS){const c=fresh(sect);for(let i=0;i<5;i++)c.chooseMain('continue');const before=itemCount(c.session,'silver');const b=c.chooseMain('continue');
@@ -109,7 +110,7 @@ test('actual combat completes the 400-episode route; gate branches, optional rom
   while(!branch.mainQuest().ending)branch.chooseMain('continue');const final=branch.snapshot();
   assert.equal(final.storyProgress.completedQuests.filter(id=>id.startsWith('D')).length,399);
   const expected=route==='home'?['home']:['actor','justice','retire'];assert.deepEqual(branch.endingOptions().filter(e=>e.available).map(e=>e.id),expected);
-  if(route==='home'){for(let e=1;e<=20;e++){const resolved=resolveDaiVietQuest(DAI_VIET_BY_ID[`D20H${String(e).padStart(2,'0')}`],final);assert.equal(resolved.title,DAI_VIET_HOME_CHAPTER.scenes[e-1].title);}assert.throws(()=>branch.completeBond('bond_companion_01_1','listen'));}
+  if(route==='home'){for(let e=1;e<=20;e++){const resolved=resolveDaiVietQuest(DAI_VIET_BY_ID[`D20H${String(e).padStart(2,'0')}`],final);assert.equal(resolved.title,DAI_VIET_HOME_CHAPTER.scenes[e-1].title);}assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H02,final).location,/Hiện đại/);assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H04,final).location,/Đại Việt/);assert.throws(()=>branch.completeBond('bond_companion_01_1','listen'));}
   for(const ending of expected){const run=fresh();run.load(final);const silver=itemCount(run.session,'silver');run.chooseEnding(ending);assert.equal(itemCount(run.session,'silver'),silver);assert.equal(run.session.storyProgress.completedQuests.filter(id=>id.startsWith('D')).length,400);assert.equal(run.catalog.quests.length,400);assert.throws(()=>run.chooseEnding(ending));
    const wallet=structuredClone(run.session.inventory),beforeReplay=run.snapshot();for(const q of run.catalog.quests)daiVietLines(q,run.session);assert.deepEqual(run.snapshot(),beforeReplay);
    const storage=new StorageManager({indexedDB:null,localStorage:{getItem:()=>null,setItem(){},removeItem(){}}});const file=await storage.exportSave(run.snapshot());const imported=await storage.decodeSave(file);assert.equal(imported.storyProgress.endingId,ending);assert.deepEqual(imported.inventory,wallet);

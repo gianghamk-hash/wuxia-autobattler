@@ -59,6 +59,7 @@ export const DAI_VIET_QUESTS=deepFreeze(DAI_VIET_CHAPTERS.flatMap(c=>{
  return c.scenes.map((scene,i)=>{
   const episode=i+1,id=episodeId(c.number,episode),battle=c.battles.includes(episode);
   const q={id,canon:'dai-viet',chapter:c.number,episode,chapterTitle:c.title,chapterGoal:c.goal,chapterSummary:c.summary,act:c.number<=4?1:c.number<=8?2:c.number<=13?3:c.number<=18?4:5,title:scene.title,location:c.place,level:levels[c.number-1],xp:xp[i],silver:silver[i],kind:battle?'battle':'story',boss:battle&&c.battles.at(-1)===episode,objectiveText:scene.objective,previous:i?c.scenes[i-1].lines[0][1]:c.number>1?DAI_VIET_CHAPTERS[c.number-2].bridge:'Trần Phong đang đóng một cảnh nguy hiểm ở hiện đại, chưa biết về Đại Việt.',lines:scene.lines,scene:sceneNames[c.number-1],choices:[{id:'continue',text:battle?'Thực hiện nhiệm vụ trận.':'Tiếp tục câu chuyện.',karma:0}],spotlights:[]};
+  if(id==='D01H01'){q.location='Hiện đại · trường quay trên sườn núi';q.scene='modern';}
   q.chapterSummary=briefs[c.number-1];
   if(episode===1)q.lines=[['Người kể',q.chapterSummary],...q.lines];
   if(episode===20){q.lines=[...q.lines,['Người kể',c.bridge]];q.flags={[`STORY_CHAPTER_${c.number}`]:true};}
@@ -80,7 +81,7 @@ export function resolveDaiVietQuest(q,session){
  if(q?.canon!=='dai-viet')return q;
  const returning=session.storyProgress.decisions.D19H18==='home';
  if(returning&&returns[q.id]){const{objective,...scene}=returns[q.id];return{...q,...scene,objectiveText:objective};}
- if(returning&&q.chapter===20){const scene=home.scenes[q.episode-1];return{...q,title:scene.title,chapterTitle:home.title,chapterSummary:home.summary,chapterGoal:home.goal,location:home.place,scene:[4,7,8,10,12,15,17].includes(q.episode)?'jianghu-village':'modern',lines:scene.lines,objectiveText:scene.objective,previous:q.episode===1?returns.D19H20.lines[0][1]:home.scenes[q.episode-2].lines[0][1]};}
+ if(returning&&q.chapter===20){const scene=home.scenes[q.episode-1],ancient=[4,7,8,10,12,15,17].includes(q.episode);return{...q,title:scene.title,chapterTitle:home.title,chapterSummary:home.summary,chapterGoal:home.goal,location:q.episode===19?'Hai thế giới · hai bữa cơm':ancient?'Đại Việt · sau cuộc chia tay':'Hiện đại · sau ngày trở về',scene:ancient?'jianghu-village':'modern',lines:scene.lines,objectiveText:scene.objective,previous:q.episode===1?returns.D19H20.lines[0][1]:home.scenes[q.episode-2].lines[0][1]};}
  return q;
 }
 export function daiVietLines(quest,session){
