@@ -23,7 +23,7 @@ import {
   SECT_ART
 } from '../ui/Visuals.js';
 import { BattleRenderer } from '../ui/BattleRenderer.js';
-import { DialogueUI } from '../ui/DialogueUI.js';
+import { DialogueUI, speakerPortrait } from '../ui/DialogueUI.js';
 import { mountFormationUI } from '../ui/FormationUI.js';
 import { mountSkillTreeUI } from '../ui/SkillTreeUI.js';
 import { mountCodexUI } from '../ui/CodexUI.js';
@@ -889,6 +889,8 @@ export class App {
           }));
     this.dialogue.show({
       title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
+      quest,
+      hero: this.model.session.hero,
       lines: [
         ['Trước đó', quest.previous],
         ...storyLines(quest, this.model.session, MAIN_QUESTS, COMPANIONS_BY_ID)
@@ -911,7 +913,7 @@ export class App {
           if (battle) this.enterBattle();
           else {
             this.setView('camp');
-            this.toast('Nhiệm vụ hoàn tất. Phần thưởng đã được lưu.');
+            this.toast('Nhiệm vụ hoàn tất. Đã nhận phần thưởng.');
           }
         })
     });
@@ -939,6 +941,7 @@ export class App {
           ].filter((c) => !previous || previous === c.id);
     this.dialogue.show({
       title: quest.title,
+      hero: this.model.session.hero,
       lines: [
         ...quest.lines,
         ...(ready
@@ -1009,7 +1012,7 @@ export class App {
         this.world.inspect(unit);
       });
       card.append(
-        portrait(COMPANIONS_BY_ID[unit.templateId] ?? unit),
+        portrait(unit.characterId ? unit : COMPANIONS_BY_ID[unit.templateId] ?? unit),
         node('strong', unit.name),
         status,
         inspect
@@ -1151,7 +1154,7 @@ export class App {
             ? `Nhận ${result.rewards.silver} bạc. Vật liệu (nếu có) đã vào túi; giới hạn thưởng được ghi theo ngày/tuần.`
             : result.kind === 'recruit'
               ? 'Thử thách đã hoàn tất. Quay lại gặp nhân vật để mời đồng hành và nhận thưởng.'
-              : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc. Đã tự lưu tiến trình.`;
+              : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc.`;
     const table = node('table'),
       head = node('thead'),
       header = node('tr');
@@ -1204,11 +1207,15 @@ export class App {
     for (const [speaker, text] of this.model.session.legacyEnding
       ? [['Người kể', this.model.session.legacyEnding.text]]
       : ending.lines) {
-      const p = node('p', `${speaker}: ${text}`);
-      root.append(p);
+      if (speaker === 'Người kể') root.append(node('p', text));
+      else {
+        const row = node('article', undefined, 'ending-dialogue-line');
+        const copy = node('div'); copy.append(node('strong', speaker), node('p', text));
+        row.append(speakerPortrait(speaker, this.model.session.hero), copy); root.append(row);
+      }
     }
     el('ending-summary').textContent =
-      `${this.model.session.hero.name} · Cấp ${this.model.session.hero.level} · ${this.model.session.party.unlocked.length}/20 người đồng hành · ${Math.floor(this.model.session.playtimeSeconds / 60)} phút phiêu lưu`;
+      `${this.model.session.hero.name} · Cấp ${this.model.session.hero.level} · ${this.model.session.party.unlocked.length}/50 người đồng hành · ${Math.floor(this.model.session.playtimeSeconds / 60)} phút phiêu lưu`;
   }
   syncSpeed() {
     el('btn-pause').textContent = this.engine.paused ? 'Tiếp tục' : 'Tạm dừng';

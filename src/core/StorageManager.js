@@ -7,6 +7,13 @@ export const SAVE_VERSION = 1;
 export const MAX_SAVE_BYTES = 1024 * 1024;
 const PREFIX = 'wuxia:save:v1:';
 const MARKER = 'wuxia:storage:v1';
+const revision = record => record === null ? null : record.revision ?? JSON.stringify(record);
+export class SaveConflictError extends Error {
+  constructor() {
+    super('Tiến trình đã được lưu từ tab khác. Hãy xuất bản đang chơi hoặc tải bản mới nhất trước khi lưu tiếp.');
+    this.name = 'SaveConflictError';
+  }
+}
 const plain = value => value && Object.getPrototypeOf(value) === Object.prototype;
 const finite = value => Number.isFinite(value) && value >= 0;
 const fail = message => { throw new Error(message); };
@@ -94,11 +101,13 @@ function slot(id) {
 }
 
 export class StorageManager {
-  constructor({ indexedDB = globalThis.indexedDB, localStorage, dbName = 'WuxiaChroniclesDB', timeout = 2500 } = {}) {
+  constructor({ indexedDB = globalThis.indexedDB, localStorage, dbName = 'WuxiaChroniclesDB', timeout = 2500, locks = typeof window === 'undefined' ? undefined : globalThis.navigator?.locks } = {}) {
     this.idb = indexedDB;
     this.local = localStorage; // Access global storage lazily: its getter can throw.
     this.dbName = dbName; this.timeout = timeout; this.backend = null;
     this.db = null; this._ready = null; this._queue = Promise.resolve();
+    this.locks = locks;
+    this._observed = new Map();
   }
   init() { return this._ready ??= this._init(); }
   async _init() {
@@ -131,9 +140,39 @@ export class StorageManager {
   async _read(id) {
     await this.init();
     if (this.backend === 'localStorage') {
-      const raw = this.local.getItem(PREFIX + id); return raw === null ? null : JSON.parse(raw);
+      return this._readLocal(id);
     }
     return this._transaction('readonly', store => store.get(id));
+  }
+  _readLocal(id) {
+    const raw = this.local.getItem(PREFIX + id);
+    if (raw === null) return null;
+    try { return JSON.parse(raw); } catch { return { invalidJSON: raw }; }
+  }
+  async _writeChecked(id, record, expected) {
+    if (this.backend === 'localStorage') {
+      const write = () => {
+        if (revision(this._readLocal(id)) !== expected) throw new SaveConflictError();
+        this.local.setItem(PREFIX + id, JSON.stringify(record));
+      };
+      // Web Locks serialize the synchronous read/check/write across browser tabs.
+      if (this.locks?.request) return this.locks.request(`wuxia:save:${id}`, write);
+      if (typeof window !== 'undefined') throw new Error('Trình duyệt chưa hỗ trợ khóa lưu an toàn. Hãy xuất file hoặc dùng trình duyệt mới hơn.');
+      return write(); // Node storage adapters execute this critical section synchronously.
+    }
+    return new Promise((resolve, reject) => {
+      if (!this.db) { reject(new Error('Kho lưu đã đóng. Hãy tải lại trang.')); return; }
+      const tx = this.db.transaction('save_slots', 'readwrite');
+      const store = tx.objectStore('save_slots');
+      let conflict = false;
+      const read = store.get(id);
+      read.onsuccess = () => {
+        if (revision(read.result ?? null) !== expected) { conflict = true; tx.abort(); }
+        else store.put(record);
+      };
+      tx.oncomplete = () => resolve();
+      tx.onabort = tx.onerror = () => reject(conflict ? new SaveConflictError() : tx.error || new Error('Không thể ghi bản lưu.'));
+    });
   }
   _transaction(mode, action) {
     return new Promise((resolve, reject) => {
@@ -148,18 +187,28 @@ export class StorageManager {
     slot(id); const snapshot = validateSnapshot(data); // capture now, not when queue drains
     const work = async () => {
       await this.init();
+      if (!this._observed.has(id)) this._observed.set(id, revision(await this._read(id)));
+      const expected = this._observed.get(id);
       const record = { slotId: id, savedAt: Date.now(), data: snapshot,
+        revision: crypto.randomUUID(),
         checksum: await hash(new TextEncoder().encode(JSON.stringify(snapshot))) };
-      if (this.backend === 'localStorage') this.local.setItem(PREFIX + id, JSON.stringify(record));
-      else await this._transaction('readwrite', store => store.put(record));
+      await this._writeChecked(id, record, expected);
+      this._observed.set(id, revision(record));
       return record;
     };
     const result = this._queue.then(work); this._queue = result.catch(() => {}); return result;
   }
   autoSave(data) { return this.save(0, data); }
-  async load(id) {
+  async adoptRevision(id) {
+    slot(id); await this._queue;
+    this._observed.set(id, revision(await this._read(id)));
+  }
+  async load(id, { observe = true } = {}) {
     slot(id); await this._queue; const record = await this._read(id);
-    if (!record) return null;
+    // Refreshing the slot list must never silently accept a newer tab's revision.
+    if (observe || !this._observed.has(id)) this._observed.set(id, revision(record));
+    if (record === null) return null;
+    if (!plain(record)) fail('Bản lưu không hợp lệ.');
     const data = validateSnapshot(record.data);
     if (record.slotId !== id || !finite(record.savedAt) ||
         await hash(new TextEncoder().encode(JSON.stringify(data))) !== record.checksum) fail('Bản lưu bị hỏng hoặc đã bị thay đổi.');
@@ -167,7 +216,7 @@ export class StorageManager {
   }
   async listSlots() {
     return Promise.all(Array.from({ length: 6 }, async (_, id) => {
-      try { return { slotId: id, record: await this.load(id), error: null }; }
+      try { return { slotId: id, record: await this.load(id, { observe: false }), error: null }; }
       catch (error) { return { slotId: id, record: null, error: error.message }; }
     }));
   }

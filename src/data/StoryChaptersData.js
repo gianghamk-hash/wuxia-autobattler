@@ -11,10 +11,11 @@ import c10 from './story/chapter10.js';
 import c11 from './story/chapter11.js';
 import c12 from './story/chapter12.js';
 import { deepFreeze } from './DataUtils.js';
+import { rewriteChapter } from './StoryRewriteData.js';
 export const STORY_REVISION = 3;
 export const CHAPTERS = deepFreeze(
   [c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12].map((c, i) => ({
-    ...c,
+    ...rewriteChapter(c, i + 1),
     number: i + 1
   }))
 );
@@ -206,6 +207,8 @@ export function buildMainStory(legacy) {
         chapter: c.number,
         episode,
         chapterTitle: c.title,
+        chapterGoal: c.goal,
+        chapterSummary: c.summary,
         act: Math.ceil(c.number / 4),
         title,
         location: c.place,
@@ -224,7 +227,7 @@ export function buildMainStory(legacy) {
         objectiveText: lead,
         previous:
           episode > 1
-            ? c.scenes[i - 1][3]
+            ? c.scenes[i - 1][1]
             : c.number > 1
               ? CHAPTERS[c.number - 2].bridge
               : 'Bạn đang phụ bếp ở quán Rồng Lửa, chưa có danh tiếng hay thế lực.',
@@ -308,24 +311,24 @@ export function storyCallbacks(quest, quests) {
       questId: 'Q104',
       choice: 'mercy',
       speaker: 'Lão Tam',
-      yes: 'Đốc Lệ được giữ sống và đã nhận phần sai trước người phu. Ông ta mang theo giấy nhận lệnh tới đây; người từng được thả giúp giữ đường cho ông.',
-      no: 'Sau khi nhóm tịch thu tiền công của toán truy bắt, người phu giữ lại giấy nhận lệnh. Họ tới làm chứng nhưng yêu cầu nhóm giải thích cả cách mình đã xử lý người đầu hàng.'
+      yes: 'Ở U Minh, ta đã để Đốc Lệ sống để phải trả lời về lệnh đã nhận. Hôm nay hãy đặt giấy nhận lệnh ấy cạnh lời người phu.',
+      no: 'Ta đã lấy tiền của toán truy bắt ở U Minh. Người phu vẫn giúp làm chứng, nhưng ta cũng phải giải thích cách đã xử lý người đầu hàng.'
     });
   if (quest.chapter === 8 && quest.episode === 11)
     rules.push({
       questId: 'Q103',
       choice: 'witness',
       speaker: 'Vũ Bình',
-      yes: 'Các cậu đã đứng cùng tôi ở bến dù biết tôi từng sửa sổ. Hôm nay tôi sẽ tự nói cả phần ấy.',
-      no: 'Danh môn giả giúp qua được bến. Hôm nay xin để tôi dùng tên thật và lời thật, không cần ai che bằng danh xưng nữa.'
+      yes: 'Ở bến Liễu, các cậu đã đưa tôi về làm chứng. Tới Hoa Lư rồi, tôi sẽ nói cả việc mình từng sửa sổ.',
+      no: 'Ở bến, ta đã dùng danh nghĩa giả để qua trạm. Hôm nay tôi muốn đứng đây bằng tên thật và trả lời điều mình đã làm.'
     });
   if (quest.chapter === 12 && quest.episode === 8)
     rules.push({
       questId: 'Q303',
       choice: 'justice',
       speaker: 'Bạn',
-      yes: 'Ta đã hứa giữ bằng chứng để người khác được hỏi. Lời mời giữ kín hợp đồng này đi ngược điều vừa hứa.',
-      no: 'Ta đã giữ quyền định đoạt sau trận cuối. Giờ phải nhìn thẳng việc người khác tới mua một phần quyền ấy.'
+      yes: 'Ta đã chọn đưa chứng cứ ra công khai. Danh sách trả thóc này cũng phải được giữ để dân tự kiểm.',
+      no: 'Ta đã giữ quyền xét sau trận cuối. Nhưng kẻ khác không được đốt danh sách để lấy thóc của dân.'
     });
   return rules;
 }

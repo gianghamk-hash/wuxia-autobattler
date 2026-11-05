@@ -1,4 +1,5 @@
 import { renderStoryArchive } from './StoryArchive.js';
+import { NPCS, NPCS_BY_ID, findNPC } from '../data/NPCData.js';
 import { EQUIPMENT_BY_ID } from '../data/EquipmentData.js';
 import {
   DUNGEONS,
@@ -259,10 +260,11 @@ export function mountWorldUI(app) {
     const id = unit.id ?? 'hero',
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
     root.removeAttribute('data-tier');
-    decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
+    const npc = NPCS_BY_ID[unit.characterId];
+    if (!npc) decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
     root.append(
       portrait(
-        COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
+        npc ?? COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
         'sheet-portrait'
       ),
       n('h2', unit.name),
@@ -282,7 +284,8 @@ export function mountWorldUI(app) {
         'weakness'
       )
     );
-    if (COMPANIONS_BY_ID[unit.templateId ?? id])
+    if (npc) root.append(n('p', `${npc.role} · ${npc.bio}`, 'hint'));
+    else if (COMPANIONS_BY_ID[unit.templateId ?? id])
       root.append(
         n(
           'p',
@@ -364,6 +367,7 @@ export function mountWorldUI(app) {
       arena: 'Đại hội',
       guild: 'Bang hội',
       story: 'Truyện ký',
+      characters: 'Người đã gặp',
       journal: 'Nhật ký'
     })) {
       const b = button(label, () => {
@@ -562,6 +566,22 @@ export function mountWorldUI(app) {
           button('Góp 25 bạc → công đức + quặng', () => action('guild_donate'))
         );
       root.append(guild);
+    }
+    if (tab === 'characters') {
+      const cast = panel('Người đã gặp', 'Hoàn thành hồi truyện để ghi thêm nhân vật. Chọn Truyện ký để đọc lại những việc đã xảy ra.');
+      const met = new Set();
+      for (const quest of MAIN_QUESTS.filter(q => s.storyProgress.completedQuests.includes(q.id))) {
+        for (const [speaker] of quest.lines) { const npc = findNPC(speaker); if (npc) met.add(npc.id); }
+        if (quest.encounter) met.add('tay_sai');
+      }
+      const grid = n('div'); grid.className = 'story-cast-grid';
+      for (const npc of NPCS.filter(npc => met.has(npc.id))) {
+        const card = n('article'); card.className = 'story-cast-card'; card.dataset.character = npc.id;
+        card.append(portrait(npc, 'story-cast-portrait'), n('h3', npc.name), n('p', npc.role, 'tiny-label'), n('p', npc.bio));
+        grid.append(card);
+      }
+      cast.append(grid.children.length ? grid : n('p', 'Bạn chưa hoàn thành hồi truyện nào. Người đầu tiên sẽ được ghi lại sau khi vượt chuyện ở quán Rồng Lửa.'));
+      root.append(cast);
     }
     if (tab === 'story') {
       const archive = panel('Truyện ký');

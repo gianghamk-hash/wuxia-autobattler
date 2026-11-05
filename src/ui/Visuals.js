@@ -1,4 +1,5 @@
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
+import { NPCS_BY_ID } from '../data/NPCData.js';
 /** Individual companion art; sect art remains for the player and sect picker. */
 export const SECT_ART = {
   ThieuLam: { index: 0, color: '#efa84b', name: 'Thiếu Lâm', sigil: 'Thiền' },
@@ -68,7 +69,7 @@ export function decorateRarity(element, unit) {
   }
 }
 export function stylePortrait(element, source) {
-  const unit = typeof source === 'object' ? source : COMPANIONS_BY_ID[source];
+  const unit = typeof source === 'object' ? source : COMPANIONS_BY_ID[source] ?? NPCS_BY_ID[source];
   const sect = unit?.sect ?? source;
   const art = SECT_ART[sect] ?? SECT_ART.VoDang;
   element.style.setProperty('--portrait-x', `${art.index * 25}%`);
@@ -78,7 +79,8 @@ export function stylePortrait(element, source) {
     element.style.backgroundImage = `url("${new URL('../../' + unit.portrait, import.meta.url).href}")`;
     element.style.backgroundSize = 'cover';
     element.style.backgroundPosition = 'center 18%';
-    element.dataset.companionId = unit.id;
+    if (COMPANIONS_BY_ID[unit.id]) element.dataset.companionId = unit.id;
+    else element.dataset.characterId = unit.characterId ?? unit.id;
   }
 }
 export function portrait(source, className = '') {

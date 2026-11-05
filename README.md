@@ -4,6 +4,17 @@ Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modu
 
 **Bản 3.0 — 240 hồi và 50 đồng hành:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
 
+## Đợt ổn định lưu, viết lại truyện và hình ảnh nhân vật
+
+- **Lưu nhiều tab:** kiểm tra revision trong transaction IndexedDB hoặc Web Locks cho LocalStorage; tab cũ không tự ghi đè tab đã lưu mới hơn. Lỗi ghi/xung đột có thông báo chung, cho xuất nhánh đang chơi, thử lại hoặc tải bản mới nhất. Sáu ô và bản lưu cũ được giữ. Xem [cơ chế và giới hạn](docs/SAVE_SAFETY.md).
+- **Đo 6v6:** 2.400 trận, tám nhóm, mỗi bên một main + năm đồng hành; đổi bên từng cặp, kiểm tra nhiều cấp, trang bị, chuẩn bị và mốc phái 2/4/6. Chưa chỉnh chỉ số combat. [Kết quả và giới hạn](reports/BALANCE_6V6.md), [dữ liệu cùng seed/đội hình](reports/balance-6v6.json).
+- **Hội thoại kiểu RPG cổ điển:** chân dung nhỏ bên trái, tên và lời thoại bên phải; chạm hoặc Enter để đọc từng câu, nút Trước/Tiếp để xem lại. Lựa chọn hiện sau câu cuối. Áp dụng cho chính truyện, chiêu mộ và Truyện ký; xem lại không nhận thưởng. [Giao diện và nguồn hình](docs/DIALOGUE.md).
+- **Truyện và NPC:** viết lại lời dẫn/hội thoại của cả 240 hồi cho rõ người, việc và mục tiêu; sửa lời Bé Na, nhắc lại sự việc thay vì nhiệm vụ cũ. Có 21 chân dung riêng cho nhân vật phụ và phản diện, dùng cả trong đối thoại và trận đấu. Quán → Người đã gặp để tra lại người của hồi đã hoàn thành.
+- **Chiêu thức:** 134 cấu hình hình ảnh, 67 họa tiết tuyệt kỹ, đường bay/quét/hộ thể và nhịp riêng. VFX theo đúng mục tiêu thật, có giảm chuyển động/tắt hiệu ứng. [Phạm vi, nguồn ảnh và kiểm chứng](docs/STORY_AND_EFFECTS.md).
+- **Kiểm tra:** `npm test` chạy 111 bài Node; `npm run test:browser` chạy 12 luồng Chromium, gồm hai tab thật cho mỗi kho lưu, lỗi quota, checkpoint trận, NPC và hiệu ứng, bốn đoạn kết, hộp thoại tại 320/390/1280px. CI chạy cả hai bộ. Sau `npm ci`, dùng `npx playwright install chromium` trước khi chạy trình duyệt trên máy mới.
+
+Chạy `npm run balance:6v6 -- 150 reports/balance-6v6.json` rồi `node scripts/summarize-6v6.mjs` để tái lập báo cáo mới. Các phần Sprint và nhật ký phiên bản bên dưới mô tả lịch sử; số lượng hiện tại nằm ở đầu README.
+
 ## Nâng cấp 3.0
 
 - **12 chương × 20 hồi:** 240 cảnh viết riêng, 68 trận giao chiến, đầu mối liên tục, phản ứng theo lựa chọn trước, lời thoại đồng đội và bốn đoạn kết đầy đủ. Quán → Truyện ký cho phép xem lại hồi đã qua mà không nhận lại thưởng. Bản lưu 12 nhiệm vụ cũ được mở rộng theo mốc đã hoàn thành, giữ tiền, XP, lựa chọn và trận đang chờ; không phát lại phần thưởng.
