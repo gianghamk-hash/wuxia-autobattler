@@ -93,9 +93,12 @@ if (!isMainThread) {
     averageSurvivorHpRatio:
       survivors.reduce((a, u) => a + u.finalHp / u.maxHp, 0) / survivors.length
   };
+  let rowIndex = 0;
+  const serialized = JSON.stringify({ summary, scenarios: results }, (key, value) => key === 'rows' ? [] : value, 2)
+    .replace(/"rows": \[\]/g, () => '"rows": [\n' + results[rowIndex++].rows.map(row => '        ' + JSON.stringify(row)).join(',\n') + '\n      ]') + '\n';
   writeFileSync(
     'reports/draw-diagnosis.json',
-    JSON.stringify({ summary, scenarios: results }, null, 2) + '\n'
+    serialized
   );
   console.log(summary);
 }
