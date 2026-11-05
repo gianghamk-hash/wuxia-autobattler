@@ -3284,7 +3284,7 @@ button {
   min-width: 44px !important;
 }
 body {
-  touch-action: pan-y pinch-zoom;
+  touch-action: manipulation;
 }
 .settings-toggles label {
   min-height: 44px;
