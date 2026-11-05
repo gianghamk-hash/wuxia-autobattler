@@ -7,7 +7,9 @@ import { MAIN_QUESTS, RECRUIT_QUESTS, ENDINGS } from '../data/QuestsData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { getSectName } from '../data/SectsData.js';
 import { getActiveSynergies } from '../data/SynergiesData.js';
-import { changeSect } from '../entities/HeroBuild.js';
+import { changeSect, expToNextLevel } from '../entities/HeroBuild.js';
+import { Hero } from '../entities/Hero.js';
+import { portrait, stylePortrait, icon, decorateIcons, SECT_ART } from '../ui/Visuals.js';
 import { BattleRenderer } from '../ui/BattleRenderer.js';
 import { DialogueUI } from '../ui/DialogueUI.js';
 import { mountFormationUI } from '../ui/FormationUI.js';
@@ -21,11 +23,14 @@ const STATES = { title: 'TITLE', camp: 'CAMP', roster: 'ROSTER', profile: 'CAMP'
 export class App {
   constructor() {
     this.engine = new GameEngine(); this.states = new StateManager(); this.sound = new SoundManager(); this.view = 'title';
-    this.ready = false; this.hasLoaded = false; this.frameTime = 0; this.unitNodes = new Map(); this.lastSfx = 0;
+    this.recruitFilter = 'all'; this.toastTimer = null; this.ready = false; this.hasLoaded = false; this.frameTime = 0; this.unitNodes = new Map(); this.lastSfx = 0;
     this.renderer = new BattleRenderer(el('game-canvas')); this.dialogue = new DialogueUI(el('dialogue-root'));
     this.model = new Campaign({ onChange: reason => this.changed(reason), onBattleEvent: event => this.battleEvent(event) });
   }
-  toast(message, error = false) { el('app-message').textContent = message; el('app-message').dataset.error = String(error); }
+  toast(message, error = false) {
+    const status = el('app-message'); status.textContent = message; status.dataset.error = String(error); status.dataset.visible = 'true';
+    clearTimeout(this.toastTimer); this.toastTimer = setTimeout(() => { status.dataset.visible = 'false'; }, error ? 8000 : 4500);
+  }
   run(action) { try { return action(); } catch (error) { this.toast(error.message, true); return null; } }
   async init() {
     this.states.go(GAME_STATE.TITLE);
@@ -34,7 +39,7 @@ export class App {
       onChange: (hero, inventory) => this.model.updateProfile(hero, inventory) });
     this.formation = mountFormationUI({ root: el('formation-root'), getState: () => this.model.session,
       canEdit: () => !this.model.running, onMove: formation => this.model.setFormation(formation), onError: text => this.toast(text, true) });
-    mountCodexUI(); this.bind();
+    mountCodexUI(); decorateIcons(); this.bind();
     this.ready = true;
     this.storage = await mountSaveUI({ getSnapshot: () => this.snapshot(), restoreSnapshot: data => this.restore(data),
       resetSession: () => { this.model.newGame({}); this.hasLoaded = false; this.setView('title'); }, engine: this.engine,
@@ -56,6 +61,25 @@ export class App {
     window.addEventListener('pageshow', () => { this.sound.setMuted(this.model.session.settings.muted); this.engine.start(); });
   }
   bind() {
+    const picker = el('sect-picker');
+    for (const sect of ['ThieuLam', 'VoDang', 'CaiBang', 'NgaMi', 'DuongMon']) {
+      const button = node('button', undefined, 'sect-option'); button.type = 'button'; button.dataset.sectPick = sect;
+      button.setAttribute('aria-label', `Chọn ${getSectName(sect)}`); button.append(portrait(sect), node('span', getSectName(sect), 'sect-name'));
+      button.addEventListener('click', () => { el('hero-sect').value = sect; this.syncSectPicker(); this.sound.sfx('click'); }); picker.append(button);
+    }
+    el('hero-sect').addEventListener('change', () => this.syncSectPicker()); this.syncSectPicker();
+    document.querySelectorAll('[data-profile-tab]').forEach(button => button.addEventListener('click', () => this.selectProfileTab(button.dataset.profileTab)));
+    // Follow the WAI-ARIA tabs pattern with roving focus and arrow navigation.
+    el('tab-skills').parentElement.addEventListener('keydown', event => {
+      const tabs = [...document.querySelectorAll('[data-profile-tab]')], current = tabs.indexOf(document.activeElement);
+      if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault(); const index = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[index].focus(); this.selectProfileTab(tabs[index].dataset.profileTab);
+    }); this.selectProfileTab('skills');
+    document.querySelectorAll('[data-recruit-filter]').forEach(button => button.addEventListener('click', () => {
+      this.recruitFilter = button.dataset.recruitFilter;
+      document.querySelectorAll('[data-recruit-filter]').forEach(b => b.setAttribute('aria-pressed', String(b === button))); this.renderRoster();
+    }));
     document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => this.run(() => this.setView(button.dataset.view))));
     el('brand-home').addEventListener('click', event => { event.preventDefault(); this.run(() => this.setView(this.model.session.hero.sect ? 'camp' : 'title')); });
     el('new-game-form').addEventListener('submit', event => {
@@ -100,7 +124,7 @@ export class App {
   applyAudio() {
     const { muted, volume } = this.model.session.settings;
     this.sound.setMuted(muted); this.sound.setVolume(volume); el('audio-volume').value = String(Math.round(volume * 100));
-    el('btn-audio').textContent = muted ? 'Bật âm thanh' : 'Tắt âm thanh'; el('btn-audio').setAttribute('aria-pressed', String(!muted));
+    el('btn-audio').replaceChildren(icon('sound')); el('btn-audio').setAttribute('aria-label', muted ? 'Bật âm thanh' : 'Tắt âm thanh'); el('btn-audio').title = muted ? 'Bật âm thanh' : 'Tắt âm thanh'; el('btn-audio').setAttribute('aria-pressed', String(!muted));
     el('audio-status').textContent = `${muted ? 'Đang tắt' : 'Đã bật'} · Âm lượng ${Math.round(volume * 100)}%`;
   }
   setView(view) {
@@ -113,9 +137,9 @@ export class App {
           (current === 'BATTLE' && target !== 'DIALOGUE') || (current === 'DIALOGUE' && target === 'ROSTER') || (current === 'ENDING' && target !== 'TITLE')) this.states.go('CAMP');
       if (this.states.current !== target && !this.states.go(target)) throw new Error('Không thể chuyển màn hình lúc này.');
     }
-    this.view = view;
+    this.view = view; document.body.dataset.scene = view;
     for (const id of Object.keys(STATES)) el(`view-${id}`).hidden = id !== view;
-    el('main-nav').hidden = view === 'title' || (!this.model.session.hero.sect && view === 'saves');
+    el('main-nav').hidden = view === 'battle' || view === 'title' || (!this.model.session.hero.sect && view === 'saves');
     document.querySelectorAll('[data-view]').forEach(button => { button.setAttribute('aria-current', button.dataset.view === view ? 'page' : 'false'); button.disabled = this.model.running; });
     this.sound.setTrack(view === 'battle' && this.model.running ? 'battle' : view === 'title' ? 'title' : view === 'ending' ? 'ending' : 'camp');
     if (view === 'battle') this.renderer.resize();
@@ -148,7 +172,7 @@ export class App {
   }
   refresh() {
     const session = this.model.session, quest = this.model.mainQuest(), pending = session.storyProgress.pendingEncounter;
-    el('hero-hud').textContent = `${session.hero.name} · Cấp ${session.hero.level} · ${itemCount(session, 'silver')} bạc`;
+    this.renderPlayer(); this.syncSectPicker();
     el('act-label').textContent = `HỒI ${session.storyProgress.currentAct} · NHÂN NGHĨA ${session.storyProgress.karmaScore}`;
     el('main-quest-title').textContent = quest?.title ?? 'Một đoạn đường đã khép lại';
     el('main-quest-note').textContent = quest ? `${quest.location}${quest.objective ? ' · Cần chiêu mộ Lão Tam và Tiểu Muội.' : ''}` : 'Bạn có thể xem lại kết cục, tiếp tục luyện võ hoặc khởi hành một hành trình khác.';
@@ -158,33 +182,76 @@ export class App {
     el('shop-inventory').textContent = `Bạc ${itemCount(session, 'silver')} · Dây ${itemCount(session, 'rope')} · Cá ${itemCount(session, 'food_fish')} · Trà ${itemCount(session, 'tea')}`;
     el('btn-continue').disabled = !this.hasLoaded;
     const party = el('party-summary'); party.replaceChildren();
-    for (const id of session.party.active) party.append(node('p', `${COMPANIONS_BY_ID[id].name} · Duyên nợ ${session.companionsAffinity[id] ?? 0}/100`));
-    if (!session.party.active.length) party.append(node('p', 'Chưa có đồng đội xuất chiến. Gặp người mới sau trận mở đầu.'));
+    const members = [{ id: 'hero', name: session.hero.name, sect: session.hero.sect, detail: `Cấp ${session.hero.level}`, role: 'HIỆP KHÁCH' }, ...session.party.active.map(id => ({ id, ...COMPANIONS_BY_ID[id], detail: `Duyên nợ ${session.companionsAffinity[id] ?? 0}/100`, role: getSectName(COMPANIONS_BY_ID[id].sect) }))];
+    for (const member of members) {
+      const card = node('article', undefined, 'party-member'), info = node('div', undefined, 'party-member-info');
+      info.append(node('span', member.role, 'member-role'), node('strong', member.name), node('small', member.detail)); card.append(portrait(member.sect), info); party.append(card);
+    }
+    for (let i = members.length; i < 3; i++) { const empty = node('article', undefined, 'party-member empty'); empty.append(node('span', '+', 'empty-slot'), node('span', 'Chờ người kết nghĩa')); party.append(empty); }
     const sects = [session.hero.sect, ...session.party.active.map(id => COMPANIONS_BY_ID[id].sect)].filter(Boolean);
     el('active-synergies').textContent = `Kích duyên: ${getActiveSynergies(sects).map(s => s.name).join(' · ') || 'Chưa có'}`;
     this.renderRoster(); this.formation?.render(); this.progress?.refresh(); this.applyAudio(); this.syncSpeed();
     document.querySelectorAll('[data-view]').forEach(button => { button.disabled = this.model.running; });
   }
+  syncSectPicker() {
+    document.querySelectorAll('[data-sect-pick]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.sectPick === el('hero-sect').value)));
+  }
+  selectProfileTab(tab) {
+    for (const button of document.querySelectorAll('[data-profile-tab]')) {
+      const selected = button.dataset.profileTab === tab; button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1;
+      el(`profile-${button.dataset.profileTab}`).hidden = !selected;
+    }
+  }
+  renderPlayer() {
+    const { hero, inventory, storyProgress, party } = this.model.session, artSect = hero.sect ?? 'VoDang';
+    const hud = el('hero-hud'), info = node('div', undefined, 'hud-info'); hud.replaceChildren(portrait(artSect, 'hud-portrait'));
+    info.append(node('strong', hero.name, 'hud-name'), node('span', `Cấp ${hero.level} · ${getSectName(artSect)}`, 'hud-level'));
+    const meter = node('span', undefined, 'xp-meter'), fill = node('i'); fill.style.width = `${hero.level >= 20 ? 100 : Math.min(100, hero.exp / expToNextLevel(hero.level) * 100)}%`; meter.append(fill); info.append(meter); hud.append(info);
+    const silver = el('silver-hud'), amount = itemCount(this.model.session, 'silver'); silver.replaceChildren(icon('coin'), node('span', new Intl.NumberFormat('vi-VN', { notation: amount >= 10000 ? 'compact' : 'standard', maximumFractionDigits: 1 }).format(amount))); silver.title = `${amount.toLocaleString('vi-VN')} bạc`; silver.setAttribute('aria-label', `${itemCount(this.model.session, 'silver')} bạc`);
+    stylePortrait(el('camp-hero-art'), artSect);
+    const completed = storyProgress.completedQuests.filter(id => MAIN_QUESTS.some(q => q.id === id)).length;
+    el('chapter-progress').textContent = `${completed}/12 chương`;
+    el('roster-count').textContent = `${party.unlocked.length}/20 đã kết nghĩa`;
+    const root = el('profile-hero'); root.replaceChildren(portrait(artSect));
+    const profile = node('div', undefined, 'profile-info'); profile.append(node('span', 'HỒ SƠ HIỆP KHÁCH', 'eyebrow'), node('h1', hero.name), node('p', `${getSectName(artSect)} · ${SECT_ART[artSect]?.sigil ?? 'Hiệp'} tâm bất diệt`));
+    if (hero.sect) {
+      const unit = new Hero(hero.sect, { profile: hero, inventory }), stats = node('div', undefined, 'profile-mini-stats');
+      for (const [label, value] of [['Sinh lực', unit.stats.maxHp], ['Ngoại công', unit.stats.physicalAtk], ['Nội công', unit.stats.magicalAtk]]) { const stat = node('span', label); stat.append(node('strong', Math.round(value).toLocaleString('vi-VN'))); stats.append(stat); }
+      profile.append(stats);
+    }
+    const level = node('span', 'Cấp ', 'hero-level'); level.append(node('strong', hero.level)); root.append(profile, level);
+  }
   renderRoster() {
     const session = this.model.session, root = el('roster-list'); root.replaceChildren();
     for (const id of session.party.unlocked) {
-      const unit = COMPANIONS_BY_ID[id], card = node('article', undefined, 'roster-card'), active = session.party.active.includes(id);
-      card.append(node('span', unit.name.slice(0, 1), 'avatar-mark'), node('h3', unit.name), node('p', `${getSectName(unit.sect)} · Duyên nợ ${session.companionsAffinity[id] ?? 0}/100`), node('p', unit.skills.ultimate.description));
+      const unit = COMPANIONS_BY_ID[id], card = node('article', undefined, 'roster-card'), active = session.party.active.includes(id), body = node('div', undefined, 'card-body');
+      card.dataset.owned = 'true'; stylePortrait(card, unit.sect); card.append(portrait(unit.sect, 'card-portrait'));
+      const badge = node('span', active ? 'Xuất chiến' : 'Đã kết nghĩa', 'card-badge'); card.append(badge);
+      const meta = node('div', undefined, 'card-meta'); meta.append(node('span', getSectName(unit.sect)), node('span', `♥ ${session.companionsAffinity[id] ?? 0}/100`));
+      body.append(meta, node('h3', unit.name), node('p', unit.skills.ultimate.description, 'card-description'));
+      const meter = node('div', undefined, 'affinity-meter'), fill = node('i'); fill.style.width = `${session.companionsAffinity[id] ?? 0}%`; meter.append(fill); body.append(meter);
       const controls = node('div', undefined, 'controls'), toggle = node('button', active ? 'Rời đội xuất chiến' : 'Chọn xuất chiến'); toggle.type = 'button'; toggle.dataset.partyId = id;
       toggle.disabled = this.model.running || (!active && session.party.active.length >= 2);
       toggle.addEventListener('click', () => this.run(() => this.model.setParty(active ? session.party.active.filter(key => key !== id) : [...session.party.active, id])));
       const gift = node('button', 'Tặng trà · +5 duyên'); gift.type = 'button'; gift.disabled = this.model.running || itemCount(session, 'tea') < 1 || session.companionsAffinity[id] >= 100;
-      gift.addEventListener('click', () => this.run(() => { this.model.gift(id); this.toast('Duyên nợ đã tăng.'); })); controls.append(toggle, gift); card.append(controls); root.append(card);
+      gift.addEventListener('click', () => this.run(() => { this.model.gift(id); this.toast('Duyên nợ đã tăng.'); })); controls.append(toggle, gift); body.append(controls); card.append(body); root.append(card);
     }
-    if (!session.party.unlocked.length) root.append(node('p', 'Chưa có đồng đội. Hoàn thành trận mở đầu để mở các cuộc gặp gỡ.'));
+    if (!session.party.unlocked.length) root.append(node('p', 'Chưa có đồng đội. Vượt trận mở đầu để bắt đầu kết nghĩa.', 'hint'));
     const recruits = el('recruit-list'); recruits.replaceChildren(); const available = this.model.availableRecruitQuests();
     for (const quest of RECRUIT_QUESTS) {
-      const owned = session.party.unlocked.includes(quest.companionId), card = node('article', undefined, 'roster-card');
-      card.append(node('span', `Hồi ${quest.act}`, 'eyebrow'), node('h3', quest.title), node('p', quest.description));
-      const button = node('button', owned ? 'Đã đồng hành' : 'Gặp gỡ'); button.type = 'button'; button.dataset.recruitId = quest.id;
-      button.disabled = owned || !available.includes(quest) || this.model.running || Boolean(session.storyProgress.pendingEncounter);
-      button.addEventListener('click', () => this.run(() => this.showRecruit(quest))); card.append(button); recruits.append(card);
+      const open = available.includes(quest), owned = session.party.unlocked.includes(quest.companionId);
+      if (this.recruitFilter === 'open' && !open) continue;
+      if (['1', '2', '3'].includes(this.recruitFilter) && quest.act !== Number(this.recruitFilter)) continue;
+      const unit = COMPANIONS_BY_ID[quest.companionId], card = node('article', undefined, 'roster-card'), body = node('div', undefined, 'card-body');
+      stylePortrait(card, unit.sect); card.dataset.locked = String(!open && !owned); card.dataset.owned = String(owned); card.append(portrait(unit.sect, 'card-portrait'));
+      const badge = node('span', undefined, 'card-badge'); if (!open && !owned) badge.append(icon('lock')); badge.append(node('span', owned ? 'Đã kết nghĩa' : `Hồi ${quest.act}`)); card.append(badge);
+      const meta = node('div', undefined, 'card-meta'); meta.append(node('span', getSectName(unit.sect)), node('span', '✦ Nhân duyên'));
+      body.append(meta, node('h3', quest.title), node('p', quest.description, 'card-description'));
+      const button = node('button', owned ? 'Đã đồng hành' : open ? 'Gặp gỡ' : `Chưa mở · Hồi ${quest.act}`); button.type = 'button'; button.dataset.recruitId = quest.id;
+      button.disabled = owned || !open || this.model.running || Boolean(session.storyProgress.pendingEncounter);
+      button.addEventListener('click', () => this.run(() => this.showRecruit(quest))); const controls = node('div', undefined, 'controls'); controls.append(button); body.append(controls); card.append(body); recruits.append(card);
     }
+    if (!recruits.children.length) recruits.append(node('p', 'Chưa có cuộc gặp nào trong nhóm này. Hãy tiếp tục chính truyện.', 'hint'));
   }
   showMain() {
     const quest = this.model.mainQuest();
@@ -221,7 +288,7 @@ export class App {
       const card = node('article', undefined, 'battle-unit-card'); card.dataset.team = unit.team;
       const status = node('p'), inspect = node('button', 'Xem kỹ năng'); inspect.type = 'button';
       inspect.addEventListener('click', () => { el('unit-inspect').textContent = `${unit.name} · ${getSectName(unit.sect)} · ${unit.skills.ultimate.name}: ${unit.skills.ultimate.description}`; });
-      card.append(node('strong', unit.name), status, inspect); root.append(card); this.unitNodes.set(unit.id, status);
+      card.append(portrait(unit.sect), node('strong', unit.name), status, inspect); root.append(card); this.unitNodes.set(unit.id, status);
     }
     bus.emit(EVT.BATTLE_STATE_CHANGED, { running: true });
     this.setView('battle'); this.updateBattleStatus();
@@ -250,6 +317,7 @@ export class App {
   renderResult() {
     const result = this.model.lastResult; if (!result) return;
     el('battle-result-panel').hidden = false;
+    el('battle-result-panel').dataset.won = String(result.winner === 'home');
     const label = result.reason === 'aborted' ? 'Đã rút lui' : result.reason === 'timeout' ? 'Hòa — hết thời gian' : result.winner === 'home' ? 'Chiến thắng!' : result.winner === 'enemy' ? 'Thất bại' : 'Hòa';
     el('battle-result').textContent = `${label} · ${result.duration.toFixed(1)} giây`;
     el('battle-rewards').textContent = result.winner !== 'home' ? 'Không mất vật phẩm hay kinh nghiệm. Có thể đổi đội hình, nâng kỹ năng rồi thử lại.' : result.kind === 'recruit' ? 'Thử thách đã hoàn tất. Quay lại gặp nhân vật để mời đồng hành và nhận thưởng.' : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc. Đã tự lưu tiến trình.`;
@@ -259,6 +327,7 @@ export class App {
     table.append(body); el('battle-stats').replaceChildren(table);
     this.sound.setTrack(result.winner === 'home' ? 'ending' : 'camp'); this.sound.sfx(result.winner === 'home' ? 'victory' : 'defeat');
     this.updateBattleStatus();
+    if (this.view === 'battle') el('battle-result-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   renderEnding() {
     const ending = ENDINGS.find(e => e.id === this.model.session.storyProgress.endingId); if (!ending) { this.toast('Câu chuyện chưa đến kết cục.', true); return; }

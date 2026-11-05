@@ -2,7 +2,17 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 1.0 — tích hợp Sprint 1–10:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 1.1 — giao diện mobile, tích hợp Sprint 1–10:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Giao diện mobile 1.1
+
+- Màn hình xuất sơn có chọn phái bằng chân dung; nền quán trọ sơn thủy, tông ngọc/vàng và bộ biểu tượng SVG thống nhất.
+- Thanh trạng thái giữ tên, cấp, XP và bạc thật trên điện thoại. Sáu mục điều hướng nằm dưới màn hình, chừa vùng an toàn của thiết bị; trong trận menu ẩn để dành chỗ cho bàn đấu.
+- Doanh trại có thẻ chính truyện nổi trên cảnh nền, đội xuất chiến ba vị trí và hai khu luyện võ/cửa hàng. Thẻ đồng đội hiển thị duyên nợ, xuất chiến và khóa theo hồi; có bộ lọc Tất cả/Đã mở/Hồi I–III.
+- Hồ sơ chia tab Võ công, Thuộc tính, Trang bị; hỗ trợ phím mũi tên, Home/End cho tab. Tên, nhiệm vụ và nội dung người chơi vẫn được dựng bằng DOM an toàn.
+- Bàn đấu xoay cách trình bày trên điện thoại: địch phía trên, đội nhà phía dưới; màn hình rộng giữ hai phe trái/phải. Đây chỉ là phép chiếu hiển thị, tọa độ, đội hình, tầm đánh, AI và luật chiến đấu giữ nguyên.
+- Chân dung trong UI và trên sân là **năm hình đại diện môn phái**, được dùng lại cho những người cùng phái; chưa phải 20 chân dung nhân vật riêng biệt. Nền và atlas WebP tổng cộng khoảng 790 KB, lưu ngay trong repo, không cần dịch vụ ảnh ngoài. Xem [nguồn và prompt minh họa](assets/images/ART_DIRECTION.md).
+- Định dạng bản lưu không thay đổi; người chơi có thể tiếp tục bản 1.0. Tùy chọn giảm chuyển động của thiết bị được tôn trọng. Đã kiểm tra thêm sáu kích thước 320/360/390/430/768/1280 px, chọn phái bằng chạm, tab hồ sơ bằng bàn phím, bộ lọc chiêu mộ và hai cách chiếu bàn đấu; không tràn ngang hoặc lỗi console.
 
 ## Bắt đầu chơi
 
@@ -54,7 +64,7 @@ Bộ kiểm thử hiện có **68 bài**: engine, lưu trữ/nhập file, dữ l
 
 Đã kiểm tra trên Chromium: khởi hành, chiến đấu, cộng kỹ năng, hai nhiệm vụ chiêu mộ đầu, chọn sai câu đố, kéo thả/chạm đội hình, lưu/xuất/nhập, tải lại giữa trận, toàn bộ chính truyện và bốn màn hình kết cục, bật/tắt/âm lượng Web Audio, bố cục rộng 360px. Không có lỗi console trong luồng này.
 
-**Phạm vi bản 1.0:** nhân vật trên sân được vẽ hình khối đơn giản, chân dung dùng ký tự; các thử thách cờ vây/đấu vật/bắn bia/đuổi mái nhà là câu đố lựa chọn tình huống, chưa phải mini-game điều khiển riêng. Nhạc được tổng hợp bằng Web Audio. Mốc 20 giờ chơi trong GDD và 60 FPS trên Chrome/Firefox/Safari chưa được đo/xác nhận; cần chơi thử và cân bằng thêm trước khi coi là bản thương mại.
+**Phạm vi bản 1.0:** nhân vật trên sân và thẻ đồng đội dùng chân dung đại diện môn phái; các thử thách cờ vây/đấu vật/bắn bia/đuổi mái nhà là câu đố lựa chọn tình huống, chưa phải mini-game điều khiển riêng. Nhạc được tổng hợp bằng Web Audio. Mốc 20 giờ chơi trong GDD và 60 FPS trên Chrome/Firefox/Safari chưa được đo/xác nhận; cần chơi thử và cân bằng thêm trước khi coi là bản thương mại.
 
 ## Nhật ký Sprint 1–6
 

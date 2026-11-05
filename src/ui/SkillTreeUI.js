@@ -56,7 +56,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
       const button = element('button', learned ? 'Đã học' : 'Học kỹ năng'); button.type = 'button'; button.dataset.skillId = node.id;
       button.addEventListener('click', change((h, items) => allocateSkill(h, node.id, items), `Đã học ${node.name}.`));
       controls.push({ node: button, disabled: Boolean(reason) }); card.append(button);
-      if (reason && !learned) card.append(element('p', reason, 'hint'));
+      if (reason && !learned) button.title = reason;
       tree.append(card);
     }
     const attributes = el('attribute-grid'); attributes.replaceChildren();

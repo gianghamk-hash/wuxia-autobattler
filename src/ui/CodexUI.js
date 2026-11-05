@@ -1,3 +1,4 @@
+import { portrait } from './Visuals.js';
 import { SECTS, SECT_IDS, getSectName } from '../data/SectsData.js';
 import { COMPANIONS, ROLE_LABELS } from '../data/CompanionsData.js';
 import { SYNERGIES, getActiveSynergies } from '../data/SynergiesData.js';
@@ -46,6 +47,7 @@ export function mountCodexUI() {
     if (!entries.length) { results.append(element('p', 'Không có kết quả phù hợp. Thử đổi môn phái hoặc từ khóa.')); return; }
     for (const item of entries) {
       const card = element('article', undefined, 'codex-card');
+      if (view.value === 'companions' || view.value === 'sects') card.append(portrait(item.sect ?? item.id));
       card.append(element('h3', item.name));
       if (view.value === 'sects') {
         line(card, 'Vai trò', item.role);
