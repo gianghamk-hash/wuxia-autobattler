@@ -85,6 +85,9 @@ export const worldMethods = {
         fail('Chỉ được đổi tự động/thủ công trong trận.');
       const next = this.snapshot();
       next.adventure.tactics.autoUltimate = patch.autoUltimate;
+      if (next.storyProgress.pendingEncounter?.preparation)
+        next.storyProgress.pendingEncounter.preparation.tactics.autoUltimate =
+          patch.autoUltimate;
       this.battle.autoUltimate = patch.autoUltimate;
       this._commit(next, 'combat-option');
       return;

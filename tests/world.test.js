@@ -175,6 +175,16 @@ test('manual mode gates home ultimates and respects priorities and row AOE', () 
   const h = c.battle.units.find((u) => u.id === 'hero');
   h.stats.energy = 100;
   assert.equal(c.battle.autoUltimate, false);
+  c.setTactics({ autoUltimate: true });
+  assert.equal(
+    c.session.storyProgress.pendingEncounter.preparation.tactics.autoUltimate,
+    true
+  );
+  c.setTactics({ autoUltimate: false });
+  assert.equal(
+    c.session.storyProgress.pendingEncounter.preparation.tactics.autoUltimate,
+    false
+  );
   assert.equal(c.battle.orderUltimate('enemy_0'), false);
   assert.equal(c.battle.orderUltimate('hero'), true);
   assert.equal(c.battle.manualOrders.has('hero'), true);
