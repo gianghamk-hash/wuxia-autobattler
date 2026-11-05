@@ -206,6 +206,7 @@
           <h1>Người cùng đường</h1>
           <span class="heading-note" id="roster-count"></span>
         </div>
+        <article id="gacha-root" class="panel gacha-panel"></article>
         <article class="panel formation-panel">
           <div class="section-title">
             <h2>Bày binh bố trận</h2>
@@ -222,6 +223,21 @@
         <div class="section-title">
           <h2>Đã kết nghĩa</h2>
           <span class="tiny-label">MAIN + TỐI ĐA 5 ĐỒNG ĐỘI</span>
+        </div>
+        <div class="collection-filters">
+          <input
+            id="companion-search"
+            type="search"
+            placeholder="Tìm đồng hành"
+            aria-label="Tìm tên đồng hành"
+          /><select id="companion-tier" aria-label="Lọc phẩm bậc">
+            <option value="">Mọi bậc</option>
+            <option value="1">Bậc 1 · Xám</option>
+            <option value="2">Bậc 2 · Lục</option>
+            <option value="3">Bậc 3 · Lam</option>
+            <option value="4">Bậc 4 · Tím</option>
+            <option value="5">Bậc 5 · Kim</option>
+          </select>
         </div>
         <div id="roster-list" class="card-grid"></div>
         <div class="section-title"><h2>Nhân duyên giang hồ</h2></div>

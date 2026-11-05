@@ -1,3 +1,6 @@
+import { mountGachaUI } from '../ui/GachaUI.js';
+import { storyLines } from '../data/StoryChaptersData.js';
+import { rarityLabel } from '../data/GachaData.js';
 import { mountWorldUI } from '../ui/WorldUI.js';
 import { STATUS_LABELS } from '../data/StrategyData.js';
 import { CONFIG } from '../config.js';
@@ -13,6 +16,7 @@ import { changeSect, expToNextLevel } from '../entities/HeroBuild.js';
 import { Hero } from '../entities/Hero.js';
 import {
   portrait,
+  decorateRarity,
   stylePortrait,
   icon,
   decorateIcons,
@@ -110,7 +114,13 @@ export class App {
     mountCodexUI();
     decorateIcons();
     this.bind();
+    for (const id of ['companion-search', 'companion-tier'])
+      el(id).addEventListener(
+        id === 'companion-search' ? 'input' : 'change',
+        () => this.renderRoster()
+      );
     this.world = mountWorldUI(this);
+    this.gacha = mountGachaUI(this);
     this.ready = true;
     this.storage = await mountSaveUI({
       getSnapshot: () => this.snapshot(),
@@ -500,13 +510,13 @@ export class App {
     this.renderPlayer();
     this.syncSectPicker();
     el('act-label').textContent =
-      `HỒI ${session.storyProgress.currentAct} · NHÂN NGHĨA ${session.storyProgress.karmaScore}`;
+      `CHƯƠNG ${session.storyProgress.currentChapter} · HỒI ${session.storyProgress.currentEpisode}/20`;
     el('main-quest-title').textContent =
       quest?.title ?? 'Một đoạn đường đã khép lại';
     el('main-quest-note').textContent = quest
       ? `${quest.location}${quest.objective ? ' · Cần chiêu mộ Lão Tam và Tiểu Muội.' : ''}`
       : 'Bạn có thể xem lại kết cục, tiếp tục luyện võ hoặc khởi hành một hành trình khác.';
-    if (quest && ['Q104', 'Q204', 'Q303'].includes(quest.id))
+    if (quest?.boss)
       el('main-quest-note').textContent +=
         ' · Boss: cộng điểm võ công/thuộc tính, xếp đủ đội.';
     el('btn-main-quest').textContent = quest
@@ -545,7 +555,7 @@ export class App {
         node('strong', member.name),
         node('small', member.detail)
       );
-      card.append(portrait(member.sect), info);
+      card.append(portrait(member), info);
       party.append(card);
     }
     for (let i = members.length; i < 6; i++) {
@@ -569,7 +579,11 @@ export class App {
         .map((s) => s.name)
         .join(' · ') || 'Chưa có'
     }`;
+    document.body.dataset.cardEffects = String(
+      this.model.session.settings.effects ?? true
+    );
     this.renderRoster();
+    this.gacha?.render();
     this.formation?.render();
     this.progress?.refresh();
     this.world?.render();
@@ -634,8 +648,8 @@ export class App {
     const completed = storyProgress.completedQuests.filter((id) =>
       MAIN_QUESTS.some((q) => q.id === id)
     ).length;
-    el('chapter-progress').textContent = `${completed}/12 chương`;
-    el('roster-count').textContent = `${party.unlocked.length}/20 đã kết nghĩa`;
+    el('chapter-progress').textContent = `${completed}/240 hồi`;
+    el('roster-count').textContent = `${party.unlocked.length}/50 đã kết nghĩa`;
     const root = el('profile-hero');
     root.replaceChildren(portrait(artSect));
     const profile = node('div', undefined, 'profile-info');
@@ -680,8 +694,11 @@ export class App {
         active = session.party.active.includes(id),
         body = node('div', undefined, 'card-body');
       card.dataset.owned = 'true';
-      stylePortrait(card, unit.sect);
-      card.append(portrait(unit.sect, 'card-portrait'));
+      decorateRarity(card, unit);
+      card.dataset.companionId = unit.id;
+      card.append(
+        portrait(COMPANIONS_BY_ID[unit.templateId] ?? unit, 'card-portrait')
+      );
       const info = node('button', 'Xem tướng', 'inspect-companion');
       info.type = 'button';
       info.addEventListener('click', () => this.world.inspect(unit));
@@ -695,7 +712,10 @@ export class App {
       const meta = node('div', undefined, 'card-meta');
       meta.append(
         node('span', getSectName(unit.sect)),
-        node('span', `♥ ${session.companionsAffinity[id] ?? 0}/100`)
+        node(
+          'span',
+          `${rarityLabel(unit.tier)} · ♥ ${session.companionsAffinity[id] ?? 0}`
+        )
       );
       body.append(
         meta,
@@ -752,8 +772,27 @@ export class App {
       );
     const recruits = el('recruit-list');
     recruits.replaceChildren();
+    const search = (el('companion-search')?.value ?? '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .toLowerCase();
+    const rarity = el('companion-tier')?.value ?? '';
+    const matches = (u) =>
+      (!rarity || u.tier === Number(rarity)) &&
+      (!search ||
+        u.name
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd')
+          .toLowerCase()
+          .includes(search));
+    for (const card of root.children)
+      if (card.dataset.companionId)
+        card.hidden = !matches(COMPANIONS_BY_ID[card.dataset.companionId]);
     const available = this.model.availableRecruitQuests();
     for (const quest of RECRUIT_QUESTS) {
+      if (!matches(COMPANIONS_BY_ID[quest.companionId])) continue;
       const open = available.includes(quest),
         owned = session.party.unlocked.includes(quest.companionId);
       if (this.recruitFilter === 'open' && !open) continue;
@@ -765,22 +804,27 @@ export class App {
       const unit = COMPANIONS_BY_ID[quest.companionId],
         card = node('article', undefined, 'roster-card'),
         body = node('div', undefined, 'card-body');
-      stylePortrait(card, unit.sect);
+      decorateRarity(card, unit);
+      card.dataset.companionId = unit.id;
       card.dataset.locked = String(!open && !owned);
       card.dataset.owned = String(owned);
-      card.append(portrait(unit.sect, 'card-portrait'));
+      card.append(
+        portrait(COMPANIONS_BY_ID[unit.templateId] ?? unit, 'card-portrait')
+      );
       const info = node('button', 'Xem tướng', 'inspect-companion');
       info.type = 'button';
       info.addEventListener('click', () => this.world.inspect(unit));
       card.append(info);
       const badge = node('span', undefined, 'card-badge');
       if (!open && !owned) badge.append(icon('lock'));
-      badge.append(node('span', owned ? 'Đã kết nghĩa' : `Hồi ${quest.act}`));
+      badge.append(
+        node('span', owned ? 'Đã kết nghĩa' : `Chương ${quest.chapter}`)
+      );
       card.append(badge);
       const meta = node('div', undefined, 'card-meta');
       meta.append(
         node('span', getSectName(unit.sect)),
-        node('span', '✦ Nhân duyên')
+        node('span', rarityLabel(unit.tier))
       );
       body.append(
         meta,
@@ -793,7 +837,7 @@ export class App {
           ? 'Đã đồng hành'
           : open
             ? `Gặp gỡ · ${this.model.recruitFee(quest)} bạc nhập đội`
-            : `Chưa mở · Hồi ${quest.act}`
+            : `Chưa mở · Chương ${quest.chapter}`
       );
       button.type = 'button';
       button.dataset.recruitId = quest.id;
@@ -837,15 +881,22 @@ export class App {
           .filter((c) => !selected || selected === c.id)
           .map((c) => ({
             id: c.id,
-            text: `${c.text} · Nhân nghĩa ${c.karma >= 0 ? '+' : ''}${c.karma}`
+            text:
+              c.text +
+              (c.karma
+                ? ` · Nhân nghĩa ${c.karma > 0 ? '+' : ''}${c.karma}`
+                : '')
           }));
     this.dialogue.show({
-      title: quest.title,
-      lines: quest.lines,
+      title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
+      lines: [
+        ['Trước đó', quest.previous],
+        ...storyLines(quest, this.model.session, MAIN_QUESTS, COMPANIONS_BY_ID)
+      ],
       choices,
       note: quest.objective
         ? 'Mở mục Đồng đội ở doanh trại để giúp Lão Tam và Tiểu Muội trước khi tiếp tục.'
-        : '',
+        : quest.objectiveText,
       onBack: () => this.setView('camp'),
       onChoice: (id) =>
         this.run(() => {
@@ -910,7 +961,7 @@ export class App {
       note:
         quest.cost && !ready
           ? `Cần ${quest.cost.quantity} ${quest.cost.itemId === 'silver' ? 'bạc' : quest.cost.itemId === 'rope' ? 'dây thừng' : 'cá'}. Có thể mua ở doanh trại.`
-          : '',
+          : quest.objectiveText,
       onBack: () => this.setView('camp'),
       onChoice: (id) =>
         this.run(() => {
@@ -958,7 +1009,7 @@ export class App {
         this.world.inspect(unit);
       });
       card.append(
-        portrait(unit.sect),
+        portrait(COMPANIONS_BY_ID[unit.templateId] ?? unit),
         node('strong', unit.name),
         status,
         inspect

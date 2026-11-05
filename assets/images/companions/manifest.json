@@ -1,0 +1,356 @@
+{
+  "created": "2026-11-05",
+  "method": "Built-in image generation, one independent portrait per character; WebP conversion only",
+  "portraits": [
+    {
+      "id": "companion_01",
+      "name": "Lão Tam Ăn Mày",
+      "file": "companion_01.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Lão Tam Ăn Mày. weathered 58-year-old man, triangular lean face, crooked grin, thin grey moustache, bald crown with tiny tied tuft, olive patchwork tunic, bamboo staff and chicken leg, amber inn.",
+      "sha256": "49d15f6fd954059e271b38612de5f66e581eaebbc9813393553a2d48cb0276d2"
+    },
+    {
+      "id": "companion_02",
+      "name": "Huyền Đạo Trưởng",
+      "file": "companion_02.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Huyền Đạo Trưởng. 70-year-old slender male Taoist, very long silver eyebrows, white pointed beard, tall topknot, pale blue robes with black sash, wooden chess stone between fingers, misty pine mountain.",
+      "sha256": "1f185d9def017ae963fdc012ccd716bf68315ed9381b20ba3b09aa48efe6496b"
+    },
+    {
+      "id": "companion_03",
+      "name": "Tiểu Muội Nga Mi",
+      "file": "companion_03.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Tiểu Muội Nga Mi. 23-year-old female healer, round freckled face, short black bob with two small side buns, pale pink and ivory robes, bamboo medicine basket and white lotus, green riverbank.",
+      "sha256": "2f45d1f23a20f08af468ef4596388353a48da1b9f25b2afe2f3c427f49b60b07"
+    },
+    {
+      "id": "companion_04",
+      "name": "Đường Thập Nhị",
+      "file": "companion_04.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Đường Thập Nhị. 27-year-old lanky male trap maker, narrow eyes, asymmetrical black fringe, rectangular brass spectacles, dark purple short jacket, mechanical wrist crossbow and bronze gears, workshop.",
+      "sha256": "f0441ee555bd36fff73edf40bec23a37c94921f921e4e5da6d32c11bfd42b234"
+    },
+    {
+      "id": "companion_05",
+      "name": "Đại Lực Kim Cang",
+      "file": "companion_05.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Đại Lực Kim Cang. 39-year-old broad muscular bald male monk, square jaw, dark tan skin, warm smile, saffron sleeveless robes, huge wooden prayer beads, bronze arm guards, temple steps.",
+      "sha256": "75090ceb9646f4b56d3003742c5988d69dbb1b6141eb987ad63990a9edd7d7d6"
+    },
+    {
+      "id": "companion_06",
+      "name": "Lý Độc Thủ",
+      "file": "companion_06.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Lý Độc Thủ. 46-year-old male poison herbalist, gaunt angular face, grey streak through long black ponytail, one jade earring, dark moss-green robe, green glass vial and leather gloves, marsh herb garden.",
+      "sha256": "8f11677481109558fb851c302e36330dfec6456623fe7d998e425f4b026fbbca"
+    },
+    {
+      "id": "companion_07",
+      "name": "Thôi Mệnh Thư Sinh",
+      "file": "companion_07.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Thôi Mệnh Thư Sinh. 31-year-old pale male scholar, elegant oval face, clean shaven, long black hair under scholar cap, indigo embroidered robe, oversized calligraphy brush and ink splash, moonlit library.",
+      "sha256": "2a8de5eab8e82f20239ee685df5c717ba2854202a695c7c05657b55bc91a5779"
+    },
+    {
+      "id": "companion_08",
+      "name": "Hồng Nương Tử",
+      "file": "companion_08.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Hồng Nương Tử. 34-year-old athletic woman, strong cheekbones, sharp confident eyes, high red-ribbon ponytail, crimson wrapped jacket, paired curved daggers and small wine flask, red lantern alley.",
+      "sha256": "455ec48a7681bd15d3ab2354134f316f895374453d076e222bd24a2b4ff2c478"
+    },
+    {
+      "id": "companion_09",
+      "name": "Tịnh Không Sư Thái",
+      "file": "companion_09.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Tịnh Không Sư Thái. 64-year-old woman Buddhist master, shaved head, soft deeply lined face, grey-white robes with pale lavender stole, small wooden temple block and mallet, quiet lotus temple.",
+      "sha256": "2be677faa2bd7c24bb6520f532e10c3bf09d8b7ef0eb13c59e69df915abfb404"
+    },
+    {
+      "id": "companion_10",
+      "name": "Bách Bộ Thần Thương",
+      "file": "companion_10.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Bách Bộ Thần Thương. 43-year-old tan male marksman, short beard, swept-back black hair, one eye covered by leather patch, russet leather coat, old hand cannon with brass barrel pointed down safely, coastal fort.",
+      "sha256": "400fa3a89aba4d79dbb66eb9471a1dc214d548f51c9aea9d7e45b004fa6ff396"
+    },
+    {
+      "id": "companion_11",
+      "name": "Mộng Cô Bán Trà",
+      "file": "companion_11.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Mộng Cô Bán Trà. 36-year-old Vietnamese woman, broad kind face, tiny mole below left eye, long braid and woven straw hat on back, brown and teal traditional tunic, ceramic teapot and steaming cup, tea stall.",
+      "sha256": "37311a63dc5d73f151253837ae5b3a2582b2fb7beac9369b7ad324e7ffd36183"
+    },
+    {
+      "id": "companion_12",
+      "name": "Bất Khắc Kiếm Khách",
+      "file": "companion_12.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Bất Khắc Kiếm Khách. 29-year-old male dual swordsman, long lean face, mismatched dark eyes, loose silver-black hair with white temple streak, black and white robes, two crossed narrow swords, rain pavilion.",
+      "sha256": "0e3097110fb96053d748765390f186225c795f1e9a4096e3ce72153d9fde1595"
+    },
+    {
+      "id": "companion_13",
+      "name": "Quy Tức Lão Nhân",
+      "file": "companion_13.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Quy Tức Lão Nhân. 82-year-old stocky male monk, deeply wrinkled round face, bald head and thick white beard, muted ochre robe, tortoise-shaped wooden shield and prayer beads, ancient tree roots.",
+      "sha256": "68f261e3c35501b3177ef4c5b366c8dd757c8b3cf1abc4fb21c193deb6f7db91"
+    },
+    {
+      "id": "companion_14",
+      "name": "Thiềm Thừ Bà Bà",
+      "file": "companion_14.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Thiềm Thừ Bà Bà. 76-year-old woman poison master, sharp hooked nose and smiling wrinkles, white hair in two coiled knots, plum and moss robes, tiny jade toad resting on wrist, misty marsh.",
+      "sha256": "246ff248d530b91e73dfc40a98ece1b6e7a765525294d4581055346dd7de4dc4"
+    },
+    {
+      "id": "companion_15",
+      "name": "Phi Thiên Đạo Tặc",
+      "file": "companion_15.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Phi Thiên Đạo Tặc. 25-year-old wiry male rooftop thief, tan skin, cheeky smile, curly short black hair under teal head wrap, charcoal fitted tunic, grappling hook and coil of rope, tiled roofs at dusk.",
+      "sha256": "7772e0a87a0a46d22ebbc240e945afff376311c8de6283d0d6bd90e814b3d743"
+    },
+    {
+      "id": "companion_16",
+      "name": "Hoa Khôi Lầu Xanh",
+      "file": "companion_16.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Hoa Khôi Lầu Xanh. 30-year-old dignified female dancer, heart shaped face, long wavy black hair with amber comb, turquoise and wine-red silk sleeves, open painted folding fan, warm theater backstage.",
+      "sha256": "4b5979feb8b56b09f0f2628e2363f91aa2d5a712710060232b5d16b21c94545d"
+    },
+    {
+      "id": "companion_17",
+      "name": "Luyện Đan Đồng Tử",
+      "file": "companion_17.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Luyện Đan Đồng Tử. 19-year-old male alchemy apprentice, youthful adult round face, unruly black hair tied high, oversized ivory and sage robe, copper mini cauldron and bundled herbs, glowing alchemy room.",
+      "sha256": "8db71305e416d96486c87fe8b1b6c313cef1e1f9cc8ce451dc58ec691a04d1bf"
+    },
+    {
+      "id": "companion_18",
+      "name": "Thiết Đầu Công",
+      "file": "companion_18.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Thiết Đầu Công. 33-year-old short muscular bald male monk, broad forehead with old pale scar, laughing open mouth, rust orange robes, padded forehead band held in one hand, cracked stone courtyard.",
+      "sha256": "622de86d41dc547c4170ff1db04ebb09397fb81ad8af2e60c198b7c24b87d56c"
+    },
+    {
+      "id": "companion_19",
+      "name": "Vô Danh Kiếm Nô",
+      "file": "companion_19.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Vô Danh Kiếm Nô. 52-year-old solemn male swordsman, long scar down cheek, grey hair tied low, black worn robe over faded bone armor, long rust-patinated sword, falling ash and moonlight.",
+      "sha256": "dc8db310b58da69c65d21025cb62c4951d44fca17b962548ec068d437bb36516"
+    },
+    {
+      "id": "companion_20",
+      "name": "Tửu Tiên Bất Tỉnh",
+      "file": "companion_20.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Tửu Tiên Bất Tỉnh. 61-year-old male drunken master, reddish nose, wild white hair, curled white moustache, deep blue patched robe, huge amber gourd with swirling golden wine mist, tavern balcony.",
+      "sha256": "a65963c67093cf133a87e58644170032fe06c106493d737a04a5b331313b1e3d"
+    },
+    {
+      "id": "companion_21",
+      "name": "Chú Tễu Giữ Cầu",
+      "file": "companion_21.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Chú Tễu Giữ Cầu. 40-year-old smiling stocky male bridge keeper, round nose, cropped hair, patched brown linen tunic, broad wooden oar and small puppet tucked into belt, village bamboo bridge.",
+      "sha256": "075f6951ff57e79dee9e9177a31df5a21e0300d0f1961491efa67f2dbcbf3127"
+    },
+    {
+      "id": "companion_22",
+      "name": "Sen Non Gánh Thuốc",
+      "file": "companion_22.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Sen Non Gánh Thuốc. 22-year-old female village herbalist, wide-set eyes and dimple, thick single braid with green cord, faded leaf-green cotton blouse, shoulder pole of herb baskets, rice field path.",
+      "sha256": "11d008edd06b87608cad3c890b280e2de8e3c05621d6d5a2bd5a1ed73c9cadd5"
+    },
+    {
+      "id": "companion_23",
+      "name": "Mộc An Quét Lá",
+      "file": "companion_23.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Mộc An Quét Lá. 24-year-old skinny male novice monk, smooth shaved head, long ears and gentle serious gaze, grey patched monk robe, bamboo broom held like a staff, autumn temple leaves.",
+      "sha256": "81beccd3dd7bf7955ab867acbb1f56a2c6e5e238d063e273a31b6d91a9c251dd"
+    },
+    {
+      "id": "companion_24",
+      "name": "Lam Nhi Học Kiếm",
+      "file": "companion_24.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Lam Nhi Học Kiếm. 20-year-old adult female sword novice, straight thick eyebrows, black bob with blunt fringe, faded pale-blue trainee robes, plain wooden practice sword, mountain training yard.",
+      "sha256": "6e6100184b0390bf80199c737189c01a90ae41bc2596998b9383413e03999bdf"
+    },
+    {
+      "id": "companion_25",
+      "name": "Tín Còi Đưa Thư",
+      "file": "companion_25.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Tín Còi Đưa Thư. 21-year-old lean male messenger, narrow chin, windblown black hair with ochre bandana, grey hemp vest, leather letter tube and reed whistle, dusty village road.",
+      "sha256": "11b96178a9c030c6c9f9e06a6a9bbdae6becda11aa0c061eb42df7298a45bc08"
+    },
+    {
+      "id": "companion_26",
+      "name": "Bàu Rách Gõ Mõ",
+      "file": "companion_26.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Bàu Rách Gõ Mõ. 57-year-old woman street storyteller, broad smiling face, grey curly hair tied in scarf, ragged maroon coat, cracked wooden fish drum, banyan tree market.",
+      "sha256": "7b450f744ea18872159141898f0a724b14b906ab2b272db08f5a3b5e606d9746"
+    },
+    {
+      "id": "companion_27",
+      "name": "Bảy Cò Giữ Bến",
+      "file": "companion_27.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Bảy Cò Giữ Bến. 45-year-old tall tan male ferryman, long neck, narrow moustache, worn straw conical hat and brown river coat, knotted boat rope, foggy wooden pier.",
+      "sha256": "02ca97286f710ded107ea830fc7af79fd63baacd7ffb3c85c69f7d4db8e51e9a"
+    },
+    {
+      "id": "companion_28",
+      "name": "Mận Chua Tung Đá",
+      "file": "companion_28.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Mận Chua Tung Đá. 26-year-old female slinger, sturdy build and square jaw, tiny side braid and red headscarf, patched dark violet vest, stone sling and pouch of river pebbles, rocky orchard.",
+      "sha256": "077ca30e47400bdb086c92bbe1477a28fd6cf50f71baaf55c0c0fb22f2ba0680"
+    },
+    {
+      "id": "companion_29",
+      "name": "Tùng Gầy Gác Cổng",
+      "file": "companion_29.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Tùng Gầy Gác Cổng. 32-year-old very tall slim male temple guard, elongated oval face and thin lips, shaved head, frayed beige monk tunic, plain iron staff, modest temple gate.",
+      "sha256": "3dcdc02ed42efd1e6869b827f99a10cb0d25bc8115dd0e64d3cbd36f55c540d3"
+    },
+    {
+      "id": "companion_30",
+      "name": "Cúc Mộc Vá Áo",
+      "file": "companion_30.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Cúc Mộc Vá Áo. 48-year-old female mender, soft square face, silver-threaded hair in low bun, brown linen dress and simple green shawl, giant sewing needle and repair cloth, humble tailor shop.",
+      "sha256": "d5be77ab83901c705b3984232c51fb9597cb9259820872ae8f78661c8513ed46"
+    },
+    {
+      "id": "companion_31",
+      "name": "Phúc Đồng Thiết Chưởng",
+      "file": "companion_31.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Phúc Đồng Thiết Chưởng. 35-year-old heavyset male copper smith monk, burnished skin, short black bristles, bronze wrist rings, ochre and dark brown robes, copper palm guard, smoky forge.",
+      "sha256": "9ee76aa597313f0dafbe13f8fd5c81c28a6a56d07d88ab82eaf361a570ee3c6e"
+    },
+    {
+      "id": "companion_32",
+      "name": "Liễu Thanh Kiếm Khách",
+      "file": "companion_32.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Liễu Thanh Kiếm Khách. 28-year-old androgynous male Taoist swordsman, fine angular face, long black hair with pale green ribbon, green and ivory layered robes, flexible willow-leaf sword, riverside willow.",
+      "sha256": "faa214d8422ee5a44d25c919234453ed109f3286886e85189238d7971405df9c"
+    },
+    {
+      "id": "companion_33",
+      "name": "Trúc Yên Y Sư",
+      "file": "companion_33.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Trúc Yên Y Sư. 41-year-old female field doctor, long calm face, small rectangular spectacles, black hair in practical braided bun, sage robe and brass herb scissors, bamboo medical tent.",
+      "sha256": "2b52f8d0ded50accc74d11c83ce70bf5100ae03e025dea631cd227cb77921ddb"
+    },
+    {
+      "id": "companion_34",
+      "name": "Vân Rổ Đan Bẫy",
+      "file": "companion_34.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Vân Rổ Đan Bẫy. 37-year-old female bamboo trap artisan, strong weathered hands, short wavy hair, indigo head scarf, bronze-and-purple apron, woven bamboo snare and tiny mechanical bird, bamboo grove.",
+      "sha256": "95b909b4587beee7a78c241aee93abbd49e758811ccf1c2901322715d83358ed"
+    },
+    {
+      "id": "companion_35",
+      "name": "Sáu Chén Túy Quyền",
+      "file": "companion_35.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Sáu Chén Túy Quyền. 44-year-old short stocky male brawler, broad grin and missing front tooth, shaved sides and short top knot, copper red vest, six small bronze wine cups on sash, festival tavern.",
+      "sha256": "2558bef2e5baac80edc12721c016686bf59f12e5bbaeede850e66bf4af852625"
+    },
+    {
+      "id": "companion_36",
+      "name": "Hạc Nâu Tĩnh Tọa",
+      "file": "companion_36.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Hạc Nâu Tĩnh Tọa. 68-year-old tall female Taoist, long narrow face and hooked eyebrows, grey hair in high bun, earth-brown robes with green trim, bronze crane staff, secluded pine shrine.",
+      "sha256": "311627cb2f6fddfb564aaa85b38bad62b4edfcbaf4e01e4715f03e3847196b0b"
+    },
+    {
+      "id": "companion_37",
+      "name": "Bạch Liên Châm Sư",
+      "file": "companion_37.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Bạch Liên Châm Sư. 32-year-old woman healer, alabaster skin, diamond-shaped face, silver-black long hair tied in lotus knot, blue-white robes, silver acupuncture case and lotus brooch, luminous lotus pond.",
+      "sha256": "0a764656a63a70d76c9b9d8d27e4d1edca9f728c9341b10f6f54b358dd52b06d"
+    },
+    {
+      "id": "companion_38",
+      "name": "Hải Âu Phi Tiêu",
+      "file": "companion_38.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Hải Âu Phi Tiêu. 26-year-old male coastal dart expert, sun kissed face, wavy shoulder-length brown-black hair, navy and silver outfit, three feather-shaped steel throwing darts, sea cliffs.",
+      "sha256": "9b1b44bb70b2fd5f7429e5b63f9c0ec6c7b9b148757564b0e7fac51d8e9c2d53"
+    },
+    {
+      "id": "companion_39",
+      "name": "Minh Khuê Kiếm Sử",
+      "file": "companion_39.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Minh Khuê Kiếm Sử. 39-year-old female scholar warrior, sharp jawline, arched eyebrows, dark hair in tall scholar knot, ink blue robe with silver corner embroidery, scroll and short straight sword, archive room.",
+      "sha256": "257e56baddb65b7f311741a0d32a190acc99354076a3387f6cbf407ad5ecf565"
+    },
+    {
+      "id": "companion_40",
+      "name": "Sơn Lâm Hộ Viện",
+      "file": "companion_40.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Sơn Lâm Hộ Viện. 47-year-old imposing male monk, dark skin, shaved head, thick black horseshoe moustache, amber robe and silver bracers, broad rectangular iron shield, forest monastery.",
+      "sha256": "5c3779f2369ffa9fcfe61810cf67dec583c9add686ebd355e6ef8f06ffebce8d"
+    },
+    {
+      "id": "companion_41",
+      "name": "Đào Hồng Tửu Hiệp",
+      "file": "companion_41.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Đào Hồng Tửu Hiệp. 29-year-old curvy athletic female tavern guardian, playful almond eyes, red-auburn hair in high messy bun, peach-pink coat over charcoal tunic, silver-capped wine jug and staff, peach orchard.",
+      "sha256": "79e7d6ba0c4e74e9c92ab618dd4ea4366033934d87e248fa6d9e06d299869e71"
+    },
+    {
+      "id": "companion_42",
+      "name": "Đỗ Quyên Huyền Châm",
+      "file": "companion_42.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Đỗ Quyên Huyền Châm. 55-year-old female assassin herbalist, stern long face, silver streaked black braided crown, dark blue high collar robes, thin silver needles and crimson azalea flower, nighttime herb garden.",
+      "sha256": "99cb29730a7b267592a6bd9c6f989e321ef17e62d572524faf90bf68994a4b03"
+    },
+    {
+      "id": "companion_43",
+      "name": "Nguyệt Cầm Chưởng Môn",
+      "file": "companion_43.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Nguyệt Cầm Chưởng Môn. 50-year-old female spiritual master, stately face, white hair held in purple jade crescent pin, violet and ivory ceremonial robes, moon-shaped zither, indigo mountains and moon halo.",
+      "sha256": "bbdee78dd31a504a65e4e8a7531f7b1aedcef0f732de0177e900d4f3dac31dba"
+    },
+    {
+      "id": "companion_44",
+      "name": "Lôi Chấn Thiền Sư",
+      "file": "companion_44.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Lôi Chấn Thiền Sư. 60-year-old muscular male master monk, shaved head and thick silver eyebrows, thundercloud-grey robes with gold clasp, gold-rimmed bronze bell and lightning staff, storm temple.",
+      "sha256": "10519b9b2c2f755f0a0d067cd6f26a162a9bae86cbc88bd2030dfe85fe6e0cad"
+    },
+    {
+      "id": "companion_45",
+      "name": "Yên Vũ Thiên Cơ",
+      "file": "companion_45.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Yên Vũ Thiên Cơ. 34-year-old woman master inventor, angular face, one amber mechanical monocle, black hair in elegant tall knot, midnight purple jacket with gold tracery, elaborate crossbow gauntlet, lantern workshop.",
+      "sha256": "ec3f818e870ddff1c142ba440a02a3f02224ebf196fe477aa518fa6d71423de5"
+    },
+    {
+      "id": "companion_46",
+      "name": "Phong Trần Lãng Khách",
+      "file": "companion_46.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Phong Trần Lãng Khách. 42-year-old male wandering master, stubble and weary amber eyes, shoulder-length untidy dark hair, plum-black cloak with purple jade fastener, curved sword and windblown petals, mountain pass.",
+      "sha256": "a0107d7780d4726debc5e4c9b2f1b16ad94bb016cc65420a7643b5242152cac4"
+    },
+    {
+      "id": "companion_47",
+      "name": "Tố Tâm Liên Sứ",
+      "file": "companion_47.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Tố Tâm Liên Sứ. 38-year-old female healer guardian, full cheeks, warm dark skin, long black braid threaded with violet silk, cream and gold robes with amethyst sash, purple lotus lantern, rainwashed shrine.",
+      "sha256": "b4bcd302192a1ead37e04e01856703ce991fa53d963c9d5757187a5347255690"
+    },
+    {
+      "id": "companion_48",
+      "name": "Lạc Hồng Long Quyền",
+      "file": "companion_48.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Lạc Hồng Long Quyền. 46-year-old heroic Vietnamese male martial arts founder, square face and short black beard, black hair with golden head ring, deep crimson armor with gold dragon shoulder, unarmed raised fists, radiant dawn over bronze drum.",
+      "sha256": "e72480dc07a59a0440ae5caba1054d762490b655241f95ca17392125a9c29cc9"
+    },
+    {
+      "id": "companion_49",
+      "name": "Thiên Hương Phượng Vũ",
+      "file": "companion_49.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Thiên Hương Phượng Vũ. 43-year-old regal female grandmaster, sharp cheekbones, silver-white flowing hair, restrained golden phoenix hairpiece, ivory-orange silk robes, golden feather fan and swirling petals, sunset mountain palace.",
+      "sha256": "788a3d88ca53d7cfb8a7dd9f0e0b1b3fa5f0c9bebe3e5ad529cf8500964213b2"
+    },
+    {
+      "id": "companion_50",
+      "name": "Trường Sơn Vô Cực",
+      "file": "companion_50.webp",
+      "prompt": "Use case: stylized-concept. Asset type: ONE unique companion portrait for a Vietnamese wuxia mobile RPG. Painterly premium mobile game key art with crisp ink outlines and textured gouache, expressive distinctive Vietnamese face, rich teal shadows and warm highlights. Single waist-up character centered in vertical 2:3 composition, head entirely visible with breathing room. No lettering, no frame, no watermark, no UI. The background must be softly painted and subordinate. Subject: Trường Sơn Vô Cực. 74-year-old male Daoist sage, long narrow face and serene eyes, very long white hair and beard, black robe with molten-gold trim, ancient gold-hilt straight sword floating beside shoulder, misty limestone peak with luminous clouds.",
+      "sha256": "7bd013ba7217ce8c5b9c4f4b16020e910d661ea9ffb076c20826a11a85548c4a"
+    }
+  ]
+}

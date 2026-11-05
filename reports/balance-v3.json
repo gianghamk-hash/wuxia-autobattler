@@ -1,0 +1,1053 @@
+{
+  "matches": 1000,
+  "seed": 20261105,
+  "format": "3v3, level 8, no equipment/consumables, 50 companions + 5 sects × 3 preset builds",
+  "caution": "Team-presence win rates are descriptive, not isolated causal strength. Confidence intervals quantify sampling only. Builds are three legal presets, not all possible builds.",
+  "draws": 79,
+  "homeWins": 464,
+  "meanDuration": 59.29,
+  "p50": 50.25,
+  "p90": 108.93333333333334,
+  "units": {
+    "companion_01": {
+      "name": "Lão Tam Ăn Mày",
+      "games": 87,
+      "wins": 56,
+      "draws": 4,
+      "damage": 235819.35434556738,
+      "healing": 0,
+      "winRate": 0.6437,
+      "drawRate": 0.046,
+      "averageDamage": 2711,
+      "averageHealing": 0,
+      "confidence95": [
+        0.539,
+        0.736
+      ]
+    },
+    "companion_02": {
+      "name": "Huyền Đạo Trưởng",
+      "games": 92,
+      "wins": 28,
+      "draws": 16,
+      "damage": 112627.09656924485,
+      "healing": 0,
+      "winRate": 0.3043,
+      "drawRate": 0.1739,
+      "averageDamage": 1224,
+      "averageHealing": 0,
+      "confidence95": [
+        0.22,
+        0.405
+      ]
+    },
+    "companion_03": {
+      "name": "Tiểu Muội Nga Mi",
+      "games": 78,
+      "wins": 27,
+      "draws": 9,
+      "damage": 0,
+      "healing": 178716.49955107635,
+      "winRate": 0.3462,
+      "drawRate": 0.1154,
+      "averageDamage": 0,
+      "averageHealing": 2291,
+      "confidence95": [
+        0.25,
+        0.457
+      ]
+    },
+    "companion_04": {
+      "name": "Đường Thập Nhị",
+      "games": 96,
+      "wins": 59,
+      "draws": 3,
+      "damage": 268275.10951851215,
+      "healing": 0,
+      "winRate": 0.6146,
+      "drawRate": 0.0313,
+      "averageDamage": 2795,
+      "averageHealing": 0,
+      "confidence95": [
+        0.515,
+        0.706
+      ]
+    },
+    "companion_05": {
+      "name": "Đại Lực Kim Cang",
+      "games": 92,
+      "wins": 34,
+      "draws": 14,
+      "damage": 122279.31294306433,
+      "healing": 0,
+      "winRate": 0.3696,
+      "drawRate": 0.1522,
+      "averageDamage": 1329,
+      "averageHealing": 0,
+      "confidence95": [
+        0.278,
+        0.472
+      ]
+    },
+    "companion_06": {
+      "name": "Lý Độc Thủ",
+      "games": 76,
+      "wins": 31,
+      "draws": 2,
+      "damage": 132629.79699982764,
+      "healing": 0,
+      "winRate": 0.4079,
+      "drawRate": 0.0263,
+      "averageDamage": 1745,
+      "averageHealing": 0,
+      "confidence95": [
+        0.304,
+        0.52
+      ]
+    },
+    "companion_07": {
+      "name": "Thôi Mệnh Thư Sinh",
+      "games": 77,
+      "wins": 30,
+      "draws": 6,
+      "damage": 149052.2580912116,
+      "healing": 0,
+      "winRate": 0.3896,
+      "drawRate": 0.0779,
+      "averageDamage": 1936,
+      "averageHealing": 0,
+      "confidence95": [
+        0.288,
+        0.501
+      ]
+    },
+    "companion_08": {
+      "name": "Hồng Nương Tử",
+      "games": 92,
+      "wins": 57,
+      "draws": 5,
+      "damage": 248878.10558092932,
+      "healing": 0,
+      "winRate": 0.6196,
+      "drawRate": 0.0543,
+      "averageDamage": 2705,
+      "averageHealing": 0,
+      "confidence95": [
+        0.517,
+        0.712
+      ]
+    },
+    "companion_09": {
+      "name": "Tịnh Không Sư Thái",
+      "games": 97,
+      "wins": 30,
+      "draws": 16,
+      "damage": 0,
+      "healing": 148667.1533239969,
+      "winRate": 0.3093,
+      "drawRate": 0.1649,
+      "averageDamage": 0,
+      "averageHealing": 1533,
+      "confidence95": [
+        0.226,
+        0.407
+      ]
+    },
+    "companion_10": {
+      "name": "Bách Bộ Thần Thương",
+      "games": 73,
+      "wins": 34,
+      "draws": 2,
+      "damage": 161063.6070500061,
+      "healing": 0,
+      "winRate": 0.4658,
+      "drawRate": 0.0274,
+      "averageDamage": 2206,
+      "averageHealing": 0,
+      "confidence95": [
+        0.356,
+        0.579
+      ]
+    },
+    "companion_11": {
+      "name": "Mộng Cô Bán Trà",
+      "games": 85,
+      "wins": 29,
+      "draws": 9,
+      "damage": 124539.40128070628,
+      "healing": 48571.01274241366,
+      "winRate": 0.3412,
+      "drawRate": 0.1059,
+      "averageDamage": 1465,
+      "averageHealing": 571,
+      "confidence95": [
+        0.249,
+        0.447
+      ]
+    },
+    "companion_12": {
+      "name": "Bất Khắc Kiếm Khách",
+      "games": 85,
+      "wins": 57,
+      "draws": 3,
+      "damage": 245567.96238213585,
+      "healing": 0,
+      "winRate": 0.6706,
+      "drawRate": 0.0353,
+      "averageDamage": 2889,
+      "averageHealing": 0,
+      "confidence95": [
+        0.565,
+        0.761
+      ]
+    },
+    "companion_13": {
+      "name": "Quy Tức Lão Nhân",
+      "games": 93,
+      "wins": 36,
+      "draws": 10,
+      "damage": 124648.03422384203,
+      "healing": 0,
+      "winRate": 0.3871,
+      "drawRate": 0.1075,
+      "averageDamage": 1340,
+      "averageHealing": 0,
+      "confidence95": [
+        0.294,
+        0.489
+      ]
+    },
+    "companion_14": {
+      "name": "Thiềm Thừ Bà Bà",
+      "games": 98,
+      "wins": 68,
+      "draws": 1,
+      "damage": 265460.495021367,
+      "healing": 0,
+      "winRate": 0.6939,
+      "drawRate": 0.0102,
+      "averageDamage": 2709,
+      "averageHealing": 0,
+      "confidence95": [
+        0.597,
+        0.776
+      ]
+    },
+    "companion_15": {
+      "name": "Phi Thiên Đạo Tặc",
+      "games": 79,
+      "wins": 34,
+      "draws": 4,
+      "damage": 156698.78690412105,
+      "healing": 0,
+      "winRate": 0.4304,
+      "drawRate": 0.0506,
+      "averageDamage": 1984,
+      "averageHealing": 0,
+      "confidence95": [
+        0.327,
+        0.54
+      ]
+    },
+    "companion_16": {
+      "name": "Hoa Khôi Lầu Xanh",
+      "games": 104,
+      "wins": 29,
+      "draws": 6,
+      "damage": 137147.40752309008,
+      "healing": 0,
+      "winRate": 0.2788,
+      "drawRate": 0.0577,
+      "averageDamage": 1319,
+      "averageHealing": 0,
+      "confidence95": [
+        0.202,
+        0.372
+      ]
+    },
+    "companion_17": {
+      "name": "Luyện Đan Đồng Tử",
+      "games": 89,
+      "wins": 21,
+      "draws": 17,
+      "damage": 0,
+      "healing": 172406.41363837002,
+      "winRate": 0.236,
+      "drawRate": 0.191,
+      "averageDamage": 0,
+      "averageHealing": 1937,
+      "confidence95": [
+        0.16,
+        0.334
+      ]
+    },
+    "companion_18": {
+      "name": "Thiết Đầu Công",
+      "games": 84,
+      "wins": 35,
+      "draws": 12,
+      "damage": 129080.92803924046,
+      "healing": 0,
+      "winRate": 0.4167,
+      "drawRate": 0.1429,
+      "averageDamage": 1537,
+      "averageHealing": 0,
+      "confidence95": [
+        0.317,
+        0.524
+      ]
+    },
+    "companion_19": {
+      "name": "Vô Danh Kiếm Nô",
+      "games": 89,
+      "wins": 36,
+      "draws": 6,
+      "damage": 174330.4244255385,
+      "healing": 0,
+      "winRate": 0.4045,
+      "drawRate": 0.0674,
+      "averageDamage": 1959,
+      "averageHealing": 0,
+      "confidence95": [
+        0.309,
+        0.508
+      ]
+    },
+    "companion_20": {
+      "name": "Tửu Tiên Bất Tỉnh",
+      "games": 94,
+      "wins": 43,
+      "draws": 6,
+      "damage": 170771.54337361263,
+      "healing": 14782.626350934206,
+      "winRate": 0.4574,
+      "drawRate": 0.0638,
+      "averageDamage": 1817,
+      "averageHealing": 157,
+      "confidence95": [
+        0.36,
+        0.558
+      ]
+    },
+    "companion_21": {
+      "name": "Chú Tễu Giữ Cầu",
+      "games": 91,
+      "wins": 36,
+      "draws": 9,
+      "damage": 163047.66005824367,
+      "healing": 0,
+      "winRate": 0.3956,
+      "drawRate": 0.0989,
+      "averageDamage": 1792,
+      "averageHealing": 0,
+      "confidence95": [
+        0.301,
+        0.498
+      ]
+    },
+    "companion_22": {
+      "name": "Sen Non Gánh Thuốc",
+      "games": 78,
+      "wins": 24,
+      "draws": 8,
+      "damage": 0,
+      "healing": 136503.82122951842,
+      "winRate": 0.3077,
+      "drawRate": 0.1026,
+      "averageDamage": 0,
+      "averageHealing": 1750,
+      "confidence95": [
+        0.216,
+        0.417
+      ]
+    },
+    "companion_23": {
+      "name": "Mộc An Quét Lá",
+      "games": 101,
+      "wins": 31,
+      "draws": 7,
+      "damage": 88934.64275906018,
+      "healing": 0,
+      "winRate": 0.3069,
+      "drawRate": 0.0693,
+      "averageDamage": 881,
+      "averageHealing": 0,
+      "confidence95": [
+        0.225,
+        0.403
+      ]
+    },
+    "companion_24": {
+      "name": "Lam Nhi Học Kiếm",
+      "games": 92,
+      "wins": 47,
+      "draws": 5,
+      "damage": 177532.49599576584,
+      "healing": 0,
+      "winRate": 0.5109,
+      "drawRate": 0.0543,
+      "averageDamage": 1930,
+      "averageHealing": 0,
+      "confidence95": [
+        0.41,
+        0.611
+      ]
+    },
+    "companion_25": {
+      "name": "Tín Còi Đưa Thư",
+      "games": 102,
+      "wins": 34,
+      "draws": 2,
+      "damage": 190490.64909603324,
+      "healing": 0,
+      "winRate": 0.3333,
+      "drawRate": 0.0196,
+      "averageDamage": 1868,
+      "averageHealing": 0,
+      "confidence95": [
+        0.249,
+        0.429
+      ]
+    },
+    "companion_26": {
+      "name": "Bàu Rách Gõ Mõ",
+      "games": 107,
+      "wins": 23,
+      "draws": 9,
+      "damage": 107814.83521005075,
+      "healing": 0,
+      "winRate": 0.215,
+      "drawRate": 0.0841,
+      "averageDamage": 1008,
+      "averageHealing": 0,
+      "confidence95": [
+        0.148,
+        0.302
+      ]
+    },
+    "companion_27": {
+      "name": "Bảy Cò Giữ Bến",
+      "games": 98,
+      "wins": 32,
+      "draws": 6,
+      "damage": 165580.7924859042,
+      "healing": 0,
+      "winRate": 0.3265,
+      "drawRate": 0.0612,
+      "averageDamage": 1690,
+      "averageHealing": 0,
+      "confidence95": [
+        0.242,
+        0.424
+      ]
+    },
+    "companion_28": {
+      "name": "Mận Chua Tung Đá",
+      "games": 112,
+      "wins": 56,
+      "draws": 2,
+      "damage": 229880.23842535124,
+      "healing": 0,
+      "winRate": 0.5,
+      "drawRate": 0.0179,
+      "averageDamage": 2053,
+      "averageHealing": 0,
+      "confidence95": [
+        0.409,
+        0.591
+      ]
+    },
+    "companion_29": {
+      "name": "Tùng Gầy Gác Cổng",
+      "games": 92,
+      "wins": 27,
+      "draws": 12,
+      "damage": 85562.11348498435,
+      "healing": 0,
+      "winRate": 0.2935,
+      "drawRate": 0.1304,
+      "averageDamage": 930,
+      "averageHealing": 0,
+      "confidence95": [
+        0.21,
+        0.393
+      ]
+    },
+    "companion_30": {
+      "name": "Cúc Mộc Vá Áo",
+      "games": 102,
+      "wins": 29,
+      "draws": 8,
+      "damage": 118057.44689861017,
+      "healing": 0,
+      "winRate": 0.2843,
+      "drawRate": 0.0784,
+      "averageDamage": 1157,
+      "averageHealing": 0,
+      "confidence95": [
+        0.206,
+        0.378
+      ]
+    },
+    "companion_31": {
+      "name": "Phúc Đồng Thiết Chưởng",
+      "games": 86,
+      "wins": 37,
+      "draws": 9,
+      "damage": 131329.54161696433,
+      "healing": 0,
+      "winRate": 0.4302,
+      "drawRate": 0.1047,
+      "averageDamage": 1527,
+      "averageHealing": 0,
+      "confidence95": [
+        0.331,
+        0.536
+      ]
+    },
+    "companion_32": {
+      "name": "Liễu Thanh Kiếm Khách",
+      "games": 88,
+      "wins": 44,
+      "draws": 5,
+      "damage": 185150.43853059463,
+      "healing": 0,
+      "winRate": 0.5,
+      "drawRate": 0.0568,
+      "averageDamage": 2104,
+      "averageHealing": 0,
+      "confidence95": [
+        0.398,
+        0.602
+      ]
+    },
+    "companion_33": {
+      "name": "Trúc Yên Y Sư",
+      "games": 103,
+      "wins": 39,
+      "draws": 12,
+      "damage": 0,
+      "healing": 183435.7614501104,
+      "winRate": 0.3786,
+      "drawRate": 0.1165,
+      "averageDamage": 0,
+      "averageHealing": 1781,
+      "confidence95": [
+        0.291,
+        0.475
+      ]
+    },
+    "companion_34": {
+      "name": "Vân Rổ Đan Bẫy",
+      "games": 99,
+      "wins": 50,
+      "draws": 1,
+      "damage": 208318.5715569143,
+      "healing": 0,
+      "winRate": 0.5051,
+      "drawRate": 0.0101,
+      "averageDamage": 2104,
+      "averageHealing": 0,
+      "confidence95": [
+        0.408,
+        0.602
+      ]
+    },
+    "companion_35": {
+      "name": "Sáu Chén Túy Quyền",
+      "games": 93,
+      "wins": 46,
+      "draws": 2,
+      "damage": 214263.99651239338,
+      "healing": 0,
+      "winRate": 0.4946,
+      "drawRate": 0.0215,
+      "averageDamage": 2304,
+      "averageHealing": 0,
+      "confidence95": [
+        0.395,
+        0.594
+      ]
+    },
+    "companion_36": {
+      "name": "Hạc Nâu Tĩnh Tọa",
+      "games": 83,
+      "wins": 25,
+      "draws": 10,
+      "damage": 79069.32833112591,
+      "healing": 0,
+      "winRate": 0.3012,
+      "drawRate": 0.1205,
+      "averageDamage": 953,
+      "averageHealing": 0,
+      "confidence95": [
+        0.213,
+        0.407
+      ]
+    },
+    "companion_37": {
+      "name": "Bạch Liên Châm Sư",
+      "games": 106,
+      "wins": 30,
+      "draws": 17,
+      "damage": 0,
+      "healing": 201684.71455653413,
+      "winRate": 0.283,
+      "drawRate": 0.1604,
+      "averageDamage": 0,
+      "averageHealing": 1903,
+      "confidence95": [
+        0.206,
+        0.375
+      ]
+    },
+    "companion_38": {
+      "name": "Hải Âu Phi Tiêu",
+      "games": 120,
+      "wins": 62,
+      "draws": 3,
+      "damage": 293307.0603568479,
+      "healing": 0,
+      "winRate": 0.5167,
+      "drawRate": 0.025,
+      "averageDamage": 2444,
+      "averageHealing": 0,
+      "confidence95": [
+        0.428,
+        0.604
+      ]
+    },
+    "companion_39": {
+      "name": "Minh Khuê Kiếm Sử",
+      "games": 99,
+      "wins": 43,
+      "draws": 9,
+      "damage": 192111.0724121204,
+      "healing": 0,
+      "winRate": 0.4343,
+      "drawRate": 0.0909,
+      "averageDamage": 1941,
+      "averageHealing": 0,
+      "confidence95": [
+        0.341,
+        0.533
+      ]
+    },
+    "companion_40": {
+      "name": "Sơn Lâm Hộ Viện",
+      "games": 98,
+      "wins": 25,
+      "draws": 12,
+      "damage": 139234.49319488058,
+      "healing": 0,
+      "winRate": 0.2551,
+      "drawRate": 0.1224,
+      "averageDamage": 1421,
+      "averageHealing": 0,
+      "confidence95": [
+        0.179,
+        0.35
+      ]
+    },
+    "companion_41": {
+      "name": "Đào Hồng Tửu Hiệp",
+      "games": 96,
+      "wins": 59,
+      "draws": 3,
+      "damage": 238677.50601474626,
+      "healing": 0,
+      "winRate": 0.6146,
+      "drawRate": 0.0313,
+      "averageDamage": 2486,
+      "averageHealing": 0,
+      "confidence95": [
+        0.515,
+        0.706
+      ]
+    },
+    "companion_42": {
+      "name": "Đỗ Quyên Huyền Châm",
+      "games": 92,
+      "wins": 55,
+      "draws": 3,
+      "damage": 263092.48635872774,
+      "healing": 0,
+      "winRate": 0.5978,
+      "drawRate": 0.0326,
+      "averageDamage": 2860,
+      "averageHealing": 0,
+      "confidence95": [
+        0.496,
+        0.692
+      ]
+    },
+    "companion_43": {
+      "name": "Nguyệt Cầm Chưởng Môn",
+      "games": 85,
+      "wins": 42,
+      "draws": 5,
+      "damage": 171160.45219542985,
+      "healing": 0,
+      "winRate": 0.4941,
+      "drawRate": 0.0588,
+      "averageDamage": 2014,
+      "averageHealing": 0,
+      "confidence95": [
+        0.39,
+        0.598
+      ]
+    },
+    "companion_44": {
+      "name": "Lôi Chấn Thiền Sư",
+      "games": 85,
+      "wins": 40,
+      "draws": 4,
+      "damage": 139751.26185451666,
+      "healing": 0,
+      "winRate": 0.4706,
+      "drawRate": 0.0471,
+      "averageDamage": 1644,
+      "averageHealing": 0,
+      "confidence95": [
+        0.368,
+        0.576
+      ]
+    },
+    "companion_45": {
+      "name": "Yên Vũ Thiên Cơ",
+      "games": 90,
+      "wins": 62,
+      "draws": 3,
+      "damage": 245677.20358289228,
+      "healing": 0,
+      "winRate": 0.6889,
+      "drawRate": 0.0333,
+      "averageDamage": 2730,
+      "averageHealing": 0,
+      "confidence95": [
+        0.587,
+        0.775
+      ]
+    },
+    "companion_46": {
+      "name": "Phong Trần Lãng Khách",
+      "games": 83,
+      "wins": 51,
+      "draws": 2,
+      "damage": 224389.04923325122,
+      "healing": 0,
+      "winRate": 0.6145,
+      "drawRate": 0.0241,
+      "averageDamage": 2703,
+      "averageHealing": 0,
+      "confidence95": [
+        0.507,
+        0.712
+      ]
+    },
+    "companion_47": {
+      "name": "Tố Tâm Liên Sứ",
+      "games": 92,
+      "wins": 36,
+      "draws": 15,
+      "damage": 0,
+      "healing": 170119.03557886535,
+      "winRate": 0.3913,
+      "drawRate": 0.163,
+      "averageDamage": 0,
+      "averageHealing": 1849,
+      "confidence95": [
+        0.298,
+        0.493
+      ]
+    },
+    "companion_48": {
+      "name": "Lạc Hồng Long Quyền",
+      "games": 94,
+      "wins": 50,
+      "draws": 15,
+      "damage": 200297.23999666402,
+      "healing": 0,
+      "winRate": 0.5319,
+      "drawRate": 0.1596,
+      "averageDamage": 2131,
+      "averageHealing": 0,
+      "confidence95": [
+        0.432,
+        0.63
+      ]
+    },
+    "companion_49": {
+      "name": "Thiên Hương Phượng Vũ",
+      "games": 91,
+      "wins": 27,
+      "draws": 10,
+      "damage": 0,
+      "healing": 237667.6603819997,
+      "winRate": 0.2967,
+      "drawRate": 0.1099,
+      "averageDamage": 0,
+      "averageHealing": 2612,
+      "confidence95": [
+        0.213,
+        0.397
+      ]
+    },
+    "companion_50": {
+      "name": "Trường Sơn Vô Cực",
+      "games": 88,
+      "wins": 58,
+      "draws": 4,
+      "damage": 250484.36828120888,
+      "healing": 0,
+      "winRate": 0.6591,
+      "drawRate": 0.0455,
+      "averageDamage": 2846,
+      "averageHealing": 0,
+      "confidence95": [
+        0.555,
+        0.75
+      ]
+    },
+    "ThieuLam:attack": {
+      "name": "ThieuLam / attack",
+      "games": 102,
+      "wins": 76,
+      "draws": 0,
+      "damage": 311957.83668960124,
+      "healing": 0,
+      "winRate": 0.7451,
+      "drawRate": 0,
+      "averageDamage": 3058,
+      "averageHealing": 0,
+      "confidence95": [
+        0.653,
+        0.82
+      ]
+    },
+    "ThieuLam:defense": {
+      "name": "ThieuLam / defense",
+      "games": 96,
+      "wins": 37,
+      "draws": 12,
+      "damage": 130675.96560753387,
+      "healing": 0,
+      "winRate": 0.3854,
+      "drawRate": 0.125,
+      "averageDamage": 1361,
+      "averageHealing": 0,
+      "confidence95": [
+        0.294,
+        0.485
+      ]
+    },
+    "ThieuLam:mixed": {
+      "name": "ThieuLam / mixed",
+      "games": 84,
+      "wins": 44,
+      "draws": 10,
+      "damage": 170885.79351865733,
+      "healing": 0,
+      "winRate": 0.5238,
+      "drawRate": 0.119,
+      "averageDamage": 2034,
+      "averageHealing": 0,
+      "confidence95": [
+        0.418,
+        0.627
+      ]
+    },
+    "VoDang:attack": {
+      "name": "VoDang / attack",
+      "games": 99,
+      "wins": 72,
+      "draws": 3,
+      "damage": 286696.20044934493,
+      "healing": 0,
+      "winRate": 0.7273,
+      "drawRate": 0.0303,
+      "averageDamage": 2896,
+      "averageHealing": 0,
+      "confidence95": [
+        0.632,
+        0.805
+      ]
+    },
+    "VoDang:defense": {
+      "name": "VoDang / defense",
+      "games": 82,
+      "wins": 26,
+      "draws": 11,
+      "damage": 104014.84498067034,
+      "healing": 0,
+      "winRate": 0.3171,
+      "drawRate": 0.1341,
+      "averageDamage": 1268,
+      "averageHealing": 0,
+      "confidence95": [
+        0.227,
+        0.424
+      ]
+    },
+    "VoDang:mixed": {
+      "name": "VoDang / mixed",
+      "games": 86,
+      "wins": 33,
+      "draws": 9,
+      "damage": 123518.24956974348,
+      "healing": 0,
+      "winRate": 0.3837,
+      "drawRate": 0.1047,
+      "averageDamage": 1436,
+      "averageHealing": 0,
+      "confidence95": [
+        0.288,
+        0.489
+      ]
+    },
+    "CaiBang:attack": {
+      "name": "CaiBang / attack",
+      "games": 92,
+      "wins": 67,
+      "draws": 3,
+      "damage": 264299.08851401065,
+      "healing": 0,
+      "winRate": 0.7283,
+      "drawRate": 0.0326,
+      "averageDamage": 2873,
+      "averageHealing": 0,
+      "confidence95": [
+        0.63,
+        0.809
+      ]
+    },
+    "CaiBang:defense": {
+      "name": "CaiBang / defense",
+      "games": 95,
+      "wins": 53,
+      "draws": 3,
+      "damage": 241653.93119903165,
+      "healing": 0,
+      "winRate": 0.5579,
+      "drawRate": 0.0316,
+      "averageDamage": 2544,
+      "averageHealing": 0,
+      "confidence95": [
+        0.458,
+        0.654
+      ]
+    },
+    "CaiBang:mixed": {
+      "name": "CaiBang / mixed",
+      "games": 93,
+      "wins": 64,
+      "draws": 2,
+      "damage": 250841.96934697794,
+      "healing": 0,
+      "winRate": 0.6882,
+      "drawRate": 0.0215,
+      "averageDamage": 2697,
+      "averageHealing": 0,
+      "confidence95": [
+        0.588,
+        0.773
+      ]
+    },
+    "NgaMi:attack": {
+      "name": "NgaMi / attack",
+      "games": 98,
+      "wins": 52,
+      "draws": 8,
+      "damage": 207749.17329249025,
+      "healing": 159645.28473688787,
+      "winRate": 0.5306,
+      "drawRate": 0.0816,
+      "averageDamage": 2120,
+      "averageHealing": 1629,
+      "confidence95": [
+        0.433,
+        0.626
+      ]
+    },
+    "NgaMi:defense": {
+      "name": "NgaMi / defense",
+      "games": 92,
+      "wins": 39,
+      "draws": 15,
+      "damage": 0,
+      "healing": 198181.82153705656,
+      "winRate": 0.4239,
+      "drawRate": 0.163,
+      "averageDamage": 0,
+      "averageHealing": 2154,
+      "confidence95": [
+        0.328,
+        0.526
+      ]
+    },
+    "NgaMi:mixed": {
+      "name": "NgaMi / mixed",
+      "games": 112,
+      "wins": 45,
+      "draws": 28,
+      "damage": 0,
+      "healing": 322456.510898546,
+      "winRate": 0.4018,
+      "drawRate": 0.25,
+      "averageDamage": 0,
+      "averageHealing": 2879,
+      "confidence95": [
+        0.316,
+        0.494
+      ]
+    },
+    "DuongMon:attack": {
+      "name": "DuongMon / attack",
+      "games": 100,
+      "wins": 65,
+      "draws": 1,
+      "damage": 294041.0388298375,
+      "healing": 0,
+      "winRate": 0.65,
+      "drawRate": 0.01,
+      "averageDamage": 2940,
+      "averageHealing": 0,
+      "confidence95": [
+        0.553,
+        0.736
+      ]
+    },
+    "DuongMon:defense": {
+      "name": "DuongMon / defense",
+      "games": 79,
+      "wins": 46,
+      "draws": 3,
+      "damage": 215933.62122387043,
+      "healing": 0,
+      "winRate": 0.5823,
+      "drawRate": 0.038,
+      "averageDamage": 2733,
+      "averageHealing": 0,
+      "confidence95": [
+        0.472,
+        0.685
+      ]
+    },
+    "DuongMon:mixed": {
+      "name": "DuongMon / mixed",
+      "games": 84,
+      "wins": 50,
+      "draws": 3,
+      "damage": 229228.14079684002,
+      "healing": 0,
+      "winRate": 0.5952,
+      "drawRate": 0.0357,
+      "averageDamage": 2729,
+      "averageHealing": 0,
+      "confidence95": [
+        0.488,
+        0.694
+      ]
+    }
+  }
+}

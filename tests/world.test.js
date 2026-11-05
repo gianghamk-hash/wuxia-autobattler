@@ -5,7 +5,7 @@ import {
 } from '../src/entities/HeroBuild.js';
 import { SKILL_TREES } from '../src/data/SkillTreeData.js';
 import { EQUIPMENT } from '../src/data/EquipmentData.js';
-import { MAIN_QUESTS } from '../src/data/QuestsData.js';
+import { MAIN_QUESTS, LEGACY_MAIN_QUESTS } from '../src/data/QuestsData.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Campaign, createCampaign, itemCount } from '../src/core/Campaign.js';
@@ -423,7 +423,10 @@ test('completed 1.x saves preserve their actual old ending when geography and en
   const c = fixture(),
     old = c.snapshot();
   delete old.adventure;
-  old.storyProgress.completedQuests = MAIN_QUESTS.map((q) => q.id);
+  old.storyProgress.completedQuests = LEGACY_MAIN_QUESTS.map((q) => q.id);
+  delete old.storyProgress.storyRevision;
+  delete old.storyProgress.currentChapter;
+  delete old.storyProgress.currentEpisode;
   old.storyProgress.activeQuestId = null;
   old.storyProgress.currentAct = 3;
   old.storyProgress.endingId = 'actor';

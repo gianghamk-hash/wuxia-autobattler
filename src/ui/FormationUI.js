@@ -40,7 +40,10 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
       button.type = 'button';
       const label = document.createElement('span');
       label.textContent = name(id);
-      button.append(portrait(sect(id)), label);
+      button.append(
+        portrait(id === 'hero' ? sect(id) : COMPANIONS_BY_ID[id]),
+        label
+      );
       button.setAttribute('aria-pressed', String(selected === id));
       button.disabled = !canEdit();
       button.addEventListener('click', () => {
@@ -78,7 +81,10 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
         if (unit) {
           const label = document.createElement('span');
           label.textContent = name(unit);
-          button.append(portrait(sect(unit)), label);
+          button.append(
+            portrait(unit === 'hero' ? sect(unit) : COMPANIONS_BY_ID[unit]),
+            label
+          );
         } else {
           const label = document.createElement('span');
           label.textContent = '+';

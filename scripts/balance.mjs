@@ -97,7 +97,7 @@ const report = {
   matches,
   seed: 20261105,
   format:
-    '3v3, level 8, no equipment/consumables, 20 companions + 5 sects × 3 preset builds',
+    `3v3, level 8, no equipment/consumables, ${COMPANIONS.length} companions + 5 sects × 3 preset builds`,
   caution:
     'Team-presence win rates are descriptive, not isolated causal strength. Confidence intervals quantify sampling only. Builds are three legal presets, not all possible builds.',
   draws,

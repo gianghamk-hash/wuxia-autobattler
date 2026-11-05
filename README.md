@@ -2,7 +2,18 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 2.0 — chiến thuật & giang hồ Đại Việt:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 3.0 — 240 hồi và 50 đồng hành:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Nâng cấp 3.0
+
+- **12 chương × 20 hồi:** 240 cảnh viết riêng, 68 trận giao chiến, đầu mối liên tục, phản ứng theo lựa chọn trước, lời thoại đồng đội và bốn đoạn kết đầy đủ. Quán → Truyện ký cho phép xem lại hồi đã qua mà không nhận lại thưởng. Bản lưu 12 nhiệm vụ cũ được mở rộng theo mốc đã hoàn thành, giữ tiền, XP, lựa chọn và trận đang chờ; không phát lại phần thưởng.
+- **50 đồng hành:** giữ 20 ID cũ, thêm `companion_21`–`companion_50`, mỗi người có chân dung riêng, tiểu sử, tuyệt kỹ và nhiệm vụ mở theo chương. Chi tiết ở [danh sách đồng hành](docs/COMPANIONS.md).
+- **Chiêu hiền bằng bạc:** Đội hình → Chiêu hiền quán; mở sau trận đầu. 60 bạc/lượt hoặc 540 bạc/10 lượt. Tỉ lệ gốc bậc 1–5: **50% / 28% / 15% / 6% / 1%**; trong cùng bậc chia đều từng người. Mốc 10 chưa có bậc 4+ nâng kết quả thấp lên bậc 4 (bậc 5 vẫn 1%); mốc 80 chưa có bậc 5 bảo đảm bậc 5. Bậc 5 reset cả hai, bậc 4 reset mốc 10. Lượt trùng vẫn tính bảo đảm. Giá trừ trước toàn bộ, hoàn trùng theo bậc **12 / 18 / 24 / 30 / 36 bạc**, không tạo bản sao hay tăng sức mạnh. Cả 50 người cũng có nhiệm vụ; đã sở hữu từ quay thì không nhận lại thưởng chiêu mộ. Quay không tự đổi đội xuất chiến.
+- **Năm khung thẻ:** xám gỗ mộc tối không glow; lục đồng thau; lam viền bạc chạm góc và hover nhẹ; tím mạ vàng ngọc tím với dải sáng chạy viền; kim khung rồng/phượng, hào quang và cánh hoa. Bậc luôn ghi bằng chữ, không chỉ bằng màu. Tắt hiệu ứng hoặc giảm chuyển động sẽ dừng hiệu ứng khung.
+- **Lưu an toàn:** tổng lượt, hai bộ đếm và 50 kết quả gần nhất lưu cùng sáu ô hiện có; xuất/nhập giữ nguyên. Tướng quay mới có 15 duyên nợ, không phát XP hay bạc nhiệm vụ. Bản lưu cũ thêm bộ đếm bằng 0.
+- **Đồ họa:** 50 ảnh WebP riêng tại `assets/images/companions/`, dùng trong thẻ, xếp trận, danh sách đội, bottom sheet và Canvas chiến đấu; ảnh môn phái chỉ còn dành cho main/chọn phái. Prompt và xuất xứ trong [ART](docs/ART.md).
+
+Quay và tiến trình vẫn chạy **ngoại tuyến trên máy**, chưa có máy chủ xác thực hoặc đồng bộ tài khoản. Bộ đếm được lưu bền trong phạm vi bản lưu, không phải cơ chế chống sửa save phía server.
 
 ## Nâng cấp 2.0
 
@@ -52,7 +63,7 @@ Trận tự đánh, có HP/nộ/khiên, số sát thương ngoại công đỏ, 
 ## Sprint 7–10 đã tích hợp
 
 - **Sprint 7:** `BattleRenderer` vẽ trận thật lên Canvas HiDPI, chuyển động, HP/nộ, khiên, báo tuyệt kỹ và số sát thương. `FormationUI` hỗ trợ kéo thả, thao tác chạm và đổi chỗ; chỉ dùng các đồng đội đã chiêu mộ.
-- **Sprint 8:** 12 nhiệm vụ chính chia ba hồi, 20 tình huống chiêu mộ, đối thoại có lựa chọn và hai bước ngoặt cốt truyện. Thử thách gồm giao chiến, câu đố tình huống và vật phẩm cần tìm/tiêu hao. Cờ nhiệm vụ, nghiệp và duyên nợ tác động tiến trình, không thể lặp thưởng bằng chọn lại đối thoại.
+- **Sprint 8:** Ban đầu 12 nhiệm vụ chính chia ba hồi và 20 tình huống chiêu mộ; bản 3.0 mở rộng thành 240 hồi và 50 tình huống chiêu mộ, đối thoại có lựa chọn và hai bước ngoặt cốt truyện. Thử thách gồm giao chiến, câu đố tình huống và vật phẩm cần tìm/tiêu hao. Cờ nhiệm vụ, nghiệp và duyên nợ tác động tiến trình, không thể lặp thưởng bằng chọn lại đối thoại.
 - **Sprint 9:** Nhạc ngũ cung tổng hợp riêng cho tiêu đề, doanh trại, chiến đấu và kết cục; hiệu ứng tương tác, đánh thường, nội công, hồi máu, tuyệt kỹ, hạ gục và thắng/thua. Nhấn **Bật âm thanh** để cho phép Web Audio; chỉnh âm lượng hoặc tắt trong Thiết lập. Không cần tải file nhạc ngoài. Trình duyệt thiếu Web Audio vẫn chơi được.
 - **Sprint 10:** `App` và `main.js` nối tiêu đề → doanh trại → đối thoại/xếp trận → chiến đấu → kết cục; tích hợp cây kỹ năng, trang bị, kỳ phổ và lưu/tải. Giao diện thích ứng điện thoại, không cần build.
 

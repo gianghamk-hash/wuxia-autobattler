@@ -1,3 +1,4 @@
+import { renderStoryArchive } from './StoryArchive.js';
 import { EQUIPMENT_BY_ID } from '../data/EquipmentData.js';
 import {
   DUNGEONS,
@@ -19,7 +20,7 @@ import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { MAIN_QUESTS } from '../data/QuestsData.js';
 import { getSectName } from '../data/SectsData.js';
 import { count, calendar } from '../core/WorldProgress.js';
-import { portrait } from './Visuals.js';
+import { portrait, decorateRarity } from './Visuals.js';
 const el = (id) => document.getElementById(id);
 function n(tag, text, cls) {
   const e = document.createElement(tag);
@@ -257,8 +258,13 @@ export function mountWorldUI(app) {
     root.replaceChildren();
     const id = unit.id ?? 'hero',
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
+    root.removeAttribute('data-tier');
+    decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
     root.append(
-      portrait(sect, 'sheet-portrait'),
+      portrait(
+        COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
+        'sheet-portrait'
+      ),
       n('h2', unit.name),
       n(
         'p',
@@ -272,10 +278,18 @@ export function mountWorldUI(app) {
       ),
       n(
         'p',
-        `Điểm yếu: ${WEAKNESSES[unit.templateId ?? id] ?? 'Bị khắc ngũ hành, khống chế và đội hình đánh vào hậu tuyến.'}`,
+        `Điểm yếu: ${unit.weakness ?? COMPANIONS_BY_ID[unit.templateId ?? id]?.weakness ?? WEAKNESSES[unit.templateId ?? id] ?? 'Bị khắc ngũ hành, khống chế và đội hình đánh vào hậu tuyến.'}`,
         'weakness'
       )
     );
+    if (COMPANIONS_BY_ID[unit.templateId ?? id])
+      root.append(
+        n(
+          'p',
+          `Bậc ${COMPANIONS_BY_ID[unit.templateId ?? id].tier} · ${COMPANIONS_BY_ID[unit.templateId ?? id].biography}`,
+          'hint'
+        )
+      );
     if (
       !app.model.running &&
       s.party.active.includes(id) &&
@@ -349,6 +363,7 @@ export function mountWorldUI(app) {
       shop: 'Quán & Rèn',
       arena: 'Đại hội',
       guild: 'Bang hội',
+      story: 'Truyện ký',
       journal: 'Nhật ký'
     })) {
       const b = button(label, () => {
@@ -548,6 +563,11 @@ export function mountWorldUI(app) {
         );
       root.append(guild);
     }
+    if (tab === 'story') {
+      const archive = panel('Truyện ký');
+      renderStoryArchive(app, archive);
+      root.append(archive);
+    }
     if (tab === 'journal') {
       const journal = panel(
         'Nhật ký giang hồ',
@@ -559,7 +579,7 @@ export function mountWorldUI(app) {
       );
       for (const quest of MAIN_QUESTS) {
         const chosen = s.storyProgress.decisions[quest.id];
-        if (chosen)
+        if (chosen && quest.choices.length > 1)
           decisions.append(
             n(
               'p',

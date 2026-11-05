@@ -1,7 +1,9 @@
+import { STORY_ENDINGS } from './StoryEndings.js';
 import { deepFreeze } from './DataUtils.js';
+import { buildMainStory } from './StoryChaptersData.js';
 import { COMPANIONS } from './CompanionsData.js';
 // Đại Việt giả tưởng: folklore-inspired geography, not a reconstruction of a historical dynasty.
-export const MAIN_QUESTS = deepFreeze([
+export const LEGACY_MAIN_QUESTS = deepFreeze([
   {
     id: 'Q101',
     act: 1,
@@ -299,10 +301,11 @@ export const MAIN_QUESTS = deepFreeze([
     ]
   }
 ]);
+export const MAIN_QUESTS = buildMainStory(LEGACY_MAIN_QUESTS);
 export const MAIN_BY_ID = deepFreeze(
   Object.fromEntries(MAIN_QUESTS.map((q) => [q.id, q]))
 );
-export const ENDINGS = deepFreeze([
+const ENDING_DEFINITIONS = [
   {
     id: 'justice',
     name: 'Chính đạo · Hiệp nghĩa Đại Việt',
@@ -364,7 +367,11 @@ export const ENDINGS = deepFreeze([
       ]
     ]
   }
-]);
+];
+export const ENDINGS = deepFreeze(
+  ENDING_DEFINITIONS.map((e) => ({ ...e, lines: STORY_ENDINGS[e.id] }))
+);
+
 export const PUZZLES = deepFreeze({
   go_wager: {
     prompt:
@@ -479,16 +486,21 @@ export const RECRUIT_QUESTS = deepFreeze(
       companionId: unit.id,
       title: unit.name,
       description: unit.recruitment.description,
-      act: [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3][i],
-      level: Math.max(1, Math.floor(i / 2)),
-      xp: 80 + i * 25,
-      silver: 15 + i * 3,
+      act:
+        [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3][i] ??
+        Math.ceil(unit.chapter / 4),
+      chapter:
+        [1, 2, 1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 9, 9, 10, 10, 11][i] ??
+        unit.chapter,
+      level: Math.min(20, Math.max(1, Math.floor(i / 2))),
+      xp: i < 20 ? 80 + i * 25 : 80 + unit.chapter * 20,
+      silver: i < 20 ? 15 + i * 3 : 10 + unit.chapter * 2,
       condition,
       puzzle,
       cost: custom?.[3]
         ? { itemId: custom[3], quantity: unit.id === 'companion_11' ? 20 : 1 }
         : null,
-      lines: [
+      lines: unit.recruitment.lines ?? [
         [unit.name, unit.recruitment.description],
         ['Bạn', 'Nếu giúp được nhau, chúng ta cùng đi một đoạn đường.']
       ]

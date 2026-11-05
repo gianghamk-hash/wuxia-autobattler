@@ -1,3 +1,6 @@
+import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
+import { expandStoryProgress } from './StoryProgress.js';
+import { STORY_REVISION } from '../data/StoryChaptersData.js';
 import {
   freshWorld,
   validateWorld,
@@ -93,6 +96,9 @@ function setFormation(session) {
 function freshStory() {
   return {
     campaignVersion: 1,
+    storyRevision: STORY_REVISION,
+    currentChapter: 1,
+    currentEpisode: 1,
     currentAct: 1,
     activeQuestId: 'Q101',
     questFlags: {},
@@ -113,7 +119,7 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '2.0.0',
+    version: '3.0.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -131,10 +137,19 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
     companionsAffinity: {},
     storyProgress: { ...freshStory(), questFlags: { STARTER_KIT: true } },
     adventure: freshWorld(),
+    gacha: freshGacha(),
     settings: { muted: true, volume: 0.35 }
   };
 }
 export function validateCampaign(session) {
+  if (
+    session.storyProgress?.campaignVersion === 1 &&
+    session.storyProgress.storyRevision !== STORY_REVISION
+  )
+    return validateCampaign({
+      ...session,
+      storyProgress: expandStoryProgress(session.storyProgress)
+    });
   const story = session.storyProgress;
   if (story?.campaignVersion !== 1)
     fail('Phiên bản chiến dịch chưa được hỗ trợ.');
@@ -154,6 +169,7 @@ export function validateCampaign(session) {
     fail('Túi đồ hoặc thời gian chơi không hợp lệ.');
   normalizeHeroBuild(session.hero, session.inventory);
   validateWorld(session);
+  if (session.gacha !== undefined) validateGacha(session.gacha);
   if (
     !Array.isArray(story.completedQuests) ||
     new Set(story.completedQuests).size !== story.completedQuests.length ||
@@ -177,7 +193,9 @@ export function validateCampaign(session) {
   const next = MAIN_QUESTS.find((q) => !story.completedQuests.includes(q.id));
   if (
     story.activeQuestId !== (next?.id ?? null) ||
-    story.currentAct !== (next?.act ?? 3)
+    story.currentAct !== (next?.act ?? 3) ||
+    story.currentChapter !== (next?.chapter ?? 12) ||
+    story.currentEpisode !== (next?.episode ?? 20)
   )
     fail('Nhiệm vụ đang theo dõi không khớp tiến trình.');
   for (const [id, choice] of Object.entries(story.decisions)) {
@@ -191,7 +209,7 @@ export function validateCampaign(session) {
     !Array.isArray(session.party.active) ||
     !Array.isArray(session.party.unlocked) ||
     session.party.active.length > 5 ||
-    session.party.unlocked.length > 20 ||
+    session.party.unlocked.length > 50 ||
     new Set(session.party.unlocked).size !== session.party.unlocked.length ||
     new Set(session.party.active).size !== session.party.active.length ||
     !session.party.unlocked.every((id) => has(COMPANIONS_BY_ID, id)) ||
@@ -360,7 +378,10 @@ export function migrateCampaign(input) {
       text: 'Kết cục từ phiên bản 1.x được giữ lại. Bốn hướng chính, tà, ẩn dật và xưng vương áp dụng cho các hành trình mới trong Đại Việt giả tưởng.'
     };
   }
+  next.storyProgress = expandStoryProgress(next.storyProgress);
   next.adventure ??= freshWorld();
+  next.gacha ??= freshGacha();
+  next.version = '3.0.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
@@ -422,7 +443,8 @@ export class Campaign {
   availableRecruitQuests() {
     return RECRUIT_QUESTS.filter(
       (q) =>
-        q.act <= this.session.storyProgress.currentAct &&
+        (q.chapter ?? (q.act - 1) * 4 + 1) <=
+          this.session.storyProgress.currentChapter &&
         this.session.storyProgress.completedQuests.includes('Q101')
     );
   }
@@ -508,6 +530,14 @@ export class Campaign {
     );
     next.storyProgress.activeQuestId = following?.id ?? null;
     next.storyProgress.currentAct = following?.act ?? 3;
+    next.storyProgress.currentChapter = following?.chapter ?? 12;
+    next.storyProgress.currentEpisode = following?.episode ?? 20;
+    for (const s of quest.spotlights ?? [])
+      if (next.party.unlocked.includes(s.id))
+        next.companionsAffinity[s.id] = Math.min(
+          100,
+          (next.companionsAffinity[s.id] ?? 0) + 1
+        );
   }
   chooseMain(choiceId) {
     this._guard();
@@ -720,18 +750,10 @@ export class Campaign {
     const enemyTemplates = [...encounter.templates];
     const enemyCount =
       pending.kind === 'main'
-        ? quest.act === 1
-          ? enemyTemplates.length
-          : quest.act === 2
-            ? quest.id === 'Q204'
-              ? 5
-              : 4
-            : quest.id === 'Q303'
-              ? 6
-              : 5
+        ? (encounter.count ?? enemyTemplates.length)
         : pending.kind === 'practice'
           ? units.length
-          : Math.min(3, quest.act + 1);
+          : Math.min(3, (quest.act ?? 1) + 1);
     if (!encounter.guide)
       while (enemyTemplates.length < enemyCount)
         enemyTemplates.push(
@@ -749,7 +771,7 @@ export class Campaign {
       unit.stats.hp = unit.stats.maxHp;
       unit.stats.physicalAtk *= encounter.attackScale;
       unit.stats.magicalAtk *= encounter.attackScale;
-      unit.name = `${pending.kind === 'main' && quest.id === 'Q303' && index === 2 ? 'Minh Chủ đóng thế' : COMPANIONS_BY_ID[id].name}`;
+      unit.name = `${pending.kind === 'main' && quest.id === 'Q303' && index === 2 ? 'Thân vệ Trịnh Nghiêm' : COMPANIONS_BY_ID[id].name}`;
       grid.place(
         unit,
         [
@@ -886,3 +908,5 @@ export class Campaign {
 }
 
 Object.assign(Campaign.prototype, worldMethods);
+
+Object.assign(Campaign.prototype, gachaMethods);
