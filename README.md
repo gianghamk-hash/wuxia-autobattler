@@ -1,8 +1,64 @@
 # Võ Lâm Hài Hiệp Truyện
-Auto-battler kiếm hiệp hài hước, thuần web (vanilla JS ES6, không engine).
 
-Chạy local: mở thư mục bằng VS Code, dùng Live Server cho `index.html`.
-Chạy online: bật GitHub Pages (Settings > Pages > Deploy from a branch > main / root).
+Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
+
+**Bản 1.0 — tích hợp Sprint 1–10:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bắt đầu chơi
+
+1. Nhập tên, chọn một trong năm môn phái rồi **Khởi hành**.
+2. Vào **Chính truyện** ở doanh trại, vượt trận hướng dẫn tại quán trọ.
+3. Mở **Đồng đội & Xếp trận**, hoàn thành thử thách rồi mời Lão Tam và Tiểu Muội. Chọn nhân vật rồi chạm ô, hoặc kéo thả để xếp một Main và tối đa hai đồng đội. Thả vào ô có người sẽ đổi chỗ.
+4. Vào **Nhân vật** để cộng chỉ số, học cây kỹ năng bốn tầng và thay trang bị đã sở hữu. XP, bạc và vật phẩm đến từ nhiệm vụ hoặc luyện tập; các nút cấp miễn phí của bản thử đã được bỏ khỏi luồng chơi.
+5. Tiếp tục chính truyện qua ba hồi. Có thể luyện tập, mua vật dụng, tặng trà tăng duyên nợ và hoàn thành các nhiệm vụ chiêu mộ khác.
+
+Trận tự đánh, có HP/nộ/khiên, số sát thương ngoại công đỏ, nội công tím, bạo kích vàng và hồi máu xanh. **Space** tạm dừng; **1 / 2 / 3** đổi tốc độ. Khi ẩn tab, mô phỏng và nhạc dừng. Kết quả ghi thống kê từng nhân vật và thưởng một lần; rút lui hoặc thua không mất vật phẩm hay XP.
+
+## Sprint 7–10 đã tích hợp
+
+- **Sprint 7:** `BattleRenderer` vẽ trận thật lên Canvas HiDPI, chuyển động, HP/nộ, khiên, báo tuyệt kỹ và số sát thương. `FormationUI` hỗ trợ kéo thả, thao tác chạm và đổi chỗ; chỉ dùng các đồng đội đã chiêu mộ.
+- **Sprint 8:** 12 nhiệm vụ chính chia ba hồi, 20 tình huống chiêu mộ, đối thoại có lựa chọn và hai bước ngoặt cốt truyện. Thử thách gồm giao chiến, câu đố tình huống và vật phẩm cần tìm/tiêu hao. Cờ nhiệm vụ, nghiệp và duyên nợ tác động tiến trình, không thể lặp thưởng bằng chọn lại đối thoại.
+- **Sprint 9:** Nhạc ngũ cung tổng hợp riêng cho tiêu đề, doanh trại, chiến đấu và kết cục; hiệu ứng tương tác, đánh thường, nội công, hồi máu, tuyệt kỹ, hạ gục và thắng/thua. Nhấn **Bật âm thanh** để cho phép Web Audio; chỉnh âm lượng hoặc tắt trong Thiết lập. Không cần tải file nhạc ngoài. Trình duyệt thiếu Web Audio vẫn chơi được.
+- **Sprint 10:** `App` và `main.js` nối tiêu đề → doanh trại → đối thoại/xếp trận → chiến đấu → kết cục; tích hợp cây kỹ năng, trang bị, kỳ phổ và lưu/tải. Giao diện thích ứng điện thoại, không cần build.
+
+| Kết cục | Điều kiện tại nhiệm vụ cuối |
+| --- | --- |
+| Minh Chủ Liêm Khiết | Nghiệp từ 2, đã phát hiện cuốn sổ nợ |
+| Trùm Tài Phiệt Giang Hồ | Có và chi 100 bạc |
+| Quy Ẩn Bán Bún Đậu | Hai đồng đội xuất chiến đều có duyên nợ từ 30 |
+| Diễn Viên Đóng Thế | Luôn có thể chọn |
+
+Mỗi hành trình chốt một kết cục. Lưu vào ô thủ công trước lựa chọn cuối để thử nhánh khác.
+
+## Lưu và tương thích bản cũ
+
+- Một ô tự lưu và năm ô thủ công; xuất/nhập `.wuxia` có kiểm tra SHA-256. Dữ liệu gắn với trình duyệt và địa chỉ website; xuất file để chuyển máy hoặc dự phòng.
+- Tự lưu theo mốc nhiệm vụ, thay đổi đội hình/nhân vật và định kỳ 15 giây. File lỗi bị từ chối trước khi thay tiến trình. Nếu kho trình duyệt không khả dụng, có thể tiếp tục chơi và xuất file.
+- Trước mỗi trận, game lưu nhiệm vụ và seed. Tải lại giữa trận cho phép **đánh lại từ đầu với cùng seed**, không khôi phục HP/từng tick giữa trận. Thưởng chỉ nhận khi kết quả được chốt.
+- Bản lưu Sprint 2–6 giữ nhân vật, trang bị, vật phẩm và đồng đội hợp lệ; phần chiến dịch mới bắt đầu từ nhiệm vụ đầu. Cờ tiến trình thử nghiệm cũ được giữ trong `legacyProgress`; bộ vật dụng khởi đầu chỉ được bổ sung một lần khi chuyển đổi.
+- Khởi hành mới chỉ thay ô tự lưu, giữ năm ô thủ công. Nên xuất bản cũ trước khi bắt đầu hành trình mới.
+
+## Chạy và kiểm tra
+
+Yêu cầu Node.js 22+ cho kiểm thử; game chạy trực tiếp trên trình duyệt có ES modules, Canvas 2D, IndexedDB hoặc LocalStorage.
+
+```sh
+npm ci
+npm test
+python3 -m http.server 8000
+```
+
+Truy cập `http://localhost:8000`; không mở `index.html` bằng `file://`. GitHub Actions chạy bộ kiểm thử và Pages triển khai nhánh `main`.
+
+Bộ kiểm thử hiện có **68 bài**: engine, lưu trữ/nhập file, dữ liệu, lưới, combat, cây kỹ năng, âm thanh, chuyển đổi bản lưu và chiến dịch. Kiểm thử tích hợp dùng combat thật để đi hết ba hồi, chiêu mộ đủ 20 nhân vật và kiểm tra cả bốn kết cục; đồng thời kiểm tra checkpoint, chặn thưởng lặp, tiêu hao vật phẩm và đội hình hợp lệ.
+
+Đã kiểm tra trên Chromium: khởi hành, chiến đấu, cộng kỹ năng, hai nhiệm vụ chiêu mộ đầu, chọn sai câu đố, kéo thả/chạm đội hình, lưu/xuất/nhập, tải lại giữa trận, toàn bộ chính truyện và bốn màn hình kết cục, bật/tắt/âm lượng Web Audio, bố cục rộng 360px. Không có lỗi console trong luồng này.
+
+**Phạm vi bản 1.0:** nhân vật trên sân được vẽ hình khối đơn giản, chân dung dùng ký tự; các thử thách cờ vây/đấu vật/bắn bia/đuổi mái nhà là câu đố lựa chọn tình huống, chưa phải mini-game điều khiển riêng. Nhạc được tổng hợp bằng Web Audio. Mốc 20 giờ chơi trong GDD và 60 FPS trên Chrome/Firefox/Safari chưa được đo/xác nhận; cần chơi thử và cân bằng thêm trước khi coi là bản thương mại.
+
+## Nhật ký Sprint 1–6
+
+Các mục dưới đây ghi lại từng bản thử trước khi tích hợp 1.0. Giao diện thử nghiệm và nút cấp tài nguyên nêu ở đây không còn nằm trong luồng chiến dịch hiện tại; hướng dẫn hiện tại ở phía trên.
 
 ## Sprint 1 — engine nền tảng
 

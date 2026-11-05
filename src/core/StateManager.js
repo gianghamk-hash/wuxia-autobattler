@@ -5,17 +5,18 @@
 import { bus, EVT } from './EventBus.js';
 
 export const GAME_STATE = Object.freeze({
-  BOOT: 'BOOT', TITLE: 'TITLE', ROSTER: 'ROSTER', BATTLE: 'BATTLE', DIALOGUE: 'DIALOGUE', CAMP: 'CAMP',
+  BOOT: 'BOOT', TITLE: 'TITLE', ROSTER: 'ROSTER', BATTLE: 'BATTLE', DIALOGUE: 'DIALOGUE', CAMP: 'CAMP', ENDING: 'ENDING',
 });
 
 /** Cho phép chuyển cảnh nào -> cảnh nào. */
 const TRANSITIONS = {
   BOOT: ['TITLE'],
   TITLE: ['CAMP', 'DIALOGUE'],
-  CAMP: ['ROSTER', 'DIALOGUE', 'BATTLE', 'TITLE'],
+  CAMP: ['ROSTER', 'DIALOGUE', 'BATTLE', 'TITLE', 'ENDING'],
   ROSTER: ['CAMP', 'BATTLE'],
-  DIALOGUE: ['CAMP', 'BATTLE', 'TITLE'],
+  DIALOGUE: ['CAMP', 'BATTLE', 'TITLE', 'ENDING'],
   BATTLE: ['CAMP', 'DIALOGUE', 'TITLE'],
+  ENDING: ['CAMP', 'TITLE'],
 };
 
 export class StateManager {
@@ -39,7 +40,7 @@ export class StateManager {
   is(state) { return this.current === state; }
 
   go(next, data = {}) {
-    if (!(next in GAME_STATE)) throw new Error(`[StateManager] Trạng thái không tồn tại: ${next}`);
+    if (!Object.hasOwn(GAME_STATE, next)) throw new Error(`[StateManager] Trạng thái không tồn tại: ${next}`);
     if (!TRANSITIONS[this.current]?.includes(next)) {
       console.warn(`[StateManager] Không thể chuyển ${this.current} -> ${next}`);
       return false;

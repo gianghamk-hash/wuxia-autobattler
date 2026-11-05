@@ -13,11 +13,12 @@ function element(tag, text, className) {
 const STAT_NAMES = { maxHp: 'HP', physicalAtk: 'Ngoại công', magicalAtk: 'Nội công', physicalDef: 'Ngoại phòng', magicalDef: 'Nội phòng', attackSpeed: 'Tốc đánh', critRate: 'Bạo kích', dodgeRate: 'Né tránh' };
 const statsText = stats => Object.entries(stats).map(([key, value]) => `${STAT_NAMES[key] ?? key} +${value < 1 ? `${Math.round(value * 100)}%` : value}`).join(' · ');
 
-export function mountSkillTreeUI({ getState, onChange, canEdit }) {
+export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = true }) {
   const el = id => document.getElementById(id);
   const sect = el('progress-sect'), message = el('progress-message');
   const say = (text, error = false) => { message.textContent = text; message.dataset.error = String(error); };
   for (const data of Object.values(SECTS)) { const option = element('option', data.name); option.value = data.id; sect.append(option); }
+  el('btn-progress-train').hidden = el('btn-progress-gear').hidden = !allowTraining;
   let controls = [];
   function locks() { for (const { node, disabled } of controls) node.disabled = disabled || !canEdit(); sect.disabled = !canEdit(); }
   function mutate(action, text) {
@@ -85,8 +86,8 @@ export function mountSkillTreeUI({ getState, onChange, canEdit }) {
     } else {
       el('progress-stats').textContent = 'Chưa chọn môn phái.'; el('progress-ultimate').textContent = ''; el('progress-set').textContent = '';
     }
-    for (const [id, disabled] of [['btn-progress-sect', false], ['btn-progress-train', !hero.sect || hero.level >= MAX_LEVEL],
-      ['btn-progress-respec', !hero.allocatedSkills.length], ['btn-progress-reset-attributes', Object.values(hero.attributes).every(n => n === 0)], ['btn-progress-gear', !hero.sect]]) controls.push({ node: el(id), disabled });
+    for (const [id, disabled] of [['btn-progress-sect', false], ['btn-progress-train', !allowTraining || !hero.sect || hero.level >= MAX_LEVEL],
+      ['btn-progress-respec', !hero.allocatedSkills.length], ['btn-progress-reset-attributes', Object.values(hero.attributes).every(n => n === 0)], ['btn-progress-gear', !allowTraining || !hero.sect]]) controls.push({ node: el(id), disabled });
     locks();
   }
   bus.on(EVT.BATTLE_STATE_CHANGED, locks);

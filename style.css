@@ -88,3 +88,75 @@ input:focus-visible, select:focus-visible, .codex-grid:focus-visible { outline: 
 #gear-slots label { flex: 1 1 220px; }
 #gear-slots select { min-width: 0; max-width: 100%; }
 @media (max-width: 600px) { .skill-tree, .attribute-grid { grid-template-columns: 1fr; } }
+/* Campaign shell, independent of the development workbench. */
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { background: radial-gradient(ellipse at top left, #17313c 0, #0b131e 55%, #090e17 100%); min-height: 100vh; }
+.app-header { width: min(1200px, calc(100% - 40px)); margin: 0 auto; padding: 24px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { font: bold 1.2rem Georgia, serif; text-decoration: none; color: var(--gold); letter-spacing: .08em; }
+.brand span { display: block; font: .65rem/1.8 'Segoe UI', sans-serif; color: #becbd2; letter-spacing: .16em; }
+.header-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: .85rem; }
+.main-nav { width: min(1200px, calc(100% - 40px)); margin: 0 auto; display: flex; gap: 8px; overflow-x: auto; padding: 8px 0 16px; }
+.main-nav button { white-space: nowrap; background: transparent; }
+.main-nav button[aria-current="page"] { border-color: var(--gold); color: var(--gold); background: #25302d; }
+#app-main { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+.view { padding: 10px 0 40px; }
+.section-heading { margin-bottom: 24px; }
+.section-heading p { color: #b5c7cf; }
+.panel { background: rgba(13,24,36,.88); padding: 24px; border: 1px solid #354b57; border-radius: 16px; }
+.panel h2 { color: #eddbb2; }
+.title-view { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; padding-top: 8vh; align-items: center; }
+.title-copy h1 { font-size: clamp(2.6rem, 5.5vw, 4.6rem); line-height: 1.08; color: #f2e5c8; }
+.title-copy > p { max-width: 540px; font-size: 1.05rem; color: #bcced4; }
+.title-facts { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; color: var(--gold); }
+.title-form { display: flex; flex-direction: column; gap: 12px; }
+.title-form input, .title-form select { width: 100%; }
+.title-form label { font-size: .9rem; margin-top: 8px; }
+.primary { background: #d0ac56; border-color: #d0ac56; color: #101c25; font-weight: 600; }
+.camp-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; margin-bottom: 18px; }
+.quest-feature { background: linear-gradient(130deg, #203e43, #162331); }
+.quest-feature h2 { font-size: 1.9rem; margin-top: 10px; }
+.card-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 28px; }
+.roster-card { background: #101e2b; border: 1px solid #354b57; padding: 18px; border-radius: 12px; overflow-wrap: anywhere; }
+.roster-card h3 { margin: 8px 0; color: #e7d3a3; }
+.roster-card p { font-size: .9rem; }
+.roster-card .controls { margin-top: 12px; }
+.avatar-mark { display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #24414b; color: #e7d3a3; font: 1.2rem Georgia, serif; }
+.formation-units { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.formation-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; max-width: 640px; }
+.formation-cell { min-height: 88px; border-style: dashed; background: #17373b; font-size: .9rem; }
+.formation-cell:active { border-color: var(--gold); }
+.dialogue-view { max-width: 850px; margin: 12px auto; }
+.dialogue-line { margin: 22px 0; padding-left: 16px; border-left: 2px solid #806d42; }
+.dialogue-line strong { color: var(--gold); font-size: .9rem; }
+.dialogue-line p { line-height: 1.8; }
+.dialogue-choices { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+.dialogue-choices button { text-align: left; }
+.battle-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 14px; }
+#battle-clock { margin-left: auto; font: .9rem monospace; color: #c7d7df; }
+.battle-arena { border: 1px solid #45606c; border-radius: 14px; overflow: hidden; }
+.battle-unit-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin: 20px 0; }
+.battle-unit-card { padding: 14px; background: #111f2d; border: 1px solid #344956; border-radius: 10px; }
+.battle-unit-card p { font-size: .85rem; }
+.battle-unit-card button { font-size: .8rem; padding: 6px 10px; }
+.battle-unit-card[data-team="enemy"] { border-color: #674a47; }
+#battle-stats { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid #354b57; }
+#app-message { min-height: 1.6em; color: #a6d8c6; }
+#app-message[data-error="true"] { color: #ffb4a6; }
+#boot-status { margin: 30px auto; width: min(1200px,90%); }
+.app-footer { width: min(1200px,calc(100% - 40px)); margin: 0 auto; padding: 0 0 24px; }
+.progress-panel, #view-saves .save-panel { margin-top: 0; }
+.ending-panel { max-width: 850px; margin: 30px auto; padding: 40px; background: linear-gradient(145deg,#253c3c,#152130); }
+#view-codex > details { margin-top: 0; }
+@media (max-width: 800px) { .title-view { grid-template-columns: 1fr; gap: 24px; padding-top: 20px; } .camp-grid { grid-template-columns: 1fr; } .card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 520px) {
+  .app-header, .main-nav, #app-main, .app-footer { width: calc(100% - 24px); }
+  .app-header { align-items: flex-start; gap: 12px; padding-top: 18px; }
+  #hero-hud { display: none; } .panel { padding: 18px; } .card-grid { grid-template-columns: 1fr; }
+  .battle-unit-list { grid-template-columns: repeat(2,minmax(0,1fr)); } .battle-unit-card { padding: 10px; }
+  .formation-cell { min-height: 72px; padding: 6px; font-size: .8rem; }
+  .title-facts { gap: 10px; font-size: .85rem; } #battle-clock { margin-left: 0; }
+  .ending-panel { padding: 22px; } .brand { font-size: 1rem; }
+}

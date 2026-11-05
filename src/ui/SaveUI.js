@@ -2,7 +2,7 @@ import { MAX_SAVE_BYTES, StorageManager } from '../core/StorageManager.js';
 import { bus, EVT } from '../core/EventBus.js';
 
 /** Storage panel for the playable engine demo. Gameplay modules can emit SAVE_REQUESTED. */
-export async function mountSaveUI({ getSnapshot, restoreSnapshot, resetSession, engine }) {
+export async function mountSaveUI({ getSnapshot, restoreSnapshot, resetSession, engine, onRename }) {
   const storage = new StorageManager();
   const select = document.getElementById('save-slot');
   const message = document.getElementById('save-message');
@@ -60,6 +60,7 @@ export async function mountSaveUI({ getSnapshot, restoreSnapshot, resetSession, 
       await storage.autoSave(snapshot()); await refresh(); say('Đã tự lưu tiến trình.'); elapsed = 0;
     });
   }
+  if (onRename) name.addEventListener('change', () => { try { onRename(name.value.trim() || getSnapshot().hero.name); } catch (error) { say(error.message, true); } });
   select.addEventListener('change', controls);
   save.addEventListener('click', () => perform(async () => {
     const id = Number(select.value);
@@ -96,16 +97,16 @@ export async function mountSaveUI({ getSnapshot, restoreSnapshot, resetSession, 
     });
   });
   fresh.addEventListener('click', () => perform(async () => {
-    if (!window.confirm('Bắt đầu bản thử mới? Ô tự lưu sẽ được cập nhật; các ô thủ công được giữ nguyên.')) return;
+    if (!window.confirm('Bắt đầu hành trình mới? Ô tự lưu sẽ được cập nhật; các ô thủ công được giữ nguyên.')) return;
     resetSession(); name.value = getSnapshot().hero.name; autoEnabled = true; elapsed = 0;
     if (available) { await storage.autoSave(snapshot()); await refresh(); }
-    say('Đã bắt đầu bản thử mới.');
+    say('Đã bắt đầu hành trình mới.');
   }));
   controls();
   await perform(async () => {
     try {
       const backend = await storage.init(); available = true;
-      document.getElementById('storage-backend').textContent = backend === 'indexedDB' ? 'Lưu trên thiết bị: IndexedDB' : 'Lưu trên thiết bị: LocalStorage (dự phòng)';
+      document.getElementById('storage-backend').textContent = backend === 'indexedDB' ? 'Lưu trên trình duyệt này' : 'Lưu trên trình duyệt này (chế độ dự phòng)';
       await refresh();
       if (slots[0].error) {
         autoEnabled = false;
