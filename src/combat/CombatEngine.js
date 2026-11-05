@@ -38,7 +38,7 @@ export class CombatEngine {
   start() {
     if (this.state !== 'idle') return false;
     this.state = 'running';
-    for (const unit of this.units) { unit.energyGainMultiplier = 1; unit.damageMultiplier = 1; }
+    for (const unit of this.units) { unit.inCombat = true; unit.energyGainMultiplier = 1; unit.damageMultiplier = 1; }
     for (const team of ['home', 'enemy']) {
       const members = this.units.filter(u => u.team === team && u.alive);
       const active = getActiveSynergies(members.map(u => u.sect)); this.teamSynergies[team] = active.map(s => s.id);
@@ -80,6 +80,7 @@ export class CombatEngine {
   finish(winner, reason) {
     if (this.state !== 'running') return;
     this.state = 'finished';
+    this.units.forEach(unit => { unit.inCombat = false; });
     this.result = { winner, reason, duration: this.elapsed, seed: this.seed, statistics: structuredClone([...this.records.values()]) };
     this.emit({ type: 'result', ...this.result });
   }

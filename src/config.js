@@ -2,7 +2,7 @@
  * Cấu hình hằng số trung tâm của game
  */
 export const CONFIG = {
-    VERSION: '0.5.0',
+    VERSION: '0.6.0',
     DEBUG: true,
     // All engine times are seconds. Legacy GAME/COMBAT values below use milliseconds.
     TIME: {
@@ -22,7 +22,7 @@ export const CONFIG = {
     GAME: {
         FPS: 60,
         MAX_DELTA_TIME: 100, // Tránh lỗi logic khi người chơi chuyển tab lâu
-        VERSION: "0.5.0"
+        VERSION: "0.6.0"
     },
     COMBAT: {
         GRID_COLS: 6, // 3 Cột phe ta, 3 cột phe địch

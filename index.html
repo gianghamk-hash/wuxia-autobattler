@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Võ Lâm Hài Hiệp Truyện — Sprint 5</title>
+  <title>Võ Lâm Hài Hiệp Truyện — Sprint 6</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <main id="game-container">
     <header>
-      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 5</p>
+      <p class="eyebrow">VÕ LÂM HÀI HIỆP TRUYỆN · SPRINT 6</p>
       <h1>Diễn võ trường</h1>
       <p>Xếp đội, khai chiến và thử chiến thuật tự động.</p>
     </header>
@@ -31,6 +31,34 @@
       <span id="engine-status" role="status">Đang khởi động</span>
     </section>
     <p class="hint">Phím 1 / 2 / 3: đổi tốc độ · Space: tạm dừng / tiếp tục.</p>
+    <section class="save-panel progress-panel" aria-labelledby="progress-title">
+      <h2 id="progress-title">Tu luyện &amp; Trang bị</h2>
+      <p class="hint">Hồ sơ này được lưu và áp dụng cho nhân vật chính trên bàn chiến đấu. Đổi phái hoàn điểm kỹ năng, tháo đồ riêng của phái cũ và giữ nguyên túi đồ. Không đổi hồ sơ trong trận.</p>
+      <div class="controls">
+        <label for="progress-sect">Môn phái</label>
+        <select id="progress-sect"><option value="">Chưa chọn</option></select>
+        <button id="btn-progress-sect" type="button">Áp dụng môn phái</button>
+        <button id="btn-progress-train" type="button">Tu luyện thử: +1 cấp</button>
+        <button id="btn-progress-gear" type="button">Nhận bộ trang bị thử</button>
+      </div>
+      <p class="hint">Bản thử nhận 1 điểm kỹ năng/cấp và 2 điểm thuộc tính mỗi lần lên cấp, tối đa cấp 20. Các nút thử giúp kiểm tra cách xây nhân vật trước khi có nhiệm vụ và phần thưởng.</p>
+      <p id="progress-summary"></p>
+      <h3>Thuộc tính</h3>
+      <p class="hint">Căn Cốt tăng HP; Khí Hải tăng nội công/nội phòng; Kình Lực tăng ngoại công và sát thương bạo kích; Ngộ Tính tăng tỷ lệ bạo kích; Thân Pháp tăng nhịp đánh/né; Cơ Duyên tăng bạo kích.</p>
+      <div id="attribute-grid" class="attribute-grid"></div>
+      <div class="controls">
+        <button id="btn-progress-reset-attributes" type="button">Tẩy thuộc tính</button>
+        <button id="btn-progress-respec" type="button">Tẩy điểm kỹ năng</button>
+      </div>
+      <h3>Cây kỹ năng bốn tầng</h3>
+      <div id="skill-tree" class="skill-tree"></div>
+      <h3>Trang bị đã sở hữu</h3>
+      <div id="gear-slots" class="codex-filters"></div>
+      <p id="progress-set"></p>
+      <p id="progress-stats"></p>
+      <p id="progress-ultimate"></p>
+      <p id="progress-message" role="status" aria-live="polite"></p>
+    </section>
     <section class="save-panel tactics-panel" aria-labelledby="tactics-title">
       <h2 id="tactics-title">Bàn thử chiến thuật</h2>
       <p class="hint">Vàng: nhân vật đang chọn. Trắng: mục tiêu. Bàn thử không chiêu mộ nhân vật hay thay đổi bản lưu; dựng lại khi cần. Bấm Khai chiến để hai phe tự động giao đấu.</p>
@@ -83,7 +111,7 @@
     </details>
     <details class="codex-panel" open>
       <summary>Giang hồ kỳ phổ · 5 môn phái · 20 đồng đội</summary>
-      <p class="hint">Tra cứu nhân vật, điều kiện chiêu mộ và kỹ năng. Chiêu mộ và trang bị sẽ mở ở các sprint tiếp theo.</p>
+      <p class="hint">Tra cứu nhân vật, điều kiện chiêu mộ và kỹ năng. Chiêu mộ theo nhiệm vụ sẽ mở ở các sprint tiếp theo.</p>
       <div class="codex-filters">
         <label>Danh mục
           <select id="catalog-view">
@@ -139,7 +167,7 @@
       <p id="save-message" role="status" aria-live="polite"></p>
       <ul id="save-slots" aria-label="Danh sách bản lưu"></ul>
     </section>
-    <footer>Bản chiến đấu thử · Cây kỹ năng, trang bị và cốt truyện sẽ được bổ sung ở các sprint tiếp theo.</footer>
+    <footer>Bản chiến đấu thử · Cốt truyện và nhiệm vụ sẽ được bổ sung ở các sprint tiếp theo.</footer>
   </main>
   <script type="module" src="./src/main.js"></script>
 </body>

@@ -1,3 +1,4 @@
+import { bus, EVT } from '../core/EventBus.js';
 import { CombatEngine } from '../combat/CombatEngine.js';
 import { Hero } from '../entities/Hero.js';
 import { Companion } from '../entities/Companion.js';
@@ -22,7 +23,7 @@ export function mountTacticsUI({ engine }) {
   for (let y = 0; y < 3; y++) for (let x = 0; x < 6; x++) option(cellSelect, `${x},${y}`, `(${x}, ${y}) · ${x < 3 ? 'Sân nhà' : 'Sân địch'}`);
   cellSelect.value = '1,1'; strategy.value = 'role';
   let grid, units, selectedId = 'hero', orders = new Map(), infoTime = 0;
-  let combat = null, floating = [];
+  let combat = null, floating = [], savedBuild = null;
   const statuses = new StatusEngine();
   const manualIds = ['btn-tactics-place', 'btn-tactics-move', 'btn-tactics-approach', 'btn-status-poison', 'btn-status-bleed', 'btn-status-stun', 'btn-status-shield', 'btn-status-cleanse', 'btn-status-damage'];
   function lockControls() {
@@ -30,6 +31,7 @@ export function mountTacticsUI({ engine }) {
     [heroSelect, ally1, ally2, el('battle-seed')].forEach(node => { node.disabled = combat?.state === 'running'; });
     el('btn-battle-start').disabled = Boolean(combat);
     strategy.disabled = cellSelect.disabled = Boolean(combat);
+    if (savedBuild?.hero.sect) heroSelect.disabled = true;
   }
   function eventLog(event) {
     const names = id => units.find(u => u.id === id)?.name ?? 'Hiệu ứng';
@@ -44,6 +46,7 @@ export function mountTacticsUI({ engine }) {
       synergy: `${event.team === 'home' ? 'Đội nhà' : 'Đội địch'} kích duyên ${event.name}`,
       passive: `${names(event.actorId)} kích hoạt ${event.name}`
     };
+    if (['start', 'result'].includes(event.type)) bus.emit(EVT.BATTLE_STATE_CHANGED, { running: event.type === 'start' });
     if (messages[event.type]) {
       const row = document.createElement('li'); row.textContent = `${event.time.toFixed(1)}s · ${messages[event.type]}`;
       const log = el('battle-log'); log.prepend(row); while (log.children.length > 80) log.lastChild.remove();
@@ -75,8 +78,9 @@ export function mountTacticsUI({ engine }) {
   function reset() {
     if (ally1.value === ally2.value) throw new Error('Hãy chọn hai đồng đội khác nhau.');
     // Build off to the side so a failed configuration leaves the existing board intact.
+    if (savedBuild?.hero.sect) heroSelect.value = savedBuild.hero.sect;
     const nextGrid = new GridSystem();
-    const nextUnits = [new Hero(heroSelect.value), new Companion(ally1.value), new Companion(ally2.value),
+    const nextUnits = [new Hero(heroSelect.value, savedBuild?.hero.sect ? { profile: savedBuild.hero, inventory: savedBuild.inventory } : {}), new Companion(ally1.value), new Companion(ally2.value),
       new Companion('companion_05', { id: 'enemy_01', team: 'enemy' }),
       new Companion('companion_04', { id: 'enemy_02', team: 'enemy' }),
       new Companion('companion_08', { id: 'enemy_03', team: 'enemy' })];
@@ -89,6 +93,7 @@ export function mountTacticsUI({ engine }) {
     el('battle-log').replaceChildren(); el('battle-stats').replaceChildren();
     grid = nextGrid; units = nextUnits; orders = new Map(); selectedId = 'hero';
     actorSelect.replaceChildren(); units.forEach(unit => option(actorSelect, unit.id, unit.name)); actorSelect.value = selectedId;
+    bus.emit(EVT.BATTLE_STATE_CHANGED, { running: false });
     lockControls(); refreshInfo(); say('Bàn thử đã sẵn sàng. Chọn nhân vật rồi thử xếp ô, tìm mục tiêu hoặc hiệu ứng.');
   }
   function safely(action) { return () => { try { action(); refreshInfo(); } catch (error) { say(error.message, true); } }; }
@@ -172,6 +177,11 @@ export function mountTacticsUI({ engine }) {
   reset();
   return {
     // Expose an inspection API for console checks; gameplay state is kept separate.
+    setHeroProfile(hero, inventory) {
+      // Incomplete draft companion choices must not make a valid profile change fail.
+      if (ally1.value === ally2.value) { ally1.value = units[1].templateId; ally2.value = units[2].templateId; }
+      savedBuild = structuredClone({ hero, inventory }); reset();
+    },
     get combat() { return combat; }, get grid() { return grid; }, get units() { return units; },
     draw(ctx, { x, y, cellW, cellH }) {
       const chosen = actor(), selected = target(chosen);

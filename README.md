@@ -174,3 +174,54 @@ không lưu trận đang đánh; save tiến trình Sprint 2–4 vẫn tương t
 Kiểm thử mới bao gồm: mô phỏng đủ 20 vai trò, tác dụng từng tuyệt kỹ, thay
 mục tiêu giữa windup, rage, stun, các kết quả trận, giới hạn nhật ký và so
 sánh chính xác kết quả/sự kiện ở ×1/×2/×3 qua GameEngine thật.
+
+## Sprint 6 — cây kỹ năng, thuộc tính và trang bị có lưu trữ
+
+Mở **Tu luyện & Trang bị**, chọn môn phái rồi áp dụng. Mỗi phái có tám nút
+(40 nút cho năm phái), chia hai nhánh Công pháp/Hộ thân và bốn tầng. Tầng
+1/2/3/4 yêu cầu cấp 1/3/5/8, tốn 1/1/2/3 điểm và cần nút trước của cùng
+nhánh. Hai tuyệt kỹ tầng 4 loại trừ nhau. Học nút cộng chỉ số thật; tầng 4
+đổi kỹ năng thật được `CombatEngine` sử dụng, không chỉ đổi nhãn giao diện.
+
+- `SkillTreeData.js` chứa node, điều kiện, chi phí, chỉ số và mười biến thể
+  tuyệt kỹ. Đây là bộ cây kỹ năng/cân bằng ban đầu vì GDD chưa liệt kê từng nút.
+- `HeroBuild.js` quản lý XP, điểm, phái, học/tẩy kỹ năng, thuộc tính, trang bị
+  và kiểm tra ngân sách. Có `buildVersion: 1` bên trong `hero`; envelope save
+  vẫn dùng schema 1. Mọi sửa đổi tạo bản mới và kiểm tra xong trước khi áp dụng.
+- `Hero` nhận `profile` và `inventory`, tính lại từ chỉ số phái + tăng trưởng
+  cấp + thuộc tính + nút kỹ năng + trang bị + thưởng bộ. Không cộng thêm vào
+  các chỉ số đã được tăng trước đó. Các API `learnSkill`, `allocateAttribute`,
+  `equip` từ chối sửa thực thể đang trong trận.
+- Ba ô: vũ khí/áo giáp/phụ kiện. Chỉ lắp món đã sở hữu, đúng ô, đúng phái
+  (đồ dùng chung không khóa phái). Đồ vẫn nằm trong kho khi đang lắp; một nhân
+  vật chính dùng một món mỗi ô. Đủ ba món cùng bộ mới cộng thưởng một lần.
+- Mỗi cấp có một điểm kỹ năng (cấp 1 có sẵn một điểm); mỗi lần lên cấp nhận
+  hai điểm thuộc tính, giới hạn bản thử cấp 20. XP cần lên cấp = cấp hiện tại
+  ×100, XP dư chuyển sang cấp sau; ở cấp tối đa không tích lũy thêm XP.
+- Thuộc tính theo số điểm đã cộng: Căn Cốt +25 HP; Khí Hải +4 nội công/+1 nội
+  phòng; Kình Lực +4 ngoại công và hệ số crit có sẵn trong CombatMath; Ngộ
+  Tính tăng crit theo công thức GDD; Thân Pháp tăng nhịp đánh theo GDD và
+  +0.2% né/điểm; Cơ Duyên +0.2% crit/điểm. Các hệ số chưa có trong GDD là
+  thông số thử, có thể điều chỉnh khi cân bằng.
+
+**Tu luyện thử: +1 cấp** cấp đúng lượng XP còn thiếu tới cấp kế; **Nhận bộ
+trang bị thử** thêm ba món của phái đang chọn một lần, không nhân bản khi
+bấm lại. New game có ba món nhập môn; save cũ không bị tự thêm vật phẩm.
+Các nút này là công cụ thử xây nhân vật trước hệ thống nhiệm vụ Sprint 8,
+không phải phần thưởng trận đấu. Tẩy điểm không tốn phí trong bản thử.
+Đổi phái hoàn điểm kỹ năng và tháo đồ riêng phái cũ, giữ nguyên kho và
+thuộc tính; quay lại phái cũ có thể lắp đồ đã sở hữu.
+
+Hồ sơ tự lưu khi đổi phái, học/tẩy điểm hoặc lắp đồ. Lưu thủ công/xuất nhập
+`.wuxia` chứa cả cấp, XP, điểm, kỹ năng, kho và trang bị. Save mặc định được tạo
+bởi Sprint 2–5 được chuẩn hóa (thuộc tính thiếu = 0, điểm được tính từ cấp),
+giữ nguyên tên, kho, đội hình và cờ nhiệm vụ. Hồ sơ phiên bản mới có điểm giả,
+node trùng/khác phái, sai tiền đề hay món đồ chưa sở hữu bị từ chối trước ghi.
+Bản legacy tự sửa với ID kỹ năng/trang bị lạ hoặc vượt giới hạn bản thử sẽ báo
+lỗi khi áp dụng, không âm thầm xóa dữ liệu hay ghi đè bản cũ.
+
+Nhân vật chính trên bàn thử dùng đúng hồ sơ đã chọn; ô phái ở bàn thử được
+khóa theo hồ sơ. Thay hồ sơ hoặc tải một save dựng lại bàn thử, không thay
+đổi đồng đội/cờ nhiệm vụ trong chiến dịch. Trong lúc đánh, bảng tu luyện được
+khóa; sau trận có thể sửa rồi khai chiến lại. Trận đang đánh vẫn không được
+lưu giữa chừng. Phần xếp trận/giao diện chiến đấu sẽ hoàn thiện ở Sprint 7.

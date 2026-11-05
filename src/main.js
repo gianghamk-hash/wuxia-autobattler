@@ -1,10 +1,12 @@
 /**
- * main.js — Bản thử Sprint 5: engine, lưu trữ và kỳ phổ giang hồ.
+ * main.js — Bản thử Sprint 6: engine, lưu trữ và kỳ phổ giang hồ.
  * Sẽ được thay bằng bootstrap hoàn chỉnh ở Sprint 10.
  */
 import { CONFIG } from './config.js';
 import { bus, EVT } from './core/EventBus.js';
 import { GameEngine } from './core/GameEngine.js';
+import { createHeroBuild, normalizeHeroBuild } from './entities/HeroBuild.js';
+import { mountSkillTreeUI } from './ui/SkillTreeUI.js';
 import { mountTacticsUI } from './ui/TacticsUI.js';
 import { mountCodexUI } from './ui/CodexUI.js';
 import { mountSaveUI } from './ui/SaveUI.js';
@@ -35,13 +37,13 @@ const demo = { x: 0, dir: 1 };
 function newSession() {
   return {
     schemaVersion: 1, version: CONFIG.VERSION, playtimeSeconds: 0,
-    hero: { name: 'Tiểu Hiệp', sect: null, level: 1, exp: 0, freeAttributePoints: 0,
-      attributes: {}, allocatedSkills: [], equippedGear: {} },
-    party: { active: [], unlocked: [], formation: {} }, inventory: [], companionsAffinity: {},
+    hero: createHeroBuild(),
+    party: { active: [], unlocked: [], formation: {} }, inventory: ['starter_weapon', 'starter_armor', 'starter_accessory'].map(itemId => ({ itemId, quantity: 1 })), companionsAffinity: {},
     storyProgress: { currentAct: 1, activeQuestId: null, questFlags: {}, karmaScore: 0 }
   };
 }
 let session = newSession();
+let progress = null;
 bus.on(EVT.FRAME, ({ frameDt }) => {
   if (!engine.paused && !document.hidden) session.playtimeSeconds += frameDt;
 });
@@ -51,13 +53,16 @@ function getSnapshot() {
     resumeScale: engine.paused ? engine.resumeScale : engine.timeScale } };
 }
 function restoreSnapshot(data) {
-  session = structuredClone(data);
+  const next = structuredClone(data);
+  next.hero = normalizeHeroBuild(next.hero, next.inventory);
+  session = next;
   const saved = session.engineDemo; delete session.engineDemo;
   demo.x = saved?.x ?? 0; demo.dir = saved?.dir ?? 1;
   engine.restoreClock(saved?.simTime ?? 0, saved?.tickCount ?? 0);
   engine.setTimeScale(saved?.resumeScale ?? 1);
   engine.setTimeScale(saved?.timeScale ?? 1);
   logAcc = 0; logEl.replaceChildren();
+  progress?.refresh(); tactics.setHeroProfile(session.hero, session.inventory);
 }
 const SPEED = 1.0; // vòng/giây mô phỏng (cả đi lẫn về = 1 chu kỳ)
 engine.addUpdater((dt) => {
@@ -140,9 +145,20 @@ bus.on(EVT.TICK, ({ dt, simTime, timeScale }) => {
 
 syncButtons();
 mountCodexUI();
+progress = mountSkillTreeUI({
+  getState: () => ({ hero: session.hero, inventory: session.inventory }),
+  canEdit: () => tactics.combat?.state !== 'running',
+  onChange(hero, inventory) {
+    const nextHero = normalizeHeroBuild(hero, inventory);
+    tactics.setHeroProfile(nextHero, inventory);
+    session.hero = nextHero; session.inventory = inventory;
+    bus.emit(EVT.SAVE_REQUESTED);
+  }
+});
+tactics.setHeroProfile(session.hero, session.inventory);
 // Restore the auto-save before starting the clock, so startup cannot overwrite it.
 window.__storage = await mountSaveUI({ getSnapshot, restoreSnapshot, engine,
   resetSession() { restoreSnapshot(newSession()); } });
 engine.start();
 document.getElementById('loading-screen').hidden = true;
-console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 5 sẵn sàng. Thử: __engine.setTimeScale(3)`);
+console.info(`[Võ Lâm Hài Hiệp Truyện] v${CONFIG.VERSION} — Sprint 6 sẵn sàng. Thử: __engine.setTimeScale(3)`);

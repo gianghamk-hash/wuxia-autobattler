@@ -50,6 +50,7 @@ export const bus = new EventBus();
 
 /** Tên sự kiện chuẩn — dùng hằng số thay vì chuỗi tự do để tránh gõ sai. */
 export const EVT = Object.freeze({
+  BATTLE_STATE_CHANGED: 'battle:state',
   SAVE_REQUESTED: 'save:requested', // checkpoint: chiến thắng, hội thoại, đổi trang bị
   ENGINE_START: 'engine:start',
   ENGINE_STOP: 'engine:stop',

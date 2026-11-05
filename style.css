@@ -75,3 +75,16 @@ input:focus-visible, select:focus-visible, .codex-grid:focus-visible { outline: 
 #battle-log { max-height: 240px; overflow: auto; padding-left: 18px; }
 #battle-seed { width: 150px; }
 .battle-controls label { margin: 0; }
+
+.skill-tree, .attribute-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.skill-node { padding: 14px; border: 1px solid #354154; border-radius: 8px; background: #101a2b; overflow-wrap: anywhere; }
+.skill-node[data-learned="true"] { border-color: var(--gold); }
+.skill-node h3 { margin: 8px 0; }
+.skill-node p { font-size: .85rem; }
+.attribute-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px; border: 1px solid #354154; border-radius: 8px; }
+#progress-summary, #progress-ultimate { color: var(--gold); }
+#progress-message { min-height: 1.6em; color: #6fb59b; }
+#progress-message[data-error="true"] { color: #ffad9f; }
+#gear-slots label { flex: 1 1 220px; }
+#gear-slots select { min-width: 0; max-width: 100%; }
+@media (max-width: 600px) { .skill-tree, .attribute-grid { grid-template-columns: 1fr; } }

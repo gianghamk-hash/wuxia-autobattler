@@ -1,3 +1,4 @@
+import { normalizeHeroBuild } from '../entities/HeroBuild.js';
 /** Six independent slots. IndexedDB first; persistent LocalStorage fallback.
  * SHA-256 detects corruption, not deliberate editing (there is no secret key).
  */
@@ -52,6 +53,7 @@ export function validateSnapshot(data) {
       !Object.values(data.companionsAffinity).every(n => finite(n) && n <= 100) ||
       !Number.isFinite(data.storyProgress.karmaScore) ||
       !(data.storyProgress.activeQuestId === null || typeof data.storyProgress.activeQuestId === 'string')) fail('Vật phẩm hoặc nhiệm vụ không hợp lệ.');
+  if (data.hero.buildVersion !== undefined) normalizeHeroBuild(data.hero, data.inventory);
   // Sprint 2 demo snapshot; optional so future gameplay snapshots can omit it.
   if (data.engineDemo !== undefined) {
     const d = data.engineDemo;
