@@ -30,30 +30,65 @@ async function rename(page, name) {
   await page.locator('#save-name').fill(name);
   await page.locator('#save-name').press('Tab');
 }
+async function readDialogue(page) {
+  for (let i = 0; i < 100 && await page.locator('#dialogue-next').isEnabled(); i++)
+    await page.locator('#dialogue-next').click();
+  await expect(page.locator('#dialogue-next')).toBeDisabled();
+}
 for (const width of [320, 390, 1280]) {
-  test(`opening webtoon reads at ${width}px, switches to text without changing progress and enters battle`, async ({ page }, testInfo) => {
+  test(`classic dialogue at ${width}px shows portraits and pages without changing progress before battle`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 844 });
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
     await start(page);
     await page.locator('#btn-main-quest').click();
-    await expect(page.locator('.webtoon-panel')).toHaveCount(3);
-    await expect.poll(() => page.locator('.webtoon-art img').evaluateAll(images => images.every(i => i.complete && i.naturalWidth > 0))).toBe(true);
+    await expect(page.locator('.classic-line')).toHaveCount(1);
+    await expect(page.locator('#dialogue-previous')).toBeDisabled();
+    await expect(page.locator('.dialogue-choices')).toBeHidden();
     const before = await page.evaluate(() => JSON.stringify(window.__game.model.session.storyProgress));
-    await page.getByRole('button', { name: 'Đọc dạng chữ', exact: true }).click();
-    await expect(page.locator('.webtoon-panel')).toHaveCount(0);
-    await expect(page.locator('.dialogue-line')).not.toHaveCount(0);
-    await page.getByRole('button', { name: 'Xem truyện tranh', exact: true }).click();
+    const first = await page.locator('#dialogue-text').textContent();
+    await page.locator('#dialogue-advance').focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#dialogue-previous')).toBeEnabled();
+    await page.keyboard.press('ArrowLeft');
+    await expect(page.locator('#dialogue-text')).toHaveText(first);
+    for (let i = 0; i < 10 && await page.locator('#dialogue-speaker').textContent() !== 'Quán chủ'; i++)
+      await page.locator('#dialogue-next').click();
+    await expect(page.locator('#dialogue-speaker')).toHaveText('Quán chủ');
+    await expect(page.locator('.portrait-innkeeper')).toHaveCount(1);
     expect(await page.evaluate(() => JSON.stringify(window.__game.model.session.storyProgress))).toBe(before);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    await page.locator('.webtoon-panel-2').scrollIntoViewIfNeeded();
-    await expect(page.locator('.webtoon-bubble')).toContainText('Quán chủ');
-    await page.locator('#dialogue-root').screenshot({ path: testInfo.outputPath(`webtoon-${width}.png`), animations: 'disabled', style: '.app-header, .main-nav, #app-message { visibility: hidden !important; }' });
+    await page.locator('#dialogue-root').screenshot({ path: testInfo.outputPath(`dialogue-${width}.png`), animations: 'disabled', style: '.app-header, .main-nav, #app-message { visibility: hidden !important; }' });
+    await readDialogue(page);
     await page.locator('[data-choice]').first().click();
     await expect(page.locator('#view-battle')).toBeVisible();
     expect(errors).toEqual([]);
   });
 }
+test('dialogue uses the player and companion portraits, preserves disabled choices and handles unknown speakers', async ({ page }) => {
+  await start(page);
+  const before = await page.evaluate(() => JSON.stringify(window.__game.model.session.storyProgress));
+  await page.evaluate(async () => {
+    const { DialogueUI } = await import('/src/ui/DialogueUI.js');
+    window.__dialogueChoices = [];
+    new DialogueUI(document.getElementById('dialogue-root')).show({
+      title: 'Chân dung người nói', hero: window.__game.model.session.hero,
+      lines: [['Bạn', 'Lên đường thôi.'], ['Lão Tam', 'Để ta dẫn đường.'], ['Người đưa thư', 'Có thư từ bến nước.']],
+      choices: [{ id: 'locked', text: 'Chưa đủ điều kiện', disabled: true }, { id: 'continue', text: 'Tiếp tục' }],
+      onChoice: id => window.__dialogueChoices.push(id)
+    });
+    window.__game.setView('dialogue');
+  });
+  await expect(page.locator('.classic-portrait[data-sect="VoDang"]')).toHaveCount(1);
+  await page.locator('#dialogue-next').click();
+  await expect(page.locator('.classic-portrait[data-companion-id="companion_01"]')).toHaveCount(1);
+  await page.locator('#dialogue-next').click();
+  await expect(page.locator('.portrait-symbol')).toHaveCount(1);
+  await expect(page.locator('[data-choice="locked"]')).toBeDisabled();
+  await page.locator('[data-choice="continue"]').click();
+  expect(await page.evaluate(() => window.__dialogueChoices)).toEqual(['continue']);
+  expect(await page.evaluate(() => JSON.stringify(window.__game.model.session.storyProgress))).toBe(before);
+});
 for (const backend of ['indexedDB', 'localStorage']) {
   test(`${backend}: two real tabs protect newer saves, export the unsaved branch and recover`, async ({ context, page }) => {
     if (backend === 'localStorage') await context.addInitScript(() => Object.defineProperty(window, 'indexedDB', { value: undefined }));
@@ -117,6 +152,7 @@ test('quota failure stays visible, preserves old save, permits export and retrie
 test('real opening battle checkpoint resumes after reload; archive reading awards nothing', async ({ page }) => {
   await start(page);
   await page.locator('#btn-main-quest').click();
+  await readDialogue(page);
   await page.locator('[data-choice]').first().click();
   await expect(page.locator('#view-battle')).toBeVisible();
   const seed = await page.evaluate(() => window.__game.model.session.storyProgress.pendingEncounter.seed);
@@ -140,7 +176,8 @@ test('real opening battle checkpoint resumes after reload; archive reading award
   await page.getByRole('button', { name: 'Truyện ký', exact: true }).click();
   const before = await page.evaluate(() => JSON.stringify({ inventory: window.__game.model.session.inventory, story: window.__game.model.session.storyProgress }));
   await page.locator('[data-episode="Q101"]').click();
-  await expect(page.locator('.webtoon-panel')).toHaveCount(3);
+  await expect(page.locator('.classic-line')).toHaveCount(1);
+  await readDialogue(page);
   await expect(page.locator('[data-choice]')).toHaveCount(0);
   expect(await page.evaluate(() => JSON.stringify({ inventory: window.__game.model.session.inventory, story: window.__game.model.session.storyProgress }))).toBe(before);
 });

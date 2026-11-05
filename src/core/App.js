@@ -890,6 +890,7 @@ export class App {
     this.dialogue.show({
       title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
       quest,
+      hero: this.model.session.hero,
       lines: [
         ['Trước đó', quest.previous],
         ...storyLines(quest, this.model.session, MAIN_QUESTS, COMPANIONS_BY_ID)
@@ -940,6 +941,7 @@ export class App {
           ].filter((c) => !previous || previous === c.id);
     this.dialogue.show({
       title: quest.title,
+      hero: this.model.session.hero,
       lines: [
         ...quest.lines,
         ...(ready

@@ -1,33 +1,84 @@
-import { hasWebtoon, renderWebtoon } from './Webtoon.js';
-/** Pure DOM dialogue surface; actions are validated by the campaign controller. */
+import { COMPANIONS } from '../data/CompanionsData.js';
+import { portrait, icon } from './Visuals.js';
+const node = (tag, text, className) => {
+  const e = document.createElement(tag);
+  if (text !== undefined) e.textContent = text;
+  if (className) e.className = className;
+  return e;
+};
+function speakerPortrait(speaker, hero) {
+  const name = speaker.trim().normalize('NFC');
+  if (name === 'Bạn' || name === hero?.name) return portrait(hero?.sect ?? 'VoDang', 'classic-portrait');
+  const companion = COMPANIONS.find(c => c.name === name || (name.length >= 3 && c.name.startsWith(name + ' ')));
+  if (companion) return portrait(companion, 'classic-portrait');
+  const result = node('span', undefined, 'classic-portrait');
+  result.setAttribute('aria-hidden', 'true');
+  if (name === 'Quán chủ') result.classList.add('portrait-innkeeper');
+  else {
+    result.classList.add('portrait-symbol');
+    result.append(icon(['Người kể', 'Trước đó'].includes(name) ? 'codex' : 'roster'));
+  }
+  return result;
+}
+/** Classic portrait-and-text dialogue. Reading never calls a campaign action. */
 export class DialogueUI {
   constructor(root) { this.root = root; }
-  show({ title, lines = [], choices = [], onChoice, onBack, note = '', quest, textOnly = false }) {
+  show({ title, lines = [], choices = [], onChoice, onBack, note = '', quest, hero }) {
+    const pages = lines.length ? lines : [['Người kể', note || 'Chưa có lời thoại.']];
+    let index = 0;
     this.root.replaceChildren();
-    const illustrated = hasWebtoon(quest) && !textOnly;
-    this.root.classList.toggle('is-webtoon', illustrated);
-    this.root.parentElement.classList.toggle('has-webtoon', illustrated);
-    const heading = document.createElement('h2'); heading.textContent = title; this.root.append(heading);
-    if (hasWebtoon(quest)) {
-      const toggle = document.createElement('button'); toggle.type = 'button'; toggle.className = 'webtoon-mode';
-      toggle.textContent = illustrated ? 'Đọc dạng chữ' : 'Xem truyện tranh';
-      toggle.setAttribute('aria-pressed', String(illustrated));
-      toggle.addEventListener('click', () => this.show({ title, lines, choices, onChoice, onBack, note, quest, textOnly: !textOnly }));
-      this.root.append(toggle);
-    }
-    if (illustrated) renderWebtoon(this.root, { quest, lines });
-    else for (const [speaker, text] of lines) {
-      const row = document.createElement('article'); row.className = 'dialogue-line';
-      const name = document.createElement('strong'); name.textContent = speaker;
-      const body = document.createElement('p'); body.textContent = text; row.append(name, body); this.root.append(row);
-    }
-    if (note && (!illustrated || !lines.some(([, text]) => text === note))) { const text = document.createElement('p'); text.className = 'hint'; text.textContent = note; this.root.append(text); }
-    const buttons = document.createElement('div'); buttons.className = 'dialogue-choices';
+    this.root.className = 'panel classic-dialogue';
+    this.root.parentElement.classList.add('has-classic-dialogue');
+    this.root.append(node('h2', title, 'classic-title'));
+    const scene = node('div', undefined, 'classic-scene');
+    scene.setAttribute('aria-hidden', 'true');
+    scene.append(node('span', quest?.location ?? 'Giang hồ ký sự', 'classic-location'));
+    this.root.append(scene);
+    const frame = node('button', undefined, 'classic-line');
+    frame.type = 'button'; frame.id = 'dialogue-advance';
+    const copy = node('span', undefined, 'classic-copy');
+    const name = node('strong', undefined, 'classic-speaker'); name.id = 'dialogue-speaker';
+    const text = node('span', undefined, 'classic-text'); text.id = 'dialogue-text';
+    copy.setAttribute('aria-live', 'polite'); copy.setAttribute('aria-atomic', 'true');
+    copy.append(name, text);
+    const indicator = node('span', '▸', 'classic-indicator'); indicator.setAttribute('aria-hidden', 'true');
+    const controls = node('div', undefined, 'classic-controls');
+    const previous = node('button', '◂ Trước'); previous.type = 'button'; previous.id = 'dialogue-previous';
+    const count = node('span', undefined, 'classic-step');
+    const next = node('button', 'Tiếp ▸'); next.type = 'button'; next.id = 'dialogue-next';
+    controls.append(previous, count, next);
+    const noteNode = node('p', note, 'hint classic-note');
+    const buttons = node('div', undefined, 'dialogue-choices');
     for (const choice of choices) {
-      const button = document.createElement('button'); button.type = 'button'; button.textContent = choice.text; button.disabled = choice.disabled === true; button.dataset.choice = String(choice.id);
-      button.addEventListener('click', () => onChoice(choice.id)); buttons.append(button);
+      const b = node('button', choice.text); b.type = 'button'; b.dataset.choice = String(choice.id); b.disabled = choice.disabled === true;
+      b.addEventListener('click', () => onChoice(choice.id)); buttons.append(b);
     }
-    if (onBack) { const back = document.createElement('button'); back.type = 'button'; back.textContent = 'Về doanh trại'; back.addEventListener('click', onBack); buttons.append(back); }
-    this.root.append(buttons);
+    this.root.append(frame, controls, noteNode, buttons);
+    if (onBack) {
+      const back = node('button', 'Về doanh trại', 'classic-back'); back.type = 'button';
+      back.addEventListener('click', onBack); this.root.append(back);
+    }
+    const draw = () => {
+      const [speaker, line] = pages[index], last = index === pages.length - 1;
+      frame.replaceChildren(speakerPortrait(speaker, hero), copy, indicator);
+      name.textContent = speaker; text.textContent = line;
+      frame.setAttribute('aria-label', last ? `${speaker}: ${line}` : `${speaker}: ${line}. Bấm để đọc tiếp.`);
+      indicator.hidden = last;
+      count.textContent = `${index + 1} / ${pages.length}`;
+      previous.disabled = index === 0; next.disabled = last;
+      buttons.hidden = !last || !choices.length;
+      noteNode.hidden = !last || !note || pages.some(([, t]) => t === note);
+    };
+    const move = delta => { index = Math.max(0, Math.min(pages.length - 1, index + delta)); draw(); };
+    frame.addEventListener('click', () => move(1));
+    frame.addEventListener('keydown', event => {
+      if (['Enter', ' '].includes(event.key)) event.stopPropagation();
+      if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault(); event.stopPropagation(); move(event.key === 'ArrowLeft' ? -1 : 1);
+      }
+    });
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    draw();
   }
 }

@@ -1,5 +1,7 @@
 # Dẫn truyện bằng webtoon — cảnh thử mở đầu
 
+**Lưu trữ lịch sử:** giao diện này đã được thay bằng [hộp thoại chân dung cổ điển](DIALOGUE.md) theo yêu cầu cập nhật. Giữ tài liệu này để ghi nguồn/prompt của ảnh đang dùng cho chân dung Quán chủ.
+
 Phạm vi: **Q101, cảnh mở đầu chương 1**, gồm ba khung minh họa theo chiều dọc. Các hồi khác tiếp tục dùng hội thoại hiện có; chưa có bộ tranh cho toàn bộ 240 hồi.
 
 Ba nhịp: quán Rồng Lửa trước biến cố → cuốn sổ bên bát cơm → đội thu tô ập vào. Khoảng nghỉ giữa khung tạo nhịp cuộn. Lời dẫn và bong bóng thoại dùng chữ HTML, hỗ trợ phóng to và trình đọc màn hình; ảnh có mô tả. Không phát chữ tự động, không ép hoạt ảnh hoặc tự cuộn. Nút **Đọc dạng chữ / Xem truyện tranh** chỉ đổi cách trình bày. Toàn bộ lời dẫn, callback và lựa chọn vẫn lấy từ dữ liệu truyện. Lựa chọn vẫn đi qua Campaign; xem lại trong Truyện ký không nhận thưởng.

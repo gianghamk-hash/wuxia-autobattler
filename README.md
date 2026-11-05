@@ -4,12 +4,12 @@ Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modu
 
 **Bản 3.0 — 240 hồi và 50 đồng hành:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
 
-## Đợt ổn định lưu và thử webtoon
+## Đợt ổn định lưu và hội thoại chân dung
 
 - **Lưu nhiều tab:** kiểm tra revision trong transaction IndexedDB hoặc Web Locks cho LocalStorage; tab cũ không tự ghi đè tab đã lưu mới hơn. Lỗi ghi/xung đột có thông báo chung, cho xuất nhánh đang chơi, thử lại hoặc tải bản mới nhất. Sáu ô và bản lưu cũ được giữ. Xem [cơ chế và giới hạn](docs/SAVE_SAFETY.md).
 - **Đo 6v6:** 2.400 trận, tám nhóm, mỗi bên một main + năm đồng hành; đổi bên từng cặp, kiểm tra nhiều cấp, trang bị, chuẩn bị và mốc phái 2/4/6. Chưa chỉnh chỉ số combat. [Kết quả và giới hạn](reports/BALANCE_6V6.md), [dữ liệu cùng seed/đội hình](reports/balance-6v6.json).
-- **Cảnh thử webtoon:** cảnh Q101 đầu chương 1 có ba khung tranh cuộn dọc, lời dẫn và bong bóng thoại, nút chuyển về dạng chữ. Truyện ký xem lại cùng giao diện và không nhận thưởng. **Chưa minh họa toàn bộ 240 hồi.** [Phạm vi, asset và prompt](docs/WEBTOON.md).
-- **Kiểm tra:** `npm test` chạy 105 bài Node; `npm run test:browser` chạy bảy luồng Chromium, gồm hai tab thật cho mỗi kho lưu, lỗi quota, checkpoint trận và webtoon tại 320/390/1280px. CI chạy cả hai bộ. Sau `npm ci`, dùng `npx playwright install chromium` trước khi chạy trình duyệt trên máy mới.
+- **Hội thoại kiểu RPG cổ điển:** chân dung nhỏ bên trái, tên và lời thoại bên phải; chạm hoặc Enter để đọc từng câu, nút Trước/Tiếp để xem lại. Lựa chọn hiện sau câu cuối. Áp dụng cho chính truyện, chiêu mộ và Truyện ký; xem lại không nhận thưởng. [Giao diện và nguồn hình](docs/DIALOGUE.md).
+- **Kiểm tra:** `npm test` chạy 105 bài Node; `npm run test:browser` chạy tám luồng Chromium, gồm hai tab thật cho mỗi kho lưu, lỗi quota, checkpoint trận, đúng chân dung người nói và hộp thoại tại 320/390/1280px. CI chạy cả hai bộ. Sau `npm ci`, dùng `npx playwright install chromium` trước khi chạy trình duyệt trên máy mới.
 
 Chạy `npm run balance:6v6 -- 150 reports/balance-6v6.json` rồi `node scripts/summarize-6v6.mjs` để tái lập báo cáo mới. Các phần Sprint và nhật ký phiên bản bên dưới mô tả lịch sử; số lượng hiện tại nằm ở đầu README.
 

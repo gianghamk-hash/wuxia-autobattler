@@ -54,6 +54,7 @@ export function renderStoryArchive(app, root, chapter) {
         app.dialogue.show({
           title: `Xem lại · Chương ${q.chapter} hồi ${q.episode} · ${q.title}`,
           quest: q,
+          hero: s.hero,
           lines: storyLines(q, s, MAIN_QUESTS, COMPANIONS_BY_ID),
           note: s.storyProgress.decisions[q.id]
             ? `Đã chọn: ${q.choices.find((c) => c.id === s.storyProgress.decisions[q.id])?.text ?? 'Kết cục đã lưu'}`
