@@ -10,11 +10,11 @@
   --ink: #0a2025;
   --panel: #102e32;
   --line: rgba(214, 193, 143, 0.24);
-  --scene: url('./assets/images/jianghu-village.webp');
+  --scene: url("./assets/images/jianghu-village.webp");
   font-family:
     system-ui,
     -apple-system,
-    'Segoe UI',
+    "Segoe UI",
     sans-serif;
   color: var(--text);
   background: #081b20;
@@ -38,7 +38,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   z-index: -1;
   inset: 0;
@@ -84,7 +84,7 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 summary:focus-visible,
-[tabindex='0']:focus-visible {
+[tabindex="0"]:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 4px;
 }
@@ -102,7 +102,7 @@ p {
 }
 h1,
 h2 {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: Georgia, "Times New Roman", serif;
   color: var(--paper);
   font-weight: 600;
 }
@@ -132,12 +132,12 @@ select {
   min-width: 0;
   max-width: 100%;
 }
-input[type='range'] {
+input[type="range"] {
   accent-color: var(--jade);
   padding-inline: 0;
   width: 100%;
 }
-input[type='text'] {
+input[type="text"] {
   width: 100%;
 }
 label {
@@ -387,11 +387,11 @@ input::placeholder {
   border-radius: 50%;
   background: #16383b;
 }
-.icon-button[aria-pressed='false'] {
+.icon-button[aria-pressed="false"] {
   color: #78948d;
 }
-.icon-button[aria-pressed='false']::after {
-  content: '';
+.icon-button[aria-pressed="false"]::after {
+  content: "";
   position: absolute;
   width: 22px;
   height: 1px;
@@ -438,12 +438,12 @@ input::placeholder {
   width: 23px;
   height: 23px;
 }
-.main-nav button[aria-current='page'] {
+.main-nav button[aria-current="page"] {
   color: var(--gold);
   background: radial-gradient(ellipse at top, #ceaf5d2b, transparent 80%);
 }
-.main-nav button[aria-current='page']::before {
-  content: '';
+.main-nav button[aria-current="page"]::before {
+  content: "";
   position: absolute;
   width: 18px;
   height: 2px;
@@ -497,10 +497,10 @@ input::placeholder {
   opacity: 0;
   transition: opacity 0.2s;
 }
-#app-message[data-visible='true'] {
+#app-message[data-visible="true"] {
   opacity: 1;
 }
-#app-message[data-error='true'] {
+#app-message[data-error="true"] {
   background: #472b2df5;
   border-color: #de9e7a77;
   color: #ffe0cc;
@@ -514,21 +514,21 @@ input::placeholder {
 .portrait {
   display: block;
   flex-shrink: 0;
-  background-image: url('./assets/images/sect-portraits.webp');
+  background-image: url("./assets/images/sect-portraits.webp");
   background-size: 500% auto;
   background-position: var(--portrait-x, 25%) 5%;
   background-color: #133e40;
   overflow: hidden;
 }
 .portrait::after {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 100%;
   background: linear-gradient(transparent 60%, #06242d77);
 }
 /* Entry screen. */
-body[data-scene='title'] {
+body[data-scene="title"] {
   background: #102e32;
 }
 .title-view {
@@ -542,7 +542,7 @@ body[data-scene='title'] {
   padding: 60px 30px;
 }
 .title-view::before {
-  content: '';
+  content: "";
   z-index: -1;
   position: absolute;
   inset: 0 -24px -50px;
@@ -655,16 +655,16 @@ body[data-scene='title'] {
   color: #b4c5bb;
   white-space: nowrap;
 }
-.sect-option[aria-pressed='true'] {
+.sect-option[aria-pressed="true"] {
   border-color: var(--gold);
   box-shadow: 0 0 14px #dbb56b33;
   transform: translateY(-4px);
 }
-.sect-option[aria-pressed='true'] .sect-name {
+.sect-option[aria-pressed="true"] .sect-name {
   color: var(--gold);
 }
-.sect-option[aria-pressed='true']::after {
-  content: '✓';
+.sect-option[aria-pressed="true"]::after {
+  content: "✓";
   position: absolute;
   right: 3px;
   top: 3px;
@@ -731,7 +731,7 @@ body[data-scene='title'] {
   box-shadow: 0 20px 60px #0004;
 }
 .camp-scene::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -1021,7 +1021,7 @@ body[data-scene='title'] {
   height: 34px;
   border-radius: 5px;
 }
-.formation-units button[aria-pressed='true'] {
+.formation-units button[aria-pressed="true"] {
   background: #6f8f6229;
   border-color: var(--gold);
   color: var(--gold);
@@ -1067,20 +1067,20 @@ body[data-scene='title'] {
   border-radius: 7px;
   box-shadow: 0 3px 12px #0005;
 }
-.formation-cell[data-occupied='true'] {
+.formation-cell[data-occupied="true"] {
   border-style: solid;
   border-color: #b49b6077;
   background: linear-gradient(#688d622f, #24494088);
   color: var(--paper);
 }
-.formation-cell[data-selected='true'] {
+.formation-cell[data-selected="true"] {
   border-color: var(--gold);
   box-shadow:
     inset 0 0 20px #dfc98c20,
     0 0 10px #dfc98c18;
 }
 .formation-cell:empty::after {
-  content: '+';
+  content: "+";
   font-size: 1.6rem;
   opacity: 0.4;
 }
@@ -1189,13 +1189,13 @@ body[data-scene='title'] {
   width: 12px;
   height: 12px;
 }
-.roster-card[data-owned='true'] {
+.roster-card[data-owned="true"] {
   border-color: #caaf75aa;
 }
-.roster-card[data-locked='true'] .card-portrait {
+.roster-card[data-locked="true"] .card-portrait {
   filter: saturate(0.5) brightness(0.72);
 }
-.roster-card[data-locked='true'] button {
+.roster-card[data-locked="true"] button {
   opacity: 0.6;
 }
 .filter-chips {
@@ -1212,7 +1212,7 @@ body[data-scene='title'] {
   padding: 7px 17px;
   background: #11343a;
 }
-.filter-chips button[aria-pressed='true'] {
+.filter-chips button[aria-pressed="true"] {
   color: #ffe4a8;
   border-color: #c6a262aa;
   background: #85703933;
@@ -1331,7 +1331,7 @@ body[data-scene='title'] {
   color: #8eaea4;
   min-height: 44px;
 }
-.profile-tabs button[aria-selected='true'] {
+.profile-tabs button[aria-selected="true"] {
   background: linear-gradient(#315346, #27483f);
   color: var(--gold);
   box-shadow: inset 0 1px #daca7922;
@@ -1357,7 +1357,7 @@ body[data-scene='title'] {
   overflow-wrap: anywhere;
 }
 .skill-node::before {
-  content: '✦';
+  content: "✦";
   display: grid;
   place-items: center;
   position: absolute;
@@ -1396,11 +1396,11 @@ body[data-scene='title'] {
   width: 100%;
   padding: 8px;
 }
-.skill-node[data-learned='true'] {
+.skill-node[data-learned="true"] {
   border-color: #d9b37499;
   background: linear-gradient(130deg, #6c674122, #16342e);
 }
-.skill-node[data-learned='true']::before {
+.skill-node[data-learned="true"]::before {
   color: var(--gold);
   box-shadow: 0 0 12px #d7b75a22;
 }
@@ -1438,8 +1438,8 @@ body[data-scene='title'] {
   color: var(--jade);
   font-size: 0.76rem;
 }
-#progress-message[data-error='true'],
-#save-message[data-error='true'] {
+#progress-message[data-error="true"],
+#save-message[data-error="true"] {
   color: #f8b8a2;
 }
 #progress-stats,
@@ -1696,7 +1696,7 @@ body[data-scene='title'] {
   border-color: #c1a46866;
 }
 .dialogue-choices button::after {
-  content: '›';
+  content: "›";
   position: absolute;
   right: 16px;
   top: 50%;
@@ -1765,7 +1765,7 @@ body[data-scene='title'] {
   padding: 8px 12px;
   background: #102e32;
 }
-.speeds button[aria-pressed='true'] {
+.speeds button[aria-pressed="true"] {
   color: #35290e;
   background: linear-gradient(#e5c885, #cda660);
   border-color: #f7d9a0;
@@ -1836,7 +1836,7 @@ body[data-scene='title'] {
   background: transparent;
   border-color: #7c956d44;
 }
-.battle-unit-card[data-team='enemy'] {
+.battle-unit-card[data-team="enemy"] {
   border-color: #c1836766;
   background: #362d2b55;
 }
@@ -2086,7 +2086,7 @@ summary {
     width: 21px;
     height: 21px;
   }
-  .main-nav button[aria-current='page']::before {
+  .main-nav button[aria-current="page"]::before {
     top: -8px;
   }
   .app-footer {
@@ -2828,7 +2828,7 @@ summary {
   .app-footer {
     padding-bottom: 110px;
   }
-  body[data-scene='battle'] .app-footer {
+  body[data-scene="battle"] .app-footer {
     padding-bottom: 35px;
   }
 }
@@ -2890,7 +2890,7 @@ button {
   touch-action: manipulation;
 }
 select,
-input:not([type='checkbox']):not([type='range']) {
+input:not([type="checkbox"]):not([type="range"]) {
   min-height: 44px;
 }
 .main-nav {
@@ -3079,11 +3079,11 @@ input:not([type='checkbox']):not([type='range']) {
   color: var(--muted);
   font-size: 0.8rem;
 }
-.dungeon-path [data-status='done'] {
+.dungeon-path [data-status="done"] {
   background: #50836b;
   color: #fff;
 }
-.dungeon-path [data-status='current'] {
+.dungeon-path [data-status="current"] {
   background: var(--gold);
   color: #19302b;
 }
@@ -3123,7 +3123,7 @@ input:not([type='checkbox']):not([type='range']) {
   margin: 20px 0;
   font-size: 0.82rem;
 }
-.settings-toggles input[type='checkbox'] {
+.settings-toggles input[type="checkbox"] {
   width: 22px;
   height: 22px;
   margin: 0;
@@ -3369,55 +3369,55 @@ body {
 .codex-card[data-tier] {
   border: 3px solid var(--rarity);
 }
-[data-tier='1'] {
+[data-tier="1"] {
   --rarity: #84715d;
 }
-.roster-card[data-tier='1'],
-.gacha-result[data-tier='1'] {
+.roster-card[data-tier="1"],
+.gacha-result[data-tier="1"] {
   background: #172223;
   border-style: ridge;
   box-shadow: none;
   border-radius: 5px;
 }
-[data-tier='2'] {
+[data-tier="2"] {
   --rarity: #7ca46a;
 }
-.roster-card[data-tier='2'],
-.gacha-result[data-tier='2'] {
+.roster-card[data-tier="2"],
+.gacha-result[data-tier="2"] {
   border-color: #9b7848;
   box-shadow: inset 0 0 0 1px #d4b47b;
   border-radius: 8px;
 }
-[data-tier='3'] {
+[data-tier="3"] {
   --rarity: #76b8ee;
 }
-.roster-card[data-tier='3'],
-.gacha-result[data-tier='3'],
-.codex-card[data-tier='3'] {
+.roster-card[data-tier="3"],
+.gacha-result[data-tier="3"],
+.codex-card[data-tier="3"] {
   border-color: #acbfd1;
   box-shadow: inset 0 0 0 1px #486c88;
   transition: box-shadow 0.2s;
 }
-[data-tier='3']:hover {
+[data-tier="3"]:hover {
   box-shadow: 0 0 15px #7bc1ff55;
 }
-[data-tier='4'] {
+[data-tier="4"] {
   --rarity: #c294ed;
 }
-.roster-card[data-tier='4'],
-.gacha-result[data-tier='4'],
-.codex-card[data-tier='4'] {
+.roster-card[data-tier="4"],
+.gacha-result[data-tier="4"],
+.codex-card[data-tier="4"] {
   border-color: #bd934d;
   box-shadow:
     inset 0 0 0 2px #ad77c9,
     0 0 12px #ad77c922;
 }
-[data-tier='5'] {
+[data-tier="5"] {
   --rarity: #ffd17a;
 }
-.roster-card[data-tier='5'],
-.gacha-result[data-tier='5'],
-.codex-card[data-tier='5'] {
+.roster-card[data-tier="5"],
+.gacha-result[data-tier="5"],
+.codex-card[data-tier="5"] {
   border: 3px ridge #edb858;
   box-shadow:
     0 0 18px #eab04944,
@@ -3437,8 +3437,8 @@ body {
   background-size: 20px 20px;
   background-repeat: no-repeat;
 }
-[data-tier='4'] > .rarity-ornament:after {
-  content: '';
+[data-tier="4"] > .rarity-ornament:after {
+  content: "";
   position: absolute;
   inset: 0;
   border: 2px solid transparent;
@@ -3454,13 +3454,13 @@ body {
   opacity: 0.5;
   animation: jade-shimmer 3.4s ease-in-out infinite;
 }
-[data-tier='5'] > .rarity-ornament {
-  background: url('./assets/images/long-phuong-frame.svg') top center/100% auto
+[data-tier="5"] > .rarity-ornament {
+  background: url("./assets/images/long-phuong-frame.svg") top center/100% auto
     no-repeat;
   filter: drop-shadow(0 1px 2px #261102);
 }
-[data-tier='5'] > .rarity-ornament:after {
-  content: '';
+[data-tier="5"] > .rarity-ornament:after {
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -3658,21 +3658,21 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .rarity-petals i,
-  [data-tier='4'] > .rarity-ornament:after,
-  [data-tier='5'] > .rarity-ornament:after {
+  [data-tier="4"] > .rarity-ornament:after,
+  [data-tier="5"] > .rarity-ornament:after {
     animation: none;
   }
   .rarity-petals {
     display: none;
   }
 }
-body[data-card-effects='false'] .rarity-petals {
+body[data-card-effects="false"] .rarity-petals {
   display: none;
 }
-body[data-card-effects='false'] .rarity-ornament:after {
+body[data-card-effects="false"] .rarity-ornament:after {
   animation: none;
 }
-[data-tier='4'] > .rarity-ornament:after {
+[data-tier="4"] > .rarity-ornament:after {
   border: 0;
   border-image: none;
   padding: 2px;
@@ -3701,7 +3701,7 @@ body[data-card-effects='false'] .rarity-ornament:after {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-tier='4'] > .rarity-ornament:after {
+  [data-tier="4"] > .rarity-ornament:after {
     animation: none;
   }
 }
@@ -3709,4 +3709,10 @@ body[data-card-effects='false'] .rarity-ornament:after {
   position: static;
   display: block;
   margin-top: 9px;
+}
+/* Rarity color remains legible beside the material frame and sect label. */
+.roster-card[data-tier] .card-meta > span:last-child,
+.gacha-result[data-tier]
+  > span:not(.portrait):not(.rarity-ornament):not(.rarity-petals) {
+  color: color-mix(in srgb, var(--rarity) 75%, white 25%);
 }
