@@ -243,7 +243,7 @@ export class App {
     if (event.type === 'death') text = `${name(event.targetId)} bị hạ`;
     if (event.type === 'synergy') text = `${event.team === 'home' ? 'Đội nhà' : 'Đội địch'} kích duyên ${event.name}`;
     if (text) { const row = node('li', `${event.time.toFixed(1)}s · ${text}`), log = el('battle-log'); log.prepend(row); while (log.children.length > 100) log.lastChild.remove(); }
-    if (performance.now() - this.lastSfx > 100 && ['damage', 'heal', 'ultimate', 'death'].includes(event.type)) {
+    if (event.type === 'death' || (performance.now() - this.lastSfx > 100 && ['damage', 'heal', 'ultimate'].includes(event.type))) {
       this.sound.sfx(event.type === 'damage' ? (event.damageType === 'magical' ? 'magic' : 'hit') : event.type); this.lastSfx = performance.now();
     }
   }
