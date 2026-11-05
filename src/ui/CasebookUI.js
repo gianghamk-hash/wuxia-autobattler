@@ -14,6 +14,7 @@ const button = (text, fn) => {
 };
 export function renderCasebook(app, root) {
   const book = casebook(app.model.session);
+  const preference=app.casebookView??={tab:'evidence',query:''};
   root.append(
     n('h2', 'Sổ đầu mối vụ án'),
     n(
@@ -47,7 +48,7 @@ export function renderCasebook(app, root) {
   search.type = 'search';
   search.placeholder = 'Tìm người hoặc đầu mối đã biết';
   search.setAttribute('aria-label', 'Tìm trong sổ đầu mối');
-  let tab = 'evidence';
+  let tab = preference.tab;search.value=preference.query;
   const norm = (s) =>
     s
       .toLowerCase()
@@ -182,12 +183,13 @@ export function renderCasebook(app, root) {
   ]) {
     const b = button(label, () => {
       tab = id;
+      preference.tab=id;
       draw();
     });
     b.dataset.tab = id;
     tabs.append(b);
   }
-  search.addEventListener('input', draw);
+  search.addEventListener('input', ()=>{preference.query=search.value;draw();});
   root.append(tabs, search, content);
   draw();
 }

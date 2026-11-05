@@ -42,6 +42,12 @@ export function expressionFor(id, quest = {}) {
     emotion = [2, 3, 12].includes(c) ? 'ashamed' : 'serious';
   if (id === 'companion_03')
     emotion = c >= 5 || (c === 4 && e >= 7) ? 'relieved' : 'worried';
+  if(id==='vu_binh')emotion=c<=3&&e<12?'worried':'resolved';
+  if(id==='tho_bay')emotion=c===7&&e<15?'ashamed':'resolved';
+  if(id==='kha_van')emotion=c===5&&e<14?'worried':'resolved';
+  if(id==='cam_tu')emotion=c<10||(c===10&&e<15)?'worried':'resolved';
+  if(id==='quan_chu')emotion=c===1?'serious':c===12?'relieved':undefined;
+  if(id==='doc_le')emotion=c<=4?'angry':'defeated';
   return emotion ? asset('expressions/' + id + '-' + emotion + '.webp') : null;
 }
 export const FIGHTERS = Object.freeze([
@@ -52,11 +58,12 @@ export const FIGHTERS = Object.freeze([
   'DuongMon',
   'companion_01',
   'companion_03',
-  'trinh_nghiem'
+  'trinh_nghiem',
+  'tay_sai','kha_van','do_mau','doc_le','quan_chu','companion_02','companion_04','companion_08','nguoi_phu'
 ]);
 export function fighterKey(unit) {
   const id =
-    unit.characterId ??
+    (unit.characterId==='mission_captive'?'nguoi_phu':unit.characterId) ??
     (unit.id === 'hero' || unit.profile ? unit.sect : unit.templateId);
   return FIGHTERS.includes(id) ? id : null;
 }

@@ -10,6 +10,25 @@ export const SECT_ART = {
   TuDo: { index: 2, color: '#c6af79', name: 'Tự do', sigil: 'Hiệp' }
 };
 const PATHS = {
+  back:'M14 5l-7 7 7 7M7 12h14',
+  close:'M6 6l12 12M18 6L6 18',
+  plus:'M12 4v16M4 12h16',
+  check:'M4 12l5 5L20 6',
+  play:'M8 4l12 8-12 8V4',
+  pause:'M7 4h3v16H7zM14 4h3v16h-3z',
+  speed:'M3 17a9 9 0 1 1 18 0M12 14l5-6M5 19h14',
+  upload:'M12 16V3M7 8l5-5 5 5M4 15v6h16v-6',
+  download:'M12 3v13M7 11l5 5 5-5M4 17v4h16v-4',
+  refresh:'M20 8a8 8 0 1 0 0 8M20 3v6h-6',
+  focus:'M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0M12 6v3M12 15v3M6 12h3M15 12h3',
+  bag:'M5 7h14l2 14H3L5 7M8 7V5a4 4 0 0 1 8 0v2',
+  gift:'M3 9h18v4H3V9M5 13v8h14v-8M12 9v12M12 9C3 9 5 1 9 4l3 5M12 9c9 0 7-8 3-5l-3 5',
+  heart:'M12 21S2 14 2 7a5 5 0 0 1 10-1A5 5 0 0 1 22 7c0 7-10 14-10 14',
+  scroll:'M7 3h13v15a3 3 0 0 1-6 0v-1H3V6a3 3 0 0 1 6 0v2H3M8 11h8M8 14h6M4 21h13',
+  hammer:'M5 3h10l5 5-4 4-5-5H5V3M12 10L3 19l2 2 9-9',
+  flag:'M5 22V3M5 3c5-4 9 4 15 0v10c-6 4-10-4-15 0',
+  help:'M9 8a3 3 0 1 1 5 2c-2 1-2 2-2 4M12 18h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
+  up:'M5 14l7-7 7 7M12 7v14M4 3h16',
   camp: 'M3 20h18M5 20V10l7-7 7 7v10M9 20v-6h6v6M3 10l9-8 9 8',
   roster:
     'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3a4 4 0 0 1 0 8M22 21v-2a4 4 0 0 0-3-3.87M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0',
@@ -42,11 +61,13 @@ export function icon(name) {
   svg.setAttribute('stroke-linejoin', 'round');
   svg.setAttribute('aria-hidden', 'true');
   svg.classList.add('game-icon');
+  svg.dataset.iconName=Object.hasOwn(PATHS,name)?name:'star';
   const path = document.createElementNS(svg.namespaceURI, 'path');
   path.setAttribute('d', PATHS[name] ?? PATHS.star);
   svg.append(path);
   return svg;
 }
+export const ICON_NAMES=Object.freeze(Object.keys(PATHS));
 export function decorateRarity(element, unit) {
   if (!unit?.tier) return;
   element.dataset.tier = String(unit.tier);

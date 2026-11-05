@@ -2,7 +2,14 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 3.2 — đầu mối, trinh sát và mục tiêu trận:** 240 hồi, 50 đồng hành. [GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/) chỉ cập nhật sau khi nhánh được hợp nhất/phát hành.
+**Bản 3.3 — hình ảnh theo tần suất và thao tác thuận tay:** 240 hồi, 50 đồng hành. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 3.3
+
+- Bổ sung chín bộ hình sáu tư thế và 12 biểu cảm: tổng 17 bộ động tác, 24 biểu cảm cho 12 nhân vật. Ưu tiên tay sai xuất hiện nhiều, nhân vật giữ đầu mối, phản diện và năm đồng hành có truyện thân tình. Người phu có hình khi được cứu; biểu cảm đoạn kết theo ngữ cảnh.
+- Đồng đội chia bốn mục Xếp trận / Đồng đội / Chiêu mộ / Chiêu hiền. Thêm thao tác nhanh về trại, lưu/tải, lên đầu; nhớ mục hồ sơ, vị trí cuộn và tìm kiếm sổ đầu mối trong phiên chơi. Các nút và mục mở rộng có biểu tượng, giữ nhãn chữ, vùng bấm tối thiểu 44px và bàn phím.
+- Chín mục ở Quán hiện rõ trên điện thoại; trang lưu, bộ đội hình, menu, hộp thoại, bộ lọc và màn trận được chỉnh khoảng cách. Chế độ thủ công có nút tung tuyệt kỹ ngay trên thẻ nhân vật, vẫn chờ đủ năng lượng và dùng hàng đợi lệnh thật.
+- Kiểm chứng: **144 bài Node và 31 luồng Chromium**, gồm bốn cỡ màn 320/390/768/1280px, 21 ảnh mới, lưu nhiều tab và chiến dịch 240 hồi. [Phạm vi, nguồn hình và cách sử dụng](docs/UI_AND_ART_3_3.md).
 
 ## Bản 3.2
 

@@ -124,7 +124,7 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '3.2.0',
+    version: '3.3.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -396,7 +396,7 @@ export function migrateCampaign(input) {
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
-  next.version = '3.2.0';
+  next.version = '3.3.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
