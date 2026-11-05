@@ -25,6 +25,9 @@ const RULES = {
     threshold: 0.7
   }
 };
+export function bossGuide(id) {
+  const rule=RULES[id];return rule?{id,text:'Ở '+Math.round(rule.threshold*100)+'% HP, chuẩn bị '+rule.name+' trong 3 giây. '+rule.counter+(id==='trinh_nghiem'?' Pha 35% HP thêm đòn quạt.':'')}:null;
+}
 /** Story-only encounter scripts. Ordinary arena and benchmark units have no characterId. */
 export class BossDirector {
   constructor(combat) {

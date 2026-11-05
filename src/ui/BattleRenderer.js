@@ -3,6 +3,7 @@ import { SECT_ART } from './Visuals.js';
 import { getSkillVisual } from '../data/SkillVisualsData.js';
 import { paintSkillEffect } from './SkillEffects.js';
 import { fighterKey, fighterURL } from '../data/PresentationData.js';
+import { battleIntent } from '../combat/BattleIntent.js';
 const COLORS = { home: '#90ddbf', enemy: '#f4a18d' };
 function rounded(ctx, x, y, width, height, radius = 5) {
   ctx.beginPath();
@@ -359,6 +360,13 @@ export class BattleRenderer {
         ctx.stroke();
       }
       const labelY = p.y + (this.portrait ? 34 : 43);
+      if(unit.team==='enemy') {
+        const intent=battleIntent(this.battle,unit);
+        if(['Chuẩn bị','Hồi máu','Hỗ trợ','Tuyệt kỹ','Giữ chân'].includes(intent.short)) {
+          ctx.font='600 11px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102c31';ctx.strokeText(intent.short,p.x,top-7);
+          ctx.fillStyle='#ffe4ae';ctx.fillText(intent.short,p.x,top-7);
+        }
+      }
       ctx.font = '600 12px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.lineWidth = 3;

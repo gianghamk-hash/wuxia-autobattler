@@ -24,6 +24,7 @@ export class AIBehavior {
       return;
     }
     if(unit.isObject || unit.bossCasting) {unit.state='IDLE';return;}
+    if(combat.mission?.control(unit,dt))return;
     this.cooldown = Math.max(0, this.cooldown - dt);
     if (this.action) {
       const { target, skill, ultimate } = this.action;

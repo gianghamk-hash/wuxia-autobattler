@@ -12,6 +12,8 @@ import { calculateDamage, modifier, seededRandom } from './CombatMath.js';
 import { SECTS } from '../data/SectsData.js';
 import { getActiveSynergies } from '../data/SynergiesData.js';
 import { BossDirector } from './BossDirector.js';
+import { MissionDirector } from './MissionDirector.js';
+import { MISSIONS } from '../data/MissionsData.js';
 
 const FRIENDLY = [
   'self',
@@ -28,6 +30,7 @@ export class CombatEngine {
     maxDuration = 120,
     overtime = true,
     yielding = true,
+    missionId = null,
     onEvent = () => {}
   }) {
     if (
@@ -38,7 +41,8 @@ export class CombatEngine {
       seed < 0 ||
       seed > 0xffffffff ||
       !Number.isFinite(maxDuration) ||
-      maxDuration <= 0
+      maxDuration <= 0 ||
+      (missionId !== null && !Object.hasOwn(MISSIONS, missionId))
     ) {
       throw new Error('Cấu hình trận đấu không hợp lệ.');
     }
@@ -60,6 +64,9 @@ export class CombatEngine {
     this.healTotals = new Map();
     this.units = units;
     this.grid = grid;
+    this.mission = missionId
+      ? new MissionDirector(this, MISSIONS[missionId])
+      : null;
     this.seed = seed;
     this.random = seededRandom(seed);
     this.maxDuration = maxDuration;
@@ -156,7 +163,9 @@ export class CombatEngine {
       unit.energyGainMultiplier += unit.preparedEnergy ?? 0;
     }
     for (const team of ['home', 'enemy']) {
-      const members = this.units.filter((u) => u.team === team && u.alive);
+      const members = this.units.filter(
+        (u) => u.team === team && u.alive && !u.missionAsset
+      );
       for (const bonus of sectBonuses(members.map((u) => u.sect))) {
         const value = bonus.tier === 6 ? 0.15 : bonus.tier === 4 ? 0.1 : 0.05;
         for (const unit of members) {
@@ -219,6 +228,7 @@ export class CombatEngine {
       this.elapsed = this.ticks * step;
       for (const unit of this.units) this.statuses.update(unit, step);
       this.director.update();
+      this.mission?.update(step);
       this.grid.removeDead();
       if (this.checkResult()) break;
       // Stable initiative order; speed controls never alter iteration or random calls.
@@ -232,10 +242,21 @@ export class CombatEngine {
         if (this.checkResult()) break;
       }
       if (this.state === 'running' && this.elapsed >= this.maxDuration - 1e-9)
-        this.finish(null, 'timeout');
+        this.finish(
+          this.mission ? 'enemy' : null,
+          this.mission ? 'objective_timeout' : 'timeout'
+        );
     }
   }
   checkResult() {
+    if (this.mission) {
+      const outcome = this.mission.outcome();
+      if (outcome) {
+        this.finish(outcome.winner, outcome.reason);
+        return true;
+      }
+      return false;
+    }
     const home = this.units.some((u) => u.team === 'home' && u.alive),
       enemy = this.units.some((u) => u.team === 'enemy' && u.alive);
     if (!home || !enemy) {
@@ -261,6 +282,7 @@ export class CombatEngine {
       seed: this.seed,
       statistics: structuredClone([...this.records.values()])
     };
+    if (this.mission) this.result.objective = this.mission.summary();
     this.emit({ type: 'result', ...this.result });
   }
   orderUltimate(id) {
@@ -382,6 +404,7 @@ export class CombatEngine {
     return this.units.filter(
       (u) =>
         u.alive &&
+        u.targetable !== false &&
         u.gridPosition &&
         u.id !== actor.id &&
         (charmed ? u.team === actor.team : u.team !== actor.team)
@@ -439,6 +462,10 @@ export class CombatEngine {
           enemies.some((u) => u.id === e.sourceId)
       );
     if (taunt) return enemies.find((u) => u.id === taunt.sourceId);
+    if (actor.targetPriority === 'objective') {
+      const asset = enemies.find((u) => u.missionAsset);
+      if (asset) return asset;
+    }
     if (actor.team === 'home' && this.focusId) {
       const focus = enemies.find((u) => u.id === this.focusId);
       if (focus) return focus;

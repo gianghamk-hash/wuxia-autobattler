@@ -2,7 +2,15 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 3.1 — hành trình, đồng hành và chiến đấu:** 240 hồi, 50 đồng hành. [GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/) chỉ cập nhật sau khi nhánh được hợp nhất/phát hành.
+**Bản 3.2 — đầu mối, trinh sát và mục tiêu trận:** 240 hồi, 50 đồng hành. [GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/) chỉ cập nhật sau khi nhánh được hợp nhất/phát hành.
+
+## Bản 3.2
+
+- **Sổ đầu mối:** mở từ doanh trại hoặc Quán → Sổ đầu mối. Có 34 ghi chép gắn nguồn, sáu câu hỏi và bảy quan hệ; chỉ hiện thông tin của hồi đã hoàn thành. Tìm không dấu, chạm tên để mở hồ sơ đã biết và xem lại nguồn không nhận thưởng.
+- **Trinh sát và ý đồ:** đối thủ trước trận chính truyện lấy từ cùng hàm dựng đội địch thật, có vai trò, chiêu và cách đối phó boss. Trong trận, thẻ nhân vật cho biết mục tiêu hiện tại, chuẩn bị hồi máu/tuyệt kỹ, tiếp cận, choáng hoặc giữ chân; thông tin lấy từ quyết định AI thật.
+- **Chín trận có mục tiêu riêng:** giữ đường rút 30 giây, bảo vệ xe/hòm 25 giây hoặc đẩy lui địch, tiếp cận–giải cứu–hộ tống người phu, phá ba chốt kho/khóa tời. Mục tiêu có HP/ô thật, điều kiện thắng/thua, nút ưu tiên cứu và thanh tiến độ.
+- **Giữ bản lưu:** sổ đầu mối suy ra từ tiến trình có sẵn. Trận đang chờ từ bản cũ giữ luật hạ địch; trận mới lưu ID mục tiêu và seed. Không đổi phần thưởng chương, không thêm lượt nhận thưởng.
+- Kiểm chứng: **140 bài Node, 23 luồng Chromium**, gồm chiến dịch 240 hồi, cứu sớm với sáu người, xung đột lưu/quota/reload, chống lộ thông tin tương lai và replay mẫu 6v6 cũ. [Hướng dẫn, phạm vi và luật nhiệm vụ](docs/CASEBOOK_AND_MISSIONS.md).
 
 ## Bản 3.1
 
