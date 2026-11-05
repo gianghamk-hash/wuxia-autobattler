@@ -1,4 +1,5 @@
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
+import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { storyEnemy, applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
 import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
@@ -120,7 +121,7 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '3.0.0',
+    version: '3.1.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -139,10 +140,12 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
     storyProgress: { ...freshStory(), questFlags: { STARTER_KIT: true } },
     adventure: freshWorld(),
     gacha: freshGacha(),
+    journey: freshJourney(),
     settings: { muted: true, volume: 0.35 }
   };
 }
 export function validateCampaign(session) {
+  validateJourney(session);
   if (
     session.storyProgress?.campaignVersion === 1 &&
     session.storyProgress.storyRevision !== STORY_REVISION
@@ -382,7 +385,8 @@ export function migrateCampaign(input) {
   next.storyProgress = expandStoryProgress(next.storyProgress);
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
-  next.version = '3.0.0';
+  next.journey ??= freshJourney();
+  next.version = '3.1.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
@@ -920,3 +924,4 @@ export class Campaign {
 Object.assign(Campaign.prototype, worldMethods);
 
 Object.assign(Campaign.prototype, gachaMethods);
+Object.assign(Campaign.prototype, journeyMethods);

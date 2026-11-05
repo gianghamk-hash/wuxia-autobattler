@@ -11,6 +11,7 @@ import { TargetSelector } from './TargetSelector.js';
 import { calculateDamage, modifier, seededRandom } from './CombatMath.js';
 import { SECTS } from '../data/SectsData.js';
 import { getActiveSynergies } from '../data/SynergiesData.js';
+import { BossDirector } from './BossDirector.js';
 
 const FRIENDLY = [
   'self',
@@ -25,6 +26,8 @@ export class CombatEngine {
     grid,
     seed = 12345,
     maxDuration = 120,
+    overtime = true,
+    yielding = true,
     onEvent = () => {}
   }) {
     if (
@@ -60,6 +63,9 @@ export class CombatEngine {
     this.seed = seed;
     this.random = seededRandom(seed);
     this.maxDuration = maxDuration;
+    this.overtime = Boolean(overtime);
+    this.yielding = Boolean(yielding);
+    this.lastYieldAt = { home: -2, enemy: -2 };
     this.onEvent = onEvent;
     this.state = 'idle';
     this.result = null;
@@ -75,6 +81,15 @@ export class CombatEngine {
           id: u.id,
           name: u.name,
           team: u.team,
+          role: u.role,
+          maxHp: u.stats.maxHp,
+          damageTaken: 0,
+          absorbed: 0,
+          attemptedHealing: 0,
+          attempts: 0,
+          misses: 0,
+          blockedTime: 0,
+          deathAt: null,
           damage: 0,
           healing: 0,
           kills: 0,
@@ -93,6 +108,8 @@ export class CombatEngine {
       ])
     );
     this.teamSynergies = {};
+    this.director = new BossDirector(this);
+    this.focusId = null;
     this.statuses = new StatusEngine({
       onPeriodic: (unit, amount, effect) => {
         const source = this.units.find((u) => u.id === effect.sourceId);
@@ -201,6 +218,7 @@ export class CombatEngine {
       this.ticks++;
       this.elapsed = this.ticks * step;
       for (const unit of this.units) this.statuses.update(unit, step);
+      this.director.update();
       this.grid.removeDead();
       if (this.checkResult()) break;
       // Stable initiative order; speed controls never alter iteration or random calls.
@@ -231,6 +249,10 @@ export class CombatEngine {
     this.state = 'finished';
     this.units.forEach((unit) => {
       unit.inCombat = false;
+      Object.assign(this.records.get(unit.id), {
+        finalHp: unit.stats.hp,
+        alive: unit.alive
+      });
     });
     this.result = {
       winner,
@@ -252,6 +274,99 @@ export class CombatEngine {
     )
       return false;
     this.manualOrders.add(id);
+    return true;
+  }
+  orderFocus(id) {
+    const target = this.units.find(
+      (u) => u.id === id && u.team === 'enemy' && u.alive
+    );
+    if (this.state !== 'running' || !target) return false;
+    this.focusId = id;
+    this.emit({ type: 'focus', targetId: id });
+    return true;
+  }
+  pressure() {
+    const t = this.overtime
+      ? Math.max(0, Math.min(1, (this.elapsed - 90) / 30))
+      : 0;
+    return { damage: 1 + t * 1.5, healing: 1 - t * 0.6 };
+  }
+  yieldPath(actor, skill) {
+    if (
+      !this.yielding ||
+      this.elapsed - this.lastYieldAt[actor.team] < 1.5 ||
+      !actor.gridPosition
+    )
+      return false;
+    const friends = this.allies(actor)
+      .filter(
+        (u) =>
+          u !== actor &&
+          !u.stunned &&
+          !u.isObject &&
+          !u.bossCasting &&
+          !u.statusEffects.some((e) => e.type === 'root' && e.remaining > 0) &&
+          !this.brains.get(u.id).action &&
+          this.grid.distance(actor.gridPosition, u.gridPosition) <= 1
+      )
+      .sort((a, b) => a.id.localeCompare(b.id));
+    const enemies = this.opponents(actor);
+    for (const friend of friends)
+      for (const cell of this.grid.neighbors(friend.gridPosition, friend)) {
+        const before = { ...friend.gridPosition };
+        friend.gridPosition = cell;
+        const opens =
+          enemies.some(
+            (target) =>
+              this.grid.pathToRange(actor, target, this.range(actor, skill)) !==
+              null
+          ) || this.grid.findPath(actor, before) !== null;
+        friend.gridPosition = before;
+        if (opens && this.grid.move(friend, cell)) {
+          this.lastYieldAt[actor.team] = this.elapsed;
+          friend.state = 'MOVE';
+          this.emit({ type: 'yield', actorId: friend.id, targetId: actor.id });
+          return true;
+        }
+      }
+    return false;
+  }
+  addUnit(unit, cell) {
+    if (
+      this.units.some((u) => u.id === unit.id) ||
+      this.units.filter((u) => u.team === unit.team && u.alive).length >= 6
+    )
+      return false;
+    this.grid.place(unit, cell, { formation: false });
+    this.units.push(unit);
+    unit.inCombat = true;
+    unit.damageMultiplier = 1;
+    unit.energyGainMultiplier = 1;
+    this.brains.set(unit.id, new AIBehavior(unit));
+    this.records.set(unit.id, {
+      id: unit.id,
+      name: unit.name,
+      team: unit.team,
+      role: unit.role,
+      maxHp: unit.stats.maxHp,
+      damage: 0,
+      healing: 0,
+      kills: 0,
+      ultimates: 0,
+      damageTaken: 0,
+      absorbed: 0,
+      attemptedHealing: 0,
+      attempts: 0,
+      misses: 0,
+      blockedTime: 0,
+      deathAt: null
+    });
+    this.passives.set(unit.id, {
+      attacks: 0,
+      shieldUsed: false,
+      internalForce: 0
+    });
+    this.emit({ type: 'boss:summon', actorId: unit.id, name: unit.name });
     return true;
   }
   abort() {
@@ -324,6 +439,10 @@ export class CombatEngine {
           enemies.some((u) => u.id === e.sourceId)
       );
     if (taunt) return enemies.find((u) => u.id === taunt.sourceId);
+    if (actor.team === 'home' && this.focusId) {
+      const focus = enemies.find((u) => u.id === this.focusId);
+      if (focus) return focus;
+    }
     if (actor.targetPriority === 'weakest') return enemies.sort(hp)[0] ?? null;
     if (actor.targetPriority === 'rear')
       return (
@@ -401,10 +520,16 @@ export class CombatEngine {
       total = this.healTotals.get(target.id) ?? 0;
     const supported =
       source && ELEMENTS[source.element]?.feeds === target.element ? 1.1 : 1;
+    if (source)
+      this.records.get(source.id).attemptedHealing +=
+        amount * (source.healMultiplier ?? 1) * supported;
     const limited = Math.max(
       0,
       Math.min(
-        amount * (source?.healMultiplier ?? 1) * supported,
+        amount *
+          (source?.healMultiplier ?? 1) *
+          supported *
+          this.pressure().healing,
         target.stats.maxHp * LIMITS.healingPerSecond - window,
         target.stats.maxHp * LIMITS.healingPerBattle - total
       )
@@ -433,6 +558,9 @@ export class CombatEngine {
       crit = false
     } = options;
     if (damageType === 'true') amount *= source?.damageMultiplier ?? 1;
+    // Reflections are derived from already amplified HP damage: do not amplify twice.
+    if (!reaction) amount *= this.pressure().damage;
+    amount *= this.director.protection(target);
     const position = { ...target.gridPosition };
     const passive = this.passives.get(target.id);
     if (target.sect === 'VoDang' && passive.internalForce > 0) {
@@ -441,6 +569,8 @@ export class CombatEngine {
       passive.internalForce -= redirected;
     }
     const result = target.takeDamage(amount, { ignoreShield });
+    this.records.get(target.id).damageTaken += result.hpDamage;
+    this.records.get(target.id).absorbed += result.absorbed;
     if (source) this.records.get(source.id).damage += result.hpDamage;
     this.emit({
       type: 'damage',
@@ -454,11 +584,13 @@ export class CombatEngine {
       position
     });
     if (result.killed) {
+      this.records.get(target.id).deathAt = this.elapsed;
       if (source) {
         source.gainEnergy(CONFIG.COMBAT.ENERGY_ON_KILL);
         this.records.get(source.id).kills++;
       }
       this.emit({ type: 'death', targetId: target.id });
+      this.director.onDeath(target);
     }
     if (
       target.alive &&
@@ -515,8 +647,10 @@ export class CombatEngine {
   }
   hit(actor, target, skill) {
     if (!actor.alive || !target.alive) return false;
+    this.records.get(actor.id).attempts++;
     const result = calculateDamage(actor, target, skill, this.random);
     if (result.missed) {
+      this.records.get(actor.id).misses++;
       this.emit({
         type: 'miss',
         actorId: actor.id,
@@ -634,11 +768,22 @@ export class CombatEngine {
     )
       return;
     const origin = { ...actor.gridPosition };
-    const announce = targets => this.emit({
-      type: 'skill:cast', actorId: actor.id, skillId: skill.id ?? skill.name,
-      name: skill.name, ultimate, ownerId: actor.characterId ?? (actor.templateId === 'hero' ? actor.sect : actor.templateId),
-      origin, targets: targets.map(target => ({ id: target.id, position: { ...target.gridPosition } }))
-    });
+    const announce = (targets) =>
+      this.emit({
+        type: 'skill:cast',
+        actorId: actor.id,
+        skillId: skill.id ?? skill.name,
+        name: skill.name,
+        ultimate,
+        ownerId:
+          actor.characterId ??
+          (actor.templateId === 'hero' ? actor.sect : actor.templateId),
+        origin,
+        targets: targets.map((target) => ({
+          id: target.id,
+          position: { ...target.gridPosition }
+        }))
+      });
     if (ultimate) {
       this.records.get(actor.id).ultimates++;
       this.emit({ type: 'ultimate', actorId: actor.id, name: skill.name });
@@ -657,12 +802,17 @@ export class CombatEngine {
         const ally = this.allies(actor).sort(
           (a, b) => a.hpRatio - b.hpRatio || a.id.localeCompare(b.id)
         )[0];
-        if (ally) { announce([ally]); this.heal(actor, ally, ally.stats.maxHp); }
-      } else
-        { announce([anchor]); this.hit(actor, anchor, {
+        if (ally) {
+          announce([ally]);
+          this.heal(actor, ally, ally.stats.maxHp);
+        }
+      } else {
+        announce([anchor]);
+        this.hit(actor, anchor, {
           ...skill,
           dmgMultiplier: choice.dmgMultiplier
-        }); }
+        });
+      }
       return;
     }
     if (effects.some((e) => e.type === 'blink')) {

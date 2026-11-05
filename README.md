@@ -2,9 +2,19 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 3.0 — 240 hồi và 50 đồng hành:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 3.1 — hành trình, đồng hành và chiến đấu:** 240 hồi, 50 đồng hành. [GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/) chỉ cập nhật sau khi nhánh được hợp nhất/phát hành.
 
-## Đợt ổn định lưu, viết lại truyện và hình ảnh nhân vật
+## Bản 3.1
+
+- Hội thoại RPG cổ điển giữ chân dung bên lời thoại, nhớ chính xác câu đang đọc, 60 dòng lịch sử và bốn cỡ chữ. Thêm 12 biểu cảm của sáu nhân vật, bảy nền vùng/bí cảnh mới bên nền làng hiện có.
+- Bốn boss truyện có cơ chế riêng, ba giây báo trước, choáng ngắt đòn và chọn mục tiêu tập trung. Ấn bảo hộ có thể đánh vỡ; viện binh không vượt sáu địch còn sống.
+- Tám nhân vật mẫu có sáu tư thế đứng/di chuyển/đánh/vận chiêu/trúng đòn/ngã. Các nhân vật khác giữ chân dung. Âm thanh chiêu phân biệt đường bắn, quét, hộ thuẫn, hồi phục, lướt; giữ bật tiếng theo thao tác người chơi, tắt hiệu ứng và giảm chuyển động.
+- Ba ô lưu đội hình và chiến thuật, gợi ý trước trận, nhận xét từ số liệu thật sau trận.
+- Quán → Đồng hành: 15 truyện cho Lão Tam, Tiểu Muội, Huyền Đạo Trưởng, Đường Thập Nhị, Hồng Nương Tử. Mốc thân tình 30/60/100 và chương 2/6/10; mốc cuối có danh hiệu cùng biến thể tuyệt kỹ thay chiêu gốc. Tổng 139 cấu hình hình ảnh chiêu.
+- Sửa nhường đường khi bị đồng đội chặn; từ giây 90 tăng dần sát thương và giảm hồi máu đồng đều cho hai phe. Cùng bộ 2.400 trận: hòa **207 → 117 (8,63% → 4,88%)**, trung bình **63,81 → 61,19 giây**. Nhóm sáu người cùng phái còn 16% hòa; đây chưa phải bằng chứng cân bằng mọi đội hình. [Báo cáo](reports/BALANCE_POLISH.md).
+- Bản lưu cũ được bổ sung dữ liệu hành trình, giữ kho và tiến trình. [Phạm vi, hướng dẫn và nguồn hình](docs/JOURNEY_3_1.md). Kiểm tra bằng `npm test` và `npm run test:browser`.
+
+## Mốc 3.0: ổn định lưu, viết lại truyện và hình ảnh nhân vật
 
 - **Lưu nhiều tab:** kiểm tra revision trong transaction IndexedDB hoặc Web Locks cho LocalStorage; tab cũ không tự ghi đè tab đã lưu mới hơn. Lỗi ghi/xung đột có thông báo chung, cho xuất nhánh đang chơi, thử lại hoặc tải bản mới nhất. Sáu ô và bản lưu cũ được giữ. Xem [cơ chế và giới hạn](docs/SAVE_SAFETY.md).
 - **Đo 6v6:** 2.400 trận, tám nhóm, mỗi bên một main + năm đồng hành; đổi bên từng cặp, kiểm tra nhiều cấp, trang bị, chuẩn bị và mốc phái 2/4/6. Chưa chỉnh chỉ số combat. [Kết quả và giới hạn](reports/BALANCE_6V6.md), [dữ liệu cùng seed/đội hình](reports/balance-6v6.json).

@@ -2,6 +2,7 @@ import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { SECT_ART } from './Visuals.js';
 import { getSkillVisual } from '../data/SkillVisualsData.js';
 import { paintSkillEffect } from './SkillEffects.js';
+import { fighterKey, fighterURL } from '../data/PresentationData.js';
 const COLORS = { home: '#90ddbf', enemy: '#f4a18d' };
 function rounded(ctx, x, y, width, height, radius = 5) {
   ctx.beginPath();
@@ -36,6 +37,11 @@ export class BattleRenderer {
     this.width = 960;
     this.height = 540;
     this.companionImages = new Map();
+    this.fighters = new Map();
+    this.poses = new Map();
+    this.fallen = [];
+    this.visualTime = 0;
+    this.hitPause = 0;
     this.atlas = new Image();
     this.atlas.src = new URL(
       '../../assets/images/sect-portraits.webp',
@@ -53,20 +59,54 @@ export class BattleRenderer {
   }
   setBattle(battle) {
     this.battle = battle;
+    if (battle?.scene && this.environment.src !== battle.scene) {
+      this.environment.src = battle.scene;
+      this.backdrop = null;
+    }
     this.positions.clear();
     this.floating = [];
     this.effects = [];
     this.skillEffects = [];
+    this.poses.clear();
+    this.fallen = [];
+    this.hitPause = 0;
   }
   event(event) {
     const enabled = document.body.dataset.cardEffects !== 'false';
+    if (event.type === 'cast')
+      this.poses.set(event.actorId, {
+        frame: event.ultimate ? 3 : 2,
+        life: event.ultimate ? 0.55 : 0.4
+      });
+    if (event.type === 'damage') {
+      this.poses.set(event.targetId, { frame: 4, life: 0.18 });
+      if (event.crit) this.hitPause = 0.045;
+    }
+    if (event.type === 'death') {
+      const unit = this.battle?.units.find((u) => u.id === event.targetId),
+        p =
+          this.positions.get(event.targetId) ??
+          (unit?.gridPosition ? this.project(unit.gridPosition) : null);
+      if (unit && p) this.fallen.push({ unit, p: { ...p }, life: 1 });
+      if (this.fallen.length > 12) this.fallen.shift();
+    }
     if (event.type === 'skill:cast' && enabled) {
       const profile = getSkillVisual(event);
       if (profile) {
         // Reserve room for ultimates when many basic attacks resolve in one tick.
-        if (!profile.ultimate && this.skillEffects.filter(e => !e.profile.ultimate).length >= 8) return;
+        if (
+          !profile.ultimate &&
+          this.skillEffects.filter((e) => !e.profile.ultimate).length >= 8
+        )
+          return;
         this.skillEffects.push({ ...event, profile, life: profile.duration });
-        if (this.skillEffects.length > 18) this.skillEffects.splice(this.skillEffects.findIndex(e => !e.profile.ultimate) >= 0 ? this.skillEffects.findIndex(e => !e.profile.ultimate) : 0, 1);
+        if (this.skillEffects.length > 18)
+          this.skillEffects.splice(
+            this.skillEffects.findIndex((e) => !e.profile.ultimate) >= 0
+              ? this.skillEffects.findIndex((e) => !e.profile.ultimate)
+              : 0,
+            1
+          );
       }
     }
     if (['damage', 'heal', 'miss'].includes(event.type) && event.position) {
@@ -190,7 +230,17 @@ export class BattleRenderer {
   render(dt = 0) {
     const ctx = this.ctx;
     const enabled = document.body.dataset.cardEffects !== 'false';
-    const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const reduced =
+      globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ??
+      false;
+    const motion = enabled && !reduced;
+    const visualDt = motion && this.hitPause > 0 ? 0 : dt;
+    this.hitPause = Math.max(0, this.hitPause - dt);
+    this.visualTime += visualDt;
+    for (const [id, pose] of this.poses) {
+      pose.life -= visualDt;
+      if (pose.life <= 0) this.poses.delete(id);
+    }
     ctx.drawImage(this.drawBoard(), 0, 0);
     if (!this.battle) return;
     for (const unit of this.battle.units.filter(
@@ -198,7 +248,7 @@ export class BattleRenderer {
     )) {
       const desired = this.project(unit.gridPosition),
         previous = this.positions.get(unit.id) ?? desired,
-        blend = 1 - Math.exp(-dt * 14);
+        blend = motion ? 1 - Math.exp(-visualDt * 14) : 1;
       const p = {
         x: previous.x + (desired.x - previous.x) * blend,
         y: previous.y + (desired.y - previous.y) * blend
@@ -220,59 +270,94 @@ export class BattleRenderer {
         ctx.stroke();
       }
       ctx.save();
-      rounded(ctx, p.x - w / 2, top, w, h, 9);
-      ctx.clip();
-      const artId = unit.characterId ?? unit.templateId;
-      const portraitPath = unit.portrait ?? COMPANIONS_BY_ID[unit.templateId]?.portrait;
-      let individual = this.companionImages.get(artId);
-      if (!individual && portraitPath) {
-        individual = new Image();
-        individual.src = new URL(
-          '../../' + portraitPath,
-          import.meta.url
-        ).href;
-        this.companionImages.set(artId, individual);
-      }
-      if (individual?.complete && individual.naturalWidth) {
-        const sourceHeight = (individual.naturalWidth * h) / w;
-        ctx.drawImage(
-          individual,
-          0,
-          0,
-          individual.naturalWidth,
-          Math.min(sourceHeight, individual.naturalHeight),
-          p.x - w / 2,
-          top,
-          w,
-          h
-        );
-      } else if (!unit.characterId && this.atlas.complete && this.atlas.naturalWidth) {
-        const part = this.atlas.width / 5;
-        ctx.drawImage(
-          this.atlas,
-          art.index * part,
-          0,
-          part,
-          (part * h) / w,
-          p.x - w / 2,
-          top,
-          w,
-          h
-        );
+      const fighter = this.fighterImage(unit);
+      const spriteReady = fighter?.complete && fighter.naturalWidth;
+      if (spriteReady) {
+        const pose = motion
+          ? (this.poses.get(unit.id)?.frame ??
+            (unit.state === 'MOVE'
+              ? 1
+              : unit.state === 'ULTIMATE'
+                ? 3
+                : unit.state === 'ATTACK'
+                  ? 2
+                  : 0))
+          : 0;
+        this.drawFighter(unit, p, fighter, pose, motion);
       } else {
-        ctx.fillStyle = art.color;
-        ctx.fillRect(p.x - w / 2, top, w, h);
-        ctx.fillStyle = '#122f35';
-        ctx.font = '25px Georgia, serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(art.sigil, p.x, top + h * 0.65);
+        rounded(ctx, p.x - w / 2, top, w, h, 9);
+        ctx.clip();
+        const artId = unit.characterId ?? unit.templateId;
+        const portraitPath =
+          unit.portrait ?? COMPANIONS_BY_ID[unit.templateId]?.portrait;
+        let individual = this.companionImages.get(artId);
+        if (!individual && portraitPath) {
+          individual = new Image();
+          individual.src = new URL(
+            '../../' + portraitPath,
+            import.meta.url
+          ).href;
+          this.companionImages.set(artId, individual);
+        }
+        if (individual?.complete && individual.naturalWidth) {
+          const sourceHeight = (individual.naturalWidth * h) / w;
+          ctx.drawImage(
+            individual,
+            0,
+            0,
+            individual.naturalWidth,
+            Math.min(sourceHeight, individual.naturalHeight),
+            p.x - w / 2,
+            top,
+            w,
+            h
+          );
+        } else if (
+          !unit.characterId &&
+          this.atlas.complete &&
+          this.atlas.naturalWidth
+        ) {
+          const part = this.atlas.width / 5;
+          ctx.drawImage(
+            this.atlas,
+            art.index * part,
+            0,
+            part,
+            (part * h) / w,
+            p.x - w / 2,
+            top,
+            w,
+            h
+          );
+        } else {
+          ctx.fillStyle = art.color;
+          ctx.fillRect(p.x - w / 2, top, w, h);
+          ctx.fillStyle = '#122f35';
+          ctx.font = '25px Georgia, serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(art.sigil, p.x, top + h * 0.65);
+        }
       }
       ctx.restore();
-      rounded(ctx, p.x - w / 2, top, w, h, 9);
-      ctx.lineWidth = unit.state === 'ULTIMATE' ? 3 : 1.5;
-      ctx.strokeStyle =
-        unit.state === 'ULTIMATE' ? '#ffe8a4' : COLORS[unit.team];
-      ctx.stroke();
+      if (!spriteReady) {
+        rounded(ctx, p.x - w / 2, top, w, h, 9);
+        ctx.lineWidth = unit.state === 'ULTIMATE' ? 3 : 1.5;
+        ctx.strokeStyle =
+          unit.state === 'ULTIMATE' ? '#ffe8a4' : COLORS[unit.team];
+        ctx.stroke();
+      }
+      if (
+        this.battle.focusId === unit.id ||
+        this.battle.director?.bosses.some((b) =>
+          b.tell?.targets.includes(unit.id)
+        )
+      ) {
+        ctx.strokeStyle =
+          this.battle.focusId === unit.id ? '#ffde8b' : '#ff9d8c';
+        ctx.lineWidth = 3;
+        rounded(ctx, p.x - w * 0.7, top - 5, w * 1.4, h + 10, 8);
+        ctx.stroke();
+      }
       const labelY = p.y + (this.portrait ? 34 : 43);
       ctx.font = '600 12px system-ui, sans-serif';
       ctx.textAlign = 'center';
@@ -306,15 +391,40 @@ export class BattleRenderer {
         ctx.fill();
       }
     }
-    if (!enabled) { this.effects = []; this.skillEffects = []; }
-    this.skillEffects = this.skillEffects.map(e => ({ ...e, life: e.life - dt })).filter(e => e.life > 0);
-    for (const effect of this.skillEffects) paintSkillEffect(ctx, effect, 1 - effect.life / effect.profile.duration, position => this.project(position), reduced);
+    this.fallen = this.fallen
+      .map((f) => ({ ...f, life: f.life - visualDt }))
+      .filter((f) => f.life > 0);
+    if (motion)
+      for (const f of this.fallen) {
+        const sheet = this.fighterImage(f.unit);
+        if (sheet?.complete && sheet.naturalWidth) {
+          ctx.save();
+          ctx.globalAlpha = Math.min(1, f.life * 2);
+          this.drawFighter(f.unit, f.p, sheet, 5, false);
+          ctx.restore();
+        }
+      }
+    if (!enabled) {
+      this.effects = [];
+      this.skillEffects = [];
+    }
+    this.skillEffects = this.skillEffects
+      .map((e) => ({ ...e, life: e.life - dt }))
+      .filter((e) => e.life > 0);
+    for (const effect of this.skillEffects)
+      paintSkillEffect(
+        ctx,
+        effect,
+        1 - effect.life / effect.profile.duration,
+        (position) => this.project(position),
+        reduced
+      );
     this.effects = this.effects
       .map((item) => ({ ...item, life: item.life - dt }))
       .filter((item) => item.life > 0);
     for (const effect of this.effects) {
       const p = this.project(effect.position),
-        t = reduced ? .5 : 1 - effect.life / effect.duration;
+        t = reduced ? 0.5 : 1 - effect.life / effect.duration;
       ctx.save();
       ctx.globalAlpha = 1 - t;
       ctx.strokeStyle =
@@ -371,7 +481,8 @@ export class BattleRenderer {
       ctx.textAlign = 'center';
       ctx.lineWidth = 4;
       ctx.strokeStyle = '#183237';
-      const textY = p.y - 37 - (enabled && !reduced ? (1 - item.life / 0.85) * 40 : 0);
+      const textY =
+        p.y - 37 - (enabled && !reduced ? (1 - item.life / 0.85) * 40 : 0);
       ctx.strokeText(text, p.x, textY);
       ctx.fillStyle =
         item.type === 'heal'
@@ -388,5 +499,40 @@ export class BattleRenderer {
       ctx.fillText(text, p.x, textY);
       ctx.restore();
     }
+  }
+  fighterImage(unit) {
+    const id = fighterKey(unit);
+    if (!id) return null;
+    if (!this.fighters.has(id)) {
+      const img = new Image();
+      img.src = fighterURL(id);
+      this.fighters.set(id, img);
+    }
+    return this.fighters.get(id);
+  }
+  drawFighter(unit, p, image, frame, motion) {
+    const ctx = this.ctx,
+      sw = image.naturalWidth / 3,
+      sh = image.naturalHeight / 2,
+      w = this.portrait ? 98 : 114,
+      h = w;
+    const facing = unit.team === 'home' ? 1 : -1,
+      walk = motion && frame === 1 ? Math.sin(this.visualTime * 14) : 0;
+    const lunge = motion && frame === 2 ? 7 : motion && frame === 4 ? -4 : 0;
+    ctx.save();
+    ctx.translate(p.x + facing * lunge, p.y + 31 + Math.abs(walk) * -2);
+    ctx.scale(facing, 1);
+    ctx.drawImage(
+      image,
+      (frame % 3) * sw,
+      Math.floor(frame / 3) * sh,
+      sw,
+      sh,
+      -w / 2,
+      -h,
+      w,
+      h
+    );
+    ctx.restore();
   }
 }

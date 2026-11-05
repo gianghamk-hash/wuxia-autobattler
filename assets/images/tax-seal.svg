@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs><linearGradient id="a" x2="0" y2="1"><stop stop-color="#bcc9a9"/><stop offset="1" stop-color="#536b5b"/></linearGradient></defs>
+<rect width="256" height="256" rx="20" fill="#173432"/>
+<path d="M67 160V97l28-15h66l28 15v63" fill="url(#a)" stroke="#edc985" stroke-width="4"/>
+<path d="M95 84V59q33-27 66 0v25" fill="#7c9681" stroke="#edc985" stroke-width="4"/>
+<path d="M52 156h152v47H52z" fill="#8e3d34" stroke="#edc985" stroke-width="5"/>
+<path d="M65 170h126v20H65z" fill="none" stroke="#e8be79" stroke-width="3"/>
+<text x="128" y="137" text-anchor="middle" fill="#ffedb5" font-family="serif" font-weight="bold" font-size="34">ẤN</text>
+</svg>

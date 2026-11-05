@@ -14,6 +14,7 @@ import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { EQUIPMENT } from '../data/EquipmentData.js';
 import { normalizeHeroBuild } from '../entities/HeroBuild.js';
 import { seededRandom } from '../combat/CombatMath.js';
+import { BOND_VARIANTS } from '../data/BondsData.js';
 const fail = (text) => {
   throw new Error(text);
 };
@@ -145,6 +146,10 @@ export function validateTeam(team) {
     occupied.add(`${p.x},${p.y}`);
   }
   validateTactics(team.tactics, ids);
+  if (team.variants !== undefined) {
+    if (!team.variants || typeof team.variants !== 'object' || Array.isArray(team.variants)) fail('Biến thể đội chia sẻ không hợp lệ.');
+    for (const [id, mode] of Object.entries(team.variants)) if (!team.active.includes(id) || !Object.hasOwn(BOND_VARIANTS, id) || !['base', 'variant'].includes(mode)) fail('Biến thể đội chia sẻ không hợp lệ.');
+  }
   return team;
 }
 function validateTactics(t, ids) {
@@ -338,7 +343,8 @@ export function teamSnapshot(s) {
     inventory: s.inventory
       .filter((i) => EQUIPMENT.some((e) => e.id === i.itemId))
       .map((i) => ({ itemId: i.itemId, quantity: 1 })),
-    tactics: structuredClone(s.adventure.tactics)
+    tactics: structuredClone(s.adventure.tactics),
+    variants: Object.fromEntries(Object.entries(s.journey?.bonds.modes ?? {}).filter(([id]) => s.party.active.includes(id)))
   });
 }
 export function encodeTeam(team) {

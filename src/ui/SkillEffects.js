@@ -111,6 +111,23 @@ export function drawSkillMotif(c, motif, x, y, radius, t, primary, secondary) {
     case 'blackFan': for (let i = 0; i <= 8; i++) { const a = Math.PI + i * Math.PI / 8; line(c, [[0, .55], [Math.cos(a), Math.sin(a) - .2]]); } arc(c, 0, -.2, 1, Math.PI, TAU); child('puppetThreads', .4); break;
     case 'guardSpear': line(c, [[-.8, .8], [.65, -.65], [.35, -.55], [.85, -.95], [.65, -.4]], false); break;
     case 'ladleGuard': line(c, [[-.7, .8], [.35, -.35]]); oval(c, .5, -.55, .28, .38, .6); arc(c, 0, 0, .95, .1, 2.7); break;
+    case 'roadGuard':
+      arc(c, 0, .3, .95, Math.PI, TAU); line(c, [[-1,.25],[1,.25]]);
+      c.strokeStyle=secondary; for(const x of [-.28,.28])line(c,[[x,.8],[x,-.2]]);
+      for(const x of [-.8,.8])line(c,[[x,-.3],[x,.55]]); break;
+    case 'pulseLotus':
+      petals(c,4,.42,.36,Math.PI/4);c.strokeStyle=secondary;
+      line(c,[[-1,0],[-.45,0],[-.25,-.4],[0,.5],[.22,-.22],[.4,0],[1,0]]);
+      oval(c,0,0,.85,.66);break;
+    case 'sharedTaiji':
+      for(const x of [-.48,.48]){oval(c,x,0,.42,.65);arc(c,x,-.24,.18,-Math.PI/2,Math.PI/2);arc(c,x,.2,.18,Math.PI/2,Math.PI*1.5);}
+      c.strokeStyle=secondary;line(c,[[-.2,-.65],[.2,-.65]]);line(c,[[-.2,.65],[.2,.65]]);break;
+    case 'singleMeridian':
+      c.lineWidth=.11;line(c,[[-.9,.8],[.72,-.72]]);oval(c,-.65,.55,.17,.07,-.8);
+      c.strokeStyle=secondary;for(const [x,y] of [[-.6,-.5],[-.15,-.3],[.2,.2],[.55,.5]]){oval(c,x,y,.08);line(c,[[x-.12,y+.15],[x+.12,y-.15]]);}break;
+    case 'returnRibbon':
+      curve(c,[.85,-.7],[-1.1,-1],[-1.1,.85],[.45,.55]);curve(c,[.85,-.5],[-.8,-.8],[-.8,.65],[.45,.35]);
+      c.strokeStyle=secondary;line(c,[[.65,-.7],[.65,.8]]);line(c,[[.45,.45],[.05,.12],[.05,.75]],true);break;
     default: throw new Error(`Missing skill motif: ${motif}`);
   }
   c.restore();

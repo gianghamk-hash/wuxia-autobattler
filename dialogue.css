@@ -71,3 +71,21 @@
 .save-notice p { margin: 0 0 8px; line-height: 1.6; overflow-wrap: anywhere; }
 .save-notice > div { display: flex; flex-wrap: wrap; gap: 8px; }
 .save-notice button { min-height: 44px; font-size: .8rem; }
+/* Reading tools and journey controls share the compact classic dialogue layout. */
+.reader-tools { display:flex; flex-wrap:wrap; align-items:start; gap:1rem; margin-top:1rem; }
+.reader-tools label { display:flex; align-items:center; gap:.5rem; }
+.reader-history { flex:1; min-width:12rem; }
+.reader-history ol { max-height:18rem; overflow:auto; padding-left:1.5rem; }
+.reader-history li { margin:.6rem 0; line-height:1.6; overflow-wrap:anywhere; }
+.loadout-row { display:flex; flex-wrap:wrap; gap:.5rem; margin:.65rem 0; }
+.loadout-row input { min-width:8rem; max-width:100%; flex:1; }
+.bond-card > .portrait { width:64px; height:80px; float:left; margin-right:1rem; }
+.bond-card > button { display:block; width:100%; text-align:left; margin:.5rem 0; }
+.bond-modes { display:flex; gap:.5rem; flex-wrap:wrap; }
+.battle-warnings { padding:.7rem; color:#ffe0a1; border:1px solid #d9b16b; background:#192b2e; line-height:1.6; }
+.battle-toolbar > .battle-warnings { flex:1 0 100%; width:100%; min-width:0; grid-column:1 / -1; order:2; }
+#battle-clock { white-space:nowrap; }
+@media (max-width:640px) { .battle-toolbar > .battle-warnings { grid-area:3 / 1 / 4 / -1; } }
+#battle-advice { padding:.6rem; background:#102b31; }
+#battle-advice li { margin:.5rem 0; line-height:1.5; }
+.battle-unit-card > [data-focus] { grid-column:1 / -1; width:100%; min-width:0; }

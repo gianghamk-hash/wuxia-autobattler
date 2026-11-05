@@ -34,7 +34,7 @@ export class GridSystem {
         (free({ x: q.x, y: p.y }) && free({ x: p.x, y: q.y }))));
   }
   move(unit, destination) {
-    if (this.units.get(unit.id) !== unit || !unit.alive || unit.stunned || !unit.gridPosition ||
+    if (this.units.get(unit.id) !== unit || !unit.alive || unit.stunned || unit.statusEffects.some(e=>e.type==='root'&&e.remaining>0) || !unit.gridPosition ||
         !this.neighbors(unit.gridPosition, unit).some(p => p.x === destination?.x && p.y === destination?.y)) return false;
     this.place(unit, destination, { formation: false }); return true;
   }
