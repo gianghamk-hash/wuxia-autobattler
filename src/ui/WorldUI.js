@@ -1,4 +1,5 @@
 import { renderStoryArchive } from './StoryArchive.js';
+import { renderBonds } from './JourneyUI.js';
 import { NPCS, NPCS_BY_ID, findNPC } from '../data/NPCData.js';
 import { EQUIPMENT_BY_ID } from '../data/EquipmentData.js';
 import {
@@ -367,6 +368,7 @@ export function mountWorldUI(app) {
       arena: 'Đại hội',
       guild: 'Bang hội',
       story: 'Truyện ký',
+      bonds: 'Đồng hành',
       characters: 'Người đã gặp',
       journal: 'Nhật ký'
     })) {
@@ -378,6 +380,7 @@ export function mountWorldUI(app) {
       b.setAttribute('aria-pressed', String(tab === id));
       tabs.append(b);
     }
+    if (tab === 'bonds') renderBonds(app, root);
     if (tab === 'activities') {
       const daily = panel(
         'Điểm danh & nhiệm vụ',

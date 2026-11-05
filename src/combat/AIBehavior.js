@@ -23,6 +23,7 @@ export class AIBehavior {
       this.moveCredit = 0;
       return;
     }
+    if(unit.isObject || unit.bossCasting) {unit.state='IDLE';return;}
     this.cooldown = Math.max(0, this.cooldown - dt);
     if (this.action) {
       const { target, skill, ultimate } = this.action;
@@ -72,6 +73,7 @@ export class AIBehavior {
       return;
     }
     if (!combat.inRange(unit, target, skill)) {
+      if(unit.statusEffects.some(e=>e.type==='root'&&e.remaining>0)){unit.state='ROOTED';this.moveCredit=0;return;}
       const path = combat.grid.pathToRange(
         unit,
         target,
@@ -82,6 +84,8 @@ export class AIBehavior {
         target = combat.reachableAlternative(unit, skill);
         this.targetId = target?.id ?? null;
         if (!target) {
+          combat.yieldPath(unit, skill);
+          combat.records.get(unit.id).blockedTime += dt;
           unit.state = 'IDLE';
           this.moveCredit = 0;
           return;

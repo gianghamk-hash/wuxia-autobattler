@@ -3,6 +3,7 @@ import { HERO_SKILLS } from './HeroSkillsData.js';
 import { SKILL_TREES } from './SkillTreeData.js';
 import { deepFreeze } from './DataUtils.js';
 import { NPC_MOVES } from './NPCData.js';
+import { BOND_VARIANTS } from './BondsData.js';
 
 // Each entry is an authored silhouette, palette, travel path and tempo, not a color hash.
 const companionArt = [
@@ -96,6 +97,10 @@ const npcArt = {
 };
 for (const [id, art] of Object.entries(npcArt)) for (const ultimate of [false, true])
   add(id, { id: `npc_${id}_${ultimate ? 'ult' : 'basic'}`, name: NPC_MOVES[id][ultimate ? 1 : 0] }, art, ultimate);
+for (const [id, skill] of Object.entries(BOND_VARIANTS)) {
+  const art = { companion_01: ['roadGuard', '#b5dd91', '#f5dcad', 'ward', 1.3], companion_03: ['pulseLotus', '#a7f4cb', '#efc6ef', 'petals', 1.4], companion_02: ['sharedTaiji', '#badfea', '#f0e4bf', 'ward', 1.4], companion_04: ['singleMeridian', '#c4b0ef', '#e7edd4', 'projectile', 1.1], companion_08: ['returnRibbon', '#e9a8b1', '#bddbe5', 'wave', 1.2] }[id];
+  add(id, skill, art, true);
+}
 export const SKILL_VISUALS = deepFreeze(profiles);
 export function getSkillVisual(event) {
   return table[`${event.ownerId}:${event.skillId}`] ?? profiles.find(p => p.skillId === event.skillId) ?? null;

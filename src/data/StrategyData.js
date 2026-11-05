@@ -122,6 +122,7 @@ export function applyQigong(u, q) {
 }
 
 export const STATUS_LABELS = {
+  root: 'Giữ chân',
   poison: 'Trúng độc',
   burn: 'Bốc cháy',
   internal_injury: 'Nội thương',

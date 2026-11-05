@@ -1,3 +1,4 @@
+import { getSkillVisual } from '../data/SkillVisualsData.js';
 /** Procedural pentatonic BGM and SFX. Audio is optional and unlocked only by a user gesture. */
 export class SoundManager {
   constructor({ AudioContext = globalThis.AudioContext ?? globalThis.webkitAudioContext } = {}) {
@@ -18,7 +19,7 @@ export class SoundManager {
     this._stop(); this._start();
   }
   _note(frequency, duration, { when, type = 'sine', gain = .09, slide } = {}) {
-    if (!this.context || this.context.state !== 'running' || this.muted || this.voices.size >= 24) return;
+    if (!this.context || this.context.state !== 'running' || this.muted || globalThis.document?.hidden || this.voices.size >= 24) return;
     const start = when ?? this.context.currentTime, oscillator = this.context.createOscillator(), envelope = this.context.createGain();
     oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, start); if(slide)oscillator.frequency.exponentialRampToValueAtTime(slide,start+duration);
     envelope.gain.setValueAtTime(.0001, start); envelope.gain.exponentialRampToValueAtTime(gain, start + .012);
@@ -48,6 +49,21 @@ export class SoundManager {
     const sounds = { click: [660, .06], hit: [120, .09], magic: [740, .14], death: [82, .28], heal: [880, .17], ultimate: [440, .35], victory: [1046, .5], defeat: [146, .5] };
     if(kind==='ultimate'){this._note(330,.35,{type:'triangle',gain:.06});this._note(660,.28,{type:'sine',gain:.05});}
     const sound = sounds[kind]; if (sound) this._note(sound[0], sound[1], { gain: .11, type: kind === 'hit' ? 'sawtooth' : 'sine' });
+  }
+  skill(event) {
+    const p=getSkillVisual(event);if(!p)return;
+    // Stable pitch per technique plus different envelopes for its physical gesture.
+    const hash=[...p.skillId].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,0),pitch=1+(hash%7)*.035;
+    const bank={
+      projectile:[1150,.09,'triangle',280],dash:[580,.13,'sawtooth',90],
+      sweep:[190,.14,'triangle',62],wave:[120,.22,'sine',48],
+      ward:[640,.26,'sine',920],petals:[880,.28,'sine',1320],
+      ribbon:[420,.2,'triangle',980],mist:[220,.3,'sine',160],
+      beam:[900,.18,'triangle',1100],lob:[360,.24,'sine',120]
+    };
+    const [frequency,duration,type,slide]=bank[p.path]??bank.sweep;
+    this._note(frequency*pitch,duration,{type,slide:slide*pitch,gain:p.ultimate?.08:.035});
+    if(p.ultimate)this._note(frequency*pitch*1.5,duration*.8,{type:'sine',gain:.025});
   }
   _stop() {
     if (this.timer) clearInterval(this.timer); this.timer = null;

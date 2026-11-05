@@ -1,4 +1,5 @@
 import { gainExperience } from '../entities/HeroBuild.js';
+import { applyBondVariant } from '../data/BondsData.js';
 import { Hero } from '../entities/Hero.js';
 import { Companion } from '../entities/Companion.js';
 import { GridSystem } from '../combat/GridSystem.js';
@@ -49,6 +50,7 @@ function fromTeam(team, side, grid) {
     )
   ];
   for (const u of units) {
+    applyBondVariant(u, team.variants?.[u.templateId] ?? 'base');
     const original =
         u.id === 'enemy_hero' ? 'hero' : u.id.replace(/^enemy_/, ''),
       p = team.formation[original];
@@ -121,6 +123,7 @@ export const worldMethods = {
       forging: 0
     };
     for (const u of units.filter((u) => u.team === 'home')) {
+      if (!u.bondConfigured) applyBondVariant(u, this.session?.journey?.bonds.modes[u.templateId] ?? 'base');
       u.sect = prep.tactics.affiliations[u.id] ?? u.sect;
       u.targetPriority =
         prep.tactics.priorities[u.id] ?? u.targetPriority ?? 'nearest';

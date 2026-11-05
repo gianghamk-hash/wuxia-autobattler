@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { SoundManager } from '../src/audio/SoundManager.js';
+import { SKILL_VISUALS } from '../src/data/SkillVisualsData.js';
 function parameter() { return { setValueAtTime() {}, exponentialRampToValueAtTime() {} }; }
 class Context {
   constructor() { this.currentTime = 0; this.state = 'suspended'; this.destination = {}; this.started = 0; }
@@ -20,4 +21,17 @@ test('audio remains silent until consent, schedules BGM/SFX and stops timers on 
 });
 test('unsupported audio rejects clearly without creating a timer', async () => {
   const sound = new SoundManager({ AudioContext: null }); await assert.rejects(sound.unlock(), /chưa hỗ trợ/); assert.equal(sound.timer, null);
+});
+test('skill audio has stable, distinct gestures and remains silent while hidden or without consent',async()=>{
+  globalThis.document={hidden:false};const sound=new SoundManager({AudioContext:Context});
+  const profiles=['sweep','projectile','ward','petals','dash'].map(path=>SKILL_VISUALS.find(p=>p.path===path&&p.ultimate));
+  profiles.forEach(p=>sound.skill({ownerId:p.ownerId,skillId:p.skillId}));assert.equal(sound.context,null);
+  await sound.unlock();sound.setMuted(false);const before=sound.context.started;
+  profiles.forEach(p=>sound.skill({ownerId:p.ownerId,skillId:p.skillId}));assert.ok(sound.context.started>before);
+  document.hidden=true;sound.visibilityChanged();const hidden=sound.context.started;
+  profiles.forEach(p=>sound.skill({ownerId:p.ownerId,skillId:p.skillId}));assert.equal(sound.context.started,hidden);
+  const notes=[];sound._note=(...args)=>notes.push(args);
+  profiles.forEach(p=>sound.skill({ownerId:p.ownerId,skillId:p.skillId}));
+  assert.equal(new Set(notes.filter((_,i)=>i%2===0).map(row=>JSON.stringify(row))).size,5);
+  await sound.dispose();document.hidden=false;
 });

@@ -66,12 +66,12 @@ export function makeSquad(squad, scenario, side, grid) {
   }
   return units;
 }
-export function simulatePair(a, b, scenario, seed) {
+export function simulatePair(a, b, scenario, seed, options = {}) {
   return [false, true].map(swapped => {
     const grid = new GridSystem();
     const home = makeSquad(swapped ? b : a, scenario, 'home', grid);
     const enemy = makeSquad(swapped ? a : b, scenario, 'enemy', grid);
-    const battle = new CombatEngine({ units: [...home, ...enemy], grid, seed });
+    const battle = new CombatEngine({ units: [...home, ...enemy], grid, seed, ...options });
     battle.start();
     while (battle.state === 'running') battle.update(0.25);
     if (battle.units.some(u => !Number.isFinite(u.stats.hp))) throw Error('Chỉ số trận đấu không hữu hạn.');
@@ -111,7 +111,7 @@ export function runBalance({ pairs = 150, seed = 20261105, scenarios = SCENARIOS
     const result = { ...scenario, pairs, matches: pairs * 2, draws, homeWins, meanDuration: +(durations.reduce((a, b) => a + b, 0) / durations.length).toFixed(2), p50: durations[Math.floor(durations.length * .5)], p90: durations[Math.floor(durations.length * .9)], units, records };
     results.push(result); progress(result);
   }
-  return { seed, matches: pairs * 2 * scenarios.length, method: 'One hero + five distinct companions per team. Each pair plays both sides with the same seed and mirrored formations. Auto ultimates; nearest target. Attribute points allocated and legal skills learned. Gear is a three-piece sect set on the hero only. Prepared scenarios use campaign code for level-10 training/forging, elixir and dragon qigong on both teams.', caution: 'Descriptive team-presence rates; not causal tier rankings. Mirrored games and members of the same team are correlated. No independent-trial confidence interval is claimed. Random composition is not an optimized player strategy. Scenarios with 2/4/6 specify the hero sect count, not every sect present. No claim to cover all gear/qigong/priorities/manual choices or campaign pacing.', scenarios: results };
+  return { seed, matches: pairs * 2 * scenarios.length, rules: { version: '3.1', yielding: true, overtime: { start: 90, end: 120, maxDamageMultiplier: 2.5, minHealingMultiplier: .4 } }, method: 'One hero + five distinct companions per team. Each pair plays both sides with the same seed and mirrored formations. Auto ultimates; nearest target. Attribute points allocated and legal skills learned. Gear is a three-piece sect set on the hero only. Prepared scenarios use campaign code for level-10 training/forging, elixir and dragon qigong on both teams.', caution: 'Descriptive team-presence rates; not causal tier rankings. Mirrored games and members of the same team are correlated. No independent-trial confidence interval is claimed. Random composition is not an optimized player strategy. Scenarios with 2/4/6 specify the hero sect count, not every sect present. No claim to cover all gear/qigong/priorities/manual choices or campaign pacing.', scenarios: results };
 }
 export async function runParallel({ pairs = 150, seed = 20261105, progress = () => {} } = {}) {
   if (!Number.isSafeInteger(pairs) || pairs < 1 || pairs > 10000) throw Error('Số cặp phải từ 1 đến 10000.');
@@ -139,7 +139,7 @@ export function serializeReport(report) {
   return JSON.stringify(report, (key, value) => key === 'records' ? [] : value, 2)
     .replace(/"records": \[\]/g, () => `"records": [\n${report.scenarios[index++].records.map(record => '        ' + JSON.stringify(record)).join(',\n')}\n      ]`) + '\n';
 }
-if (!isMainThread) {
+if (!isMainThread && workerData?.index !== undefined) {
   const { index, pairs, seed } = workerData;
   parentPort.postMessage(runBalance({ pairs, seed, scenarios: [SCENARIOS[index]], scenarioOffset: index }).scenarios[0]);
 } else if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

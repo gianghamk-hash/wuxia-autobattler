@@ -29,6 +29,8 @@ import { mountSkillTreeUI } from '../ui/SkillTreeUI.js';
 import { mountCodexUI } from '../ui/CodexUI.js';
 import { mountSaveUI } from '../ui/SaveUI.js';
 import { SoundManager } from '../audio/SoundManager.js';
+import { renderJourneyRoster, renderBattleAdvice } from '../ui/JourneyUI.js';
+import { battleScene } from '../data/PresentationData.js';
 const el = (id) => document.getElementById(id);
 function node(tag, text, className) {
   const result = document.createElement(tag);
@@ -485,6 +487,10 @@ export class App {
   }
   changed(reason) {
     if (!this.ready) return;
+    if (reason === 'reader') {
+      bus.emit(EVT.SAVE_REQUESTED);
+      return;
+    }
     if (reason === 'settings') {
       this.applyAudio();
       bus.emit(EVT.SAVE_REQUESTED);
@@ -680,6 +686,7 @@ export class App {
     root.append(profile, level);
   }
   renderRoster() {
+    renderJourneyRoster(this);
     const session = this.model.session,
       root = el('roster-list');
     root.replaceChildren();
@@ -888,6 +895,7 @@ export class App {
                 : '')
           }));
     this.dialogue.show({
+      ...this.readerOptions('main:' + quest.id),
       title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
       quest,
       hero: this.model.session.hero,
@@ -940,6 +948,7 @@ export class App {
             { id: 'demand', text: 'Đòi một lời hứa trả công trước' }
           ].filter((c) => !previous || previous === c.id);
     this.dialogue.show({
+      ...this.readerOptions('recruit:' + quest.id),
       title: quest.title,
       hero: this.model.session.hero,
       lines: [
@@ -996,12 +1005,35 @@ export class App {
     this.cinematicRemaining = 0;
     el('ultimate-banner').classList.remove('show');
   }
+  readerOptions(key) {
+    return {
+      readerKey: key,
+      getReader: () => this.model.session.journey.reader,
+      onRead: (...args) => this.run(() => this.model.rememberDialogue(...args)),
+      onFont: (size) => this.run(() => this.model.setReaderFont(size))
+    };
+  }
   enterBattle() {
     const battle = this.model.battle;
+    battle.scene = battleScene(
+      this.model.session.storyProgress.pendingEncounter,
+      this.model.mainQuest(),
+      this.model.session.adventure.dungeon?.id
+    );
     this.renderer.setBattle(battle);
     el('battle-title').textContent = battle.encounterName;
+    this.renderBattleCards();
+    bus.emit(EVT.BATTLE_STATE_CHANGED, { running: true });
+    this.setView('battle');
+    this.updateBattleStatus();
+    if (this.engine.paused)
+      this.toast('Trận đã sẵn sàng. Bấm Tiếp tục để giao chiến.');
+  }
+  renderBattleCards() {
+    const battle = this.model.battle;
     const root = el('battle-unit-list');
     root.replaceChildren();
+    this.unitNodes.clear();
     for (const unit of battle.units) {
       const card = node('article', undefined, 'battle-unit-card');
       card.dataset.team = unit.team;
@@ -1012,25 +1044,85 @@ export class App {
         this.world.inspect(unit);
       });
       card.append(
-        portrait(unit.characterId ? unit : COMPANIONS_BY_ID[unit.templateId] ?? unit),
+        portrait(
+          unit.characterId ? unit : (COMPANIONS_BY_ID[unit.templateId] ?? unit)
+        ),
         node('strong', unit.name),
         status,
         inspect
       );
+      if (unit.team === 'enemy') {
+        const focus = node('button', 'Tập trung mục tiêu');
+        focus.type = 'button';
+        focus.dataset.focus = unit.id;
+        focus.disabled = !unit.alive || !this.model.running;
+        focus.addEventListener('click', () => {
+          if (battle.orderFocus(unit.id)) {
+            this.updateBattleStatus();
+            this.toast(
+              'Đã chọn ' + unit.name + '. Khiêu khích vẫn được ưu tiên.'
+            );
+          }
+        });
+        card.append(focus);
+      }
       root.append(card);
       this.unitNodes.set(unit.id, status);
     }
-    bus.emit(EVT.BATTLE_STATE_CHANGED, { running: true });
-    this.setView('battle');
-    this.updateBattleStatus();
-    if (this.engine.paused)
-      this.toast('Trận đã sẵn sàng. Bấm Tiếp tục để giao chiến.');
   }
   updateBattleStatus() {
     const battle = this.model.battle;
     if (!battle || this.view !== 'battle') return;
     el('battle-clock').textContent =
       `${this.engine.paused ? 'Tạm dừng · ' : ''}${battle.elapsed.toFixed(1)} / 120 giây`;
+    let warnings = el('battle-warnings');
+    if (!warnings) {
+      warnings = node('div', undefined, 'battle-warnings');
+      warnings.id = 'battle-warnings';
+      warnings.setAttribute('role', 'status');
+      el('battle-clock').after(warnings);
+    }
+    const tells =
+      battle.state === 'running'
+        ? battle.director.bosses
+            .filter((b) => b.tell)
+            .map(
+              (b) =>
+                b.unit.name +
+                ' · ' +
+                b.tell.name +
+                ' · ' +
+                Math.max(0, b.tell.until - battle.elapsed).toFixed(1) +
+                's · ' +
+                b.tell.counter
+            )
+        : [];
+    if (
+      battle.state === 'running' &&
+      battle.director.bosses.some(
+        (b) => b.unit.alive && battle.director.protection(b.unit) < 1
+      )
+    )
+      tells.push(
+        'Ấn đang giảm 65% sát thương nhận vào của Đỗ Mậu. Chọn tập trung đánh Ấn để phá bảo hộ.'
+      );
+    if (battle.overtime && battle.elapsed >= 85)
+      tells.push(
+        battle.elapsed < 90
+          ? 'Sau 90 giây: Quyết đấu tăng sát thương và giảm hồi máu cho cả hai phe.'
+          : 'Quyết đấu: sát thương ×' +
+              battle.pressure().damage.toFixed(2) +
+              ' · hồi máu ×' +
+              battle.pressure().healing.toFixed(2) +
+              ' · áp dụng cả hai phe.'
+      );
+    warnings.textContent = tells.join(' | ');
+    warnings.hidden = !tells.length;
+    for (const b of document.querySelectorAll('[data-focus]')) {
+      const u = battle.units.find((u) => u.id === b.dataset.focus);
+      b.disabled = !this.model.running || !u?.alive;
+      b.setAttribute('aria-pressed', String(battle.focusId === u?.id));
+    }
     el('btn-retreat').disabled = !this.model.running;
     el('btn-battle-mode').textContent = battle.autoUltimate
       ? 'Tự động'
@@ -1058,6 +1150,8 @@ export class App {
   }
   battleEvent(event) {
     this.renderer.event(event);
+    if (event.type === 'boss:summon' && this.view === 'battle')
+      this.renderBattleCards();
     const effects =
       (this.model.session.settings.effects ?? true) &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1097,6 +1191,17 @@ export class App {
     const name = (id) =>
       this.model.battle?.units.find((u) => u.id === id)?.name ?? 'Hiệu ứng';
     let text = '';
+    if (event.type.startsWith('boss:'))
+      text =
+        event.type === 'boss:interrupt'
+          ? 'Đã ngắt ' + event.name
+          : event.type === 'boss:tell'
+            ? name(event.actorId) + ' chuẩn bị ' + event.name
+            : event.type === 'boss:phase'
+              ? name(event.actorId) + ' thi triển ' + event.name
+              : event.type === 'boss:summon'
+                ? 'Xuất hiện ' + event.name
+                : 'Đòn chuẩn bị đã hủy';
     if (event.type === 'damage')
       text = `${name(event.targetId)} nhận ${Math.ceil(event.amount)} sát thương${event.crit ? ' bạo kích' : ''}${event.absorbed ? `; khiên đỡ ${Math.ceil(event.absorbed)}` : ''}`;
     if (event.type === 'heal')
@@ -1115,15 +1220,17 @@ export class App {
     if (
       event.type === 'death' ||
       (performance.now() - this.lastSfx > 100 &&
-        ['damage', 'heal', 'ultimate'].includes(event.type))
+        ['damage', 'heal', 'skill:cast'].includes(event.type))
     ) {
-      this.sound.sfx(
-        event.type === 'damage'
-          ? event.damageType === 'magical'
-            ? 'magic'
-            : 'hit'
-          : event.type
-      );
+      if (event.type === 'skill:cast') this.sound.skill(event);
+      else
+        this.sound.sfx(
+          event.type === 'damage'
+            ? event.damageType === 'magical'
+              ? 'magic'
+              : 'hit'
+            : event.type
+        );
       this.lastSfx = performance.now();
     }
   }
@@ -1183,6 +1290,7 @@ export class App {
     }
     table.append(body);
     el('battle-stats').replaceChildren(table);
+    renderBattleAdvice(this, result);
     this.sound.setTrack(result.winner === 'home' ? 'ending' : 'camp');
     this.sound.sfx(result.winner === 'home' ? 'victory' : 'defeat');
     this.updateBattleStatus();
@@ -1210,8 +1318,10 @@ export class App {
       if (speaker === 'Người kể') root.append(node('p', text));
       else {
         const row = node('article', undefined, 'ending-dialogue-line');
-        const copy = node('div'); copy.append(node('strong', speaker), node('p', text));
-        row.append(speakerPortrait(speaker, this.model.session.hero), copy); root.append(row);
+        const copy = node('div');
+        copy.append(node('strong', speaker), node('p', text));
+        row.append(speakerPortrait(speaker, this.model.session.hero), copy);
+        root.append(row);
       }
     }
     el('ending-summary').textContent =

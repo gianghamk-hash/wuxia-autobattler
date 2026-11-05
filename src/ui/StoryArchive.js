@@ -52,6 +52,7 @@ export function renderStoryArchive(app, root, chapter) {
           return;
         }
         app.dialogue.show({
+          ...app.readerOptions('archive:' + q.id),
           title: `Xem lại · Chương ${q.chapter} hồi ${q.episode} · ${q.title}`,
           quest: q,
           hero: s.hero,
