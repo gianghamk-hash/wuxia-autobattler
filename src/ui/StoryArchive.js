@@ -1,3 +1,4 @@
+import {resolveDaiVietQuest} from '../data/DaiVietStoryData.js';
 import { CHAPTERS, storyLines } from '../data/StoryChaptersData.js';
 import { MAIN_QUESTS } from '../data/QuestsData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
@@ -8,20 +9,21 @@ const n = (tag, text) => {
 };
 /** Replay never calls a campaign action and never awards resources. */
 export function renderStoryArchive(app, root, chapter) {
-  const s = app.model.session;
+  const s = app.model.session, {quests:MAIN_QUESTS,chapters:CHAPTERS}=app.model.catalog;
   let selected = chapter ?? s.storyProgress.currentChapter;
   const draw = () => {
     root.replaceChildren(
-      n('h2', 'Truyện ký 12 chương'),
+      n('h2', `Truyện ký ${CHAPTERS.length} chương`),
       n(
         'p',
-        '240 hồi · Xem lại hồi đã qua, tiếp tục hồi hiện tại. Lựa chọn đã lưu được giữ nguyên.'
+        `${MAIN_QUESTS.length} hồi · Xem lại hồi đã qua, tiếp tục hồi hiện tại. Lựa chọn đã lưu được giữ nguyên.`
       )
     );
     const tabs = n('div', '');
     tabs.className = 'story-chapters';
     for (const c of CHAPTERS) {
-      const b = n('button', `Chương ${c.number} · ${c.title}`);
+      const visible=resolveDaiVietQuest(MAIN_QUESTS.find(q=>q.chapter===c.number),s);
+      const b = n('button', `Chương ${c.number} · ${visible.chapterTitle}`);
       b.type = 'button';
       b.disabled = c.number > s.storyProgress.currentChapter;
       b.setAttribute('aria-pressed', String(selected === c.number));
@@ -33,10 +35,10 @@ export function renderStoryArchive(app, root, chapter) {
     }
     root.append(tabs);
     const c = CHAPTERS[selected - 1];
-    root.append(n('h3', c.title), n('p', c.summary));
+    const first=resolveDaiVietQuest(MAIN_QUESTS.find(q=>q.chapter===selected),s);root.append(n('h3',first.chapterTitle),n('p',first.chapterSummary));
     const list = n('div', '');
     list.className = 'story-episodes';
-    for (const q of MAIN_QUESTS.filter((q) => q.chapter === selected)) {
+    for (const q of MAIN_QUESTS.filter((q) => q.chapter === selected).map(q=>resolveDaiVietQuest(q,s))) {
       const done = s.storyProgress.completedQuests.includes(q.id),
         current = q.id === s.storyProgress.activeQuestId,
         b = n(

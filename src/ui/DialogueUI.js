@@ -3,6 +3,7 @@ import { portrait, icon } from './Visuals.js';
 import { findNPC } from '../data/NPCData.js';
 import { expressionFor, sceneFor } from '../data/PresentationData.js';
 import { renderBattleBrief } from './BattleBriefUI.js';
+import { DAI_VIET_CAST_BY_NAME } from '../data/DaiVietCast.js';
 const node = (tag, text, className) => {
   const e = document.createElement(tag);
   if (text !== undefined) e.textContent = text;
@@ -11,8 +12,9 @@ const node = (tag, text, className) => {
 };
 export function speakerPortrait(speaker, hero, quest) {
   const name = speaker.trim().normalize('NFC');
-  if (name === 'Bạn')
+  if (name === 'Bạn'||name==='Trần Phong')
     return portrait(hero?.sect ?? 'VoDang', 'classic-portrait');
+  if(quest?.canon==='dai-viet'&&DAI_VIET_CAST_BY_NAME[name])return expressive(DAI_VIET_CAST_BY_NAME[name],quest);
   const companion = COMPANIONS.find(
     (c) =>
       c.name === name || (name.length >= 3 && c.name.startsWith(name + ' '))
@@ -30,7 +32,7 @@ export function speakerPortrait(speaker, hero, quest) {
 }
 function expressive(person, quest) {
   const result = portrait(person, 'classic-portrait'),
-    url = expressionFor(person.id, quest);
+    url = expressionFor(person.assetId??person.id, quest);
   if (url) {
     result.style.backgroundImage = 'url("' + url + '")';
     result.dataset.expression = url.split('/').at(-1);
@@ -85,6 +87,7 @@ export class DialogueUI {
       'linear-gradient(0deg,#091f28aa,transparent),url("' +
       sceneFor(quest) +
       '")';
+    if(quest?.scene==='modern')scene.style.backgroundImage='linear-gradient(125deg,#28444f,#102c30)';
     scene.setAttribute('aria-hidden', 'true');
     scene.append(
       node('span', quest?.location ?? 'Giang hồ ký sự', 'classic-location')
@@ -172,7 +175,7 @@ export class DialogueUI {
       if (readerKey) onRead?.(readerKey, index, speaker, line);
       name.textContent = speaker;
       text.textContent = line;
-      const npc = findNPC(speaker);
+      const npc = quest?.canon==='dai-viet'?DAI_VIET_CAST_BY_NAME[speaker]:findNPC(speaker);
       role.textContent = npc?.role ?? '';
       role.hidden = !npc;
       frame.title = npc?.bio ?? '';

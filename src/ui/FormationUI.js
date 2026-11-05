@@ -1,5 +1,6 @@
 import { portrait } from './Visuals.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
+import {storyPerson} from '../data/DaiVietCast.js';
 export function moveFormation(formation, id, cell) {
   if (
     !Object.hasOwn(formation, id) ||
@@ -34,7 +35,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
         : (session.adventure?.tactics.affiliations[id] ??
           COMPANIONS_BY_ID[id].sect);
     const name = (id) =>
-      id === 'hero' ? session.hero.name : COMPANIONS_BY_ID[id].name;
+      id === 'hero' ? session.hero.name : storyPerson(session,COMPANIONS_BY_ID[id]).name;
     for (const id of ids) {
       const button = document.createElement('button');
       button.type = 'button';

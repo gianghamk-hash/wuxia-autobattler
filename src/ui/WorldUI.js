@@ -1,3 +1,5 @@
+import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
+import {casebook} from '../core/Casebook.js';
 import { renderStoryArchive } from './StoryArchive.js';
 import { renderBonds } from './JourneyUI.js';
 import { renderCasebook } from './CasebookUI.js';
@@ -222,7 +224,7 @@ export function mountWorldUI(app) {
     );
     const list = n('div', undefined, 'priority-list');
     for (const id of ['hero', ...s.party.active]) {
-      const u = id === 'hero' ? s.hero : COMPANIONS_BY_ID[id],
+      const u = id === 'hero' ? s.hero : storyPerson(s,COMPANIONS_BY_ID[id]),
         sect = t.affiliations[id] ?? u.sect,
         label = n(
           'label',
@@ -268,7 +270,7 @@ export function mountWorldUI(app) {
     const id = unit.id ?? 'hero',
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
     root.removeAttribute('data-tier');
-    const npc = NPCS_BY_ID[unit.characterId];
+    const npc = isDaiViet(s)?(DAI_VIET_CAST_BY_ID[unit.storyActorId??unit.templateId??unit.id]??(unit.characterId?{...NPCS_BY_ID[unit.characterId],name:unit.name}:null)):NPCS_BY_ID[unit.characterId];
     if (!npc) decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
     root.append(
       portrait(
@@ -292,7 +294,7 @@ export function mountWorldUI(app) {
         'weakness'
       )
     );
-    if (npc) root.append(n('p', `${npc.role} · ${npc.bio}`, 'hint'));
+    if (npc) root.append(n('p', [npc.role,npc.bio].filter(Boolean).join(' · '), 'hint'));
     else if (COMPANIONS_BY_ID[unit.templateId ?? id])
       root.append(
         n(
@@ -584,7 +586,9 @@ export function mountWorldUI(app) {
     if (tab === 'characters') {
       const cast = panel('Người đã gặp', 'Hoàn thành hồi truyện để ghi thêm nhân vật. Chọn Truyện ký để đọc lại những việc đã xảy ra.');
       const met = new Set();
-      for (const quest of MAIN_QUESTS.filter(q => s.storyProgress.completedQuests.includes(q.id))) {
+      if(isDaiViet(s)){const grid=n('div');grid.className='story-cast-grid';for(const p of casebook(s).people){const card=n('article');card.className='story-cast-card';card.dataset.character=p.id;card.append(portrait(p,'story-cast-portrait'),n('h3',p.name),...p.facts.slice(-3).map(f=>n('p',f.text)));grid.append(card);}cast.append(grid.children.length?grid:n('p','Hoàn thành hồi truyện để ghi lại người đã gặp.'));root.append(cast);}
+      else {
+      for (const quest of app.model.catalog.quests.filter(q => s.storyProgress.completedQuests.includes(q.id))) {
         for (const [speaker] of quest.lines) { const npc = findNPC(speaker); if (npc) met.add(npc.id); }
         if (quest.encounter) met.add('tay_sai');
       }
@@ -595,7 +599,7 @@ export function mountWorldUI(app) {
         grid.append(card);
       }
       cast.append(grid.children.length ? grid : n('p', 'Bạn chưa hoàn thành hồi truyện nào. Người đầu tiên sẽ được ghi lại sau khi vượt chuyện ở quán Rồng Lửa.'));
-      root.append(cast);
+      root.append(cast);}
     }
     if (tab === 'story') {
       const archive = panel('Truyện ký');
@@ -605,13 +609,13 @@ export function mountWorldUI(app) {
     if (tab === 'journal') {
       const journal = panel(
         'Nhật ký giang hồ',
-        `Đại Việt giả tưởng; giữ giọng hài hiệp, không tái hiện một triều đại lịch sử. Nhân nghĩa hiện tại ${s.storyProgress.karmaScore}. Bốn hướng: chính (+2), tà (−2 và 100 bạc), ẩn dật, xưng vương (500 bạc).`
+        isDaiViet(s)?'Đại Việt giả tưởng. Hai hướng về hiện đại hoặc ở lại được giữ từ chương 19; ở lại có thể nhận quyền, trao cho hội hoặc về đời sống riêng. Tình cảm với Mai Tước do hai người tự chọn. Không thu bạc để chọn kết thúc.':`Đại Việt giả tưởng; giữ giọng hài hiệp, không tái hiện một triều đại lịch sử. Nhân nghĩa hiện tại ${s.storyProgress.karmaScore}. Bốn hướng: chính (+2), tà (−2 và 100 bạc), ẩn dật, xưng vương (500 bạc).`
       );
       const decisions = panel(
         'Lựa chọn chính truyện đã lưu',
         'Luôn giữ riêng, kể cả khi nhật ký hoạt động gần đây vượt 200 dòng.'
       );
-      for (const quest of MAIN_QUESTS) {
+      for (const quest of app.model.catalog.quests) {
         const chosen = s.storyProgress.decisions[quest.id];
         if (chosen && quest.choices.length > 1)
           decisions.append(

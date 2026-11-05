@@ -1,4 +1,5 @@
 import { deepFreeze } from './DataUtils.js';
+import {DAI_VIET_MISSIONS} from './DaiVietMissions.js';
 const definitions = [
   [
     'C01H09',
@@ -75,9 +76,9 @@ const definitions = [
 ];
 export const MISSIONS = deepFreeze(
   Object.fromEntries(
-    definitions.map(([id, type, title, duration, description, failure]) => [
+    [...definitions.map(([id, type, title, duration, description, failure]) => [
       id,
       { id, type, title, duration, description, failure }
-    ])
+    ]),...Object.entries(DAI_VIET_MISSIONS)]
   )
 );

@@ -1,3 +1,4 @@
+import {storyPerson,isDaiViet} from '../data/DaiVietCast.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { GACHA, RARITIES, rarityLabel } from '../data/GachaData.js';
 import { itemCount } from '../core/Campaign.js';
@@ -34,7 +35,7 @@ export function mountGachaUI(app) {
       heading,
       n(
         'p',
-        'Một chén trà, một cuộc gặp. 50 hiệp khách đều có thể kết nghĩa qua nhiệm vụ; quay không cộng kinh nghiệm hay tự đổi đội hình.',
+        isDaiViet(s)?'Vai chính được mời qua chính truyện và chỉ vào nhóm quay sau khi đã gặp. Các nhân vật còn lại có thể mời như thường; tỉ lệ bậc và bảo đảm được giữ, trong mỗi bậc chia đều người hiện có. Quay không tự đổi đội hình.':'Một chén trà, một cuộc gặp. 50 hiệp khách đều có thể kết nghĩa qua nhiệm vụ; quay không cộng kinh nghiệm hay tự đổi đội hình.',
         'hint'
       )
     );
@@ -47,7 +48,7 @@ export function mountGachaUI(app) {
     const locked =
       app.model.running ||
       Boolean(s.storyProgress.pendingEncounter) ||
-      !s.storyProgress.completedQuests.includes('Q101');
+      !s.storyProgress.completedQuests.includes('Q101')&&!s.storyProgress.completedQuests.includes('D01H06');
     const controls = n('div', undefined, 'gacha-actions');
     for (const [count, cost] of [
       [1, GACHA.singleCost],
@@ -115,7 +116,7 @@ export function mountGachaUI(app) {
       result.append(n('h3', `Cuộc gặp vừa rồi · ${last.price} bạc`));
       const cards = n('div', undefined, 'gacha-results');
       for (const r of last.results) {
-        const u = COMPANIONS_BY_ID[r.id],
+        const u = storyPerson(s,COMPANIONS_BY_ID[r.id]),
           card = n('button', undefined, 'gacha-result');
         card.type = 'button';
         decorateRarity(card, u);
@@ -140,7 +141,7 @@ export function mountGachaUI(app) {
     history.append(n('summary', `Lịch sử · tổng ${g.total} lượt`));
     if (!g.history.length) history.append(n('p', 'Chưa có cuộc gặp.'));
     for (const r of [...g.history].reverse()) {
-      const u = COMPANIONS_BY_ID[r.id];
+      const u = storyPerson(s,COMPANIONS_BY_ID[r.id]);
       history.append(
         n(
           'p',

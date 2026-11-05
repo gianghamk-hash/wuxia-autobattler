@@ -55,7 +55,7 @@ export function validateSnapshot(data) {
     occupied.add(key);
   }
   if (!Array.isArray(data.inventory) || !plain(data.companionsAffinity) || !plain(data.storyProgress) ||
-      !Number.isInteger(data.storyProgress.currentAct) || data.storyProgress.currentAct < 1 || data.storyProgress.currentAct > 3 ||
+      !Number.isInteger(data.storyProgress.currentAct) || data.storyProgress.currentAct < 1 || data.storyProgress.currentAct > (data.storyProgress.storyRevision===4?5:3) ||
       !plain(data.storyProgress.questFlags)) fail('Tiến trình không hợp lệ.');
   if (!data.inventory.every(item => plain(item) && typeof item.itemId === 'string' && Number.isInteger(item.quantity) && item.quantity > 0) ||
       !Object.values(data.companionsAffinity).every(n => finite(n) && n <= 100) ||

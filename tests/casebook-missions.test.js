@@ -255,9 +255,10 @@ test('hold objectives last thirty simulation seconds, spawn capped waves and rep
     a.battle.units.filter((u) => u.team === 'enemy' && u.alive).length <= 6
   );
 });
-test('all nine authored missions match actual story battles and keep success/failure state explicit', () => {
-  assert.equal(Object.keys(MISSIONS).length, 9);
-  for (const mission of Object.values(MISSIONS)) {
+test('all nine legacy missions match their actual story battles and keep success/failure state explicit', () => {
+  const legacy=Object.values(MISSIONS).filter(m=>!m.id.startsWith('D'));
+  assert.equal(legacy.length, 9);
+  for (const mission of legacy) {
     assert.ok(MAIN_QUESTS.find((q) => q.id === mission.id)?.encounter);
     assert.ok(mission.failure);
     assert.ok(mission.description);

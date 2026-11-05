@@ -1,8 +1,18 @@
-# Võ Lâm Hài Hiệp Truyện
+# Đại Việt Kỳ Hiệp Truyện
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 3.3 — hình ảnh theo tần suất và thao tác thuận tay:** 240 hồi, 50 đồng hành. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 4.0 — cốt truyện mới 20 chương × 20 hồi:** hành trình mặc định có 400 hồi liên kết, dùng lại hình ảnh hiện có. Bản lưu cũ tiếp tục 240 hồi quán Rồng Lửa. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 4.0
+
+- Phát triển đề cương Word thành hơn 31.000 từ trong 400 hồi riêng: Trần Phong từ người dùng vẻ tự tin để giấu sợ thành người biết nghe, chịu kiểm và bàn giao; Mai Tước có trách nhiệm gia đình và con đường riêng; Lôi Nam học sống cùng mất mát mà không ép người khác ở lại.
+- Nối chuyện thiếu thóc, án mạng, kho dự trữ và xâm lược bằng nguồn cụ thể. Vụ Lục Thư có người gây án, người ra lệnh, động cơ và chứng cứ; hậu quả được theo tới hậu chiến. Năm chưởng môn được xây trước khi mất, không dùng cái chết để tặng sức mạnh tức thì.
+- 25 chân dung được ghép vai mới, không tạo hoặc ghi đè ảnh. Tên và bối cảnh thống nhất trong hội thoại, đội hình, thẻ tướng, danh mục, đầu mối và truyện đồng hành. Vai chính chỉ vào đội/quay khi đã tới mốc gặp.
+- 67 trận, trong đó 31 mục tiêu giữ đường/bảo vệ/giải cứu/mở chốt thật. Mở đầu dùng quyền cơ bản và một đối thủ; chiến tranh dùng các toán 6v6 và mạch truyện, không giả lập hàng nghìn đơn vị trên bàn.
+- Chọn tình bạn hoặc tìm hiểu Mai; chọn về hiện đại hoặc ở lại. Có 22 cảnh thay thế cho nhánh về, bốn kết thúc theo lựa chọn, không thu bạc để chọn kết. Mười lăm chuyện đồng hành có kịch bản của chiến dịch mới, giữ cơ chế biến thể chiêu.
+- Hai danh mục truyện tách theo phiên bản lưu, không đổi hồi cũ thành cảnh mới hoặc cấp lại thưởng. Sửa bản lưu nhận đủ năm phần và việc nhường hai chỗ nối tiếp khi người giải cứu/người được cứu kẹt giữa đội hình sáu người.
+- [Mạch chương, diễn biến nhân vật, phạm vi và lưu game](docs/DAI_VIET_STORY_4_0.md). Xuất bản đọc HTML/Markdown từ đúng dữ liệu game bằng `node scripts/export-dai-viet.mjs <thư-mục>`; kiểm tra bằng `npm test` và `npm run test:browser`.
 
 ## Bản 3.3
 

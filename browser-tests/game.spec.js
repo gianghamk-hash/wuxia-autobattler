@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 
 async function ready(page) {
-  await page.goto('/');
+  await page.goto('/?story=legacy');
   await expect(page.locator('#boot-status')).toBeHidden();
 }
 async function start(page, name = 'Tiểu Hiệp') {

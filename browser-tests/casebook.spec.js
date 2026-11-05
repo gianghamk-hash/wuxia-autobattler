@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 async function start(page) {
-  await page.goto('/');
+  await page.goto('/?story=legacy');
   await expect(page.locator('#boot-status')).toBeHidden();
   await page.locator('[data-sect-pick="VoDang"]').click();
   await page.locator('#btn-new-game').click();

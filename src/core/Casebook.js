@@ -6,7 +6,10 @@ import {
 import { MAIN_QUESTS } from '../data/QuestsData.js';
 import { NPCS_BY_ID } from '../data/NPCData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
+import {isDaiViet} from '../data/DaiVietCast.js';
+import {daiVietCasebook} from './DaiVietCasebook.js';
 export function casebook(session) {
+  if(isDaiViet(session))return daiVietCasebook(session);
   const done = new Set(session.storyProgress.completedQuests),
     current = MAIN_QUESTS.find(
       (q) => q.id === session.storyProgress.activeQuestId

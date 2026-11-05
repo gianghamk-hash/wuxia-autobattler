@@ -6,6 +6,9 @@ import { bossGuide } from '../combat/BossDirector.js';
 import { applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
 import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
+import { storyCatalog } from '../data/StoryCatalog.js';
+import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
+import { isDaiViet, PLOT_COMPANIONS, PLOT_UNLOCKS, DAI_VIET_CAST_BY_ID, applyDaiVietName } from '../data/DaiVietCast.js';
 import {
   freshWorld,
   validateWorld,
@@ -98,14 +101,14 @@ function setFormation(session) {
   }
   session.party.formation = next;
 }
-function freshStory() {
+function freshStory(catalog=storyCatalog('legacy')) {
   return {
     campaignVersion: 1,
-    storyRevision: STORY_REVISION,
+    storyRevision: catalog.revision,
     currentChapter: 1,
     currentEpisode: 1,
     currentAct: 1,
-    activeQuestId: 'Q101',
+    activeQuestId: catalog.quests[0].id,
     questFlags: {},
     karmaScore: 0,
     completedQuests: [],
@@ -115,8 +118,11 @@ function freshStory() {
     endingId: null
   };
 }
-export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
-  const hero = createHeroBuild({ name, sect });
+// Preserve older engine callers; the app explicitly selects dai-viet for a new journey.
+export function createCampaign({ name, sect = null, story = 'legacy' } = {}) {
+  if(!['legacy','dai-viet'].includes(story))fail('Câu chuyện chưa được hỗ trợ.');
+  const catalog=storyCatalog(story);
+  const hero = createHeroBuild({ name:name??(story==='dai-viet'?'Trần Phong':'Tiểu Hiệp'), sect });
   hero.equippedGear = {
     weapon: 'starter_weapon',
     armor: 'starter_armor',
@@ -124,7 +130,7 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '3.3.0',
+    version: '4.0.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -140,7 +146,7 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
         { itemId: 'food_fish', quantity: 1 }
       ]),
     companionsAffinity: {},
-    storyProgress: { ...freshStory(), questFlags: { STARTER_KIT: true } },
+    storyProgress: { ...freshStory(catalog), questFlags: { STARTER_KIT: true } },
     adventure: freshWorld(),
     gacha: freshGacha(),
     journey: freshJourney(),
@@ -148,10 +154,11 @@ export function createCampaign({ name = 'Tiểu Hiệp', sect = null } = {}) {
   };
 }
 export function validateCampaign(session) {
+  const catalog=storyCatalog(session),{quests:MAIN_QUESTS,byId:MAIN_BY_ID,endings:ENDINGS}=catalog;
   validateJourney(session);
   if (
     session.storyProgress?.campaignVersion === 1 &&
-    session.storyProgress.storyRevision !== STORY_REVISION
+    ![STORY_REVISION,4].includes(session.storyProgress.storyRevision)
   )
     return validateCampaign({
       ...session,
@@ -200,18 +207,20 @@ export function validateCampaign(session) {
   const next = MAIN_QUESTS.find((q) => !story.completedQuests.includes(q.id));
   if (
     story.activeQuestId !== (next?.id ?? null) ||
-    story.currentAct !== (next?.act ?? 3) ||
-    story.currentChapter !== (next?.chapter ?? 12) ||
+    story.currentAct !== (next?.act ?? catalog.finalAct) ||
+    story.currentChapter !== (next?.chapter ?? catalog.chapters.length) ||
     story.currentEpisode !== (next?.episode ?? 20)
   )
     fail('Nhiệm vụ đang theo dõi không khớp tiến trình.');
   for (const [id, choice] of Object.entries(story.decisions)) {
     if (has(MAIN_BY_ID, id)) {
+      if(isDaiViet(session)&&!story.completedQuests.includes(id)&&id!==story.activeQuestId)fail('Lựa chọn thuộc hồi chưa mở.');
       if (!MAIN_BY_ID[id].choices.some((c) => c.id === choice))
         fail('Lựa chọn hội thoại không hợp lệ.');
     } else if (!has(RECRUIT_BY_ID, id) || !['help', 'demand'].includes(choice))
       fail('Lựa chọn nhiệm vụ không tồn tại.');
   }
+  if(isDaiViet(session)&&MAIN_QUESTS.some(q=>!q.ending&&story.completedQuests.includes(q.id)&&!story.decisions[q.id]))fail('Hồi đã qua thiếu lựa chọn được lưu.');
   if (
     !Array.isArray(session.party.active) ||
     !Array.isArray(session.party.unlocked) ||
@@ -242,6 +251,7 @@ export function validateCampaign(session) {
       fail('Vị trí đội hình bị trùng hoặc ngoài sân.');
     occupied.add(`${p.x},${p.y}`);
   }
+  if(isDaiViet(session)&&PLOT_COMPANIONS.some(id=>session.party.unlocked.includes(id)&&!story.completedQuests.includes(PLOT_UNLOCKS[id])))fail('Đồng hành chính truyện chưa tới mốc gặp.');
   for (const quest of RECRUIT_QUESTS)
     if (
       story.completedQuests.includes(quest.id) &&
@@ -261,10 +271,11 @@ export function validateCampaign(session) {
     !(
       story.endingId === null || ENDINGS.some((e) => e.id === story.endingId)
     ) ||
-    Boolean(story.endingId) !== story.completedQuests.includes('Q304')
+    Boolean(story.endingId) !== story.completedQuests.includes(catalog.finalId)
   )
     fail('Kết cục không khớp tiến trình.');
   const pending = story.pendingEncounter;
+  if(isDaiViet(session)&&story.endingId&&((story.endingId==='home')!==(story.decisions.D19H18==='home')))fail('Kết cục không khớp lựa chọn cổng.');
   if (pending !== null) {
     if (
       !pending ||
@@ -392,11 +403,11 @@ export function migrateCampaign(input) {
       text: 'Kết cục từ phiên bản 1.x được giữ lại. Bốn hướng chính, tà, ẩn dật và xưng vương áp dụng cho các hành trình mới trong Đại Việt giả tưởng.'
     };
   }
-  next.storyProgress = expandStoryProgress(next.storyProgress);
+  if(next.storyProgress.storyRevision!==4)next.storyProgress = expandStoryProgress(next.storyProgress);
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
-  next.version = '3.3.0';
+  next.version = '4.0.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
@@ -419,6 +430,7 @@ export class Campaign {
   get running() {
     return this.battle?.state === 'running';
   }
+  get catalog(){return storyCatalog(this.session);}
   snapshot() {
     validateCampaign(this.session);
     return structuredClone(this.session);
@@ -453,14 +465,15 @@ export class Campaign {
     this._commit(createCampaign(options), 'new');
   }
   mainQuest() {
-    return MAIN_BY_ID[this.session.storyProgress.activeQuestId] ?? null;
+    return resolveDaiVietQuest(this.catalog.byId[this.session.storyProgress.activeQuestId] ?? null,this.session);
   }
   availableRecruitQuests() {
     return RECRUIT_QUESTS.filter(
       (q) =>
         (q.chapter ?? (q.act - 1) * 4 + 1) <=
           this.session.storyProgress.currentChapter &&
-        this.session.storyProgress.completedQuests.includes('Q101')
+        (this.session.storyProgress.completedQuests.includes('Q101')||this.session.storyProgress.completedQuests.includes('D01H06'))&&
+        (!isDaiViet(this.session)||!PLOT_COMPANIONS.includes(q.companionId))
     );
   }
   updateProfile(hero, inventory) {
@@ -513,6 +526,7 @@ export class Campaign {
     }, 'gift');
   }
   _decision(next, questId, choiceId, karma) {
+    const MAIN_BY_ID=storyCatalog(next).byId;
     const previous = next.storyProgress.decisions[questId];
     if (previous && previous !== choiceId)
       fail(
@@ -529,9 +543,15 @@ export class Campaign {
     }
   }
   _completeMain(next, quest) {
+    const catalog=storyCatalog(next),MAIN_QUESTS=catalog.quests;
     if (next.storyProgress.completedQuests.includes(quest.id))
       fail('Nhiệm vụ đã nhận thưởng.');
     next.storyProgress.completedQuests.push(quest.id);
+    if(quest.recruitCompanion){
+      const id=quest.recruitCompanion,recruit=RECRUIT_QUESTS.find(q=>q.companionId===id);
+      if(!next.party.unlocked.includes(id)){next.party.unlocked.push(id);next.companionsAffinity[id]=15;if(next.party.active.length<5)next.party.active.push(id);setFormation(next);}
+      if(!next.storyProgress.completedQuests.includes(recruit.id))next.storyProgress.completedQuests.push(recruit.id);
+    }
     Object.assign(next.storyProgress.questFlags, quest.flags ?? {});
     next.hero = gainExperience(next.hero, quest.xp, next.inventory);
     if (quest.silver) give(next, 'silver', quest.silver);
@@ -544,8 +564,8 @@ export class Campaign {
       (q) => !next.storyProgress.completedQuests.includes(q.id)
     );
     next.storyProgress.activeQuestId = following?.id ?? null;
-    next.storyProgress.currentAct = following?.act ?? 3;
-    next.storyProgress.currentChapter = following?.chapter ?? 12;
+    next.storyProgress.currentAct = following?.act ?? catalog.finalAct;
+    next.storyProgress.currentChapter = following?.chapter ?? catalog.chapters.length;
     next.storyProgress.currentEpisode = following?.episode ?? 20;
     for (const s of quest.spotlights ?? [])
       if (next.party.unlocked.includes(s.id))
@@ -607,7 +627,7 @@ export class Campaign {
     return {
       name: encounter.name,
       enemies,
-      guides: enemies.map((u) => bossGuide(u.characterId)).filter(Boolean),
+      guides: enemies.map((u) => bossGuide(u.characterId,quest.canon)).filter(Boolean),
       objective: MISSIONS[missionId] ?? null
     };
   }
@@ -723,6 +743,7 @@ export class Campaign {
     return this.retryEncounter();
   }
   retryEncounter() {
+    const MAIN_BY_ID=this.catalog.byId;
     this._guard();
     const pending = this.session.storyProgress.pendingEncounter;
     if (!pending || !this.session.hero.sect) fail('Không có trận đang chờ.');
@@ -762,20 +783,25 @@ export class Campaign {
       }),
       ...this.session.party.active.map((id) => new Companion(id, { level }))
     ];
+    if(quest?.canon==='dai-viet'&&quest.chapter===1){
+      const hero=units[0];hero.passive=null;hero.stats.attackRange=1;hero.stats.physicalAtk=Math.max(hero.stats.physicalAtk,hero.stats.magicalAtk*.8);
+      hero.skills.autoAttack={id:'dai_viet_unarmed',name:'Quyền Cơ Bản',type:'physical',targetType:'nearest_enemy',dmgMultiplier:1,energyGain:15,effects:[]};
+      hero.skills.ultimate={id:'dai_viet_unarmed_guard',name:'Chưa học tuyệt kỹ',type:'physical',targetType:'self',dmgMultiplier:0,energyCost:10000,effects:[]};
+    }
     units.forEach((u) => grid.place(u, this.session.party.formation[u.id]));
     const helper =
       pending.kind === 'recruit'
         ? quest.companionId
-        : encounter.guide ||
+        : quest?.guide??(encounter.guide ||
             units.every((u) => u.skills.autoAttack.dmgMultiplier === 0)
           ? 'companion_01'
-          : null;
+          : null);
     if (
       helper &&
       units.length < 3 &&
       !units.some((u) => u.templateId === helper)
     ) {
-      const guide = new Companion(helper, { id: 'guide', level });
+      const guide = new Companion(COMPANIONS_BY_ID[helper]?helper:'companion_01', { id: 'guide', level });
       guide.name =
         pending.kind === 'recruit'
           ? `${COMPANIONS_BY_ID[helper].name} (hỗ trợ)`
@@ -783,6 +809,13 @@ export class Campaign {
       if (pending.kind === 'main' && quest.id === 'Q101') {
         applyStoryIdentity(guide, NPCS_BY_ID.quan_chu);
         guide.name = 'Quán chủ (hỗ trợ)';
+      }
+      if(isDaiViet(this.session)){
+        const lockedPlot=PLOT_COMPANIONS.includes(helper)&&!this.session.party.unlocked.includes(helper)&&!quest?.guide;
+        const person=lockedPlot?DAI_VIET_CAST_BY_ID.kha_van:DAI_VIET_CAST_BY_ID[helper]??COMPANIONS_BY_ID[helper]??DAI_VIET_CAST_BY_ID.kha_van;
+        applyStoryIdentity(guide,{...person,id:person.assetId??person.id});
+        if(person.kind==='companion')applyDaiVietName(guide);
+        guide.name=person.name+' (hỗ trợ)';
       }
       const cell = [
         { x: 1, y: 0 },
@@ -830,6 +863,7 @@ export class Campaign {
     if (this.battle.state === 'finished') this.settleBattle();
   }
   settleBattle() {
+    const MAIN_BY_ID=this.catalog.byId;
     const pending = this.session.storyProgress.pendingEncounter;
     if (!this.battle?.result || !pending || pending.token !== this.battleToken)
       fail('Trận này đã được xử lý hoặc không thuộc chiến dịch.');
@@ -898,6 +932,7 @@ export class Campaign {
   }
   endingOptions() {
     const next = this.session;
+    if(isDaiViet(next))return this.catalog.endings.map(e=>({...e,available:(next.storyProgress.decisions.D19H18==='home')===(e.id==='home')}));
     return ENDINGS.map((ending) => ({
       ...ending,
       available:
@@ -913,8 +948,9 @@ export class Campaign {
   }
   chooseEnding(id) {
     this._mutate((next) => {
+      const catalog=storyCatalog(next);
       if (
-        next.storyProgress.activeQuestId !== 'Q304' ||
+        next.storyProgress.activeQuestId !== catalog.finalId ||
         next.storyProgress.endingId
       )
         fail('Chưa đến lúc chọn kết cục.');
@@ -923,10 +959,10 @@ export class Campaign {
       );
       if (!choice) fail('Chưa đủ điều kiện kết cục này.');
       if (id === 'wealth') consume(next, 'silver', 100);
-      if (id === 'actor') consume(next, 'silver', 500);
+      if (id === 'actor'&&!isDaiViet(next)) consume(next, 'silver', 500);
       log(next, `Kết cục: ${choice.name}`, this.now());
       next.storyProgress.endingId = id;
-      this._completeMain(next, MAIN_BY_ID.Q304);
+      this._completeMain(next, catalog.byId[catalog.finalId]);
     }, 'ending');
   }
 }
