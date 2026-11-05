@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { writeFile } from 'node:fs/promises';
 
 async function ready(page) {
-  await page.goto('/');
+  await page.goto('/?story=legacy');
   await expect(page.locator('#boot-status')).toBeHidden();
   await page.evaluate(() => window.__game.engine.stop());
 }

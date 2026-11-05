@@ -1,4 +1,5 @@
 import { deepFreeze } from './DataUtils.js';
+import { DAI_VIET_CAST_BY_ID } from './DaiVietCast.js';
 const records = [
   ['quan_chu', 'Quán chủ', 'Chủ quán Rồng Lửa', 'Người đã cho bạn chỗ ở và việc phụ bếp. Ông che chở khách trong quán.', ['Chủ quán']],
   ['ba_tu', 'Bà Tư', 'Người trồng lúa ở Thanh Khê', 'Bà giữ biên nhận đã nộp đủ thóc, nhưng vẫn bị đòi nợ và lấy ruộng.', []],
@@ -28,6 +29,10 @@ export function findNPC(name) { return NPCS.find(n => n.name === name || n.alias
 
 /** Main-story opponents have story identities without changing their battle stats. */
 export function storyEnemy(quest, index, count) {
+  if(quest.canon==='dai-viet'){
+    const actor=DAI_VIET_CAST_BY_ID[index===count-1?quest.enemyId:'tay_sai']??DAI_VIET_CAST_BY_ID.tay_sai;
+    return{...actor,id:actor.assetId,storyName:actor.name,actorId:actor.id};
+  }
   const boss = index === count - 1 && quest.boss;
   const id = boss ? ({ 1: 'doi_truong', 4: 'doc_le', 5: 'kha_van', 8: 'do_mau', 11: 'trinh_nghiem' }[quest.chapter] ?? 'tay_sai') : 'tay_sai';
   return NPCS_BY_ID[id];

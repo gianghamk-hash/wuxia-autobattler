@@ -1,6 +1,7 @@
 const asset = (path) =>
   new URL('../../assets/images/' + path, import.meta.url).href;
 export function sceneFor(quest = {}) {
+  if(quest.canon==='dai-viet')return asset(quest.scene==='jianghu-village'||quest.scene==='modern'?'jianghu-village.webp':`scenes/${quest.scene}.webp`);
   if (quest.location?.includes('Quán Rồng Lửa'))
     return asset('jianghu-village.webp');
   const chapter = quest.chapter ?? 1;
@@ -30,6 +31,11 @@ export function battleScene(pending, quest, dungeonId) {
   return asset('jianghu-village.webp');
 }
 export function expressionFor(id, quest = {}) {
+  if(quest.canon==='dai-viet'){
+    const c=quest.chapter,e=quest.episode;
+    const emotion=({be_na:c>=19?'happy':'worried',ba_tu:c>=19?'relieved':'angry',vu_binh:c>=12?'resolved':'worried',tho_bay:c>=15?'resolved':'ashamed',kha_van:c>=6?'resolved':'worried',cam_tu:c>=19?'resolved':'worried',quan_chu:c>=19?'relieved':'serious',doc_le:c>=19?'defeated':'angry',trinh_nghiem:c>=12?'angry':'smirk',do_mau:c>=12?'resigned':'worried',companion_01:c===14?'ashamed':'serious'})[id];
+    return emotion?asset(`expressions/${id}-${emotion}.webp`):null;
+  }
   const c = quest.chapter ?? 1,
     e = quest.episode ?? 1;
   let emotion;

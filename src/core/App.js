@@ -32,6 +32,8 @@ import { SoundManager } from '../audio/SoundManager.js';
 import { renderJourneyRoster, renderBattleAdvice } from '../ui/JourneyUI.js';
 import { battleScene } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
+import { storyPerson, isDaiViet, PLOT_UNLOCKS } from '../data/DaiVietCast.js';
+import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
 import { renderMissionStatus } from '../ui/MissionUI.js';
 import { mountUsability } from '../ui/UsabilityUI.js';
 const el = (id) => document.getElementById(id);
@@ -117,7 +119,7 @@ export class App {
       onMove: (formation) => this.model.setFormation(formation),
       onError: (text) => this.toast(text, true)
     });
-    mountCodexUI();
+    this.codex=mountCodexUI({getState:()=>this.model.session});
     decorateIcons();
     this.bind();
     for (const id of ['companion-search', 'companion-tier'])
@@ -140,7 +142,7 @@ export class App {
       getSnapshot: () => this.snapshot(),
       restoreSnapshot: (data) => this.restore(data),
       resetSession: () => {
-        this.model.newGame({});
+        this.model.newGame({story:new URLSearchParams(location.search).get('story')==='legacy'?'legacy':'dai-viet'});
         this.hasLoaded = false;
         this.setView('title');
       },
@@ -269,13 +271,14 @@ export class App {
         )
           return;
         this.model.newGame({
+          story:new URLSearchParams(location.search).get('story')==='legacy'?'legacy':'dai-viet',
           name: el('hero-name').value.trim(),
           sect: el('hero-sect').value
         });
         this.hasLoaded = true;
         this.refresh();
         this.setView('camp');
-        this.toast('Hãy mở chính truyện để bắt đầu từ quán trọ Rồng Lửa.');
+        this.toast('Mở chính truyện để bắt đầu '+this.model.catalog.title+'.');
         this.unlockIfEnabled();
       });
     });
@@ -456,6 +459,7 @@ export class App {
             : 'camp'
     );
     if (view === 'battle') this.renderer.resize();
+    if(view==='codex')this.codex?.render();
     if (view === 'profile'&&!this.usability) this.selectProfileTab('gear');
     if (view === 'ending') this.renderEnding();
     if (['tavern', 'dungeons'].includes(view)) this.world?.refreshCalendar();
@@ -496,7 +500,7 @@ export class App {
     this.setView(this.model.session.hero.sect ? 'camp' : 'title');
     if (this.model.session.legacyProgress)
       this.toast(
-        'Hồ sơ từ bản thử đã được giữ lại. Cốt truyện mới bắt đầu ở Hồi 1.'
+        'Hồ sơ từ bản thử được giữ để tiếp tục truyện quán Rồng Lửa. Khởi hành mới để đọc Đại Việt Kỳ Hiệp Truyện.'
       );
   }
   changed(reason) {
@@ -531,6 +535,7 @@ export class App {
     this.syncSectPicker();
     el('act-label').textContent =
       `CHƯƠNG ${session.storyProgress.currentChapter} · HỒI ${session.storyProgress.currentEpisode}/20`;
+    el('campaign-label').textContent=this.model.catalog.title+(isDaiViet(session)?(session.storyProgress.decisions.D19H18==='home'?' · Nhánh trở về; hoạt động ngoài truyện là hồi ức.':''):' · Tiếp tục bản lưu truyện cũ.');
     el('main-quest-title').textContent =
       quest?.title ?? 'Một đoạn đường đã khép lại';
     el('main-quest-note').textContent = quest
@@ -562,7 +567,7 @@ export class App {
       },
       ...session.party.active.map((id) => ({
         id,
-        ...COMPANIONS_BY_ID[id],
+        ...storyPerson(session,COMPANIONS_BY_ID[id]),
         detail: `Duyên nợ ${session.companionsAffinity[id] ?? 0}/100`,
         role: getSectName(COMPANIONS_BY_ID[id].sect)
       }))
@@ -666,9 +671,9 @@ export class App {
     );
     stylePortrait(el('camp-hero-art'), artSect);
     const completed = storyProgress.completedQuests.filter((id) =>
-      MAIN_QUESTS.some((q) => q.id === id)
+      this.model.catalog.quests.some((q) => q.id === id)
     ).length;
-    el('chapter-progress').textContent = `${completed}/240 hồi`;
+    el('chapter-progress').textContent = `${completed}/${this.model.catalog.quests.length} hồi`;
     el('roster-count').textContent = `${party.unlocked.length}/50 đã kết nghĩa`;
     const root = el('profile-hero');
     root.replaceChildren(portrait(artSect));
@@ -706,7 +711,7 @@ export class App {
     root.replaceChildren();
     for (const id of session.party.unlocked) {
       const unit = {
-          ...COMPANIONS_BY_ID[id],
+          ...storyPerson(this.model.session,COMPANIONS_BY_ID[id]),
           sect:
             session.adventure.tactics.affiliations[id] ??
             COMPANIONS_BY_ID[id].sect
@@ -802,7 +807,7 @@ export class App {
     const matches = (u) =>
       (!rarity || u.tier === Number(rarity)) &&
       (!search ||
-        u.name
+        storyPerson(session,u).name
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '')
           .replace(/đ/g, 'd')
@@ -822,9 +827,10 @@ export class App {
         quest.act !== Number(this.recruitFilter)
       )
         continue;
-      const unit = COMPANIONS_BY_ID[quest.companionId],
+      const unit = storyPerson(session,COMPANIONS_BY_ID[quest.companionId]),
         card = node('article', undefined, 'roster-card'),
         body = node('div', undefined, 'card-body');
+      const unlockChapter=isDaiViet(session)&&PLOT_UNLOCKS[unit.id]?Number(PLOT_UNLOCKS[unit.id].slice(1,3)):quest.chapter;
       decorateRarity(card, unit);
       card.dataset.companionId = unit.id;
       card.dataset.locked = String(!open && !owned);
@@ -839,7 +845,7 @@ export class App {
       const badge = node('span', undefined, 'card-badge');
       if (!open && !owned) badge.append(icon('lock'));
       badge.append(
-        node('span', owned ? 'Đã kết nghĩa' : `Chương ${quest.chapter}`)
+        node('span', owned ? 'Đã kết nghĩa' : `Chương ${unlockChapter}`)
       );
       card.append(badge);
       const meta = node('div', undefined, 'card-meta');
@@ -849,8 +855,8 @@ export class App {
       );
       body.append(
         meta,
-        node('h3', quest.title),
-        node('p', quest.description, 'card-description')
+        node('h3', unit.name),
+        node('p', isDaiViet(session)?unit.recruitment.description:quest.description, 'card-description')
       );
       const button = node(
         'button',
@@ -858,7 +864,7 @@ export class App {
           ? 'Đã đồng hành'
           : open
             ? `Gặp gỡ · ${this.model.recruitFee(quest)} bạc nhập đội`
-            : `Chưa mở · Chương ${quest.chapter}`
+            : `Chưa mở · Chương ${unlockChapter}`
       );
       button.type = 'button';
       button.dataset.recruitId = quest.id;
@@ -916,7 +922,7 @@ export class App {
       hero: this.model.session.hero,
       lines: [
         ['Trước đó', quest.previous],
-        ...storyLines(quest, this.model.session, MAIN_QUESTS, COMPANIONS_BY_ID)
+        ...storyLines(quest, this.model.session, this.model.catalog.quests, COMPANIONS_BY_ID)
       ],
       choices,
       note: quest.objective
@@ -1031,7 +1037,7 @@ export class App {
   }
   openCaseSource(id) {
     const s = this.model.session,
-      q = MAIN_QUESTS.find((q) => q.id === id);
+      q = resolveDaiVietQuest(this.model.catalog.quests.find((q) => q.id === id),s);
     if (!q || !s.storyProgress.completedQuests.includes(id)) {
       this.toast('Nguồn này chưa được mở.', true);
       return;
@@ -1047,7 +1053,7 @@ export class App {
         q.title,
       quest: q,
       hero: s.hero,
-      lines: storyLines(q, s, MAIN_QUESTS, COMPANIONS_BY_ID),
+      lines: storyLines(q, s, this.model.catalog.quests, COMPANIONS_BY_ID),
       note: 'Xem lại nguồn đã hoàn thành; giữ nguyên lựa chọn và phần thưởng.',
       onBack: () => this.world.openCasebook()
     });
@@ -1390,7 +1396,7 @@ export class App {
       });
   }
   renderEnding() {
-    const ending = ENDINGS.find(
+    const ending = this.model.catalog.endings.find(
       (e) => e.id === this.model.session.storyProgress.endingId
     );
     if (!ending) {
@@ -1409,7 +1415,7 @@ export class App {
         const row = node('article', undefined, 'ending-dialogue-line');
         const copy = node('div');
         copy.append(node('strong', speaker), node('p', text));
-        row.append(speakerPortrait(speaker, this.model.session.hero,{chapter:12,episode:20}), copy);
+        row.append(speakerPortrait(speaker, this.model.session.hero,{canon:isDaiViet(this.model.session)?'dai-viet':undefined,chapter:this.model.catalog.chapters.length,episode:20}), copy);
         root.append(row);
       }
     }

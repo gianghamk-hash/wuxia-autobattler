@@ -22,14 +22,14 @@ export class MissionDirector {
       const asset = new Unit(
         {
           id: 'mission_asset',
-          name: captive
+          name: definition.assetLabel??(captive
             ? 'Người phu'
             : enemy
               ? (definition.id === 'C10H18' ? 'Khóa tời ' : 'Chốt kho ') +
                 (i + 1)
               : definition.id === 'C07H13'
                 ? 'Hòm khuôn dấu'
-                : 'Xe thóc',
+                : 'Xe thóc'),
           sect: 'TuDo',
           role: 'Object',
           baseStats: {
@@ -160,7 +160,7 @@ export class MissionDirector {
       return true;
     const route = c.grid.pathToRange(unit, npc, 1);
     if (!route?.length) {
-      c.yieldPath(unit, { targetType: 'front_enemy' });
+      this.yieldForPath(unit,()=>c.grid.pathToRange(unit,npc,1)!==null,npc.id);
       return true;
     }
     brain.moveCredit += dt * unit.stats.moveSpeed;
@@ -274,33 +274,47 @@ export class MissionDirector {
     }
   }
   clearEscortPath(npc) {
+    return this.yieldForPath(npc,()=>[0,1,2].some(y=>this.c.grid.findPath(npc,{x:npc.gridPosition.x-1,y})!==null),npc.id);
+  }
+  yieldForPath(actor,opensPath,targetId) {
     const c = this.c;
     if (c.elapsed - c.lastYieldAt.home < 1.5) return false;
     const friends = this.fighters('home')
       .filter(
         (u) =>
-          !u.stunned &&
+          u!==actor && !u.stunned &&
           !u.bossCasting &&
           !u.statusEffects.some((e) => e.type === 'root' && e.remaining > 0) &&
-          !c.brains.get(u.id).action &&
-          c.grid.distance(u.gridPosition, npc.gridPosition) <= 1
+          !c.brains.get(u.id).action
       )
       .sort(
         (a, b) =>
           a.gridPosition.x - b.gridPosition.x || a.id.localeCompare(b.id)
       );
-    for (const friend of friends)
+    // Finish an immediately useful move before planning another two-step opening.
+    for(const lookAhead of [false,true])for (const friend of friends)
       for (const cell of c.grid.neighbors(friend.gridPosition, friend)) {
         const before = { ...friend.gridPosition };
         friend.gridPosition = cell;
-        const opens = [0, 1, 2].some(
-          (y) => c.grid.findPath(npc, { x: npc.gridPosition.x - 1, y }) !== null
-        );
+        let opens = opensPath();
+        // A dense formation can require two blockers to move before any route opens.
+        // Plan the second step without moving it or skipping the first unit's real move.
+        if(!opens&&lookAhead)for(const second of friends){
+          if(second===friend)continue;
+          const secondBefore={...second.gridPosition};
+          for(const next of c.grid.neighbors(secondBefore,second)){
+            second.gridPosition=next;
+            opens=opensPath();
+            second.gridPosition=secondBefore;
+            if(opens)break;
+          }
+          if(opens)break;
+        }
         friend.gridPosition = before;
         if (opens && c.grid.move(friend, cell)) {
           c.lastYieldAt.home = c.elapsed;
           friend.state = 'MOVE';
-          c.emit({ type: 'yield', actorId: friend.id, targetId: npc.id });
+          c.emit({ type: 'yield', actorId: friend.id, targetId });
           return true;
         }
       }

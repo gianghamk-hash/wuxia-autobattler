@@ -3,6 +3,7 @@ import { BOND_VARIANTS, BOND_TITLES } from '../data/BondsData.js';
 import { Hero } from '../entities/Hero.js';
 import { formationAdvice, battleAdvice } from '../combat/TeamAdvisor.js';
 import { portrait } from './Visuals.js';
+import {storyPerson,isDaiViet} from '../data/DaiVietCast.js';
 const n = (tag, text, cls) => {
   const e = document.createElement(tag);
   if (text !== undefined) e.textContent = text;
@@ -66,7 +67,7 @@ export function renderJourneyRoster(app) {
     });
     const members = [
       hero,
-      ...s.party.active.map((id) => COMPANIONS_BY_ID[id])
+      ...s.party.active.map((id) => storyPerson(s,COMPANIONS_BY_ID[id]))
     ].map((u) => ({ ...u, position: s.party.formation[u.id] }));
     const ul = n('ul');
     for (const note of formationAdvice(members)) ul.append(n('li', note));
@@ -89,11 +90,11 @@ export function renderBonds(app, root) {
     n('h2', 'Chuyện sau chuyến đi'),
     n(
       'p',
-      'Năm người bạn đầu tiên có ba mốc thân tình: 30 / 60 / 100, ở chương 2 / 6 / 10. Mốc cuối mở một danh hiệu và biến thể tuyệt kỹ; chỉ dùng một phiên bản mỗi lần.'
+      isDaiViet(app.model.session)?'Các cuộc trò chuyện có mốc thân tình 30 / 60 / 100 và chương riêng trên từng nút. Lôi Nam và Mai Tước xuất hiện theo chính truyện; mốc cuối mở biến thể chiêu hiện có, không cộng thêm tuyệt kỹ.':'Năm người bạn đầu tiên có ba mốc thân tình: 30 / 60 / 100, ở chương 2 / 6 / 10. Mốc cuối mở một danh hiệu và biến thể tuyệt kỹ; chỉ dùng một phiên bản mỗi lần.'
     )
   );
   for (const id of Object.keys(BOND_VARIANTS)) {
-    const person = COMPANIONS_BY_ID[id],
+    const person = storyPerson(app.model.session,COMPANIONS_BY_ID[id]),
       card = n('article', undefined, 'panel bond-card'),
       s = app.model.session;
     card.append(
@@ -111,6 +112,7 @@ export function renderBonds(app, root) {
             ...app.readerOptions('bond:' + story.id),
             hero: app.model.session.hero,
             quest: {
+              canon:story.canon,
               chapter: story.chapter,
               location: 'Quán Rồng Lửa · chuyện đồng hành'
             },
@@ -137,6 +139,7 @@ export function renderBonds(app, root) {
             ...app.readerOptions('bond:' + story.id),
             hero: s.hero,
             quest: {
+              canon:story.canon,
               chapter: story.chapter,
               location: 'Quán Rồng Lửa · chuyện đồng hành'
             },

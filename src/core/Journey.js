@@ -1,5 +1,7 @@
 import { BOND_STORIES, BOND_VARIANTS } from '../data/BondsData.js';
 import { MAIN_BY_ID, RECRUIT_BY_ID } from '../data/QuestsData.js';
+import { DAI_VIET_BY_ID } from '../data/DaiVietStoryData.js';
+import {bondCatalog} from '../data/DaiVietBonds.js';
 import { QIGONG, QIGONG_UNLOCKS, PRIORITIES } from '../data/StrategyData.js';
 export const freshJourney = () => ({
   version: 1,
@@ -16,7 +18,7 @@ export function validReaderKey(key) {
   const [kind, id, extra] = String(key).split(':');
   return (
     !extra &&
-    ((['main', 'archive'].includes(kind) && Object.hasOwn(MAIN_BY_ID, id)) ||
+    ((['main', 'archive'].includes(kind) && (Object.hasOwn(MAIN_BY_ID, id)||Object.hasOwn(DAI_VIET_BY_ID,id))) ||
       (kind === 'recruit' && Object.hasOwn(RECRUIT_BY_ID, id)) ||
       (kind === 'bond' && BOND_STORIES.some((b) => b.id === id)))
   );
@@ -66,6 +68,7 @@ function checkLayout(layout, session) {
     fail('Khí công của đội lưu chưa mở.');
 }
 export function validateJourney(session) {
+  const BOND_STORIES=bondCatalog(session);
   const j = session.journey;
   if (j === undefined) return;
   if (
@@ -73,7 +76,7 @@ export function validateJourney(session) {
     j.version !== 1 ||
     !plain(j.reader) ||
     !plain(j.reader.positions) ||
-    Object.keys(j.reader.positions).length > 620 ||
+    Object.keys(j.reader.positions).length > 1000 ||
     ![16, 18, 20, 22].includes(j.reader.fontSize) ||
     !Array.isArray(j.reader.history) ||
     j.reader.history.length > 60 ||
@@ -200,17 +203,18 @@ export const journeyMethods = {
     }, 'formation');
   },
   bondStories() {
-    return BOND_STORIES.map((b) => ({
+    return bondCatalog(this.session).map((b) => ({
       ...b,
       done: this.session.journey.bonds.completed.includes(b.id),
-      available: available(this.session, b)
+      available: this.session.storyProgress.decisions.D19H18!=='home'&&available(this.session, b)
     }));
   },
   completeBond(id, choice) {
+    if(this.session.storyProgress.decisions.D19H18==='home')fail('Nhánh trở về chỉ xem lại các cuộc trò chuyện đã có.');
     this._mutate((next) => {
       if (next.storyProgress.pendingEncounter || next.adventure.dungeon)
         fail('Kết thúc thử thách trước khi trò chuyện.');
-      const b = BOND_STORIES.find((b) => b.id === id);
+      const b = bondCatalog(next).find((b) => b.id === id);
       if (
         !b ||
         !available(next, b) ||

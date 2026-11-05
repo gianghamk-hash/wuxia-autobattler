@@ -12,6 +12,7 @@ import c11 from './story/chapter11.js';
 import c12 from './story/chapter12.js';
 import { deepFreeze } from './DataUtils.js';
 import { rewriteChapter } from './StoryRewriteData.js';
+import { daiVietLines } from './DaiVietStoryData.js';
 export const STORY_REVISION = 3;
 export const CHAPTERS = deepFreeze(
   [c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12].map((c, i) => ({
@@ -333,6 +334,7 @@ export function storyCallbacks(quest, quests) {
   return rules;
 }
 export function storyLines(quest, session, quests, companions) {
+  if(quest.canon==='dai-viet')return daiVietLines(quest,session);
   const lines = quest.lines.map((line) => [...line]);
   for (const rule of storyCallbacks(quest, quests)) {
     const choice = session.storyProgress.decisions[rule.questId];

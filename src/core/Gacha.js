@@ -1,5 +1,6 @@
 import { COMPANIONS, COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { RARITIES, GACHA } from '../data/GachaData.js';
+import { storyPoolAllows } from '../data/DaiVietCast.js';
 const integer = (n) => Number.isSafeInteger(n) && n >= 0;
 export const freshGacha = () => ({
   version: 1,
@@ -51,7 +52,7 @@ export function rollGacha(
   if (![1, 10].includes(count)) throw Error('Chỉ có thể mời 1 hoặc 10 lượt.');
   if (
     !session.hero.sect ||
-    !session.storyProgress.completedQuests.includes('Q101')
+    !session.storyProgress.completedQuests.includes('Q101')&&!session.storyProgress.completedQuests.includes('D01H06')
   )
     throw Error('Vượt trận mở đầu để mở Chiêu hiền.');
   if (session.storyProgress.pendingEncounter)
@@ -99,7 +100,7 @@ export function rollGacha(
     }
     if (guarantee === 'legendary') tier = 5;
     else if (guarantee === 'epic') tier = Math.max(4, tier);
-    const pool = COMPANIONS.filter((c) => c.tier === tier),
+    const pool = COMPANIONS.filter((c) => c.tier === tier&&storyPoolAllows(next,c.id)),
       unit = pool[Math.floor(roll() * pool.length)],
       duplicate = next.party.unlocked.includes(unit.id),
       refund = duplicate ? RARITIES[tier - 1].refund : 0;

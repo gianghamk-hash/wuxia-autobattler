@@ -3,6 +3,7 @@ import { SECTS, SECT_IDS, getSectName } from '../data/SectsData.js';
 import { COMPANIONS, ROLE_LABELS } from '../data/CompanionsData.js';
 import { SYNERGIES, getActiveSynergies } from '../data/SynergiesData.js';
 import { EQUIPMENT, EQUIPMENT_SETS } from '../data/EquipmentData.js';
+import {storyPerson} from '../data/DaiVietCast.js';
 
 const STAT_LABELS = {
   maxHp: 'Sinh lực',
@@ -41,7 +42,7 @@ function line(card, label, text) {
   card.append(element('p', `${label}: ${text}`));
 }
 
-export function mountCodexUI() {
+export function mountCodexUI({getState=()=>null}={}) {
   const view = document.getElementById('catalog-view');
   const filter = document.getElementById('catalog-sect');
   const search = document.getElementById('catalog-search');
@@ -53,13 +54,14 @@ export function mountCodexUI() {
     filter.append(option);
   }
   function render() {
+    const companions=COMPANIONS.map(p=>storyPerson(getState(),p));
     const source =
       {
-        companions: COMPANIONS,
+        companions,
         sects: Object.values(SECTS),
         synergies: SYNERGIES,
         equipment: EQUIPMENT
-      }[view.value] ?? COMPANIONS;
+      }[view.value] ?? companions;
     const query = fold(search.value.trim());
     const entries = source.filter((item) => {
       const matchesSect =
@@ -203,4 +205,5 @@ export function mountCodexUI() {
     select.addEventListener('change', renderPreview)
   );
   renderPreview();
+  return {render};
 }

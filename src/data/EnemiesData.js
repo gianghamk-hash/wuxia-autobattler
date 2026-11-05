@@ -1,4 +1,5 @@
 import { MAIN_QUESTS } from './QuestsData.js';
+import { DAI_VIET_QUESTS } from './DaiVietStoryData.js';
 import { deepFreeze } from './DataUtils.js';
 const CLASSIC_ENCOUNTERS = {
   inn_escape: {
@@ -89,7 +90,7 @@ const templates = [
   ['companion_18', 'companion_14', 'companion_12']
 ];
 const story = Object.fromEntries(
-  MAIN_QUESTS.filter((q) => q.encounter && q.encounter !== 'inn_escape').map(
+  [...MAIN_QUESTS,...DAI_VIET_QUESTS].filter((q) => q.encounter && q.encounter !== 'inn_escape').map(
     (q) => {
       const count =
         q.chapter <= 2
@@ -112,13 +113,14 @@ const story = Object.fromEntries(
           templates: Array.from(
             { length: count },
             (_, i) =>
-              templates[q.chapter - 1][i % templates[q.chapter - 1].length]
+              templates[(q.chapter - 1)%templates.length][i % templates[(q.chapter - 1)%templates.length].length]
           ),
           guide: q.chapter <= 2,
           hpScale:
-            (q.chapter <= 2 ? 0.6 : 0.76 + q.chapter * 0.012) *
+            (q.chapter <= 2 ? 0.6 : 0.76 + Math.min(q.chapter,12) * 0.012) *
             (q.boss ? 1.12 : 1),
-          attackScale: (0.55 + q.chapter * 0.025) * (q.boss ? 1.05 : 1)
+          attackScale: (0.55 + Math.min(q.chapter,12) * 0.025) * (q.boss ? 1.05 : 1)
+          ,...(q.id==='D01H06'?{count:1,templates:['companion_06'],hpScale:.6,attackScale:.45,guide:true}:q.id==='D07H05'?{count:1,templates:['companion_01'],hpScale:.95,attackScale:.7}:{} )
         }
       ];
     }

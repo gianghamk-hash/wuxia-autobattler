@@ -13,6 +13,7 @@ import {
 } from '../data/StrategyData.js';
 import { DUNGEONS } from '../data/WorldData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
+import {isDaiViet,applyDaiVietName} from '../data/DaiVietCast.js';
 import { EQUIPMENT } from '../data/EquipmentData.js';
 import {
   count,
@@ -124,6 +125,7 @@ export const worldMethods = {
     };
     for (const u of units.filter((u) => u.team === 'home')) {
       if (!u.bondConfigured) applyBondVariant(u, this.session?.journey?.bonds.modes[u.templateId] ?? 'base');
+      if(isDaiViet(this.session)&&u.id!=='guide')applyDaiVietName(u);
       u.sect = prep.tactics.affiliations[u.id] ?? u.sect;
       u.targetPriority =
         prep.tactics.priorities[u.id] ?? u.targetPriority ?? 'nearest';
