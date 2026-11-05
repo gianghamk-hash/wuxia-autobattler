@@ -18,7 +18,8 @@ import { Hero } from '../src/entities/Hero.js';
 import { Companion } from '../src/entities/Companion.js';
 import { GridSystem } from '../src/combat/GridSystem.js';
 import { CombatEngine } from '../src/combat/CombatEngine.js';
-import { battleIntent } from '../src/combat/BattleIntent.js';
+import { battleIntent,roleLabel } from '../src/combat/BattleIntent.js';
+import { COMPANIONS } from '../src/data/CompanionsData.js';
 import { applyStoryIdentity, NPCS_BY_ID } from '../src/data/NPCData.js';
 import { StorageManager } from '../src/core/StorageManager.js';
 import { simulatePair } from '../scripts/balance-6v6.mjs';
@@ -268,6 +269,7 @@ test('an unfinished mission at the deadline is a loss rather than an ordinary co
   assert.equal(hero.alive,true);assert.equal(battle.result.reason,'objective_timeout');assert.equal(battle.result.winner,'enemy');
 });
 test('intent shows actual healer, control and boss decisions without consuming simulation state', () => {
+  assert.ok(COMPANIONS.every(u=>roleLabel(u.role)!=='Võ sĩ'));
   const { battle, hero, enemy } = fixture('C01H14');
   const skill = {
       name: 'Thuốc',

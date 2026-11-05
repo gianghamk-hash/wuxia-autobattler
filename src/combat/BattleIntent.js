@@ -26,6 +26,17 @@ export const roleLabel = (role) =>
     Assassin: 'Áp sát',
     RangedDPS: 'Đánh xa',
     Mage: 'Nội công',
+      Debuffer: 'Làm suy yếu',
+      BurstMage: 'Dồn sát thương nội công',
+      Buffer: 'Cường hóa đồng đội',
+      DualDPS: 'Sát thương hỗn hợp',
+      ReflectTank: 'Đỡ đòn / phản kích',
+      Poisoner: 'Dùng độc',
+      EvasionDPS: 'Né tránh / tấn công',
+      CrowdControl: 'Khống chế',
+      Battery: 'Tiếp nội lực',
+      Finisher: 'Kết liễu',
+      Wildcard: 'Biến chiêu',
     Object: 'Mục tiêu nhiệm vụ'
   })[role] ?? 'Võ sĩ';
 export function skillSummary(skill) {

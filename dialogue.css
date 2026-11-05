@@ -90,6 +90,8 @@
 #battle-advice li { margin:.5rem 0; line-height:1.5; }
 .battle-unit-card > [data-focus] { grid-column:1 / -1; width:100%; min-width:0; }
 .casebook-tabs { display:flex; gap:.5rem; flex-wrap:wrap; margin:1rem 0; }
+.casebook-tabs button { background:#14353a; }
+.casebook-tabs button[aria-pressed="true"] { border-color:#d6bc7a; background:#655d3866; color:#ffe3a3; }
 #world-tabs button { flex:0 0 auto; min-height:44px; }
 .casebook-tabs + input { width:100%; margin-bottom:1rem; }
 .case-entry,.case-person,.case-relation { margin-bottom:1rem; overflow-wrap:anywhere; }
