@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { IDBFactory } from 'fake-indexeddb';
-import { StorageManager, validateSnapshot } from '../src/core/StorageManager.js';
+import { StorageManager, validateSnapshot, SaveConflictError } from '../src/core/StorageManager.js';
 
 export function snapshot(name = 'Tiểu Hiệp — Giang 湖') {
   return { schemaVersion: 1, version: '0.2.0', playtimeSeconds: 123.5,
@@ -14,6 +14,68 @@ function memory() {
   const map = new Map();
   return { getItem: k => map.get(k) ?? null, setItem: (k, v) => map.set(k, v), removeItem: k => map.delete(k) };
 }
+for (const backend of ['indexedDB', 'localStorage']) {
+  test(`${backend}: stale tabs cannot overwrite; listing slots cannot clear a conflict; explicit load recovers`, async () => {
+    const options = { indexedDB: backend === 'indexedDB' ? new IDBFactory() : null, localStorage: memory() };
+    const a = new StorageManager(options), b = new StorageManager(options);
+    await a.autoSave(snapshot('Ban đầu'));
+    await b.load(0);
+    await a.autoSave(snapshot('Tab A mới'));
+    await b.listSlots();
+    await assert.rejects(b.autoSave(snapshot('Tab B cũ')), SaveConflictError);
+    assert.equal((await a.load(0)).data.hero.name, 'Tab A mới');
+    // The unsaved session is still exportable, without writing over the other tab.
+    assert.equal((await b.decodeSave(await b.exportSave(snapshot('B riêng')))).hero.name, 'B riêng');
+    await b.load(0);
+    await b.autoSave(snapshot('Đã tiếp tục'));
+    assert.equal((await a.load(0)).data.hero.name, 'Đã tiếp tục');
+    a.db?.close(); b.db?.close();
+  });
+  test(`${backend}: simultaneous writes have one winner and no silent overwrite`, async () => {
+    const options = { indexedDB: backend === 'indexedDB' ? new IDBFactory() : null, localStorage: memory() };
+    const a = new StorageManager(options), b = new StorageManager(options);
+    await Promise.all([a.load(0), b.load(0)]);
+    const results = await Promise.allSettled([a.autoSave(snapshot('A')), b.autoSave(snapshot('B'))]);
+    assert.equal(results.filter(r => r.status === 'fulfilled').length, 1);
+    const rejected = results.find(r => r.status === 'rejected');
+    assert.ok(rejected.reason instanceof SaveConflictError);
+    a.db?.close(); b.db?.close();
+  });
+}
+test('legacy records without revisions remain readable and gain a revision on their next save', async () => {
+  const local = memory(), options = { indexedDB: null, localStorage: local };
+  await new StorageManager(options).save(0, snapshot());
+  const legacy = JSON.parse(local.getItem('wuxia:save:v1:0'));
+  delete legacy.revision;
+  local.setItem('wuxia:save:v1:0', JSON.stringify(legacy));
+  const a = new StorageManager(options), b = new StorageManager(options);
+  await Promise.all([a.load(0), b.load(0)]);
+  assert.equal(typeof (await a.autoSave(snapshot('Mới'))).revision, 'string');
+  await assert.rejects(b.autoSave(snapshot('Cũ')), SaveConflictError);
+});
+test('fallback uses a shared browser lock; failed writes can retry without adopting another revision', async () => {
+  const local = memory(); let calls = 0;
+  const locks = { async request(name, action) { assert.equal(name, 'wuxia:save:0'); calls++; return action(); } };
+  const s = new StorageManager({ indexedDB: null, localStorage: local, locks });
+  await s.autoSave(snapshot('Trước'));
+  const set = local.setItem;
+  local.setItem = () => { throw new Error('QuotaExceededError'); };
+  await assert.rejects(s.autoSave(snapshot('Chờ ghi')), /Quota/);
+  local.setItem = set;
+  await s.autoSave(snapshot('Thử lại'));
+  assert.equal(calls, 3);
+  assert.equal((await s.load(0)).data.hero.name, 'Thử lại');
+});
+test('a corrupt autosave can be deliberately replaced by a valid manual branch', async () => {
+  const local = memory(), s = new StorageManager({ indexedDB: null, localStorage: local });
+  await s.save(1, snapshot('Dự phòng'));
+  local.setItem('wuxia:save:v1:0', '{broken');
+  assert.ok((await s.listSlots())[0].error);
+  const manual = await s.load(1);
+  await s.adoptRevision(0);
+  await s.autoSave(manual.data);
+  assert.equal((await s.load(0)).data.hero.name, 'Dự phòng');
+});
 for (const backend of ['indexedDB', 'localStorage']) {
   test(`${backend}: six isolated slots survive manager reload; snapshots are detached`, async () => {
     const options = { indexedDB: backend === 'indexedDB' ? new IDBFactory() : null, localStorage: memory() };

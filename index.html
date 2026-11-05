@@ -10,11 +10,12 @@
     <meta name="theme-color" content="#102c30" />
     <meta
       name="description"
-      content="Võ Lâm Hài Hiệp Truyện — game nhập vai chiến thuật tự động, ba hồi giang hồ, hai mươi đồng đội và bốn kết cục."
+      content="Võ Lâm Hài Hiệp Truyện — game nhập vai chiến thuật tự động, 12 chương giang hồ, 50 đồng đội và bốn kết cục."
     />
     <title>Võ Lâm Hài Hiệp Truyện</title>
     <link rel="icon" href="./assets/images/game-mark.svg" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./story.css" />
   </head>
   <body>
     <header class="app-header">
@@ -48,6 +49,14 @@
       </div>
     </header>
     <p id="boot-status" role="status">Đang mở trang giang hồ…</p>
+    <aside id="save-notice" class="save-notice" role="alert" hidden>
+      <p id="save-notice-text"></p>
+      <div>
+        <button id="btn-retry-save" type="button">Thử lưu lại</button>
+        <button id="btn-rescue-export" type="button">Xuất bản đang chơi</button>
+        <button id="btn-latest-save" type="button">Tải bản mới nhất</button>
+      </div>
+    </aside>
     <nav id="main-nav" class="main-nav" aria-label="Điều hướng" hidden>
       <button type="button" data-view="camp">
         <span data-icon="sword"></span><span>Chiến</span>
@@ -75,7 +84,7 @@
           <h1><span>Võ Lâm</span>Hài Hiệp Truyện</h1>
           <p>Một cuốn sổ nợ. Cả một giang hồ.</p>
           <div class="title-facts">
-            <span>3 hồi truyện</span><i></i><span>20 đồng đội</span><i></i
+            <span>12 chương truyện</span><i></i><span>50 đồng đội</span><i></i
             ><span>4 kết cục</span>
           </div>
         </div>

@@ -889,6 +889,7 @@ export class App {
           }));
     this.dialogue.show({
       title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
+      quest,
       lines: [
         ['Trước đó', quest.previous],
         ...storyLines(quest, this.model.session, MAIN_QUESTS, COMPANIONS_BY_ID)
@@ -911,7 +912,7 @@ export class App {
           if (battle) this.enterBattle();
           else {
             this.setView('camp');
-            this.toast('Nhiệm vụ hoàn tất. Phần thưởng đã được lưu.');
+            this.toast('Nhiệm vụ hoàn tất. Đã nhận phần thưởng.');
           }
         })
     });
@@ -1151,7 +1152,7 @@ export class App {
             ? `Nhận ${result.rewards.silver} bạc. Vật liệu (nếu có) đã vào túi; giới hạn thưởng được ghi theo ngày/tuần.`
             : result.kind === 'recruit'
               ? 'Thử thách đã hoàn tất. Quay lại gặp nhân vật để mời đồng hành và nhận thưởng.'
-              : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc. Đã tự lưu tiến trình.`;
+              : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc.`;
     const table = node('table'),
       head = node('thead'),
       header = node('tr');
