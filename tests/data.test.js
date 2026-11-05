@@ -67,14 +67,14 @@ test('signature effects retain the supplied numeric thresholds', () => {
   assert.equal(effect('companion_19').hpThreshold, .15);
   assert.deepEqual(effect('companion_20').choices.map(choice => choice.type), ['damage', 'full_heal']);
 });
-test('synergies require distinct sects, enforce three members, and support overlapping bonuses', () => {
+test('synergies require distinct sects, enforce six members, and support overlapping bonuses', () => {
   assert.equal(SYNERGIES.length, 4);
   assert.equal(getActiveSynergies([]).length, 0);
   assert.equal(getActiveSynergies(['VoDang', 'VoDang', 'TuDo']).length, 0);
   assert.deepEqual(getActiveSynergies(['ThieuLam', 'VoDang', 'NgaMi']).map(x => x.id), ['thai_son_bac_dau', 'am_duong_giao_hoa']);
   assert.deepEqual(getActiveSynergies(['DuongMon', 'NgaMi', 'CaiBang']).map(x => x.id), ['hiep_nghia_giang_ho', 'doc_ba_vo_lam']);
   assert.equal(getActiveSynergies(['CaiBang', 'DuongMon', 'DuongMon']).length, 1);
-  assert.throws(() => getActiveSynergies(['ThieuLam', 'VoDang', 'NgaMi', 'CaiBang']));
+  assert.throws(() => getActiveSynergies(['ThieuLam', 'VoDang', 'NgaMi', 'CaiBang', 'NgaMi', 'CaiBang', 'ThieuLam']));
   assert.throws(() => getActiveSynergies(['unknown']));
   assert.throws(() => getActiveSynergies(['toString']));
   assert.equal(SYNERGIES[0].effects[0].maxHpRatio, .15);

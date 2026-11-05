@@ -29,7 +29,7 @@ export class Unit {
     if (!Number.isFinite(amount) || amount < 0) throw new Error('Nộ khí không hợp lệ.');
     if (!this.alive || this.stunned) return 0;
     const before = this.stats.energy;
-    this.stats.energy = Math.min(this.stats.maxEnergy, before + amount * this.energyGainMultiplier);
+    this.stats.energy = Math.min(this.stats.maxEnergy, before + amount * this.energyGainMultiplier * Math.max(.2, 1 - this.statusEffects.filter(e => e.type === 'internal_injury' && e.remaining > 0).reduce((n,e)=>n+e.ratio,0)));
     return this.stats.energy - before;
   }
   heal(amount) {

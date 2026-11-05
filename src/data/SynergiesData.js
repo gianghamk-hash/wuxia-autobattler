@@ -74,9 +74,9 @@ export const SYNERGIES = deepFreeze([
 
 /** A party is one hero + at most two companions; duplicate sects count once. */
 export function getActiveSynergies(sectIds) {
-  if (!Array.isArray(sectIds) || sectIds.length > 3 ||
+  if (!Array.isArray(sectIds) || sectIds.length > 6 ||
       !sectIds.every(id => Object.hasOwn(SECTS, id) || id === 'TuDo')) {
-    throw new Error('Đội hình cần tối đa ba môn phái hợp lệ.');
+    throw new Error('Đội hình cần tối đa sáu môn phái hợp lệ.');
   }
   const present = new Set(sectIds);
   return SYNERGIES.filter(synergy => synergy.requiredSects.every(id => present.has(id)));

@@ -147,8 +147,8 @@ export const COMPANIONS = deepFreeze([
     "role": "Healer",
     "gridPosition": null,
     "baseStats": {
-      "maxHp": 1000,
-      "hp": 1000,
+      "maxHp": 1120.0,
+      "hp": 1120.0,
       "maxEnergy": 100,
       "energy": 0,
       "physicalAtk": 25,
@@ -164,7 +164,7 @@ export const COMPANIONS = deepFreeze([
       "attackRange": 3
     },
     "growthPerLevel": {
-      "maxHp": 70,
+      "maxHp": 78.4,
       "physicalAtk": 1,
       "magicalAtk": 7,
       "physicalDef": 2,
@@ -361,8 +361,8 @@ export const COMPANIONS = deepFreeze([
     "role": "Debuffer",
     "gridPosition": null,
     "baseStats": {
-      "maxHp": 1100,
-      "hp": 1100,
+      "maxHp": 1232.0,
+      "hp": 1232.0,
       "maxEnergy": 100,
       "energy": 0,
       "physicalAtk": 85,
@@ -378,7 +378,7 @@ export const COMPANIONS = deepFreeze([
       "attackRange": 2
     },
     "growthPerLevel": {
-      "maxHp": 75,
+      "maxHp": 84.0,
       "physicalAtk": 5,
       "magicalAtk": 4,
       "physicalDef": 2,
@@ -408,8 +408,8 @@ export const COMPANIONS = deepFreeze([
       "ultimate": {
         "id": "companion_06_ult",
         "name": "Độc Vụ Mê Tung",
-        "description": "Rải khói độc làm giảm chính xác của địch.",
-        "dmgMultiplier": 0.8,
+        "description": "Khói độc gây sát thương, giảm chính xác và gây nội thương giảm 35% hồi nội lực.",
+        "dmgMultiplier": 1.5,
         "type": "magical",
         "targetType": "enemy_area",
         "energyCost": 100,
@@ -419,6 +419,11 @@ export const COMPANIONS = deepFreeze([
             "ratio": 0.3,
             "duration": 4,
             "radius": 1
+          },
+          {
+            "type": "internal_injury",
+            "duration": 5,
+            "ratio": 0.35
           }
         ]
       }
@@ -563,8 +568,8 @@ export const COMPANIONS = deepFreeze([
     "role": "Buffer",
     "gridPosition": null,
     "baseStats": {
-      "maxHp": 1000,
-      "hp": 1000,
+      "maxHp": 1120.0,
+      "hp": 1120.0,
       "maxEnergy": 100,
       "energy": 0,
       "physicalAtk": 25,
@@ -580,7 +585,7 @@ export const COMPANIONS = deepFreeze([
       "attackRange": 3
     },
     "growthPerLevel": {
-      "maxHp": 70,
+      "maxHp": 78.4,
       "physicalAtk": 1,
       "magicalAtk": 7,
       "physicalDef": 2,
@@ -707,8 +712,8 @@ export const COMPANIONS = deepFreeze([
     "role": "Support",
     "gridPosition": null,
     "baseStats": {
-      "maxHp": 1100,
-      "hp": 1100,
+      "maxHp": 1232.0,
+      "hp": 1232.0,
       "maxEnergy": 100,
       "energy": 0,
       "physicalAtk": 85,
@@ -724,7 +729,7 @@ export const COMPANIONS = deepFreeze([
       "attackRange": 2
     },
     "growthPerLevel": {
-      "maxHp": 75,
+      "maxHp": 84.0,
       "physicalAtk": 5,
       "magicalAtk": 4,
       "physicalDef": 2,
@@ -753,17 +758,28 @@ export const COMPANIONS = deepFreeze([
       "ultimate": {
         "id": "companion_11_ult",
         "name": "Trà Nóng Tỉnh Mộng",
-        "description": "Ném chén trà nóng giải choáng cho đồng đội.",
+        "description": "Trà nóng giải choáng, nội thương, độc cho toàn đội; hồi máu và 8 nội lực.",
         "dmgMultiplier": 0,
         "type": "magical",
-        "targetType": "stunned_ally",
+        "targetType": "all_allies",
         "energyCost": 100,
         "effects": [
           {
             "type": "cleanse",
             "statuses": [
-              "stun"
+              "stun",
+              "internal_injury",
+              "poison"
             ]
+          },
+          {
+            "type": "heal",
+            "scalingStat": "magicalAtk",
+            "multiplier": 1.6
+          },
+          {
+            "type": "energy_restore",
+            "amount": 8
           }
         ]
       }
@@ -1124,8 +1140,8 @@ export const COMPANIONS = deepFreeze([
     "role": "Battery",
     "gridPosition": null,
     "baseStats": {
-      "maxHp": 1000,
-      "hp": 1000,
+      "maxHp": 1120.0,
+      "hp": 1120.0,
       "maxEnergy": 100,
       "energy": 0,
       "physicalAtk": 25,
@@ -1141,7 +1157,7 @@ export const COMPANIONS = deepFreeze([
       "attackRange": 3
     },
     "growthPerLevel": {
-      "maxHp": 70,
+      "maxHp": 78.4,
       "physicalAtk": 1,
       "magicalAtk": 7,
       "physicalDef": 2,

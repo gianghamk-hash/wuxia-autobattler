@@ -17,10 +17,10 @@ export class SoundManager {
     if (this.track === track) return; this.track = track; this.step = 0;
     this._stop(); this._start();
   }
-  _note(frequency, duration, { when, type = 'triangle', gain = .09 } = {}) {
+  _note(frequency, duration, { when, type = 'sine', gain = .09, slide } = {}) {
     if (!this.context || this.context.state !== 'running' || this.muted || this.voices.size >= 24) return;
     const start = when ?? this.context.currentTime, oscillator = this.context.createOscillator(), envelope = this.context.createGain();
-    oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, start);
+    oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, start); if(slide)oscillator.frequency.exponentialRampToValueAtTime(slide,start+duration);
     envelope.gain.setValueAtTime(.0001, start); envelope.gain.exponentialRampToValueAtTime(gain, start + .012);
     envelope.gain.exponentialRampToValueAtTime(.0001, start + duration);
     oscillator.connect(envelope); envelope.connect(this.master);
@@ -39,12 +39,14 @@ export class SoundManager {
     while (this.nextNote < this.context.currentTime + .3) {
       const note = melodies[this.track][this.step % 8];
       this._note(220 * 2 ** (note / 12), beat * .9, { when: this.nextNote });
+      if(this.track==='battle'&&this.step%2===0)this._note(90,.14,{when:this.nextNote,gain:.15,type:'sine',slide:42});
       if (this.step % 4 === 0) this._note(110, beat * 1.8, { when: this.nextNote, gain: .045, type: 'sine' });
       this.nextNote += beat; this.step++;
     }
   }
   sfx(kind) {
     const sounds = { click: [660, .06], hit: [120, .09], magic: [740, .14], death: [82, .28], heal: [880, .17], ultimate: [440, .35], victory: [1046, .5], defeat: [146, .5] };
+    if(kind==='ultimate'){this._note(330,.35,{type:'triangle',gain:.06});this._note(660,.28,{type:'sine',gain:.05});}
     const sound = sounds[kind]; if (sound) this._note(sound[0], sound[1], { gain: .11, type: kind === 'hit' ? 'sawtooth' : 'sine' });
   }
   _stop() {

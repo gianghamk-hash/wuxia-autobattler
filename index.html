@@ -1,164 +1,633 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#102c30">
-  <meta name="description" content="Võ Lâm Hài Hiệp Truyện — game nhập vai chiến thuật tự động, ba hồi giang hồ, hai mươi đồng đội và bốn kết cục.">
-  <title>Võ Lâm Hài Hiệp Truyện</title>
-  <link rel="icon" href="./assets/images/game-mark.svg"><link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <header class="app-header">
-    <a href="#" id="brand-home" class="brand" aria-label="Võ Lâm — về doanh trại"><span class="brand-seal">VÕ<br>LÂM</span><span class="brand-sub">HÀI HIỆP<br>TRUYỆN</span></a>
-    <div id="hero-hud" class="hero-hud"></div>
-    <div class="header-actions"><span id="silver-hud" class="currency"></span><button id="btn-audio" class="icon-button" type="button" aria-label="Bật âm thanh" title="Bật âm thanh"><span data-icon="sound"></span></button></div>
-  </header>
-  <p id="boot-status" role="status">Đang mở trang giang hồ…</p>
-  <nav id="main-nav" class="main-nav" aria-label="Điều hướng" hidden>
-    <button type="button" data-view="camp"><span data-icon="camp"></span><span>Giang hồ</span></button>
-    <button type="button" data-view="roster"><span data-icon="roster"></span><span>Đồng đội</span></button>
-    <button type="button" data-view="profile"><span data-icon="profile"></span><span>Nhân vật</span></button>
-    <button type="button" data-view="codex"><span data-icon="codex"></span><span>Kỳ phổ</span></button>
-    <button type="button" data-view="saves"><span data-icon="saves"></span><span>Lưu game</span></button>
-    <button type="button" data-view="settings"><span data-icon="settings"></span><span>Cài đặt</span></button>
-  </nav>
-  <main id="app-main">
-    <p id="app-message" role="status" aria-live="polite"></p>
-    <section id="view-title" class="view title-view" hidden>
-      <div class="title-copy"><span class="edition-label">KIẾM HIỆP • CHIẾN THUẬT • NHÂN DUYÊN</span><h1><span>Võ Lâm</span>Hài Hiệp Truyện</h1><p>Một cuốn sổ nợ. Cả một giang hồ.</p><div class="title-facts"><span>3 hồi truyện</span><i></i><span>20 đồng đội</span><i></i><span>4 kết cục</span></div></div>
-      <form id="new-game-form" class="panel title-form">
-        <div class="form-heading"><span class="eyebrow">CHỌN CON ĐƯỜNG CỦA BẠN</span><h2>Hiệp khách xuất sơn</h2></div>
-        <div id="sect-picker" class="sect-picker" role="group" aria-label="Chọn môn phái"></div>
-        <div class="start-fields"><label for="hero-name">Danh tính<input id="hero-name" maxlength="80" required value="Tiểu Hiệp" autocomplete="off"></label>
-        <label for="hero-sect">Môn phái<select id="hero-sect"><option value="ThieuLam">Thiếu Lâm · Đỡ đòn</option><option value="VoDang" selected>Võ Đang · Nội công</option><option value="CaiBang">Cái Bang · Đấu sĩ</option><option value="NgaMi">Nga Mi · Hỗ trợ</option><option value="DuongMon">Đường Môn · Độc sát</option></select></label></div>
-        <button id="btn-new-game" class="primary start-button" type="submit"><span data-icon="sword"></span> Khởi hành <span data-icon="arrow"></span></button>
-        <div class="title-secondary"><button id="btn-continue" type="button">Tiếp tục bản lưu</button><button id="btn-title-saves" type="button">Nhập / Tải game</button></div>
-        <p class="hint title-save-note">Khởi hành mới thay ô tự lưu; 5 ô thủ công vẫn được giữ.</p>
-      </form>
-    </section>
-    <section id="view-camp" class="view" hidden>
-      <div class="camp-scene">
-        <div class="scene-top"><span class="scene-location"><span class="live-dot"></span> QUÁN TRỌ RỒNG LỬA</span><span id="chapter-progress"></span></div>
-        <div class="scene-copy"><p class="eyebrow" id="act-label"></p><h1>Chốn giang hồ,<br>gặp người tri kỷ.</h1><p>Một chén trà, một lời hứa.<br>Chuyện của bạn bắt đầu từ đây.</p></div>
-        <div id="camp-hero-art" class="portrait camp-hero-art" aria-hidden="true"></div>
-        <article class="quest-feature"><div class="quest-seal" data-icon="codex"></div><div class="quest-copy"><p class="eyebrow">CHÍNH TRUYỆN</p><h2 id="main-quest-title"></h2><p id="main-quest-note"></p></div><div class="quest-actions"><button id="btn-main-quest" class="primary" type="button">Tiếp tục câu chuyện</button><button id="btn-resume-battle" type="button" hidden>Chơi lại trận chưa hoàn tất</button></div></article>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#102c30" />
+    <meta
+      name="description"
+      content="Võ Lâm Hài Hiệp Truyện — game nhập vai chiến thuật tự động, ba hồi giang hồ, hai mươi đồng đội và bốn kết cục."
+    />
+    <title>Võ Lâm Hài Hiệp Truyện</title>
+    <link rel="icon" href="./assets/images/game-mark.svg" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <a
+        href="#"
+        id="brand-home"
+        class="brand"
+        aria-label="Võ Lâm — về doanh trại"
+        ><span class="brand-seal">VÕ<br />LÂM</span
+        ><span class="brand-sub">HÀI HIỆP<br />TRUYỆN</span></a
+      >
+      <div id="hero-hud" class="hero-hud"></div>
+      <div class="header-actions">
+        <span id="silver-hud" class="currency"></span
+        ><button
+          id="btn-audio"
+          class="icon-button"
+          type="button"
+          aria-label="Bật âm thanh"
+          title="Bật âm thanh"
+        >
+          <span data-icon="sound"></span></button
+        ><button
+          id="btn-more"
+          class="icon-button"
+          type="button"
+          aria-label="Menu, lưu và cài đặt"
+        >
+          <span data-icon="settings"></span>
+        </button>
       </div>
-      <section class="party-panel"><div class="section-title"><div><p class="eyebrow">CÙNG NHAU XUẤT CHIẾN</p><h2>Người cùng đường</h2></div><button id="btn-camp-roster" class="text-button" type="button">Xếp trận <span data-icon="arrow"></span></button></div><div id="party-summary" class="party-summary"></div></section>
-      <div class="camp-grid"><article class="activity-card training-card"><div class="activity-icon" data-icon="sword"></div><div><p class="eyebrow">RÈN LUYỆN MỖI NGÀY</p><h2>Sân luyện võ</h2><p>Thắng trận nhận XP và 20 bạc.</p></div><button id="btn-practice" type="button">Thử sức <span data-icon="arrow"></span></button></article>
-      <article class="activity-card shop-card"><div class="activity-icon" data-icon="tea"></div><div><p class="eyebrow">MỘT CHÚT HÀNH TRANG</p><h2>Quán nhỏ ven đường</h2><p id="shop-inventory"></p></div><div class="shop-items"><button data-buy="rope" type="button"><span>Dây thừng</span><small>5 bạc</small></button><button data-buy="food_fish" type="button"><span>Cá tươi</span><small>5 bạc</small></button><button data-buy="tea" type="button"><span>Trà ngon</span><small>8 bạc</small></button></div></article></div>
-    </section>
-    <section id="view-roster" class="view" hidden>
-      <div class="section-heading"><p class="eyebrow">KẾT NGHĨA GIANG HỒ</p><h1>Người cùng đường</h1><span class="heading-note" id="roster-count"></span></div>
-      <article class="panel formation-panel"><div class="section-title"><h2>Bày binh bố trận</h2><span class="tiny-label">3 × 3</span></div><p class="hint">Chọn tên rồi chạm ô, hoặc kéo nhân vật vào ô. Hậu tuyến bên trái, tiền tuyến bên phải. Thả lên người khác để đổi chỗ.</p><div id="formation-root"></div><p id="active-synergies"></p></article>
-      <div class="section-title"><h2>Đã kết nghĩa</h2><span class="tiny-label">TỐI ĐA 2 ĐỒNG ĐỘI XUẤT CHIẾN</span></div><div id="roster-list" class="card-grid"></div>
-      <div class="section-title"><h2>Nhân duyên giang hồ</h2></div><p class="hint">Vượt thử thách, tìm người chung đường.</p><div id="recruit-filters" class="filter-chips" role="group" aria-label="Lọc nhiệm vụ chiêu mộ"><button type="button" data-recruit-filter="all" aria-pressed="true">Tất cả</button><button type="button" data-recruit-filter="open">Đã mở</button><button type="button" data-recruit-filter="1">Hồi I</button><button type="button" data-recruit-filter="2">Hồi II</button><button type="button" data-recruit-filter="3">Hồi III</button></div><div id="recruit-list" class="card-grid"></div>
-    </section>
-    <section id="view-profile" class="view" hidden>    <div id="profile-hero" class="profile-hero"></div><section class="save-panel progress-panel" aria-labelledby="progress-title">
-      <h2 id="progress-title" class="sr-only">Tu luyện &amp; Trang bị</h2><p id="progress-summary"></p><div class="profile-tabs" role="tablist" aria-label="Hồ sơ nhân vật"><button type="button" role="tab" id="tab-skills" data-profile-tab="skills" aria-controls="profile-skills" aria-selected="true">Võ công</button><button type="button" role="tab" id="tab-attributes" data-profile-tab="attributes" aria-controls="profile-attributes" aria-selected="false">Thuộc tính</button><button type="button" role="tab" id="tab-gear" data-profile-tab="gear" aria-controls="profile-gear" aria-selected="false">Trang bị</button></div><div id="profile-attributes" role="tabpanel" aria-labelledby="tab-attributes" hidden>
-      <p class="hint">Kỹ năng và trang bị được áp dụng cho nhân vật chính trong chiến dịch. Đổi phái hoàn điểm kỹ năng, tháo đồ riêng của phái cũ và giữ nguyên túi đồ. Không đổi hồ sơ trong trận.</p>
-      <div class="controls">
-        <label for="progress-sect">Môn phái</label>
-        <select id="progress-sect"><option value="">Chưa chọn</option></select>
-        <button id="btn-progress-sect" type="button">Áp dụng môn phái</button>
-        <button id="btn-progress-train" type="button">Tu luyện thử: +1 cấp</button>
-        <button id="btn-progress-gear" type="button">Nhận bộ trang bị thử</button>
-      </div>
-      <p class="hint">Nhận 1 điểm kỹ năng/cấp, 2 điểm thuộc tính mỗi lần lên cấp, tối đa cấp 20. Kinh nghiệm đến từ nhiệm vụ và luyện võ.</p>
-      <h3>Thuộc tính</h3>
-      <p class="hint">Căn Cốt tăng HP; Khí Hải tăng nội công/nội phòng; Kình Lực tăng ngoại công và sát thương bạo kích; Ngộ Tính tăng tỷ lệ bạo kích; Thân Pháp tăng nhịp đánh/né; Cơ Duyên tăng bạo kích.</p>
-      <div id="attribute-grid" class="attribute-grid"></div>
-      <div class="controls">
-        <button id="btn-progress-reset-attributes" type="button">Tẩy thuộc tính</button>
-        <button id="btn-progress-respec" type="button">Tẩy điểm kỹ năng</button>
-      </div>
-      </div><div id="profile-skills" role="tabpanel" aria-labelledby="tab-skills"><h3>Cây võ công</h3><p class="hint">Hai nhánh Công pháp và Hộ thân. Chọn hướng tu luyện của riêng bạn.</p>
-      <div id="skill-tree" class="skill-tree"></div>
-      </div><div id="profile-gear" role="tabpanel" aria-labelledby="tab-gear" hidden><h3>Hành trang hiệp khách</h3>
-      <div id="gear-slots" class="codex-filters"></div>
-      <p id="progress-set"></p>
-      <p id="progress-stats"></p>
-      <p id="progress-ultimate"></p>
-      </div><p id="progress-message" role="status" aria-live="polite"></p>
-    </section>
-</section>
-    <section id="view-codex" class="view" hidden>    <details class="codex-panel" open>
-      <summary>Giang hồ kỳ phổ · 5 môn phái · 20 đồng đội</summary>
-      <p class="hint">Tra cứu nhân vật, điều kiện chiêu mộ và kỹ năng. Gặp nhân vật ở mục Đồng đội và hoàn thành nhiệm vụ để mời họ đồng hành.</p>
-      <div class="codex-filters">
-        <label>Danh mục
-          <select id="catalog-view">
-            <option value="companions">Đồng đội</option>
-            <option value="sects">Môn phái</option>
-            <option value="synergies">Kích duyên</option>
-            <option value="equipment">Trang bị</option>
-          </select>
-        </label>
-        <label>Môn phái
-          <select id="catalog-sect"><option value="">Tất cả</option></select>
-        </label>
-        <label class="codex-search">Tìm kiếm
-          <input id="catalog-search" type="search" maxlength="100" placeholder="Tên, kỹ năng, nhiệm vụ…">
-        </label>
-      </div>
-      <p id="catalog-count" role="status" aria-live="polite"></p>
-      <div id="catalog-results" class="codex-grid" role="region" aria-label="Kết quả tra cứu" tabindex="0"></div>
-      <section class="synergy-lab" aria-labelledby="synergy-title">
-        <h2 id="synergy-title">Thử phối hợp môn phái</h2>
-        <p class="hint">Chọn phái cho một nhân vật chính và hai đồng đội để xem kích duyên. Phần thử này không thay đổi bản lưu.</p>
-        <div class="codex-filters">
-          <label>Nhân vật chính<select id="preview-hero"><option value="">Chưa chọn</option></select></label>
-          <label>Đồng đội 1<select id="preview-ally-1"><option value="">Chưa chọn</option></select></label>
-          <label>Đồng đội 2<select id="preview-ally-2"><option value="">Chưa chọn</option></select></label>
+    </header>
+    <p id="boot-status" role="status">Đang mở trang giang hồ…</p>
+    <nav id="main-nav" class="main-nav" aria-label="Điều hướng" hidden>
+      <button type="button" data-view="camp">
+        <span data-icon="sword"></span><span>Chiến</span>
+      </button>
+      <button type="button" data-view="roster">
+        <span data-icon="roster"></span><span>Đội hình</span>
+      </button>
+      <button type="button" data-view="tavern">
+        <span data-icon="tea"></span><span>Quán</span>
+      </button>
+      <button type="button" data-view="dungeons">
+        <span data-icon="camp"></span><span>Bí cảnh</span>
+      </button>
+      <button type="button" data-view="profile">
+        <span data-icon="profile"></span><span>Túi đồ</span>
+      </button>
+    </nav>
+    <main id="app-main">
+      <p id="app-message" role="status" aria-live="polite"></p>
+      <section id="view-title" class="view title-view" hidden>
+        <div class="title-copy">
+          <span class="edition-label"
+            >KIẾM HIỆP • CHIẾN THUẬT • NHÂN DUYÊN</span
+          >
+          <h1><span>Võ Lâm</span>Hài Hiệp Truyện</h1>
+          <p>Một cuốn sổ nợ. Cả một giang hồ.</p>
+          <div class="title-facts">
+            <span>3 hồi truyện</span><i></i><span>20 đồng đội</span><i></i
+            ><span>4 kết cục</span>
+          </div>
         </div>
-        <div id="synergy-preview" role="status" aria-live="polite"></div>
+        <form id="new-game-form" class="panel title-form">
+          <div class="form-heading">
+            <span class="eyebrow">CHỌN CON ĐƯỜNG CỦA BẠN</span>
+            <h2>Hiệp khách xuất sơn</h2>
+          </div>
+          <div
+            id="sect-picker"
+            class="sect-picker"
+            role="group"
+            aria-label="Chọn môn phái"
+          ></div>
+          <div class="start-fields">
+            <label for="hero-name"
+              >Danh tính<input
+                id="hero-name"
+                maxlength="80"
+                required
+                value="Tiểu Hiệp"
+                autocomplete="off"
+            /></label>
+            <label for="hero-sect"
+              >Môn phái<select id="hero-sect">
+                <option value="ThieuLam">Thiếu Lâm · Đỡ đòn</option>
+                <option value="VoDang" selected>Võ Đang · Nội công</option>
+                <option value="CaiBang">Cái Bang · Đấu sĩ</option>
+                <option value="NgaMi">Nga Mi · Hỗ trợ</option>
+                <option value="DuongMon">Đường Môn · Độc sát</option>
+              </select></label
+            >
+          </div>
+          <button id="btn-new-game" class="primary start-button" type="submit">
+            <span data-icon="sword"></span> Khởi hành
+            <span data-icon="arrow"></span>
+          </button>
+          <div class="title-secondary">
+            <button id="btn-continue" type="button">Tiếp tục bản lưu</button
+            ><button id="btn-title-saves" type="button">Nhập / Tải game</button>
+          </div>
+          <p class="hint title-save-note">
+            Khởi hành mới thay ô tự lưu; 5 ô thủ công vẫn được giữ.
+          </p>
+        </form>
       </section>
-    </details>
-</section>
-    <section id="view-saves" class="view" hidden>    <section class="save-panel" aria-labelledby="save-title">
-      <h2 id="save-title">Lưu tiến trình</h2>
-      <p id="storage-backend">Đang mở kho lưu…</p>
-      <p class="hint">Lưu hồ sơ, nhiệm vụ, đồng đội và đội hình trên trình duyệt này. Trận chưa hoàn tất sẽ được chơi lại từ đầu khi tiếp tục. Xuất file để giữ bản sao hoặc chuyển thiết bị.</p>
-      <label for="save-name">Tên hiệp khách</label>
-      <input id="save-name" type="text" maxlength="80" value="Tiểu Hiệp" autocomplete="off">
-      <label for="save-slot">Ô lưu</label>
-      <select id="save-slot">
-        <option value="0">Tự lưu (chỉ tải)</option>
-        <option value="1" selected>Ô thủ công 1</option>
-        <option value="2">Ô thủ công 2</option>
-        <option value="3">Ô thủ công 3</option>
-        <option value="4">Ô thủ công 4</option>
-        <option value="5">Ô thủ công 5</option>
-      </select>
-      <div class="controls">
-        <button id="btn-save" type="button" disabled>Lưu</button>
-        <button id="btn-load" type="button" disabled>Tải</button>
-        <button id="btn-export" type="button" disabled>Xuất .wuxia</button>
-        <button id="btn-import" type="button" disabled>Nhập .wuxia</button>
-        <button id="btn-new-session" type="button" disabled>Nhân vật mới</button>
-      </div>
-      <input id="save-file" type="file" accept=".wuxia,application/json" hidden>
-      <p id="save-message" role="status" aria-live="polite"></p>
-      <ul id="save-slots" aria-label="Danh sách bản lưu"></ul>
-    </section>
-<button id="btn-saves-title" type="button">Về màn hình đầu</button></section>
-    <section id="view-settings" class="view" hidden><article class="panel"><h1>Thiết lập</h1>
-      <label for="audio-volume">Âm lượng</label><input id="audio-volume" type="range" min="0" max="100" step="1" value="35"><p id="audio-status"></p>
-      <p class="hint">Bật hoặc tắt nhạc bằng biểu tượng loa ở đầu màn hình. Khi rời tab, game tự tạm dừng nhạc và trận đấu.</p>
-      <button id="btn-settings-title" type="button">Về màn hình đầu</button><p id="version-label"></p>
-    </article></section>
-    <section id="view-dialogue" class="view dialogue-view" hidden><div class="dialogue-scenery" aria-hidden="true"><span class="dialogue-emblem">Giang hồ ký sự</span></div><div id="dialogue-root" class="panel"></div></section>
-    <section id="view-battle" class="view" hidden>
-      <div class="section-heading battle-heading"><p class="eyebrow">LUẬN KIẾM GIANG HỒ</p><h1 id="battle-title"></h1></div>
-      <div class="battle-toolbar"><button id="btn-pause" type="button" aria-pressed="false">Tạm dừng</button><div class="speeds" role="group" aria-label="Tốc độ"><button data-scale="1" type="button" aria-pressed="true">×1</button><button data-scale="2" type="button">×2</button><button data-scale="3" type="button">×3</button></div><span id="battle-clock"></span><button id="btn-retreat" type="button">Rút lui</button></div>
-      <article class="panel battle-result-panel" id="battle-result-panel" hidden><div class="result-emblem" data-icon="trophy"></div><p class="eyebrow">TRẬN ĐẤU KHÉP LẠI</p><h2 id="battle-result" role="status"></h2><p id="battle-rewards"></p><div id="battle-stats"></div><button id="btn-battle-camp" class="primary" type="button">Về doanh trại</button></article>
-      <div class="battle-arena"><canvas id="game-canvas" width="960" height="540" role="img" aria-label="Bàn chiến đấu hai phe sáu cột ba hàng"></canvas></div>
-      <p class="hint">Thanh ngọc: sinh lực · Thanh vàng: nộ · Vòng lam: khiên. Trên điện thoại, địch ở phía trên và đội nhà ở phía dưới.</p>
-      <div id="battle-unit-list" class="battle-unit-list"></div><p id="unit-inspect" class="hint"></p>
+      <section id="view-camp" class="view" hidden>
+        <div class="camp-scene">
+          <div class="scene-top">
+            <span class="scene-location"
+              ><span class="live-dot"></span> QUÁN TRỌ RỒNG LỬA</span
+            ><span id="chapter-progress"></span>
+          </div>
+          <div class="scene-copy">
+            <p class="eyebrow" id="act-label"></p>
+            <h1>Chốn giang hồ,<br />gặp người tri kỷ.</h1>
+            <p>
+              Một chén trà, một lời hứa.<br />Chuyện của bạn bắt đầu từ đây.
+            </p>
+          </div>
+          <div
+            id="camp-hero-art"
+            class="portrait camp-hero-art"
+            aria-hidden="true"
+          ></div>
+          <article class="quest-feature">
+            <div class="quest-seal" data-icon="codex"></div>
+            <div class="quest-copy">
+              <p class="eyebrow">CHÍNH TRUYỆN</p>
+              <h2 id="main-quest-title"></h2>
+              <p id="main-quest-note"></p>
+            </div>
+            <div class="quest-actions">
+              <button id="btn-main-quest" class="primary" type="button">
+                Tiếp tục câu chuyện</button
+              ><button id="btn-resume-battle" type="button" hidden>
+                Chơi lại trận chưa hoàn tất
+              </button>
+            </div>
+          </article>
+        </div>
+        <section class="party-panel">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">CÙNG NHAU XUẤT CHIẾN</p>
+              <h2>Người cùng đường</h2>
+            </div>
+            <button id="btn-camp-roster" class="text-button" type="button">
+              Xếp trận <span data-icon="arrow"></span>
+            </button>
+          </div>
+          <div id="party-summary" class="party-summary"></div>
+        </section>
+        <div class="camp-grid">
+          <article class="activity-card training-card">
+            <div class="activity-icon" data-icon="sword"></div>
+            <div>
+              <p class="eyebrow">RÈN LUYỆN MỖI NGÀY</p>
+              <h2>Sân luyện võ</h2>
+              <p>Thưởng theo cấp; sau 3 trận thắng/ngày, bạc và XP giảm.</p>
+            </div>
+            <button id="btn-practice" type="button">
+              Thử sức <span data-icon="arrow"></span>
+            </button>
+          </article>
+          <article class="activity-card shop-card">
+            <div class="activity-icon" data-icon="tea"></div>
+            <div>
+              <p class="eyebrow">MỘT CHÚT HÀNH TRANG</p>
+              <h2>Quán nhỏ ven đường</h2>
+              <p id="shop-inventory"></p>
+            </div>
+            <div class="shop-items">
+              <button data-buy="rope" type="button">
+                <span>Dây thừng</span><small>5 bạc</small></button
+              ><button data-buy="food_fish" type="button">
+                <span>Cá tươi</span><small>5 bạc</small></button
+              ><button data-buy="tea" type="button">
+                <span>Trà ngon</span><small>8 bạc</small>
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section id="view-roster" class="view" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">KẾT NGHĨA GIANG HỒ</p>
+          <h1>Người cùng đường</h1>
+          <span class="heading-note" id="roster-count"></span>
+        </div>
+        <article class="panel formation-panel">
+          <div class="section-title">
+            <h2>Bày binh bố trận</h2>
+            <span class="tiny-label">6 NGƯỜI · 3 HÀNG</span>
+          </div>
+          <p class="hint">
+            Chọn tên rồi chạm ô, hoặc kéo nhân vật vào ô. Hậu tuyến bên trái,
+            tiền tuyến bên phải. Thả lên người khác để đổi chỗ.
+          </p>
+          <div id="formation-root"></div>
+          <p id="active-synergies"></p>
+        </article>
+        <div id="tactics-root" class="panel tactics-options"></div>
+        <div class="section-title">
+          <h2>Đã kết nghĩa</h2>
+          <span class="tiny-label">MAIN + TỐI ĐA 5 ĐỒNG ĐỘI</span>
+        </div>
+        <div id="roster-list" class="card-grid"></div>
+        <div class="section-title"><h2>Nhân duyên giang hồ</h2></div>
+        <p class="hint">Vượt thử thách, tìm người chung đường.</p>
+        <div
+          id="recruit-filters"
+          class="filter-chips"
+          role="group"
+          aria-label="Lọc nhiệm vụ chiêu mộ"
+        >
+          <button type="button" data-recruit-filter="all" aria-pressed="true">
+            Tất cả</button
+          ><button type="button" data-recruit-filter="open">Đã mở</button
+          ><button type="button" data-recruit-filter="1">Hồi I</button
+          ><button type="button" data-recruit-filter="2">Hồi II</button
+          ><button type="button" data-recruit-filter="3">Hồi III</button>
+        </div>
+        <div id="recruit-list" class="card-grid"></div>
+      </section>
+      <section id="view-profile" class="view" hidden>
+        <div id="profile-hero" class="profile-hero"></div>
+        <section
+          class="save-panel progress-panel"
+          aria-labelledby="progress-title"
+        >
+          <h2 id="progress-title" class="sr-only">Tu luyện &amp; Trang bị</h2>
+          <p id="progress-summary"></p>
+          <div class="profile-tabs" role="tablist" aria-label="Hồ sơ nhân vật">
+            <button
+              type="button"
+              role="tab"
+              id="tab-skills"
+              data-profile-tab="skills"
+              aria-controls="profile-skills"
+              aria-selected="true"
+            >
+              Võ công</button
+            ><button
+              type="button"
+              role="tab"
+              id="tab-attributes"
+              data-profile-tab="attributes"
+              aria-controls="profile-attributes"
+              aria-selected="false"
+            >
+              Thuộc tính</button
+            ><button
+              type="button"
+              role="tab"
+              id="tab-gear"
+              data-profile-tab="gear"
+              aria-controls="profile-gear"
+              aria-selected="false"
+            >
+              Trang bị
+            </button>
+          </div>
+          <div
+            id="profile-attributes"
+            role="tabpanel"
+            aria-labelledby="tab-attributes"
+            hidden
+          >
+            <p class="hint">
+              Kỹ năng và trang bị được áp dụng cho nhân vật chính trong chiến
+              dịch. Đổi phái hoàn điểm kỹ năng, tháo đồ riêng của phái cũ và giữ
+              nguyên túi đồ. Không đổi hồ sơ trong trận.
+            </p>
+            <div class="controls">
+              <label for="progress-sect">Môn phái</label>
+              <select id="progress-sect">
+                <option value="">Chưa chọn</option>
+              </select>
+              <button id="btn-progress-sect" type="button">
+                Áp dụng môn phái
+              </button>
+              <button id="btn-progress-train" type="button">
+                Tu luyện thử: +1 cấp
+              </button>
+              <button id="btn-progress-gear" type="button">
+                Nhận bộ trang bị thử
+              </button>
+            </div>
+            <p class="hint">
+              Nhận 1 điểm kỹ năng/cấp, 2 điểm thuộc tính mỗi lần lên cấp, tối đa
+              cấp 20. Kinh nghiệm đến từ nhiệm vụ và luyện võ.
+            </p>
+            <h3>Thuộc tính</h3>
+            <p class="hint">
+              Căn Cốt tăng HP; Khí Hải tăng nội công/nội phòng; Kình Lực tăng
+              ngoại công và sát thương bạo kích; Ngộ Tính tăng tỷ lệ bạo kích;
+              Thân Pháp tăng nhịp đánh/né; Cơ Duyên tăng bạo kích.
+            </p>
+            <div id="attribute-grid" class="attribute-grid"></div>
+            <div class="controls">
+              <button id="btn-progress-reset-attributes" type="button">
+                Tẩy thuộc tính
+              </button>
+              <button id="btn-progress-respec" type="button">
+                Tẩy điểm kỹ năng
+              </button>
+            </div>
+          </div>
+          <div id="profile-skills" role="tabpanel" aria-labelledby="tab-skills">
+            <h3>Cây võ công</h3>
+            <p class="hint">
+              Hai nhánh Công pháp và Hộ thân. Chọn hướng tu luyện của riêng bạn.
+            </p>
+            <div id="skill-tree" class="skill-tree"></div>
+          </div>
+          <div
+            id="profile-gear"
+            role="tabpanel"
+            aria-labelledby="tab-gear"
+            hidden
+          >
+            <h3>Hành trang hiệp khách</h3>
+            <div id="gear-slots" class="codex-filters"></div>
+            <p id="progress-set"></p>
+            <p id="progress-stats"></p>
+            <p id="progress-ultimate"></p>
+            <div id="world-bag"></div>
+          </div>
+          <p id="progress-message" role="status" aria-live="polite"></p>
+        </section>
+      </section>
+      <section id="view-codex" class="view" hidden>
+        <details class="codex-panel" open>
+          <summary>Giang hồ kỳ phổ · 5 môn phái · 20 đồng đội</summary>
+          <p class="hint">
+            Tra cứu nhân vật, điều kiện chiêu mộ và kỹ năng. Gặp nhân vật ở mục
+            Đồng đội và hoàn thành nhiệm vụ để mời họ đồng hành.
+          </p>
+          <div class="codex-filters">
+            <label
+              >Danh mục
+              <select id="catalog-view">
+                <option value="companions">Đồng đội</option>
+                <option value="sects">Môn phái</option>
+                <option value="synergies">Kích duyên</option>
+                <option value="equipment">Trang bị</option>
+              </select>
+            </label>
+            <label
+              >Môn phái
+              <select id="catalog-sect">
+                <option value="">Tất cả</option>
+              </select>
+            </label>
+            <label class="codex-search"
+              >Tìm kiếm
+              <input
+                id="catalog-search"
+                type="search"
+                maxlength="100"
+                placeholder="Tên, kỹ năng, nhiệm vụ…"
+              />
+            </label>
+          </div>
+          <p id="catalog-count" role="status" aria-live="polite"></p>
+          <div
+            id="catalog-results"
+            class="codex-grid"
+            role="region"
+            aria-label="Kết quả tra cứu"
+            tabindex="0"
+          ></div>
+          <section class="synergy-lab" aria-labelledby="synergy-title">
+            <h2 id="synergy-title">Thử phối hợp môn phái</h2>
+            <p class="hint">
+              Chọn phái cho một nhân vật chính và hai đồng đội để xem kích
+              duyên. Phần thử này không thay đổi bản lưu.
+            </p>
+            <div class="codex-filters">
+              <label
+                >Nhân vật chính<select id="preview-hero">
+                  <option value="">Chưa chọn</option>
+                </select></label
+              >
+              <label
+                >Đồng đội 1<select id="preview-ally-1">
+                  <option value="">Chưa chọn</option>
+                </select></label
+              >
+              <label
+                >Đồng đội 2<select id="preview-ally-2">
+                  <option value="">Chưa chọn</option>
+                </select></label
+              >
+            </div>
+            <div id="synergy-preview" role="status" aria-live="polite"></div>
+          </section>
+        </details>
+      </section>
+      <section id="view-saves" class="view" hidden>
+        <section class="save-panel" aria-labelledby="save-title">
+          <h2 id="save-title">Lưu tiến trình</h2>
+          <p id="storage-backend">Đang mở kho lưu…</p>
+          <p class="hint">
+            Lưu hồ sơ, nhiệm vụ, đồng đội và đội hình trên trình duyệt này. Trận
+            chưa hoàn tất sẽ được chơi lại từ đầu khi tiếp tục. Xuất file để giữ
+            bản sao hoặc chuyển thiết bị.
+          </p>
+          <label for="save-name">Tên hiệp khách</label>
+          <input
+            id="save-name"
+            type="text"
+            maxlength="80"
+            value="Tiểu Hiệp"
+            autocomplete="off"
+          />
+          <label for="save-slot">Ô lưu</label>
+          <select id="save-slot">
+            <option value="0">Tự lưu (chỉ tải)</option>
+            <option value="1" selected>Ô thủ công 1</option>
+            <option value="2">Ô thủ công 2</option>
+            <option value="3">Ô thủ công 3</option>
+            <option value="4">Ô thủ công 4</option>
+            <option value="5">Ô thủ công 5</option>
+          </select>
+          <div class="controls">
+            <button id="btn-save" type="button" disabled>Lưu</button>
+            <button id="btn-load" type="button" disabled>Tải</button>
+            <button id="btn-export" type="button" disabled>Xuất .wuxia</button>
+            <button id="btn-import" type="button" disabled>Nhập .wuxia</button>
+            <button id="btn-new-session" type="button" disabled>
+              Nhân vật mới
+            </button>
+          </div>
+          <input
+            id="save-file"
+            type="file"
+            accept=".wuxia,application/json"
+            hidden
+          />
+          <p id="save-message" role="status" aria-live="polite"></p>
+          <ul id="save-slots" aria-label="Danh sách bản lưu"></ul>
+        </section>
+        <button id="btn-saves-title" type="button">Về màn hình đầu</button>
+      </section>
+      <section id="view-settings" class="view" hidden>
+        <article class="panel">
+          <h1>Thiết lập</h1>
+          <label for="audio-volume">Âm lượng</label
+          ><input
+            id="audio-volume"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value="35"
+          />
+          <p id="audio-status"></p>
+          <p class="hint">
+            Bật hoặc tắt nhạc bằng biểu tượng loa ở đầu màn hình. Khi rời tab,
+            game tự tạm dừng nhạc và trận đấu.
+          </p>
+          <div class="settings-toggles">
+            <label
+              ><input id="effects-enable" type="checkbox" checked /> Hiệu ứng và
+              quay chậm tuyệt kỹ</label
+            ><label
+              ><input id="haptics-enable" type="checkbox" checked /> Rung nhẹ
+              khi trúng đòn mạnh (nếu máy hỗ trợ)</label
+            ><button id="btn-portrait-mode" type="button">
+              Chơi dọc toàn màn hình
+            </button>
+            <p class="hint">
+              Có thể khóa dọc khi trình duyệt cho phép ở chế độ toàn màn hình
+              hoặc khi cài game. Nếu không được hỗ trợ, game vẫn chơi bằng bố
+              cục dọc trên điện thoại; xoay ngang sẽ hiện lời nhắc.
+            </p>
+          </div>
+          <button id="btn-settings-title" type="button">Về màn hình đầu</button>
+          <p id="version-label"></p>
+        </article>
+      </section>
+      <section id="view-tavern" class="view" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">GIANG HỒ ĐẠI VIỆT · GIẢ TƯỞNG</p>
+          <h1>Quán nhỏ, chuyện lớn</h1>
+        </div>
+        <div id="world-tabs" class="filter-chips"></div>
+        <div id="world-root"></div>
+      </section>
+      <section id="view-dungeons" class="view" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">MỘT LƯỢT ĐI · MỘT LẦN QUYẾT</p>
+          <h1>Bí cảnh Đại Việt</h1>
+        </div>
+        <div id="dungeon-root"></div>
+      </section>
+      <section id="view-dialogue" class="view dialogue-view" hidden>
+        <div class="dialogue-scenery" aria-hidden="true">
+          <span class="dialogue-emblem">Giang hồ ký sự</span>
+        </div>
+        <div id="dialogue-root" class="panel"></div>
+      </section>
+      <section id="view-battle" class="view" hidden>
+        <div class="section-heading battle-heading">
+          <p class="eyebrow">LUẬN KIẾM GIANG HỒ</p>
+          <h1 id="battle-title"></h1>
+        </div>
+        <div class="battle-toolbar">
+          <button id="btn-battle-mode" type="button" aria-pressed="true">
+            Tự động</button
+          ><button id="btn-pause" type="button" aria-pressed="false">
+            Tạm dừng
+          </button>
+          <div class="speeds" role="group" aria-label="Tốc độ">
+            <button data-scale="1" type="button" aria-pressed="true">×1</button
+            ><button data-scale="2" type="button">×2</button
+            ><button data-scale="3" type="button">×3</button>
+          </div>
+          <span id="battle-clock"></span
+          ><button id="btn-retreat" type="button">Rút lui</button>
+        </div>
+        <article
+          class="panel battle-result-panel"
+          id="battle-result-panel"
+          hidden
+        >
+          <div class="result-emblem" data-icon="trophy"></div>
+          <p class="eyebrow">TRẬN ĐẤU KHÉP LẠI</p>
+          <h2 id="battle-result" role="status"></h2>
+          <p id="battle-rewards"></p>
+          <div id="battle-stats"></div>
+          <button id="btn-battle-camp" class="primary" type="button">
+            Về doanh trại
+          </button>
+        </article>
+        <div class="battle-arena" id="battle-arena">
+          <div id="ultimate-banner" aria-live="polite"></div>
+          <canvas
+            id="game-canvas"
+            width="960"
+            height="540"
+            role="img"
+            aria-label="Bàn chiến đấu hai phe sáu cột ba hàng"
+          ></canvas>
+        </div>
+        <p class="hint">
+          Thanh ngọc: sinh lực · Thanh vàng: nộ · Vòng lam: khiên. Trên điện
+          thoại, địch ở phía trên và đội nhà ở phía dưới.
+        </p>
+        <div id="battle-unit-list" class="battle-unit-list"></div>
+        <p id="unit-inspect" class="hint"></p>
 
-      <details><summary>Nhật ký giao chiến</summary><ol id="battle-log"></ol></details>
-    </section>
-    <section id="view-ending" class="view" hidden><article class="panel ending-panel"><p class="eyebrow">MỘT ĐOẠN ĐƯỜNG KHÉP LẠI</p><h1 id="ending-title"></h1><div id="ending-story"></div><p id="ending-summary"></p><div class="controls"><button id="btn-ending-camp" type="button">Trở lại doanh trại</button><button id="btn-ending-title" type="button">Một hành trình khác</button></div></article></section>
-  </main>
-  <footer class="app-footer"><span>VÕ LÂM HÀI HIỆP TRUYỆN</span><span>Chuyện của bạn. Giang hồ của chúng ta.</span></footer>
-  <script type="module" src="./src/main.js"></script>
-</body></html>
+        <details>
+          <summary>Nhật ký giao chiến</summary>
+          <ol id="battle-log"></ol>
+        </details>
+      </section>
+      <section id="view-ending" class="view" hidden>
+        <article class="panel ending-panel">
+          <p class="eyebrow">MỘT ĐOẠN ĐƯỜNG KHÉP LẠI</p>
+          <h1 id="ending-title"></h1>
+          <div id="ending-story"></div>
+          <p id="ending-summary"></p>
+          <div class="controls">
+            <button id="btn-ending-camp" type="button">
+              Trở lại doanh trại</button
+            ><button id="btn-ending-title" type="button">
+              Một hành trình khác
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer class="app-footer">
+      <span>VÕ LÂM HÀI HIỆP TRUYỆN</span
+      ><span>Chuyện của bạn. Giang hồ của chúng ta.</span>
+    </footer>
+    <dialog id="menu-sheet" class="bottom-sheet">
+      <div class="sheet-heading">
+        <h2>Hành trang giang hồ</h2>
+        <button
+          type="button"
+          data-close-sheet="menu-sheet"
+          aria-label="Đóng menu"
+        >
+          ×
+        </button>
+      </div>
+      <div class="sheet-menu">
+        <button type="button" data-view="codex">Giang hồ kỳ phổ</button
+        ><button type="button" data-view="saves">Lưu / Tải game</button
+        ><button type="button" data-view="settings">Cài đặt</button>
+      </div>
+    </dialog>
+    <dialog id="unit-sheet" class="bottom-sheet">
+      <div class="sheet-heading">
+        <h2>Hồ sơ tướng</h2>
+        <button
+          type="button"
+          data-close-sheet="unit-sheet"
+          aria-label="Đóng hồ sơ"
+        >
+          ×
+        </button>
+      </div>
+      <div id="unit-sheet-content"></div>
+    </dialog>
+    <div id="orientation-tip" role="status">
+      Game được thiết kế để chơi dọc. Hãy xoay điện thoại khi thuận tiện.
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

@@ -72,7 +72,7 @@ export function mountCodexUI() {
         details.append(element('summary', 'Chỉ số và đánh thường'));
         details.append(element('p', statsText(item.baseStats)));
         details.append(element('p', item.skills.autoAttack.targetType === 'lowest_hp_ally' ? 'Đánh thường hồi máu cho đồng đội yếu nhất; nhận 15 nộ.' : 'Đánh thường nhận 15 nộ.'));
-        details.append(element('p', `Tuyệt kỹ cần ${item.skills.ultimate.energyCost} nộ. Chỉ số sẽ được cân bằng khi có chiến đấu.`));
+        details.append(element('p', `Tuyệt kỹ cần ${item.skills.ultimate.energyCost} nội lực. Chỉ số sẽ được cân bằng khi có chiến đấu.`));
         card.append(details);
       }
       results.append(card);

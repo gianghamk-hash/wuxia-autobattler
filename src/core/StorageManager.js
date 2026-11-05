@@ -28,7 +28,7 @@ export function validateSnapshot(data) {
   if (typeof data.version !== 'string' || !finite(data.playtimeSeconds)) fail('Thông tin bản lưu không hợp lệ.');
   if (!plain(data.hero) || typeof data.hero.name !== 'string' || !data.hero.name.trim() || data.hero.name.length > 80 ||
       !Number.isInteger(data.hero.level) || data.hero.level < 1 || !finite(data.hero.exp)) fail('Thông tin nhân vật không hợp lệ.');
-  if (!plain(data.party) || !Array.isArray(data.party.active) || data.party.active.length > 2 ||
+  if (!plain(data.party) || !Array.isArray(data.party.active) || data.party.active.length > 5 ||
       !Array.isArray(data.party.unlocked) || !plain(data.party.formation) ||
       ![...data.party.active, ...data.party.unlocked].every(id => typeof id === 'string') ||
       new Set(data.party.active).size !== data.party.active.length ||

@@ -99,6 +99,7 @@ export class BattleRenderer {
       ctx.strokeStyle = effect.type === 'heal' ? '#b0ffca' : effect.type === 'ultimate' ? '#ffe0a0' : effect.damageType === 'magical' ? '#dab6ff' : '#ffdbb1'; ctx.lineWidth = effect.type === 'ultimate' ? 3 : 2;
       if (effect.type === 'damage') { ctx.beginPath(); ctx.moveTo(p.x - 30 - 8 * t, p.y + 16); ctx.lineTo(p.x + 30 + 8 * t, p.y - 40); ctx.stroke(); }
       else { ctx.beginPath(); ctx.ellipse(p.x, p.y - 10, 25 + t * 70, 18 + t * 40, 0, 0, Math.PI * 2); ctx.stroke(); }
+      if(effect.type==='ultimate'){for(let i=0;i<12;i++){const angle=i*2.4,reach=20+t*95;ctx.fillStyle=i%2?'#c9bd7b':'#d7e0a5';ctx.beginPath();ctx.ellipse(p.x+Math.cos(angle)*reach,p.y+Math.sin(angle)*reach*.55+t*25,3,1.4,angle+t*3,0,Math.PI*2);ctx.fill();}}
       ctx.restore();
     }
     this.floating = this.floating.map(item => ({ ...item, life: item.life - dt })).filter(item => item.life > 0);
@@ -106,7 +107,7 @@ export class BattleRenderer {
       const p = this.project(item.position), text = item.type === 'miss' ? 'HỤT' : `${item.type === 'heal' ? '+' : '−'}${Math.ceil(item.amount)}`;
       ctx.save(); ctx.globalAlpha = Math.min(1, item.life * 4); ctx.font = `800 ${item.crit ? 29 : 24}px Georgia, serif`; ctx.textAlign = 'center'; ctx.lineWidth = 4; ctx.strokeStyle = '#183237';
       const textY = p.y - 37 - (1 - item.life / .85) * 40; ctx.strokeText(text, p.x, textY);
-      ctx.fillStyle = item.type === 'heal' ? '#acffcc' : item.crit ? '#ffe18a' : item.damageType === 'magical' ? '#d9b2ff' : '#ffb1a3'; ctx.fillText(text, p.x, textY); ctx.restore();
+      ctx.fillStyle = item.type === 'heal' ? '#acffcc' : item.statusType === 'poison' ? '#b4e765' : item.statusType === 'burn' ? '#ffb275' : item.crit ? '#ffe18a' : item.damageType === 'magical' ? '#d9b2ff' : '#ffb1a3'; ctx.fillText(text, p.x, textY); ctx.restore();
     }
   }
 }

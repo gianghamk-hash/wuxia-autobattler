@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "serve": "python3 -m http.server 8000"
+    "serve": "python3 -m http.server 8000",
+    "balance": "node scripts/balance.mjs reports/balance-current.json"
   },
   "devDependencies": {
     "fake-indexeddb": "6.2.7"

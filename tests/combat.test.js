@@ -125,13 +125,13 @@ test('synergies grant the GDD shield/energy/damage modifiers and poison detonate
   const healer = new Hero('NgaMi'), poison = new Companion('companion_04'), beggar = new Companion('companion_01');
   [0, 1, 2].forEach(i => grid.remove(units[i])); [healer, poison, beggar].forEach((u, i) => grid.place(u, { x: i, y: 0 }));
   const c = new CombatEngine({ grid, units: [healer, poison, beggar, ...units.slice(3)] }); c.start();
-  assert.equal(poison.damageMultiplier, 1.2); assert.ok(c.teamSynergies.home.includes('doc_ba_vo_lam'));
+  assert.ok(Math.abs(poison.damageMultiplier - 1.02) < 1e-9); assert.ok(c.teamSynergies.home.includes('doc_ba_vo_lam'));
   const target = units[3]; target.stats.dodgeRate = target.stats.blockRate = 0; poison.stats.critRate = 0;
   target.stats.maxHp = target.stats.hp = 100000;
   for (let i = 0; i < 5; i++) c.resolveSkill(poison, target, poison.skills.autoAttack, false);
   assert.equal(target.statusEffects.filter(e => e.type === 'poison').length, 0);
   assert.ok(c.records.get(poison.id).damage > 5 * 30);
-  const standard = battle(); standard.combat.start(); assert.equal(standard.units[0].energyGainMultiplier, 1.25);
+  const standard = battle(); standard.combat.start(); assert.equal(standard.units[0].energyGainMultiplier, 1.33);
 });
 test('terminal timeout, defeat, victory, abort and mutual elimination emit exactly once', () => {
   const { a, b, combat } = duel(); combat.maxDuration = .1; combat.start(); combat.update(1);

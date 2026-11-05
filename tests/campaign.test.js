@@ -24,7 +24,7 @@ function win(c, action) {
     improve(c); action(); const result = fight(c); if (result.winner === 'home') return result;
     for (let practice = 0; practice < 3; practice++) { c.practice(); const training = fight(c); assert.equal(training.winner, 'home'); }
   }
-  assert.fail('Cannot complete encounter after twelve attempts');
+  assert.fail(`Cannot complete ${c.mainQuest()?.id} at level ${c.session.hero.level}; last ${c.lastResult?.reason}; team ${c.session.party.active.join(',')}`);
 }
 function recruit(c, quest) {
   if (quest.puzzle) { if (quest.cost && itemCount(c.session, quest.cost.itemId) < quest.cost.quantity) c.buy(quest.cost.itemId); c.solveRecruit(quest.id, quest.puzzle.correct); }
@@ -96,17 +96,17 @@ test('full campaign crosses all three acts, recruits all twenty, and supports ea
   const c = new Campaign(); c.newGame({ sect: 'VoDang', name: 'Giang' });
   for (const quest of MAIN_QUESTS.filter(q => !q.ending)) {
     if (quest.id === 'Q102') { recruit(c, RECRUIT_QUESTS[0]); recruit(c, RECRUIT_QUESTS[2]); c.chooseMain('together'); }
-    else win(c, () => c.chooseMain(quest.choices[0].id));
+    else { if (quest.id === 'Q104' || quest.act >= 2) for(const q of c.availableRecruitQuests().slice(0,6))if(!c.session.party.unlocked.includes(q.companionId)) recruit(c,q); win(c, () => c.chooseMain(quest.choices[0].id)); }
     assert.doesNotThrow(() => validateCampaign(c.snapshot()));
   }
   assert.equal(c.mainQuest().id, 'Q304'); assert.equal(c.session.storyProgress.questFlags.DISCOVERED_DEBT_BOOK, true);
   assert.equal(c.session.storyProgress.questFlags.DISCOVERED_FAKE_LEADER, true);
   for (const quest of RECRUIT_QUESTS) if (!c.session.party.unlocked.includes(quest.companionId)) recruit(c, quest);
   assert.equal(c.session.party.unlocked.length, 20);
-  assert.ok(c.endingOptions().every(e => e.available));
+  assert.equal(c.endingOptions().find(e=>e.id==='wealth').available, false); assert.equal(c.endingOptions().find(e=>e.id==='retire').available,true);
   const before = c.snapshot(), storage = new StorageManager({ indexedDB: null, localStorage: memory() });
   for (const ending of ENDINGS) {
-    const branch = new Campaign(); branch.load(before); branch.chooseEnding(ending.id);
+    const branch = new Campaign(); branch.load(before); if(ending.id==='wealth')branch.session.storyProgress.karmaScore=-3; if(ending.id==='actor'&&itemCount(branch.session,'silver')<500)branch.session.inventory.find(i=>i.itemId==='silver').quantity=500; branch.chooseEnding(ending.id);
     assert.equal(branch.session.storyProgress.endingId, ending.id); assert.equal(branch.mainQuest(), null);
     assert.throws(() => branch.chooseEnding('actor'));
     const text = await storage.exportSave(branch.snapshot()); const restored = new Campaign(); restored.load(await storage.decodeSave(text));

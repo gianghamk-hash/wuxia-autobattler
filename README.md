@@ -2,9 +2,34 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 1.1 — giao diện mobile, tích hợp Sprint 1–10:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 2.0 — chiến thuật & giang hồ Đại Việt:** [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
 
-## Giao diện mobile 1.1
+## Nâng cấp 2.0
+
+- **Chiến thuật:** Main + tối đa 5 đồng đội trên lưới ba hàng tiền/trung/hậu; ngũ hành tương khắc ±15% sát thương và tương sinh hỗ trợ hồi nội lực/hồi máu. Mốc 2/4/6 người cùng phái kích hoạt hiệu ứng; tướng Tự do có thể nhập phái với 80 bạc để mốc 6 dùng được với roster hiện tại. Chỉnh ưu tiên gần nhất/ít máu/hậu tuyến từng tướng trước trận; khiêu khích vẫn có hiệu lực.
+- **Nội lực và trạng thái:** tự tung tuyệt kỹ khi đủ nội lực, hoặc chọn chế độ Thủ công để ra lệnh từng tướng trong bottom sheet (đánh thường/di chuyển vẫn tự động). Độc, điểm huyệt, nội thương giảm hồi nội lực, bốc cháy; khí công Long mạch từ Phong Nha cho tuyệt kỹ sát thương đánh theo hàng tiền/trung/hậu (cùng tọa độ x), không phải toàn sân.
+- **Kinh tế:** cá +8% HP, trà +15% nội lực, đan +10% HP cho một trận. Trừ ngay khi chốt, lưu cùng seed; thua/rút lui vẫn mất món. Luyện võ tăng thưởng theo cấp, giảm thưởng sau 3 thắng/ngày. Tu luyện 10 bậc, rèn 10 bậc, phí chiêu mộ (hai người đầu miễn phí), nguyên liệu và phí bí cảnh tạo khoản chi dài hạn.
+- **Hoạt động:** điểm danh theo giờ Việt Nam, nhiệm vụ ngày/tuần nhận một lần, câu cá 3 lượt/ngày, tiêu cục 2 chuyến/ngày (an toàn/đường tắt, có cọc), luyện đan, rèn vũ khí, tửu quán nghe tin; nhật ký ghi hành động và câu trả lời bằng tiếng Việt.
+- **Bí cảnh:** Phong Nha 5 tầng, U Minh 6, Yên Tử 6, Hoa Lư 7, Sơn Đoòng 8. Điều kiện cấp + ngũ hành/phái, mỗi tầng hai lối, phòng giao chiến/kho báu/sự kiện/nghỉ/boss. Giữ HP và tướng đã hạ giữa tầng; đội hình/cấp/bậc rèn được chốt lúc vào. Mỗi vùng mở một khí công riêng; thử thách tuần luân phiên, thưởng tinh hoa/80 bạc một lần mỗi tuần.
+- **Cốt truyện:** Đại Việt **giả tưởng**, không tái hiện một triều đại có thật. Giữ năm lớp phái để tương thích dữ liệu cũ; thêm bến làng, Bình Định, U Minh, Hoa Lư, Yên Tử, thành ngữ và lời thoại chơi chữ. Bốn đường cuối: Chính đạo (+2 nhân nghĩa + bằng chứng), Tà đạo (−2 + 100 bạc), Ẩn dật (luôn chọn được), Xưng vương (500 bạc). Bản 1.x đã kết thúc giữ tên kết cục cũ.
+- **Điện thoại:** menu dưới Chiến/Đội hình/Quán/Bí cảnh/Túi đồ; menu phụ chứa lưu, kỳ phổ, cài đặt. Nút tối thiểu 44×44 px, safe area, bottom sheet tướng, bố cục dọc và manifest `orientation: portrait`. Khóa dọc toàn màn hình được thử sau khi người chơi nhấn, có thông báo nếu trình duyệt từ chối; web không bảo đảm cưỡng chế hướng trên mọi máy. Chặn double-tap zoom bằng `touch-action`, vẫn cho phép pinch zoom hỗ trợ tiếp cận.
+- **Hiệu ứng:** số sát thương, độc xanh, bạo kích vàng, hồi máu lục; chữ tên tuyệt kỹ, bụi/lá, rung nhẹ và quay chậm ngắn. Có nút tắt âm thanh, tắt hiệu ứng/rung; tôn trọng giảm chuyển động. Kiếm/trống/sáo là âm tổng hợp Web Audio, không phải bản thu nhạc cụ thật.
+
+### Phần online: phạm vi hiện tại
+
+**Đại hội hiện đấu AI từ mã đội hình chia sẻ**, gồm cấp/trang bị/khí công/ưu tiên của đội; không chuyển tiền, bậc tu luyện, bậc rèn hoặc món ăn. Ba đội NPC và tối đa tám đội nhập; tối đa ba thưởng thắng/tuần, mỗi đối thủ một lần. Không có PvP thời gian thực hoặc bảng xếp hạng máy chủ.
+
+**Bang hội và điểm danh hiện lưu ngoại tuyến**, chưa có đăng nhập máy chủ, thành viên người chơi khác hay đồng bộ nhiều thiết bị. Repo đang dùng GitHub Pages tĩnh, chưa có backend dành riêng cho game; phần này cần bổ sung dịch vụ xác thực và cơ sở dữ liệu. Không dùng dữ liệu/hạ tầng DolphinApp để giả lập tính năng online.
+
+Lưu giữ nguyên sáu ô IndexedDB và LocalStorage dự phòng có `try/catch`; không đổi kho đột ngột làm mất bản lưu. Đồng hồ nhiệm vụ dùng giờ thiết bị (UTC+7); bản ngoại tuyến không có cơ chế chống sửa đồng hồ/bản lưu ở cấp máy chủ.
+
+### Kiểm chứng 2.0
+
+Đã chạy 1.000 trận trước chỉnh và các vòng 1.000 trận sau chỉnh bằng cùng seed. Xem [toàn bộ 35 cấu hình và khoảng tin cậy](reports/BALANCE.md), [báo cáo gốc](reports/balance-baseline.json) và [báo cáo hiện tại](reports/balance-current.json). **Không coi một bộ mô phỏng 3v3 là bằng chứng cân bằng mọi build 6v6.**
+
+Chạy `npm test` cho bộ kiểm thử và `npm run balance` để tái lập mô phỏng. Kiểm tra trình duyệt 2.0 bao gồm hoạt động, tài nguyên, chọn món/ưu tiên, chế độ thủ công, bottom sheet, chiến dịch thật với đội sáu người, đấu đội chia sẻ, bí cảnh năm tầng, kỹ năng mở từ bí cảnh và lưu/tải; bố cục/nút ở 320/360/390/430/768/1280 px.
+
+## Nhật ký giao diện mobile 1.1
 
 - Màn hình xuất sơn có chọn phái bằng chân dung; nền quán trọ sơn thủy, tông ngọc/vàng và bộ biểu tượng SVG thống nhất.
 - Thanh trạng thái giữ tên, cấp, XP và bạc thật trên điện thoại. Sáu mục điều hướng nằm dưới màn hình, chừa vùng an toàn của thiết bị; trong trận menu ẩn để dành chỗ cho bàn đấu.
@@ -18,7 +43,7 @@ Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modu
 
 1. Nhập tên, chọn một trong năm môn phái rồi **Khởi hành**.
 2. Vào **Chính truyện** ở doanh trại, vượt trận hướng dẫn tại quán trọ.
-3. Mở **Đồng đội & Xếp trận**, hoàn thành thử thách rồi mời Lão Tam và Tiểu Muội. Chọn nhân vật rồi chạm ô, hoặc kéo thả để xếp một Main và tối đa hai đồng đội. Thả vào ô có người sẽ đổi chỗ.
+3. Mở **Đồng đội & Xếp trận**, hoàn thành thử thách rồi mời Lão Tam và Tiểu Muội. Chọn nhân vật rồi chạm ô, hoặc kéo thả để xếp một Main và tối đa năm đồng đội. Thả vào ô có người sẽ đổi chỗ.
 4. Vào **Nhân vật** để cộng chỉ số, học cây kỹ năng bốn tầng và thay trang bị đã sở hữu. XP, bạc và vật phẩm đến từ nhiệm vụ hoặc luyện tập; các nút cấp miễn phí của bản thử đã được bỏ khỏi luồng chơi.
 5. Tiếp tục chính truyện qua ba hồi. Có thể luyện tập, mua vật dụng, tặng trà tăng duyên nợ và hoàn thành các nhiệm vụ chiêu mộ khác.
 
@@ -33,10 +58,10 @@ Trận tự đánh, có HP/nộ/khiên, số sát thương ngoại công đỏ, 
 
 | Kết cục | Điều kiện tại nhiệm vụ cuối |
 | --- | --- |
-| Minh Chủ Liêm Khiết | Nghiệp từ 2, đã phát hiện cuốn sổ nợ |
-| Trùm Tài Phiệt Giang Hồ | Có và chi 100 bạc |
-| Quy Ẩn Bán Bún Đậu | Hai đồng đội xuất chiến đều có duyên nợ từ 30 |
-| Diễn Viên Đóng Thế | Luôn có thể chọn |
+| Chính đạo · Hiệp nghĩa Đại Việt | Nhân nghĩa từ +2, đã có bằng chứng sổ tô thuế |
+| Tà đạo · Chúa đất giang hồ | Nhân nghĩa từ −2 trở xuống, chi 100 bạc |
+| Ẩn dật · Bún đậu tri kỷ | Luôn có thể chọn sau trận cuối |
+| Xưng vương · Ngai vàng Hoa Lư | Chi 500 bạc sau trận cuối |
 
 Mỗi hành trình chốt một kết cục. Lưu vào ô thủ công trước lựa chọn cuối để thử nhánh khác.
 
@@ -60,7 +85,7 @@ python3 -m http.server 8000
 
 Truy cập `http://localhost:8000`; không mở `index.html` bằng `file://`. GitHub Actions chạy bộ kiểm thử và Pages triển khai nhánh `main`.
 
-Bộ kiểm thử hiện có **68 bài**: engine, lưu trữ/nhập file, dữ liệu, lưới, combat, cây kỹ năng, âm thanh, chuyển đổi bản lưu và chiến dịch. Kiểm thử tích hợp dùng combat thật để đi hết ba hồi, chiêu mộ đủ 20 nhân vật và kiểm tra cả bốn kết cục; đồng thời kiểm tra checkpoint, chặn thưởng lặp, tiêu hao vật phẩm và đội hình hợp lệ.
+Bộ kiểm thử hiện có **84 bài**: engine, lưu trữ/nhập file, dữ liệu, lưới, combat, cây kỹ năng, âm thanh, chuyển đổi bản lưu và chiến dịch. Kiểm thử tích hợp dùng combat thật để đi hết ba hồi, chiêu mộ đủ 20 nhân vật và kiểm tra cả bốn kết cục; đồng thời kiểm tra checkpoint, chặn thưởng lặp, tiêu hao vật phẩm và đội hình hợp lệ.
 
 Đã kiểm tra trên Chromium: khởi hành, chiến đấu, cộng kỹ năng, hai nhiệm vụ chiêu mộ đầu, chọn sai câu đố, kéo thả/chạm đội hình, lưu/xuất/nhập, tải lại giữa trận, toàn bộ chính truyện và bốn màn hình kết cục, bật/tắt/âm lượng Web Audio, bố cục rộng 360px. Không có lỗi console trong luồng này.
 
