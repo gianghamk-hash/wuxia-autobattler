@@ -75,6 +75,8 @@ export class DialogueUI {
     this.root.className = 'panel classic-dialogue';
     this.root.parentElement.classList.add('has-classic-dialogue');
     this.root.append(node('h2', title, 'classic-title'));
+    const extras=node('section',undefined,'classic-extras');
+    extras.setAttribute('aria-label','Thông tin thêm về câu chuyện');
     const returning=identitySession?.storyProgress.decisions.D19H18==='home';
     const continuity=continuityFor(quest,{returning});
     if(continuity){
@@ -82,10 +84,10 @@ export class DialogueUI {
       const logic=node('details',undefined,'story-logic');logic.append(node('summary','Việc đang theo đuổi và những gì đã rõ'),node('p',continuity.thread));
       const known=readerKey?.startsWith('aftermath:')||identitySession?.storyProgress.completedQuests.includes(quest.id)?quest.episode:quest.episode-1;
       for(const step of continuity.stages.filter(v=>v.at<=known))logic.append(node('p',step.label+': '+heroText(step.text,identitySession)));
-      this.root.append(logic);
+      extras.append(logic);
     }
     const full=readerKey?.startsWith('aftermath:')?quest?.fullAftermath:quest?.fullLines;
-    if(full?.length>lines.length){const archive=node('details',undefined,'classic-recap');archive.append(node('summary','Bản thoại đầy đủ · tùy chọn'));for(const[speaker,text]of heroLines(full,identitySession))archive.append(node('p',speaker+': '+text));this.root.append(archive);}
+    if(full?.length>lines.length){const archive=node('details',undefined,'classic-recap');archive.append(node('summary','Bản thoại đầy đủ · tùy chọn'));for(const[speaker,text]of heroLines(full,identitySession))archive.append(node('p',speaker+': '+text));extras.append(archive);}
     renderBattleBrief(this.root, brief);
     if (quest?.chapterGoal) {
       if(!continuous)this.root.append(
@@ -97,7 +99,7 @@ export class DialogueUI {
         node('p', quest.chapterSummary)
       );
       if(continuous)recap.append(node('p',quest.chapterGoal));
-      this.root.append(recap);
+      extras.append(recap);
     }
     const scene = node('div', undefined, 'classic-scene');
     scene.style.backgroundImage =
@@ -171,6 +173,7 @@ export class DialogueUI {
       back.addEventListener('click', onBack);
       this.root.append(back);
     }
+    if(extras.childElementCount)this.root.append(extras);
     const draw = () => {
       const [speaker, line,actor] = pages[index],
         last = index === pages.length - 1;

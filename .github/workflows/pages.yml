@@ -1,6 +1,13 @@
 name: Publish game to Pages
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/pages.yml]
+  workflow_run:
+    workflows: [pages build and deployment]
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
 concurrency:
@@ -8,23 +15,44 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'failure' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
+    outputs:
+      current: ${{ steps.revision.outputs.current }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - name: Skip obsolete revisions
+        id: revision
+        run: |
+          deployed_revision=$(git rev-parse HEAD)
+          current_revision=$(git ls-remote origin refs/heads/main | cut -f1)
+          if [ "$deployed_revision" = "$current_revision" ]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+          fi
       - name: Prepare runtime files
+        if: steps.revision.outputs.current == 'true'
         run: |
           mkdir -p _site
           cp index.html manifest.webmanifest .nojekyll *.css _site/
           cp -R src assets _site/
-          printf '{"commit":"%s","run":"%s"}\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > _site/deployment.json
+          printf '{"commit":"%s","run":"%s"}\n' "$(git rev-parse HEAD)" "$GITHUB_RUN_ID" > _site/deployment.json
           test -f _site/src/main.js
           test -f _site/src/config.js
           du -sh _site
       - uses: actions/upload-pages-artifact@v4
+        if: steps.revision.outputs.current == 'true'
         with:
           path: _site
   deploy:
     needs: build
+    if: needs.build.outputs.current == 'true'
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -33,6 +61,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Confirm main has not advanced
+        id: latest
+        env:
+          DEPLOY_REVISION: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          current_revision=$(git ls-remote "https://github.com/$GITHUB_REPOSITORY.git" refs/heads/main | cut -f1)
+          if [ "$DEPLOY_REVISION" = "$current_revision" ]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+          fi
       - name: Deploy game
+        if: steps.latest.outputs.current == 'true'
         id: deployment
         uses: actions/deploy-pages@v5
