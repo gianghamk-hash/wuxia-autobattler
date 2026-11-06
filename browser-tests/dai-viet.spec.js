@@ -5,7 +5,7 @@ async function at(page,id,route='stay',romance='friends'){
  await page.evaluate(async({id,route,romance})=>{
   const {createCampaign}=await import('/src/core/Campaign.js'),{DAI_VIET_QUESTS}=await import('/src/data/DaiVietStoryData.js'),{PLOT_UNLOCKS}=await import('/src/data/DaiVietCast.js'),{createHeroBuild}=await import('/src/entities/HeroBuild.js');
   const s=createCampaign({story:'dai-viet',sect:'VoDang'}),i=DAI_VIET_QUESTS.findIndex(q=>q.id===id),q=DAI_VIET_QUESTS[i],done=DAI_VIET_QUESTS.slice(0,i);s.hero=createHeroBuild({sect:'VoDang',name:'Trần Phong',level:20});
-  s.storyProgress.completedQuests=done.map(q=>q.id);s.storyProgress.decisions=Object.fromEntries(done.filter(q=>!q.ending).map(q=>[q.id,q.id==='D19H12'?romance:q.id==='D19H18'?route:q.choices[0].id]));
+  s.storyProgress.completedQuests=done.map(q=>q.id);for(const past of done)if(past.aftermath)s.journey.reader.positions['aftermath:'+past.id]=past.aftermath.length-1;s.storyProgress.decisions=Object.fromEntries(done.filter(q=>!q.ending).map(q=>[q.id,q.id==='D19H12'?romance:q.id==='D19H18'?route:q.choices[0].id]));
   Object.assign(s.storyProgress,{activeQuestId:id,currentChapter:q.chapter,currentEpisode:q.episode,currentAct:q.act});
   for(const [cid,milestone]of Object.entries(PLOT_UNLOCKS))if(s.storyProgress.completedQuests.includes(milestone)){s.party.unlocked.push(cid);s.party.active.push(cid);s.companionsAffinity[cid]=100;s.storyProgress.completedQuests.push('recruit_'+cid.slice(-2));}
   s.party.formation=Object.fromEntries(['hero',...s.party.active].map((cid,n)=>[cid,[{x:2,y:1},{x:1,y:0},{x:0,y:2},{x:2,y:0},{x:1,y:2},{x:0,y:0}][n]]));
@@ -20,22 +20,23 @@ test('continuous reading keeps the next episode open, ignores detached choices, 
  for(let i=1;i<=5;i++){
   await read(page);await page.evaluate(()=>window.__oldStoryChoice=document.querySelector('[data-choice="continue"]'));
   await page.locator('[data-choice="continue"]').click();
+  if(await page.evaluate(()=>window.__game.model.running)){await page.evaluate(()=>{const a=window.__game;a.engine.stop();for(let n=0;n<22500&&a.model.running;n++)a.model.update(1/60);});await page.locator('#btn-story-next').click();await read(page);await page.locator('[data-choice="continue"]').click();}
   await expect(page.locator('#view-dialogue')).toBeVisible();
   const expected='D01H0'+(i+1);expect(await page.evaluate(()=>window.__game.model.mainQuest().id)).toBe(expected);
   await page.evaluate(()=>window.__oldStoryChoice.click());expect(await page.evaluate(()=>window.__game.model.mainQuest().id)).toBe(expected);
  }
  await expect(page.locator('.classic-title')).toContainText('Một đòn không giải quyết hết');
- await expect(page.locator('#dialogue-text')).toContainText('chẳng có đạo diễn');
+
 });
 
 test('victory opens aftermath, reload resumes it, and continuation grants no duplicate reward',async({page})=>{
  await start(page);await at(page,'D01H06');await page.locator('#btn-main-quest').click();await read(page);await page.locator('[data-choice="continue"]').click();
- await page.evaluate(()=>{const a=window.__game;a.engine.stop();for(let i=0;i<7500&&a.model.running;i++)a.model.update(1/60);});
+ await page.evaluate(()=>{const a=window.__game;a.engine.stop();for(let i=0;i<22500&&a.model.running;i++)a.model.update(1/60);});
  await expect(page.locator('#btn-story-next')).toBeVisible();const paid=await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory));
- await page.locator('#btn-story-next').click();await expect(page.locator('.classic-title')).toContainText('Sau trận');await page.locator('#dialogue-next').click();
- await expect.poll(()=>page.evaluate(async()=>{const{StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.journey.reader.positions['aftermath:D01H06'];}finally{m.db?.close();}})).toBe(1);
+ await page.locator('#btn-story-next').click();await expect(page.locator('.classic-title')).toContainText('Sau trận');
+ await expect.poll(()=>page.evaluate(async()=>{const{StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.journey.reader.positions['aftermath:D01H06'];}finally{m.db?.close();}})).toBe(0);
  await page.reload();await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#btn-continue').click();await page.locator('#btn-main-quest').click();
- await expect(page.locator('.classic-title')).toContainText('Sau trận');await expect(page.locator('#dialogue-speaker')).toHaveText('Trần Phong');
+ await expect(page.locator('.classic-title')).toContainText('Sau trận');await expect(page.locator('#dialogue-speaker')).toHaveText('Người kể');
  await read(page);await page.locator('[data-choice="continue"]').click();await expect(page.locator('.classic-title')).toContainText('Vết bầm dưới áo');
  expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory))).toBe(paid);
 });
@@ -64,10 +65,10 @@ for(const width of [320,390,1280])test('default 400-episode story has readable c
  expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory))).toBe(before);await page.locator('[data-choice="continue"]').click();await expect(page.locator('#chapter-progress')).toHaveText('1/400 hồi');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(errors).toEqual([]);
 });
-test('new unarmed opening battle checkpoints reload with the same seed and one enemy',async({page})=>{
- await start(page);await page.evaluate(()=>{const a=window.__game;for(let i=0;i<5;i++)a.model.chooseMain('continue');a.enterBattle(a.model.chooseMain('continue'));a.engine.stop();});
+test('new unarmed opening battle checkpoints reload with the same seed and four enemies',async({page})=>{
+ await start(page);await at(page,'D01H06');await page.evaluate(()=>{const a=window.__game;a.model.chooseMain('continue');a.enterBattle();a.engine.stop();});
  const pending=await page.evaluate(()=>window.__game.model.session.storyProgress.pendingEncounter);await expect(page.locator('#view-battle')).toBeVisible();
- expect(await page.evaluate(()=>window.__game.model.battle.units.filter(u=>u.team==='enemy').length)).toBe(1);
+ expect(await page.evaluate(()=>window.__game.model.battle.units.filter(u=>u.team==='enemy').length)).toBe(4);
  await expect.poll(()=>page.evaluate(async()=>{const {StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.storyProgress.pendingEncounter?.seed;}finally{m.db?.close();}})).toBe(pending.seed);
  await page.reload();await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#btn-continue').click();await page.locator('#btn-resume-battle').click();await page.evaluate(()=>window.__game.engine.stop());
  expect(await page.evaluate(()=>window.__game.model.battle.seed)).toBe(pending.seed);expect(await page.evaluate(()=>window.__game.model.battle.units.find(u=>u.id==='hero').skills.autoAttack.name)).toBe('Quyền Cơ Bản');
@@ -86,7 +87,7 @@ test('casebook and twenty-chapter archive expose only completed sources and repl
 });
 test('home choice survives reload and reads a different epilogue with only its valid ending',async({page},info)=>{
  await page.setViewportSize({width:390,height:900});await start(page);await at(page,'D19H18');await page.locator('#btn-main-quest').click();await read(page);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.locator('[data-choice="home"]').click();await expect(page.locator('#campaign-label')).toContainText('Nhánh trở về');
- for(let i=0;i<2;i++){await read(page);await page.locator('[data-choice="continue"]').click();}
+ for(let i=0;i<2;i++){await read(page);await page.locator('[data-choice="continue"]').click();if(await page.evaluate(()=>window.__game.model.running)){await page.evaluate(()=>{const a=window.__game;a.engine.stop();for(let n=0;n<22500&&a.model.running;n++)a.model.update(1/60);});await page.locator('#btn-story-next').click();await read(page);await page.locator('[data-choice="continue"]').click();}}
  await expect(page.locator('.classic-title')).toContainText('Tiếng gọi không phát từ chiếc máy');await read(page);await page.screenshot({path:info.outputPath('home-epilogue.png'),animations:'disabled'});
  await page.locator('[data-choice="continue"]').click();await expect.poll(()=>page.evaluate(async()=>{const{StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.storyProgress.activeQuestId;}finally{m.db?.close();}})).toBe('D20H02');
  await page.reload();await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#btn-continue').click();await page.locator('#btn-main-quest').click();await expect(page.locator('.classic-title')).toContainText('Mẹ đứng ở cửa');

@@ -1,14 +1,12 @@
+import {ENEMY_CELLS,strengthenEnemy} from '../combat/BattleRules6.js';
 import { Companion } from '../entities/Companion.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { storyEnemy, applyStoryIdentity } from '../data/NPCData.js';
 // Both scouting and the actual fight use these exact instances/stat transformations.
-export function enemyLineup({ quest, encounter, count, grid, main }) {
-  const templates = [...encounter.templates];
-  if (!encounter.guide)
-    while (templates.length < count)
-      templates.push(
-        encounter.templates[templates.length % encounter.templates.length]
-      );
+export function enemyLineup({ quest, encounter, count, grid, main,rules }) {
+  const advanced=rules===6||quest?.canon==='dai-viet';
+  const templates=advanced?Array.from({length:Math.max(4,Math.min(8,count))},(_,i)=>encounter.templates[i%encounter.templates.length]):[...encounter.templates];
+  if(!advanced&&!encounter.guide)while(templates.length<count)templates.push(encounter.templates[templates.length%encounter.templates.length]);
   return templates.map((id, index) => {
     const unit = new Companion(id, {
       id: 'enemy_' + index,
@@ -33,17 +31,8 @@ export function enemyLineup({ quest, encounter, count, grid, main }) {
       }
       if (identity.id === 'tay_sai') unit.name += ' ' + (index + 1);
     }
-    grid?.place(
-      unit,
-      [
-        { x: 3, y: 1 },
-        { x: 5, y: 0 },
-        { x: 4, y: 2 },
-        { x: 3, y: 2 },
-        { x: 4, y: 0 },
-        { x: 5, y: 2 }
-      ][index]
-    );
+    if(advanced)strengthenEnemy(unit,{chapter:quest?.chapter??1,drill:['duel','drill','breach'].includes(quest?.combatType),index});
+    grid?.place(unit,ENEMY_CELLS[index]);
     return unit;
   });
 }

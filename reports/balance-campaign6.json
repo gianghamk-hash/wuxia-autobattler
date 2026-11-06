@@ -1,0 +1,4392 @@
+{
+  "version": "6.0",
+  "difficulty": {
+    "power": 2,
+    "hp": 1.6,
+    "attack": 1.25
+  },
+  "scope": "Deterministic developed level-20 party, exceptional gear, training/forging 10; not a random-player win-rate estimate.",
+  "storyFights": 265,
+  "chapterBosses": [
+    {
+      "chapter": 1,
+      "winner": "home",
+      "seconds": 26.65,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 2,
+      "winner": "home",
+      "seconds": 43.15,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 3,
+      "winner": "home",
+      "seconds": 31.816666666666666,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 4,
+      "winner": "home",
+      "seconds": 35.96666666666667,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 5,
+      "winner": "home",
+      "seconds": 30.8,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 6,
+      "winner": "home",
+      "seconds": 26.65,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 7,
+      "winner": "home",
+      "seconds": 26.65,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 8,
+      "winner": "home",
+      "seconds": 26.75,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 9,
+      "winner": "home",
+      "seconds": 39.61666666666667,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 10,
+      "winner": "home",
+      "seconds": 37.93333333333333,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 11,
+      "winner": "home",
+      "seconds": 47.61666666666667,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 12,
+      "winner": "home",
+      "seconds": 42.45,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 13,
+      "winner": "home",
+      "seconds": 42.95,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 14,
+      "winner": "home",
+      "seconds": 53.61666666666667,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 15,
+      "winner": "home",
+      "seconds": 47.8,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 16,
+      "winner": "home",
+      "seconds": 44.88333333333333,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 17,
+      "winner": "home",
+      "seconds": 63.31666666666666,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 18,
+      "winner": "home",
+      "seconds": 76.56666666666666,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "chapter": 19,
+      "winner": "home",
+      "seconds": 50.2,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "chapter": 20,
+      "winner": "home",
+      "seconds": 78.81666666666666,
+      "phase": 3,
+      "survivors": 6
+    }
+  ],
+  "towers": [
+    {
+      "id": "phong_nha",
+      "cleared": true,
+      "floors": [
+        {
+          "floor": 1,
+          "winner": "home",
+          "seconds": 12.8,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 2,
+          "gear": []
+        },
+        {
+          "floor": 2,
+          "winner": "home",
+          "seconds": 12.733333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 2,
+          "gear": []
+        },
+        {
+          "floor": 3,
+          "winner": "home",
+          "seconds": 15.2,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 2,
+          "gear": []
+        },
+        {
+          "floor": 4,
+          "winner": "home",
+          "seconds": 15.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 3,
+          "gear": []
+        },
+        {
+          "floor": 5,
+          "winner": "home",
+          "seconds": 12.833333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 3,
+          "gear": []
+        },
+        {
+          "floor": 6,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 3,
+          "gear": []
+        },
+        {
+          "floor": 7,
+          "winner": "home",
+          "seconds": 13.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 4,
+          "gear": []
+        },
+        {
+          "floor": 8,
+          "winner": "home",
+          "seconds": 15.549999999999999,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 4,
+          "gear": []
+        },
+        {
+          "floor": 9,
+          "winner": "home",
+          "seconds": 12.483333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 4,
+          "gear": []
+        },
+        {
+          "floor": 10,
+          "winner": "home",
+          "seconds": 29.75,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 5,
+          "gear": [
+            "gear_phong_hanh_rare_armor"
+          ]
+        },
+        {
+          "floor": 11,
+          "winner": "home",
+          "seconds": 14.966666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 5,
+          "gear": []
+        },
+        {
+          "floor": 12,
+          "winner": "home",
+          "seconds": 15.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 5,
+          "gear": []
+        },
+        {
+          "floor": 13,
+          "winner": "home",
+          "seconds": 13.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 11,
+          "silver": 5,
+          "gear": []
+        },
+        {
+          "floor": 14,
+          "winner": "home",
+          "seconds": 15.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 12,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 15,
+          "winner": "home",
+          "seconds": 14.683333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 12,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 16,
+          "winner": "home",
+          "seconds": 15.9,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 13,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 17,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 13,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 18,
+          "winner": "home",
+          "seconds": 8.116666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 14,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 19,
+          "winner": "home",
+          "seconds": 17.4,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 15,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 20,
+          "winner": "home",
+          "seconds": 26.8,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 15,
+          "silver": 8,
+          "gear": [
+            "gear_phong_hanh_rare_accessory"
+          ]
+        },
+        {
+          "floor": 21,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 16,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 22,
+          "winner": "home",
+          "seconds": 18.1,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 16,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 23,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 17,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 24,
+          "winner": "home",
+          "seconds": 20.5,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 18,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 25,
+          "winner": "home",
+          "seconds": 14.966666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 18,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 26,
+          "winner": "home",
+          "seconds": 14.966666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 19,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 27,
+          "winner": "home",
+          "seconds": 13.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 19,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 28,
+          "winner": "home",
+          "seconds": 15.9,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 20,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 29,
+          "winner": "home",
+          "seconds": 18.8,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 21,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 30,
+          "winner": "home",
+          "seconds": 39.71666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 21,
+          "silver": 11,
+          "gear": [
+            "gear_thiet_ve_rare_weapon"
+          ]
+        },
+        {
+          "floor": 31,
+          "winner": "home",
+          "seconds": 14.683333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 22,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 32,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 22,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 33,
+          "winner": "home",
+          "seconds": 18.066666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 23,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 34,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 24,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 35,
+          "winner": "home",
+          "seconds": 18.7,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 24,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 36,
+          "winner": "home",
+          "seconds": 13.433333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 25,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 37,
+          "winner": "home",
+          "seconds": 15.966666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 25,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 38,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 26,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 39,
+          "winner": "home",
+          "seconds": 11.366666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 27,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 40,
+          "winner": "home",
+          "seconds": 47.31666666666666,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 27,
+          "silver": 14,
+          "gear": [
+            "gear_thiet_ve_excellent_armor"
+          ]
+        },
+        {
+          "floor": 41,
+          "winner": "home",
+          "seconds": 29.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 28,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 42,
+          "winner": "home",
+          "seconds": 14.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 28,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 43,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 29,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 44,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 30,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 45,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 30,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 46,
+          "winner": "home",
+          "seconds": 23,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 31,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 47,
+          "winner": "home",
+          "seconds": 18.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 31,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 48,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 32,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 49,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 33,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 50,
+          "winner": "home",
+          "seconds": 44.5,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 33,
+          "silver": 17,
+          "gear": [
+            "gear_thiet_ve_excellent_accessory"
+          ]
+        },
+        {
+          "floor": 51,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 34,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 52,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 34,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 53,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 35,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 54,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 36,
+          "silver": 18,
+          "gear": []
+        },
+        {
+          "floor": 55,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 36,
+          "silver": 18,
+          "gear": []
+        },
+        {
+          "floor": 56,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 37,
+          "silver": 18,
+          "gear": []
+        },
+        {
+          "floor": 57,
+          "winner": "home",
+          "seconds": 18.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 37,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 58,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 38,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 59,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 39,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 60,
+          "winner": "home",
+          "seconds": 38.06666666666666,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 39,
+          "silver": 20,
+          "gear": [
+            "gear_thanh_tam_excellent_weapon"
+          ]
+        },
+        {
+          "floor": 61,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 40,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 62,
+          "winner": "home",
+          "seconds": 26.383333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 40,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 63,
+          "winner": "home",
+          "seconds": 29.716666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 41,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 64,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 42,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 65,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 42,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 66,
+          "winner": "home",
+          "seconds": 24.9,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 43,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 67,
+          "winner": "home",
+          "seconds": 34.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 43,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 68,
+          "winner": "home",
+          "seconds": 29.716666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 44,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 69,
+          "winner": "home",
+          "seconds": 32.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 45,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 70,
+          "winner": "home",
+          "seconds": 62.583333333333336,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 45,
+          "silver": 23,
+          "gear": [
+            "gear_thanh_tam_excellent_armor"
+          ]
+        },
+        {
+          "floor": 71,
+          "winner": "home",
+          "seconds": 44.31666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 46,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 72,
+          "winner": "home",
+          "seconds": 31.666666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 46,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 73,
+          "winner": "home",
+          "seconds": 36.88333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 47,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 74,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 48,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 75,
+          "winner": "home",
+          "seconds": 39.416666666666664,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 48,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 76,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 49,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 77,
+          "winner": "home",
+          "seconds": 44.81666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 49,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 78,
+          "winner": "home",
+          "seconds": 29.083333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 50,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 79,
+          "winner": "home",
+          "seconds": 24.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 51,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 80,
+          "winner": "home",
+          "seconds": 65.21666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 51,
+          "silver": 26,
+          "gear": [
+            "gear_thanh_tam_exceptional_accessory"
+          ]
+        },
+        {
+          "floor": 81,
+          "winner": "home",
+          "seconds": 19.633333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 52,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 82,
+          "winner": "home",
+          "seconds": 31.516666666666666,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 52,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 83,
+          "winner": "home",
+          "seconds": 39.516666666666666,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 53,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 84,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 54,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 85,
+          "winner": "home",
+          "seconds": 26.566666666666666,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 54,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 86,
+          "winner": "home",
+          "seconds": 24.566666666666666,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 55,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 87,
+          "winner": "home",
+          "seconds": 31.666666666666668,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 55,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 88,
+          "winner": "home",
+          "seconds": 36.833333333333336,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 56,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 89,
+          "winner": "home",
+          "seconds": 42.61666666666667,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 57,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 90,
+          "winner": "home",
+          "seconds": 68.43333333333334,
+          "phase": 3,
+          "survivors": 4,
+          "xp": 57,
+          "silver": 29,
+          "gear": [
+            "gear_phong_hanh_exceptional_weapon"
+          ]
+        },
+        {
+          "floor": 91,
+          "winner": "home",
+          "seconds": 47.13333333333333,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 58,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 92,
+          "winner": "home",
+          "seconds": 24.716666666666665,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 58,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 93,
+          "winner": "home",
+          "seconds": 57.78333333333333,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 59,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 94,
+          "winner": "home",
+          "seconds": 41.8,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 60,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 95,
+          "winner": "home",
+          "seconds": 40.36666666666667,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 60,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 96,
+          "winner": "home",
+          "seconds": 45.6,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 61,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 97,
+          "winner": "home",
+          "seconds": 51.68333333333333,
+          "phase": 0,
+          "survivors": 3,
+          "xp": 61,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 98,
+          "winner": "home",
+          "seconds": 66.55,
+          "phase": 0,
+          "survivors": 3,
+          "xp": 62,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 99,
+          "winner": "home",
+          "seconds": 67.46666666666667,
+          "phase": 0,
+          "survivors": 3,
+          "xp": 63,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 100,
+          "winner": "home",
+          "seconds": 63.266666666666666,
+          "phase": 3,
+          "survivors": 4,
+          "xp": 63,
+          "silver": 32,
+          "gear": [
+            "gear_phong_hanh_exceptional_armor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u_minh",
+      "cleared": false,
+      "floors": [
+        {
+          "floor": 1,
+          "winner": "home",
+          "seconds": 11.166666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 3,
+          "gear": []
+        },
+        {
+          "floor": 2,
+          "winner": "home",
+          "seconds": 10.7,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 4,
+          "gear": []
+        },
+        {
+          "floor": 3,
+          "winner": "home",
+          "seconds": 9.55,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 4,
+          "gear": []
+        },
+        {
+          "floor": 4,
+          "winner": "home",
+          "seconds": 12.916666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 5,
+          "gear": []
+        },
+        {
+          "floor": 5,
+          "winner": "home",
+          "seconds": 11.166666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 5,
+          "gear": []
+        },
+        {
+          "floor": 6,
+          "winner": "home",
+          "seconds": 12.533333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 11,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 7,
+          "winner": "home",
+          "seconds": 12.916666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 12,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 8,
+          "winner": "home",
+          "seconds": 12.166666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 13,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 9,
+          "winner": "home",
+          "seconds": 12.816666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 14,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 10,
+          "winner": "home",
+          "seconds": 40.53333333333333,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 15,
+          "silver": 8,
+          "gear": [
+            "gear_thanh_tam_rare_armor"
+          ]
+        },
+        {
+          "floor": 11,
+          "winner": "home",
+          "seconds": 14.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 16,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 12,
+          "winner": "home",
+          "seconds": 12.533333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 17,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 13,
+          "winner": "home",
+          "seconds": 12.816666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 18,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 14,
+          "winner": "home",
+          "seconds": 13.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 19,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 15,
+          "winner": "home",
+          "seconds": 15.65,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 20,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 16,
+          "winner": "home",
+          "seconds": 10.1,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 21,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 17,
+          "winner": "home",
+          "seconds": 14.733333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 22,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 18,
+          "winner": "home",
+          "seconds": 12.916666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 23,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 19,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 24,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 20,
+          "winner": "home",
+          "seconds": 38.36666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 25,
+          "silver": 13,
+          "gear": [
+            "gear_thanh_tam_rare_accessory"
+          ]
+        },
+        {
+          "floor": 21,
+          "winner": "home",
+          "seconds": 14.299999999999999,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 26,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 22,
+          "winner": "home",
+          "seconds": 10.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 27,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 23,
+          "winner": "home",
+          "seconds": 16.816666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 28,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 24,
+          "winner": "home",
+          "seconds": 15.933333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 29,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 25,
+          "winner": "home",
+          "seconds": 19.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 30,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 26,
+          "winner": "home",
+          "seconds": 13.533333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 31,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 27,
+          "winner": "home",
+          "seconds": 18.733333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 32,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 28,
+          "winner": "home",
+          "seconds": 10.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 33,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 29,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 34,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 30,
+          "winner": "home",
+          "seconds": 40.38333333333333,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 35,
+          "silver": 18,
+          "gear": [
+            "gear_phong_hanh_rare_weapon"
+          ]
+        },
+        {
+          "floor": 31,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 36,
+          "silver": 18,
+          "gear": []
+        },
+        {
+          "floor": 32,
+          "winner": "home",
+          "seconds": 13.066666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 37,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 33,
+          "winner": "home",
+          "seconds": 18.583333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 38,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 34,
+          "winner": "home",
+          "seconds": 15.233333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 39,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 35,
+          "winner": "home",
+          "seconds": 22.8,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 40,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 36,
+          "winner": "home",
+          "seconds": 20.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 41,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 37,
+          "winner": "home",
+          "seconds": 20.316666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 42,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 38,
+          "winner": "home",
+          "seconds": 22.633333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 43,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 39,
+          "winner": "home",
+          "seconds": 22.78333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 44,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 40,
+          "winner": "home",
+          "seconds": 46.016666666666666,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 45,
+          "silver": 23,
+          "gear": [
+            "gear_phong_hanh_excellent_armor"
+          ]
+        },
+        {
+          "floor": 41,
+          "winner": "home",
+          "seconds": 22.233333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 46,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 42,
+          "winner": "home",
+          "seconds": 10.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 47,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 43,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 48,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 44,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 49,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 45,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 50,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 46,
+          "winner": "home",
+          "seconds": 25.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 51,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 47,
+          "winner": "home",
+          "seconds": 21.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 52,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 48,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 53,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 49,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 54,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 50,
+          "winner": "home",
+          "seconds": 47.766666666666666,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 55,
+          "silver": 28,
+          "gear": [
+            "gear_phong_hanh_excellent_accessory"
+          ]
+        },
+        {
+          "floor": 51,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 56,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 52,
+          "winner": "home",
+          "seconds": 16.116666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 57,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 53,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 58,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 54,
+          "winner": "home",
+          "seconds": 21.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 59,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 55,
+          "winner": "home",
+          "seconds": 22.683333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 60,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 56,
+          "winner": "home",
+          "seconds": 21.583333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 61,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 57,
+          "winner": "home",
+          "seconds": 25.683333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 62,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 58,
+          "winner": "home",
+          "seconds": 24.2,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 63,
+          "silver": 32,
+          "gear": []
+        },
+        {
+          "floor": 59,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 64,
+          "silver": 32,
+          "gear": []
+        },
+        {
+          "floor": 60,
+          "winner": "home",
+          "seconds": 50.36666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 65,
+          "silver": 33,
+          "gear": [
+            "gear_thiet_ve_excellent_weapon"
+          ]
+        },
+        {
+          "floor": 61,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 66,
+          "silver": 33,
+          "gear": []
+        },
+        {
+          "floor": 62,
+          "winner": "home",
+          "seconds": 21.666666666666668,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 67,
+          "silver": 34,
+          "gear": []
+        },
+        {
+          "floor": 63,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 68,
+          "silver": 34,
+          "gear": []
+        },
+        {
+          "floor": 64,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 69,
+          "silver": 35,
+          "gear": []
+        },
+        {
+          "floor": 65,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 70,
+          "silver": 35,
+          "gear": []
+        },
+        {
+          "floor": 66,
+          "winner": "home",
+          "seconds": 30.583333333333332,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 71,
+          "silver": 36,
+          "gear": []
+        },
+        {
+          "floor": 67,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 72,
+          "silver": 36,
+          "gear": []
+        },
+        {
+          "floor": 68,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 73,
+          "silver": 37,
+          "gear": []
+        },
+        {
+          "floor": 69,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 74,
+          "silver": 37,
+          "gear": []
+        },
+        {
+          "floor": 70,
+          "winner": "home",
+          "seconds": 54.333333333333336,
+          "phase": 3,
+          "survivors": 4,
+          "xp": 75,
+          "silver": 38,
+          "gear": [
+            "gear_thiet_ve_excellent_armor"
+          ]
+        },
+        {
+          "floor": 71,
+          "winner": "home",
+          "seconds": 21.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 76,
+          "silver": 38,
+          "gear": []
+        },
+        {
+          "floor": 72,
+          "winner": "home",
+          "seconds": 49.016666666666666,
+          "phase": 0,
+          "survivors": 3,
+          "xp": 77,
+          "silver": 39,
+          "gear": []
+        },
+        {
+          "floor": 73,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 78,
+          "silver": 39,
+          "gear": []
+        },
+        {
+          "floor": 74,
+          "winner": "home",
+          "seconds": 21.333333333333332,
+          "phase": 0,
+          "survivors": 2,
+          "xp": 79,
+          "silver": 40,
+          "gear": []
+        },
+        {
+          "floor": 75,
+          "winner": "home",
+          "seconds": 28,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 80,
+          "silver": 40,
+          "gear": []
+        },
+        {
+          "floor": 76,
+          "winner": "home",
+          "seconds": 41.06666666666666,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 81,
+          "silver": 41,
+          "gear": []
+        },
+        {
+          "floor": 77,
+          "winner": "home",
+          "seconds": 29.083333333333332,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 82,
+          "silver": 41,
+          "gear": []
+        },
+        {
+          "floor": 78,
+          "winner": "enemy",
+          "seconds": 20.05,
+          "phase": 0,
+          "survivors": 0,
+          "xp": 0,
+          "silver": 0,
+          "gear": []
+        }
+      ]
+    },
+    {
+      "id": "yen_tu",
+      "cleared": true,
+      "floors": [
+        {
+          "floor": 1,
+          "winner": "home",
+          "seconds": 17.116666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 4,
+          "gear": []
+        },
+        {
+          "floor": 2,
+          "winner": "home",
+          "seconds": 16.95,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 10,
+          "silver": 5,
+          "gear": []
+        },
+        {
+          "floor": 3,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 12,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 4,
+          "winner": "home",
+          "seconds": 15.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 13,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 5,
+          "winner": "home",
+          "seconds": 16.8,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 14,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 6,
+          "winner": "home",
+          "seconds": 17.4,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 16,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 7,
+          "winner": "home",
+          "seconds": 17.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 17,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 8,
+          "winner": "home",
+          "seconds": 17.916666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 19,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 9,
+          "winner": "home",
+          "seconds": 24.066666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 20,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 10,
+          "winner": "home",
+          "seconds": 47.35,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 21,
+          "silver": 11,
+          "gear": [
+            "gear_thanh_tam_rare_armor"
+          ]
+        },
+        {
+          "floor": 11,
+          "winner": "home",
+          "seconds": 24.716666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 23,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 12,
+          "winner": "home",
+          "seconds": 23.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 24,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 13,
+          "winner": "home",
+          "seconds": 21.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 26,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 14,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 27,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 15,
+          "winner": "home",
+          "seconds": 18.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 28,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 16,
+          "winner": "home",
+          "seconds": 17.116666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 30,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 17,
+          "winner": "home",
+          "seconds": 20.65,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 31,
+          "silver": 15,
+          "gear": []
+        },
+        {
+          "floor": 18,
+          "winner": "home",
+          "seconds": 23.916666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 33,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 19,
+          "winner": "home",
+          "seconds": 20.65,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 34,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 20,
+          "winner": "home",
+          "seconds": 48.95,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 35,
+          "silver": 18,
+          "gear": [
+            "gear_thanh_tam_rare_accessory"
+          ]
+        },
+        {
+          "floor": 21,
+          "winner": "home",
+          "seconds": 24.9,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 37,
+          "silver": 18,
+          "gear": []
+        },
+        {
+          "floor": 22,
+          "winner": "home",
+          "seconds": 10.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 38,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 23,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 40,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 24,
+          "winner": "home",
+          "seconds": 10.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 41,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 25,
+          "winner": "home",
+          "seconds": 27.28333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 42,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 26,
+          "winner": "home",
+          "seconds": 22.516666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 44,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 27,
+          "winner": "home",
+          "seconds": 10.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 45,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 28,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 47,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 29,
+          "winner": "home",
+          "seconds": 17.166666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 48,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 30,
+          "winner": "home",
+          "seconds": 55.666666666666664,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 49,
+          "silver": 25,
+          "gear": [
+            "gear_phong_hanh_rare_weapon"
+          ]
+        },
+        {
+          "floor": 31,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 51,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 32,
+          "winner": "home",
+          "seconds": 18.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 52,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 33,
+          "winner": "home",
+          "seconds": 20.266666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 54,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 34,
+          "winner": "home",
+          "seconds": 19.983333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 55,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 35,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 56,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 36,
+          "winner": "home",
+          "seconds": 20.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 58,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 37,
+          "winner": "home",
+          "seconds": 19.75,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 59,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 38,
+          "winner": "home",
+          "seconds": 19.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 61,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 39,
+          "winner": "home",
+          "seconds": 17.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 62,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 40,
+          "winner": "home",
+          "seconds": 66.96666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 63,
+          "silver": 31,
+          "gear": [
+            "gear_phong_hanh_excellent_armor"
+          ]
+        },
+        {
+          "floor": 41,
+          "winner": "home",
+          "seconds": 34.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 65,
+          "silver": 32,
+          "gear": []
+        },
+        {
+          "floor": 42,
+          "winner": "home",
+          "seconds": 31.78333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 66,
+          "silver": 33,
+          "gear": []
+        },
+        {
+          "floor": 43,
+          "winner": "home",
+          "seconds": 27.28333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 68,
+          "silver": 34,
+          "gear": []
+        },
+        {
+          "floor": 44,
+          "winner": "home",
+          "seconds": 29.8,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 69,
+          "silver": 34,
+          "gear": []
+        },
+        {
+          "floor": 45,
+          "winner": "home",
+          "seconds": 35.81666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 70,
+          "silver": 35,
+          "gear": []
+        },
+        {
+          "floor": 46,
+          "winner": "home",
+          "seconds": 32.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 72,
+          "silver": 36,
+          "gear": []
+        },
+        {
+          "floor": 47,
+          "winner": "home",
+          "seconds": 32.733333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 73,
+          "silver": 36,
+          "gear": []
+        },
+        {
+          "floor": 48,
+          "winner": "home",
+          "seconds": 31.516666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 75,
+          "silver": 37,
+          "gear": []
+        },
+        {
+          "floor": 49,
+          "winner": "home",
+          "seconds": 29.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 76,
+          "silver": 38,
+          "gear": []
+        },
+        {
+          "floor": 50,
+          "winner": "home",
+          "seconds": 65.85,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 77,
+          "silver": 39,
+          "gear": [
+            "gear_phong_hanh_excellent_accessory"
+          ]
+        },
+        {
+          "floor": 51,
+          "winner": "home",
+          "seconds": 34.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 79,
+          "silver": 39,
+          "gear": []
+        },
+        {
+          "floor": 52,
+          "winner": "home",
+          "seconds": 31.666666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 80,
+          "silver": 40,
+          "gear": []
+        },
+        {
+          "floor": 53,
+          "winner": "home",
+          "seconds": 34.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 82,
+          "silver": 41,
+          "gear": []
+        },
+        {
+          "floor": 54,
+          "winner": "home",
+          "seconds": 31.78333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 83,
+          "silver": 41,
+          "gear": []
+        },
+        {
+          "floor": 55,
+          "winner": "home",
+          "seconds": 34.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 84,
+          "silver": 42,
+          "gear": []
+        },
+        {
+          "floor": 56,
+          "winner": "home",
+          "seconds": 29.383333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 86,
+          "silver": 43,
+          "gear": []
+        },
+        {
+          "floor": 57,
+          "winner": "home",
+          "seconds": 36.833333333333336,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 87,
+          "silver": 43,
+          "gear": []
+        },
+        {
+          "floor": 58,
+          "winner": "home",
+          "seconds": 36.833333333333336,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 89,
+          "silver": 44,
+          "gear": []
+        },
+        {
+          "floor": 59,
+          "winner": "home",
+          "seconds": 35.81666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 90,
+          "silver": 45,
+          "gear": []
+        },
+        {
+          "floor": 60,
+          "winner": "home",
+          "seconds": 79.43333333333334,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 91,
+          "silver": 46,
+          "gear": [
+            "gear_thiet_ve_excellent_weapon"
+          ]
+        },
+        {
+          "floor": 61,
+          "winner": "home",
+          "seconds": 44.733333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 93,
+          "silver": 46,
+          "gear": []
+        },
+        {
+          "floor": 62,
+          "winner": "home",
+          "seconds": 42.46666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 94,
+          "silver": 47,
+          "gear": []
+        },
+        {
+          "floor": 63,
+          "winner": "home",
+          "seconds": 50.666666666666664,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 96,
+          "silver": 48,
+          "gear": []
+        },
+        {
+          "floor": 64,
+          "winner": "home",
+          "seconds": 46.86666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 97,
+          "silver": 48,
+          "gear": []
+        },
+        {
+          "floor": 65,
+          "winner": "home",
+          "seconds": 39.68333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 98,
+          "silver": 49,
+          "gear": []
+        },
+        {
+          "floor": 66,
+          "winner": "home",
+          "seconds": 53.61666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 100,
+          "silver": 50,
+          "gear": []
+        },
+        {
+          "floor": 67,
+          "winner": "home",
+          "seconds": 46.18333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 101,
+          "silver": 50,
+          "gear": []
+        },
+        {
+          "floor": 68,
+          "winner": "home",
+          "seconds": 53.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 103,
+          "silver": 51,
+          "gear": []
+        },
+        {
+          "floor": 69,
+          "winner": "home",
+          "seconds": 36.983333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 104,
+          "silver": 52,
+          "gear": []
+        },
+        {
+          "floor": 70,
+          "winner": "home",
+          "seconds": 95.66666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 105,
+          "silver": 53,
+          "gear": [
+            "gear_thiet_ve_excellent_armor"
+          ]
+        },
+        {
+          "floor": 71,
+          "winner": "home",
+          "seconds": 50.483333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 107,
+          "silver": 53,
+          "gear": []
+        },
+        {
+          "floor": 72,
+          "winner": "home",
+          "seconds": 62.96666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 108,
+          "silver": 54,
+          "gear": []
+        },
+        {
+          "floor": 73,
+          "winner": "home",
+          "seconds": 49.9,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 110,
+          "silver": 55,
+          "gear": []
+        },
+        {
+          "floor": 74,
+          "winner": "home",
+          "seconds": 44.733333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 111,
+          "silver": 55,
+          "gear": []
+        },
+        {
+          "floor": 75,
+          "winner": "home",
+          "seconds": 47.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 112,
+          "silver": 56,
+          "gear": []
+        },
+        {
+          "floor": 76,
+          "winner": "home",
+          "seconds": 44.983333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 114,
+          "silver": 57,
+          "gear": []
+        },
+        {
+          "floor": 77,
+          "winner": "home",
+          "seconds": 58.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 115,
+          "silver": 57,
+          "gear": []
+        },
+        {
+          "floor": 78,
+          "winner": "home",
+          "seconds": 51.25,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 117,
+          "silver": 58,
+          "gear": []
+        },
+        {
+          "floor": 79,
+          "winner": "home",
+          "seconds": 49.483333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 118,
+          "silver": 59,
+          "gear": []
+        },
+        {
+          "floor": 80,
+          "winner": "home",
+          "seconds": 89.88333333333333,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 119,
+          "silver": 59,
+          "gear": [
+            "gear_thiet_ve_exceptional_accessory"
+          ]
+        },
+        {
+          "floor": 81,
+          "winner": "home",
+          "seconds": 62.56666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 121,
+          "silver": 60,
+          "gear": []
+        },
+        {
+          "floor": 82,
+          "winner": "home",
+          "seconds": 53.61666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 122,
+          "silver": 61,
+          "gear": []
+        },
+        {
+          "floor": 83,
+          "winner": "home",
+          "seconds": 83.83333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 124,
+          "silver": 62,
+          "gear": []
+        },
+        {
+          "floor": 84,
+          "winner": "home",
+          "seconds": 57.583333333333336,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 125,
+          "silver": 62,
+          "gear": []
+        },
+        {
+          "floor": 85,
+          "winner": "home",
+          "seconds": 59.21666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 126,
+          "silver": 63,
+          "gear": []
+        },
+        {
+          "floor": 86,
+          "winner": "home",
+          "seconds": 62,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 128,
+          "silver": 64,
+          "gear": []
+        },
+        {
+          "floor": 87,
+          "winner": "home",
+          "seconds": 48.46666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 129,
+          "silver": 64,
+          "gear": []
+        },
+        {
+          "floor": 88,
+          "winner": "home",
+          "seconds": 69.21666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 131,
+          "silver": 65,
+          "gear": []
+        },
+        {
+          "floor": 89,
+          "winner": "home",
+          "seconds": 63.11666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 132,
+          "silver": 66,
+          "gear": []
+        },
+        {
+          "floor": 90,
+          "winner": "home",
+          "seconds": 102.16666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 133,
+          "silver": 67,
+          "gear": [
+            "gear_thanh_tam_exceptional_weapon"
+          ]
+        },
+        {
+          "floor": 91,
+          "winner": "home",
+          "seconds": 60.53333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 135,
+          "silver": 67,
+          "gear": []
+        },
+        {
+          "floor": 92,
+          "winner": "home",
+          "seconds": 66.16666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 136,
+          "silver": 68,
+          "gear": []
+        },
+        {
+          "floor": 93,
+          "winner": "home",
+          "seconds": 75.91666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 138,
+          "silver": 69,
+          "gear": []
+        },
+        {
+          "floor": 94,
+          "winner": "home",
+          "seconds": 66.85,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 139,
+          "silver": 69,
+          "gear": []
+        },
+        {
+          "floor": 95,
+          "winner": "home",
+          "seconds": 65.7,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 140,
+          "silver": 70,
+          "gear": []
+        },
+        {
+          "floor": 96,
+          "winner": "home",
+          "seconds": 64.81666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 142,
+          "silver": 71,
+          "gear": []
+        },
+        {
+          "floor": 97,
+          "winner": "home",
+          "seconds": 83.98333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 143,
+          "silver": 71,
+          "gear": []
+        },
+        {
+          "floor": 98,
+          "winner": "home",
+          "seconds": 60.38333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 145,
+          "silver": 72,
+          "gear": []
+        },
+        {
+          "floor": 99,
+          "winner": "home",
+          "seconds": 63.03333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 146,
+          "silver": 73,
+          "gear": []
+        },
+        {
+          "floor": 100,
+          "winner": "home",
+          "seconds": 123.13333333333333,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 147,
+          "silver": 74,
+          "gear": [
+            "gear_thanh_tam_exceptional_armor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hoa_lu",
+      "cleared": false,
+      "floors": [
+        {
+          "floor": 1,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 13,
+          "silver": 6,
+          "gear": []
+        },
+        {
+          "floor": 2,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 15,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 3,
+          "winner": "home",
+          "seconds": 13.666666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 17,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 4,
+          "winner": "home",
+          "seconds": 16.633333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 19,
+          "silver": 9,
+          "gear": []
+        },
+        {
+          "floor": 5,
+          "winner": "home",
+          "seconds": 15.549999999999999,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 21,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 6,
+          "winner": "home",
+          "seconds": 22.483333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 23,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 7,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 25,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 8,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 27,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 9,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 29,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 10,
+          "winner": "home",
+          "seconds": 26.65,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 31,
+          "silver": 15,
+          "gear": [
+            "gear_thanh_tam_rare_armor"
+          ]
+        },
+        {
+          "floor": 11,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 33,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 12,
+          "winner": "home",
+          "seconds": 16.633333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 35,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 13,
+          "winner": "home",
+          "seconds": 14.683333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 37,
+          "silver": 18,
+          "gear": []
+        },
+        {
+          "floor": 14,
+          "winner": "home",
+          "seconds": 21.03333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 39,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 15,
+          "winner": "home",
+          "seconds": 22.516666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 41,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 16,
+          "winner": "home",
+          "seconds": 17.4,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 43,
+          "silver": 21,
+          "gear": []
+        },
+        {
+          "floor": 17,
+          "winner": "home",
+          "seconds": 20.8,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 45,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 18,
+          "winner": "home",
+          "seconds": 15.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 47,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 19,
+          "winner": "home",
+          "seconds": 17.75,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 49,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 20,
+          "winner": "home",
+          "seconds": 37.13333333333333,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 51,
+          "silver": 25,
+          "gear": [
+            "gear_thanh_tam_rare_accessory"
+          ]
+        },
+        {
+          "floor": 21,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 53,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 22,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 55,
+          "silver": 27,
+          "gear": []
+        },
+        {
+          "floor": 23,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 57,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 24,
+          "winner": "home",
+          "seconds": 17.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 59,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 25,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 61,
+          "silver": 30,
+          "gear": []
+        },
+        {
+          "floor": 26,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 63,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 27,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 65,
+          "silver": 32,
+          "gear": []
+        },
+        {
+          "floor": 28,
+          "winner": "home",
+          "seconds": 22.166666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 67,
+          "silver": 33,
+          "gear": []
+        },
+        {
+          "floor": 29,
+          "winner": "home",
+          "seconds": 29.116666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 69,
+          "silver": 34,
+          "gear": []
+        },
+        {
+          "floor": 30,
+          "winner": "home",
+          "seconds": 29.233333333333334,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 71,
+          "silver": 35,
+          "gear": [
+            "gear_phong_hanh_rare_weapon"
+          ]
+        },
+        {
+          "floor": 31,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 73,
+          "silver": 36,
+          "gear": []
+        },
+        {
+          "floor": 32,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 75,
+          "silver": 37,
+          "gear": []
+        },
+        {
+          "floor": 33,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 77,
+          "silver": 38,
+          "gear": []
+        },
+        {
+          "floor": 34,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 79,
+          "silver": 39,
+          "gear": []
+        },
+        {
+          "floor": 35,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 81,
+          "silver": 40,
+          "gear": []
+        },
+        {
+          "floor": 36,
+          "winner": "home",
+          "seconds": 18.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 83,
+          "silver": 41,
+          "gear": []
+        },
+        {
+          "floor": 37,
+          "winner": "home",
+          "seconds": 15.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 85,
+          "silver": 42,
+          "gear": []
+        },
+        {
+          "floor": 38,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 87,
+          "silver": 43,
+          "gear": []
+        },
+        {
+          "floor": 39,
+          "winner": "home",
+          "seconds": 20.166666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 89,
+          "silver": 44,
+          "gear": []
+        },
+        {
+          "floor": 40,
+          "winner": "home",
+          "seconds": 35.45,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 91,
+          "silver": 45,
+          "gear": [
+            "gear_phong_hanh_excellent_armor"
+          ]
+        },
+        {
+          "floor": 41,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 93,
+          "silver": 46,
+          "gear": []
+        },
+        {
+          "floor": 42,
+          "winner": "home",
+          "seconds": 22.366666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 95,
+          "silver": 47,
+          "gear": []
+        },
+        {
+          "floor": 43,
+          "winner": "home",
+          "seconds": 29.716666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 97,
+          "silver": 48,
+          "gear": []
+        },
+        {
+          "floor": 44,
+          "winner": "home",
+          "seconds": 22.366666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 99,
+          "silver": 49,
+          "gear": []
+        },
+        {
+          "floor": 45,
+          "winner": "home",
+          "seconds": 23.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 101,
+          "silver": 50,
+          "gear": []
+        },
+        {
+          "floor": 46,
+          "winner": "home",
+          "seconds": 25.366666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 103,
+          "silver": 51,
+          "gear": []
+        },
+        {
+          "floor": 47,
+          "winner": "home",
+          "seconds": 25.333333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 105,
+          "silver": 52,
+          "gear": []
+        },
+        {
+          "floor": 48,
+          "winner": "home",
+          "seconds": 24.866666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 107,
+          "silver": 53,
+          "gear": []
+        },
+        {
+          "floor": 49,
+          "winner": "home",
+          "seconds": 23.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 109,
+          "silver": 54,
+          "gear": []
+        },
+        {
+          "floor": 50,
+          "winner": "home",
+          "seconds": 42.583333333333336,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 111,
+          "silver": 55,
+          "gear": [
+            "gear_phong_hanh_excellent_accessory"
+          ]
+        },
+        {
+          "floor": 51,
+          "winner": "home",
+          "seconds": 19.383333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 113,
+          "silver": 56,
+          "gear": []
+        },
+        {
+          "floor": 52,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 115,
+          "silver": 57,
+          "gear": []
+        },
+        {
+          "floor": 53,
+          "winner": "home",
+          "seconds": 24.7,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 117,
+          "silver": 58,
+          "gear": []
+        },
+        {
+          "floor": 54,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 119,
+          "silver": 59,
+          "gear": []
+        },
+        {
+          "floor": 55,
+          "winner": "home",
+          "seconds": 18.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 121,
+          "silver": 60,
+          "gear": []
+        },
+        {
+          "floor": 56,
+          "winner": "home",
+          "seconds": 22.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 123,
+          "silver": 61,
+          "gear": []
+        },
+        {
+          "floor": 57,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 125,
+          "silver": 62,
+          "gear": []
+        },
+        {
+          "floor": 58,
+          "winner": "home",
+          "seconds": 23.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 127,
+          "silver": 63,
+          "gear": []
+        },
+        {
+          "floor": 59,
+          "winner": "home",
+          "seconds": 30.733333333333334,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 129,
+          "silver": 64,
+          "gear": []
+        },
+        {
+          "floor": 60,
+          "winner": "home",
+          "seconds": 47.61666666666667,
+          "phase": 3,
+          "survivors": 3,
+          "xp": 131,
+          "silver": 65,
+          "gear": [
+            "gear_thiet_ve_excellent_weapon"
+          ]
+        },
+        {
+          "floor": 61,
+          "winner": "home",
+          "seconds": 30.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 133,
+          "silver": 66,
+          "gear": []
+        },
+        {
+          "floor": 62,
+          "winner": "home",
+          "seconds": 26.916666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 135,
+          "silver": 67,
+          "gear": []
+        },
+        {
+          "floor": 63,
+          "winner": "home",
+          "seconds": 24.066666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 137,
+          "silver": 68,
+          "gear": []
+        },
+        {
+          "floor": 64,
+          "winner": "home",
+          "seconds": 31.666666666666668,
+          "phase": 0,
+          "survivors": 3,
+          "xp": 139,
+          "silver": 69,
+          "gear": []
+        },
+        {
+          "floor": 65,
+          "winner": "enemy",
+          "seconds": 44.516666666666666,
+          "phase": 0,
+          "survivors": 0,
+          "xp": 0,
+          "silver": 0,
+          "gear": []
+        }
+      ]
+    },
+    {
+      "id": "son_doong",
+      "cleared": false,
+      "floors": [
+        {
+          "floor": 1,
+          "winner": "home",
+          "seconds": 13.75,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 15,
+          "silver": 7,
+          "gear": []
+        },
+        {
+          "floor": 2,
+          "winner": "home",
+          "seconds": 13.75,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 17,
+          "silver": 8,
+          "gear": []
+        },
+        {
+          "floor": 3,
+          "winner": "home",
+          "seconds": 13.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 20,
+          "silver": 10,
+          "gear": []
+        },
+        {
+          "floor": 4,
+          "winner": "home",
+          "seconds": 13.533333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 22,
+          "silver": 11,
+          "gear": []
+        },
+        {
+          "floor": 5,
+          "winner": "home",
+          "seconds": 13.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 25,
+          "silver": 12,
+          "gear": []
+        },
+        {
+          "floor": 6,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 27,
+          "silver": 13,
+          "gear": []
+        },
+        {
+          "floor": 7,
+          "winner": "home",
+          "seconds": 15.933333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 29,
+          "silver": 14,
+          "gear": []
+        },
+        {
+          "floor": 8,
+          "winner": "home",
+          "seconds": 13.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 32,
+          "silver": 16,
+          "gear": []
+        },
+        {
+          "floor": 9,
+          "winner": "home",
+          "seconds": 14.166666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 34,
+          "silver": 17,
+          "gear": []
+        },
+        {
+          "floor": 10,
+          "winner": "home",
+          "seconds": 35.86666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 37,
+          "silver": 18,
+          "gear": [
+            "gear_phong_hanh_rare_armor"
+          ]
+        },
+        {
+          "floor": 11,
+          "winner": "home",
+          "seconds": 13.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 39,
+          "silver": 19,
+          "gear": []
+        },
+        {
+          "floor": 12,
+          "winner": "home",
+          "seconds": 13.35,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 41,
+          "silver": 20,
+          "gear": []
+        },
+        {
+          "floor": 13,
+          "winner": "home",
+          "seconds": 13.283333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 44,
+          "silver": 22,
+          "gear": []
+        },
+        {
+          "floor": 14,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 46,
+          "silver": 23,
+          "gear": []
+        },
+        {
+          "floor": 15,
+          "winner": "home",
+          "seconds": 12.816666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 49,
+          "silver": 24,
+          "gear": []
+        },
+        {
+          "floor": 16,
+          "winner": "home",
+          "seconds": 17.4,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 51,
+          "silver": 25,
+          "gear": []
+        },
+        {
+          "floor": 17,
+          "winner": "home",
+          "seconds": 13.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 53,
+          "silver": 26,
+          "gear": []
+        },
+        {
+          "floor": 18,
+          "winner": "home",
+          "seconds": 15.166666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 56,
+          "silver": 28,
+          "gear": []
+        },
+        {
+          "floor": 19,
+          "winner": "home",
+          "seconds": 17.366666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 58,
+          "silver": 29,
+          "gear": []
+        },
+        {
+          "floor": 20,
+          "winner": "home",
+          "seconds": 40.266666666666666,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 61,
+          "silver": 30,
+          "gear": [
+            "gear_phong_hanh_rare_accessory"
+          ]
+        },
+        {
+          "floor": 21,
+          "winner": "home",
+          "seconds": 17.4,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 63,
+          "silver": 31,
+          "gear": []
+        },
+        {
+          "floor": 22,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 65,
+          "silver": 32,
+          "gear": []
+        },
+        {
+          "floor": 23,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 68,
+          "silver": 34,
+          "gear": []
+        },
+        {
+          "floor": 24,
+          "winner": "home",
+          "seconds": 21.03333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 70,
+          "silver": 35,
+          "gear": []
+        },
+        {
+          "floor": 25,
+          "winner": "home",
+          "seconds": 19.916666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 73,
+          "silver": 36,
+          "gear": []
+        },
+        {
+          "floor": 26,
+          "winner": "home",
+          "seconds": 17.566666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 75,
+          "silver": 37,
+          "gear": []
+        },
+        {
+          "floor": 27,
+          "winner": "home",
+          "seconds": 23.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 77,
+          "silver": 38,
+          "gear": []
+        },
+        {
+          "floor": 28,
+          "winner": "home",
+          "seconds": 21.183333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 80,
+          "silver": 40,
+          "gear": []
+        },
+        {
+          "floor": 29,
+          "winner": "home",
+          "seconds": 21.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 82,
+          "silver": 41,
+          "gear": []
+        },
+        {
+          "floor": 30,
+          "winner": "home",
+          "seconds": 39.56666666666666,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 85,
+          "silver": 42,
+          "gear": [
+            "gear_thiet_ve_rare_weapon"
+          ]
+        },
+        {
+          "floor": 31,
+          "winner": "home",
+          "seconds": 21.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 87,
+          "silver": 43,
+          "gear": []
+        },
+        {
+          "floor": 32,
+          "winner": "home",
+          "seconds": 19.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 89,
+          "silver": 44,
+          "gear": []
+        },
+        {
+          "floor": 33,
+          "winner": "home",
+          "seconds": 19.516666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 92,
+          "silver": 46,
+          "gear": []
+        },
+        {
+          "floor": 34,
+          "winner": "home",
+          "seconds": 18.45,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 94,
+          "silver": 47,
+          "gear": []
+        },
+        {
+          "floor": 35,
+          "winner": "home",
+          "seconds": 22.266666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 97,
+          "silver": 48,
+          "gear": []
+        },
+        {
+          "floor": 36,
+          "winner": "home",
+          "seconds": 22.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 99,
+          "silver": 49,
+          "gear": []
+        },
+        {
+          "floor": 37,
+          "winner": "home",
+          "seconds": 18.766666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 101,
+          "silver": 50,
+          "gear": []
+        },
+        {
+          "floor": 38,
+          "winner": "home",
+          "seconds": 25.166666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 104,
+          "silver": 52,
+          "gear": []
+        },
+        {
+          "floor": 39,
+          "winner": "home",
+          "seconds": 22.516666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 106,
+          "silver": 53,
+          "gear": []
+        },
+        {
+          "floor": 40,
+          "winner": "home",
+          "seconds": 47.78333333333333,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 109,
+          "silver": 54,
+          "gear": [
+            "gear_thiet_ve_excellent_armor"
+          ]
+        },
+        {
+          "floor": 41,
+          "winner": "home",
+          "seconds": 17.966666666666665,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 111,
+          "silver": 55,
+          "gear": []
+        },
+        {
+          "floor": 42,
+          "winner": "home",
+          "seconds": 18.583333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 113,
+          "silver": 56,
+          "gear": []
+        },
+        {
+          "floor": 43,
+          "winner": "home",
+          "seconds": 18.6,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 116,
+          "silver": 58,
+          "gear": []
+        },
+        {
+          "floor": 44,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 118,
+          "silver": 59,
+          "gear": []
+        },
+        {
+          "floor": 45,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 121,
+          "silver": 60,
+          "gear": []
+        },
+        {
+          "floor": 46,
+          "winner": "home",
+          "seconds": 28.933333333333334,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 123,
+          "silver": 61,
+          "gear": []
+        },
+        {
+          "floor": 47,
+          "winner": "home",
+          "seconds": 20.316666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 125,
+          "silver": 62,
+          "gear": []
+        },
+        {
+          "floor": 48,
+          "winner": "home",
+          "seconds": 16.016666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 128,
+          "silver": 64,
+          "gear": []
+        },
+        {
+          "floor": 49,
+          "winner": "home",
+          "seconds": 19.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 130,
+          "silver": 65,
+          "gear": []
+        },
+        {
+          "floor": 50,
+          "winner": "home",
+          "seconds": 47.61666666666667,
+          "phase": 3,
+          "survivors": 6,
+          "xp": 133,
+          "silver": 66,
+          "gear": [
+            "gear_thiet_ve_excellent_accessory"
+          ]
+        },
+        {
+          "floor": 51,
+          "winner": "home",
+          "seconds": 20.53333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 135,
+          "silver": 67,
+          "gear": []
+        },
+        {
+          "floor": 52,
+          "winner": "home",
+          "seconds": 20.53333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 137,
+          "silver": 68,
+          "gear": []
+        },
+        {
+          "floor": 53,
+          "winner": "home",
+          "seconds": 24.316666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 140,
+          "silver": 70,
+          "gear": []
+        },
+        {
+          "floor": 54,
+          "winner": "home",
+          "seconds": 21.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 142,
+          "silver": 71,
+          "gear": []
+        },
+        {
+          "floor": 55,
+          "winner": "home",
+          "seconds": 22.266666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 145,
+          "silver": 72,
+          "gear": []
+        },
+        {
+          "floor": 56,
+          "winner": "home",
+          "seconds": 26.516666666666666,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 147,
+          "silver": 73,
+          "gear": []
+        },
+        {
+          "floor": 57,
+          "winner": "home",
+          "seconds": 24.03333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 149,
+          "silver": 74,
+          "gear": []
+        },
+        {
+          "floor": 58,
+          "winner": "home",
+          "seconds": 21.833333333333332,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 152,
+          "silver": 76,
+          "gear": []
+        },
+        {
+          "floor": 59,
+          "winner": "home",
+          "seconds": 20.53333333333333,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 154,
+          "silver": 77,
+          "gear": []
+        },
+        {
+          "floor": 60,
+          "winner": "home",
+          "seconds": 41.15,
+          "phase": 3,
+          "survivors": 4,
+          "xp": 157,
+          "silver": 78,
+          "gear": [
+            "gear_thanh_tam_excellent_weapon"
+          ]
+        },
+        {
+          "floor": 61,
+          "winner": "home",
+          "seconds": 31.416666666666668,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 159,
+          "silver": 79,
+          "gear": []
+        },
+        {
+          "floor": 62,
+          "winner": "home",
+          "seconds": 29.116666666666667,
+          "phase": 0,
+          "survivors": 6,
+          "xp": 161,
+          "silver": 80,
+          "gear": []
+        },
+        {
+          "floor": 63,
+          "winner": "home",
+          "seconds": 36.833333333333336,
+          "phase": 0,
+          "survivors": 5,
+          "xp": 164,
+          "silver": 82,
+          "gear": []
+        },
+        {
+          "floor": 64,
+          "winner": "home",
+          "seconds": 32.38333333333333,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 166,
+          "silver": 83,
+          "gear": []
+        },
+        {
+          "floor": 65,
+          "winner": "home",
+          "seconds": 29.083333333333332,
+          "phase": 0,
+          "survivors": 4,
+          "xp": 169,
+          "silver": 84,
+          "gear": []
+        },
+        {
+          "floor": 66,
+          "winner": "home",
+          "seconds": 29.083333333333332,
+          "phase": 0,
+          "survivors": 3,
+          "xp": 171,
+          "silver": 85,
+          "gear": []
+        },
+        {
+          "floor": 67,
+          "winner": "home",
+          "seconds": 49.9,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 173,
+          "silver": 86,
+          "gear": []
+        },
+        {
+          "floor": 68,
+          "winner": "home",
+          "seconds": 26.5,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 176,
+          "silver": 88,
+          "gear": []
+        },
+        {
+          "floor": 69,
+          "winner": "home",
+          "seconds": 36.833333333333336,
+          "phase": 0,
+          "survivors": 1,
+          "xp": 178,
+          "silver": 89,
+          "gear": []
+        },
+        {
+          "floor": 70,
+          "winner": "enemy",
+          "seconds": 43.53333333333333,
+          "phase": 3,
+          "survivors": 0,
+          "xp": 0,
+          "silver": 0,
+          "gear": []
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ function fixture() {
   const c = new Campaign();
   c.newGame({ sect: 'VoDang' });
   c.chooseMain('protect');
-  for (let i = 0; i < 8000 && c.running; i++) c.update(1 / 60);
+  for (let i = 0; i < 22500 && c.running; i++) c.update(1 / 60);
   assert.equal(c.lastResult.winner, 'home');
   c.session.inventory.find((i) => i.itemId === 'silver').quantity = 100000;
   return c;
@@ -38,7 +38,7 @@ test('60 unique companions, all five tiers, valid quest chapters and signature i
     assert.equal(q.act, Math.ceil(c.chapter / 4));
   }
 });
-test('single and ten draws spend atomically, own first copy, refund duplicates, and leave formation/XP/quests intact', () => {
+test('single and five draws spend atomically, own first copy, refund duplicates, and leave formation/XP/quests intact', () => {
   const c = fixture(),
     before = c.snapshot(),
     one = rollGacha(before, 1, { random: () => 0, now: 10 });
@@ -59,11 +59,11 @@ test('single and ten draws spend atomically, own first copy, refund duplicates, 
     itemCount(repeated.session, 'silver'),
     itemCount(one.session, 'silver') - 48
   );
-  const ten = rollGacha(before, 10, { random: () => 0, now: 12 });
+  const ten = rollGacha(before, 5, { random: () => 0, now: 12 });
   assert.equal(ten.price, 540);
-  assert.equal(ten.results.at(-1).tier, 4);
-  assert.equal(ten.session.gacha.sinceEpic, 0);
-  assert.equal(ten.session.gacha.total, 10);
+  assert.equal(ten.results.at(-1).tier, 1);
+  assert.equal(ten.session.gacha.sinceEpic, 5);
+  assert.equal(ten.session.gacha.total, 5);
   assert.deepEqual(before, c.snapshot());
   validateCampaign(ten.session);
 });
@@ -86,8 +86,8 @@ test('insufficient funds, invalid count/RNG, pending encounters and pre-tutorial
   const s = fixture().snapshot();
   s.inventory.find((i) => i.itemId === 'silver').quantity = 539;
   const original = structuredClone(s);
-  assert.throws(() => rollGacha(s, 10));
-  for (const count of [0, 2, -1, 1.5, '1'])
+  assert.throws(() => rollGacha(s, 5));
+  for (const count of [0, 2, 10, -1, 1.5, '1'])
     assert.throws(() => rollGacha(s, count));
   for (const value of [-1, 1, NaN, Infinity])
     assert.throws(() => rollGacha(s, 1, { random: () => value }));
@@ -102,7 +102,7 @@ test('insufficient funds, invalid count/RNG, pending encounters and pre-tutorial
 });
 test('all 50 owned characters and pity/history survive export/import; corrupted counters are rejected', async () => {
   const c = fixture();
-  let s = rollGacha(c.snapshot(), 10, { random: () => 0 }).session;
+  let s = rollGacha(c.snapshot(), 5, { random: () => 0 }).session;
   s.party.unlocked = COMPANIONS.map((c) => c.id);
   s.companionsAffinity = Object.fromEntries(
     s.party.unlocked.map((id) => [id, 15])

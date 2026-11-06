@@ -34,7 +34,7 @@ export class MissionDirector {
           role: 'Object',
           baseStats: {
             ...base,
-            maxHp: hp * (enemy ? 0.22 : 1.8),
+            maxHp: hp * (enemy ? 0.22 : 1.8*(combat.enemyLimit===8?2:1)),
             physicalAtk: 0,
             magicalAtk: 0,
             physicalDef: 0,

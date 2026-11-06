@@ -58,6 +58,6 @@ test('ten hero atlases and all fifty-four gear mappings point to repository asse
 test('all four hundred main episodes have ordered causal milestones and time/place context; return scenes never inherit ancient commander timelines',()=>{
  assert.equal(SCENE_HANDOFFS.length,20);assert.ok(SCENE_HANDOFFS.every(lines=>lines.length===20));
  for(const q of DAI_VIET_QUESTS){const c=continuityFor(q);assert.ok(c.time&&c.place&&c.thread,q.id);assert.equal(c.stages.length,10);const reveal=c.stages.map(v=>v.at);assert.ok(reveal.every((v,i)=>v>=1&&v<=20&&(!i||v>=reveal[i-1])));assert.ok(c.stages.every(v=>v.text.length>30));}
- for(const q of DAI_VIET_QUESTS){assert.ok(q.handoff?.length>40,q.id);assert.ok((q.aftermath??q.lines).some(l=>l[1]===q.handoff),q.id);if(q.aftermath)assert.ok(!q.lines.some(l=>l[1]===q.handoff),q.id);}
+ for(const q of DAI_VIET_QUESTS){assert.ok(q.handoff?.length>40,q.id);assert.ok((q.fullAftermath??q.fullLines).some(l=>l[1]===q.handoff),q.id);if(q.aftermath)assert.ok(!q.lines.some(l=>l[1]===q.handoff),q.id);}
  assert.equal(continuityFor(DAI_VIET_QUESTS.at(-1),{returning:true}),null);
 });

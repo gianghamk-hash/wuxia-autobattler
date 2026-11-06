@@ -82,3 +82,7 @@ img.game-icon { object-fit:contain; image-rendering:auto; filter:drop-shadow(0 1
 .main-nav button .game-icon {width:28px;height:28px;}
 .icon-button .game-icon {width:26px;height:26px;}
 @media(max-width:480px){#view-dungeons>.training-card{grid-template-columns:44px minmax(0,1fr);padding:16px}#view-dungeons>.training-card>button{grid-column:1/-1}#world-root>.shop-card{padding:16px}#world-root>.shop-card .shop-items button{font-size:.8rem;min-width:0}}
+
+#boss-phase-hud{display:flex;gap:8px;margin:12px 0;padding:10px;background:#182b35;border:1px solid #b59057;border-radius:12px}
+#boss-phase-hud span{flex:1;text-align:center;padding:8px;color:#a8bbb6;border-radius:8px;font-size:.85rem}
+#boss-phase-hud [data-active=true]{background:#be964c;color:#10262d;font-weight:700}

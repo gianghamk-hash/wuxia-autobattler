@@ -109,7 +109,7 @@ const story = Object.fromEntries(
         {
           name: `Chương ${q.chapter} · Hồi ${q.episode} · ${q.title}`,
           level: q.level,
-          count,
+          count:q.canon==='dai-viet'?Math.min(8,4+Math.floor((q.chapter-1)/4)):count,
           templates: Array.from(
             { length: count },
             (_, i) =>
@@ -123,9 +123,12 @@ const story = Object.fromEntries(
           ,...(q.id==='D01H06'?{count:1,templates:['companion_06'],hpScale:.6,attackScale:.45,guide:true}:q.id==='D07H05'?{count:1,templates:['companion_01'],hpScale:.95,attackScale:.7}:{} )
           ,...(['duel','drill','breach'].includes(q.combatType)?{count:q.combatType==='duel'?1:2,templates:q.combatType==='duel'?['companion_06']:['companion_06','companion_05'],hpScale:.65,attackScale:.45,guide:true}: {})
           ,...(q.canon==='dai-viet'&&q.chapter>=3&&!q.combatType&&q.id!=='D07H05'?{hpScale:(.76+Math.min(q.chapter,12)*.012)*(q.boss?1.12*1.12:1.08)*(1+Math.max(0,q.chapter-7)*.009),attackScale:(.55+Math.min(q.chapter,12)*.025)*(q.boss?1.05*1.08:1.05)*(1+Math.max(0,q.chapter-7)*.006)}:{})
+          ,count:q.canon==='dai-viet'?Math.min(8,4+Math.floor((q.chapter-1)/4)):count
+          ,...(q.canon==='dai-viet'&&q.chapter<=4?{hpScale:q.boss?.18:.32,attackScale:q.boss?.12:.23}: {})
         }
       ];
     }
   )
 );
+for(const q of DAI_VIET_QUESTS.filter(q=>q.boss&&q.chapter>4)){story[q.encounter].hpScale*=.62;story[q.encounter].attackScale*=.72;}
 export const ENCOUNTERS = deepFreeze({ ...CLASSIC_ENCOUNTERS, ...story });

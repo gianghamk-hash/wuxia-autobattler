@@ -49,7 +49,7 @@ export function rollGacha(
   count,
   { random = secureRandom, now = Date.now() } = {}
 ) {
-  if (![1, 10].includes(count)) throw Error('Chỉ có thể mời 1 hoặc 10 lượt.');
+  if (![1, 5].includes(count)) throw Error('Chỉ có thể mời 1 hoặc 5 lượt.');
   if (
     !session.hero.sect ||
     !session.storyProgress.completedQuests.includes('Q101')&&!session.storyProgress.completedQuests.includes('D01H06')
@@ -60,7 +60,7 @@ export function rollGacha(
   const next = structuredClone(session);
   next.gacha ??= freshGacha();
   validateGacha(next.gacha);
-  const price = count === 10 ? GACHA.tenCost : GACHA.singleCost;
+  const price = count === 5 ? GACHA.tenCost : GACHA.singleCost;
   if (
     next.inventory
       .filter((i) => i.itemId === 'silver')

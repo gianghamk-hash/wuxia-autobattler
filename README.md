@@ -2,7 +2,15 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 5.1 — màn hình gọn và hình màu:** chuyển sân luyện sang Bí cảnh, chuyển quầy mua đồ sang Quán, bỏ đội hình trùng ở trang hành trình; thêm cảnh nền cho mười tướng và 40 icon màu đã render. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 6.0 — chiến đấu và tháp 100 tầng:** 265 trận chính truyện, địch 4–8 người, boss ba giai đoạn và lời thoại cô đọng. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 6.0
+
+- 265 hồi chiến đấu trong 400 hồi; mỗi chương có một boss chốt. Hai đoạn thoại mặc định trước/sau cảnh, giữ kết quả và câu nối; bản đầy đủ có thể mở đọc. Chương hậu chiến dùng khảo trận, nhánh về nhà dùng hồi ức được ghi rõ.
+- Mỗi đội địch có 4–8 người; nhiệm vụ ba chốt dành ô cho vật thể và dùng tối đa 6 chiến binh. Boss có hai lượt mini boss và lượt boss cuối với lính; không hồi máu miễn phí giữa ba giai đoạn.
+- Năm Bí cảnh đều có 100 tầng, boss mỗi 10 tầng, thắng tự vào tầng tiếp theo và nút kết quả trở về Bí cảnh. Thắng tầng hồi 25% HP cho đội; mỗi mốc 10 hồi đầy. Hai lượt/ngày và mua thêm một lượt giữ nguyên.
+- Gói nhân vật 540 bạc/5 kết quả, gói trang bị 720 bạc/5 kết quả; lượt đơn 60/80 bạc. Bảo đảm tính liên tục theo số kết quả, giữ lịch sử cũ.
+- 120 nút kỹ năng, tám tầng cho mỗi phái; 12 bộ chuyển động lính/boss mới kèm chân dung khớp mẫu. [Quy tắc và giới hạn đo](docs/COMBAT_6_0.md).
 
 ## Bản 5.1
 
@@ -91,7 +99,7 @@ Chạy `npm run balance:6v6 -- 150 reports/balance-6v6.json` rồi `node scripts
 
 - **12 chương × 20 hồi:** 240 cảnh viết riêng, 68 trận giao chiến, đầu mối liên tục, phản ứng theo lựa chọn trước, lời thoại đồng đội và bốn đoạn kết đầy đủ. Quán → Truyện ký cho phép xem lại hồi đã qua mà không nhận lại thưởng. Bản lưu 12 nhiệm vụ cũ được mở rộng theo mốc đã hoàn thành, giữ tiền, XP, lựa chọn và trận đang chờ; không phát lại phần thưởng.
 - **50 đồng hành:** giữ 20 ID cũ, thêm `companion_21`–`companion_50`, mỗi người có chân dung riêng, tiểu sử, tuyệt kỹ và nhiệm vụ mở theo chương. Chi tiết ở [danh sách đồng hành](docs/COMPANIONS.md).
-- **Chiêu hiền bằng bạc:** Đội hình → Chiêu hiền quán; mở sau trận đầu. 60 bạc/lượt hoặc 540 bạc/10 lượt. Tỉ lệ gốc bậc 1–5: **50% / 28% / 15% / 6% / 1%**; trong cùng bậc chia đều từng người. Mốc 10 chưa có bậc 4+ nâng kết quả thấp lên bậc 4 (bậc 5 vẫn 1%); mốc 80 chưa có bậc 5 bảo đảm bậc 5. Bậc 5 reset cả hai, bậc 4 reset mốc 10. Lượt trùng vẫn tính bảo đảm. Giá trừ trước toàn bộ, hoàn trùng theo bậc **12 / 18 / 24 / 30 / 36 bạc**, không tạo bản sao hay tăng sức mạnh. Cả 50 người cũng có nhiệm vụ; đã sở hữu từ quay thì không nhận lại thưởng chiêu mộ. Quay không tự đổi đội xuất chiến.
+- **Chiêu hiền bằng bạc:** Đội hình → Chiêu hiền quán; mở sau trận đầu. 60 bạc/lượt hoặc 540 bạc/5 lượt. Tỉ lệ gốc bậc 1–5: **50% / 28% / 15% / 6% / 1%**; trong cùng bậc chia đều từng người. Mốc 10 chưa có bậc 4+ nâng kết quả thấp lên bậc 4 (bậc 5 vẫn 1%); mốc 80 chưa có bậc 5 bảo đảm bậc 5. Bậc 5 reset cả hai, bậc 4 reset mốc 10. Lượt trùng vẫn tính bảo đảm. Giá trừ trước toàn bộ, hoàn trùng theo bậc **12 / 18 / 24 / 30 / 36 bạc**, không tạo bản sao hay tăng sức mạnh. Cả 50 người cũng có nhiệm vụ; đã sở hữu từ quay thì không nhận lại thưởng chiêu mộ. Quay không tự đổi đội xuất chiến.
 - **Năm khung thẻ:** xám gỗ mộc tối không glow; lục đồng thau; lam viền bạc chạm góc và hover nhẹ; tím mạ vàng ngọc tím với dải sáng chạy viền; kim khung rồng/phượng, hào quang và cánh hoa. Bậc luôn ghi bằng chữ, không chỉ bằng màu. Tắt hiệu ứng hoặc giảm chuyển động sẽ dừng hiệu ứng khung.
 - **Lưu an toàn:** tổng lượt, hai bộ đếm và 50 kết quả gần nhất lưu cùng sáu ô hiện có; xuất/nhập giữ nguyên. Tướng quay mới có 15 duyên nợ, không phát XP hay bạc nhiệm vụ. Bản lưu cũ thêm bộ đếm bằng 0.
 - **Đồ họa:** 50 ảnh WebP riêng tại `assets/images/companions/`, dùng trong thẻ, xếp trận, danh sách đội, bottom sheet và Canvas chiến đấu; ảnh môn phái chỉ còn dành cho main/chọn phái. Prompt và xuất xứ trong [ART](docs/ART.md).

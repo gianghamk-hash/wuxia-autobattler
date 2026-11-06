@@ -1,0 +1,145 @@
+[
+  {
+    "sect": "VoDang",
+    "bosses": [
+      {
+        "chapter": 5,
+        "winner": "home",
+        "seconds": 29.233333333333334
+      },
+      {
+        "chapter": 10,
+        "winner": "home",
+        "seconds": 44.88333333333333
+      },
+      {
+        "chapter": 15,
+        "winner": "home",
+        "seconds": 34.7
+      },
+      {
+        "chapter": 19,
+        "winner": "home",
+        "seconds": 83.76666666666667
+      }
+    ]
+  },
+  {
+    "sect": "ThieuLam",
+    "bosses": [
+      {
+        "chapter": 5,
+        "winner": "home",
+        "seconds": 33.916666666666664
+      },
+      {
+        "chapter": 10,
+        "winner": "home",
+        "seconds": 47.266666666666666
+      },
+      {
+        "chapter": 15,
+        "winner": "home",
+        "seconds": 58.78333333333333
+      },
+      {
+        "chapter": 19,
+        "winner": "home",
+        "seconds": 102.25
+      }
+    ]
+  },
+  {
+    "sect": "CaiBang",
+    "bosses": [
+      {
+        "chapter": 5,
+        "winner": "home",
+        "seconds": 26.083333333333332
+      },
+      {
+        "chapter": 10,
+        "winner": "home",
+        "seconds": 42.46666666666667
+      },
+      {
+        "chapter": 15,
+        "winner": "home",
+        "seconds": 51.6
+      },
+      {
+        "chapter": 19,
+        "winner": "home",
+        "seconds": 77.96666666666667
+      }
+    ]
+  },
+  {
+    "sect": "NgaMi",
+    "bosses": [
+      {
+        "chapter": 5,
+        "winner": "home",
+        "seconds": 32.78333333333333
+      },
+      {
+        "chapter": 10,
+        "winner": "home",
+        "seconds": 33.766666666666666
+      },
+      {
+        "chapter": 15,
+        "winner": "home",
+        "seconds": 70.06666666666666
+      },
+      {
+        "chapter": 19,
+        "winner": "home",
+        "seconds": 65.06666666666666
+      }
+    ]
+  },
+  {
+    "sect": "DuongMon",
+    "bosses": [
+      {
+        "chapter": 5,
+        "winner": "home",
+        "seconds": 37.233333333333334
+      },
+      {
+        "chapter": 10,
+        "winner": "home",
+        "seconds": 54.3
+      },
+      {
+        "chapter": 15,
+        "winner": "home",
+        "seconds": 60.699999999999996
+      },
+      {
+        "chapter": 19,
+        "winner": "home",
+        "seconds": 84.48333333333333
+      }
+    ]
+  },
+  {
+    "id": "u_minh",
+    "roster": "two healers",
+    "floorsWon": 76,
+    "cleared": false
+  },
+  {
+    "id": "hoa_lu",
+    "roster": "two healers",
+    "floorsWon": 78,
+    "cleared": false
+  },
+  {
+    "id": "son_doong",
+    "roster": "two healers",
+    "floorsWon": 68,
+    "cleared": false
+  }
+]

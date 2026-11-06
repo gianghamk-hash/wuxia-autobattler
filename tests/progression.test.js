@@ -18,10 +18,10 @@ function local() { const data = new Map(); return { getItem: k => data.get(k) ??
 function snapshot(hero, inventory) { return { schemaVersion: 1, version: '0.6.0', hero, inventory, playtimeSeconds: 1,
   party: { active: [], unlocked: [], formation: {} }, companionsAffinity: {}, storyProgress: { currentAct: 1, activeQuestId: null, questFlags: {}, karmaScore: 0 } }; }
 
-test('five trees contain four tiers with three branches and valid acyclic same-sect prerequisites', () => {
-  assert.equal(Object.values(SKILL_TREES).flat().length, 60);
+test('five trees contain eight tiers with three branches and valid acyclic same-sect prerequisites', () => {
+  assert.equal(Object.values(SKILL_TREES).flat().length, 120);
   for (const [sect, nodes] of Object.entries(SKILL_TREES)) {
-    assert.equal(nodes.length, 12);
+    assert.equal(nodes.length, 24);
     for (const node of nodes) {
       assert.equal(node.sect, sect); assert.ok(node.cost > 0);
       for (const id of node.prerequisites) assert.ok(nodes.some(p => p.id === id && p.tier < node.tier));

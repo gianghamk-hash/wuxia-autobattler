@@ -19,7 +19,7 @@ function battle(seed = 12345) {
   const events = []; const combat = new CombatEngine({ units, grid, seed, onEvent: e => events.push(e) });
   return { combat, units, grid, events };
 }
-function finish(combat) { for (let i = 0; i < 8000 && combat.state === 'running'; i++) combat.update(1 / 60); }
+function finish(combat) { for (let i = 0; i < 22500 && combat.state === 'running'; i++) combat.update(1 / 60); }
 function duel() {
   const grid = new GridSystem(), a = new Hero('CaiBang'), b = new Companion('companion_01', { id: 'enemy', team: 'enemy' });
   grid.place(a, { x: 2, y: 1 }); grid.place(b, { x: 3, y: 1 });

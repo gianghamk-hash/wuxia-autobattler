@@ -21,7 +21,7 @@ import { EQUIPMENT } from '../src/data/EquipmentData.js';
 import { StorageManager } from '../src/core/StorageManager.js';
 import { moveFormation } from '../src/ui/FormationUI.js';
 function fight(c) {
-  for (let i = 0; i < 8000 && c.running; i++) c.update(1 / 60);
+  for (let i = 0; i < 22500 && c.running; i++) c.update(1 / 60);
   assert.equal(c.running, false);
   return c.lastResult;
 }

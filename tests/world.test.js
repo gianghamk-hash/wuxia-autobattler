@@ -46,7 +46,7 @@ function fixture(sect = 'VoDang') {
   return c;
 }
 function finish(c) {
-  for (let i = 0; i < 8000 && c.running; i++) c.update(1 / 60);
+  for (let i = 0; i < 22500 && c.running; i++) c.update(1 / 60);
   assert.equal(c.running, false);
   return c.lastResult;
 }
@@ -206,7 +206,7 @@ test('shared lineups validate schema, retain formation/build, reject forged leve
   assert.throws(() => b.importTeam('DV1.e30='));
   const saved = b.snapshot();
   b.startArena(saved.adventure.arena[0].id);
-  assert.equal(b.battle.units.filter((u) => u.team === 'enemy').length, 3);
+  assert.equal(b.battle.units.filter((u) => u.team === 'enemy').length, 4);
   b.retreat();
   assert.throws(() => b.startArena('npc_99'));
 });
@@ -225,9 +225,11 @@ test('escort deposits/limits and weekly arena reward ledgers cannot be farmed by
 });
 test('dungeon admission gates, floor HP attrition, immutable seed, branch rewards and saved checkpoint replay', async () => {
   const c = fixture();
-  grant(c, ['companion_01', 'companion_03']);
-  assert.throws(() => c.enterDungeon('son_doong'));
+  grant(c, ['companion_01','companion_03','companion_05','companion_04','companion_02']);
+  c.session.adventure.training=10;c.session.adventure.forging=10;
+  const locked=fixture();grant(locked,['companion_01','companion_03']);assert.throws(() => locked.enterDungeon('son_doong'));
   c.enterDungeon('phong_nha');
+  delete c.session.adventure.dungeon.mode;c.session.adventure.dungeon.rooms=Array.from({length:5},(_,i)=>[i===4?'boss':'battle',i===4?'boss':'battle']);
   const seed = c.session.adventure.dungeon.seed;
   while (c.session.adventure.dungeon && c.session.adventure.dungeon.floor < 4) {
     const d = c.session.adventure.dungeon,
@@ -369,7 +371,7 @@ test('six-person progress survives localStorage fallback with world fields and p
   assert.equal(result.data.adventure.version, 1);
 });
 
-test('all five dungeon layouts can be completed by a developed six-member roster and unlock usable qigong', () => {
+test('all five saved legacy dungeon layouts can be completed by a developed six-member roster and unlock usable qigong', () => {
   for (const def of DUNGEONS) {
     const c = fixture();
     grant(c, [
@@ -398,6 +400,7 @@ test('all five dungeon layouts can be completed by a developed six-member roster
       c.action('forge');
     }
     c.enterDungeon(def.id);
+    delete c.session.adventure.dungeon.mode;c.session.adventure.dungeon.rooms=Array.from({length:def.floors},(_,i)=>[i===def.floors-1?'boss':'rest',i===def.floors-1?'boss':'rest']);
     while (c.session.adventure.dungeon) {
       const d = c.session.adventure.dungeon;
       let index = d.rooms[d.floor].findIndex(

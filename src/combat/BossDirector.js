@@ -124,7 +124,7 @@ export class BossDirector {
       cell = this.freeCell();
     if (
       !cell ||
-      c.units.filter((u) => u.team === 'enemy' && u.alive).length >= 6
+      c.units.filter((u) => u.team === 'enemy' && u.alive).length >= c.enemyLimit
     )
       return null;
     const u = new Companion('companion_01', {

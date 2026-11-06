@@ -184,6 +184,7 @@ export function validateWorld(s) {
   if (!w || w.version !== 1) fail('Phiên bản giang hồ không hợp lệ.');
   if (!w.daily) fail('Thiếu lịch ngày.');
   validateEntries(w.daily);
+  if(w.towerBest!==undefined&&(!w.towerBest||Object.getPrototypeOf(w.towerBest)!==Object.prototype||Object.entries(w.towerBest).some(([id,n])=>!DUNGEONS.some(d=>d.id===id)||!integer(n,100))))fail('Kỷ lục tháp không hợp lệ.');
   validateTactics(w.tactics, ids);
   if (
     !integer(w.training, 10) ||
@@ -278,9 +279,9 @@ export function validateWorld(s) {
     if (
       !definition ||
       !integer(d.seed, 0xffffffff) ||
-      !integer(d.floor, definition.floors - 1) ||
+      !integer(d.floor,(d.mode==='tower'?100:definition.floors)-1) ||
       !Array.isArray(d.rooms) ||
-      d.rooms.length !== definition.floors ||
+      d.rooms.length !== (d.mode==='tower'?100:definition.floors) ||
       !d.rooms.every(
         (r, i) =>
           Array.isArray(r) &&
@@ -288,9 +289,7 @@ export function validateWorld(s) {
           r.every((t) =>
             ['battle', 'treasure', 'event', 'rest', 'boss'].includes(t)
           ) &&
-          (i < definition.floors - 1
-            ? !r.includes('boss')
-            : r.every((t) => t === 'boss'))
+          (d.mode==='tower'?r.every(t=>t===((i+1)%10===0?'boss':'battle')):(i<definition.floors-1?!r.includes('boss'):r.every(t=>t==='boss')))
       ) ||
       ![null, 0, 1].includes(d.selected) ||
       !integer(d.training, 10) ||
@@ -521,23 +520,17 @@ export function makeDungeon(s, id, weekly, now) {
         s.storyProgress.attemptCounter * 941 +
         s.adventure.journal.length * 17 +
         id.length) >>>
-      0,
-    rng = seededRandom(seed),
-    bag = ['battle', 'event', 'treasure', 'rest'];
-  const rooms = Array.from({ length: def.floors }, (_, i) =>
-    i === def.floors - 1
-      ? ['boss', 'boss']
-      : [bag[i % 4], bag[(i + 1 + Math.floor(rng() * 3)) % 4]]
-  );
+      0;
   return {
     id,
+    mode:'tower',
     weekly,
     week,
     seed,
     training: s.adventure.training,
     forging: s.adventure.forging,
     floor: 0,
-    rooms,
+    rooms:Array.from({length:100},(_,i)=>Array(2).fill((i+1)%10===0?'boss':'battle')),
     selected: null,
     squad,
     hp: Object.fromEntries(['hero', ...s.party.active].map((id) => [id, 1])),
