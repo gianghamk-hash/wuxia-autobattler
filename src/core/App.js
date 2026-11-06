@@ -34,7 +34,7 @@ import { mountCodexUI } from '../ui/CodexUI.js';
 import { mountSaveUI } from '../ui/SaveUI.js';
 import { SoundManager } from '../audio/SoundManager.js';
 import { renderJourneyRoster, renderBattleAdvice } from '../ui/JourneyUI.js';
-import { battleScene } from '../data/PresentationData.js';
+import { battleScene, sceneFor } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
 import { storyPerson, isDaiViet, PLOT_UNLOCKS } from '../data/DaiVietCast.js';
 import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
@@ -546,6 +546,9 @@ export class App {
       `CHƯƠNG ${session.storyProgress.currentChapter} · HỒI ${session.storyProgress.currentEpisode}/20`;
     el('campaign-label').textContent=this.model.catalog.title+(isDaiViet(session)?(session.storyProgress.decisions.D19H18==='home'?' · Nhánh trở về; hoạt động ngoài truyện là hồi ức.':''):' · Tiếp tục bản lưu truyện cũ.');
     const context=continuityFor(quest,{returning:session.storyProgress.decisions.D19H18==='home'});
+    const campaignScene=document.querySelector('.camp-scene');
+    campaignScene.dataset.storyScene=quest?.scene??'ending';
+    campaignScene.style.setProperty('--scene',quest?.scene==='modern'?'linear-gradient(135deg,#637c89,#172f39)':`url("${sceneFor(quest??{})}")`);
     const locationNode=document.querySelector('.scene-location');
     if(locationNode)locationNode.textContent=context?(quest.id==='D01H01'?'Trường quay · Hiện đại':context.place):quest?.location??'Hành trình đã khép lại';
     const headline=document.querySelector('.scene-copy h1');if(headline)headline.textContent=isDaiViet(session)?quest?.chapterTitle??'Những lời hẹn còn lại':'Chốn giang hồ, gặp người tri kỷ.';

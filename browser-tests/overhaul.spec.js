@@ -23,6 +23,7 @@ test('real six-song playlist decodes, keeps position across views, advances thro
 });
 for(const width of [320,390])test('portrait UI, synchronized hero art, all three builds and gear auras at '+width+'px',async({page},info)=>{
  await page.setViewportSize({width,height:844});await fresh(page);await fixture(page);
+ await expect(page.locator('.camp-scene')).toHaveAttribute('data-story-scene','u_minh');
  expect(await page.locator('.camp-scene').evaluate(e=>{const box=e.getBoundingClientRect();return [...e.querySelectorAll('.quest-actions button')].filter(b=>b.getClientRects().length).every(b=>{const r=b.getBoundingClientRect();return r.top>=box.top&&r.bottom<=box.bottom;});})).toBe(true);
  await expect(page.locator('#camp-hero-art')).toHaveAttribute('data-character-id','hero_commander');
  await page.evaluate(()=>window.__game.setView('roster'));const hero=page.locator('.formation-cell[data-selected="true"] .portrait');await expect(hero).toHaveAttribute('data-character-id','hero_commander');await expect(page.locator('.formation-cell[data-selected="true"]')).toHaveAttribute('data-equipment-aura','4');
