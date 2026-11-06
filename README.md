@@ -2,7 +2,13 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 5.0 — playlist, nhân vật chuyển động và lối chơi dọc:** sáu bản nhạc nền lặp xuyên màn hình, mười bộ chuyển động nhân vật chính, hình trang bị theo phẩm chất và ba hướng võ công. 400 đoạn nối cảnh giữ rõ kết quả và phần còn mở; chỉnh tiến độ XP, buff đội hình và lượt bí cảnh. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 5.1 — màn hình gọn và hình màu:** chuyển sân luyện sang Bí cảnh, chuyển quầy mua đồ sang Quán, bỏ đội hình trùng ở trang hành trình; thêm cảnh nền cho mười tướng và 40 icon màu đã render. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 5.1
+
+- Hành trình tập trung vào truyện. Sân luyện ở Bí cảnh; quầy dây/cá/trà ở Quán → Quán & Rèn, không còn hai quầy trùng. Xếp trận và đồng đội tập trung tại Đội hình.
+- Mười chân dung 51–60 có bối cảnh phù hợp vai trò, giữ khuôn mặt và độ hiếm. 50 chân dung cũ giữ nguyên; người chơi quay lại nhận đúng bản ảnh mới.
+- Bộ 40 WebP màu thay icon nét đơn, có hình dây, cá và tắt âm riêng. Tên nút, nhãn truy cập và quy tắc chơi vẫn giữ. [Chi tiết và nguồn ảnh](docs/UI_ART_5_1.md).
 
 ## Bản 5.0
 

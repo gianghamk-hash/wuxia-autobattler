@@ -1,3 +1,4 @@
+import {icon} from './Visuals.js';
 import {remainingEntries,EXTRA_ENTRY_PRICE} from '../core/DungeonEntries.js';
 import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
 import {renderEquipment,renderChapterBosses} from './EquipmentUI.js';
@@ -63,7 +64,8 @@ function select(options, value, callback) {
   return e;
 }
 export function mountWorldUI(app) {
-  let tab = 'activities',
+  const roadsideShop=el('roadside-shop');roadsideShop.remove();
+  let tab = 'shop',
     roomOption = 0,
     inspectedId = null;
   const run = (action) =>
@@ -391,6 +393,7 @@ export function mountWorldUI(app) {
         renderWorld();
       });
       b.setAttribute('aria-pressed', String(tab === id));
+      b.dataset.uiIcon=({activities:'flag',shop:'tea',arena:'sword',guild:'roster',story:'scroll',casebook:'codex',bonds:'heart',characters:'profile',journal:'scroll'})[id];
       tabs.append(b);
     }
     const activeTab=tabs.querySelector('[aria-pressed="true"]');
@@ -452,25 +455,8 @@ export function mountWorldUI(app) {
       root.append(escort);
     }
     if (tab === 'shop') {
+      root.append(roadsideShop);
       renderEquipment(app,root);
-      const pantry = panel(
-        'Quán trà & hành trang',
-        `Bạc ${count(s, 'silver')} · Cá ${count(s, 'food_fish')} · Trà ${count(s, 'tea')} · Đan ${count(s, 'elixir')} · Quặng ${count(s, 'ore')} · Thảo dược ${count(s, 'herb')}`
-      );
-      for (const [id, label] of [
-        ['rope', 'Dây · 5 bạc'],
-        ['food_fish', 'Cá · 5 bạc'],
-        ['tea', 'Trà · 8 bạc']
-      ])
-        pantry.append(
-          button(label, () =>
-            run(() => {
-              app.model.buy(id);
-              app.toast('Đã mua. Chọn món cho một trận ở Đội hình.');
-            })
-          )
-        );
-      root.append(pantry);
       for (const [id, title, text, cost, disabled] of [
         [
           'train',
@@ -673,7 +659,8 @@ export function mountWorldUI(app) {
         );
       const path = n('div', undefined, 'dungeon-path');
       d.rooms.forEach((_, i) => {
-        const e = n('span', i === d.rooms.length - 1 ? '⚑' : String(i + 1));
+        const e = n('span', i === d.rooms.length - 1 ? undefined : String(i + 1));
+        if(i===d.rooms.length-1)e.append(icon('flag'));
         e.dataset.status =
           i < d.floor ? 'done' : i === d.floor ? 'current' : 'future';
         path.append(e);

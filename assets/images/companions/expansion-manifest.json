@@ -3,140 +3,160 @@
     "id": "companion_51",
     "name": "Đinh Sáo",
     "tier": 1,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-80eb83f4-a10b-4e3b-a9c9-ef4b509de96c.png",
-    "prompt": "One original character portrait for a Vietnamese wuxia tactical RPG. A Vietnamese young male courier age 20, lively narrow face, short tied black hair, brown linen travel robe, a small bamboo message tube and reed whistle hanging at collar, bright attentive eyes. Chest-up three-quarter view, face large readable at small dialogue size, natural mature face proportions. Painterly ink and gouache, textured muted olive/teal backdrop, earthy restrained color palette, soft warm face lighting. Distinct memorable fictional face. Vertical 2:3 single portrait. No text, watermark, frame, logos, panels or other people, no photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-a7eb90e1-8c30-46d4-8295-d0cc0f4942b1.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a bamboo courier road with a wooden milestone and distant green hills. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_51.webp",
-    "sha256": "bf2370ea06b3794da3050e1cbbff26f178706ca6fce171ebdd3693e1de286315",
+    "sha256": "c2d7f78c0d57e94f8da2c83c85f0e1f8e9865da0e50db46fbf9c0638cb6b58f3",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-80eb83f4-a10b-4e3b-a9c9-ef4b509de96c.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_52",
     "name": "Lụa",
     "tier": 1,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b52d7805-4d7f-4e05-b1c5-e6fa4979bb45.png",
-    "prompt": "One original character portrait for a Vietnamese wuxia tactical RPG. A Vietnamese woman riverboat apprentice age 25, sun-tanned face, tied black hair with plain blue cloth band, indigo working tunic and rope loop across shoulder, warm practical expression. Chest-up three-quarter view, face large readable at small dialogue size, natural mature face proportions. Painterly ink and gouache, textured muted olive/teal backdrop, earthy restrained color palette, soft warm face lighting. Distinct memorable fictional face. Vertical 2:3 single portrait. No text, watermark, frame, logos, panels or other people, no photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-4b3b7358-85d0-4cd6-a90f-ff4cbf0ad0f6.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a riverside wooden ferry, coiled mooring ropes, reeds and warm dawn water. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_52.webp",
-    "sha256": "39bde80eaa9eacd0c99f7cde60d0b79c4eaadc743822c5881c80e987cb773b42",
+    "sha256": "999e585f4d68b5455a74938d32a9dd801850bda2ca888efa827055a081961f8a",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b52d7805-4d7f-4e05-b1c5-e6fa4979bb45.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_53",
     "name": "Tạ Yến",
     "tier": 2,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-94793edc-e8b8-47a8-a775-60164bf63986.png",
-    "prompt": "One original character portrait for a Vietnamese wuxia tactical RPG. A Vietnamese woman carpenter age 32, strong broad face, dark hair tied back, faded ochre workshop clothes and small leather tool strap, charcoal mark on cheek, confident thoughtful expression. Chest-up three-quarter view, face large readable at small dialogue size, natural mature face proportions. Painterly ink and gouache, textured muted olive/teal backdrop, earthy restrained color palette, soft warm face lighting. Distinct memorable fictional face. Vertical 2:3 single portrait. No text, watermark, frame, logos, panels or other people, no photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-86237f28-caf5-467a-b54d-9301e4d6ddba.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a carpenter workshop with timber beams, wooden cart wheels and hanging hand tools. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_53.webp",
-    "sha256": "d1bba718656195d687da9e53215b297612986be462700ec474fdfd4f9cc95abe",
+    "sha256": "11e39923ca0945e97e483de73ad31b0ecfe5fd69d889ef129cdacb398f93c6f9",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-94793edc-e8b8-47a8-a775-60164bf63986.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_54",
     "name": "Vệ Bình",
     "tier": 2,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-a4cbfee3-8d80-4eaa-b093-420826c90f3f.png",
-    "prompt": "One original chest-up character portrait for a Vietnamese wuxia tactical RPG. Vietnamese male junior watchman age 29, angular kind face, hair under simple navy cloth cap, worn slate-blue guard tunic with modest leather collar, straight posture, observant restrained expression, no helmet. Face large, unique and readable in small dialogue UI. Hand-painted ink/gouache illustration with natural adult facial proportions, muted olive teal textured backdrop and earthy restrained colors, warm soft lighting. Vertical 2:3. No text, watermark, frame, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-df8a8349-0045-4a9a-9589-b941373af511.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a walled city gate watch post with lanterns and a stone road. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_54.webp",
-    "sha256": "fb51ac7a1a8c9cd02806dbc06dfc1be706086fdb117e52a0421a97b521a5f25e",
+    "sha256": "9837acbdc840f4ba696396547b795827a2559ccf0327b19774ec849edab1dfa6",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-a4cbfee3-8d80-4eaa-b093-420826c90f3f.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_55",
     "name": "Hồ Tâm",
     "tier": 3,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-f69e615c-a089-4265-b61a-b7a15aebac90.png",
-    "prompt": "One original chest-up character portrait for a Vietnamese wuxia tactical RPG. Vietnamese female field medic age 36, calm tired eyes, black hair in practical low bun, cream and sage cross-collar robe with an ochre medical satchel strap, compassionate but firm face, no jewelry. Face large, unique and readable in small dialogue UI. Hand-painted ink/gouache illustration with natural adult facial proportions, muted olive teal textured backdrop and earthy restrained colors, warm soft lighting. Vertical 2:3. No text, watermark, frame, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-93ca1c07-72ab-40b8-bac3-cc141d1ccc17.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with an open herbal clinic with medicine drawers, herbs drying under wooden eaves. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_55.webp",
-    "sha256": "bc89c7cea38297c09b19db4d8661edbe2b876d8f1ebf3b3cb5b7fb9e91973908",
+    "sha256": "b240efc746465fb039b533d91be5842c5d56f39e47905bdd003a2ecb97704630",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-f69e615c-a089-4265-b61a-b7a15aebac90.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_56",
     "name": "Trác Viễn",
     "tier": 3,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-ce913202-8405-42a2-999b-5a6a45a828a5.png",
-    "prompt": "One original chest-up character portrait for a Vietnamese wuxia tactical RPG. Vietnamese male pathfinder age 33, thin face with faint sun freckles, long black hair tied loosely, moss-green travel coat and rolled cloth map at shoulder, thoughtful watchful eyes. Face large, unique and readable in small dialogue UI. Hand-painted ink/gouache illustration with natural adult facial proportions, muted olive teal textured backdrop and earthy restrained colors, warm soft lighting. Vertical 2:3. No text, watermark, frame, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-fd02ac09-6227-4dbc-aabb-f0637dbac5c4.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a winding forest scout trail beside a stream, bamboo and distant mountain ridges. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_56.webp",
-    "sha256": "aae9075f00e9b08f673e53d75e65d3babaf97e7c905a7834cb92a1e3bee911e3",
+    "sha256": "814570581c3ca7bb6baaeacc23a4c2fe5eadaf06856337e353a05dcc77e38e8c",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-ce913202-8405-42a2-999b-5a6a45a828a5.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_57",
     "name": "Lê Nguyệt",
     "tier": 4,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-90db0fd1-5ab8-4acb-bfc3-8d5a7eb8817a.png",
-    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese female archivist age 28, distinctive oval face and intense thoughtful dark eyes, black hair in neat pinned bun, off-white and muted plum scholar robe, small bundle of letters held at chest, dignified sorrow and resolve, no tears or text. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-4193c0d5-b6da-45b2-9c77-334e76d0ad09.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a scholar family courtyard with a wooden desk, folded letters and soft lantern light. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_57.webp",
-    "sha256": "752789a866d9557f8f9cb794d51eeb7c6b1d74e25568db01e1a216f3c99f522d",
+    "sha256": "86a800e225d8ee27c1d5d66ed5d143cf718197d4e69f0b4a4669fabd77e04ffe",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-90db0fd1-5ab8-4acb-bfc3-8d5a7eb8817a.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_58",
     "name": "Đào Bất Khuất",
     "tier": 4,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3a90b1a1-b00a-424c-9b40-28173d63a893.png",
-    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese former caravan captain age 46, weathered broad tan face, short graying beard, strong nose, black hair with gray tied back, worn brown leather shoulder protection over dark green robe, regretful but steady eyes, no villain sneer. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9261e7a2-d3e5-4e3f-9d48-2a9071afa83a.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a grain caravan depot with sacks, pack carts and a weighing balance. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_58.webp",
-    "sha256": "780c77a753edf238321fd97f2fe8cd1aca10397cf34d3e0a191a2f207f274c93",
+    "sha256": "e213326ffb71ef1c135a867223bc386e16debc383c569bdecc98d0b10dd31c18",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3a90b1a1-b00a-424c-9b40-28173d63a893.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_59",
     "name": "Dương Tịnh",
     "tier": 5,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-426d70ce-2f73-4177-81c8-9b52cb0c4734.png",
-    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese elderly female lay sword instructor age 62, silver-streaked black hair tied in simple bun, lined warm face, clear strong dark eyes, muted ivory and ochre training robes with plain sword strap at shoulder, grounded calm expression, no magic aura. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-e0a38f57-2278-4493-9a2d-355047a4eaa3.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with an old mountain monastery terrace with bronze bell and pine trees. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_59.webp",
-    "sha256": "e2fb02872e679369b4a70d0fa464402bc67604284f6251aa0e86f815358aa72e",
+    "sha256": "319cfee3ab5c7c73ca6319b9d2890cf69d410c7dac468661ab8acf028c24e238",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-426d70ce-2f73-4177-81c8-9b52cb0c4734.png",
+    "reference": "assets/images/companions/companion_01.webp"
   },
   {
     "id": "companion_60",
     "name": "Phan Uy",
     "tier": 5,
-    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-4edea829-5163-4b54-801d-0c5e308425e1.png",
-    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese retired naval coordinator age 55, lean sun-browned face, neat salt-and-pepper moustache and short beard, simple indigo cloth headband and blue-gray cross-collar travel robe, old rope toggle at shoulder, perceptive modest half-smile, no crown. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
-    "mode": "generate",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5d226780-259a-4425-8966-c9028af4a3c8.png",
+    "prompt": "Edit target image 1: this exact character portrait. Supporting style reference image 2: earlier game portrait with a detailed narrative setting. Replace the flat textured backdrop of image 1 with a river navigation pavilion overlooking sailboats and a misty bend in the water. Match the rich readable painted wuxia environment quality and warm/cool depth in image 2. STRICTLY preserve the exact character identity, age, gender, face shape, expression, hairstyle, clothing, pose and accessories from image 1. The supporting portrait is NOT a face or costume reference. Keep the same medium chest-up portrait framing and large face readable for mobile dialogue. Vertical 2:3 full-bleed illustration, no text, no frame, no logos, no extra characters. Background must be clearly drawn scenery occupying negative space around head and shoulders, not a flat gradient or abstract texture. Balanced color, subtle background depth, sharp foreground face.",
+    "mode": "built-in image_gen edit",
     "asset": "assets/images/companions/companion_60.webp",
-    "sha256": "b65d8c5f9f64b566eec3b93b0b8e62bc84701f2c06d954e6849bdbaf5c299d78",
+    "sha256": "a4f4632d135dc33d5678f737146a5cee0a95f475135f01e400105c2caa385789",
     "size": [
       480,
       720
-    ]
+    ],
+    "originalSource": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-4edea829-5163-4b54-801d-0c5e308425e1.png",
+    "reference": "assets/images/companions/companion_01.webp"
   }
 ]

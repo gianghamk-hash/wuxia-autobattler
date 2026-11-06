@@ -73,7 +73,7 @@ test('new unarmed opening battle checkpoints reload with the same seed and one e
  expect(await page.evaluate(()=>window.__game.model.battle.seed)).toBe(pending.seed);expect(await page.evaluate(()=>window.__game.model.battle.units.find(u=>u.id==='hero').skills.autoAttack.name)).toBe('Quyền Cơ Bản');
 });
 test('canonical names agree in formation, collection, codex, unit sheet and companion conversations',async({page},info)=>{
- await start(page);await at(page,'D19H12');await page.locator('#btn-camp-roster').click();await expect(page.locator('.formation-units')).toContainText('Mai Tước');await expect(page.locator('.formation-units')).toContainText('Lôi Nam');
+ await start(page);await at(page,'D19H12');await page.locator('.main-nav [data-view="roster"]').click();await expect(page.locator('.formation-units')).toContainText('Mai Tước');await expect(page.locator('.formation-units')).toContainText('Lôi Nam');
  await page.locator('#roster-tab-companions').click();await page.getByLabel('Tìm tên đồng hành').fill('Mai Tuoc');await expect(page.locator('#roster-list .roster-card:visible')).toHaveCount(1);await expect(page.locator('#roster-list')).toContainText('Mai Tước');
  await page.locator('#roster-list').getByRole('button',{name:'Xem tướng',exact:true}).first().click();await expect(page.locator('#unit-sheet')).toContainText('Mai Tước');await expect(page.locator('#unit-sheet')).not.toContainText('undefined');await page.locator('[data-close-sheet="unit-sheet"]').click();
  await page.evaluate(()=>window.__game.setView('codex'));await page.locator('#catalog-search').fill('Loi Nam');await expect(page.locator('#catalog-results')).toContainText('Lôi Nam');await expect(page.locator('#catalog-results')).not.toContainText('Lão Tam');
