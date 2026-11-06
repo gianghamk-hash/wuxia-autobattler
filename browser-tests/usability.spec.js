@@ -67,7 +67,7 @@ test('all new portraits and nine six-pose sheets load with clean transparency an
    let clear=0,cells=0;if(row.kind==='sprite'){const a=c.getImageData(0,0,canvas.width,canvas.height).data;for(let i=3;i<a.length;i+=4)if(a[i]<10)clear++;for(let y=0;y<2;y++)for(let x=0;x<3;x++){const p=c.getImageData(x*512,y*512,512,512).data;if(p.some((v,i)=>i%4===3&&v>200))cells++;}}
    const label=document.createElement('figcaption');label.textContent=row.id;card.append(canvas,label);gallery.append(card);checks.push({id:row.id,kind:row.kind,clear,cells,motion:FIGHTERS.includes(row.id)});
   }return{checks,count:FIGHTERS.length};
- });expect(result.count).toBe(108);expect(result.checks).toHaveLength(21);
+ });expect(result.count).toBe(115);expect(result.checks).toHaveLength(21);
  for(const c of result.checks.filter(c=>c.kind==='sprite')){expect(c.clear).toBeGreaterThan(700000);expect(c.cells).toBe(6);expect(c.motion).toBe(true);}
  await page.setViewportSize({width:1280,height:1000});await page.screenshot({path:info.outputPath('new-character-art.png'),fullPage:true,animations:'disabled'});
 });
