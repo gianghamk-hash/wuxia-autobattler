@@ -36,13 +36,13 @@
  .main-nav { box-shadow:0 -8px 24px #001b2280; }
  .main-nav button[aria-current=page] { background:#d8b66b; color:#172e2f; border-radius:10px; }
  #app-message {top:auto;bottom:calc(88px + env(safe-area-inset-bottom));max-width:calc(100% - 24px);pointer-events:none;}
- .camp-scene { min-height:460px; display:flex; flex-direction:column; padding:16px; gap:12px; }
- .scene-top { position:relative; inset:auto; gap:8px; }
+ .camp-scene { height:auto; min-height:460px; display:flex; flex-direction:column; padding:16px; gap:12px; }
+ .scene-top { position:relative; inset:auto; gap:8px; padding:10px 0; }
  .camp-hero-art { width:135px; height:205px; top:80px; bottom:auto; right:0; transform:none; }
- .scene-copy { position:relative; z-index:1; max-width:calc(100% - 110px); margin:24px 0 14px; padding:0; }
- .scene-copy h1 { font-size:1.6rem; max-width:220px; }
+ .scene-copy { position:relative; inset:auto; z-index:1; width:calc(100% - 110px); max-width:220px; margin:24px 0 14px; padding:0; height:auto; flex-shrink:0; }
+ .scene-copy h1 { font-size:1.5rem; max-width:100%; line-height:1.35; overflow-wrap:normal; word-break:normal; hyphens:none; }
  .scene-copy>p:last-child { font-size:.82rem; }
- .quest-feature { position:relative; inset:auto; margin-top:auto; width:100%; display:grid; grid-template-columns:1fr; gap:10px; padding:16px; }
+ .quest-feature { position:relative; inset:auto; margin-top:auto; width:100%; height:auto; flex-shrink:0; display:grid; grid-template-columns:1fr; gap:10px; padding:16px; }
  .quest-seal { display:none; }
  .quest-actions { display:grid; grid-template-columns:1fr; width:100%; }
  .quest-actions button { width:100%; }
