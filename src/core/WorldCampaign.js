@@ -14,6 +14,7 @@ import {
 import { DUNGEONS } from '../data/WorldData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import {isDaiViet,applyDaiVietName} from '../data/DaiVietCast.js';
+import {heroAppearance,hasEnrollment} from '../data/HeroIdentity.js';
 import { EQUIPMENT } from '../data/EquipmentData.js';
 import {
   count,
@@ -124,9 +125,10 @@ export const worldMethods = {
       forging: 0
     };
     for (const u of units.filter((u) => u.team === 'home')) {
+      if(isDaiViet(this.session)&&u.id==='hero')Object.assign(u,heroAppearance(this.session));
       if (!u.bondConfigured) applyBondVariant(u, this.session?.journey?.bonds.modes[u.templateId] ?? 'base');
       if(isDaiViet(this.session)&&u.id!=='guide')applyDaiVietName(u);
-      u.sect = prep.tactics.affiliations[u.id] ?? u.sect;
+      u.sect = isDaiViet(this.session)&&u.id==='hero'&&!hasEnrollment(this.session)?null:prep.tactics.affiliations[u.id] ?? u.sect;
       u.targetPriority =
         prep.tactics.priorities[u.id] ?? u.targetPriority ?? 'nearest';
       u.element = SECT_ELEMENT[u.sect];

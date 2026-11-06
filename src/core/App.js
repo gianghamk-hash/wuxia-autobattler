@@ -10,7 +10,7 @@ import { bus, EVT } from './EventBus.js';
 import { Campaign, itemCount } from './Campaign.js';
 import { MAIN_QUESTS, RECRUIT_QUESTS, ENDINGS } from '../data/QuestsData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
-import { getSectName } from '../data/SectsData.js';
+import { getSectName, SECTS } from '../data/SectsData.js';
 import { getActiveSynergies } from '../data/SynergiesData.js';
 import { changeSect, expToNextLevel } from '../entities/HeroBuild.js';
 import { Hero } from '../entities/Hero.js';
@@ -34,6 +34,7 @@ import { battleScene } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
 import { storyPerson, isDaiViet, PLOT_UNLOCKS } from '../data/DaiVietCast.js';
 import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
+import {ENROLLMENT_QUEST,sectReady,storyHeroBuild,heroAppearance,heroSectLabel,heroLines} from '../data/HeroIdentity.js';
 import { renderMissionStatus } from '../ui/MissionUI.js';
 import { mountUsability } from '../ui/UsabilityUI.js';
 const el = (id) => document.getElementById(id);
@@ -106,10 +107,10 @@ export class App {
   async init() {
     this.states.go(GAME_STATE.TITLE);
     this.progress = mountSkillTreeUI({
-      getState: () => this.model.session,
+      getState: () => ({...this.model.session,hero:storyHeroBuild(this.model.session)}),
       allowTraining: false,
       canEdit: () =>
-        !this.model.running && Boolean(this.model.session.hero.sect),
+        !this.model.running && sectReady(this.model.session),
       onChange: (hero, inventory) => this.model.updateProfile(hero, inventory)
     });
     this.formation = mountFormationUI({
@@ -209,6 +210,7 @@ export class App {
       picker.append(button);
     }
     el('hero-sect').addEventListener('change', () => this.syncSectPicker());
+    el('hero-name').addEventListener('input',()=>{if(!this.hasLoaded)this.renderPlayer();});
     this.syncSectPicker();
     document
       .querySelectorAll('[data-profile-tab]')
@@ -257,7 +259,7 @@ export class App {
     el('brand-home').addEventListener('click', (event) => {
       event.preventDefault();
       this.run(() =>
-        this.setView(this.model.session.hero.sect ? 'camp' : 'title')
+        this.setView(this.hasLoaded ? 'camp' : 'title')
       );
     });
     el('new-game-form').addEventListener('submit', (event) => {
@@ -272,8 +274,8 @@ export class App {
           return;
         this.model.newGame({
           story:new URLSearchParams(location.search).get('story')==='legacy'?'legacy':'dai-viet',
-          name: el('hero-name').value.trim(),
-          sect: el('hero-sect').value
+          name: el('hero-name').value.trim().normalize('NFC'),
+          sect: new URLSearchParams(location.search).get('story')==='legacy'?el('hero-sect').value:null
         });
         this.hasLoaded = true;
         this.refresh();
@@ -284,7 +286,7 @@ export class App {
     });
     el('btn-continue').addEventListener('click', () =>
       this.run(() => {
-        if (!this.model.session.hero.sect)
+        if (!isDaiViet(this.model.session)&&!this.model.session.hero.sect)
           this.model.updateProfile(
             changeSect(
               this.model.session.hero,
@@ -500,7 +502,7 @@ export class App {
     this.renderer.setBattle(null);
     this.clearBattle();
     this.refresh();
-    this.setView(this.model.session.hero.sect ? 'camp' : 'title');
+    this.setView(isDaiViet(this.model.session)||this.model.session.hero.sect ? 'camp' : 'title');
     if (this.model.session.legacyProgress)
       this.toast(
         'Hồ sơ từ bản thử được giữ để tiếp tục truyện quán Rồng Lửa. Khởi hành mới để đọc Đại Việt Kỳ Hiệp Truyện.'
@@ -552,9 +554,9 @@ export class App {
         ? 'Chọn con đường cuối'
         : 'Tiếp tục câu chuyện'
       : 'Xem kết cục';
-    el('btn-main-quest').disabled = !session.hero.sect || Boolean(pending);
+    el('btn-main-quest').disabled = (!isDaiViet(session)&&!session.hero.sect) || Boolean(pending);
     el('btn-resume-battle').hidden = !pending;
-    el('btn-practice').disabled = !session.hero.sect || Boolean(pending);
+    el('btn-practice').disabled = !sectReady(session) || Boolean(pending);
     el('shop-inventory').textContent =
       `Bạc ${itemCount(session, 'silver')} · Dây ${itemCount(session, 'rope')} · Cá ${itemCount(session, 'food_fish')} · Trà ${itemCount(session, 'tea')}`;
     el('btn-continue').disabled = !this.hasLoaded;
@@ -563,6 +565,7 @@ export class App {
     const members = [
       {
         id: 'hero',
+        ...(isDaiViet(session)?heroAppearance(session):{}),
         name: session.hero.name,
         sect: session.hero.sect,
         detail: `Cấp ${session.hero.level}`,
@@ -595,7 +598,7 @@ export class App {
       party.append(empty);
     }
     const sects = [
-      session.hero.sect,
+      storyHeroBuild(session).sect,
       ...session.party.active.map(
         (id) =>
           session.adventure.tactics.affiliations[id] ??
@@ -622,6 +625,11 @@ export class App {
     });
   }
   syncSectPicker() {
+    const legacy=new URLSearchParams(location.search).get('story')==='legacy';
+    el('sect-picker').hidden=!legacy;el('start-sect-field').hidden=!legacy;
+    el('hero-origin-preview').hidden=legacy;
+    el('start-story-hint').textContent=legacy?'Chọn môn phái cho tuyến truyện cũ.':'Bạn chưa thuộc môn phái nào. Lời mời nhập môn đến ở chương 2, sau khi tìm hiểu năm viện.';
+    stylePortrait(el('hero-origin-preview').querySelector('.portrait'),{id:'hero',portrait:'assets/images/hero/modern.webp'});
     document
       .querySelectorAll('[data-sect-pick]')
       .forEach((button) =>
@@ -640,14 +648,15 @@ export class App {
     }
   }
   renderPlayer() {
+    const newIdentity=!this.hasLoaded&&new URLSearchParams(location.search).get('story')!=='legacy';
     const { hero, inventory, storyProgress, party } = this.model.session,
-      artSect = hero.sect ?? 'VoDang';
+      artSect = hero.sect ?? 'VoDang',art=newIdentity?{id:'hero',portrait:'assets/images/hero/modern.webp'}:heroAppearance(this.model.session),sectLabel=newIdentity?'Chưa nhập môn':isDaiViet(this.model.session)?heroSectLabel(this.model.session):getSectName(artSect);
     const hud = el('hero-hud'),
       info = node('div', undefined, 'hud-info');
-    hud.replaceChildren(portrait(artSect, 'hud-portrait'));
+    hud.replaceChildren(portrait(art, 'hud-portrait'));
     info.append(
-      node('strong', hero.name, 'hud-name'),
-      node('span', `Cấp ${hero.level} · ${getSectName(artSect)}`, 'hud-level')
+      node('strong', newIdentity?el('hero-name').value.trim()||'Nhân vật của bạn':hero.name, 'hud-name'),
+      node('span', `Cấp ${hero.level} · ${sectLabel}`, 'hud-level')
     );
     const meter = node('span', undefined, 'xp-meter'),
       fill = node('i');
@@ -679,18 +688,18 @@ export class App {
     el('chapter-progress').textContent = `${completed}/${this.model.catalog.quests.length} hồi`;
     el('roster-count').textContent = `${party.unlocked.length}/50 đã kết nghĩa`;
     const root = el('profile-hero');
-    root.replaceChildren(portrait(artSect));
+    root.replaceChildren(portrait(art));
     const profile = node('div', undefined, 'profile-info');
     profile.append(
       node('span', 'HỒ SƠ HIỆP KHÁCH', 'eyebrow'),
       node('h1', hero.name),
       node(
         'p',
-        `${getSectName(artSect)} · ${SECT_ART[artSect]?.sigil ?? 'Hiệp'} tâm bất diệt`
+        isDaiViet(this.model.session)?sectLabel:`${getSectName(artSect)} · ${SECT_ART[artSect]?.sigil ?? 'Hiệp'} tâm bất diệt`
       )
     );
-    if (hero.sect) {
-      const unit = new Hero(hero.sect, { profile: hero, inventory }),
+    if (hero.sect||isDaiViet(this.model.session)) {
+      const build=storyHeroBuild(this.model.session),unit = new Hero(build.sect, { profile: build, inventory }),
         stats = node('div', undefined, 'profile-mini-stats');
       for (const [label, value] of [
         ['Sinh lực', unit.stats.maxHp],
@@ -924,6 +933,7 @@ export class App {
           text: `${e.name} — ${e.requirement}`,
           disabled: !e.available
         }))
+      : canonical&&quest.id===ENROLLMENT_QUEST?Object.values(SECTS).map(sect=>({id:sect.id,text:`${({ThieuLam:'Hoa Lư',VoDang:'Trúc Lâm',CaiBang:'Tản Viên',NgaMi:'Thất Sơn',DuongMon:'Vân Đồn'})[sect.id]} · ${sect.name} · ${sect.role}`,portrait:{id:'hero',portrait:`assets/images/hero/${sect.id}.webp`}}))
       : quest.choices
           .filter((c) => !selected || selected === c.id)
           .map((c) => ({
@@ -954,6 +964,7 @@ export class App {
         this.run(() => {
           if(this.view!=='dialogue'||this.storyPageToken!==pageToken||this.model.mainQuest()?.id!==quest.id)return;
           this.sound.sfx('click');
+          if(canonical&&quest.id===ENROLLMENT_QUEST){this.model.joinSect(id);this.clearBattle();this.showMain({skipAftermath:true});return;}
           if (quest.ending) {
             this.model.chooseEnding(id);
             this.setView('ending');
@@ -1053,6 +1064,7 @@ export class App {
   }
   readerOptions(key) {
     return {
+      identitySession:this.model.session,
       readerKey: key,
       getReader: () => this.model.session.journey.reader,
       onRead: (...args) => this.run(() => this.model.rememberDialogue(...args)),
@@ -1432,15 +1444,15 @@ export class App {
       this.model.session.legacyEnding?.name ?? ending.name;
     const root = el('ending-story');
     root.replaceChildren();
-    for (const [speaker, text] of this.model.session.legacyEnding
+    for (const [speaker, text, actor] of heroLines(this.model.session.legacyEnding
       ? [['Người kể', this.model.session.legacyEnding.text]]
-      : ending.lines) {
-      if (speaker === 'Người kể') root.append(node('p', text));
+      : ending.lines,this.model.session)) {
+      if (speaker === 'Người kể'&&actor!=='hero') root.append(node('p', text));
       else {
         const row = node('article', undefined, 'ending-dialogue-line');
         const copy = node('div');
         copy.append(node('strong', speaker), node('p', text));
-        row.append(speakerPortrait(speaker, this.model.session.hero,{canon:isDaiViet(this.model.session)?'dai-viet':undefined,chapter:this.model.catalog.chapters.length,episode:20}), copy);
+        row.append(speakerPortrait(speaker, this.model.session.hero,{canon:isDaiViet(this.model.session)?'dai-viet':undefined,chapter:this.model.catalog.chapters.length,episode:20},actor,this.model.session), copy);
         root.append(row);
       }
     }

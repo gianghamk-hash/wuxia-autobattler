@@ -8,6 +8,7 @@ import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
 import { storyCatalog } from '../data/StoryCatalog.js';
 import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
+import {ENROLLMENT_QUEST,hasEnrollment,sectReady,storyHeroBuild,heroAppearance} from '../data/HeroIdentity.js';
 import { isDaiViet, PLOT_COMPANIONS, PLOT_UNLOCKS, DAI_VIET_CAST_BY_ID, applyDaiVietName } from '../data/DaiVietCast.js';
 import {
   freshWorld,
@@ -20,7 +21,8 @@ import { worldMethods } from './WorldCampaign.js';
 import {
   createHeroBuild,
   normalizeHeroBuild,
-  gainExperience
+  gainExperience,
+  changeSect
 } from '../entities/HeroBuild.js';
 import { Hero } from '../entities/Hero.js';
 import { Companion } from '../entities/Companion.js';
@@ -130,7 +132,7 @@ export function createCampaign({ name, sect = null, story = 'legacy' } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '4.1.0',
+    version: '4.2.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -182,6 +184,7 @@ export function validateCampaign(session) {
   )
     fail('Túi đồ hoặc thời gian chơi không hợp lệ.');
   normalizeHeroBuild(session.hero, session.inventory);
+  if(isDaiViet(session)&&hasEnrollment(session)&&!session.hero.sect)fail('Bản lưu đã nhập môn cần có môn phái.');
   validateWorld(session);
   if (session.gacha !== undefined) validateGacha(session.gacha);
   if (
@@ -407,7 +410,7 @@ export function migrateCampaign(input) {
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
-  next.version = '4.1.0';
+  next.version = '4.2.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
@@ -478,13 +481,24 @@ export class Campaign {
   }
   updateProfile(hero, inventory) {
     this._mutate((next) => {
+      if(isDaiViet(next)&&(hero.sect!==next.hero.sect||!hasEnrollment(next)))fail('Việc nhập môn diễn ra trong chính truyện ở chương 2, hồi 10.');
       next.hero = normalizeHeroBuild(hero, inventory);
       next.inventory = structuredClone(inventory);
     }, 'profile');
   }
+  joinSect(sect) {
+    this._guard();
+    if(!isDaiViet(this.session)||this.mainQuest()?.id!==ENROLLMENT_QUEST||hasEnrollment(this.session))fail('Chưa tới lời mời nhập môn, hoặc đã chọn phái.');
+    this._mutate(next=>{
+      if(next.storyProgress.pendingEncounter)fail('Hãy kết thúc trận đang chờ.');
+      next.hero=changeSect(next.hero,sect,next.inventory);
+      this._decision(next,ENROLLMENT_QUEST,'continue',0);
+      this._completeMain(next,this.catalog.byId[ENROLLMENT_QUEST]);
+    },'main');
+  }
   rename(name) {
     this._mutate((next) => {
-      next.hero.name = name;
+      next.hero.name = name.trim().normalize('NFC');
     }, 'profile');
   }
   setSettings(settings) {
@@ -576,7 +590,7 @@ export class Campaign {
   }
   chooseMain(choiceId) {
     this._guard();
-    if (!this.session.hero.sect) fail('Hãy chọn môn phái trước khi lên đường.');
+    if (!this.session.hero.sect&&(!isDaiViet(this.session)||hasEnrollment(this.session)||this.session.storyProgress.activeQuestId===ENROLLMENT_QUEST)) fail('Hãy chọn môn phái trong lời mời nhập môn ở chương 2, hồi 10.');
     if (this.session.storyProgress.pendingEncounter)
       fail('Hãy tiếp tục trận đang chờ trước.');
     const quest = this.mainQuest();
@@ -703,6 +717,7 @@ export class Campaign {
     }, 'recruit');
   }
   _pending(next, kind, questId) {
+    if(kind!=='main'&&!sectReady(next))fail('Hoàn thành việc nhập môn trong chương 2 trước khi nhận thử thách ngoài truyện.');
     next.storyProgress.attemptCounter++;
     next.storyProgress.pendingEncounter = {
       token: next.storyProgress.attemptCounter,
@@ -746,7 +761,7 @@ export class Campaign {
     const MAIN_BY_ID=this.catalog.byId;
     this._guard();
     const pending = this.session.storyProgress.pendingEncounter;
-    if (!pending || !this.session.hero.sect) fail('Không có trận đang chờ.');
+    if (!pending || !this.session.hero.sect&&!(isDaiViet(this.session)&&!hasEnrollment(this.session)&&pending.kind==='main')) fail('Không có trận đang chờ.');
     if (['dungeon', 'arena', 'escort'].includes(pending.kind))
       return this._worldBattle(pending);
     const quest =
@@ -774,11 +789,12 @@ export class Campaign {
             hpScale: 0.7,
             attackScale: 0.65
           };
+    const combatBuild=storyHeroBuild(this.session);
     const grid = new GridSystem(),
       level = this.session.hero.level;
     const units = [
-      new Hero(this.session.hero.sect, {
-        profile: this.session.hero,
+      new Hero(combatBuild.sect, {
+        profile: combatBuild,
         inventory: this.session.inventory
       }),
       ...this.session.party.active.map((id) => new Companion(id, { level }))
@@ -842,6 +858,7 @@ export class Campaign {
       })
     );
     this.prepareUnits(units, pending);
+    if(isDaiViet(this.session))Object.assign(units[0],heroAppearance(this.session,quest));
     this.lastResult = null;
     this.battleToken = pending.token;
     this.battle = new CombatEngine({

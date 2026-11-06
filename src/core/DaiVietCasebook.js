@@ -41,11 +41,13 @@ const questions=[
  ['case','D05H09','D17H12','Ai ra lệnh giết Lục Thư và nhằm che việc gì?','Trịnh Nghiêm thuê hộ vệ Hà Lập lấy trang lệnh chuyển kho giả; sổ tiền, thư nhận và người chuyển lệnh được kiểm chéo. Gia đình Lục Thư được dự hỏi.'],
  ['home','D11H11','D19H17','Ghi chép về cột sáng có dẫn tới điều gì thật không?','Nguyệt thực khớp lịch, ánh sáng lạ đã xuất hiện. Thời gian hai phía và khả năng đi lại vẫn chưa được bảo đảm.']
 ];
-export function daiVietCasebook(session){
+import {personalizeStory} from '../data/HeroIdentity.js';
+export function daiVietCasebook(session){return personalizeStory(rawCasebook(session),session);}
+function rawCasebook(session){
  const done=new Set(session.storyProgress.completedQuests),current=resolveDaiVietQuest(DAI_VIET_QUESTS.find(q=>q.id===session.storyProgress.activeQuestId),session);
  const entries=records.filter(r=>done.has(r[1])).map(([id,source,type,title,text,people])=>({id,source,type,title,text,people,quest:DAI_VIET_QUESTS.find(q=>q.id===source)}));
  const met=new Map();
- for(const raw of DAI_VIET_QUESTS.filter(q=>done.has(q.id))){const q=resolveDaiVietQuest(raw,session);for(const [speaker,text]of [...q.lines,...(q.aftermath??[])]){const p=DAI_VIET_CAST_BY_NAME[speaker];if(p&&!met.has(p.id))met.set(p.id,{id:'met_'+p.id,source:q.id,type:'Người đã gặp',title:'Gặp '+p.name,text,people:[p.id],quest:q});}}
+ for(const raw of DAI_VIET_QUESTS.filter(q=>done.has(q.id))){const q=resolveDaiVietQuest(raw,session);for(const [speaker,text,actor]of [...q.lines,...(q.aftermath??[])]){if(actor==='hero')continue;const p=DAI_VIET_CAST_BY_NAME[speaker];if(p&&!met.has(p.id))met.set(p.id,{id:'met_'+p.id,source:q.id,type:'Người đã gặp',title:'Gặp '+p.name,text,people:[p.id],quest:q});}}
  entries.push(...met.values());
  const ids=new Set(entries.flatMap(e=>e.people));
  return{entries,people:[...ids].map(id=>({...DAI_VIET_CAST_BY_ID[id],facts:entries.filter(e=>e.people.includes(id)).map(e=>({title:e.title,text:e.text,source:e.source}))})),questions:questions.filter(q=>done.has(q[1])).map(([id,from,answered,question,answer])=>({id,question,answered:done.has(answered),answer:done.has(answered)?answer:null,source:done.has(answered)?answered:from})),relations:[

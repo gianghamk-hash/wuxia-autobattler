@@ -1,4 +1,5 @@
 import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
+import {sectReady,heroText,heroAppearance,heroSectLabel} from '../data/HeroIdentity.js';
 import {casebook} from '../core/Casebook.js';
 import { renderStoryArchive } from './StoryArchive.js';
 import { renderBonds } from './JourneyUI.js';
@@ -270,17 +271,17 @@ export function mountWorldUI(app) {
     const id = unit.id ?? 'hero',
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
     root.removeAttribute('data-tier');
-    const npc = isDaiViet(s)?(DAI_VIET_CAST_BY_ID[unit.storyActorId??unit.templateId??unit.id]??(unit.characterId?{...NPCS_BY_ID[unit.characterId],name:unit.name}:null)):NPCS_BY_ID[unit.characterId];
+    const npc = unit.id==='hero'?null:isDaiViet(s)?(DAI_VIET_CAST_BY_ID[unit.storyActorId??unit.templateId??unit.id]??(unit.characterId?{...NPCS_BY_ID[unit.characterId],name:unit.name}:null)):NPCS_BY_ID[unit.characterId];
     if (!npc) decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
     root.append(
       portrait(
-        npc ?? COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
+        unit.id==='hero'&&isDaiViet(s)?heroAppearance(s):npc ?? COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
         'sheet-portrait'
       ),
       n('h2', unit.name),
       n(
         'p',
-        `${getSectName(sect)} · ${ELEMENTS[SECT_ELEMENT[sect] ?? 'Tho'].name}`
+        unit.id==='hero'&&isDaiViet(s)?heroSectLabel(s):`${getSectName(sect)} · ${ELEMENTS[SECT_ELEMENT[sect] ?? 'Tho'].name}`
       ),
       n(
         'p',
@@ -294,7 +295,7 @@ export function mountWorldUI(app) {
         'weakness'
       )
     );
-    if (npc) root.append(n('p', [npc.role,npc.bio].filter(Boolean).join(' · '), 'hint'));
+    if (npc) root.append(n('p', heroText([npc.role,npc.bio].filter(Boolean).join(' · '),s), 'hint'));
     else if (COMPANIONS_BY_ID[unit.templateId ?? id])
       root.append(
         n(
@@ -391,6 +392,10 @@ export function mountWorldUI(app) {
       tabs.append(b);
     }
     const activeTab=tabs.querySelector('[aria-pressed="true"]');
+    if(isDaiViet(s)&&!sectReady(s)&&['activities','arena','guild'].includes(tab)){
+      root.append(panel('Hành trình của người chưa nhập môn','Tiếp tục chính truyện để tìm hiểu năm viện. Sau khi chọn phái ở chương 2, bạn có thể tham gia các thử thách ngoài truyện.'));
+      return;
+    }
     if(activeTab&&tabs.clientWidth)tabs.scrollLeft+=activeTab.getBoundingClientRect().left-tabs.getBoundingClientRect().left-(tabs.clientWidth-activeTab.clientWidth)/2;
     if (tab === 'bonds') renderBonds(app, root);
     if (tab === 'casebook') renderCasebook(app,root);
@@ -621,7 +626,7 @@ export function mountWorldUI(app) {
           decisions.append(
             n(
               'p',
-              `${quest.title}: ${quest.choices.find((c) => c.id === chosen)?.text ?? chosen}`,
+              heroText(`${quest.title}: ${quest.choices.find((c) => c.id === chosen)?.text ?? chosen}`,s),
               'journal-choice'
             )
           );
@@ -638,7 +643,7 @@ export function mountWorldUI(app) {
               timeZone: 'Asia/Ho_Chi_Minh'
             }).format(e.time)
           ),
-          n('p', e.text)
+          n('p', heroText(e.text,s))
         );
         journal.append(row);
       }
@@ -654,6 +659,7 @@ export function mountWorldUI(app) {
       w = s.adventure,
       root = el('dungeon-root');
     root.replaceChildren();
+    if(isDaiViet(s)&&!sectReady(s)){root.append(panel('Chưa nhận nhiệm vụ bí cảnh','Hãy tiếp tục hành trình và chọn nơi nhập môn trong chương 2 trước khi nhận nhiệm vụ này.'));return;}
     const d = w.dungeon;
     if (d) {
       const def = DUNGEONS.find((v) => v.id === d.id),

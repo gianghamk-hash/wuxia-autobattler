@@ -1,0 +1,122 @@
+[
+  {
+    "id": "modern",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-32c3e534-cf7f-4ad7-9d2d-e2913e835add.png",
+    "prompt": "Portrait asset for a Vietnamese wuxia tactical RPG, original fictional male protagonist, Vietnamese man age 27, lean athletic stunt performer, natural dark eyes, distinctive straight thick eyebrows, short black hair brushed back with two loose strands, subtle old notch on left eyebrow, clean shaven, warm medium tan skin, alert but slightly wry expression. Modern plain charcoal crew-neck shirt and faded olive stunt jacket, no weapons, no jewelry. Chest-up three-quarter view, face large and readable in a small dialogue portrait, facing slightly toward viewer's right. Hand painted ink and gouache illustration, textured muted olive teal background, earthy restrained tones, mature natural proportions, soft warm face lighting. Consistent character design intended for later clothing variants. Single vertical 2:3 portrait. No text, frame, watermark, logos, comic panels, other people; no photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/hero/modern.webp",
+    "sha256": "73c622309b81c9e5e9607deb80f9018d2d41a4fbdaedcfbfd30d12f9bcc00912",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "traveler",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-1daf8a41-574b-4c8c-90c2-17692b83ce6b.png",
+    "prompt": "Edit this supplied protagonist portrait into ONE clothing/story progression variant. Preserve exactly the SAME Vietnamese man's face, age, tan skin, eyes, distinctive eyebrows, subtle eyebrow notch, nose, jaw, black hairline, facial proportions, same chest-up crop, view angle, muted olive/teal painted background and ink/gouache art style. Replace the modern jacket and shirt with plain worn brown linen cross-collar clothing borrowed in ancient Dai Viet, simple cloth shoulder wrap, no insignia, no armor. A faint healing bruise on cheek, cautious determined expression. Single vertical 2:3 portrait, face large and readable at small UI size. No text, frame, watermark, panels, extra people, photorealism. Do not replace him with a stock sect character.",
+    "mode": "edit",
+    "asset": "assets/images/hero/traveler.webp",
+    "sha256": "65986d16f2b5f41e933c785699fe74d21d673b0e501adbfb12fccc68d11301bc",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "ThieuLam",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-81adf9b9-e212-41fe-94bc-87f280702005.png",
+    "prompt": "Edit this supplied protagonist portrait into ONE clothing/story progression variant. Preserve exactly the SAME Vietnamese man's face, age, tan skin, eyes, distinctive eyebrows, subtle eyebrow notch, nose, jaw, black hairline, facial proportions, same chest-up crop, view angle, muted olive/teal painted background and ink/gouache art style. Same protagonist now a novice martial disciple of Hoa Lu, Thieu Lam tradition: ochre and saffron cross-collar training robes, simple wooden prayer beads, cloth wrist wraps; hair remains his own black brushed-back hair, do NOT shave his head. Calm sturdy expression. Single vertical 2:3 portrait, face large and readable at small UI size. No text, frame, watermark, panels, extra people, photorealism. Do not replace him with a stock sect character.",
+    "mode": "edit",
+    "asset": "assets/images/hero/ThieuLam.webp",
+    "sha256": "3101f0cd5a81dd76056c19705d19cf7969daea54ac5e725d017950106d9105b9",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "VoDang",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-aa7aa8dc-f32e-4e92-b721-b67a60124ada.png",
+    "prompt": "Edit this supplied protagonist portrait into ONE clothing/story progression variant. Preserve exactly the SAME Vietnamese man's face, age, tan skin, eyes, distinctive eyebrows, subtle eyebrow notch, nose, jaw, black hairline, facial proportions, same chest-up crop, view angle, muted olive/teal painted background and ink/gouache art style. Same protagonist now a novice martial disciple of Truc Lam, Vo Dang tradition: slate blue and ivory cross-collar training robes, modest dark blue sash, simple wooden sword hilt barely visible at lower edge; same black hair, no ornate crown. Quiet attentive expression. Single vertical 2:3 portrait, face large and readable at small UI size. No text, frame, watermark, panels, extra people, photorealism. Do not replace him with a stock sect character.",
+    "mode": "edit",
+    "asset": "assets/images/hero/VoDang.webp",
+    "sha256": "54d4d6abd22fc4cf79440de5f6664fc112d17bd177224c760b894b0ad1bf1847",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "CaiBang",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-dd00aa10-bbd9-4ba0-833d-bba3a69aa2fa.png",
+    "prompt": "Edit the supplied portrait into ONE variant. Preserve EXACT same Vietnamese man's face, eyes, eyebrows with subtle notch, nose, jaw, tan skin, age 27, facial proportions, black hairline, view angle, chest-up crop, textured olive/teal background and mature painted ink/gouache style. Now a novice disciple of Tan Vien, Cai Bang tradition: weathered moss green and patched earth brown cross-collar training clothes, woven cord belt, simple cloth wrist wraps, practical and modest, no beer gourd. Resourceful half-smile. Same person, different clothes only, not the generic character of this sect. Vertical 2:3, readable small dialogue portrait. No text, frame, logos, watermark, extra people or panels, no photorealism.",
+    "mode": "edit",
+    "asset": "assets/images/hero/CaiBang.webp",
+    "sha256": "0ec5a5a4ff0e979992e55c292eb8f23f2db8f7971eb069210447df5a118d8626",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "NgaMi",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-78126f98-c035-4fac-b8d6-9b952362bcde.png",
+    "prompt": "Edit the supplied portrait into ONE variant. Preserve EXACT same Vietnamese man's face, eyes, eyebrows with subtle notch, nose, jaw, tan skin, age 27, facial proportions, black hairline, view angle, chest-up crop, textured olive/teal background and mature painted ink/gouache style. Now a MALE novice disciple of That Son, Nga Mi healing tradition: ivory and dusty rose cross-collar training robes, muted jade sash, small herbal pouch strap on shoulder, no feminine makeup or change to male face. Gentle attentive expression. Same person, different clothes only, not the generic character of this sect. Vertical 2:3, readable small dialogue portrait. No text, frame, logos, watermark, extra people or panels, no photorealism.",
+    "mode": "edit",
+    "asset": "assets/images/hero/NgaMi.webp",
+    "sha256": "06972f829afa88c90f831bfa96bbbf95d85537d60b572a609497e67c9abce5ff",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "DuongMon",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-d168de74-7ab6-436e-8310-037dbbdccbea.png",
+    "prompt": "Edit the supplied portrait into ONE variant. Preserve EXACT same Vietnamese man's face, eyes, eyebrows with subtle notch, nose, jaw, tan skin, age 27, facial proportions, black hairline, view angle, chest-up crop, textured olive/teal background and mature painted ink/gouache style. Now a novice disciple of Van Don, Duong Mon tradition: charcoal and muted plum cross-collar fitted training coat, practical fabric shoulder guards, restrained leather straps, no face mask and no hood obscuring face. Watchful expression. Same person, different clothes only, not the generic character of this sect. Vertical 2:3, readable small dialogue portrait. No text, frame, logos, watermark, extra people or panels, no photorealism.",
+    "mode": "edit",
+    "asset": "assets/images/hero/DuongMon.webp",
+    "sha256": "1f9801ca1d63bbf9f6596eb266b052a76a24a1ddd8f271606bc10e93e79b2af0",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "grief",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b33b5a68-388f-41a4-adde-d3866e89198d.png",
+    "prompt": "Edit the supplied portrait into ONE later story-stage portrait. Preserve EXACT same Vietnamese male protagonist's face, natural dark eyes, thick brows with subtle notch, nose, jaw, tan skin, facial proportions, same view angle, large face chest-up framing, olive/teal textured background and hand-painted ink/gouache illustration. He has lived through a disastrous military retreat and lost his teachers. Worn dark brown and muted indigo ancient travel coat, modest bandage around his upper arm at lower frame edge, dust and subtle superficial cheek scrape, exhausted grieving eyes with quiet resolve. Same age, face and hair, no gruesome injury, no grand magical power. Vertical 2:3, one portrait, readable at small dialogue size. No text, logos, frames, watermarks, extra people or panels, no photorealism.",
+    "mode": "edit",
+    "asset": "assets/images/hero/grief.webp",
+    "sha256": "d77cc4a93e58acbeb694db0463e6897108184545df972af11700655cb5ef0c89",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "commander",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-ae173c29-f713-4b97-aa37-0d9674b186af.png",
+    "prompt": "Edit the supplied portrait into ONE later story-stage portrait. Preserve EXACT same Vietnamese male protagonist's face, natural dark eyes, thick brows with subtle notch, nose, jaw, tan skin, facial proportions, same view angle, large face chest-up framing, olive/teal textured background and hand-painted ink/gouache illustration. Now an experienced field commander in Dai Viet: practical worn indigo and dark bronze lamellar shoulder protection over a simple cross-collar robe, restrained cloth collar, composed focused eyes, small healing cheek scratch. His face remains the same young man, slightly weathered. No crown, no helmet obscuring face, no excessive ornaments. Vertical 2:3, one portrait, readable at small dialogue size. No text, logos, frames, watermarks, extra people or panels, no photorealism.",
+    "mode": "edit",
+    "asset": "assets/images/hero/commander.webp",
+    "sha256": "17cfffd52b6e132ed3763aa62852e91ff9c40a739b991f7b43bc7106a96664cb",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "peace",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b52ec020-a571-466e-9938-f83e848b3c6b.png",
+    "prompt": "Edit the supplied portrait into ONE later story-stage portrait. Preserve EXACT same Vietnamese male protagonist's face, natural dark eyes, thick brows with subtle notch, nose, jaw, tan skin, facial proportions, same view angle, large face chest-up framing, olive/teal textured background and hand-painted ink/gouache illustration. After the war, same man now a little more settled: clean simple pale linen and muted teal cross-collar civilian robe, no armor or crown, small old faint cheek scar, calm warm expression with some weariness, same black hair a little longer and tied loosely behind. Keep exact recognizable face and age around 29. Vertical 2:3, one portrait, readable at small dialogue size. No text, logos, frames, watermarks, extra people or panels, no photorealism.",
+    "mode": "edit",
+    "asset": "assets/images/hero/peace.webp",
+    "sha256": "caa28197cfadc7ec0a11533ac6cb40ca9723f383fc83c1c1e7baf898e6f89c1f",
+    "size": [
+      480,
+      720
+    ]
+  }
+]

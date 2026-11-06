@@ -1,6 +1,7 @@
 import { portrait } from './Visuals.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import {storyPerson} from '../data/DaiVietCast.js';
+import {heroAppearance} from '../data/HeroIdentity.js';
 export function moveFormation(formation, id, cell) {
   if (
     !Object.hasOwn(formation, id) ||
@@ -42,7 +43,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
       const label = document.createElement('span');
       label.textContent = name(id);
       button.append(
-        portrait(id === 'hero' ? sect(id) : COMPANIONS_BY_ID[id]),
+        portrait(id === 'hero' ? heroAppearance(session) : storyPerson(session,COMPANIONS_BY_ID[id])),
         label
       );
       button.setAttribute('aria-pressed', String(selected === id));

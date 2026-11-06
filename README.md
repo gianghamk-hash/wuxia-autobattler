@@ -2,7 +2,14 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 4.1 — đọc liền mạch, 105 trận theo truyện:** 20 chương × 20 hồi, chân dung người kể riêng, dẫn vào trận rồi mới kể kết quả. Bản lưu cũ tiếp tục đúng tuyến đã chọn. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 4.2 — tự đặt tên, nhập môn theo truyện:** bắt đầu chưa có phái, chọn phái tại chương 2, hồi 10; một nhân vật chính với mười chân dung theo tiến trình. Giữ 20 chương × 20 hồi và 105 trận. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 4.2
+
+- Khởi hành chỉ nhập tên. Người chơi dùng quyền cơ bản tới khi đã tìm hiểu năm viện; lời mời ở chương 2, hồi 10 cho chọn một trong năm phái. Võ công và chân dung nhập môn có hiệu lực từ hồi sau.
+- Tên được dùng trong lời kể, người nói, đầu mối, chuyện đồng hành, nhật ký, xem lại và kết thúc. Giữ riêng nhận diện người nói để tên trùng NPC không làm hiện nhầm ảnh.
+- Mười ảnh giữ cùng một gương mặt: hiện đại, lưu lạc, năm trang phục phái, sau cuộc rút lui, chỉ huy và thường phục hậu chiến. Hình cập nhật ở khung thoại, thanh thông tin, hồ sơ, đội hình và trận đấu; xem lại dùng thời điểm của hồi ấy.
+- Giữ bộ học và tài nguyên của bản lưu cũ, không ép người đã qua lời mời chọn lại hoặc nhận thêm thưởng. [Mốc ảnh, nhập môn, tên và bản lưu](docs/HERO_IDENTITY_4_2.md).
 
 ## Bản 4.1
 

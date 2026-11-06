@@ -4,17 +4,18 @@ import { findNPC } from '../data/NPCData.js';
 import { expressionFor, sceneFor } from '../data/PresentationData.js';
 import { renderBattleBrief } from './BattleBriefUI.js';
 import { DAI_VIET_CAST_BY_NAME } from '../data/DaiVietCast.js';
+import {heroAppearance,heroLines,heroText} from '../data/HeroIdentity.js';
 const node = (tag, text, className) => {
   const e = document.createElement(tag);
   if (text !== undefined) e.textContent = text;
   if (className) e.className = className;
   return e;
 };
-export function speakerPortrait(speaker, hero, quest) {
+export function speakerPortrait(speaker, hero, quest,actor,identitySession) {
   const name = speaker.trim().normalize('NFC');
+  if (actor==='hero'||name === 'Bạn'||name==='Trần Phong')
+    return portrait(identitySession?heroAppearance(identitySession,quest):hero?.sect ?? 'VoDang', 'classic-portrait');
   if(['Người kể','Trước đó'].includes(name))return portrait({id:'narrator',portrait:'assets/images/narrator.webp'},'classic-portrait');
-  if (name === 'Bạn'||name==='Trần Phong')
-    return portrait(hero?.sect ?? 'VoDang', 'classic-portrait');
   if(quest?.canon==='dai-viet'&&DAI_VIET_CAST_BY_NAME[name])return expressive(DAI_VIET_CAST_BY_NAME[name],quest);
   const companion = COMPANIONS.find(
     (c) =>
@@ -59,11 +60,12 @@ export class DialogueUI {
     onRead,
     onFont,
     brief,
-    continuous = false
+    continuous = false,
+    identitySession
   }) {
-    const pages = lines.length
+    const pages = heroLines(lines.length
       ? lines
-      : [['Người kể', note || 'Chưa có lời thoại.']];
+      : [['Người kể', note || 'Chưa có lời thoại.']],identitySession);
     let index = Math.max(
       0,
       Math.min(pages.length - 1, getReader?.().positions[readerKey] ?? 0)
@@ -129,6 +131,7 @@ export class DialogueUI {
       const b = node('button', choice.text);
       b.type = 'button';
       b.dataset.choice = String(choice.id);
+      if(choice.portrait){b.classList.add('enrollment-choice');b.replaceChildren(portrait(choice.portrait,'enrollment-portrait'),node('span',choice.text,'enrollment-copy'));}
       b.disabled = choice.disabled === true;
       b.addEventListener('click', () => {if(this.root.contains(b))onChoice(choice.id);});
       buttons.append(b);
@@ -157,7 +160,7 @@ export class DialogueUI {
         if (!history.open) return;
         content.replaceChildren(
           ...getReader().history.map((row) =>
-            node('li', row.speaker + ': ' + row.text)
+            node('li', (row.speaker==='Trần Phong'?identitySession?.hero?.name??row.speaker:row.speaker) + ': ' + heroText(row.text,identitySession))
           )
         );
       });
@@ -171,18 +174,18 @@ export class DialogueUI {
       this.root.append(back);
     }
     const draw = () => {
-      const [speaker, line] = pages[index],
+      const [speaker, line,actor] = pages[index],
         last = index === pages.length - 1;
       frame.replaceChildren(
-        speakerPortrait(speaker, hero, quest),
+        speakerPortrait(speaker, hero, quest,actor,identitySession),
         copy,
         indicator
       );
       if (readerKey) onRead?.(readerKey, index, speaker, line);
       name.textContent = speaker;
       text.textContent = line;
-      const npc = quest?.canon==='dai-viet'?DAI_VIET_CAST_BY_NAME[speaker]:findNPC(speaker);
-      role.textContent = npc?.role ?? '';
+      const npc = actor==='hero'?null:quest?.canon==='dai-viet'?DAI_VIET_CAST_BY_NAME[speaker]:findNPC(speaker);
+      role.textContent = heroText(npc?.role ?? '',identitySession);
       role.hidden = !npc;
       frame.title = npc?.bio ?? '';
       frame.setAttribute(

@@ -16,6 +16,7 @@ import {SECT_IDS} from '../src/data/SectsData.js';
 import {rollGacha} from '../src/core/Gacha.js';
 import {validReaderKey} from '../src/core/Journey.js';
 import {StorageManager} from '../src/core/StorageManager.js';
+import {heroText} from '../src/data/HeroIdentity.js';
 import {COMBAT_APPROACHES,EXTRA_COMBAT} from '../src/data/DaiVietCombatStory.js';
 
 function fight(c){for(let i=0;i<7500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
@@ -136,7 +137,7 @@ test('actual combat completes the 400-episode route; gate branches, optional rom
   while(!branch.mainQuest().ending)branch.chooseMain('continue');const final=branch.snapshot();
   assert.equal(final.storyProgress.completedQuests.filter(id=>id.startsWith('D')).length,399);
   const expected=route==='home'?['home']:['actor','justice','retire'];assert.deepEqual(branch.endingOptions().filter(e=>e.available).map(e=>e.id),expected);
-  if(route==='home'){for(let e=1;e<=20;e++){const resolved=resolveDaiVietQuest(DAI_VIET_BY_ID[`D20H${String(e).padStart(2,'0')}`],final);assert.equal(resolved.title,DAI_VIET_HOME_CHAPTER.scenes[e-1].title);}assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H02,final).location,/Hiện đại/);assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H04,final).location,/Đại Việt/);assert.throws(()=>branch.completeBond('bond_companion_01_1','listen'));}
+  if(route==='home'){for(let e=1;e<=20;e++){const resolved=resolveDaiVietQuest(DAI_VIET_BY_ID[`D20H${String(e).padStart(2,'0')}`],final);assert.equal(resolved.title,heroText(DAI_VIET_HOME_CHAPTER.scenes[e-1].title,final));}assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H02,final).location,/Hiện đại/);assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H04,final).location,/Đại Việt/);assert.throws(()=>branch.completeBond('bond_companion_01_1','listen'));}
   for(const ending of expected){const run=fresh();run.load(final);const silver=itemCount(run.session,'silver');run.chooseEnding(ending);assert.equal(itemCount(run.session,'silver'),silver);assert.equal(run.session.storyProgress.completedQuests.filter(id=>id.startsWith('D')).length,400);assert.equal(run.catalog.quests.length,400);assert.throws(()=>run.chooseEnding(ending));
    const wallet=structuredClone(run.session.inventory),beforeReplay=run.snapshot();for(const q of run.catalog.quests)daiVietLines(q,run.session);assert.deepEqual(run.snapshot(),beforeReplay);
    const storage=new StorageManager({indexedDB:null,localStorage:{getItem:()=>null,setItem(){},removeItem(){}}});const file=await storage.exportSave(run.snapshot());const imported=await storage.decodeSave(file);assert.equal(imported.storyProgress.endingId,ending);assert.deepEqual(imported.inventory,wallet);

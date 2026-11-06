@@ -20,7 +20,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
   for (const data of Object.values(SECTS)) { const option = element('option', data.name); option.value = data.id; sect.append(option); }
   el('btn-progress-train').hidden = el('btn-progress-gear').hidden = !allowTraining;
   let controls = [];
-  function locks() { for (const { node, disabled } of controls) node.disabled = disabled || !canEdit(); sect.disabled = !canEdit(); }
+  function locks() { for (const { node, disabled } of controls) node.disabled = disabled || !canEdit(); sect.disabled = !canEdit()||getState().storyProgress?.storyRevision===4; }
   function mutate(action, text) {
     if (!canEdit()) { say('Hãy kết thúc hoặc dựng lại bàn trước khi đổi hồ sơ.', true); return; }
     try {
@@ -41,9 +41,11 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
   function refresh() {
     const { hero: input, inventory } = getState(), hero = normalizeHeroBuild(input, inventory);
     controls = []; sect.value = hero.sect ?? '';
+    const storyMode=getState().storyProgress?.storyRevision===4;
+    const sectLabel=document.querySelector('label[for="progress-sect"]');if(sectLabel)sectLabel.hidden=storyMode;sect.hidden=storyMode;el('btn-progress-sect').hidden=storyMode;
     el('progress-summary').textContent = `Cấp ${hero.level}/${MAX_LEVEL} · XP ${hero.exp}/${hero.level === MAX_LEVEL ? 'Tối đa' : expToNextLevel(hero.level)} · Điểm kỹ năng ${hero.freeSkillPoints} · Điểm thuộc tính ${hero.freeAttributePoints}`;
     const tree = el('skill-tree'); tree.replaceChildren();
-    if (!hero.sect) tree.append(element('p', 'Chọn môn phái để mở cây kỹ năng.'));
+    if (!hero.sect) tree.append(element('p', storyMode?'Bạn chưa nhập môn. Tìm hiểu năm viện và chọn phái trong chính truyện ở chương 2, hồi 10.':'Chọn môn phái để mở cây kỹ năng.'));
     for (const node of SKILL_TREES[hero.sect] ?? []) {
       const learned = hero.allocatedSkills.includes(node.id);
       let reason = '';

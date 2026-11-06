@@ -1,6 +1,9 @@
 import {test,expect} from '@playwright/test';
 import {writeFile} from 'node:fs/promises';
-async function start(page) {await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('[data-sect-pick="VoDang"]').click();await page.locator('#btn-new-game').click();await page.evaluate(()=>window.__game.engine.stop());}
+async function start(page) {await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Trần Phong');await page.locator('#btn-new-game').click();await page.evaluate(async()=>{
+ const a=window.__game,{DAI_VIET_QUESTS}=await import('/src/data/DaiVietStoryData.js'),s=a.model.snapshot(),at=DAI_VIET_QUESTS.findIndex(q=>q.id==='D02H10'),done=DAI_VIET_QUESTS.slice(0,at);
+ s.storyProgress.completedQuests=done.map(q=>q.id);s.storyProgress.decisions=Object.fromEntries(done.map(q=>[q.id,'continue']));Object.assign(s.storyProgress,{activeQuestId:'D02H10',currentChapter:2,currentEpisode:10,currentAct:1});a.model.load(s);a.model.joinSect('VoDang');a.engine.stop();a.setView('camp');
+ });}
 async function audit(page) {
  await expect.poll(()=>page.evaluate(()=>[...document.querySelectorAll('button,summary')].filter(b=>b.getClientRects().length&&!b.querySelector('svg.game-icon')).map(b=>b.id||b.textContent.trim().slice(0,40)))).toEqual([]);
  const result=await page.evaluate(()=>{
