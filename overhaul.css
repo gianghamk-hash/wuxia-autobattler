@@ -40,7 +40,7 @@
  .scene-top { position:relative; inset:auto; gap:8px; padding:10px 0; }
  .camp-hero-art { width:135px; height:205px; top:80px; bottom:auto; right:0; transform:none; }
  .scene-copy { position:relative; inset:auto; z-index:1; width:calc(100% - 110px); max-width:220px; margin:24px 0 14px; padding:0; height:auto; flex-shrink:0; }
- .scene-copy h1 { font-size:1.5rem; max-width:100%; line-height:1.35; overflow-wrap:normal; word-break:normal; hyphens:none; }
+ .scene-copy h1 { font-family:system-ui,"Segoe UI",sans-serif; font-weight:750; font-size:1.4rem; letter-spacing:normal; max-width:100%; line-height:1.35; overflow-wrap:normal; word-break:normal; hyphens:none; }
  .scene-copy>p:last-child { font-size:.82rem; }
  .quest-feature { position:relative; inset:auto; margin-top:auto; width:100%; height:auto; flex-shrink:0; display:grid; grid-template-columns:1fr; gap:10px; padding:16px; }
  .quest-seal { display:none; }
