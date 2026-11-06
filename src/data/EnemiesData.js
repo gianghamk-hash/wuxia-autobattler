@@ -122,6 +122,7 @@ const story = Object.fromEntries(
           attackScale: (0.55 + Math.min(q.chapter,12) * 0.025) * (q.boss ? 1.05 : 1)
           ,...(q.id==='D01H06'?{count:1,templates:['companion_06'],hpScale:.6,attackScale:.45,guide:true}:q.id==='D07H05'?{count:1,templates:['companion_01'],hpScale:.95,attackScale:.7}:{} )
           ,...(['duel','drill','breach'].includes(q.combatType)?{count:q.combatType==='duel'?1:2,templates:q.combatType==='duel'?['companion_06']:['companion_06','companion_05'],hpScale:.65,attackScale:.45,guide:true}: {})
+          ,...(q.canon==='dai-viet'&&q.chapter>=3&&!q.combatType&&q.id!=='D07H05'?{hpScale:(.76+Math.min(q.chapter,12)*.012)*(q.boss?1.12*1.12:1.08),attackScale:(.55+Math.min(q.chapter,12)*.025)*(q.boss?1.05*1.08:1.05)}:{})
         }
       ];
     }

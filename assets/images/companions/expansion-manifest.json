@@ -1,0 +1,142 @@
+[
+  {
+    "id": "companion_51",
+    "name": "Đinh Sáo",
+    "tier": 1,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-80eb83f4-a10b-4e3b-a9c9-ef4b509de96c.png",
+    "prompt": "One original character portrait for a Vietnamese wuxia tactical RPG. A Vietnamese young male courier age 20, lively narrow face, short tied black hair, brown linen travel robe, a small bamboo message tube and reed whistle hanging at collar, bright attentive eyes. Chest-up three-quarter view, face large readable at small dialogue size, natural mature face proportions. Painterly ink and gouache, textured muted olive/teal backdrop, earthy restrained color palette, soft warm face lighting. Distinct memorable fictional face. Vertical 2:3 single portrait. No text, watermark, frame, logos, panels or other people, no photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_51.webp",
+    "sha256": "bf2370ea06b3794da3050e1cbbff26f178706ca6fce171ebdd3693e1de286315",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_52",
+    "name": "Lụa",
+    "tier": 1,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b52d7805-4d7f-4e05-b1c5-e6fa4979bb45.png",
+    "prompt": "One original character portrait for a Vietnamese wuxia tactical RPG. A Vietnamese woman riverboat apprentice age 25, sun-tanned face, tied black hair with plain blue cloth band, indigo working tunic and rope loop across shoulder, warm practical expression. Chest-up three-quarter view, face large readable at small dialogue size, natural mature face proportions. Painterly ink and gouache, textured muted olive/teal backdrop, earthy restrained color palette, soft warm face lighting. Distinct memorable fictional face. Vertical 2:3 single portrait. No text, watermark, frame, logos, panels or other people, no photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_52.webp",
+    "sha256": "39bde80eaa9eacd0c99f7cde60d0b79c4eaadc743822c5881c80e987cb773b42",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_53",
+    "name": "Tạ Yến",
+    "tier": 2,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-94793edc-e8b8-47a8-a775-60164bf63986.png",
+    "prompt": "One original character portrait for a Vietnamese wuxia tactical RPG. A Vietnamese woman carpenter age 32, strong broad face, dark hair tied back, faded ochre workshop clothes and small leather tool strap, charcoal mark on cheek, confident thoughtful expression. Chest-up three-quarter view, face large readable at small dialogue size, natural mature face proportions. Painterly ink and gouache, textured muted olive/teal backdrop, earthy restrained color palette, soft warm face lighting. Distinct memorable fictional face. Vertical 2:3 single portrait. No text, watermark, frame, logos, panels or other people, no photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_53.webp",
+    "sha256": "d1bba718656195d687da9e53215b297612986be462700ec474fdfd4f9cc95abe",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_54",
+    "name": "Vệ Bình",
+    "tier": 2,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-a4cbfee3-8d80-4eaa-b093-420826c90f3f.png",
+    "prompt": "One original chest-up character portrait for a Vietnamese wuxia tactical RPG. Vietnamese male junior watchman age 29, angular kind face, hair under simple navy cloth cap, worn slate-blue guard tunic with modest leather collar, straight posture, observant restrained expression, no helmet. Face large, unique and readable in small dialogue UI. Hand-painted ink/gouache illustration with natural adult facial proportions, muted olive teal textured backdrop and earthy restrained colors, warm soft lighting. Vertical 2:3. No text, watermark, frame, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_54.webp",
+    "sha256": "fb51ac7a1a8c9cd02806dbc06dfc1be706086fdb117e52a0421a97b521a5f25e",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_55",
+    "name": "Hồ Tâm",
+    "tier": 3,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-f69e615c-a089-4265-b61a-b7a15aebac90.png",
+    "prompt": "One original chest-up character portrait for a Vietnamese wuxia tactical RPG. Vietnamese female field medic age 36, calm tired eyes, black hair in practical low bun, cream and sage cross-collar robe with an ochre medical satchel strap, compassionate but firm face, no jewelry. Face large, unique and readable in small dialogue UI. Hand-painted ink/gouache illustration with natural adult facial proportions, muted olive teal textured backdrop and earthy restrained colors, warm soft lighting. Vertical 2:3. No text, watermark, frame, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_55.webp",
+    "sha256": "bc89c7cea38297c09b19db4d8661edbe2b876d8f1ebf3b3cb5b7fb9e91973908",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_56",
+    "name": "Trác Viễn",
+    "tier": 3,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-ce913202-8405-42a2-999b-5a6a45a828a5.png",
+    "prompt": "One original chest-up character portrait for a Vietnamese wuxia tactical RPG. Vietnamese male pathfinder age 33, thin face with faint sun freckles, long black hair tied loosely, moss-green travel coat and rolled cloth map at shoulder, thoughtful watchful eyes. Face large, unique and readable in small dialogue UI. Hand-painted ink/gouache illustration with natural adult facial proportions, muted olive teal textured backdrop and earthy restrained colors, warm soft lighting. Vertical 2:3. No text, watermark, frame, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_56.webp",
+    "sha256": "aae9075f00e9b08f673e53d75e65d3babaf97e7c905a7834cb92a1e3bee911e3",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_57",
+    "name": "Lê Nguyệt",
+    "tier": 4,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-90db0fd1-5ab8-4acb-bfc3-8d5a7eb8817a.png",
+    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese female archivist age 28, distinctive oval face and intense thoughtful dark eyes, black hair in neat pinned bun, off-white and muted plum scholar robe, small bundle of letters held at chest, dignified sorrow and resolve, no tears or text. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_57.webp",
+    "sha256": "752789a866d9557f8f9cb794d51eeb7c6b1d74e25568db01e1a216f3c99f522d",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_58",
+    "name": "Đào Bất Khuất",
+    "tier": 4,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3a90b1a1-b00a-424c-9b40-28173d63a893.png",
+    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese former caravan captain age 46, weathered broad tan face, short graying beard, strong nose, black hair with gray tied back, worn brown leather shoulder protection over dark green robe, regretful but steady eyes, no villain sneer. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_58.webp",
+    "sha256": "780c77a753edf238321fd97f2fe8cd1aca10397cf34d3e0a191a2f207f274c93",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_59",
+    "name": "Dương Tịnh",
+    "tier": 5,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-426d70ce-2f73-4177-81c8-9b52cb0c4734.png",
+    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese elderly female lay sword instructor age 62, silver-streaked black hair tied in simple bun, lined warm face, clear strong dark eyes, muted ivory and ochre training robes with plain sword strap at shoulder, grounded calm expression, no magic aura. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_59.webp",
+    "sha256": "e2fb02872e679369b4a70d0fa464402bc67604284f6251aa0e86f815358aa72e",
+    "size": [
+      480,
+      720
+    ]
+  },
+  {
+    "id": "companion_60",
+    "name": "Phan Uy",
+    "tier": 5,
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-4edea829-5163-4b54-801d-0c5e308425e1.png",
+    "prompt": "Create ONE original character portrait for a Vietnamese wuxia tactical RPG. Vietnamese retired naval coordinator age 55, lean sun-browned face, neat salt-and-pepper moustache and short beard, simple indigo cloth headband and blue-gray cross-collar travel robe, old rope toggle at shoulder, perceptive modest half-smile, no crown. Unique memorable face, chest-up three-quarter composition, large readable face at small UI size, natural mature facial proportions. Painterly ink and gouache, muted olive teal textured backdrop, restrained earthy colors, soft warm lighting, consistent historical RPG art. Vertical 2:3 portrait, no frame, lettering, watermark, logos, panels, other people, photorealism or exaggerated anime.",
+    "mode": "generate",
+    "asset": "assets/images/companions/companion_60.webp",
+    "sha256": "b65d8c5f9f64b566eec3b93b0b8e62bc84701f2c06d954e6849bdbaf5c299d78",
+    "size": [
+      480,
+      720
+    ]
+  }
+]

@@ -8,6 +8,8 @@ import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
 import { storyCatalog } from '../data/StoryCatalog.js';
 import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
+import {expansionAvailable} from '../data/ExpansionCast.js';
+import {lootMethods,validateLoot,storyEquipment,chapterBossAvailable,bossLoot,chapterBossRewards} from './Loot.js';
 import {ENROLLMENT_QUEST,hasEnrollment,sectReady,storyHeroBuild,heroAppearance} from '../data/HeroIdentity.js';
 import { isDaiViet, PLOT_COMPANIONS, PLOT_UNLOCKS, DAI_VIET_CAST_BY_ID, applyDaiVietName } from '../data/DaiVietCast.js';
 import {
@@ -132,7 +134,7 @@ export function createCampaign({ name, sect = null, story = 'legacy' } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '4.2.0',
+    version: '4.3.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -184,6 +186,7 @@ export function validateCampaign(session) {
   )
     fail('Túi đồ hoặc thời gian chơi không hợp lệ.');
   normalizeHeroBuild(session.hero, session.inventory);
+  if(session.loot!==undefined)validateLoot(session.loot);
   if(isDaiViet(session)&&hasEnrollment(session)&&!session.hero.sect)fail('Bản lưu đã nhập môn cần có môn phái.');
   validateWorld(session);
   if (session.gacha !== undefined) validateGacha(session.gacha);
@@ -228,7 +231,7 @@ export function validateCampaign(session) {
     !Array.isArray(session.party.active) ||
     !Array.isArray(session.party.unlocked) ||
     session.party.active.length > 5 ||
-    session.party.unlocked.length > 50 ||
+    session.party.unlocked.length > Object.keys(COMPANIONS_BY_ID).length ||
     new Set(session.party.unlocked).size !== session.party.unlocked.length ||
     new Set(session.party.active).size !== session.party.active.length ||
     !session.party.unlocked.every((id) => has(COMPANIONS_BY_ID, id)) ||
@@ -255,6 +258,7 @@ export function validateCampaign(session) {
     occupied.add(`${p.x},${p.y}`);
   }
   if(isDaiViet(session)&&PLOT_COMPANIONS.some(id=>session.party.unlocked.includes(id)&&!story.completedQuests.includes(PLOT_UNLOCKS[id])))fail('Đồng hành chính truyện chưa tới mốc gặp.');
+  if(session.party.unlocked.some(id=>!expansionAvailable(session,id)))fail('Đồng hành mới chưa xuất hiện trong chính truyện.');
   for (const quest of RECRUIT_QUESTS)
     if (
       story.completedQuests.includes(quest.id) &&
@@ -287,7 +291,7 @@ export function validateCampaign(session) {
       pending.token > story.attemptCounter ||
       !nonnegative(pending.seed) ||
       pending.seed > 0xffffffff ||
-      !['main', 'recruit', 'practice', 'dungeon', 'arena', 'escort'].includes(
+      !['main', 'recruit', 'practice', 'dungeon', 'arena', 'escort','chapterBoss'].includes(
         pending.kind
       )
     )
@@ -296,7 +300,7 @@ export function validateCampaign(session) {
       validatePreparation(pending.preparation);
     if (
       pending.missionId !== undefined &&
-      (pending.kind !== 'main' ||
+      (!['main','recruit'].includes(pending.kind) ||
         pending.missionId !== pending.questId ||
         !Object.hasOwn(MISSIONS, pending.missionId))
     )
@@ -338,6 +342,7 @@ export function validateCampaign(session) {
         story.questFlags[`challenge_${pending.questId}`])
     )
       fail('Trận chiêu mộ không hợp lệ.');
+    if(pending.kind==='chapterBoss'&&(!/^(?:[1-9]|1[0-9]|20)$/.test(pending.questId)||!chapterBossAvailable(session,Number(pending.questId))))fail('Boss chương chưa mở hoặc không hợp lệ.');
     if (pending.kind === 'practice' && pending.questId !== null)
       fail('Trận luyện tập không hợp lệ.');
   }
@@ -410,7 +415,7 @@ export function migrateCampaign(input) {
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
-  next.version = '4.2.0';
+  next.version = '4.3.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;
@@ -476,7 +481,7 @@ export class Campaign {
         (q.chapter ?? (q.act - 1) * 4 + 1) <=
           this.session.storyProgress.currentChapter &&
         (this.session.storyProgress.completedQuests.includes('Q101')||this.session.storyProgress.completedQuests.includes('D01H06'))&&
-        (!isDaiViet(this.session)||!PLOT_COMPANIONS.includes(q.companionId))
+        (!isDaiViet(this.session)||!PLOT_COMPANIONS.includes(q.companionId))&&expansionAvailable(this.session,q.companionId)
     );
   }
   updateProfile(hero, inventory) {
@@ -556,7 +561,7 @@ export class Campaign {
       );
     }
   }
-  _completeMain(next, quest) {
+  _completeMain(next, quest,seed=next.storyProgress.attemptCounter) {
     const catalog=storyCatalog(next),MAIN_QUESTS=catalog.quests;
     if (next.storyProgress.completedQuests.includes(quest.id))
       fail('Nhiệm vụ đã nhận thưởng.');
@@ -574,6 +579,7 @@ export class Campaign {
         (item) => item.sect === next.hero.sect
       ))
         if (!itemCount(next, item.id)) give(next, item.id, 1);
+    const gear=storyEquipment(next,quest,seed);
     const following = MAIN_QUESTS.find(
       (q) => !next.storyProgress.completedQuests.includes(q.id)
     );
@@ -587,6 +593,7 @@ export class Campaign {
           100,
           (next.companionsAffinity[s.id] ?? 0) + 1
         );
+    return gear;
   }
   chooseMain(choiceId) {
     this._guard();
@@ -730,7 +737,7 @@ export class Campaign {
         forging: next.adventure.forging
       }
     };
-    if (kind === 'main' && Object.hasOwn(MISSIONS, questId))
+    if (['main','recruit'].includes(kind) && Object.hasOwn(MISSIONS, questId))
       next.storyProgress.pendingEncounter.missionId = questId;
     if (kind === 'dungeon') {
       const d = next.adventure.dungeon;
@@ -762,7 +769,7 @@ export class Campaign {
     this._guard();
     const pending = this.session.storyProgress.pendingEncounter;
     if (!pending || !this.session.hero.sect&&!(isDaiViet(this.session)&&!hasEnrollment(this.session)&&pending.kind==='main')) fail('Không có trận đang chờ.');
-    if (['dungeon', 'arena', 'escort'].includes(pending.kind))
+    if (['dungeon', 'arena', 'escort','chapterBoss'].includes(pending.kind))
       return this._worldBattle(pending);
     const quest =
       pending.kind === 'main'
@@ -858,7 +865,7 @@ export class Campaign {
       })
     );
     this.prepareUnits(units, pending);
-    if(isDaiViet(this.session))Object.assign(units[0],heroAppearance(this.session,quest));
+    if(isDaiViet(this.session))Object.assign(units[0],heroAppearance(this.session,pending.kind==='main'?quest:undefined));
     this.lastResult = null;
     this.battleToken = pending.token;
     this.battle = new CombatEngine({
@@ -902,7 +909,7 @@ export class Campaign {
         const q = MAIN_BY_ID[pending.questId];
         rewards.xp = q.xp;
         rewards.silver = q.silver;
-        this._completeMain(next, q);
+        rewards.gear=this._completeMain(next, q,pending.seed);
       } else if (pending.kind === 'recruit')
         this._markChallenge(next, RECRUIT_BY_ID[pending.questId]);
       else if (pending.kind === 'practice') {
@@ -921,6 +928,9 @@ export class Campaign {
         next.hero = gainExperience(next.hero, rewards.xp, next.inventory);
         give(next, 'silver', rewards.silver);
       }
+    }
+    if(pending.kind==='chapterBoss'&&result.winner==='home'){
+      const chapter=Number(pending.questId);Object.assign(rewards,chapterBossRewards(next,chapter));rewards.gear=bossLoot(next,chapter,pending.seed);next.hero=gainExperience(next.hero,rewards.xp,next.inventory);give(next,'silver',rewards.silver);
     }
     if (['dungeon', 'arena', 'escort'].includes(pending.kind))
       this.settleWorld(next, pending, result, rewards);
@@ -988,3 +998,4 @@ Object.assign(Campaign.prototype, worldMethods);
 
 Object.assign(Campaign.prototype, gachaMethods);
 Object.assign(Campaign.prototype, journeyMethods);
+Object.assign(Campaign.prototype, lootMethods);

@@ -2,7 +2,15 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 4.2 — tự đặt tên, nhập môn theo truyện:** bắt đầu chưa có phái, chọn phái tại chương 2, hồi 10; một nhân vật chính với mười chân dung theo tiến trình. Giữ 20 chương × 20 hồi và 105 trận. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 4.3 — 60 đồng hành, bộ trang bị và boss chương:** mở rộng 43 hồi với mười người mới, thêm ngoại truyện chiêu mộ và vòng quay trang bị, tăng nhẹ độ khó để cấp và đồ có tác dụng rõ hơn. Giữ 400 hồi, tên người chơi và nhập môn theo truyện. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 4.3
+
+- Thêm 10 đồng hành, hai người mỗi bậc hiếm; mỗi người có ảnh, khung hiếm và vai trò lặp lại trong chính truyện. Mở quay/nhiệm vụ sau lần gặp; 10 nhiệm vụ mời có mục tiêu giữ đường, bảo vệ, giải cứu hoặc mở chốt thật và lời sau trận riêng.
+- Thêm 36 món và ba bộ Vân Hành / Thiết Vệ / Thanh Tâm với mốc 2 và 3 món. Bốn phẩm chất: Thường, Hiếm, Xuất sắc, Trác việt. Đồ cũ còn nguyên, tổng 54 món.
+- Nhận đồ qua mốc cốt truyện, vòng quay trang bị và boss. **Quán → Quán & Rèn** có quay 80 bạc/lượt, 720/10 lượt, tỉ lệ 60/28/10/2%, bảo đảm 10/50 độc lập với quay nhân vật. **Quán → Hoạt động** có 20 thử thách boss ôn trận mở theo chương, đánh lại để nhận XP/bạc/đồ mà không thay mạch truyện.
+- Từ chương 3, tăng khoảng 8% HP / 5% công cho trận thường, 12% / 8% cho trận chốt; giữ mở đầu và các bài luyện mới. Luyện cấp và chọn bộ hợp vai trò cải thiện kết quả trong mẫu đo 240 trận. [Kết quả và giới hạn](reports/PROGRESSION_4_3.md).
+- Giữ mã hồi, ngân sách XP/bạc cũ và sáu ô lưu. Thưởng trận được ghi một lần, tải lại giữ seed và đồ; không tự thưởng lại hồi đã qua. [Nhân vật, trang bị, tỉ lệ, nguồn đồ và bản lưu](docs/PROGRESSION_4_3.md).
 
 ## Bản 4.2
 

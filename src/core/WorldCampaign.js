@@ -13,7 +13,7 @@ import {
 } from '../data/StrategyData.js';
 import { DUNGEONS } from '../data/WorldData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
-import {isDaiViet,applyDaiVietName} from '../data/DaiVietCast.js';
+import {isDaiViet,applyDaiVietName,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
 import {heroAppearance,hasEnrollment} from '../data/HeroIdentity.js';
 import { EQUIPMENT } from '../data/EquipmentData.js';
 import {
@@ -334,8 +334,13 @@ export const worldMethods = {
         ['companion_14', 'companion_07', 'companion_19']
       ][DUNGEONS.indexOf(def)];
     }
+    if(pending.kind==='chapterBoss'){
+      const c=Number(pending.questId),q=this.catalog.quests.filter(q=>q.chapter===c&&q.encounter).at(-1);
+      title=`Ôn trận · Boss chương ${c}`;level=Math.min(20,c+1);scale=1.04+c*.012;
+      templates=q?.enemyId==='companion_01'?['companion_01','companion_06','companion_05']:['companion_05','companion_04','companion_06'];
+    }
     if (!units.some((u) => u.team === 'enemy'))
-      for (let i = 0; i < Math.max(2, team.active.length + 1); i++) {
+      for (let i = 0; i < (pending.kind==='chapterBoss'?Math.min(6,2+Math.floor(Number(pending.questId)/4)):Math.max(2, team.active.length + 1)); i++) {
         const unit = new Companion(templates[i % templates.length], {
           id: `enemy_${i}`,
           team: 'enemy',
@@ -345,6 +350,10 @@ export const worldMethods = {
         unit.stats.hp = unit.stats.maxHp;
         unit.stats.physicalAtk *= scale;
         unit.stats.magicalAtk *= scale;
+        if(pending.kind==='chapterBoss'&&i===0){
+          const c=Number(pending.questId),q=this.catalog.quests.filter(q=>q.chapter===c&&q.encounter).at(-1),p=DAI_VIET_CAST_BY_ID[q?.enemyId];
+          unit.name='Trấn giữ · '+(p?.id==='tay_sai'?(c>=13?'Toán truy đuổi':'Đội chặn đường'):p?.name??'Đối thủ tập trận');if(p){unit.portrait=p.portrait;unit.characterId=p.assetId;unit.storyActorId=p.id==='tay_sai'?'chapter_guard':p.id;unit.canon='dai-viet';}unit.stats.maxHp=Math.round(unit.stats.maxHp*1.3);unit.stats.hp=unit.stats.maxHp;
+        }
         grid.place(
           unit,
           [

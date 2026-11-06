@@ -19,6 +19,16 @@
 .dialogue-choices .enrollment-choice { display:flex; align-items:center; gap:10px; text-align:left; font-size:14px; }
 .dialogue-choices .enrollment-copy { flex:1; min-width:0; line-height:1.6; }
 .dialogue-choices .enrollment-portrait { display:inline-block; width:54px; height:70px; flex:none; }
+.gear-results,.gear-inventory { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr)); gap:12px; margin:12px 0; }
+.gear-results { max-height:560px; overflow:auto; padding-right:6px; scrollbar-gutter:stable; overscroll-behavior:contain; }
+.gear-results:focus-visible { outline:2px solid #e7bd62; outline-offset:3px; }
+.gear-card { min-width:0; padding:14px; border:2px solid var(--gear-color,#9aa); border-radius:8px; background:#102b30; overflow-wrap:anywhere; }
+.gear-card h3 { margin:0 0 8px; font-size:1rem; }
+.gear-grade { display:block; color:var(--gear-color); font-weight:700; margin-top:6px; }
+.gear-card p { font-size:.85rem; line-height:1.7; }
+.gear-card button { width:100%; }
+.gear-set { color:#c9d9ad; }
+#chapter-boss-panel > button { display:block; width:100%; margin:8px 0; text-align:left; white-space:normal; }
 #dialogue-advance.classic-line {
   display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 14px;
   position: relative; width: 100%; min-height: 154px; padding: 14px;

@@ -1,4 +1,5 @@
 import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
+import {renderEquipment,renderChapterBosses} from './EquipmentUI.js';
 import {sectReady,heroText,heroAppearance,heroSectLabel} from '../data/HeroIdentity.js';
 import {casebook} from '../core/Casebook.js';
 import { renderStoryArchive } from './StoryArchive.js';
@@ -400,6 +401,7 @@ export function mountWorldUI(app) {
     if (tab === 'bonds') renderBonds(app, root);
     if (tab === 'casebook') renderCasebook(app,root);
     if (tab === 'activities') {
+      renderChapterBosses(app,root);
       const daily = panel(
         'Điểm danh & nhiệm vụ',
         'Ngày/tuần theo giờ Việt Nam. Điểm danh trên máy này, chưa có tài khoản đăng nhập máy chủ.'
@@ -449,6 +451,7 @@ export function mountWorldUI(app) {
       root.append(escort);
     }
     if (tab === 'shop') {
+      renderEquipment(app,root);
       const pantry = panel(
         'Quán trà & hành trang',
         `Bạc ${count(s, 'silver')} · Cá ${count(s, 'food_fish')} · Trà ${count(s, 'tea')} · Đan ${count(s, 'elixir')} · Quặng ${count(s, 'ore')} · Thảo dược ${count(s, 'herb')}`

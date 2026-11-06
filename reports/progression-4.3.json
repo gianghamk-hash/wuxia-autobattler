@@ -1,0 +1,1991 @@
+{
+  "method": "240 paired seeded fights, six selected main encounters, one six-member VoDang build. Baseline reverses only the new HP/attack multipliers after construction; it is not a checkout of the full 4.2 release. Underlevel = chapter minus one with old rare school set; trained = chapter plus one with the same set; equipped = underlevel with an excellent Van Hanh hybrid three-piece set; aligned = underlevel with an excellent Thanh Tam magic three-piece set. Party identities, positions and seed are paired. Does not establish balance for every school, roster, formation or boss trial.",
+  "summary": [
+    {
+      "build": "underlevel",
+      "rules": "4.2",
+      "matches": 30,
+      "wins": 28,
+      "draws": 0,
+      "meanSeconds": 42.29
+    },
+    {
+      "build": "underlevel",
+      "rules": "4.3",
+      "matches": 30,
+      "wins": 24,
+      "draws": 0,
+      "meanSeconds": 46.06
+    },
+    {
+      "build": "trained",
+      "rules": "4.2",
+      "matches": 30,
+      "wins": 30,
+      "draws": 0,
+      "meanSeconds": 37.98
+    },
+    {
+      "build": "trained",
+      "rules": "4.3",
+      "matches": 30,
+      "wins": 28,
+      "draws": 0,
+      "meanSeconds": 43.7
+    },
+    {
+      "build": "equipped",
+      "rules": "4.2",
+      "matches": 30,
+      "wins": 30,
+      "draws": 0,
+      "meanSeconds": 37.63
+    },
+    {
+      "build": "equipped",
+      "rules": "4.3",
+      "matches": 30,
+      "wins": 25,
+      "draws": 0,
+      "meanSeconds": 42.24
+    },
+    {
+      "build": "aligned",
+      "rules": "4.2",
+      "matches": 30,
+      "wins": 30,
+      "draws": 0,
+      "meanSeconds": 37.68
+    },
+    {
+      "build": "aligned",
+      "rules": "4.3",
+      "matches": 30,
+      "wins": 27,
+      "draws": 0,
+      "meanSeconds": 42.97
+    }
+  ],
+  "rows": [
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.5
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 21.833333333333332
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.366666666666667
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.2
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.3
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.366666666666667
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 19.833333333333332
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.55
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 19.833333333333332
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 20.2
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 18.766666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.133333333333333
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 18.133333333333333
+    },
+    {
+      "id": "D03H12",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 21.833333333333332
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.366666666666667
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 21.966666666666665
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 21.833333333333332
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.5
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 22.366666666666667
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D03H12",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 20.016666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.45
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 44.666666666666664
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 39.666666666666664
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 42.46666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 38.06666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 45.666666666666664
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 41.56666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.56666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 38.31666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.56666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.56666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 35.61666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.61666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 34.11666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 37.71666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 40.266666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 37.71666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.61666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 35.766666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 42.166666666666664
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 38.06666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.766666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 34.81666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 39.45
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.88333333333333
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D06H18",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 42.166666666666664
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 37.016666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.71666666666667
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 35.766666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.266666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 36.68333333333333
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.45
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.266666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 44.31666666666666
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 33.9
+    },
+    {
+      "id": "D06H18",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.56666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 46.56666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.86666666666667
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 55.56666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.95
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.11666666666667
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 34.583333333333336
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.71666666666667
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 35.983333333333334
+    },
+    {
+      "id": "D09H19",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.56666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 46.56666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 47.166666666666664
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42.18333333333333
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 47.85
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 45.916666666666664
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 33.666666666666664
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.766666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 36.06666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 38.06666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 38.15
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 38.06666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 34.583333333333336
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 33.81666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 32.516666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 37.416666666666664
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 35.766666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 45.666666666666664
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 39.75
+    },
+    {
+      "id": "D09H19",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 38.38333333333333
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.56666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 33.81666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 44.43333333333333
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 33.81666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 39.416666666666664
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 32.55
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 46.86666666666667
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 37.016666666666666
+    },
+    {
+      "id": "D09H19",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 45.666666666666664
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42.03333333333333
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 45.31666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 52.11666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 51.266666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 49.416666666666664
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 52.11666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 39.6
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 58.71666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 49.75
+    },
+    {
+      "id": "D12H14",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.166666666666664
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 35.06666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.86666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 46.56666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 47.016666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 33.9
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 45.666666666666664
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 38.06666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 43.86666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 38.46666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 46.56666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.31666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 51.916666666666664
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42.61666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.81666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.71666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 49.06666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 34.96666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 35.86666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 37.71666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 47.5
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 44.583333333333336
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 42
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 44.583333333333336
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 52.483333333333334
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 46.86666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 50.016666666666666
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 34.25
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 39.53333333333333
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42.61666666666667
+    },
+    {
+      "id": "D12H14",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 52.06666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "enemy",
+      "seconds": 56.38333333333333
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 51.266666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "enemy",
+      "seconds": 64.46666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 49.86666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 55.416666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 52.3
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 54.199999999999996
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 65.31666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 47.61666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 49.71666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 54.199999999999996
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 55.06666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 41.38333333333333
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 53.46666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 57.516666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 77.16666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 41.166666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 61.65
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.86666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.416666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 39.86666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 51.916666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 61.56666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 51.699999999999996
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 46.9
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 48.916666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 41.766666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 53.46666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.11666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 51.266666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 45.666666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 49.06666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.46666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 51.266666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 61.416666666666664
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "enemy",
+      "seconds": 47.833333333333336
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.71666666666667
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 51.56666666666666
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42
+    },
+    {
+      "id": "D15H19",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.9
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 59.46666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 64.61666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 49.333333333333336
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 68.95
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 46.86666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 57.516666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 49.56666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.63333333333333
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 43.416666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "underlevel",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 54.666666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 47.61666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 54.666666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 54.199999999999996
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 54.666666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 41.88333333333333
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.333333333333336
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 42.03333333333333
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 41.166666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.38333333333333
+    },
+    {
+      "id": "D18H19",
+      "build": "trained",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 51.96666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 47.55
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 55.416666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 49.56666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 53.733333333333334
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 44.06666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 51.516666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.416666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 50.13333333333333
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 50.333333333333336
+    },
+    {
+      "id": "D18H19",
+      "build": "equipped",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 57.36666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.43333333333333
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 0,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 51.766666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 49.21666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 1,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.21666666666667
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.266666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 2,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.75
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 40.416666666666664
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 3,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 49.25
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.2",
+      "winner": "home",
+      "seconds": 45.516666666666666
+    },
+    {
+      "id": "D18H19",
+      "build": "aligned",
+      "seed": 4,
+      "rules": "4.3",
+      "winner": "home",
+      "seconds": 53
+    }
+  ]
+}

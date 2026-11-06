@@ -1,6 +1,7 @@
 import { deepFreeze } from './DataUtils.js';
+import {NEW_GEAR,NEW_GEAR_SETS} from './GearCatalog.js';
 
-export const EQUIPMENT = deepFreeze([
+export const EQUIPMENT = deepFreeze([...NEW_GEAR,
   {
     "id": "thieulam_weapon",
     "name": "Thiền Trượng",
@@ -247,7 +248,7 @@ export const EQUIPMENT = deepFreeze([
   }
 ]);
 
-export const EQUIPMENT_SETS = deepFreeze([
+export const EQUIPMENT_SETS = deepFreeze([...NEW_GEAR_SETS,
   {
     "id": "thieulam_set",
     "name": "Bộ Thiếu Lâm",
