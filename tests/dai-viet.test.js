@@ -16,6 +16,7 @@ import {SECT_IDS} from '../src/data/SectsData.js';
 import {rollGacha} from '../src/core/Gacha.js';
 import {validReaderKey} from '../src/core/Journey.js';
 import {StorageManager} from '../src/core/StorageManager.js';
+import {COMBAT_APPROACHES,EXTRA_COMBAT} from '../src/data/DaiVietCombatStory.js';
 
 function fight(c){for(let i=0;i<7500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
 function fresh(sect='VoDang'){const c=new Campaign({now:()=>1720000000000});c.newGame({story:'dai-viet',sect});return c;}
@@ -36,6 +37,31 @@ function snapshotAt(id){
  for(const [cid,milestone]of Object.entries(PLOT_UNLOCKS))if(s.storyProgress.completedQuests.includes(milestone)){s.party.unlocked.push(cid);s.companionsAffinity[cid]=100;s.storyProgress.completedQuests.push('recruit_'+cid.slice(-2));}
  return s;
 }
+
+test('all 105 fights separate setup from aftermath and retain every existing per-episode reward',()=>{
+ assert.equal(Object.keys(COMBAT_APPROACHES).length,67);assert.equal(Object.keys(EXTRA_COMBAT).length,38);
+ const xp=[260,360,500,650,850,1050,1250,1450,1650,1850,2000,2100,2200,2300,2300,2300,2400,2500,500,500],money=[70,80,100,115,125,135,150,165,180,195,210,220,225,230,240,250,260,280,100,100];
+ for(const c of DAI_VIET_CHAPTERS){
+  const weights=c.scenes.map((_,i)=>c.battles.includes(i+1)?2:1),sum=weights.reduce((a,b)=>a+b,0);
+  const divide=budget=>{const v=weights.map(w=>Math.floor(budget*w/sum));v[19]+=budget-v.reduce((a,b)=>a+b,0);return v;};
+  const ex=divide(xp[c.number-1]),sil=divide(money[c.number-1]);
+  for(const q of DAI_VIET_QUESTS.filter(q=>q.chapter===c.number)){
+   assert.equal(q.xp,q.ending?0:ex[q.episode-1]);assert.equal(q.silver,q.ending?0:sil[q.episode-1]);
+   if(q.encounter){assert.ok(q.aftermath?.length);assert.notEqual(q.lines[0][1],q.aftermath[0][1]);}
+   for(const [speaker,text]of [...q.lines,...(q.aftermath??[])]){assert.ok(text);assert.ok(['Người kể','Trần Phong'].includes(speaker)||DAI_VIET_CAST_BY_NAME[speaker],q.id+' '+speaker);}
+  }
+ }
+ assert.ok(existsSync('assets/images/narrator.webp'));
+ assert.ok(validReaderKey('flow:D01H01'));assert.ok(validReaderKey('aftermath:D01H06'));assert.equal(validReaderKey('aftermath:D01H01'),false);
+});
+
+test('all five paths can complete the added early training with ordinary same-level builds and their authored guide',()=>{
+ for(const sect of SECT_IDS)for(const q of DAI_VIET_QUESTS.filter(q=>q.chapter<=4&&q.combatType)){
+  const c=fresh(sect),s=snapshotAt(q.id);s.hero=createHeroBuild({name:'Trần Phong',sect,level:q.level});c.load(s);
+  c.chooseMain('continue');const r=fight(c);assert.equal(r.winner,'home',sect+' '+q.id+' '+r.reason);
+  if(DAI_VIET_MISSIONS[q.id]?.noWaves){assert.ok(r.duration>=12);assert.equal(c.battle.mission.waves.size,0);}
+ }
+});
 test('400 full authored episodes have distinct scenes, complete speaker portraits and explicit connected chapter goals',()=>{
  assert.equal(DAI_VIET_CHAPTERS.length,20);assert.equal(DAI_VIET_QUESTS.length,400);assert.equal(new Set(DAI_VIET_QUESTS.map(q=>q.id)).size,400);
  assert.equal(new Set(DAI_VIET_QUESTS.map(q=>q.title)).size,400);assert.equal(new Set(DAI_VIET_QUESTS.map(q=>q.lines[0][1])).size,400);
@@ -71,9 +97,9 @@ test('new chiêu hiền cannot reveal five plot companions before their authored
  for(const id of PLOT_COMPANIONS){const bad=structuredClone(s);bad.party.unlocked.push(id);bad.companionsAffinity[id]=15;assert.throws(()=>validateCampaign(bad));}
  const renamed=storyPerson(s,COMPANIONS_BY_ID.companion_08);assert.equal(renamed.name,'Mai Tước');assert.equal(renamed.role,COMPANIONS_BY_ID.companion_08.role);
 });
-test('all 31 new objectives refer to real combat episodes and never request a forced loss',()=>{
- assert.equal(Object.keys(DAI_VIET_MISSIONS).length,31);for(const m of Object.values(DAI_VIET_MISSIONS)){assert.ok(DAI_VIET_BY_ID[m.id]?.encounter);assert.ok(m.failure&&m.description);assert.ok(['hold','protect','rescue','breach'].includes(m.type));}
- assert.equal(DAI_VIET_QUESTS.filter(q=>q.chapter===14&&q.encounter).length,4);
+test('all 43 objectives refer to real combat episodes and never request a forced loss',()=>{
+ assert.equal(Object.keys(DAI_VIET_MISSIONS).length,43);for(const m of Object.values(DAI_VIET_MISSIONS)){assert.ok(DAI_VIET_BY_ID[m.id]?.encounter);assert.ok(m.failure&&m.description);assert.ok(['hold','protect','rescue','breach'].includes(m.type));}
+ assert.equal(DAI_VIET_QUESTS.filter(q=>q.chapter===14&&q.encounter).length,6);
 });
 test('chapter-entry recaps and early casebook do not reveal later proof or the five masters deaths',()=>{
  const s=snapshotAt('D03H11'),book=casebook(s);assert.ok(!book.people.some(p=>p.name==='Trịnh Nghiêm'));assert.ok(!book.entries.some(e=>e.id==='twice'||e.id==='murder'||e.id==='lost'));
@@ -91,9 +117,9 @@ test('all fifteen campaign-specific bond conversations keep their variants and r
  c.chooseMain('home');const snapshot=c.snapshot();c.load(snapshot);assert.deepEqual(c.session.journey.bonds,snapshot.journey.bonds);assert.ok(c.bondStories().every(b=>b.done&&!b.available));
 });
 test('reader positions for all 400 main episodes and 400 replays fit the unchanged save envelope',async()=>{
- const s=snapshotAt('D20H20');for(const q of DAI_VIET_QUESTS)for(const kind of ['main','archive'])s.journey.reader.positions[kind+':'+q.id]=1;
+ const s=snapshotAt('D20H20');for(const q of DAI_VIET_QUESTS){for(const kind of ['main','archive','flow'])s.journey.reader.positions[kind+':'+q.id]=1;if(q.aftermath)s.journey.reader.positions['aftermath:'+q.id]=0;}
  const m=new StorageManager({indexedDB:null,localStorage:{getItem:()=>null,setItem(){},removeItem(){}}}),text=await m.exportSave(s),restored=await m.decodeSave(text);
- assert.equal(Object.keys(restored.journey.reader.positions).length,800);assert.equal(restored.storyProgress.activeQuestId,'D20H20');assert.deepEqual(restored.inventory,s.inventory);
+ assert.equal(Object.keys(restored.journey.reader.positions).length,1305);assert.equal(restored.storyProgress.activeQuestId,'D20H20');assert.deepEqual(restored.inventory,s.inventory);
 });
 test('actual combat completes the 400-episode route; gate branches, optional romance, four endings and replay stay consistent',async()=>{
  const c=prepared();let fights=0,gate;
@@ -101,7 +127,7 @@ test('actual combat completes the 400-episode route; gate branches, optional rom
   const q=c.mainQuest(),choice=q.id==='D19H12'?'friends':q.choices[0].id;
   const b=c.chooseMain(choice);if(b){fights++;if(b.mission?.definition.type==='rescue')b.mission.requestRescue('hero');const r=fight(c);assert.equal(r.winner,'home',q.id+' '+c.lastResult.reason);}
  }
- gate=c.snapshot();assert.equal(fights,67);assert.ok(PLOT_COMPANIONS.every(id=>gate.party.unlocked.includes(id)&&gate.storyProgress.completedQuests.includes(PLOT_UNLOCKS[id])));
+ gate=c.snapshot();assert.equal(fights,105);assert.ok(PLOT_COMPANIONS.every(id=>gate.party.unlocked.includes(id)&&gate.storyProgress.completedQuests.includes(PLOT_UNLOCKS[id])));
  const book=casebook(gate);assert.ok(book.entries.some(e=>e.id==='murder'));assert.ok(!book.entries.some(e=>e.id==='gate'));assert.ok(!book.entries.some(e=>e.source==='D19H18'));
  const goldBefore=itemCount(gate,'silver');
  for(const route of ['home','stay']){

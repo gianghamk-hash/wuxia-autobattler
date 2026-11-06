@@ -11,6 +11,7 @@
   border: 1px solid #415d57; border-bottom: 0;
 }
 .classic-location { position: absolute; left: 16px; bottom: 18px; color: #f2ddb1; font: italic 1.2rem Georgia, serif; text-shadow: 0 2px 8px #000; }
+.classic-scene.modern-scene { height: 92px; }
 #dialogue-advance.classic-line {
   display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 14px;
   position: relative; width: 100%; min-height: 154px; padding: 14px;

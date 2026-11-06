@@ -130,7 +130,7 @@ export function createCampaign({ name, sect = null, story = 'legacy' } = {}) {
   };
   return {
     schemaVersion: 1,
-    version: '4.0.0',
+    version: '4.1.0',
     playtimeSeconds: 0,
     hero,
     party: {
@@ -407,7 +407,7 @@ export function migrateCampaign(input) {
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
-  next.version = '4.0.0';
+  next.version = '4.1.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
   return next;

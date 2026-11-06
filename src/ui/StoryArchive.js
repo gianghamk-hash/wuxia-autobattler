@@ -58,7 +58,7 @@ export function renderStoryArchive(app, root, chapter) {
           title: `Xem lại · Chương ${q.chapter} hồi ${q.episode} · ${q.title}`,
           quest: q,
           hero: s.hero,
-          lines: storyLines(q, s, MAIN_QUESTS, COMPANIONS_BY_ID),
+          lines: [...storyLines(q, s, MAIN_QUESTS, COMPANIONS_BY_ID),...(q.aftermath??[])],
           note: s.storyProgress.decisions[q.id]
             ? `Đã chọn: ${q.choices.find((c) => c.id === s.storyProgress.decisions[q.id])?.text ?? 'Kết cục đã lưu'}`
             : 'Mốc đã đi qua từ bản lưu cũ; chưa ghi lựa chọn ở hồi này.',

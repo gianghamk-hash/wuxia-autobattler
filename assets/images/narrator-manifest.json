@@ -1,0 +1,12 @@
+{
+  "mode": "generate",
+  "tool": "image_gen.imagegen",
+  "source": "exec-55117f4e-3907-47c8-88de-dd4076b95b11.png",
+  "asset": "assets/images/narrator.webp",
+  "size": [
+    480,
+    720
+  ],
+  "sha256": "e885785d60f2c0b12623df5d24af3731bd19ba8d67c4899609e32a67f2f77e2e",
+  "prompt": "Create one portrait illustration for the off-screen NARRATOR of a Vietnamese wuxia tactical RPG. A distinctive elderly Vietnamese storyteller, warm perceptive dark eyes, short neat silver beard, weathered kind face, indigo scholar cap and muted teal traditional robe, holding a closed ochre book at chest level. Face large, chest-up three-quarter portrait, looking toward the reader. Painterly ink and gouache, textured hand-painted dark olive/teal background, earthy restrained colors, natural mature facial proportions, dignified with a hint of amused wit. Readable when cropped to a small portrait next to dialogue, strong clear face silhouette, soft warm face lighting. No lettering, symbols, watermark, frame, scene panels or other people. Vertical portrait 2:3. This is a new fictional face, not any existing character, no photorealism, no anime."
+}

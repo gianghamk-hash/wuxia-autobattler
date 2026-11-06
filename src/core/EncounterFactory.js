@@ -27,6 +27,7 @@ export function enemyLineup({ quest, encounter, count, grid, main }) {
         unit.canon='dai-viet';unit.storyActorId=identity.actorId;
         unit.name=identity.storyName??identity.name;
         if(identity.id==='tay_sai')unit.name=quest.chapter<=4?(quest.chapter===1||quest.chapter===4&&quest.episode===19?'Người chặn đường':'Đệ tử đối luyện'):quest.chapter>=13?'Quân Cao Lệ':'Hộ vệ Vạn Lợi';
+        if(['duel','drill','breach'].includes(quest.combatType))unit.name=quest.chapter===7?'Người giữ bến · đối luyện':quest.chapter>=8?'Bạn tập':'Đệ tử đối luyện';
         unit.skills.autoAttack={...unit.skills.autoAttack,name:quest.chapter>=13?'Đoản Binh':'Đòn Cơ Bản'};
         unit.skills.ultimate={...unit.skills.ultimate,name:identity.id==='doc_le'?'Chiến Lệnh Phá Tuyến':'Liên Kích'};
       }

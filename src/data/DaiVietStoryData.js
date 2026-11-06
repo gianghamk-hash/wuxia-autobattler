@@ -20,6 +20,7 @@ import c19 from './dai-viet/chapter19.js';
 import c20 from './dai-viet/chapter20.js';
 import home from './dai-viet/chapter20home.js';
 import {deepFreeze} from './DataUtils.js';
+import {stageCombat} from './DaiVietCombatStory.js';
 export const DAI_VIET_CHAPTERS=deepFreeze([c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20]);
 export const DAI_VIET_HOME_CHAPTER=deepFreeze(home);
 export const DAI_VIET_REVISION=4;
@@ -61,15 +62,14 @@ export const DAI_VIET_QUESTS=deepFreeze(DAI_VIET_CHAPTERS.flatMap(c=>{
   const q={id,canon:'dai-viet',chapter:c.number,episode,chapterTitle:c.title,chapterGoal:c.goal,chapterSummary:c.summary,act:c.number<=4?1:c.number<=8?2:c.number<=13?3:c.number<=18?4:5,title:scene.title,location:c.place,level:levels[c.number-1],xp:xp[i],silver:silver[i],kind:battle?'battle':'story',boss:battle&&c.battles.at(-1)===episode,objectiveText:scene.objective,previous:i?c.scenes[i-1].lines[0][1]:c.number>1?DAI_VIET_CHAPTERS[c.number-2].bridge:'Trần Phong đang đóng một cảnh nguy hiểm ở hiện đại, chưa biết về Đại Việt.',lines:scene.lines,scene:sceneNames[c.number-1],choices:[{id:'continue',text:battle?'Thực hiện nhiệm vụ trận.':'Tiếp tục câu chuyện.',karma:0}],spotlights:[]};
   if(id==='D01H01'){q.location='Hiện đại · trường quay trên sườn núi';q.scene='modern';}
   q.chapterSummary=briefs[c.number-1];
-  if(episode===1)q.lines=[['Người kể',q.chapterSummary],...q.lines];
-  if(episode===20){q.lines=[...q.lines,['Người kể',c.bridge]];q.flags={[`STORY_CHAPTER_${c.number}`]:true};}
+  if(episode===20)q.flags={[`STORY_CHAPTER_${c.number}`]:true};
   if(battle){q.encounter=`dai_viet_${c.number}_${episode}`;q.guide=c.number<=4?'kha_van':c.number<=7?'companion_08':null;q.enemyId=c.number===7&&episode===5?'companion_01':c.number<=4?'kha_van':c.number>=13?'cao_le':'tay_sai';if((!q.boss||[13,14,15,16,17].includes(c.number))&&!(c.number===7&&episode===5))q.enemyId='tay_sai';if(c.number===1||(c.number===4&&episode===19))q.enemyId='tay_sai';}
   if(q.enemyId==='kha_van')q.guide='dao_tinh';
   if(grantAt[id])q.recruitCompanion=grantAt[id];
   if(id==='D19H12')q.choices=[{id:'together',text:'Muốn thử tìm hiểu nhau, không thay cô ấy quyết tương lai.',karma:0},{id:'friends',text:'Giữ tình bằng hữu và tôn trọng con đường riêng.',karma:0}];
   if(id==='D19H18')q.choices=[{id:'home',text:'Trở về hiện đại. Gặp lại gia đình; chia tay Đại Việt và bàn giao đã có hiệu lực.',karma:0},{id:'stay',text:'Ở lại Đại Việt. Giữ đời sống đã xây; chấp nhận chưa có đường gặp lại mẹ.',karma:0}];
   if(id==='D20H20'){q.ending=true;q.kind='ending';q.xp=0;q.silver=0;q.choices=[];}
-  return q;
+  return stageCombat(q);
  });
 }));
 export const DAI_VIET_BY_ID=deepFreeze(Object.fromEntries(DAI_VIET_QUESTS.map(q=>[q.id,q])));

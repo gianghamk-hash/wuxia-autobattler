@@ -12,6 +12,48 @@ async function at(page,id,route='stay',romance='friends'){
   const a=window.__game;a.model.load(s);a.engine.stop();a.setView('camp');
  },{id,route,romance});
 }
+test('continuous reading keeps the next episode open, ignores detached choices, and renders the narrator image',async({page},info)=>{
+ await page.setViewportSize({width:390,height:900});await start(page);await page.locator('#btn-main-quest').click();
+ await expect(page.locator('#dialogue-speaker')).toHaveText('Người kể');
+ expect(await page.locator('.classic-portrait').evaluate(async e=>{const src=getComputedStyle(e).backgroundImage.match(/url\(["']?(.*?)["']?\)/)[1];const im=new Image();im.src=src;await im.decode();return[im.naturalWidth,im.naturalHeight];})).toEqual([480,720]);
+ await page.screenshot({path:info.outputPath('narrator-mobile.png'),animations:'disabled'});
+ for(let i=1;i<=5;i++){
+  await read(page);await page.evaluate(()=>window.__oldStoryChoice=document.querySelector('[data-choice="continue"]'));
+  await page.locator('[data-choice="continue"]').click();
+  await expect(page.locator('#view-dialogue')).toBeVisible();
+  const expected='D01H0'+(i+1);expect(await page.evaluate(()=>window.__game.model.mainQuest().id)).toBe(expected);
+  await page.evaluate(()=>window.__oldStoryChoice.click());expect(await page.evaluate(()=>window.__game.model.mainQuest().id)).toBe(expected);
+ }
+ await expect(page.locator('.classic-title')).toContainText('Một đòn không giải quyết hết');
+ await expect(page.locator('#dialogue-text')).toContainText('chẳng có đạo diễn');
+});
+
+test('victory opens aftermath, reload resumes it, and continuation grants no duplicate reward',async({page})=>{
+ await start(page);await at(page,'D01H06');await page.locator('#btn-main-quest').click();await read(page);await page.locator('[data-choice="continue"]').click();
+ await page.evaluate(()=>{const a=window.__game;a.engine.stop();for(let i=0;i<7500&&a.model.running;i++)a.model.update(1/60);});
+ await expect(page.locator('#btn-story-next')).toBeVisible();const paid=await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory));
+ await page.locator('#btn-story-next').click();await expect(page.locator('.classic-title')).toContainText('Sau trận');await page.locator('#dialogue-next').click();
+ await expect.poll(()=>page.evaluate(async()=>{const{StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.journey.reader.positions['aftermath:D01H06'];}finally{m.db?.close();}})).toBe(1);
+ await page.reload();await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#btn-continue').click();await page.locator('#btn-main-quest').click();
+ await expect(page.locator('.classic-title')).toContainText('Sau trận');await expect(page.locator('#dialogue-speaker')).toHaveText('Trần Phong');
+ await read(page);await page.locator('[data-choice="continue"]').click();await expect(page.locator('.classic-title')).toContainText('Vết bầm dưới áo');
+ expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory))).toBe(paid);
+});
+
+test('retreat leaves the current fight uncompleted and never exposes a victory aftermath',async({page})=>{
+ await start(page);await at(page,'D01H06');await page.locator('#btn-main-quest').click();await read(page);await page.locator('[data-choice="continue"]').click();
+ await page.evaluate(()=>{window.__game.engine.stop();window.__game.model.retreat();});
+ await expect(page.locator('#btn-story-next')).toBeHidden();
+ expect(await page.evaluate(()=>window.__game.model.mainQuest().id)).toBe('D01H06');
+ await page.locator('#btn-battle-camp').click();await page.locator('#btn-main-quest').click();await expect(page.locator('.classic-title')).not.toContainText('Sau trận');
+ expect(await page.evaluate(()=>window.__game.model.session.storyProgress.completedQuests.includes('D01H06'))).toBe(false);
+});
+
+test('new training uses a real twelve-second hold without enemy reinforcements',async({page})=>{
+ await start(page);await at(page,'D02H02');await page.locator('#btn-main-quest').click();await read(page);await page.locator('[data-choice="continue"]').click();
+ const result=await page.evaluate(()=>{const a=window.__game;a.engine.stop();const b=a.model.battle;for(let i=0;i<300&&a.model.running;i++)a.model.update(1/60);const midway={running:a.model.running,elapsed:b.elapsed,waves:b.mission.waves.size};for(let i=0;i<500&&a.model.running;i++)a.model.update(1/60);return{midway,winner:a.model.lastResult.winner,duration:a.model.lastResult.duration,waves:b.mission.waves.size,mission:b.mission.summary().title};});
+ expect(result.midway.running).toBe(true);expect(result.midway.elapsed).toBeCloseTo(5,1);expect(result.midway.waves).toBe(0);expect(result.winner).toBe('home');expect(result.duration).toBeGreaterThanOrEqual(12);expect(result.waves).toBe(0);expect(result.mission).toContain('Đối luyện');
+});
 for(const width of [320,390,1280])test('default 400-episode story has readable classic dialogue and real player art at '+width+'px',async({page},info)=>{
  await page.setViewportSize({width,height:900});const errors=[];page.on('pageerror',e=>errors.push(e.message));await start(page);
  await expect(page.locator('#chapter-progress')).toHaveText('0/400 hồi');await expect(page.locator('#campaign-label')).toContainText('Đại Việt Kỳ Hiệp');
@@ -44,8 +86,8 @@ test('casebook and twenty-chapter archive expose only completed sources and repl
 });
 test('home choice survives reload and reads a different epilogue with only its valid ending',async({page},info)=>{
  await page.setViewportSize({width:390,height:900});await start(page);await at(page,'D19H18');await page.locator('#btn-main-quest').click();await read(page);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.locator('[data-choice="home"]').click();await expect(page.locator('#campaign-label')).toContainText('Nhánh trở về');
- for(let i=0;i<2;i++){await page.locator('#btn-main-quest').click();await read(page);await page.locator('[data-choice="continue"]').click();}
- await page.locator('#btn-main-quest').click();await expect(page.locator('.classic-title')).toContainText('Tiếng gọi không phát từ chiếc máy');await read(page);await page.screenshot({path:info.outputPath('home-epilogue.png'),animations:'disabled'});
+ for(let i=0;i<2;i++){await read(page);await page.locator('[data-choice="continue"]').click();}
+ await expect(page.locator('.classic-title')).toContainText('Tiếng gọi không phát từ chiếc máy');await read(page);await page.screenshot({path:info.outputPath('home-epilogue.png'),animations:'disabled'});
  await page.locator('[data-choice="continue"]').click();await expect.poll(()=>page.evaluate(async()=>{const{StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.storyProgress.activeQuestId;}finally{m.db?.close();}})).toBe('D20H02');
  await page.reload();await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#btn-continue').click();await page.locator('#btn-main-quest').click();await expect(page.locator('.classic-title')).toContainText('Mẹ đứng ở cửa');
  await at(page,'D20H20','home');await page.locator('#btn-main-quest').click();await read(page);await expect(page.locator('[data-choice="home"]')).toBeEnabled();await expect(page.locator('[data-choice="actor"]')).toBeDisabled();await page.locator('[data-choice="home"]').click();await expect(page.locator('#ending-title')).toContainText('hai mái nhà');await expect(page.locator('#ending-story')).not.toContainText('phong hậu');
