@@ -12,6 +12,7 @@ import { RECRUIT_QUESTS, MAIN_QUESTS } from '../src/data/QuestsData.js';
 import { seededRandom } from '../src/combat/CombatMath.js';
 import { StorageManager } from '../src/core/StorageManager.js';
 import { Companion } from '../src/entities/Companion.js';
+import {Hero} from '../src/entities/Hero.js';
 import { GridSystem } from '../src/combat/GridSystem.js';
 import { CombatEngine } from '../src/combat/CombatEngine.js';
 function fixture() {
@@ -23,10 +24,10 @@ function fixture() {
   c.session.inventory.find((i) => i.itemId === 'silver').quantity = 100000;
   return c;
 }
-test('50 unique companions, all five tiers, valid quest chapters and signature identities', () => {
-  assert.equal(COMPANIONS.length, 50);
-  assert.equal(new Set(COMPANIONS.map((c) => c.portrait)).size, 50);
-  assert.equal(new Set(COMPANIONS.map((c) => c.skills.ultimate.name)).size, 50);
+test('60 unique companions, all five tiers, valid quest chapters and signature identities', () => {
+  assert.equal(COMPANIONS.length, 60);
+  assert.equal(new Set(COMPANIONS.map((c) => c.portrait)).size, 60);
+  assert.equal(new Set(COMPANIONS.map((c) => c.skills.ultimate.name)).size, 60);
   for (let tier = 1; tier <= 5; tier++)
     assert.ok(COMPANIONS.some((c) => c.tier === tier));
   for (const c of COMPANIONS.slice(20)) {
@@ -116,7 +117,7 @@ test('all 50 owned characters and pity/history survive export/import; corrupted 
     saved = await storage.exportSave(c.snapshot());
   const restored = new Campaign();
   restored.load(await storage.decodeSave(saved));
-  assert.equal(restored.session.party.unlocked.length, 50);
+  assert.equal(restored.session.party.unlocked.length, 60);
   assert.deepEqual(restored.session.gacha, c.session.gacha);
   for (const edit of [
     (g) => (g.sinceEpic = 10),
@@ -138,7 +139,7 @@ test('each newly authored ultimate resolves through the actual combat engine', (
   for (const c of COMPANIONS.slice(20)) {
     const grid = new GridSystem(),
       hero = new Companion(c.id, { id: 'caster', level: 8 }),
-      friend = new Companion('companion_01', { id: 'friend', level: 8 }),
+      friend = c.skills.ultimate.targetType==='hero_ally'?new Hero('ThieuLam',{id:'hero',level:8}):new Companion('companion_01', { id: 'friend', level: 8 }),
       enemy = new Companion('companion_05', {
         id: 'enemy',
         team: 'enemy',
@@ -202,5 +203,5 @@ test('all portrait assets exist and are independently generated, with distinct c
     assert.equal(data.subarray(8, 12).toString(), 'WEBP');
     hashes.push(createHash('sha256').update(data).digest('hex'));
   }
-  assert.equal(new Set(hashes).size, 50);
+  assert.equal(new Set(hashes).size, 60);
 });

@@ -35,7 +35,7 @@ export function mountGachaUI(app) {
       heading,
       n(
         'p',
-        isDaiViet(s)?'Vai chính được mời qua chính truyện và chỉ vào nhóm quay sau khi đã gặp. Các nhân vật còn lại có thể mời như thường; tỉ lệ bậc và bảo đảm được giữ, trong mỗi bậc chia đều người hiện có. Quay không tự đổi đội hình.':'Một chén trà, một cuộc gặp. 50 hiệp khách đều có thể kết nghĩa qua nhiệm vụ; quay không cộng kinh nghiệm hay tự đổi đội hình.',
+        isDaiViet(s)?'Vai chính được mời qua chính truyện và chỉ vào nhóm quay sau khi đã gặp. Mười nhân vật mới chỉ mở quay và nhiệm vụ mời sau lần gặp trong truyện. Các nhân vật còn lại có thể mời như thường; tỉ lệ bậc và bảo đảm được giữ, trong mỗi bậc chia đều người hiện có. Quay không tự đổi đội hình.':'Một chén trà, một cuộc gặp. 60 hiệp khách đều có thể kết nghĩa qua nhiệm vụ; quay không cộng kinh nghiệm hay tự đổi đội hình.',
         'hint'
       )
     );
@@ -47,7 +47,7 @@ export function mountGachaUI(app) {
     root.append(pity);
     const locked =
       app.model.running ||
-      Boolean(s.storyProgress.pendingEncounter) ||
+      Boolean(s.storyProgress.pendingEncounter) ||!s.hero.sect||
       !s.storyProgress.completedQuests.includes('Q101')&&!s.storyProgress.completedQuests.includes('D01H06');
     const controls = n('div', undefined, 'gacha-actions');
     for (const [count, cost] of [

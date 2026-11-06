@@ -2,6 +2,7 @@ import { bus, EVT } from '../core/EventBus.js';
 import { SECTS } from '../data/SectsData.js';
 import { SKILL_TREES } from '../data/SkillTreeData.js';
 import { EQUIPMENT, EQUIPMENT_SETS } from '../data/EquipmentData.js';
+import {gearRarity} from '../data/GearCatalog.js';
 import { Hero } from '../entities/Hero.js';
 import { ATTRIBUTES, GEAR_SLOTS, MAX_LEVEL, normalizeHeroBuild, allocateSkill, allocateAttribute,
   equipItem, changeSect, resetSkills, resetAttributes, gainExperience, expToNextLevel, trialEquipment } from '../entities/HeroBuild.js';
@@ -11,7 +12,7 @@ function element(tag, text, className) {
   if (className) node.className = className; return node;
 }
 const STAT_NAMES = { maxHp: 'HP', physicalAtk: 'Ngoại công', magicalAtk: 'Nội công', physicalDef: 'Ngoại phòng', magicalDef: 'Nội phòng', attackSpeed: 'Tốc đánh', critRate: 'Bạo kích', dodgeRate: 'Né tránh' };
-const statsText = stats => Object.entries(stats).map(([key, value]) => `${STAT_NAMES[key] ?? key} +${value < 1 ? `${Math.round(value * 100)}%` : value}`).join(' · ');
+const statsText = stats => Object.entries(stats).map(([key, value]) => `${STAT_NAMES[key] ?? key} +${key==='attackSpeed'?value+' lần/giây':value < 1 ? `${Number((value * 100).toFixed(2))}%` : value}`).join(' · ');
 
 export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = true }) {
   const el = id => document.getElementById(id);
@@ -74,7 +75,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
       const row = element('label', label), select = element('select'); select.dataset.gearSlot = slot;
       const empty = element('option', 'Không trang bị'); empty.value = ''; select.append(empty);
       for (const item of EQUIPMENT.filter(item => item.slot === slot && (!item.sect || item.sect === hero.sect) && inventory.some(owned => owned.itemId === item.id && owned.quantity > 0))) {
-        const option = element('option', `${item.name} · ${statsText(item.stats)}`); option.value = item.id; select.append(option);
+        const option = element('option', `[${gearRarity(item).name}] ${item.name} · ${statsText(item.stats)}`); option.value = item.id; select.append(option);
       }
       select.value = hero.equippedGear[slot] ?? '';
       select.addEventListener('change', change((h, items) => equipItem(h, slot, select.value || null, items), 'Đã cập nhật trang bị.'));
@@ -84,7 +85,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
       const instance = new Hero(hero.sect, { profile: hero, inventory });
       el('progress-stats').textContent = `HP ${instance.stats.maxHp} · Ngoại công ${instance.stats.physicalAtk} · Nội công ${instance.stats.magicalAtk} · Ngoại phòng ${instance.stats.physicalDef} · Nội phòng ${instance.stats.magicalDef} · Bạo kích ${Math.round(Math.min(.75, instance.stats.critRate + hero.attributes.ngoTinh * .005) * 100)}%`;
       el('progress-ultimate').textContent = `Tuyệt kỹ hiện tại: ${instance.skills.ultimate.name}`;
-      el('progress-set').textContent = instance.activeEquipmentSets.length ? `Đủ bộ: ${instance.activeEquipmentSets.map(id => EQUIPMENT_SETS.find(set => set.id === id).name).join(', ')}` : 'Chưa đủ bộ ba món.';
+      el('progress-set').textContent = instance.activeEquipmentSets.length ? `Đủ bộ: ${instance.activeEquipmentSets.map(id => EQUIPMENT_SETS.find(set => set.id === id).name).join(', ')}` : 'Chưa đủ mốc bộ. Bộ mới có mốc 2 và 3 món; bộ phái cũ cần 3 món.';
     } else {
       el('progress-stats').textContent = 'Chưa chọn môn phái.'; el('progress-ultimate').textContent = ''; el('progress-set').textContent = '';
     }

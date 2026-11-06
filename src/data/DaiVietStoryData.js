@@ -21,6 +21,7 @@ import c20 from './dai-viet/chapter20.js';
 import home from './dai-viet/chapter20home.js';
 import {deepFreeze} from './DataUtils.js';
 import {stageCombat} from './DaiVietCombatStory.js';
+import {enrichExpansion} from './ExpansionStory.js';
 import {personalizeStory} from './HeroIdentity.js';
 export const DAI_VIET_CHAPTERS=deepFreeze([c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20]);
 export const DAI_VIET_HOME_CHAPTER=deepFreeze(home);
@@ -70,7 +71,7 @@ export const DAI_VIET_QUESTS=deepFreeze(DAI_VIET_CHAPTERS.flatMap(c=>{
   if(id==='D19H12')q.choices=[{id:'together',text:'Muốn thử tìm hiểu nhau, không thay cô ấy quyết tương lai.',karma:0},{id:'friends',text:'Giữ tình bằng hữu và tôn trọng con đường riêng.',karma:0}];
   if(id==='D19H18')q.choices=[{id:'home',text:'Trở về hiện đại. Gặp lại gia đình; chia tay Đại Việt và bàn giao đã có hiệu lực.',karma:0},{id:'stay',text:'Ở lại Đại Việt. Giữ đời sống đã xây; chấp nhận chưa có đường gặp lại mẹ.',karma:0}];
   if(id==='D20H20'){q.ending=true;q.kind='ending';q.xp=0;q.silver=0;q.choices=[];}
-  return stageCombat(q);
+  return enrichExpansion(stageCombat(q));
  });
 }));
 export const DAI_VIET_BY_ID=deepFreeze(Object.fromEntries(DAI_VIET_QUESTS.map(q=>[q.id,q])));

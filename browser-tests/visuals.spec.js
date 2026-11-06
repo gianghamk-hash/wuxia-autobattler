@@ -28,7 +28,7 @@ test('all 21 NPC portraits load in a review gallery', async ({ page }, testInfo)
   await expect.poll(() => page.locator('#npc-gallery img').evaluateAll(images => images.length === 21 && images.every(i => i.complete && i.naturalWidth >= 400))).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('npc-gallery.png'), fullPage: true });
 });
-test('all 139 skill profiles paint with real canvas, preserve transforms and have distinct ultimate silhouettes', async ({ page }, testInfo) => {
+test('all 159 skill profiles paint with real canvas, preserve transforms and have distinct ultimate silhouettes', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1200, height: 900 });
   await ready(page);
   const stats = await page.evaluate(async () => {
@@ -62,7 +62,7 @@ test('all 139 skill profiles paint with real canvas, preserve transforms and hav
     document.body.append(grid);
     return { count: SKILL_VISUALS.length, painted, silhouettes: hashes.size };
   });
-  expect(stats.count).toBe(139); expect(stats.painted).toBe(139); expect(stats.silhouettes).toBeGreaterThanOrEqual(72);
+  expect(stats.count).toBe(159); expect(stats.painted).toBe(159); expect(stats.silhouettes).toBeGreaterThanOrEqual(72);
   await page.screenshot({ path: testInfo.outputPath('skill-gallery.png'), fullPage: true });
   const video = await page.evaluate(async () => {
     const { SKILL_VISUALS } = await import('/src/data/SkillVisualsData.js');
@@ -129,7 +129,7 @@ test('real battle effects use NPC identity and actual targets; off/reduced setti
   expect(result.stable).toBe(true); expect(result.remaining).toBe(0);
   expect(result.targetHp).toBeLessThan(1300); expect(result.portrait).toContain('trinh_nghiem.webp');
 });
-test('four ending screens render individual speakers with portraits and the fifty-companion summary', async ({ page }) => {
+test('four ending screens render individual speakers with portraits and the sixty-companion summary', async ({ page }) => {
   await ready(page);
   const result = await page.evaluate(() => {
     const app = window.__game, old = app.model.session.storyProgress.endingId, results = [];
@@ -142,5 +142,5 @@ test('four ending screens render individual speakers with portraits and the fift
     return results;
   });
   expect(result).toHaveLength(4);
-  expect(result.every(r => r.portraits >= 3 && r.summary.includes('/50'))).toBe(true);
+  expect(result.every(r => r.portraits >= 3 && r.summary.includes('/60'))).toBe(true);
 });

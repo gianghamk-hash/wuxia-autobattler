@@ -33,6 +33,16 @@ export function drawSkillMotif(c, motif, x, y, radius, t, primary, secondary) {
   c.strokeStyle = primary; c.fillStyle = primary; c.lineWidth = .055; c.lineCap = 'round'; c.lineJoin = 'round';
   const child = (name, size = 1, rotation = 0) => { c.save(); c.rotate(rotation); drawSkillMotif(c, name, 0, 0, size, t, primary, secondary); c.restore(); };
   switch (motif) {
+    case 'courierKnot':line(c,[[-.75,-.4],[.4,-.4],[.4,.35],[-.75,.35]],true);line(c,[[-.75,-.4],[-.2,.05],[.4,-.4]]);for(let i=0;i<3;i++)line(c,[[.5,-.35+i*.3],[1,-.5+i*.3]]);break;
+    case 'ferryRope':arc(c,0,-.15,.6,0,Math.PI*2);line(c,[[-.7,-.5],[.6,.7],[1,.7]]);for(let i=0;i<2;i++)arc(c,-.2,.6+i*.25,.7,0,Math.PI);break;
+    case 'timberBrace':line(c,[[-.8,.7],[-.8,-.65],[.8,-.65],[.8,.7]],true);line(c,[[-.8,.7],[0,-.5],[.8,.7]]);line(c,[[-1,.9],[1,.9]]);break;
+    case 'watchGate':for(const x of [-.65,.65])line(c,[[x,.8],[x,-.7]]);line(c,[[-.9,-.7],[.9,-.7]]);line(c,[[-.4,.7],[.4,-.4],[.65,-.65]]);break;
+    case 'medicThread':line(c,[[-1,.1],[-.55,.1],[-.3,-.55],[0,.65],[.3,-.3],[.5,.1],[1,.1]]);arc(c,0,0,.95,-2.7,-.5);break;
+    case 'trailMarks':for(let i=0;i<4;i++){const x=(i%2?.3:-.3),y=-.8+i*.45;arc(c,x,y,.12,0,Math.PI*2);line(c,[[x-.1,y+.18],[x+.12,y+.18]]);}break;
+    case 'witnessPages':for(let i=0;i<3;i++){const x=-.75+i*.25;line(c,[[x,-.8+i*.15],[x+.8,-.8+i*.15],[x+.8,.7+i*.1],[x,.7+i*.1]],true);}line(c,[[-.35,-.1],[.25,-.1]]);break;
+    case 'caravanGuard':line(c,[[-.9,-.5],[.6,-.5],[.8,.3],[-.7,.3]],true);for(const x of [-.5,.6])arc(c,x,.55,.23,0,Math.PI*2);line(c,[[-1,-.85],[1,-.85]]);break;
+    case 'swordPause':sword(c,1);arc(c,0,0,.9,-2.8,-.4);line(c,[[-.9,.6],[-.3,.6],[-.3,.2]]);break;
+    case 'harborBeacon':line(c,[[-.3,.7],[-.15,-.8],[.15,-.8],[.3,.7]],true);for(const k of [-1,1]){line(c,[[k*.25,-.65],[k*.95,-.9]]);line(c,[[k*.25,-.4],[k,-.25]]);}arc(c,0,.8,.9,Math.PI,Math.PI*2);break;
     case 'staffSweep':
       c.rotate(-1.1 + t * 1.8); line(c, [[-1, -.07], [1, -.07], [1, .07], [-1, .07]], true); arc(c, 0, 0, .8, -.8, 1.5); break;
     case 'yinYang':

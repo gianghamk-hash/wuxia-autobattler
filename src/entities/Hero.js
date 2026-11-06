@@ -29,7 +29,7 @@ export class Hero extends Unit {
     }
     const items = Object.values(this.equippedGear).filter(Boolean).map(id => EQUIPMENT_BY_ID[id]);
     items.forEach(item => add(item.stats));
-    for (const set of EQUIPMENT_SETS) if (items.filter(item => item.setId === set.id).length >= set.requiredPieces) {
+    for (const set of EQUIPMENT_SETS) if (items.filter(item => item.setId === (set.setId??set.id)).length >= set.requiredPieces) {
       add(set.stats); this.activeEquipmentSets.push(set.id);
     }
     this.stats.hp = this.stats.maxHp;

@@ -10,6 +10,8 @@ import { bus, EVT } from './EventBus.js';
 import { Campaign, itemCount } from './Campaign.js';
 import { MAIN_QUESTS, RECRUIT_QUESTS, ENDINGS } from '../data/QuestsData.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
+import {EQUIPMENT_BY_ID} from '../data/EquipmentData.js';
+import {expansionRecruitEnding} from '../data/ExpansionCast.js';
 import { getSectName, SECTS } from '../data/SectsData.js';
 import { getActiveSynergies } from '../data/SynergiesData.js';
 import { changeSect, expToNextLevel } from '../entities/HeroBuild.js';
@@ -686,7 +688,7 @@ export class App {
       this.model.catalog.quests.some((q) => q.id === id)
     ).length;
     el('chapter-progress').textContent = `${completed}/${this.model.catalog.quests.length} hồi`;
-    el('roster-count').textContent = `${party.unlocked.length}/50 đã kết nghĩa`;
+    el('roster-count').textContent = `${party.unlocked.length}/${Object.keys(COMPANIONS_BY_ID).length} đã kết nghĩa`;
     const root = el('profile-hero');
     root.replaceChildren(portrait(art));
     const profile = node('div', undefined, 'profile-info');
@@ -1007,7 +1009,8 @@ export class App {
       ...this.readerOptions('recruit:' + quest.id),
       title: quest.title,
       hero: this.model.session.hero,
-      lines: [
+      quest:isDaiViet(this.model.session)?{canon:'dai-viet',chapter:this.model.session.storyProgress.currentChapter,episode:this.model.session.storyProgress.currentEpisode,scene:this.model.mainQuest()?.scene,location:quest.title}:undefined,
+      lines:ready&&expansionRecruitEnding(quest.companionId)?[[quest.title,expansionRecruitEnding(quest.companionId)]]:[
         ...quest.lines,
         ...(ready
           ? [
@@ -1097,9 +1100,11 @@ export class App {
   }
   enterBattle() {
     const battle = this.model.battle;
+    const pending=this.model.session.storyProgress.pendingEncounter;
+    const memory=pending?.kind==='chapterBoss'?this.model.catalog.quests.find(q=>q.chapter===Number(pending.questId)&&q.encounter)??this.model.catalog.quests.find(q=>q.chapter===Number(pending.questId)):null;
     battle.scene = battleScene(
-      this.model.session.storyProgress.pendingEncounter,
-      this.model.mainQuest(),
+      memory?{kind:'main'}:pending,
+      memory??this.model.mainQuest(),
       this.model.session.adventure.dungeon?.id
     );
     this.renderer.setBattle(battle);
@@ -1381,6 +1386,7 @@ export class App {
             : result.kind === 'recruit'
               ? 'Thử thách đã hoàn tất. Quay lại gặp nhân vật để mời đồng hành và nhận thưởng.'
               : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc.`;
+    if(result.rewards.gear?.length)el('battle-rewards').textContent+=' Trang bị: '+result.rewards.gear.map(id=>EQUIPMENT_BY_ID[id].name).join(', ')+'.';
     const table = node('table'),
       head = node('thead'),
       header = node('tr');
@@ -1457,7 +1463,7 @@ export class App {
       }
     }
     el('ending-summary').textContent =
-      `${this.model.session.hero.name} · Cấp ${this.model.session.hero.level} · ${this.model.session.party.unlocked.length}/50 người đồng hành · ${Math.floor(this.model.session.playtimeSeconds / 60)} phút phiêu lưu`;
+      `${this.model.session.hero.name} · Cấp ${this.model.session.hero.level} · ${this.model.session.party.unlocked.length}/${Object.keys(COMPANIONS_BY_ID).length} người đồng hành · ${Math.floor(this.model.session.playtimeSeconds / 60)} phút phiêu lưu`;
   }
   syncSpeed() {
     el('btn-pause').textContent = this.engine.paused ? 'Tiếp tục' : 'Tạm dừng';

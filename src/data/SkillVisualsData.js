@@ -56,7 +56,17 @@ const companionArt = [
   ['lotusLanterns', '#ffdea0', '#f0c7e9', 'petals', 1.5],
   ['dragonFist', '#e5bf63', '#80d3bc', 'wave', 1.35],
   ['phoenixWings', '#f7a675', '#efc9de', 'petals', 1.6],
-  ['infinityCut', '#d7e8ee', '#a9b6ed', 'sweep', 1.35]
+  ['infinityCut', '#d7e8ee', '#a9b6ed', 'sweep', 1.35],
+  ['courierKnot','#f2d58f','#8bc9d2','projectile',1.05],
+  ['ferryRope','#91d5d8','#d9bb83','ribbon',1.3],
+  ['timberBrace','#d6ac73','#b9d3a0','ward',1.45],
+  ['watchGate','#a6d6e9','#e1bc7b','wave',1.2],
+  ['medicThread','#a9e9bb','#f3dab7','petals',1.5],
+  ['trailMarks','#a8c693','#ded4a7','projectile',1.1],
+  ['witnessPages','#ded3ef','#d6ba8b','beam',1.35],
+  ['caravanGuard','#dcac71','#a8c8b1','sweep',1.25],
+  ['swordPause','#e6d5a4','#b2dfd1','ward',1.5],
+  ['harborBeacon','#a7dce3','#f2d18d','wave',1.4]
 ];
 const profiles = [], table = {};
 function add(ownerId, skill, art, ultimate, crest = '') {

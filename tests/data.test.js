@@ -72,8 +72,8 @@ test('five sects have full stats, growth and GDD passive mechanics', () => {
   assert.equal(SECTS.NgaMi.passive.ultimateCleanse, 'all_control');
   assert.equal(SECTS.DuongMon.passive.detonateAtStacks, 5);
 });
-test('50 stable companion IDs have stats, skills, structured recruitment and valid references', () => {
-  assert.equal(COMPANIONS.length, 50);
+test('60 stable companion IDs have stats, skills, structured recruitment and valid references', () => {
+  assert.equal(COMPANIONS.length, 60);
   const ids = new Set(),
     names = new Set(),
     skills = new Set(),
@@ -175,9 +175,9 @@ test('synergies require distinct sects, enforce six members, and support overlap
   assert.equal(SYNERGIES[2].effects[0].ratio, 0.25);
   assert.equal(SYNERGIES[3].effects[0].ratio, 0.2);
 });
-test('18 equipment records have unique IDs and complete three-piece sets', () => {
-  assert.equal(EQUIPMENT.length, 18);
-  assert.equal(EQUIPMENT_SETS.length, 5);
+test('54 equipment records have unique IDs and complete three-piece sets', () => {
+  assert.equal(EQUIPMENT.length, 54);
+  assert.equal(EQUIPMENT_SETS.length, 11);
   assert.equal(new Set(EQUIPMENT.map((x) => x.id)).size, EQUIPMENT.length);
   for (const item of EQUIPMENT) {
     assert.equal(EQUIPMENT_BY_ID[item.id], item);
@@ -187,15 +187,13 @@ test('18 equipment records have unique IDs and complete three-piece sets', () =>
     );
     assert.ok(item.sect === null || SECTS[item.sect]);
     assert.ok(
-      item.setId === null || EQUIPMENT_SETS.some((s) => s.id === item.setId)
+      item.setId === null || EQUIPMENT_SETS.some((s) => (s.setId??s.id) === item.setId)
     );
   }
   for (const set of EQUIPMENT_SETS) {
-    assert.equal(set.requiredPieces, 3);
+    assert.ok([2,3].includes(set.requiredPieces));
     assert.deepEqual(
-      EQUIPMENT.filter((x) => x.setId === set.id)
-        .map((x) => x.slot)
-        .sort(),
+      [...new Set(EQUIPMENT.filter((x) => x.setId === (set.setId??set.id)).map((x) => x.slot))].sort(),
       ['accessory', 'armor', 'weapon']
     );
   }

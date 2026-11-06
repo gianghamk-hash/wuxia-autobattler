@@ -210,7 +210,7 @@ test('legacy profile migration retains hero, inventory and flags, starts the rea
   c.load(once);
   assert.deepEqual(c.snapshot(), once);
 });
-test('full campaign crosses 240 episodes, recruits all fifty, and supports each gated ending with valid saves', async () => {
+test('full campaign crosses 240 episodes, recruits all sixty, and supports each gated ending with valid saves', async () => {
   const c = new Campaign();
   c.newGame({ sect: 'VoDang', name: 'Giang' });
   for (const quest of MAIN_QUESTS.filter((q) => !q.ending)) {
@@ -231,7 +231,7 @@ test('full campaign crosses 240 episodes, recruits all fifty, and supports each 
   for (const quest of RECRUIT_QUESTS)
     if (!c.session.party.unlocked.includes(quest.companionId))
       recruit(c, quest);
-  assert.equal(c.session.party.unlocked.length, 50);
+  assert.equal(c.session.party.unlocked.length, 60);
   assert.equal(
     c.endingOptions().find((e) => e.id === 'wealth').available,
     false
@@ -257,7 +257,7 @@ test('full campaign crosses 240 episodes, recruits all fifty, and supports each 
     const restored = new Campaign();
     restored.load(await storage.decodeSave(text));
     assert.equal(restored.session.storyProgress.endingId, ending.id);
-    assert.equal(restored.session.party.unlocked.length, 50);
+    assert.equal(restored.session.party.unlocked.length, 60);
   }
 });
 test('campaign schema rejects future quest skips, invented companions, forged ending and mismatched pending fights', () => {

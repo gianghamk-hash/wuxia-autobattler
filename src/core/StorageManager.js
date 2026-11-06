@@ -1,5 +1,6 @@
 import { validateCampaign } from './Campaign.js';
 import { normalizeHeroBuild } from '../entities/HeroBuild.js';
+import {COMPANIONS} from '../data/CompanionsData.js';
 /** Six independent slots. IndexedDB first; persistent LocalStorage fallback.
  * SHA-256 detects corruption, not deliberate editing (there is no secret key).
  */
@@ -44,7 +45,7 @@ export function validateSnapshot(data) {
       !plain(data.hero.attributes) || !Object.values(data.hero.attributes).every(finite) ||
       !Array.isArray(data.hero.allocatedSkills) || !data.hero.allocatedSkills.every(id => typeof id === 'string') ||
       !plain(data.hero.equippedGear)) fail('Thuộc tính nhân vật không hợp lệ.');
-  if (data.party.unlocked.length > 50 || new Set(data.party.unlocked).size !== data.party.unlocked.length) fail('Danh sách đồng đội không hợp lệ.');
+  if (data.party.unlocked.length > COMPANIONS.length || new Set(data.party.unlocked).size !== data.party.unlocked.length) fail('Danh sách đồng đội không hợp lệ.');
   const occupied = new Set();
   for (const [id, position] of Object.entries(data.party.formation)) {
     if (id !== 'hero' && !data.party.active.includes(id)) fail('Vị trí của nhân vật ngoài đội hình.');
