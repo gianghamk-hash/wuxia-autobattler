@@ -49,7 +49,7 @@ export function makeSquad(squad, scenario, side, grid) {
     const attr = squad.build === 'defense' ? 'canCot' : squad.build === 'mixed' && point++ % 2 === 0 ? 'canCot' : offense;
     profile = allocateAttribute(profile, attr, inventory);
   }
-  for (const node of [...SKILL_TREES[squad.sect]].sort((a, b) => a.tier - b.tier)) {
+  for (const node of [...SKILL_TREES[squad.sect]].filter(n=>n.tier<=4).sort((a, b) => a.tier - b.tier)) {
     // Keep historical 'mixed' fixtures on their original two branches.
     if(squad.build==='mixed' && node.branch==='balanced')continue;
     if (squad.build !== 'mixed' && node.branch !== squad.build) continue;

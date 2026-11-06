@@ -8,7 +8,7 @@ async function read(page){for(let i=0;i<30&&await page.locator('#dialogue-next')
 async function at(page,id,sect=null,route='stay'){
  await page.evaluate(async({id,sect,route})=>{
   const{createCampaign}=await import('/src/core/Campaign.js'),{DAI_VIET_QUESTS}=await import('/src/data/DaiVietStoryData.js'),{PLOT_UNLOCKS}=await import('/src/data/DaiVietCast.js'),s=createCampaign({story:'dai-viet',name:window.__game.model.session.hero.name,sect}),i=DAI_VIET_QUESTS.findIndex(q=>q.id===id),q=DAI_VIET_QUESTS[i],done=DAI_VIET_QUESTS.slice(0,i);
-  s.storyProgress.completedQuests=done.map(q=>q.id);s.storyProgress.decisions=Object.fromEntries(done.filter(q=>!q.ending).map(q=>[q.id,q.id==='D19H18'?route:q.choices[0].id]));Object.assign(s.storyProgress,{activeQuestId:id,currentChapter:q.chapter,currentEpisode:q.episode,currentAct:q.act});
+  s.storyProgress.completedQuests=done.map(q=>q.id);for(const past of done)if(past.aftermath)s.journey.reader.positions['aftermath:'+past.id]=past.aftermath.length-1;s.storyProgress.decisions=Object.fromEntries(done.filter(q=>!q.ending).map(q=>[q.id,q.id==='D19H18'?route:q.choices[0].id]));Object.assign(s.storyProgress,{activeQuestId:id,currentChapter:q.chapter,currentEpisode:q.episode,currentAct:q.act});
   for(const[cid,m]of Object.entries(PLOT_UNLOCKS))if(s.storyProgress.completedQuests.includes(m)){s.party.unlocked.push(cid);s.companionsAffinity[cid]=15;s.storyProgress.completedQuests.push('recruit_'+cid.slice(-2));}
   window.__game.model.load(s);window.__game.engine.stop();window.__game.setView('camp');
  },{id,sect,route});

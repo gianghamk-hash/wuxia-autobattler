@@ -12,9 +12,9 @@ export function validateLoot(l){
 }
 const secureRandom=()=>{if(!globalThis.crypto?.getRandomValues)fail('Thiết bị chưa hỗ trợ quay an toàn.');return globalThis.crypto.getRandomValues(new Uint32Array(1))[0]/4294967296;};
 export function drawEquipment(session,count,{random=secureRandom,now=Date.now()}={}){
- if(![1,10].includes(count)||!sectReady(session))fail('Nhập môn trước khi quay trang bị; chọn 1 hoặc 10 lượt.');
+ if(![1,5].includes(count)||!sectReady(session))fail('Nhập môn trước khi quay trang bị; chọn 1 hoặc 5 lượt.');
  if(session.storyProgress.pendingEncounter)fail('Kết thúc trận đang chờ trước khi quay trang bị.');
- const s=structuredClone(session);s.loot??=freshLoot();validateLoot(s.loot);const price=count===10?GEAR_DRAW.tenCost:GEAR_DRAW.singleCost;pay(s,'silver',price);
+ const s=structuredClone(session);s.loot??=freshLoot();validateLoot(s.loot);const price=count===5?GEAR_DRAW.tenCost:GEAR_DRAW.singleCost;pay(s,'silver',price);
  const roll=()=>{const n=random();if(!Number.isFinite(n)||n<0||n>=1)fail('Kết quả quay không hợp lệ.');return n;},results=[];
  for(let i=0;i<count;i++){
   const l=s.loot;let n=roll()*100,rank=4;

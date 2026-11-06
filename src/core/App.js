@@ -375,7 +375,7 @@ export class App {
       this.run(() => this.model.retreat())
     );
     el('btn-battle-camp').addEventListener('click', () =>
-      this.run(() => this.setView('camp'))
+      this.run(() => this.setView(this.model.lastResult?.kind==='dungeon'?'dungeons':'camp'))
     );
     el('btn-story-next').addEventListener('click',()=>this.run(()=>{
       if(this.view==='battle'&&this.model.lastResult?.winner==='home'&&this.model.lastResult.kind==='main')this.showMain();
@@ -882,7 +882,7 @@ export class App {
     const s=this.model.session,canonical=isDaiViet(s),pageToken=Symbol('story-page');
     this.storyPageToken=pageToken;
     if(canonical&&!skipAftermath&&!s.storyProgress.pendingEncounter){
-      const last=this.model.catalog.quests.filter(q=>s.storyProgress.completedQuests.includes(q.id)).at(-1);
+      const last=resolveDaiVietQuest(this.model.catalog.quests.filter(q=>s.storyProgress.completedQuests.includes(q.id)).at(-1),s);
       const key='aftermath:'+last?.id,position=s.journey.reader.positions[key];
       if(last?.aftermath&&(position===undefined||position<last.aftermath.length-1)){
         this.dialogue.show({
@@ -1065,7 +1065,7 @@ export class App {
         q.title,
       quest: q,
       hero: s.hero,
-      lines: [...storyLines(q, s, this.model.catalog.quests, COMPANIONS_BY_ID),...(q.aftermath??[])],
+      lines: [...(q.fullLines??storyLines(q,s,this.model.catalog.quests,COMPANIONS_BY_ID)),...(q.fullAftermath??q.aftermath??[])],
       note: 'Xem lại nguồn đã hoàn thành; giữ nguyên lựa chọn và phần thưởng.',
       onBack: () => this.world.openCasebook()
     });
@@ -1082,7 +1082,10 @@ export class App {
     );
     this.renderer.setBattle(battle);
     let buffs=el('battle-team-effects');if(!buffs){buffs=node('div');buffs.id='battle-team-effects';document.querySelector('.battle-toolbar').after(buffs);}buffs.replaceChildren();mountTeamEffects(buffs,this.model.session);buffs.querySelector('details').open=false;
-    el('battle-title').textContent = battle.encounterName;
+    el('battle-title').textContent=battle.encounterName+(battle.bossPhase?' · Boss 3 phase':'');
+    let phases=el('boss-phase-hud');if(!phases){phases=node('div');phases.id='boss-phase-hud';phases.setAttribute('role','status');document.querySelector('.battle-toolbar').after(phases);}phases.replaceChildren();phases.hidden=!battle.bossPhase;
+    if(battle.bossPhase)for(let i=1;i<=3;i++){const chip=node('span',i<3?`${i} · Mini boss`:'3 · Boss cuối');chip.dataset.phase=i;chip.dataset.active=String(i===battle.bossPhase);phases.append(chip);}
+
     this.renderBattleCards();
     bus.emit(EVT.BATTLE_STATE_CHANGED, { running: true });
     this.setView('battle');
@@ -1096,7 +1099,7 @@ export class App {
     root.replaceChildren();
     this.unitNodes.clear();
     this.intentNodes.clear();
-    for (const unit of battle.units) {
+    for (const unit of battle.units.filter(u=>u.team!=='enemy'||!battle.bossPhase||u.alive)) {
       const card = node('article', undefined, 'battle-unit-card');
       card.dataset.team = unit.team;
       const status = node('p'),
@@ -1159,7 +1162,7 @@ export class App {
         if (e.textContent !== text) e.textContent = text;
       }
     el('battle-clock').textContent =
-      `${this.engine.paused ? 'Tạm dừng · ' : ''}${battle.elapsed.toFixed(1)} / 120 giây`;
+      `${this.engine.paused ? 'Tạm dừng · ' : ''}${battle.elapsed.toFixed(1)} / ${battle.maxDuration} giây`;
     let warnings = el('battle-warnings');
     if (!warnings) {
       warnings = node('div', undefined, 'battle-warnings');
@@ -1243,6 +1246,7 @@ export class App {
           : 'Đã bị phá / bị hạ';
   }
   battleEvent(event) {
+    if(event.type==='boss:wave'){el('boss-phase-hud')?.querySelectorAll('[data-phase]').forEach(e=>e.dataset.active=String(Number(e.dataset.phase)===event.phase));el('battle-title').textContent=this.model.battle.encounterName+` · Phase ${event.phase}/3`;this.toast(`Phase ${event.phase}/3 · ${event.phase===3?'BOSS CUỐI':'MINI BOSS'}`);}
     this.renderer.event(event);
     if (event.type === 'boss:summon' && this.view === 'battle')
       this.renderBattleCards();
@@ -1333,6 +1337,7 @@ export class App {
     if (el('unit-sheet').open) el('unit-sheet').close();
     const result = this.model.lastResult;
     if (!result) return;
+    el('btn-battle-camp').textContent=result.kind==='dungeon'?'Về Bí cảnh':'Về doanh trại';
     el('btn-story-next').hidden=!(isDaiViet(this.model.session)&&result.kind==='main'&&result.winner==='home');
     el('battle-result-panel').hidden = false;
     el('battle-result-panel').dataset.won = String(result.winner === 'home');
@@ -1360,6 +1365,7 @@ export class App {
             : result.kind === 'recruit'
               ? 'Thử thách đã hoàn tất. Quay lại gặp nhân vật để mời đồng hành và nhận thưởng.'
               : `Nhận ${result.rewards.xp} XP và ${result.rewards.silver} bạc.`;
+    if(result.rewards.checkpointRest)el('battle-rewards').textContent+=' Trạm nghỉ mốc 10 tầng: toàn đội hồi phục trước chặng mới.';
     if(result.rewards.gear?.length)el('battle-rewards').textContent+=' Trang bị: '+result.rewards.gear.map(id=>EQUIPMENT_BY_ID[id].name).join(', ')+'.';
     const table = node('table'),
       head = node('thead'),
@@ -1403,6 +1409,12 @@ export class App {
       el('battle-stats').prepend(p);
     }
     renderBattleAdvice(this, result);
+    const tower=this.model.session.adventure.dungeon;
+    if(result.kind==='dungeon'&&result.winner==='home'&&tower?.mode==='tower'){
+      clearTimeout(this.towerTimer);const token=this.model.battleToken;
+      this.towerTimer=setTimeout(()=>{if(this.view==='battle'&&this.model.battleToken===token&&!this.model.running&&this.model.session.adventure.dungeon?.seed===tower.seed&&this.model.session.adventure.dungeon?.floor===tower.floor&&!document.hidden)this.run(()=>{this.clearBattle();this.model.chooseRoom(0);this.enterBattle();});},1200);
+    }
+
     this.sound.setTrack(result.winner === 'home' ? 'ending' : 'camp');
     this.sound.sfx(result.winner === 'home' ? 'victory' : 'defeat');
     this.updateBattleStatus();

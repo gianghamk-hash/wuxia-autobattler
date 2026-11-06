@@ -23,12 +23,12 @@ function at(id='D19H18'){
  s.companionsAffinity=Object.fromEntries(s.party.unlocked.map(id=>[id,15]));s.party.formation=Object.fromEntries(['hero',...s.party.active].map((id,i)=>[id,[{x:1,y:1},{x:2,y:1},{x:0,y:1},{x:0,y:0},{x:1,y:2},{x:2,y:0}][i]]));
  return s;
 }
-function fight(c){for(let i=0;i<7500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
+function fight(c){for(let i=0;i<22500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
 test('ten new companions have two per rarity and recurring concrete main-story scenes; unlocking waits for the first encounter',()=>{
  assert.equal(EXPANSION_CAST.length,10);for(let tier=1;tier<=5;tier++)assert.equal(EXPANSION_CAST.filter(p=>p.tier===tier).length,2);
  for(const p of EXPANSION_CAST){assert.ok(COMPANIONS_BY_ID[p.id]);const appearances=Object.entries(EXPANSION_SCENES).filter(([,lines])=>lines.some(l=>l[0]===p.name));assert.ok(appearances.length>=3,p.name);assert.equal(appearances[0][0],p.meet,p.name);assert.ok(Object.entries(EXPANSION_SCENES).some(([id,lines])=>Number(id.slice(1,3))>=17&&lines.some(l=>l[0]===p.name||l[1].includes(p.name))),p.name);
-  const c=fresh();c.load(at(p.meet));assert.equal(expansionAvailable(c.session,p.id),false);assert.equal(storyPoolAllows(c.session,p.id),false);assert.ok(!c.availableRecruitQuests().some(q=>q.companionId===p.id));
-  const bad=c.snapshot();bad.party.unlocked.push(p.id);bad.companionsAffinity[p.id]=15;assert.throws(()=>validateCampaign(bad));c.chooseMain('continue');assert.equal(expansionAvailable(c.session,p.id),true);assert.ok(c.availableRecruitQuests().some(q=>q.companionId===p.id));
+  const c=fresh(),met=at(p.meet);for(const n of SKILL_TREES.VoDang.filter(n=>n.branch==='attack')){try{met.hero=allocateSkill(met.hero,n.id,met.inventory);}catch{}}while(met.hero.freeAttributePoints)met.hero=allocateAttribute(met.hero,'khiHai',met.inventory);met.adventure.training=10;met.adventure.forging=10;c.load(met);assert.equal(expansionAvailable(c.session,p.id),false);assert.equal(storyPoolAllows(c.session,p.id),false);assert.ok(!c.availableRecruitQuests().some(q=>q.companionId===p.id));
+  const bad=c.snapshot();bad.party.unlocked.push(p.id);bad.companionsAffinity[p.id]=15;assert.throws(()=>validateCampaign(bad));if(c.chooseMain('continue'))assert.equal(fight(c).winner,'home');assert.equal(expansionAvailable(c.session,p.id),true);assert.ok(c.availableRecruitQuests().some(q=>q.companionId===p.id));
   const pool=Object.values(COMPANIONS_BY_ID).filter(u=>u.tier===p.tier&&storyPoolAllows(c.session,u.id)),values=[[0,.25,.64,.85,.96,.995][p.tier],(pool.findIndex(u=>u.id===p.id)+.1)/pool.length];const drawn=rollGacha(c.snapshot(),1,{random:()=>values.shift(),now:1});assert.equal(drawn.results[0].id,p.id);assert.equal(drawn.results[0].tier,p.tier);
  }
 });
@@ -37,9 +37,9 @@ test('an encountered new companion can be recruited through the actual side chal
 });
 test('equipment draws spend atomically, retain independent pity, and meet both real guarantees',()=>{
  const s=at(),before=structuredClone(s);assert.equal(GEAR_RARITIES.reduce((sum,r)=>sum+r.rate,0),100);assert.equal(NEW_GEAR.length,36);
- const ten=drawEquipment(s,10,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-720);assert.equal(ten.results.length,10);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'excellent');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
+ const ten=drawEquipment(s,5,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-720);assert.equal(ten.results.length,5);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'common');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
  let next=s;for(let i=0;i<50;i++)next=drawEquipment(next,1,{random:()=>0,now:i}).session;assert.equal(NEW_GEAR.find(e=>e.id===next.loot.history.at(-1).id).rarity,'exceptional');validateLoot(next.loot);
- assert.throws(()=>drawEquipment(s,10,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=79;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
+ assert.throws(()=>drawEquipment(s,5,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=79;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
  const bad=structuredClone(next);bad.loot.sinceExceptional=50;assert.throws(()=>validateCampaign(bad));
 });
 test('sets activate actual two/three-slot bonuses across rarities without counting spare copies or leaking stats after removal',()=>{
@@ -50,7 +50,7 @@ test('sets activate actual two/three-slot bonuses across rarities without counti
  h=equipItem(h,'accessory',null,s.inventory);assert.deepEqual(new Hero(h.sect,{profile:h,inventory:s.inventory}).stats,two.stats);assert.throws(()=>equipItem(h,'weapon',armor.id,s.inventory));
 });
 test('story equipment arrives once and completed old saves are not retroactively rewarded',()=>{
- const c=fresh();c.load(at('D03H10'));const id='gear_thiet_ve_common_armor';assert.equal(itemCount(c.session,id),0);c.chooseMain('continue');assert.equal(itemCount(c.session,id),1);const paid=c.snapshot();c.load(paid);assert.equal(itemCount(c.session,id),1);c.chooseMain('continue');assert.equal(itemCount(c.session,id),1);
+ const c=fresh();c.load(at('D03H10'));const id='gear_thiet_ve_common_armor';assert.equal(itemCount(c.session,id),0);if(c.chooseMain('continue'))assert.equal(fight(c).winner,'home');assert.equal(itemCount(c.session,id),1);const paid=c.snapshot();c.load(paid);assert.equal(itemCount(c.session,id),1);if(c.chooseMain('continue'))assert.equal(fight(c).winner,'home');assert.equal(itemCount(c.session,id),1);
  const old=at('D05H01');delete old.loot;c.load(old);assert.equal(itemCount(c.session,'gear_phong_hanh_rare_weapon'),0);
 });
 test('boss checkpoint reloads with the same seed and gear; a result settles only once, loss awards nothing',async()=>{

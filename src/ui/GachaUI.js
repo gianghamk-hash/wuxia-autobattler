@@ -52,7 +52,7 @@ export function mountGachaUI(app) {
     const controls = n('div', undefined, 'gacha-actions');
     for (const [count, cost] of [
       [1, GACHA.singleCost],
-      [10, GACHA.tenCost]
+      [5, GACHA.tenCost]
     ]) {
       const b = n('button', `Mời ${count} lượt · ${cost} bạc`);
       b.type = 'button';
@@ -105,7 +105,7 @@ export function mountGachaUI(app) {
       ),
       n(
         'p',
-        'Mời 10 giảm từ 600 còn 540 bạc, cùng tỉ lệ từng lượt. Phải đủ toàn bộ bạc trước khi mời; hoàn trùng áp dụng sau khi trừ giá. Đây là tiền trong game.',
+        'Gói mời 5 kết quả giá 540 bạc; lượt đơn giá 60 bạc. Tỉ lệ mỗi kết quả và bộ đếm bảo đảm được giữ. Phải đủ toàn bộ bạc trước khi mời; hoàn trùng áp dụng sau khi trừ giá. Đây là tiền trong game.',
         'hint'
       )
     );

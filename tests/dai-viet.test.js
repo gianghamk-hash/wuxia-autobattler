@@ -10,6 +10,7 @@ import {casebook} from '../src/core/Casebook.js';
 import {ENCOUNTERS} from '../src/data/EnemiesData.js';
 import {COMPANIONS_BY_ID} from '../src/data/CompanionsData.js';
 import {createHeroBuild,allocateAttribute,allocateSkill,equipItem} from '../src/entities/HeroBuild.js';
+import {NEW_GEAR} from '../src/data/GearCatalog.js';
 import {EQUIPMENT} from '../src/data/EquipmentData.js';
 import {SKILL_TREES} from '../src/data/SkillTreeData.js';
 import {SECT_IDS} from '../src/data/SectsData.js';
@@ -19,17 +20,17 @@ import {StorageManager} from '../src/core/StorageManager.js';
 import {heroText} from '../src/data/HeroIdentity.js';
 import {COMBAT_APPROACHES,EXTRA_COMBAT} from '../src/data/DaiVietCombatStory.js';
 
-function fight(c){for(let i=0;i<7500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
+function fight(c,rescue=false){let asked=false;for(let i=0;i<22500&&c.running;i++){if(rescue&&!asked&&c.battle.mission?.definition.type==='rescue'&&(c.battle.elapsed>=25||c.battle.units.filter(u=>u.team==='enemy'&&u.alive&&!u.missionAsset).length<=2)){c.battle.mission.requestRescue('hero');asked=true;}c.update(1/60);}assert.equal(c.running,false);return c.lastResult;}
 function fresh(sect='VoDang'){const c=new Campaign({now:()=>1720000000000});c.newGame({story:'dai-viet',sect});return c;}
 function prepared(){
  const c=fresh(),s=c.snapshot();
- s.inventory.push(...EQUIPMENT.filter(e=>e.sect==='VoDang').map(e=>({itemId:e.id,quantity:1})));
+ s.inventory.push(...NEW_GEAR.filter(e=>e.setId==='thanh_tam'&&e.rarity==='exceptional').map(e=>({itemId:e.id,quantity:1})));
  let h=createHeroBuild({sect:'VoDang',name:'Trần Phong',level:20});
  while(h.freeAttributePoints)h=allocateAttribute(h,'khiHai',s.inventory);
  for(const node of SKILL_TREES.VoDang.filter(n=>n.branch==='attack')){try{h=allocateSkill(h,node.id,s.inventory);}catch{}}
- for(const slot of ['weapon','armor','accessory']){const item=EQUIPMENT.filter(e=>e.sect==='VoDang'&&e.slot===slot).at(-1);h=equipItem(h,slot,item.id,s.inventory);}
- s.hero=h;s.party.unlocked=['companion_05','companion_03','companion_04','companion_06','companion_12'];s.party.active=[...s.party.unlocked];
- s.party.formation={hero:{x:1,y:1},companion_05:{x:2,y:1},companion_03:{x:0,y:1},companion_04:{x:0,y:0},companion_06:{x:1,y:2},companion_12:{x:2,y:0}};
+ for(const slot of ['weapon','armor','accessory']){const item=NEW_GEAR.find(e=>e.setId==='thanh_tam'&&e.rarity==='exceptional'&&e.slot===slot);h=equipItem(h,slot,item.id,s.inventory);}
+ s.hero=h;s.party.unlocked=['companion_05','companion_49','companion_50','companion_14','companion_20'];s.party.active=[...s.party.unlocked];
+ s.party.formation={hero:{x:1,y:1},companion_05:{x:2,y:1},companion_49:{x:0,y:1},companion_50:{x:0,y:0},companion_14:{x:1,y:2},companion_20:{x:2,y:0}};
  s.companionsAffinity=Object.fromEntries(s.party.unlocked.map(id=>[id,15]));s.adventure.training=10;s.adventure.forging=10;c.load(s);return c;
 }
 function snapshotAt(id){
@@ -39,7 +40,7 @@ function snapshotAt(id){
  return s;
 }
 
-test('all 105 fights separate setup from aftermath and retain every existing per-episode reward',()=>{
+test('all 265 fights separate setup from aftermath and retain every existing per-episode reward',()=>{
  assert.equal(Object.keys(COMBAT_APPROACHES).length,67);assert.equal(Object.keys(EXTRA_COMBAT).length,38);
  const xp=[260,360,500,650,850,1050,1250,1450,1650,1850,2000,2100,2200,2300,2300,2300,2400,2500,500,500],money=[70,80,100,115,125,135,150,165,180,195,210,220,225,230,240,250,260,280,100,100];
  for(const c of DAI_VIET_CHAPTERS){
@@ -74,9 +75,9 @@ test('400 full authored episodes have distinct scenes, complete speaker portrait
  assert.equal(DAI_VIET_HOME_CHAPTER.scenes.length,20);
  assert.equal(DAI_VIET_QUESTS[0].scene,'modern');assert.match(DAI_VIET_QUESTS[0].location,/Hiện đại/);assert.match(DAI_VIET_QUESTS[1].location,/Tây Bắc/);
 });
-test('all five selected paths play the actual one-enemy unarmed opening without prematurely learning an ultimate',()=>{
- for(const sect of SECT_IDS){const c=fresh(sect);for(let i=0;i<5;i++)c.chooseMain('continue');const before=itemCount(c.session,'silver');const b=c.chooseMain('continue');
-  assert.equal(b.units.filter(u=>u.team==='enemy').length,1);assert.equal(b.units[0].skills.autoAttack.name,'Quyền Cơ Bản');assert.equal(b.units[0].stats.attackRange,1);assert.equal(b.units[0].passive,null);
+test('all five selected paths play the actual four-enemy unarmed opening without prematurely learning an ultimate',()=>{
+ for(const sect of SECT_IDS){const c=fresh(sect);while(c.mainQuest().id!=='D01H06'){if(c.chooseMain('continue'))fight(c);}const before=itemCount(c.session,'silver');const b=c.chooseMain('continue');
+  assert.equal(b.units.filter(u=>u.team==='enemy').length,4);assert.equal(b.units[0].skills.autoAttack.name,'Quyền Cơ Bản');assert.equal(b.units[0].stats.attackRange,1);assert.equal(b.units[0].passive,null);
   assert.equal(fight(c).winner,'home',sect);assert.equal(c.mainQuest().id,'D01H07');assert.ok(itemCount(c.session,'silver')>before);
   assert.throws(()=>c.chooseEnding('actor'));assert.ok(!c.availableRecruitQuests().some(q=>PLOT_COMPANIONS.includes(q.companionId)));
  }
@@ -84,7 +85,7 @@ test('all five selected paths play the actual one-enemy unarmed opening without 
 test('new and legacy saves resume their own catalog and pending seed without converting already-read episode numbers',()=>{
  const legacy=new Campaign();legacy.newGame({sect:'VoDang'});legacy.chooseMain('protect');const old=legacy.snapshot(),wallet=structuredClone(old.inventory);
  const loaded=fresh();loaded.load(old);assert.equal(loaded.catalog.quests.length,240);assert.equal(loaded.mainQuest().id,'Q101');assert.deepEqual(loaded.session.inventory,wallet);assert.deepEqual(loaded.session.storyProgress.pendingEncounter,old.storyProgress.pendingEncounter);
- const current=fresh();for(let i=0;i<6;i++)current.chooseMain('continue');const saved=current.snapshot();loaded.load(saved);assert.equal(loaded.catalog.quests.length,400);assert.equal(loaded.mainQuest().id,'D01H06');assert.equal(loaded.retryEncounter().seed,saved.storyProgress.pendingEncounter.seed);
+ const current=fresh();while(current.mainQuest().id!=='D01H06'){if(current.chooseMain('continue'))fight(current);}current.chooseMain('continue');const saved=current.snapshot();loaded.load(saved);assert.equal(loaded.catalog.quests.length,400);assert.equal(loaded.mainQuest().id,'D01H06');assert.equal(loaded.retryEncounter().seed,saved.storyProgress.pendingEncounter.seed);
  const a=loaded.snapshot();loaded.load(a);assert.deepEqual(loaded.snapshot(),a);assert.equal(MAIN_QUESTS.length,240);
 });
 test('an examiner never appears as both ally guide and opponent in the same training fight',()=>{
@@ -93,14 +94,14 @@ test('an examiner never appears as both ally guide and opponent in the same trai
  assert.ok(guide&&opponent);assert.equal(guide.name,'Đạo Tĩnh (hỗ trợ)');assert.notEqual(guide.characterId,opponent.characterId);
 });
 test('new chiêu hiền cannot reveal five plot companions before their authored meeting and preserves rarity guarantees',()=>{
- const c=fresh();for(let i=0;i<6;i++)c.chooseMain('continue');fight(c);const s=c.snapshot();s.inventory.find(i=>i.itemId==='silver').quantity=100000;
- const rolls=rollGacha(s,10,{random:()=>0,now:1});assert.ok(rolls.results.every(r=>!PLOT_COMPANIONS.includes(r.id)));assert.ok(rolls.results.at(-1).tier>=4);
+ const c=fresh();while(c.mainQuest().id!=='D01H06'){if(c.chooseMain('continue'))fight(c);}c.chooseMain('continue');fight(c);const s=c.snapshot();s.inventory.find(i=>i.itemId==='silver').quantity=100000;
+ const first=rollGacha(s,5,{random:()=>0,now:1});const rolls=rollGacha(first.session,5,{random:()=>0,now:2});assert.ok(rolls.results.every(r=>!PLOT_COMPANIONS.includes(r.id)));assert.ok(rolls.results.at(-1).tier>=4);
  for(const id of PLOT_COMPANIONS){const bad=structuredClone(s);bad.party.unlocked.push(id);bad.companionsAffinity[id]=15;assert.throws(()=>validateCampaign(bad));}
  const renamed=storyPerson(s,COMPANIONS_BY_ID.companion_08);assert.equal(renamed.name,'Mai Tước');assert.equal(renamed.role,COMPANIONS_BY_ID.companion_08.role);
 });
 test('all 43 objectives refer to real combat episodes and never request a forced loss',()=>{
  assert.equal(Object.keys(DAI_VIET_MISSIONS).length,43);for(const m of Object.values(DAI_VIET_MISSIONS)){assert.ok(DAI_VIET_BY_ID[m.id]?.encounter);assert.ok(m.failure&&m.description);assert.ok(['hold','protect','rescue','breach'].includes(m.type));}
- assert.equal(DAI_VIET_QUESTS.filter(q=>q.chapter===14&&q.encounter).length,6);
+ assert.equal(DAI_VIET_QUESTS.filter(q=>q.chapter===14&&q.encounter).length,14);
 });
 test('chapter-entry recaps and early casebook do not reveal later proof or the five masters deaths',()=>{
  const s=snapshotAt('D03H11'),book=casebook(s);assert.ok(!book.people.some(p=>p.name==='Trịnh Nghiêm'));assert.ok(!book.entries.some(e=>e.id==='twice'||e.id==='murder'||e.id==='lost'));
@@ -120,21 +121,21 @@ test('all fifteen campaign-specific bond conversations keep their variants and r
 test('reader positions for all 400 main episodes and 400 replays fit the unchanged save envelope',async()=>{
  const s=snapshotAt('D20H20');for(const q of DAI_VIET_QUESTS){for(const kind of ['main','archive','flow'])s.journey.reader.positions[kind+':'+q.id]=1;if(q.aftermath)s.journey.reader.positions['aftermath:'+q.id]=0;}
  const m=new StorageManager({indexedDB:null,localStorage:{getItem:()=>null,setItem(){},removeItem(){}}}),text=await m.exportSave(s),restored=await m.decodeSave(text);
- assert.equal(Object.keys(restored.journey.reader.positions).length,1305);assert.equal(restored.storyProgress.activeQuestId,'D20H20');assert.deepEqual(restored.inventory,s.inventory);
+ assert.equal(Object.keys(restored.journey.reader.positions).length,1465);assert.equal(restored.storyProgress.activeQuestId,'D20H20');assert.deepEqual(restored.inventory,s.inventory);
 });
 test('actual combat completes the 400-episode route; gate branches, optional romance, four endings and replay stay consistent',async()=>{
  const c=prepared();let fights=0,gate;
  while(c.mainQuest().id!=='D19H18'){
   const q=c.mainQuest(),choice=q.id==='D19H12'?'friends':q.choices[0].id;
-  const b=c.chooseMain(choice);if(b){fights++;if(b.mission?.definition.type==='rescue')b.mission.requestRescue('hero');const r=fight(c);assert.equal(r.winner,'home',q.id+' '+c.lastResult.reason);}
+  const b=c.chooseMain(choice);if(b){fights++;const r=fight(c,true);assert.equal(r.winner,'home',q.id+' '+c.lastResult.reason);}
  }
- gate=c.snapshot();assert.equal(fights,105);assert.ok(PLOT_COMPANIONS.every(id=>gate.party.unlocked.includes(id)&&gate.storyProgress.completedQuests.includes(PLOT_UNLOCKS[id])));
+ gate=c.snapshot();assert.equal(fights,DAI_VIET_QUESTS.filter(q=>q.encounter&&q.id<'D19H18').length);assert.ok(PLOT_COMPANIONS.every(id=>gate.party.unlocked.includes(id)&&gate.storyProgress.completedQuests.includes(PLOT_UNLOCKS[id])));
  const book=casebook(gate);assert.ok(book.entries.some(e=>e.id==='murder'));assert.ok(!book.entries.some(e=>e.id==='gate'));assert.ok(!book.entries.some(e=>e.source==='D19H18'));
  const goldBefore=itemCount(gate,'silver');
  for(const route of ['home','stay']){
   const branch=fresh();branch.load(gate);branch.chooseMain(route);assert.equal(branch.mainQuest().id,'D19H19');
   const line=daiVietLines(branch.mainQuest(),branch.session).flat().join(' ');assert.ok(route==='home'?line.includes('chọn trở về'):line.includes('chọn ở lại'));
-  while(!branch.mainQuest().ending)branch.chooseMain('continue');const final=branch.snapshot();
+  while(!branch.mainQuest().ending){if(branch.chooseMain('continue'))assert.equal(fight(branch).winner,'home');}const final=branch.snapshot();
   assert.equal(final.storyProgress.completedQuests.filter(id=>id.startsWith('D')).length,399);
   const expected=route==='home'?['home']:['actor','justice','retire'];assert.deepEqual(branch.endingOptions().filter(e=>e.available).map(e=>e.id),expected);
   if(route==='home'){for(let e=1;e<=20;e++){const resolved=resolveDaiVietQuest(DAI_VIET_BY_ID[`D20H${String(e).padStart(2,'0')}`],final);assert.equal(resolved.title,heroText(DAI_VIET_HOME_CHAPTER.scenes[e-1].title,final));}assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H02,final).location,/Hiện đại/);assert.match(resolveDaiVietQuest(DAI_VIET_BY_ID.D20H04,final).location,/Đại Việt/);assert.throws(()=>branch.completeBond('bond_companion_01_1','listen'));}

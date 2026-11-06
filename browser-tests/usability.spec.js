@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 import {writeFile} from 'node:fs/promises';
 async function start(page) {await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Trần Phong');await page.locator('#btn-new-game').click();await page.evaluate(async()=>{
  const a=window.__game,{DAI_VIET_QUESTS}=await import('/src/data/DaiVietStoryData.js'),s=a.model.snapshot(),at=DAI_VIET_QUESTS.findIndex(q=>q.id==='D02H10'),done=DAI_VIET_QUESTS.slice(0,at);
- s.storyProgress.completedQuests=done.map(q=>q.id);s.storyProgress.decisions=Object.fromEntries(done.map(q=>[q.id,'continue']));Object.assign(s.storyProgress,{activeQuestId:'D02H10',currentChapter:2,currentEpisode:10,currentAct:1});a.model.load(s);a.model.joinSect('VoDang');a.engine.stop();a.setView('camp');
+ s.storyProgress.completedQuests=done.map(q=>q.id);for(const past of done)if(past.aftermath)s.journey.reader.positions['aftermath:'+past.id]=past.aftermath.length-1;s.storyProgress.decisions=Object.fromEntries(done.map(q=>[q.id,'continue']));Object.assign(s.storyProgress,{activeQuestId:'D02H10',currentChapter:2,currentEpisode:10,currentAct:1});a.model.load(s);a.model.joinSect('VoDang');a.engine.stop();a.setView('camp');
  });}
 async function audit(page) {
  await expect.poll(()=>page.evaluate(()=>[...document.querySelectorAll('button,summary')].filter(b=>b.getClientRects().length&&!b.querySelector('img.game-icon')).map(b=>b.id||b.textContent.trim().slice(0,40)))).toEqual([]);
@@ -67,7 +67,7 @@ test('all new portraits and nine six-pose sheets load with clean transparency an
    let clear=0,cells=0;if(row.kind==='sprite'){const a=c.getImageData(0,0,canvas.width,canvas.height).data;for(let i=3;i<a.length;i+=4)if(a[i]<10)clear++;for(let y=0;y<2;y++)for(let x=0;x<3;x++){const p=c.getImageData(x*512,y*512,512,512).data;if(p.some((v,i)=>i%4===3&&v>200))cells++;}}
    const label=document.createElement('figcaption');label.textContent=row.id;card.append(canvas,label);gallery.append(card);checks.push({id:row.id,kind:row.kind,clear,cells,motion:FIGHTERS.includes(row.id)});
   }return{checks,count:FIGHTERS.length};
- });expect(result.count).toBe(27);expect(result.checks).toHaveLength(21);
+ });expect(result.count).toBe(39);expect(result.checks).toHaveLength(21);
  for(const c of result.checks.filter(c=>c.kind==='sprite')){expect(c.clear).toBeGreaterThan(700000);expect(c.cells).toBe(6);expect(c.motion).toBe(true);}
  await page.setViewportSize({width:1280,height:1000});await page.screenshot({path:info.outputPath('new-character-art.png'),fullPage:true,animations:'disabled'});
 });

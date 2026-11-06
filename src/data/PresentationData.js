@@ -57,6 +57,7 @@ export function expressionFor(id, quest = {}) {
   return emotion ? asset('expressions/' + id + '-' + emotion + '.webp') : null;
 }
 export const FIGHTERS = Object.freeze([
+  'troop_spear','troop_saber','troop_archer','troop_medic','troop_raider','troop_duelist','troop_heavy','troop_shadow','boss_captain','boss_river','boss_marshal','boss_examiner',
   ...['modern','traveler','ThieuLam','VoDang','CaiBang','NgaMi','DuongMon','grief','commander','peace'].map(id=>'hero_'+id),
   'ThieuLam',
   'VoDang',

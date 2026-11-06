@@ -1,3 +1,5 @@
+import {ENEMY_CELLS,strengthenEnemy,bossSequence} from '../combat/BattleRules6.js';
+import {NEW_GEAR} from '../data/GearCatalog.js';
 import { gainExperience } from '../entities/HeroBuild.js';
 import { applyBondVariant } from '../data/BondsData.js';
 import { Hero } from '../entities/Hero.js';
@@ -322,12 +324,12 @@ export const worldMethods = {
     if (pending.kind === 'dungeon') {
       const def = DUNGEONS.find((v) => v.id === d.id),
         boss = d.rooms[d.floor][d.selected] === 'boss';
-      title = `${def.name} · tầng ${d.floor + 1}/${def.floors}${boss ? ' · TRẤN THỦ' : ''}`;
+      title = `${def.name} · tầng ${d.floor + 1}/${d.mode==='tower'?100:def.floors}${boss ? ' · TRẤN THỦ' : ''}`;
       level = Math.min(
         20,
-        def.level + Math.floor(d.floor / 2) + (d.weekly ? 2 : 0)
+        def.level + Math.floor(d.floor/(d.mode==='tower'?7:2))+(d.weekly?2:0)
       );
-      scale = (0.65 + d.floor * 0.045) * (boss ? 1.25 : 1);
+      scale=d.mode==='tower'?(.48+d.floor*.0045)*(boss?.8:1)*(d.weekly?1.1:1):(.65+d.floor*.045)*(boss?1.25:1);
       templates = [
         ['companion_05', 'companion_06', 'companion_08'],
         ['companion_14', 'companion_09', 'companion_01'],
@@ -338,37 +340,15 @@ export const worldMethods = {
     }
     if(pending.kind==='chapterBoss'){
       const c=Number(pending.questId),q=this.catalog.quests.filter(q=>q.chapter===c&&q.encounter).at(-1);
-      title=`Ôn trận · Boss chương ${c}`;level=Math.min(20,c+1);scale=1.04+c*.012;
+      title=`Ôn trận · Boss chương ${c}`;level=Math.min(20,c+1);scale=.60+c*.008;
       templates=q?.enemyId==='companion_01'?['companion_01','companion_06','companion_05']:['companion_05','companion_04','companion_06'];
     }
-    if (!units.some((u) => u.team === 'enemy'))
-      for (let i = 0; i < (pending.kind==='chapterBoss'?Math.min(6,2+Math.floor(Number(pending.questId)/4)):Math.max(2, team.active.length + 1)); i++) {
-        const unit = new Companion(templates[i % templates.length], {
-          id: `enemy_${i}`,
-          team: 'enemy',
-          level
-        });
-        unit.stats.maxHp = Math.round(unit.stats.maxHp * scale);
-        unit.stats.hp = unit.stats.maxHp;
-        unit.stats.physicalAtk *= scale;
-        unit.stats.magicalAtk *= scale;
-        if(pending.kind==='chapterBoss'&&i===0){
-          const c=Number(pending.questId),q=this.catalog.quests.filter(q=>q.chapter===c&&q.encounter).at(-1),p=DAI_VIET_CAST_BY_ID[q?.enemyId];
-          unit.name='Trấn giữ · '+(p?.id==='tay_sai'?(c>=13?'Toán truy đuổi':'Đội chặn đường'):p?.name??'Đối thủ tập trận');if(p){unit.portrait=p.portrait;unit.characterId=p.assetId;unit.storyActorId=p.id==='tay_sai'?'chapter_guard':p.id;unit.canon='dai-viet';}unit.stats.maxHp=Math.round(unit.stats.maxHp*1.3);unit.stats.hp=unit.stats.maxHp;
-        }
-        grid.place(
-          unit,
-          [
-            { x: 3, y: 1 },
-            { x: 5, y: 0 },
-            { x: 4, y: 2 },
-            { x: 3, y: 2 },
-            { x: 4, y: 0 },
-            { x: 5, y: 2 }
-          ][i]
-        );
-        units.push(unit);
-      }
+    const chapter=pending.kind==='chapterBoss'?Number(pending.questId):Math.min(20,Math.floor((d?.floor??0)/5)+1),isBoss=pending.kind==='chapterBoss'||pending.kind==='dungeon'&&d.mode==='tower'&&d.rooms[d.floor][d.selected]==='boss';
+    const targetCount=isBoss?4:pending.kind==='dungeon'&&d.mode==='tower'?Math.min(8,4+Math.floor(d.floor/20)):Math.min(8,Math.max(4,team.active.length+1));
+    for(let i=units.filter(u=>u.team==='enemy').length;i<targetCount;i++){
+      const unit=new Companion(templates[i%templates.length],{id:`enemy_${i}`,team:'enemy',level});unit.stats.maxHp=Math.round(unit.stats.maxHp*scale);unit.stats.hp=unit.stats.maxHp;unit.stats.physicalAtk*=scale;unit.stats.magicalAtk*=scale;grid.place(unit,ENEMY_CELLS.find(p=>!grid.at(p)));units.push(unit);
+    }
+    units.filter(u=>u.team==='enemy').forEach((u,index)=>{strengthenEnemy(u,{chapter,index});if(isDaiViet(s))u.canon='dai-viet';});
     // Apply each side's preparation once. Shared teams cannot import currency, training or paid buffs.
     this.prepareUnits(units, pending);
     if (pending.kind === 'dungeon') {
@@ -378,7 +358,9 @@ export const worldMethods = {
     }
     this.battleToken = pending.token;
     this.lastResult = null;
+    const nextBossWave=isBoss?bossSequence(units.filter(u=>u.team==='enemy'),chapter,pending.kind==='dungeon'?{title:title.replace(' · TRẤN THỦ',''),training:false,skin:d.floor<30?'boss_river':d.floor<60?'boss_captain':'boss_marshal'}:undefined):null;
     this.battle = new CombatEngine({
+      enemyLimit:8,nextBossWave,maxDuration:isBoss?360:150,
       units,
       grid,
       seed: pending.seed,
@@ -427,21 +409,26 @@ export const worldMethods = {
         return;
       }
       for (const unit of this.battle.units.filter((u) => u.team === 'home'))
-        d.hp[unit.id] = Math.max(0, unit.hpRatio);
+        d.hp[unit.id] = Math.max(0, Math.min(1,unit.hpRatio+(d.mode==='tower'?.25:0)));
       w.daily.floors++;
       rewards.xp = Math.max(
         10,
-        Math.round((40 + d.floor * 15) * d.rewardScale)
+        Math.round((d.mode==='tower'?25+d.floor*4:40+d.floor*15)*d.rewardScale)
       );
       rewards.silver = Math.max(
         1,
-        Math.round((5 + d.floor * 3) * d.rewardScale)
+        Math.round((d.mode==='tower'?12+d.floor*2:5+d.floor*3)*d.rewardScale)
       );
       give(s, 'silver', rewards.silver);
       d.floor++;
+      if(d.mode==='tower'){
+        w.towerBest??={};w.towerBest[d.id]=Math.max(w.towerBest[d.id]??0,d.floor);
+        if(d.floor%10===0){for(const id of Object.keys(d.hp))d.hp[id]=1;rewards.checkpointRest=true;const rank=d.floor>=80?4:d.floor>=40?3:2,pool=NEW_GEAR.filter(e=>e.tier===rank),item=pool[(d.seed+d.floor)%pool.length];give(s,item.id,1);rewards.gear=[item.id];give(s,'ore',Math.ceil(d.floor/10));}
+        if(d.floor%25===0)give(s,'essence',d.floor/25);
+      }
       d.selected = null;
       const def = DUNGEONS.find((v) => v.id === d.id);
-      if (d.floor === def.floors) {
+      if(d.floor===(d.mode==='tower'?100:def.floors)) {
         w.weekly.clears++;
         give(s, 'ore', 3);
         give(s, 'herb', 2);

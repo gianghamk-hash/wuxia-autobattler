@@ -654,11 +654,12 @@ export function mountWorldUI(app) {
     if (d) {
       const def = DUNGEONS.find((v) => v.id === d.id),
         p = panel(
-          `${def.name} · tầng ${d.floor + 1}/${def.floors}`,
-          'Đội và cấp đã chốt lúc vào. HP giữ qua tầng; tướng bị hạ không được hồi sinh tại quán nghỉ. Thua/rút lui kết thúc lượt.'
+          `${def.name} · tầng ${d.floor+1}/${d.mode==='tower'?100:def.floors}`,
+          d.mode==='tower'?'Đội và cấp đã chốt lúc vào. Thắng tầng hồi 25% HP cho cả người bị hạ; mốc 10 hồi đầy toàn đội. Trong ba phase boss không hồi miễn phí. Thua/rút lui kết thúc lượt.':'Đội và cấp đã chốt lúc vào. HP giữ qua tầng; tướng bị hạ không được hồi sinh tại quán nghỉ. Thua/rút lui kết thúc lượt.'
         );
       const path = n('div', undefined, 'dungeon-path');
       d.rooms.forEach((_, i) => {
+        if(d.mode==='tower'&&(i<d.floor-2||i>d.floor+3&&i!==99))return;
         const e = n('span', i === d.rooms.length - 1 ? undefined : String(i + 1));
         if(i===d.rooms.length-1)e.append(icon('flag'));
         e.dataset.status =
@@ -680,6 +681,7 @@ export function mountWorldUI(app) {
             fight(() => app.model.retryEncounter())
           )
         );
+      else if(d.mode==='tower'){p.append(n('p','Tháp 100 tầng · hồi 25% HP khi thắng, hồi toàn đội mỗi 10 tầng: địch mạnh dần, boss ba phase mỗi 10 tầng. Thắng tự chuyển tầng; giữ HP và đội đã chốt. Thua/rút lui kết thúc lượt.'));p.append(button('Tiếp tục tầng '+(d.floor+1),()=>fight(()=>app.model.chooseRoom(0))));p.append(button('Rời tháp',()=>run(()=>app.model.leaveDungeon())));}
       else {
         const choice = select(
           {
@@ -728,14 +730,14 @@ export function mountWorldUI(app) {
       const remaining=remainingEntries(s,def.id);
       const p = panel(
         def.name,
-        `${def.floors} tầng · cấp ${def.level} · phí ${def.fee} bạc. ${def.description} Lần đầu: bí kíp ${def.relic} + vật liệu/trang bị hiếm.`
+        `100 tầng · hồi 25% HP khi thắng, hồi toàn đội mỗi 10 tầng · kỷ lục ${w.towerBest?.[def.id]??0}/100 · cấp mở ${def.level} · phí ${def.fee} bạc. ${def.description} Lần đầu: bí kíp ${def.relic} + vật liệu/trang bị hiếm.`
       );
       p.append(n('p',`Còn ${remaining} lượt hôm nay`));
       if(remaining===0&&!w.daily.entryPurchases?.[def.id])p.append(button('Mua thêm 1 lượt · 60 bạc',()=>run(()=>app.model.buyDungeonEntry(def.id)),count(s,'silver')<EXTRA_ENTRY_PRICE));
       p.append(
         button(
           w.clears.includes(def.id) ? 'Khám phá lại' : 'Vào bí cảnh',
-          () => run(() => app.model.enterDungeon(def.id)),
+          () => fight(() => {app.model.enterDungeon(def.id);app.model.chooseRoom(0);}),
           s.hero.level < def.level || remaining<=0
         )
       );
@@ -743,7 +745,7 @@ export function mountWorldUI(app) {
         p.append(
           button(
             'Thử thách tuần · quái +2 cấp',
-            () => run(() => app.model.enterDungeon(def.id, true)),
+            () => fight(() => {app.model.enterDungeon(def.id,true);app.model.chooseRoom(0);}),
             s.hero.level < def.level + 2 || remaining<=0
           )
         );

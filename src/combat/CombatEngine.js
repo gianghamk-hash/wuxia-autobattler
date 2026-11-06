@@ -31,6 +31,8 @@ export class CombatEngine {
     overtime = true,
     yielding = true,
     missionId = null,
+    enemyLimit = 6,
+    nextBossWave = null,
     onEvent = () => {}
   }) {
     if (
@@ -55,8 +57,10 @@ export class CombatEngine {
       )
         throw new Error('Nhân vật chưa sẵn sàng chiến đấu.');
     }
+    if(![6,8].includes(enemyLimit))throw Error('Giới hạn quân không hợp lệ.');
+    this.enemyLimit=enemyLimit;this.nextBossWave=nextBossWave;this.bossPhase=nextBossWave?1:0;this.phaseStartedAt=0;this.startingCells=new Map(units.filter(u=>u.team==='home').map(u=>[u.id,{...u.gridPosition}]));
     for (const team of ['home', 'enemy'])
-      if (units.filter((u) => u.team === team).length > 6)
+      if (units.filter((u) => u.team === team).length > (team==='enemy'?enemyLimit:6))
         throw new Error('Mỗi phe tối đa sáu nhân vật.');
     this.autoUltimate = true;
     this.manualOrders = new Set();
@@ -195,7 +199,7 @@ export class CombatEngine {
           )
         )
           unit.energyGainMultiplier += 0.08;
-      const active = getActiveSynergies(members.map((u) => u.sect).filter(Boolean));
+      const active = getActiveSynergies([...new Set(members.map((u) => u.sect).filter(Boolean))]);
       this.teamSynergies[team] = active.map((s) => s.id);
       for (const synergy of active) {
         for (const unit of members) {
@@ -249,20 +253,21 @@ export class CombatEngine {
     }
   }
   checkResult() {
-    if (this.mission) {
-      const outcome = this.mission.outcome();
-      if (outcome) {
-        this.finish(outcome.winner, outcome.reason);
-        return true;
+    const home=this.units.some(u=>u.team==='home'&&u.alive&&!u.missionAsset),enemy=this.units.some(u=>u.team==='enemy'&&u.alive);
+    const outcome=this.mission?.outcome();
+    if(outcome?.winner==='enemy'||!home){this.finish(outcome?.winner==='enemy'?'enemy':enemy?'enemy':null,outcome?.reason??'elimination');return true;}
+    if(!enemy&&this.nextBossWave&&this.bossPhase<3){
+      this.bossPhase++;this.phaseStartedAt=this.elapsed;this.healTotals.clear();this.healWindows.clear();
+      for(const u of this.units.filter(u=>u.team==='home'&&u.alive&&this.startingCells.has(u.id)))this.grid.remove(u);
+      for(const u of this.units.filter(u=>u.team==='home'&&u.alive&&this.startingCells.has(u.id))){this.grid.place(u,this.startingCells.get(u.id),{formation:false});this.brains.get(u.id).action=null;}
+      for(const [i,u]of this.nextBossWave(this.bossPhase).entries()){
+        const cell=[{x:3,y:1},{x:5,y:0},{x:4,y:2},{x:3,y:2},{x:4,y:0},{x:5,y:2},{x:3,y:0},{x:5,y:1}][i];
+        if(!this.addUnit(u,cell))throw Error('Không thể mở phase boss.');
       }
-      return false;
+      this.director=new BossDirector(this);this.emit({type:'boss:wave',phase:this.bossPhase,total:3,name:`Phase ${this.bossPhase}/3`});return false;
     }
-    const home = this.units.some((u) => u.team === 'home' && u.alive),
-      enemy = this.units.some((u) => u.team === 'enemy' && u.alive);
-    if (!home || !enemy) {
-      this.finish(home ? 'home' : enemy ? 'enemy' : null, 'elimination');
-      return true;
-    }
+    if(this.mission&&!this.nextBossWave){if(outcome){this.finish(outcome.winner,outcome.reason);return true;}return false;}
+    if(!enemy){if(this.mission&&!outcome)return false;this.finish('home','elimination');return true;}
     return false;
   }
   finish(winner, reason) {
@@ -279,6 +284,7 @@ export class CombatEngine {
       winner,
       reason,
       duration: this.elapsed,
+      bossPhases: this.bossPhase,
       seed: this.seed,
       statistics: structuredClone([...this.records.values()])
     };
@@ -309,7 +315,7 @@ export class CombatEngine {
   }
   pressure() {
     const t = this.overtime
-      ? Math.max(0, Math.min(1, (this.elapsed - 90) / 30))
+      ? Math.max(0, Math.min(1, (this.elapsed - this.phaseStartedAt - 90) / 30))
       : 0;
     return { damage: 1 + t * 1.5, healing: 1 - t * 0.6 };
   }
@@ -356,7 +362,7 @@ export class CombatEngine {
   addUnit(unit, cell) {
     if (
       this.units.some((u) => u.id === unit.id) ||
-      this.units.filter((u) => u.team === unit.team && u.alive).length >= 6
+      this.units.filter((u) => u.team === unit.team && u.alive&&!u.isObject).length >= (unit.team==='enemy'?this.enemyLimit:6)
     )
       return false;
     this.grid.place(unit, cell, { formation: false });

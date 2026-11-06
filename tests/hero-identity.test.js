@@ -10,7 +10,7 @@ import {ENROLLMENT_QUEST,heroText,heroLines,heroAppearance,hasEnrollment,storyHe
 import {bondCatalog} from '../src/data/DaiVietBonds.js';
 import {StorageManager} from '../src/core/StorageManager.js';
 const fresh=(name='Minh An')=>{const c=new Campaign();c.newGame({story:'dai-viet',name});return c;};
-function fight(c){for(let i=0;i<7500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);assert.equal(c.lastResult.winner,'home');}
+function fight(c){for(let i=0;i<22500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);assert.equal(c.lastResult.winner,'home');}
 function gate(){
  const c=fresh();
  while(c.mainQuest().id!==ENROLLMENT_QUEST){const b=c.chooseMain('continue');if(b)fight(c);}
@@ -18,7 +18,7 @@ function gate(){
 }
 test('a named newcomer reaches enrollment through the actual opening with no sect, passive or ultimate',async()=>{
  const c=fresh(),before=c.snapshot();assert.equal(c.session.hero.sect,null);assert.throws(()=>c.joinSect('VoDang'));assert.deepEqual(c.snapshot(),before);
- for(let i=0;i<6;i++)c.chooseMain('continue');
+ while(c.mainQuest().id!=='D01H06'){if(c.chooseMain('continue'))fight(c);}c.chooseMain('continue');
  const u=c.battle.units[0];assert.equal(u.sect,null);assert.equal(u.name,'Minh An');assert.equal(u.passive,null);assert.equal(u.skills.ultimate.energyCost,10000);assert.ok(u.portrait.endsWith('/traveler.webp'));assert.deepEqual(c.battle.teamSynergies.home,[]);
  const m=new StorageManager({indexedDB:null,localStorage:{getItem:()=>null,setItem(){},removeItem(){}}}),restored=await m.decodeSave(await m.exportSave(c.snapshot())),copy=fresh();copy.load(restored);copy.retryEncounter();assert.equal(copy.battle.seed,c.battle.seed);fight(copy);assert.equal(copy.session.hero.sect,null);
 });

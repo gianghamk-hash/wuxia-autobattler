@@ -1,3 +1,4 @@
+import {combatFocused} from './CombatStory6.js';
 import {connectChapter} from './StoryContinuity.js';
 import c01 from './dai-viet/chapter01.js';
 import c02 from './dai-viet/chapter02.js';
@@ -72,7 +73,7 @@ export const DAI_VIET_QUESTS=deepFreeze(DAI_VIET_CHAPTERS.flatMap(c=>{
   if(id==='D19H12')q.choices=[{id:'together',text:'Muốn thử tìm hiểu nhau, không thay cô ấy quyết tương lai.',karma:0},{id:'friends',text:'Giữ tình bằng hữu và tôn trọng con đường riêng.',karma:0}];
   if(id==='D19H18')q.choices=[{id:'home',text:'Trở về hiện đại. Gặp lại gia đình; chia tay Đại Việt và bàn giao đã có hiệu lực.',karma:0},{id:'stay',text:'Ở lại Đại Việt. Giữ đời sống đã xây; chấp nhận chưa có đường gặp lại mẹ.',karma:0}];
   if(id==='D20H20'){q.ending=true;q.kind='ending';q.xp=0;q.silver=0;q.choices=[];}
-  return enrichExpansion(connectChapter(stageCombat(q)));
+  return combatFocused(enrichExpansion(connectChapter(stageCombat(q))));
  });
 }));
 export const DAI_VIET_BY_ID=deepFreeze(Object.fromEntries(DAI_VIET_QUESTS.map(q=>[q.id,q])));
@@ -87,7 +88,16 @@ function resolveRawDaiVietQuest(q,session){
  if(returning&&q.chapter===20){const scene=home.scenes[q.episode-1],ancient=[4,7,8,10,12,15,17].includes(q.episode);return{...q,title:scene.title,chapterTitle:home.title,chapterSummary:home.summary,chapterGoal:home.goal,location:q.episode===19?'Hai thế giới · hai bữa cơm':ancient?'Đại Việt · sau cuộc chia tay':'Hiện đại · sau ngày trở về',scene:ancient?'jianghu-village':'modern',lines:scene.lines,objectiveText:scene.objective,previous:q.episode===1?returns.D19H20.lines[0][1]:home.scenes[q.episode-2].lines[0][1]};}
  return q;
 }
-export function resolveDaiVietQuest(q,session){return q?.canon==='dai-viet'?personalizeStory(resolveRawDaiVietQuest(q,session),session):q;}
+export function resolveDaiVietQuest(q,session){
+ if(q?.canon!=='dai-viet')return q;
+ let resolved=resolveRawDaiVietQuest(q,session);
+ if(session.storyProgress.decisions.D19H18==='home'&&(q.chapter===20||q.chapter===19&&q.episode>=19)){
+  const original=resolved.lines,compact=[original[0],original.find(l=>l[0]!=='Người kể')].filter(Boolean);
+  resolved={...resolved,fullLines:original,fullAftermath:null,lines:compact};
+  if(q.encounter)resolved={...resolved,combatContext:'memory',lines:[['Người kể','Hồi ức một buổi đối luyện ở Đại Việt. Hiện tại Phong đã về nhà; đây không phải một trận chiến mới ở hiện đại.'],['Trần Phong','Nhớ cách giữ người bên cạnh, không chỉ nhớ phần mình thắng.']],aftermath:compact,fullAftermath:original,fullLines:[['Người kể','Ôn lại một buổi tập đã trải qua; kết quả không đổi lựa chọn trở về.']]};
+ }
+ return personalizeStory(resolved,session);
+}
 export function daiVietLines(quest,session){
  const q=resolveDaiVietQuest(quest,session),lines=q.lines.map(l=>[...l]);
  if(q.chapter===20&&session.storyProgress.decisions.D19H18!=='home'&&[3,13].includes(q.episode)){

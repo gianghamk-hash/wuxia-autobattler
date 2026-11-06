@@ -84,6 +84,8 @@ export class DialogueUI {
       for(const step of continuity.stages.filter(v=>v.at<=known))logic.append(node('p',step.label+': '+heroText(step.text,identitySession)));
       this.root.append(logic);
     }
+    const full=readerKey?.startsWith('aftermath:')?quest?.fullAftermath:quest?.fullLines;
+    if(full?.length>lines.length){const archive=node('details',undefined,'classic-recap');archive.append(node('summary','Bản thoại đầy đủ · tùy chọn'));for(const[speaker,text]of heroLines(full,identitySession))archive.append(node('p',speaker+': '+text));this.root.append(archive);}
     renderBattleBrief(this.root, brief);
     if (quest?.chapterGoal) {
       if(!continuous)this.root.append(

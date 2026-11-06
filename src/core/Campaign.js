@@ -1,4 +1,5 @@
 import {entryMethods} from './DungeonEntries.js';
+import {bossSequence} from '../combat/BattleRules6.js';
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
 import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { MISSIONS } from '../data/MissionsData.js';
@@ -634,11 +635,13 @@ export class Campaign {
     const encounter = ENCOUNTERS[quest.encounter],
       pending = this.session.storyProgress.pendingEncounter;
     const enemies = enemyLineup({
+      rules:isDaiViet(this.session)?6:null,
       quest,
       encounter,
-      count: encounter.count ?? encounter.templates.length,
+      count: isDaiViet(this.session)&&quest.boss?4:Math.min(MISSIONS[quest.id]?.type==='breach'?6:8,encounter.count??encounter.templates.length),
       main: true
     });
+    if(isDaiViet(this.session)&&quest.boss)bossSequence(enemies,quest.chapter);
     const missionId = pending
       ? pending.kind === 'main'
         ? pending.missionId
@@ -858,9 +861,10 @@ export class Campaign {
           : Math.min(3, (quest.act ?? 1) + 1);
     units.push(
       ...enemyLineup({
+        rules:isDaiViet(this.session)?6:null,
         quest,
         encounter,
-        count: enemyCount,
+        count: isDaiViet(this.session)&&quest?.boss&&pending.kind==='main'?4:Math.min(MISSIONS[pending.missionId]?.type==='breach'?6:8,enemyCount),
         grid,
         main: pending.kind === 'main'
       })
@@ -869,7 +873,10 @@ export class Campaign {
     if(isDaiViet(this.session))Object.assign(units[0],heroAppearance(this.session,pending.kind==='main'?quest:undefined));
     this.lastResult = null;
     this.battleToken = pending.token;
+    const boss=Boolean(isDaiViet(this.session)&&quest?.boss&&pending.kind==='main');
+    const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter):null;
     this.battle = new CombatEngine({
+      enemyLimit:8,nextBossWave,maxDuration:boss?360:150,
       units,
       grid,
       seed: pending.seed,

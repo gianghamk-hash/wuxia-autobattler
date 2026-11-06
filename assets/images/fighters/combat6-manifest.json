@@ -1,0 +1,290 @@
+[
+  {
+    "id": "troop_spear",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional city watch spearman, indigo quilted tunic, bronze helmet, long spear. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_spear.webp",
+    "sha256": "604a54f8425a92eab17e8167b9b7fc88347c4e5a78e76249c64972f21cdf119b",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_spear.webp",
+    "portraitSha256": "e9336921d299a39f99103d67d83012efa4d3a4a13b9ef58be899d1a147919de2",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_saber",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional caravan saber guard, brown leather armor, red waist sash, curved dao. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_saber.webp",
+    "sha256": "1db4ce21d8e043e3c71c99d3686a29b29feb8b558c3758934206458a3b905679",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_saber.webp",
+    "portraitSha256": "04b7479995f73102e066f46f18a9b3528c295a15d07b67fc0ef773a0704b0841",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_archer",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional forest archer, moss cloak, light leather, recurved bow. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_archer.webp",
+    "sha256": "d9efdc3c389df3b337eb8a747e783f59d789c3624b65a8c6c5dbdfa364ac4599",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_archer.webp",
+    "portraitSha256": "2b3ebd7f703659e1fcb35898cf2cdb2615e0a7ea5da4a9222012671da7f145a8",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_medic",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional enemy field herbalist, ivory and teal robe, staff and medicine satchel. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_medic.webp",
+    "sha256": "6c945b8ae453c30d5cddc40c28a8582776aa97bff9ef4ab9beb883eb6ee6324c",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_medic.webp",
+    "portraitSha256": "a10f735c2c23dcda3b8c2af9e18e9cb80a4b65dd0c5ffb44191fee697391c528",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_raider",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional river raider, blue headcloth, sleeveless rust vest, heavy short axe. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_raider.webp",
+    "sha256": "8c48f95da2ac8d02a8107617ec63d89d323803ad686055a23543a2dcf5085064",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_raider.webp",
+    "portraitSha256": "d660e41a28fc03d05095eeb576259781952a211007463c51838e6bf0acd02dd9",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_duelist",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional academy practice swordsman, white and slate robe, wooden training sword. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_duelist.webp",
+    "sha256": "597aeb1afb706c9636ee4cee62cc6f1e7bca573e7ec88361af97221905e9e999",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_duelist.webp",
+    "portraitSha256": "8013059fba048b2d0f09f4da30c311e49096cdb96868501c2c7e4b7133432abb",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_heavy",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional heavy infantry, dark bronze lamellar armor, tall shield and halberd. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_heavy.webp",
+    "sha256": "0e370e862460e85c9cd37e20a0cd58a855b90efa08cef4d98180d516d103a58a",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_heavy.webp",
+    "portraitSha256": "dd95b04cf568702268e74f05a182b2d6dd497e9d2774aa22bc16dfa569aae726",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "troop_shadow",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional masked scout, plum black layered clothes, twin short blades. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/troop_shadow.webp",
+    "sha256": "b7d586f04f0807211f098ccf4a5b40cf0388e779d6fc3292fbff5f383ea9eed0",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/troop_shadow.webp",
+    "portraitSha256": "a5dfd2558041d4bf03cb67015e91ebfc034bf42022ce743791a4daf915555732",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "boss_captain",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional veteran gate captain age50, grey moustache, ornate blue bronze armor, massive glaive. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/boss_captain.webp",
+    "sha256": "102f8b228302198fcc1ec4acd9cca15a9788f7710b489dd1bd16cb2f58aa26a3",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/boss_captain.webp",
+    "portraitSha256": "bdb5adacbea72e6bae10104be3ac309d0637cf000b2e89ab46a2043bc589439e",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "boss_river",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional river blockade commander age45, dark blue brocade, red headband, hooked saber. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels. Follow-up edit: Remove all white/gray background and floor shadows from this six-pose sprite atlas. Keep the same six poses, character, weapons, effects, exact 1536x1024 3x2 grid and cell placement. True fully transparent alpha=0 background in every empty area. No opaque backdrop.",
+    "asset": "assets/images/fighters/boss_river.webp",
+    "sha256": "1c94c3210c58660c391843a9783f7add46a357e136bd5c295c0423039247b2e1",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/boss_river.webp",
+    "portraitSha256": "e98568c80fe37b376ff2778e9c48cf13501f2e84f6c601130278e63df77e8854",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "boss_marshal",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional foreign army marshal age55, square weathered face, burgundy bronze lamellar armor, black fur mantle, longsword. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/boss_marshal.webp",
+    "sha256": "204a33c5fd334749fcbfe0d30784b5626aca430226a810c80fecc0f6184d4fd4",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/boss_marshal.webp",
+    "portraitSha256": "c4469398f59c9290d08fa8fc49da5a751e34aec6f916c61b272a12f2a926bd72",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "boss_examiner",
+    "prompt": "Production wuxia tactical RPG transparent fighter sprite atlas. Style reference is the attached existing game fighter atlas, not a face reference. New distinct Vietnamese/Asian fictional senior martial examiner age60, silver tied hair, cream and dark green ceremonial robe, long staff. Full body, painted detailed 2.5D art, strong readable silhouette. EXACT 3 columns by 2 rows on 1536x1024, six equal512x512 cells. Every figure faces RIGHT in three quarter view, consistent character identity, size and baseline. Top row: idle alert, running forward, forceful basic weapon attack. Bottom row: ultimate martial strike with a tight colored qi arc, recoiling from a hit, fallen defeated. All six distinct poses fully within own cells, generous transparent padding, no overlap. Preserve weapons and attire in all poses. Genuine alpha=0 empty background, no fog, floor or backdrop, no text, panels, logos or labels.",
+    "asset": "assets/images/fighters/boss_examiner.webp",
+    "sha256": "27aad7a13f028585121cf7f3b9992b96651e142b187b8b7400155db72e24fb45",
+    "size": [
+      1536,
+      1024
+    ],
+    "mode": "built-in image_gen",
+    "portrait": "assets/images/enemies/boss_examiner.webp",
+    "portraitSha256": "6aedf2975cef155e2612558694694a8131d0509c4c65dcdfb15d3c98a1e4af16",
+    "reference": "assets/images/fighters/tay_sai.webp",
+    "portraitCrop": [
+      110,
+      0,
+      410,
+      300
+    ],
+    "portraitSize": [
+      256,
+      256
+    ]
+  }
+]
