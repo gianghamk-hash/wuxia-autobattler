@@ -1,3 +1,4 @@
+import {CONFIG} from '../src/config.js';
 import {continuityFor} from '../src/data/StoryContinuity.js';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
@@ -8,13 +9,13 @@ import {DAI_VIET_MISSIONS} from '../src/data/DaiVietMissions.js';
 import {bondCatalog} from '../src/data/DaiVietBonds.js';
 import {EXPANSION_CAST} from '../src/data/ExpansionCast.js';
 import {EXPANSION_SCENES} from '../src/data/ExpansionStory.js';
-const out=resolve(process.argv[2]??'../../outputs/overhaul-5.0');await mkdir(out,{recursive:true});
+const out=resolve(process.argv[2]??'../../outputs/polish-5.1');await mkdir(out,{recursive:true});
 const state=(route='stay',romance='friends')=>({storyProgress:{storyRevision:4,decisions:{D19H18:route,D19H12:romance}}});
 const episode=(q,s)=>{const r=resolveDaiVietQuest(q,s);return{id:r.id,chapter:r.chapter,episode:r.episode,title:r.title,chapterTitle:r.chapterTitle,summary:r.chapterSummary,goal:r.chapterGoal,location:r.location,time:continuityFor(r,{returning:s.storyProgress.decisions.D19H18==='home'})?.time??'',lines:[...daiVietLines(q,s),...(r.aftermath?[['Người kể','[Sau khi người chơi hoàn thành trận đấu]'],...r.aftermath]:[])],objective:r.objectiveText,choices:r.choices,battle:Boolean(r.encounter),mission:DAI_VIET_MISSIONS[r.id]?.title??null};};
 const base=DAI_VIET_QUESTS.map(q=>episode(q,state())),home=DAI_VIET_QUESTS.filter(q=>q.chapter===20||(q.chapter===19&&q.episode>=19)).map(q=>episode(q,state('home')));
 const cast=[];for(const p of [...DAI_VIET_CAST,{id:'narrator',name:'Người kể',role:'Người dẫn chuyện ngoài bối cảnh, không tham gia chiến đấu',portrait:'assets/images/narrator.webp',kind:'narrator'}]){const bytes=await readFile(p.portrait);cast.push({...p,sha256:createHash('sha256').update(bytes).digest('hex'),image:'data:image/webp;base64,'+bytes.toString('base64')});}
 const spoken=DAI_VIET_QUESTS.flatMap(q=>[...daiVietLines(q,state()),...(q.aftermath??[])]);
-const bonds=bondCatalog(state()),stats={title:'Đại Việt Kỳ Hiệp Truyện',version:'5.0.0',source:'Cot_Truyen_Game_Full_20_Chuong.docx',chapters:20,episodes:400,mainWords:spoken.map(l=>l[1]).join(' ').split(/\s+/).length,mainLines:spoken.length,returnAlternativeEpisodes:22,bondScenes:bonds.length,battles:base.filter(q=>q.battle).length,objectives:Object.keys(DAI_VIET_MISSIONS).length,reusedCastPortraits:25,newCastPortraits:EXPANSION_CAST.length,narratorPortraits:1,newImages:46,sceneHandoffs:400,causalChapterSpines:20,enrichedEpisodes:Object.keys(EXPANSION_SCENES).length};
+const bonds=bondCatalog(state()),stats={title:'Đại Việt Kỳ Hiệp Truyện',version:CONFIG.VERSION,source:'Cot_Truyen_Game_Full_20_Chuong.docx',chapters:20,episodes:400,mainWords:spoken.map(l=>l[1]).join(' ').split(/\s+/).length,mainLines:spoken.length,returnAlternativeEpisodes:22,bondScenes:bonds.length,battles:base.filter(q=>q.battle).length,objectives:Object.keys(DAI_VIET_MISSIONS).length,reusedCastPortraits:25,newCastPortraits:EXPANSION_CAST.length,narratorPortraits:1,heroMotionSheets:10,equipmentIllustrations:36,colorIconImages:40,refreshedCompanionPortraits:10,sceneHandoffs:400,causalChapterSpines:20,enrichedEpisodes:Object.keys(EXPANSION_SCENES).length};
 await writeFile(join(out,'STORY_CAUSALITY.json'),JSON.stringify(DAI_VIET_QUESTS.filter(q=>q.episode===20).map(q=>({chapter:q.chapter,...continuityFor(q)})),null,2)+'\n');
 await writeFile(join(out,'STORY_STATS.json'),JSON.stringify(stats,null,2)+'\n');
 await writeFile(join(out,'CAST_ASSET_MAPPING.json'),JSON.stringify(cast.map(({image,...p})=>p),null,2)+'\n');

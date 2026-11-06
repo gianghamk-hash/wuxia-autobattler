@@ -126,6 +126,7 @@ export class App {
     });
     this.codex=mountCodexUI({getState:()=>this.model.session});
     decorateIcons();
+    this.shopInventory=el('shop-inventory');
     this.bind();
     for (const id of ['companion-search', 'companion-tier'])
       el(id).addEventListener(
@@ -317,9 +318,6 @@ export class App {
       el(id).addEventListener('click', () =>
         this.run(() => this.setView('title'))
       );
-    el('btn-camp-roster').addEventListener('click', () =>
-      this.run(() => {this.usability?.openRoster('formation');this.setView('roster');})
-    );
     el('btn-main-quest').addEventListener('click', () =>
       this.run(() => this.showMain())
     );
@@ -414,7 +412,7 @@ export class App {
     this.sound.setMuted(muted);
     this.sound.setVolume(volume);
     el('audio-volume').value = String(Math.round(volume * 100));
-    el('btn-audio').replaceChildren(icon('sound'));
+    el('btn-audio').replaceChildren(icon(muted?'mute':'sound'));
     el('btn-audio').setAttribute(
       'aria-label',
       muted ? 'Bật âm thanh' : 'Tắt âm thanh'
@@ -571,46 +569,9 @@ export class App {
     el('btn-main-quest').disabled = (!isDaiViet(session)&&!session.hero.sect) || Boolean(pending);
     el('btn-resume-battle').hidden = !pending;
     el('btn-practice').disabled = !sectReady(session) || Boolean(pending);
-    el('shop-inventory').textContent =
+    this.shopInventory.textContent =
       `Bạc ${itemCount(session, 'silver')} · Dây ${itemCount(session, 'rope')} · Cá ${itemCount(session, 'food_fish')} · Trà ${itemCount(session, 'tea')}`;
     el('btn-continue').disabled = !this.hasLoaded;
-    const party = el('party-summary');
-    party.replaceChildren();
-    const members = [
-      {
-        id: 'hero',
-        ...(isDaiViet(session)?heroAppearance(session):{}),
-        name: session.hero.name,
-        sect: session.hero.sect,
-        detail: `Cấp ${session.hero.level}`,
-        role: 'HIỆP KHÁCH'
-      },
-      ...session.party.active.map((id) => ({
-        id,
-        ...storyPerson(session,COMPANIONS_BY_ID[id]),
-        detail: `Duyên nợ ${session.companionsAffinity[id] ?? 0}/100`,
-        role: getSectName(COMPANIONS_BY_ID[id].sect)
-      }))
-    ];
-    for (const member of members) {
-      const card = node('article', undefined, 'party-member'),
-        info = node('div', undefined, 'party-member-info');
-      info.append(
-        node('span', member.role, 'member-role'),
-        node('strong', member.name),
-        node('small', member.detail)
-      );
-      card.append(portrait(member), info);
-      party.append(card);
-    }
-    for (let i = members.length; i < 6; i++) {
-      const empty = node('article', undefined, 'party-member empty');
-      empty.append(
-        node('span', '+', 'empty-slot'),
-        node('span', 'Chờ người kết nghĩa')
-      );
-      party.append(empty);
-    }
     const sects = [
       storyHeroBuild(session).sect,
       ...session.party.active.map(

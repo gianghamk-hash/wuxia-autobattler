@@ -70,3 +70,15 @@
 }
 @media(max-width:360px){ .gear-inventory,.gear-results{grid-template-columns:1fr}.camp-hero-art{width:112px}.scene-copy h1{font-size:1.35rem}.formation-units{grid-template-columns:1fr} }
 @media(prefers-reduced-motion:reduce){ *{scroll-behavior:auto!important} }
+
+/* Rendered bitmap symbols share the same decorative/accessible contract as the old glyphs. */
+img.game-icon { object-fit:contain; image-rendering:auto; filter:drop-shadow(0 1px 1px #0007); }
+.team-effects p .game-icon {display:inline-block;vertical-align:middle;margin-right:7px;width:22px;height:22px;}
+.formation-cell>span>.game-icon {width:23px;height:23px;}
+#view-dungeons>.training-card,#world-root>.shop-card {margin:0 0 18px;width:100%;}
+#world-root>.shop-card .shop-items {grid-template-columns:repeat(3,minmax(0,1fr));}
+.shop-items button {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:90px;padding:10px 5px;}
+.shop-items button.portrait-action>.action-symbol {position:static;width:24px;height:24px;flex-basis:24px;padding:0;margin:0 auto;background:none;border-radius:0;}
+.main-nav button .game-icon {width:28px;height:28px;}
+.icon-button .game-icon {width:26px;height:26px;}
+@media(max-width:480px){#view-dungeons>.training-card{grid-template-columns:44px minmax(0,1fr);padding:16px}#view-dungeons>.training-card>button{grid-column:1/-1}#world-root>.shop-card{padding:16px}#world-root>.shop-card .shop-items button{font-size:.8rem;min-width:0}}

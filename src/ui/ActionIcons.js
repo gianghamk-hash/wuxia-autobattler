@@ -5,7 +5,7 @@ const IDS={
  'btn-audio':'sound','btn-more':'settings','btn-save':'saves','btn-load':'download','btn-export':'upload','btn-import':'download',
  'btn-retry-save':'refresh','btn-rescue-export':'upload','btn-latest-save':'download','btn-new-session':'plus',
  'btn-practice':'sword','btn-pause':'pause','btn-retreat':'back','btn-battle-mode':'settings','btn-rescue-mission':'heart',
- 'dialogue-previous':'back','dialogue-next':'arrow','dialogue-advance':'arrow','btn-camp-roster':'roster',
+ 'dialogue-previous':'back','dialogue-next':'arrow','dialogue-advance':'arrow',
  'tab-skills':'sword','tab-attributes':'plus','tab-gear':'bag'
 };
 /** Every label remains in the DOM; icons are decorative and never become the accessible name. */
@@ -16,7 +16,7 @@ export function actionKey({id='',text='',view,close,scale,focus,skill,attribute,
   if(scale!==undefined)return 'speed';
   if(skill)return 'sword';
   if(attribute)return 'plus';
-  if(buy)return buy==='tea'?'tea':'bag';
+  if(buy)return ({tea:'tea',rope:'rope',food_fish:'fish'})[buy]??'bag';
   if(view)return {camp:'camp',roster:'roster',tavern:'tea',dungeons:'flag',profile:'profile',codex:'codex',saves:'saves',settings:'settings',title:'back'}[view]??'arrow';
   if(IDS[id])return id==='btn-pause'&&/tiep tuc/.test(normal(text))?'play':IDS[id];
   if(/^đóng/i.test(String(text)))return 'close';
@@ -40,12 +40,12 @@ export function decorateAction(element) {
   if(element.dataset.closeSheet&&element.textContent.trim()==='×')for(const child of [...element.childNodes])if(child.nodeType===3)child.remove();
   if(element.id==='dialogue-advance'){
     const indicator=element.querySelector('.classic-indicator');
-    if(indicator&&!indicator.querySelector('svg'))indicator.replaceChildren(icon('arrow'));
+    if(indicator&&!indicator.querySelector('.game-icon'))indicator.replaceChildren(icon('arrow'));
     element.dataset.actionIcon='arrow';return;
   }
-  const original=element.querySelector('svg.game-icon:not([data-action-symbol])');
+  const original=element.querySelector('.game-icon:not([data-action-symbol])');
   if(original){element.dataset.actionIcon=key;return;}
-  const own=[...element.children].filter(e=>e.matches?.('svg[data-action-symbol]'));
+  const own=[...element.children].filter(e=>e.matches?.('.game-icon[data-action-symbol]'));
   if(own.length===1&&own[0].dataset.actionSymbol===key){element.dataset.actionIcon=key;return;}
   own.forEach(e=>e.remove());
   const glyph=icon(key);glyph.dataset.actionSymbol=key;glyph.classList.add('action-symbol');element.prepend(glyph);

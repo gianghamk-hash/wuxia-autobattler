@@ -5,10 +5,10 @@ async function start(page) {await page.goto('/');await expect(page.locator('#boo
  s.storyProgress.completedQuests=done.map(q=>q.id);s.storyProgress.decisions=Object.fromEntries(done.map(q=>[q.id,'continue']));Object.assign(s.storyProgress,{activeQuestId:'D02H10',currentChapter:2,currentEpisode:10,currentAct:1});a.model.load(s);a.model.joinSect('VoDang');a.engine.stop();a.setView('camp');
  });}
 async function audit(page) {
- await expect.poll(()=>page.evaluate(()=>[...document.querySelectorAll('button,summary')].filter(b=>b.getClientRects().length&&!b.querySelector('svg.game-icon')).map(b=>b.id||b.textContent.trim().slice(0,40)))).toEqual([]);
+ await expect.poll(()=>page.evaluate(()=>[...document.querySelectorAll('button,summary')].filter(b=>b.getClientRects().length&&!b.querySelector('img.game-icon')).map(b=>b.id||b.textContent.trim().slice(0,40)))).toEqual([]);
  const result=await page.evaluate(()=>{
   const visible=[...document.querySelectorAll('button,summary')].filter(b=>b.getClientRects().length&&getComputedStyle(b).visibility!=='hidden');
-  return {overflow:document.documentElement.scrollWidth>innerWidth,small:visible.filter(b=>b.getBoundingClientRect().height<43.5).map(b=>({id:b.id,text:b.textContent.trim().slice(0,30),h:b.getBoundingClientRect().height})),duplicates:visible.filter(b=>b.querySelectorAll(':scope > svg[data-action-symbol]').length>1).map(b=>b.id),
+  return {overflow:document.documentElement.scrollWidth>innerWidth,small:visible.filter(b=>b.getBoundingClientRect().height<43.5).map(b=>({id:b.id,text:b.textContent.trim().slice(0,30),h:b.getBoundingClientRect().height})),duplicates:visible.filter(b=>b.querySelectorAll(':scope > img[data-action-symbol]').length>1).map(b=>b.id),
    unnamed:visible.filter(b=>!((b.getAttribute('aria-label')??b.textContent).trim())).map(b=>b.id)};
  });expect(result).toEqual({overflow:false,small:[],duplicates:[],unnamed:[]});
 }
@@ -30,7 +30,7 @@ for(const width of [320,390,768,1280])test('all main screens and function icons 
  await page.locator('#btn-more').click();await expect(page.locator('#menu-sheet')).toBeVisible();await audit(page);await page.locator('[data-close-sheet="menu-sheet"]').click();expect(errors).toEqual([]);
 });
 test('roster tabs support keyboard, retain saved formations and reveal recruitment without spending silver',async({page})=>{
- await start(page);await page.locator('#btn-camp-roster').click();const before=await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory));
+ await start(page);await page.locator('.main-nav [data-view="roster"]').click();const before=await page.evaluate(()=>JSON.stringify(window.__game.model.session.inventory));
  await page.locator('#roster-tab-formation').focus();await page.keyboard.press('ArrowRight');await expect(page.locator('#roster-tab-companions')).toHaveAttribute('aria-selected','true');await expect(page.locator('#roster-pane-formation')).toBeHidden();
  await page.keyboard.press('ArrowRight');await expect(page.locator('#recruit-list')).toBeVisible();await page.keyboard.press('End');await expect(page.locator('#gacha-root')).toBeVisible();await page.keyboard.press('Home');
  await page.getByLabel('Tên đội 1').fill('Đội thuận tay');await page.locator('#journey-roster').getByRole('button',{name:'Lưu đội',exact:true}).first().click();
@@ -47,7 +47,7 @@ test('profile tab, list scroll and casebook search survive normal navigation; ic
  });expect(await page.evaluate(()=>JSON.stringify(window.__game.model.snapshot()))).toBe(before);await audit(page);
 });
 test('manual ultimate is a one-tap queued order with the real energy gate, and battle shortcuts do not interrupt combat',async({page},info)=>{
- await start(page);await page.locator('#btn-practice').click();await expect(page.locator('#view-battle')).toBeVisible();
+ await start(page);await page.locator('.main-nav [data-view="dungeons"]').click();await page.locator('#btn-practice').click();await expect(page.locator('#view-battle')).toBeVisible();
  await page.locator('#btn-battle-mode').click();await page.evaluate(()=>window.__game.updateBattleStatus());
  const cast=page.locator('[data-manual-ultimate="hero"]');await expect(cast).toBeVisible();await expect(cast).toBeDisabled();
  await page.evaluate(()=>{const a=window.__game;a.model.battle.units.find(u=>u.id==='hero').stats.energy=100;a.updateBattleStatus();});await expect(cast).toBeEnabled();await cast.click();

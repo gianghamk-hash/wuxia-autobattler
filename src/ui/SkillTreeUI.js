@@ -49,7 +49,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
     const tree = el('skill-tree'); tree.replaceChildren();
     if(hero.sect)tree.append(element('p','Chọn hướng build: Sát lực dồn sát thương; Cân bằng vừa công vừa thủ; Phòng thủ giữ tuyến. Có thể phối nút, nhưng chỉ được học một tuyệt kỹ tầng 4. Hoàn điểm miễn phí để thử lại.','build-guide'));
     if (!hero.sect) tree.append(element('p', storyMode?'Bạn chưa nhập môn. Tìm hiểu năm viện và chọn phái trong chính truyện ở chương 2, hồi 10.':'Chọn môn phái để mở cây kỹ năng.'));
-    if(hero.sect){const nav=element('nav',undefined,'build-tabs');nav.setAttribute('aria-label','Hướng võ công');for(const[id,label]of Object.entries({attack:'Sát lực',balanced:'Cân bằng',guard:'Phòng thủ'})){const button=element('button',label);button.type='button';button.dataset.buildBranch=id;button.setAttribute('aria-pressed',String(branchChoice===id));button.onclick=()=>{branchChoice=id;refresh();};nav.append(button);}tree.append(nav);}
+    if(hero.sect){const nav=element('nav',undefined,'build-tabs');nav.setAttribute('aria-label','Hướng võ công');for(const[id,label]of Object.entries({attack:'Sát lực',balanced:'Cân bằng',guard:'Phòng thủ'})){const button=element('button',label);button.type='button';button.dataset.buildBranch=id;button.dataset.uiIcon=({attack:'sword',balanced:'lotus',guard:'shield'})[id];button.setAttribute('aria-pressed',String(branchChoice===id));button.onclick=()=>{branchChoice=id;refresh();};nav.append(button);}tree.append(nav);}
     for (const node of (SKILL_TREES[hero.sect] ?? []).filter(n=>n.branch===branchChoice)) {
       const learned = hero.allocatedSkills.includes(node.id);
       let reason = '';

@@ -1,3 +1,4 @@
+import {icon} from './Visuals.js';
 import {sectBonuses} from '../data/StrategyData.js';
 import {getActiveSynergies} from '../data/SynergiesData.js';
 import {SECTS} from '../data/SectsData.js';
@@ -12,6 +13,6 @@ export function mountTeamEffects(root,session){
  const box=document.createElement('details');box.className='team-effects';box.open=true;
  const effects=teamEffects(session),title=document.createElement('summary');title.textContent=`Hiệu ứng đội hình · ${effects.length} đã kích hoạt`;box.append(title);
  if(!effects.length){const p=document.createElement('p');p.textContent='Ghép từ 2 người cùng phái hoặc phối các phái tương trợ để kích hoạt buff.';box.append(p);}
- for(const effect of effects){const p=document.createElement('p');p.textContent='✓ '+effect;box.append(p);}
+ for(const effect of effects){const p=document.createElement('p');p.append(icon('check'),document.createTextNode(effect));box.append(p);}
  root.append(box);return box;
 }

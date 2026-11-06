@@ -1,6 +1,6 @@
 import {mountTeamEffects} from './TeamEffects.js';
 import {equipmentAura} from './GearArt.js';
-import { portrait } from './Visuals.js';
+import { portrait,icon } from './Visuals.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import {storyPerson} from '../data/DaiVietCast.js';
 import {heroAppearance} from '../data/HeroIdentity.js';
@@ -91,7 +91,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
           );
         } else {
           const label = document.createElement('span');
-          label.textContent = '+';
+          label.append(icon('plus'));
           label.setAttribute('aria-hidden', 'true');
           button.append(label);
         }

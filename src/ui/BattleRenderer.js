@@ -1,4 +1,5 @@
 import {equipmentAura} from './GearArt.js';
+import {portraitURL} from '../data/ArtURLs.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { SECT_ART } from './Visuals.js';
 import { getSkillVisual } from '../data/SkillVisualsData.js';
@@ -297,10 +298,7 @@ export class BattleRenderer {
         let individual = this.companionImages.get(artId);
         if (!individual && portraitPath) {
           individual = new Image();
-          individual.src = new URL(
-            '../../' + portraitPath,
-            import.meta.url
-          ).href;
+          individual.src = portraitURL(portraitPath);
           this.companionImages.set(artId, individual);
         }
         if (individual?.complete && individual.naturalWidth) {

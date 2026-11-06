@@ -1,0 +1,522 @@
+[
+  {
+    "id": "back",
+    "description": "chunky curved jade left arrow",
+    "asset": "assets/images/icons/back.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "ed1964a680351285b731374e481d2e1a82c5baf2c62f696ce6037539c7349a81",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "close",
+    "description": "polished red X cross",
+    "asset": "assets/images/icons/close.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "182b18766494bda54c3c566860df4752de1b50b8ffa320993104ad04a8386e55",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "plus",
+    "description": "bright jade green plus",
+    "asset": "assets/images/icons/plus.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "393996aba78cb2839d578f9ab10d8ea8b81715356e61155ceb9edfd4fa6d1c94",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "check",
+    "description": "emerald green checkmark",
+    "asset": "assets/images/icons/check.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "9314c162afb39e9afdf831b87bdc889cf7bab171db0b62bc5c3325aa913e747d",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "play",
+    "description": "gold right pointing triangular play button",
+    "asset": "assets/images/icons/play.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "2f37c4e329cbe527bae506b433d423d5b2cf89b6a7bb35ed557d31df624f9852",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "pause",
+    "description": "two gold pause bars",
+    "asset": "assets/images/icons/pause.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "bd3fdf0ecd8fa4c15c68d3a0149287d68925862c7900e6c2485c41c6dff40927",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "speed",
+    "description": "bronze speedometer with turquoise needle",
+    "asset": "assets/images/icons/speed.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "233676f3dde58780788a01b4baa819a0b76ae8781618fcc54b09dcbb2e1a91fa",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "upload",
+    "description": "rolled parchment with blue upward arrow",
+    "asset": "assets/images/icons/upload.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "a47226ad16d400859cfefa3497d53059b4d9f7afb40320a715450e0ce82a5bf5",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "download",
+    "description": "rolled parchment with green downward arrow",
+    "asset": "assets/images/icons/download.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "408b193fdef9d27921b5a02515771a3e12c23f4b47e3a9ee2d2c4a64edb792ff",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "refresh",
+    "description": "two circular turquoise refresh arrows",
+    "asset": "assets/images/icons/refresh.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3f64506f-32ee-4fdc-a8dc-90e5cc5d1ab8.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. chunky curved jade left arrow; 2. polished red X cross; 3. bright jade green plus; 4. emerald green checkmark; 5. gold right pointing triangular play button; 6. two gold pause bars; 7. bronze speedometer with turquoise needle; 8. rolled parchment with blue upward arrow; 9. rolled parchment with green downward arrow; 10. two circular turquoise refresh arrows. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "e0c68d857673ac9c03b1272dd77251c2d7cc408b12451764cfbafc640d589224",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "focus",
+    "description": "red and gold target reticle",
+    "asset": "assets/images/icons/focus.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "cb9582105b1853bf19d8eba8697498d0d38d3bb1c30e3672055445e6c682e282",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "bag",
+    "description": "rich brown leather travel satchel",
+    "asset": "assets/images/icons/bag.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "abe0a835cbdf7cc594f9a51eb0f4f97da7c925b9a53da32895ec5e01fb3d4d4d",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "gift",
+    "description": "red silk gift box with golden bow",
+    "asset": "assets/images/icons/gift.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "f591fe3fdd006402fb41a0752b74cddf643472364edbd93e07e9d60c0ab07701",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "heart",
+    "description": "glossy red heart",
+    "asset": "assets/images/icons/heart.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "05cbdb99d276bf03b62cbdf995acceb59935f8f4eb80907af85ef86b5506ce2b",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "scroll",
+    "description": "golden rolled quest scroll",
+    "asset": "assets/images/icons/scroll.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "ba0143ed7ecda243d9ecbc584b93b948da96dedccc8841c96826ce42ee41ad86",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "hammer",
+    "description": "steel blacksmith hammer with brown handle",
+    "asset": "assets/images/icons/hammer.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "72dd7c7692c56f6e3f6000cf9104de2b93cab6bb8259c5bd7074692156f0ad2a",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "flag",
+    "description": "crimson flag on a bronze pole",
+    "asset": "assets/images/icons/flag.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "282a815b4d91521649f0bb31b5d98cacf9bb2fff1243d725ccdf1e5387b0573a",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "help",
+    "description": "sapphire blue question mark",
+    "asset": "assets/images/icons/help.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "f8cb9354dc9101dc0a8a30e54ee75c49b755f9e2768748b3adfd93853dc3a761",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "up",
+    "description": "gold upward arrow",
+    "asset": "assets/images/icons/up.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "8c24dcfedc603bc1dc789c813ee3c811dc5306bd6c492702e6db41b3057af069",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "camp",
+    "description": "small jade roofed ancient Vietnamese pavilion",
+    "asset": "assets/images/icons/camp.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b72720c2-8ab6-4b58-b3ce-ebe403969dda.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. red and gold target reticle; 2. rich brown leather travel satchel; 3. red silk gift box with golden bow; 4. glossy red heart; 5. golden rolled quest scroll; 6. steel blacksmith hammer with brown handle; 7. crimson flag on a bronze pole; 8. sapphire blue question mark; 9. gold upward arrow; 10. small jade roofed ancient Vietnamese pavilion. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "86fca1218cdf01a85f03807bafcdd043fac5fb070f6a31198b6293d08bf87ce3",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "roster",
+    "description": "three colorful miniature warrior busts",
+    "asset": "assets/images/icons/roster.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "ab58d0eec67862b5433c0b497caf89a4c352482f07c0f0f70d1aa3562d67974e",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "profile",
+    "description": "single young warrior head and shoulders with blue collar",
+    "asset": "assets/images/icons/profile.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "240fc9ebdd237ea131e7d6b3e8847aa3cfd644f7386a5e65b17206c8ab611e4e",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "codex",
+    "description": "open illustrated book with jade cover",
+    "asset": "assets/images/icons/codex.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "ab0776f517a9c8913d27a19f6b13ebd2cbd950f140ebd8a0e1886b17c969ba30",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "saves",
+    "description": "ornate bronze save coffer with a blue downward arrow",
+    "asset": "assets/images/icons/saves.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "77ed6c160bb279a7f0eec61d6c82d1fb8dee6259357947ff8a450ed892bbe7e1",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "settings",
+    "description": "gold cogwheel with turquoise center",
+    "asset": "assets/images/icons/settings.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "dcc29a7d130356bee403cd1b41bc33c9abe0bdef5ded6787e81d21328574a8c9",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "sword",
+    "description": "silver wuxia sword with red wrapped handle",
+    "asset": "assets/images/icons/sword.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "d3a38f9d8b47da3ccf0320df6b218623e71386322a84f8aef6fd05ba0671352c",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "coin",
+    "description": "round gold coin with square center hole",
+    "asset": "assets/images/icons/coin.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "2b67cb62a97e6573496d186f10e038a6adec7fd4afafb40e7d228fd3cd69ad17",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "arrow",
+    "description": "chunky gold right arrow",
+    "asset": "assets/images/icons/arrow.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "f8f43156c10abf5f5a3eb5230fc0ba5edc80b0680cd0845c6d873cbc2370bbfe",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "lotus",
+    "description": "pink lotus flower with green leaves",
+    "asset": "assets/images/icons/lotus.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "ba1686d97f710797e770055e27a0014baf02a028617227f19109ef6f00c85a81",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "trophy",
+    "description": "gold victory cup",
+    "asset": "assets/images/icons/trophy.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-b458bc77-be3f-458f-976a-4f1fd53f4b36.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. three colorful miniature warrior busts; 2. single young warrior head and shoulders with blue collar; 3. open illustrated book with jade cover; 4. ornate bronze save coffer with a blue downward arrow; 5. gold cogwheel with turquoise center; 6. silver wuxia sword with red wrapped handle; 7. round gold coin with square center hole; 8. chunky gold right arrow; 9. pink lotus flower with green leaves; 10. gold victory cup. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "427a1027233736ce2b9daaf167ed5b6da29591e617d33692df026ae599c6d065",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "tea",
+    "description": "jade tea cup with pale steam",
+    "asset": "assets/images/icons/tea.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "73960d039dce2a333552d0a016143b519b1be5dec8d8963f1a018537bfd79c68",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "sound",
+    "description": "gold speaker with turquoise sound waves",
+    "asset": "assets/images/icons/sound.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "cef2a8438ab361ac326e283fe6bf40124a3c84d068efa355f78aefd32a12e854",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "star",
+    "description": "gold five pointed star",
+    "asset": "assets/images/icons/star.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "a63bf1549b5955326fc79e67763ff7718cdd30bd60fbceb8103c789c27da5d0f",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "shield",
+    "description": "blue steel shield with gold rim",
+    "asset": "assets/images/icons/shield.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "43c6ec2a821a9ad38996c352bbad35bd18c78337904e6bb8fafd1a0e64fa92b3",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "lock",
+    "description": "bronze padlock with jade latch",
+    "asset": "assets/images/icons/lock.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "50beb2f70636b6af034f2c8cc5b1a5238749fe208ba5235cd3b3917774c7fbf7",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "rope",
+    "description": "coil of tan travel rope",
+    "asset": "assets/images/icons/rope.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "38a72db45c03e2fca96d2ca3d6deda4fa81b52fd09e896e78df8183a0c940be8",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "fish",
+    "description": "silver blue freshwater fish",
+    "asset": "assets/images/icons/fish.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "13b513fb89cf193a22fd117a8322f16054717b6380edd5d60f0487f8743e30f6",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "mute",
+    "description": "gold speaker with clear red diagonal slash",
+    "asset": "assets/images/icons/mute.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "6565daf8e5ec52a11a5f7b8921b374ae0677700f94acb3964784e9bff0064bd2",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "sun",
+    "description": "warm golden sun medallion",
+    "asset": "assets/images/icons/sun.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "cc943d4351d0ce1f3ba7452db3e29c8f13b65869440a0917ada1d69d83340d12",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "id": "moon",
+    "description": "silver crescent moon on blue jade",
+    "asset": "assets/images/icons/moon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-46eff4f2-607a-4361-a560-c3cc82717a5d.png",
+    "prompt": "Use case: stylized-concept. One production game UI icon atlas. EXACT 5 columns by 2 rows, ten equal isolated square cells on a wide 2560x1024 TRANSPARENT canvas. Each cell contains one centered colorful miniature rendered icon for an ancient Vietnamese wuxia mobile game, highly readable at 24–32px. Polished 2.5D hand-painted game UI objects, chunky silhouettes, gold/jade/red/blue accents, luminous materials, consistent upper-left lighting, delicate dark contour. No badges, circles or frames around the icons unless inherent to the object. No words, labels, lettering or extra decorations. Tight clear shapes, not monochrome line symbols. Left to right top row then bottom row, precisely: 1. jade tea cup with pale steam; 2. gold speaker with turquoise sound waves; 3. gold five pointed star; 4. blue steel shield with gold rim; 5. bronze padlock with jade latch; 6. coil of tan travel rope; 7. silver blue freshwater fish; 8. gold speaker with clear red diagonal slash; 9. warm golden sun medallion; 10. silver crescent moon on blue jade. Exactly ten icons, no duplicates or additional items. All empty space between icons is genuine alpha=0, no white background, no fog, no scene, no checkerboard. Every icon fits fully inside its own cell with padding.",
+    "mode": "built-in image_gen; atlas crop and resize",
+    "sha256": "02a7861dde92a0984b77e9a899c8a243cd9f11be0a048ac0c652c77fb91803b9",
+    "size": [
+      96,
+      96
+    ]
+  }
+]
