@@ -1,3 +1,4 @@
+import {connectChapter} from './StoryContinuity.js';
 import c01 from './dai-viet/chapter01.js';
 import c02 from './dai-viet/chapter02.js';
 import c03 from './dai-viet/chapter03.js';
@@ -71,7 +72,7 @@ export const DAI_VIET_QUESTS=deepFreeze(DAI_VIET_CHAPTERS.flatMap(c=>{
   if(id==='D19H12')q.choices=[{id:'together',text:'Muốn thử tìm hiểu nhau, không thay cô ấy quyết tương lai.',karma:0},{id:'friends',text:'Giữ tình bằng hữu và tôn trọng con đường riêng.',karma:0}];
   if(id==='D19H18')q.choices=[{id:'home',text:'Trở về hiện đại. Gặp lại gia đình; chia tay Đại Việt và bàn giao đã có hiệu lực.',karma:0},{id:'stay',text:'Ở lại Đại Việt. Giữ đời sống đã xây; chấp nhận chưa có đường gặp lại mẹ.',karma:0}];
   if(id==='D20H20'){q.ending=true;q.kind='ending';q.xp=0;q.silver=0;q.choices=[];}
-  return enrichExpansion(stageCombat(q));
+  return enrichExpansion(connectChapter(stageCombat(q)));
  });
 }));
 export const DAI_VIET_BY_ID=deepFreeze(Object.fromEntries(DAI_VIET_QUESTS.map(q=>[q.id,q])));

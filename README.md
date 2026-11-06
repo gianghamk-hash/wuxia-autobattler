@@ -2,7 +2,16 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 4.3 — 60 đồng hành, bộ trang bị và boss chương:** mở rộng 43 hồi với mười người mới, thêm ngoại truyện chiêu mộ và vòng quay trang bị, tăng nhẹ độ khó để cấp và đồ có tác dụng rõ hơn. Giữ 400 hồi, tên người chơi và nhập môn theo truyện. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 5.0 — playlist, nhân vật chuyển động và lối chơi dọc:** sáu bản nhạc nền lặp xuyên màn hình, mười bộ chuyển động nhân vật chính, hình trang bị theo phẩm chất và ba hướng võ công. 400 đoạn nối cảnh giữ rõ kết quả và phần còn mở; chỉnh tiến độ XP, buff đội hình và lượt bí cảnh. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 5.0
+
+- Sửa ảnh cũ trong ô đội hình và hình lớn hành trình; mười atlas sáu tư thế riêng cho nhân vật chính theo giai đoạn. Hình đồ và khung bốn phẩm chất; hào quang theo đồ đang mặc.
+- Playlist sáu MP3 người dùng cung cấp giữ bài khi đổi màn, lặp toàn bộ danh sách và nhớ vị trí riêng trên thiết bị. Âm va chạm/tuyệt kỹ có thêm trầm và lớp tiếp xúc ngắn.
+- 400 nối cảnh, 19 chuyển chương, mốc thời gian/địa điểm và sổ nhân quả có điều kiện mở dữ kiện; giữ 20 chương, 105 trận và các nhánh kết thúc.
+- Ba hướng Sát lực / Cân bằng / Phòng thủ, giải thích điểm thuộc tính và buff kích hoạt ngay tại đội hình/trận. Nút và bố cục ưu tiên điện thoại dọc.
+- Mỗi bí cảnh và mỗi boss ôn trận có 2 lượt/ngày, mua thêm tối đa 1 lượt/nơi với 60 bạc, đặt lại 00:00 giờ Việt Nam. Không tính thêm khi tải lại một lượt đang chơi.
+- Đường cấp dài hơn từ cấp 8, địch giữa/cuối game tăng nhẹ có đo 1.080 trận ghép cặp; giữ cấp/điểm cũ. [Quy tắc, số đo và giới hạn](docs/JOURNEY_5_0.md).
 
 ## Bản 4.3
 

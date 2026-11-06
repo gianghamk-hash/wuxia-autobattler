@@ -46,6 +46,9 @@ export const SKILL_TREES = deepFreeze(Object.fromEntries(Object.keys(SECTS).map(
         ...(tier === 4 ? { ultimate: { ...structuredClone(HERO_SKILLS[sect].ultimate), ...variants[sect][index], description: descriptions[sect][index], id: `hero_${sect}_t4_${branch}` } } : {}) });
     }
   }
+  const balancedNames=['Hợp khí nhập môn','Công thủ tương hỗ','Bền nhịp giao tranh','Trung Hòa Hộ Trận'];
+  const balancedStats=[{[attack]:8,maxHp:60},{[attack]:12,physicalDef:8,magicalDef:8},{maxHp:100,attackSpeed:.04},{[attack]:18,maxHp:140}];
+  for(let tier=1;tier<=4;tier++)nodes.push({id:`${sect}_t${tier}_balanced`,sect,tier,branch:'balanced',name:balancedNames[tier-1],minLevel:[1,3,5,8][tier-1],cost:[1,1,2,3][tier-1],prerequisites:tier===1?[]:[`${sect}_t${tier-1}_balanced`],stats:balancedStats[tier-1],description:tier===4?'Đánh vùng với 160% công kích chủ đạo, tạo khiên 20% HP cho bản thân trong 5 giây. Chỉ chọn một tuyệt kỹ tầng 4.':'Kết hợp công kích và chống chịu, phù hợp đội hình thiếu người giữ nhịp.',exclusiveGroup:tier===4?'ultimate':null,...(tier===4?{ultimate:{...structuredClone(HERO_SKILLS[sect].ultimate),id:`hero_${sect}_t4_balanced`,name:'Trung Hòa Hộ Trận',type:['VoDang','NgaMi'].includes(sect)?'magical':'physical',targetType:'enemy_area',dmgMultiplier:1.6,effects:[{type:'area_damage',width:3,height:3},{type:'shield',recipient:'caster',maxHpRatio:.2,duration:5}]}}:{})});
   return [sect, nodes.sort((a, b) => a.tier - b.tier || a.branch.localeCompare(b.branch))];
 })));
 export const SKILLS_BY_ID = deepFreeze(Object.fromEntries(Object.values(SKILL_TREES).flat().map(node => [node.id, node])));

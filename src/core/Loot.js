@@ -1,6 +1,7 @@
 import {GEAR_RARITIES,GEAR_DRAW,NEW_GEAR,STORY_GEAR} from '../data/GearCatalog.js';
 import {sectReady} from '../data/HeroIdentity.js';
 import {pay,give} from './WorldProgress.js';
+import {useEntry} from './DungeonEntries.js';
 import {seededRandom} from '../combat/CombatMath.js';
 const fail=t=>{throw Error(t);},integer=n=>Number.isSafeInteger(n)&&n>=0;
 export const freshLoot=()=>({version:1,total:0,sinceExcellent:0,sinceExceptional:0,history:[],bossWins:{}});
@@ -41,5 +42,5 @@ export function storyEquipment(s,q,seed){
 }
 export const lootMethods={
  drawEquipment(count){this._guard();const r=drawEquipment(this.snapshot(),count,{now:this.now()});this._commit(r.session,'gear-draw');return r;},
- startChapterBoss(chapter){this._guard();if(!chapterBossAvailable(this.session,chapter))fail('Hoàn thành chương này trước khi nhận thử thách boss.');this._mutate(s=>{if(s.storyProgress.pendingEncounter||s.adventure.dungeon)fail('Hãy kết thúc hành trình đang chờ.');this._pending(s,'chapterBoss',String(chapter));},'encounter');return this.retryEncounter();}
+ startChapterBoss(chapter){this._guard();if(!chapterBossAvailable(this.session,chapter))fail('Hoàn thành chương này trước khi nhận thử thách boss.');this._mutate(s=>{if(s.storyProgress.pendingEncounter||s.adventure.dungeon)fail('Hãy kết thúc hành trình đang chờ.');useEntry(s,'boss_'+chapter);this._pending(s,'chapterBoss',String(chapter));},'encounter');return this.retryEncounter();}
 };

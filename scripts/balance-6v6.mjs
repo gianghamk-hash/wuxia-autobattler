@@ -50,6 +50,8 @@ export function makeSquad(squad, scenario, side, grid) {
     profile = allocateAttribute(profile, attr, inventory);
   }
   for (const node of [...SKILL_TREES[squad.sect]].sort((a, b) => a.tier - b.tier)) {
+    // Keep historical 'mixed' fixtures on their original two branches.
+    if(squad.build==='mixed' && node.branch==='balanced')continue;
     if (squad.build !== 'mixed' && node.branch !== squad.build) continue;
     try { profile = allocateSkill(profile, node.id, inventory); } catch { /* Legal points/tier constraints. */ }
   }

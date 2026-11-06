@@ -1,3 +1,4 @@
+import {equipmentAura} from './GearArt.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { SECT_ART } from './Visuals.js';
 import { getSkillVisual } from '../data/SkillVisualsData.js';
@@ -271,6 +272,8 @@ export class BattleRenderer {
         ctx.stroke();
       }
       ctx.save();
+      const aura=equipmentAura(unit.equippedGear);
+      if(aura.rank>=2){ctx.save();ctx.strokeStyle=aura.color;ctx.globalAlpha=.5;ctx.shadowColor=aura.color;ctx.shadowBlur=aura.rank*4;ctx.lineWidth=aura.rank;ctx.beginPath();ctx.ellipse(p.x,p.y+22,w*.55,10+aura.rank,0,0,Math.PI*2);ctx.stroke();if(aura.rank>=3)for(let i=0;i<aura.rank*2;i++){const a=i*Math.PI/aura.rank+(motion?this.visualTime*.7:0);ctx.fillStyle=aura.color;ctx.beginPath();ctx.arc(p.x+Math.cos(a)*w*.58,p.y+5+Math.sin(a)*25,1.5,0,Math.PI*2);ctx.fill();}ctx.restore();}
       const fighter = this.fighterImage(unit);
       const spriteReady = fighter?.complete && fighter.naturalWidth;
       if (spriteReady) {

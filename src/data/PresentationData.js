@@ -57,6 +57,7 @@ export function expressionFor(id, quest = {}) {
   return emotion ? asset('expressions/' + id + '-' + emotion + '.webp') : null;
 }
 export const FIGHTERS = Object.freeze([
+  ...['modern','traveler','ThieuLam','VoDang','CaiBang','NgaMi','DuongMon','grief','commander','peace'].map(id=>'hero_'+id),
   'ThieuLam',
   'VoDang',
   'CaiBang',

@@ -84,6 +84,7 @@ for (const [sect, skills] of Object.entries(HERO_SKILLS)) {
   add(sect, skills.ultimate, starterArt[sect], true, sect);
 }
 const advanced = {
+  'Trung Hòa Hộ Trận': ['dualTaiji', '#e8d39c', '#8ee0ce', 'wave', 1.5],
   'Kim Cang Trấn Sơn': ['goldenPeak', '#edc46c', '#fff1b8', 'wave', 1.5],
   'Bất Hoại Kim Thân': ['diamondWall', '#e0b664', '#f5eac2', 'ward', 1.5],
   'Lưỡng Nghi Kiếm Trận': ['dualTaiji', '#b5e9ef', '#f7eed6', 'sweep', 1.5],

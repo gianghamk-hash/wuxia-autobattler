@@ -14,6 +14,7 @@ import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { EQUIPMENT } from '../data/EquipmentData.js';
 import { normalizeHeroBuild } from '../entities/HeroBuild.js';
 import { seededRandom } from '../combat/CombatMath.js';
+import {validateEntries} from './DungeonEntries.js';
 import { BOND_VARIANTS } from '../data/BondsData.js';
 const fail = (text) => {
   throw new Error(text);
@@ -181,6 +182,8 @@ export function validateWorld(s) {
   if (w === undefined) return;
   const ids = ['hero', ...s.party.active];
   if (!w || w.version !== 1) fail('Phiên bản giang hồ không hợp lệ.');
+  if (!w.daily) fail('Thiếu lịch ngày.');
+  validateEntries(w.daily);
   validateTactics(w.tactics, ids);
   if (
     !integer(w.training, 10) ||
@@ -318,6 +321,7 @@ export function resetCalendar(s, now) {
     w.daily = {
       ...w.daily,
       day,
+      entries: {}, entryPurchases: {},
       wins: 0,
       crafts: 0,
       floors: 0,

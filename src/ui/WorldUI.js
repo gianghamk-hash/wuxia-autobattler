@@ -1,3 +1,4 @@
+import {remainingEntries,EXTRA_ENTRY_PRICE} from '../core/DungeonEntries.js';
 import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
 import {renderEquipment,renderChapterBosses} from './EquipmentUI.js';
 import {sectReady,heroText,heroAppearance,heroSectLabel} from '../data/HeroIdentity.js';
@@ -735,16 +736,20 @@ export function mountWorldUI(app) {
         'hint'
       )
     );
+    root.append(n('p','Mỗi bí cảnh có 2 lượt/ngày. Thường và tuần dùng chung lượt. Mua thêm tối đa 1 lượt/bí cảnh với 60 bạc; đặt lại lúc 00:00 giờ Việt Nam. Phí vào cửa vẫn áp dụng. Thua/rút lui vẫn tính lượt.','hint'));
     for (const def of DUNGEONS) {
+      const remaining=remainingEntries(s,def.id);
       const p = panel(
         def.name,
         `${def.floors} tầng · cấp ${def.level} · phí ${def.fee} bạc. ${def.description} Lần đầu: bí kíp ${def.relic} + vật liệu/trang bị hiếm.`
       );
+      p.append(n('p',`Còn ${remaining} lượt hôm nay`));
+      if(remaining===0&&!w.daily.entryPurchases?.[def.id])p.append(button('Mua thêm 1 lượt · 60 bạc',()=>run(()=>app.model.buyDungeonEntry(def.id)),count(s,'silver')<EXTRA_ENTRY_PRICE));
       p.append(
         button(
           w.clears.includes(def.id) ? 'Khám phá lại' : 'Vào bí cảnh',
           () => run(() => app.model.enterDungeon(def.id)),
-          s.hero.level < def.level
+          s.hero.level < def.level || remaining<=0
         )
       );
       if (def.id === featured.id)
@@ -752,7 +757,7 @@ export function mountWorldUI(app) {
           button(
             'Thử thách tuần · quái +2 cấp',
             () => run(() => app.model.enterDungeon(def.id, true)),
-            s.hero.level < def.level + 2
+            s.hero.level < def.level + 2 || remaining<=0
           )
         );
       root.append(p);

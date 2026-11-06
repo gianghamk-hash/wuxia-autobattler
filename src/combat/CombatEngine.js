@@ -888,6 +888,7 @@ export class CombatEngine {
       targets = this.opponents(actor).filter(
         (u) => u.gridPosition.y === anchor.gridPosition.y
       );
+    for (const effect of effects.filter(e=>e.recipient==='caster')) this.effect(actor,actor,effect);
     announce(targets);
     let connected = false;
     for (const target of targets) {
@@ -904,7 +905,7 @@ export class CombatEngine {
       if (landed) {
         for (const effect of effects.filter(
           (e) =>
-            ![
+            e.recipient!=='caster' && ![
               'area_damage',
               'multi_hit',
               'piercing_projectiles',

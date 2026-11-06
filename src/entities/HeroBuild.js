@@ -7,7 +7,7 @@ export const GEAR_SLOTS = Object.freeze({ weapon: 'Vũ khí', armor: 'Áo giáp'
 const owns = (inventory, id) => inventory.some(item => item.itemId === id && Number.isSafeInteger(item.quantity) && item.quantity > 0);
 const integer = value => Number.isSafeInteger(value) && value >= 0;
 const error = text => { throw new Error(text); };
-export const expToNextLevel = level => level * 100;
+export const expToNextLevel = level => Math.round(level * 100 * (1 + Math.max(0,level-7)*.08));
 export function createHeroBuild({ name = 'Tiểu Hiệp', sect = null, level = 1 } = {}) {
   return { buildVersion: 1, name, sect, level, exp: 0, freeAttributePoints: (level - 1) * 2,
     freeSkillPoints: level, attributes: Object.fromEntries(Object.keys(ATTRIBUTES).map(key => [key, 0])),

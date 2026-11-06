@@ -1,3 +1,5 @@
+import {mountTeamEffects} from './TeamEffects.js';
+import {equipmentAura} from './GearArt.js';
 import { portrait } from './Visuals.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import {storyPerson} from '../data/DaiVietCast.js';
@@ -84,7 +86,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
           const label = document.createElement('span');
           label.textContent = name(unit);
           button.append(
-            portrait(unit === 'hero' ? sect(unit) : COMPANIONS_BY_ID[unit]),
+            portrait(unit === 'hero' ? heroAppearance(session) : storyPerson(session,COMPANIONS_BY_ID[unit])),
             label
           );
         } else {
@@ -93,6 +95,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
           label.setAttribute('aria-hidden', 'true');
           button.append(label);
         }
+        if(unit==='hero'){const aura=equipmentAura(session.hero.equippedGear);button.dataset.equipmentAura=aura.rank;button.style.setProperty('--aura-color',aura.color);}
         button.dataset.occupied = String(Boolean(unit));
         button.dataset.selected = String(unit === selected);
         button.dataset.cell = `${x},${y}`;
@@ -118,7 +121,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
         });
         grid.append(button);
       }
-    root.append(grid);
+    root.append(grid);mountTeamEffects(root,session);
   }
   render();
   return { render };
