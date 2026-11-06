@@ -198,7 +198,7 @@ Thuyền gạo ra khỏi hai mũi ép. Phần gạo có chủ được đánh d�
 Người giữ giấy được nghe quyền từ chối chuyển cho ai. Nhóm nhận bảo vệ, không nhận làm chủ lời khai của họ.|
 Kho dự trữ thiếu tiếp tế được ghi vào sơ đồ tuyến. Một cuộc thoát vây không làm phần thiếu ấy tự đầy lại.|
 Mai đọc câu trả lời của nhà thuyền rồi chọn điều sẽ làm. Các bạn đợi cô nói trước khi đặt việc cho cô.|
-Khoảng trắng trên bản đồ được khoanh lại; Trác Viễn cần đi xem, không được tô theo điều đoán.|
+Khoảng trắng trên bản đồ được khoanh lại; Truy Phong cần đi xem, không được tô theo điều đoán.|
 Lối rút còn giữ được khi đoàn sau tới. Thuyền neo được trả lại chỗ dân có thể tìm lấy.|
 Tin trạm Hải Vân được chép kèm người chỉ đường. Chuyến sông kết thúc, đường núi chỉ bắt đầu sau khi người được cứu đã có chỗ an toàn.`
 ,

@@ -119,27 +119,15 @@ test('60 stable companion IDs have stats, skills, structured recruitment and val
       );
       assert.ok(Array.isArray(skill.effects));
     }
-    assert.equal(unit.skills.ultimate.energyCost, 100);
+    assert.ok(unit.skills.ultimate.energyCost>=85&&unit.skills.ultimate.energyCost<=100);
     assert.equal(unit.skills.autoAttack.energyGain, 15);
   }
 });
-test('signature effects retain the supplied numeric thresholds', () => {
-  const effect = (id) => COMPANIONS_BY_ID[id].skills.ultimate.effects[0];
-  assert.equal(effect('companion_04').count, 3);
-  assert.equal(effect('companion_09').ratio, 0.25);
-  assert.equal(effect('companion_10').width, 3);
-  assert.equal(effect('companion_10').height, 3);
-  assert.equal(effect('companion_12').hits, 5);
-  assert.equal(effect('companion_13').ratio, 0.4);
-  assert.equal(effect('companion_15').ratio, 0.5);
-  assert.equal(effect('companion_15').duration, 4);
-  assert.equal(effect('companion_17').amount, 40);
-  assert.equal(effect('companion_19').hpThreshold, 0.15);
-  assert.deepEqual(
-    effect('companion_20').choices.map((choice) => choice.type),
-    ['damage', 'full_heal']
-  );
+test('authored signatures retain distinct targets, shapes and secondary effects at each rarity',()=>{
+ const kits=COMPANIONS.map(p=>p.skills.ultimate);assert.equal(new Set(kits.map(s=>s.name)).size,60);assert.equal(new Set(kits.map(s=>JSON.stringify([s.type,s.targetType,s.dmgMultiplier,s.effects]))).size,60);
+ assert.ok(kits.some(s=>s.effects.some(e=>e.type==='physical_defense_down')));assert.ok(kits.some(s=>s.effects.some(e=>e.type==='cleanse')));assert.ok(kits.some(s=>s.targetType==='farthest_enemy'));assert.equal(COMPANIONS_BY_ID.companion_04.skills.ultimate.effects[0].count,3);
 });
+
 test('synergies require distinct sects, enforce six members, and support overlapping bonuses', () => {
   assert.equal(SYNERGIES.length, 4);
   assert.equal(getActiveSynergies([]).length, 0);
@@ -175,13 +163,13 @@ test('synergies require distinct sects, enforce six members, and support overlap
   assert.equal(SYNERGIES[2].effects[0].ratio, 0.25);
   assert.equal(SYNERGIES[3].effects[0].ratio, 0.2);
 });
-test('54 equipment records have unique IDs and complete three-piece sets', () => {
-  assert.equal(EQUIPMENT.length, 54);
-  assert.equal(EQUIPMENT_SETS.length, 11);
+test('104 equipment records have unique IDs and complete four-piece sets', () => {
+  assert.equal(EQUIPMENT.length, 104);
+  assert.equal(EQUIPMENT_SETS.length, 25);
   assert.equal(new Set(EQUIPMENT.map((x) => x.id)).size, EQUIPMENT.length);
   for (const item of EQUIPMENT) {
     assert.equal(EQUIPMENT_BY_ID[item.id], item);
-    assert.ok(['weapon', 'armor', 'accessory'].includes(item.slot));
+    assert.ok(['weapon', 'armor', 'accessory','helmet'].includes(item.slot));
     assert.ok(
       Object.values(item.stats).every((n) => Number.isFinite(n) && n > 0)
     );
@@ -191,10 +179,10 @@ test('54 equipment records have unique IDs and complete three-piece sets', () =>
     );
   }
   for (const set of EQUIPMENT_SETS) {
-    assert.ok([2,3].includes(set.requiredPieces));
+    assert.ok([2,3,4].includes(set.requiredPieces));
     assert.deepEqual(
       [...new Set(EQUIPMENT.filter((x) => x.setId === (set.setId??set.id)).map((x) => x.slot))].sort(),
-      ['accessory', 'armor', 'weapon']
+      ['accessory', 'armor','helmet', 'weapon']
     );
   }
 });

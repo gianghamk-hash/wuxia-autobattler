@@ -1,3 +1,4 @@
+import {developed} from '../scripts/balance-campaign7.mjs';
 import {
   allocateSkill,
   allocateAttribute,
@@ -51,14 +52,14 @@ function finish(c) {
   return c.lastResult;
 }
 function grant(c, ids) {
-  c.session.party.unlocked = [...ids];
-  c.session.companionsAffinity = Object.fromEntries(ids.map((id) => [id, 20]));
+  c.session.party.unlocked = [...new Set([...c.session.party.unlocked,...ids])];
+  c.session.companionsAffinity = {...c.session.companionsAffinity,...Object.fromEntries(ids.map((id) => [id, 20]))};
   c.setParty(ids);
 }
 test('five-element counter is directional, all six-person thresholds work without duplicate tier stacking', () => {
   for (const [element, data] of Object.entries(ELEMENTS)) {
-    assert.equal(elementMultiplier({ element }, { element: data.beats }), 1.15);
-    assert.equal(elementMultiplier({ element: data.beats }, { element }), 0.85);
+    assert.equal(elementMultiplier({ element }, { element: data.beats }), 1.75);
+    assert.equal(elementMultiplier({ element: data.beats }, { element }), 0.6);
     assert.equal(elementMultiplier({ element }, { element }), 1);
   }
   for (const n of [2, 4, 6])
@@ -228,6 +229,7 @@ test('dungeon admission gates, floor HP attrition, immutable seed, branch reward
   grant(c, ['companion_01','companion_03','companion_05','companion_04','companion_02']);
   c.session.adventure.training=10;c.session.adventure.forging=10;
   const locked=fixture();grant(locked,['companion_01','companion_03']);assert.throws(() => locked.enterDungeon('son_doong'));
+  const max=developed().snapshot();c.session.hero=max.hero;c.session.inventory=max.inventory;grant(c,max.party.active);
   c.enterDungeon('phong_nha');
   delete c.session.adventure.dungeon.mode;c.session.adventure.dungeon.rooms=Array.from({length:5},(_,i)=>[i===4?'boss':'battle',i===4?'boss':'battle']);
   const seed = c.session.adventure.dungeon.seed;

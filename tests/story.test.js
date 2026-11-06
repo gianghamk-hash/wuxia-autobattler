@@ -81,7 +81,7 @@ test('old completed chapters expand without money/XP and remain stable across re
     c.load(s);
     assert.equal(c.session.storyProgress.completedQuests.length, n * 20);
     assert.equal(c.session.storyProgress.currentChapter, n + 1);
-    assert.deepEqual(c.session.hero, hero);
+    assert.deepEqual(c.session.hero, {...hero,equippedGear:{...hero.equippedGear,helmet:null}});
     assert.deepEqual(c.session.inventory, inventory);
     const once = c.snapshot();
     c.load(once);

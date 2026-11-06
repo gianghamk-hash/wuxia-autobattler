@@ -1,3 +1,4 @@
+import {storyRecruit7,STORY_RECRUITS7} from '../data/Recruitment7.js';
 import {entryMethods} from './DungeonEntries.js';
 import {bossSequence} from '../combat/BattleRules6.js';
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
@@ -5,6 +6,7 @@ import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { MISSIONS } from '../data/MissionsData.js';
 import { enemyLineup } from './EncounterFactory.js';
 import { bossGuide } from '../combat/BossDirector.js';
+import {STORY_ACTORS7} from '../data/StoryActors7.js';
 import { applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
 import { expandStoryProgress } from './StoryProgress.js';
 import { STORY_REVISION } from '../data/StoryChaptersData.js';
@@ -417,6 +419,17 @@ export function migrateCampaign(input) {
   next.adventure ??= freshWorld();
   next.gacha ??= freshGacha();
   next.journey ??= freshJourney();
+  // Old campaigns may have passed the new story-only milestones without recruiting
+  // these characters. Restore access once, without replaying XP, money or gear rewards
+  // and without changing the player's active formation.
+  if(isDaiViet(next)&&Array.isArray(next.storyProgress.completedQuests)&&Array.isArray(next.party?.unlocked)&&next.companionsAffinity&&typeof next.companionsAffinity==='object'&&!Array.isArray(next.companionsAffinity)){
+    for(const person of STORY_RECRUITS7){
+      if(!next.storyProgress.completedQuests.includes(person.meet))continue;
+      if(!next.party.unlocked.includes(person.id)){next.party.unlocked.push(person.id);next.companionsAffinity[person.id]=15;}
+      const recruitId='recruit_'+person.id.slice(-2);
+      if(!next.storyProgress.completedQuests.includes(recruitId))next.storyProgress.completedQuests.push(recruitId);
+    }
+  }
   next.version = '4.3.0';
   next.settings ??= { muted: true, volume: 0.35 };
   validateCampaign(next);
@@ -479,7 +492,7 @@ export class Campaign {
   }
   availableRecruitQuests() {
     return RECRUIT_QUESTS.filter(
-      (q) =>
+      (q) => storyRecruit7(q.companionId)&&!isDaiViet(this.session)&&
         (q.chapter ?? (q.act - 1) * 4 + 1) <=
           this.session.storyProgress.currentChapter &&
         (this.session.storyProgress.completedQuests.includes('Q101')||this.session.storyProgress.completedQuests.includes('D01H06'))&&
@@ -812,8 +825,8 @@ export class Campaign {
     ];
     if(quest?.canon==='dai-viet'&&quest.chapter===1){
       const hero=units[0];hero.passive=null;hero.stats.attackRange=1;hero.stats.physicalAtk=Math.max(hero.stats.physicalAtk,hero.stats.magicalAtk*.8);
-      hero.skills.autoAttack={id:'dai_viet_unarmed',name:'Quyền Cơ Bản',type:'physical',targetType:'nearest_enemy',dmgMultiplier:1,energyGain:15,effects:[]};
-      hero.skills.ultimate={id:'dai_viet_unarmed_guard',name:'Chưa học tuyệt kỹ',type:'physical',targetType:'self',dmgMultiplier:0,energyCost:10000,effects:[]};
+      hero.skills.autoAttack={id:'untrained_attack',icon:'assets/images/skills7/untrained_attack.webp',description:'Quyền cơ bản gây 100% ngoại công lên địch gần nhất; nhận 15 nộ.',name:'Quyền Cơ Bản',type:'physical',targetType:'nearest_enemy',dmgMultiplier:1,energyGain:15,effects:[]};
+      hero.skills.ultimate={id:'untrained_guard',icon:'assets/images/skills7/untrained_guard.webp',description:'Chưa nhập môn nên chưa sử dụng tuyệt kỹ. Chọn môn phái tại chương 2 hồi 10 để mở võ học.',name:'Chưa học tuyệt kỹ',type:'physical',targetType:'self',dmgMultiplier:0,energyCost:10000,effects:[]};
     }
     units.forEach((u) => grid.place(u, this.session.party.formation[u.id]));
     const helper =
@@ -828,7 +841,7 @@ export class Campaign {
       units.length < 3 &&
       !units.some((u) => u.templateId === helper)
     ) {
-      const guide = new Companion(COMPANIONS_BY_ID[helper]?helper:'companion_01', { id: 'guide', level });
+      const guide = new Companion(COMPANIONS_BY_ID[helper]?helper:STORY_ACTORS7[helper]?.template??'companion_01', { id: 'guide', level });
       guide.name =
         pending.kind === 'recruit'
           ? `${COMPANIONS_BY_ID[helper].name} (hỗ trợ)`
@@ -840,7 +853,7 @@ export class Campaign {
       if(isDaiViet(this.session)){
         const lockedPlot=PLOT_COMPANIONS.includes(helper)&&!this.session.party.unlocked.includes(helper)&&!quest?.guide;
         const person=lockedPlot?DAI_VIET_CAST_BY_ID.kha_van:DAI_VIET_CAST_BY_ID[helper]??COMPANIONS_BY_ID[helper]??DAI_VIET_CAST_BY_ID.kha_van;
-        applyStoryIdentity(guide,{...person,id:person.assetId??person.id});
+        applyStoryIdentity(guide,{...person,actorId:person.id,id:person.assetId??person.id});
         if(person.kind==='companion')applyDaiVietName(guide);
         guide.name=person.name+' (hỗ trợ)';
       }

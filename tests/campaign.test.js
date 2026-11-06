@@ -1,4 +1,7 @@
 import test from 'node:test';
+import {rollGacha} from '../src/core/Gacha.js';
+import {COMPANIONS} from '../src/data/CompanionsData.js';
+import {storyPoolAllows} from '../src/data/DaiVietCast.js';
 import assert from 'node:assert/strict';
 import {
   Campaign,
@@ -210,7 +213,7 @@ test('legacy profile migration retains hero, inventory and flags, starts the rea
   c.load(once);
   assert.deepEqual(c.snapshot(), once);
 });
-test('full campaign crosses 240 episodes, recruits all sixty, and supports each gated ending with valid saves', async () => {
+test('legacy 240-episode campaign completes, collects through story and gacha, and preserves each gated ending', async () => {
   const c = new Campaign();
   c.newGame({ sect: 'VoDang', name: 'Giang' });
   for (const quest of MAIN_QUESTS.filter((q) => !q.ending)) {
@@ -227,10 +230,9 @@ test('full campaign crosses 240 episodes, recruits all sixty, and supports each 
   assert.equal(c.session.storyProgress.questFlags.DISCOVERED_DEBT_BOOK, true);
   assert.equal(c.session.storyProgress.questFlags.DISCOVERED_FAKE_LEADER, true);
   // Fund optional endgame collection; main story above uses earned rewards.
-  c.session.inventory.find((i) => i.itemId === 'silver').quantity += 5000;
-  for (const quest of RECRUIT_QUESTS)
-    if (!c.session.party.unlocked.includes(quest.companionId))
-      recruit(c, quest);
+  c.session.inventory.find((i) => i.itemId === 'silver').quantity += 25000;
+  for(const quest of [...c.availableRecruitQuests()])if(!c.session.party.unlocked.includes(quest.companionId))recruit(c,quest);
+  for(const target of COMPANIONS){for(let attempt=0;attempt<3&&!c.session.party.unlocked.includes(target.id);attempt++){const s=c.snapshot(),pool=COMPANIONS.filter(p=>p.tier===target.tier&&storyPoolAllows(s,p.id)),values=[[0,.25,.64,.85,.96,.995][target.tier],(pool.findIndex(p=>p.id===target.id)+.1)/pool.length];c.load(rollGacha(s,1,{random:()=>values.shift(),now:1}).session);}}
   assert.equal(c.session.party.unlocked.length, 60);
   assert.equal(
     c.endingOptions().find((e) => e.id === 'wealth').available,

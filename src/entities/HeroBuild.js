@@ -3,7 +3,7 @@ import { SKILLS_BY_ID } from '../data/SkillTreeData.js';
 import { EQUIPMENT, EQUIPMENT_BY_ID } from '../data/EquipmentData.js';
 export const MAX_LEVEL = 20;
 export const ATTRIBUTES = Object.freeze({ canCot: 'Căn Cốt', khiHai: 'Khí Hải', kinhLuc: 'Kình Lực', ngoTinh: 'Ngộ Tính', thanPhap: 'Thân Pháp', coDuyen: 'Cơ Duyên' });
-export const GEAR_SLOTS = Object.freeze({ weapon: 'Vũ khí', armor: 'Áo giáp', accessory: 'Phụ kiện' });
+export const GEAR_SLOTS = Object.freeze({ weapon: 'Vũ khí', armor: 'Áo giáp', accessory: 'Ngọc bội', helmet: 'Mũ' });
 const owns = (inventory, id) => inventory.some(item => item.itemId === id && Number.isSafeInteger(item.quantity) && item.quantity > 0);
 const integer = value => Number.isSafeInteger(value) && value >= 0;
 const error = text => { throw new Error(text); };
@@ -11,7 +11,7 @@ export const expToNextLevel = level => Math.round(level * 100 * (1 + Math.max(0,
 export function createHeroBuild({ name = 'Tiểu Hiệp', sect = null, level = 1 } = {}) {
   return { buildVersion: 1, name, sect, level, exp: 0, freeAttributePoints: (level - 1) * 2,
     freeSkillPoints: level, attributes: Object.fromEntries(Object.keys(ATTRIBUTES).map(key => [key, 0])),
-    allocatedSkills: [], equippedGear: { weapon: null, armor: null, accessory: null } };
+    allocatedSkills: [], equippedGear: { weapon: null, armor: null, accessory: null, helmet: null } };
 }
 /** Validate before constructing battle stats or committing any profile mutation. */
 export function normalizeHeroBuild(input, inventory = []) {

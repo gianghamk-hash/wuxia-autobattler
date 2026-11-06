@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {storyRecruit7} from '../src/data/Recruitment7.js';
+import {developed} from '../scripts/balance-campaign7.mjs';
 import {Campaign,createCampaign,validateCampaign,itemCount} from '../src/core/Campaign.js';
 import {DAI_VIET_QUESTS,DAI_VIET_BY_ID} from '../src/data/DaiVietStoryData.js';
 import {EXPANSION_CAST,expansionAvailable} from '../src/data/ExpansionCast.js';
@@ -28,15 +30,16 @@ test('ten new companions have two per rarity and recurring concrete main-story s
  assert.equal(EXPANSION_CAST.length,10);for(let tier=1;tier<=5;tier++)assert.equal(EXPANSION_CAST.filter(p=>p.tier===tier).length,2);
  for(const p of EXPANSION_CAST){assert.ok(COMPANIONS_BY_ID[p.id]);const appearances=Object.entries(EXPANSION_SCENES).filter(([,lines])=>lines.some(l=>l[0]===p.name));assert.ok(appearances.length>=3,p.name);assert.equal(appearances[0][0],p.meet,p.name);assert.ok(Object.entries(EXPANSION_SCENES).some(([id,lines])=>Number(id.slice(1,3))>=17&&lines.some(l=>l[0]===p.name||l[1].includes(p.name))),p.name);
   const c=fresh(),met=at(p.meet);for(const n of SKILL_TREES.VoDang.filter(n=>n.branch==='attack')){try{met.hero=allocateSkill(met.hero,n.id,met.inventory);}catch{}}while(met.hero.freeAttributePoints)met.hero=allocateAttribute(met.hero,'khiHai',met.inventory);met.adventure.training=10;met.adventure.forging=10;c.load(met);assert.equal(expansionAvailable(c.session,p.id),false);assert.equal(storyPoolAllows(c.session,p.id),false);assert.ok(!c.availableRecruitQuests().some(q=>q.companionId===p.id));
-  const bad=c.snapshot();bad.party.unlocked.push(p.id);bad.companionsAffinity[p.id]=15;assert.throws(()=>validateCampaign(bad));if(c.chooseMain('continue'))assert.equal(fight(c).winner,'home');assert.equal(expansionAvailable(c.session,p.id),true);assert.ok(c.availableRecruitQuests().some(q=>q.companionId===p.id));
+  const bad=c.snapshot();bad.party.unlocked.push(p.id);bad.companionsAffinity[p.id]=15;assert.throws(()=>validateCampaign(bad));if(c.chooseMain('continue'))assert.equal(fight(c).winner,'home');assert.equal(expansionAvailable(c.session,p.id),true);assert.equal(c.availableRecruitQuests().length,0);assert.equal(c.session.party.unlocked.includes(p.id),Boolean(storyRecruit7(p.id)));if(storyRecruit7(p.id))continue;
   const pool=Object.values(COMPANIONS_BY_ID).filter(u=>u.tier===p.tier&&storyPoolAllows(c.session,u.id)),values=[[0,.25,.64,.85,.96,.995][p.tier],(pool.findIndex(u=>u.id===p.id)+.1)/pool.length];const drawn=rollGacha(c.snapshot(),1,{random:()=>values.shift(),now:1});assert.equal(drawn.results[0].id,p.id);assert.equal(drawn.results[0].tier,p.tier);
  }
 });
-test('an encountered new companion can be recruited through the actual side challenge without relying on gacha',()=>{
- const c=fresh();c.load(at('D04H01'));const q=c.availableRecruitQuests().find(q=>q.companionId==='companion_51');assert.ok(q);c.challengeRecruit(q.id);assert.equal(fight(c).winner,'home');c.recruit(q.id);assert.ok(c.session.party.unlocked.includes('companion_51'));const paid=c.snapshot();assert.throws(()=>c.recruit(q.id));assert.deepEqual(c.snapshot(),paid);
+test('canonical side recruitment cannot bypass the story/gacha ownership rules',()=>{
+ const c=fresh();c.load(at('D04H01'));const before=c.snapshot();assert.equal(c.availableRecruitQuests().length,0);assert.throws(()=>c.challengeRecruit('recruit_51'));assert.throws(()=>c.recruit('recruit_60'));assert.deepEqual(c.snapshot(),before);
 });
+
 test('equipment draws spend atomically, retain independent pity, and meet both real guarantees',()=>{
- const s=at(),before=structuredClone(s);assert.equal(GEAR_RARITIES.reduce((sum,r)=>sum+r.rate,0),100);assert.equal(NEW_GEAR.length,36);
+ const s=at(),before=structuredClone(s);assert.equal(GEAR_RARITIES.reduce((sum,r)=>sum+r.rate,0),100);assert.equal(NEW_GEAR.length,80);
  const ten=drawEquipment(s,5,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-720);assert.equal(ten.results.length,5);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'common');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
  let next=s;for(let i=0;i<50;i++)next=drawEquipment(next,1,{random:()=>0,now:i}).session;assert.equal(NEW_GEAR.find(e=>e.id===next.loot.history.at(-1).id).rarity,'exceptional');validateLoot(next.loot);
  assert.throws(()=>drawEquipment(s,5,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=79;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
@@ -59,11 +62,12 @@ test('boss checkpoint reloads with the same seed and gear; a result settles only
  const before=itemCount(c.session,'silver'),expected=chapterBossRewards(c.session,4),r=fight(c),r2=fight(copy);assert.equal(r.winner,'home');assert.deepEqual(r.rewards,r2.rewards);assert.equal(r.rewards.gear.length,1);assert.equal(itemCount(c.session,'silver'),before+expected.silver);assert.ok(expected.silver<24);assert.equal(c.mainQuest().id,active);const paid=c.snapshot();assert.throws(()=>c.settleBattle());assert.deepEqual(c.snapshot(),paid);
  c.startChapterBoss(4);const wallet=itemCount(c.session,'silver');for(const u of c.battle.units.filter(u=>u.team==='home'))u.stats.hp=0;const loss=fight(c);assert.equal(loss.winner,'enemy');assert.equal(itemCount(c.session,'silver'),wallet);assert.equal(c.session.loot.bossWins[4],1);
 });
-test('all ten authored side missions play to victory and can recruit their own companion',()=>{
- for(const p of EXPANSION_CAST){const c=fresh();c.load(at());const q=c.availableRecruitQuests().find(q=>q.companionId===p.id);assert.ok(q,p.name);const b=c.challengeRecruit(q.id);assert.equal(b.mission.definition.id,q.id);if(b.mission.definition.type==='rescue')b.mission.requestRescue('hero');assert.equal(fight(c).winner,'home',p.name);c.recruit(q.id);assert.ok(c.session.party.unlocked.includes(p.id));validateCampaign(c.snapshot());}
+test('the ten archived recruitment missions remain data-compatible but cannot grant canonical gacha exclusives',()=>{
+ const c=fresh();c.load(at());for(const p of EXPANSION_CAST){const before=c.snapshot();assert.throws(()=>c.challengeRecruit('recruit_'+p.id.slice(-2)));assert.deepEqual(c.snapshot(),before);}
 });
+
 test('all twenty chapter bosses are playable after the ending and grant their first clear equipment without reopening story progress',()=>{
- const c=fresh(),s=at('D20H20');
+ const c=fresh(),s=at('D20H20'),max=developed().snapshot();s.party=max.party;s.companionsAffinity=max.companionsAffinity;
  for(const item of NEW_GEAR.filter(e=>e.setId==='phong_hanh'&&e.rarity==='exceptional'))s.inventory.push({itemId:item.id,quantity:1});
  let h=s.hero;while(h.freeAttributePoints)h=allocateAttribute(h,'khiHai',s.inventory);for(const node of SKILL_TREES.VoDang.filter(n=>n.branch==='attack')){try{h=allocateSkill(h,node.id,s.inventory);}catch{}}
  for(const item of NEW_GEAR.filter(e=>e.setId==='phong_hanh'&&e.rarity==='exceptional'))h=equipItem(h,item.slot,item.id,s.inventory);s.hero=h;s.adventure.training=10;s.adventure.forging=10;c.load(s);c.chooseEnding('home');

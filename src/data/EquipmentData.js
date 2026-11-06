@@ -1,7 +1,7 @@
 import { deepFreeze } from './DataUtils.js';
-import {NEW_GEAR,NEW_GEAR_SETS} from './GearCatalog.js';
+import {NEW_GEAR,NEW_GEAR_SETS,LEGACY_HELMETS7,LEGACY_FULL_SETS7} from './GearCatalog.js';
 
-export const EQUIPMENT = deepFreeze([...NEW_GEAR,
+export const EQUIPMENT = deepFreeze([...NEW_GEAR,...LEGACY_HELMETS7,{id:"starter_helmet",name:"Mũ Vải Đi Đường",slot:"helmet",rarity:"common",tier:1,sect:null,setId:null,stats:{maxHp:35,physicalDef:3},description:"Mũ khởi hành dùng chung, không yêu cầu môn phái."},
   {
     "id": "thieulam_weapon",
     "name": "Thiền Trượng",
@@ -248,7 +248,7 @@ export const EQUIPMENT = deepFreeze([...NEW_GEAR,
   }
 ]);
 
-export const EQUIPMENT_SETS = deepFreeze([...NEW_GEAR_SETS,
+export const EQUIPMENT_SETS = deepFreeze([...NEW_GEAR_SETS,...LEGACY_FULL_SETS7,
   {
     "id": "thieulam_set",
     "name": "Bộ Thiếu Lâm",

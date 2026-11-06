@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
+import {STORY_RECRUITS7} from '../src/data/Recruitment7.js';
 import {Campaign,createCampaign,validateCampaign,itemCount} from '../src/core/Campaign.js';
 import {DAI_VIET_CHAPTERS,DAI_VIET_QUESTS,DAI_VIET_HOME_CHAPTER,DAI_VIET_BY_ID,resolveDaiVietQuest,daiVietLines} from '../src/data/DaiVietStoryData.js';
 import {DAI_VIET_CAST,DAI_VIET_CAST_BY_NAME,PLOT_COMPANIONS,PLOT_UNLOCKS,storyPerson} from '../src/data/DaiVietCast.js';
@@ -36,8 +37,8 @@ function prepared(){
 function snapshotAt(id){
  const s=createCampaign({story:'dai-viet',sect:'VoDang'}),at=DAI_VIET_QUESTS.findIndex(q=>q.id===id),done=DAI_VIET_QUESTS.slice(0,at),q=DAI_VIET_QUESTS[at];
  s.storyProgress.completedQuests=done.map(q=>q.id);s.storyProgress.decisions=Object.fromEntries(done.map(q=>[q.id,q.choices[0]?.id??'continue']));Object.assign(s.storyProgress,{activeQuestId:id,currentAct:q.act,currentChapter:q.chapter,currentEpisode:q.episode});
- for(const [cid,milestone]of Object.entries(PLOT_UNLOCKS))if(s.storyProgress.completedQuests.includes(milestone)){s.party.unlocked.push(cid);s.companionsAffinity[cid]=100;s.storyProgress.completedQuests.push('recruit_'+cid.slice(-2));}
- return s;
+ for(const [cid,milestone]of STORY_RECRUITS7.map(p=>[p.id,p.meet]))if(s.storyProgress.completedQuests.includes(milestone)){s.party.unlocked.push(cid);s.companionsAffinity[cid]=100;s.storyProgress.completedQuests.push('recruit_'+cid.slice(-2));}
+ s.party.active=s.party.unlocked.slice(0,5);s.party.formation=Object.fromEntries(['hero',...s.party.active].map((id,i)=>[id,[{x:1,y:1},{x:2,y:1},{x:0,y:1},{x:0,y:0},{x:1,y:2},{x:2,y:0}][i]]));return s;
 }
 
 test('all 265 fights separate setup from aftermath and retain every existing per-episode reward',()=>{
@@ -113,7 +114,7 @@ test('future choices and mixed campaign IDs cannot be injected into a new save',
  assert.ok(validReaderKey('main:D20H20'));assert.ok(validReaderKey('archive:D20H20'));assert.ok(validReaderKey('main:Q101'));assert.equal(validReaderKey('main:D21H01'),false);
 });
 test('all fifteen campaign-specific bond conversations keep their variants and remain valid after choosing home',()=>{
- const s=snapshotAt('D19H18');for(const id of ['companion_02','companion_03','companion_04']){s.party.unlocked.push(id);s.companionsAffinity[id]=100;}
+ const s=snapshotAt('D19H18');for(const id of ['companion_02','companion_03','companion_04']){if(!s.party.unlocked.includes(id))s.party.unlocked.push(id);s.companionsAffinity[id]=100;}
  const c=fresh();c.load(s);for(const person of ['companion_01','companion_02','companion_03','companion_04','companion_08'])for(let stage=1;stage<=3;stage++)c.completeBond(`bond_${person}_${stage}`,'listen');
  assert.equal(c.session.journey.bonds.completed.length,15);assert.ok(c.bondStories().find(b=>b.id==='bond_companion_01_1').lines.some(l=>l[0]==='Lôi Nam'));
  c.chooseMain('home');const snapshot=c.snapshot();c.load(snapshot);assert.deepEqual(c.session.journey.bonds,snapshot.journey.bonds);assert.ok(c.bondStories().every(b=>b.done&&!b.available));

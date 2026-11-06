@@ -20,7 +20,7 @@ export function speakerPortrait(speaker, hero, quest,actor,identitySession) {
   if(quest?.canon==='dai-viet'&&DAI_VIET_CAST_BY_NAME[name])return expressive(DAI_VIET_CAST_BY_NAME[name],quest);
   const companion = COMPANIONS.find(
     (c) =>
-      c.name === name || (name.length >= 3 && c.name.startsWith(name + ' '))
+      c.name === name || c.legacyName===name || c.legacyName?.startsWith(name+' ') || (name.length >= 3 && c.name.startsWith(name + ' '))
   );
   if (companion) return expressive(companion, quest);
   const npc = findNPC(name);
@@ -150,21 +150,7 @@ export class DialogueUI {
     }
     this.root.append(frame, controls, noteNode, buttons);
     if (getReader) {
-      const tools = node('div', undefined, 'reader-tools'),
-        label = node('label', 'Cỡ chữ ');
-      const font = node('select');
-      font.setAttribute('aria-label', 'Cỡ chữ lời thoại');
-      for (const size of [16, 18, 20, 22]) {
-        const option = node('option', size + ' px');
-        option.value = size;
-        font.append(option);
-      }
-      font.value = getReader().fontSize;
-      font.addEventListener('change', () => {
-        text.style.fontSize = font.value + 'px';
-        onFont?.(Number(font.value));
-      });
-      label.append(font);
+      const tools = node('div', undefined, 'reader-tools');
       const history = node('details', undefined, 'reader-history'),
         content = node('ol');
       history.append(node('summary', 'Lịch sử lời thoại'), content);
@@ -176,7 +162,7 @@ export class DialogueUI {
           )
         );
       });
-      tools.append(label, history);
+      tools.append(history);
       this.root.append(tools);
     }
     if (onBack) {

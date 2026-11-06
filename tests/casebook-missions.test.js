@@ -301,10 +301,10 @@ test('intent shows actual healer, control and boss decisions without consuming s
   assert.equal(battleIntent(battle, enemy).short, 'Choáng');
   assert.equal(hero.alive, true);
 });
-test('ordinary 6v6 outcomes remain identical to representative stored 3.1 replay pairs', () => {
+test('ordinary 6v6 outcomes match stored 7.0 replays for the same mirrored squad and seed inputs', () => {
   const report = JSON.parse(
     readFileSync(
-      new URL('../reports/balance-polish-final.json', import.meta.url),
+      new URL('../reports/replays-7.json', import.meta.url),
       'utf8'
     )
   );

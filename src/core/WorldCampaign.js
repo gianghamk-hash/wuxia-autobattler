@@ -134,7 +134,7 @@ export const worldMethods = {
       u.sect = isDaiViet(this.session)&&u.id==='hero'&&!hasEnrollment(this.session)?null:prep.tactics.affiliations[u.id] ?? u.sect;
       u.targetPriority =
         prep.tactics.priorities[u.id] ?? u.targetPriority ?? 'nearest';
-      u.element = SECT_ELEMENT[u.sect];
+      u.element = u.sect==='TuDo'?(u.element??'Tho'):SECT_ELEMENT[u.sect];
       if (u.id === 'hero') {
         u.stats.maxHp *= 1 + prep.training * 0.02;
         u.stats.physicalAtk *= 1 + prep.training * 0.01 + prep.forging * 0.03;

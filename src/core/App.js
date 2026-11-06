@@ -34,9 +34,10 @@ import { mountCodexUI } from '../ui/CodexUI.js';
 import { mountSaveUI } from '../ui/SaveUI.js';
 import { SoundManager } from '../audio/SoundManager.js';
 import { renderJourneyRoster, renderBattleAdvice } from '../ui/JourneyUI.js';
+import {storyRecruit7,acquisitionText7} from '../data/Recruitment7.js';
 import { battleScene, sceneFor } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
-import { storyPerson, isDaiViet, PLOT_UNLOCKS } from '../data/DaiVietCast.js';
+import { storyPerson, isDaiViet, PLOT_UNLOCKS,storyPoolAllows } from '../data/DaiVietCast.js';
 import { resolveDaiVietQuest } from '../data/DaiVietStoryData.js';
 import {ENROLLMENT_QUEST,sectReady,storyHeroBuild,heroAppearance,heroSectLabel,heroLines} from '../data/HeroIdentity.js';
 import { renderMissionStatus } from '../ui/MissionUI.js';
@@ -546,7 +547,7 @@ export class App {
     const context=continuityFor(quest,{returning:session.storyProgress.decisions.D19H18==='home'});
     const campaignScene=document.querySelector('.camp-scene');
     campaignScene.dataset.storyScene=quest?.scene??'ending';
-    campaignScene.style.setProperty('--scene',quest?.scene==='modern'?'linear-gradient(135deg,#637c89,#172f39)':`url("${sceneFor(quest??{})}")`);
+    campaignScene.style.setProperty('--scene',`url("${sceneFor(quest??{})}")`);
     const locationNode=document.querySelector('.scene-location');
     if(locationNode)locationNode.textContent=context?(quest.id==='D01H01'?'Trường quay · Hiện đại':context.place):quest?.location??'Hành trình đã khép lại';
     const headline=document.querySelector('.scene-copy h1');if(headline)headline.textContent=isDaiViet(session)?quest?.chapterTitle??'Những lời hẹn còn lại':'Chốn giang hồ, gặp người tri kỷ.';
@@ -804,20 +805,29 @@ export class App {
       if (card.dataset.companionId)
         card.hidden = !matches(COMPANIONS_BY_ID[card.dataset.companionId]);
     const available = this.model.availableRecruitQuests();
+    for(const filter of document.querySelectorAll('[data-recruit-filter]')){
+      const key=filter.dataset.recruitFilter,label=isDaiViet(session)?({'1':'Chính truyện','2':'Vòng quay','3':'Đã sở hữu'})[key]:({'1':'Hồi I','2':'Hồi II','3':'Hồi III'})[key];
+      if(label&&filter.textContent.trim()!==label)filter.textContent=label;
+    }
     for (const quest of RECRUIT_QUESTS) {
       if (!matches(COMPANIONS_BY_ID[quest.companionId])) continue;
       const open = available.includes(quest),
         owned = session.party.unlocked.includes(quest.companionId);
-      if (this.recruitFilter === 'open' && !open) continue;
+      if (this.recruitFilter === 'open' && !(isDaiViet(session)?owned||storyPoolAllows(session,quest.companionId):open)) continue;
+      if(isDaiViet(session)&&(['1','2','3'].includes(this.recruitFilter))){
+        const fromStory=Boolean(storyRecruit7(quest.companionId));
+        if(this.recruitFilter==='1'&&!fromStory||this.recruitFilter==='2'&&fromStory||this.recruitFilter==='3'&&!owned)continue;
+      }
       if (
-        ['1', '2', '3'].includes(this.recruitFilter) &&
+        !isDaiViet(session)&&['1', '2', '3'].includes(this.recruitFilter) &&
         quest.act !== Number(this.recruitFilter)
       )
         continue;
       const unit = storyPerson(session,COMPANIONS_BY_ID[quest.companionId]),
         card = node('article', undefined, 'roster-card'),
         body = node('div', undefined, 'card-body');
-      const unlockChapter=isDaiViet(session)&&PLOT_UNLOCKS[unit.id]?Number(PLOT_UNLOCKS[unit.id].slice(1,3)):quest.chapter;
+      const route=storyRecruit7(unit.id),canonical=isDaiViet(session);
+      const unlockChapter=canonical?(route?.chapter??null):quest.chapter;
       decorateRarity(card, unit);
       card.dataset.companionId = unit.id;
       card.dataset.locked = String(!open && !owned);
@@ -832,7 +842,7 @@ export class App {
       const badge = node('span', undefined, 'card-badge');
       if (!open && !owned) badge.append(icon('lock'));
       badge.append(
-        node('span', owned ? 'Đã kết nghĩa' : `Chương ${unlockChapter}`)
+        node('span', owned ? 'Đã kết nghĩa' : canonical?acquisitionText7(unit.id):`Chương ${unlockChapter}`)
       );
       card.append(badge);
       const meta = node('div', undefined, 'card-meta');
@@ -843,13 +853,15 @@ export class App {
       body.append(
         meta,
         node('h3', unit.name),
-        node('p', isDaiViet(session)?unit.recruitment.description:quest.description, 'card-description')
+        node('p', canonical?acquisitionText7(unit.id)+' · '+unit.biography:quest.description, 'card-description')
       );
       const button = node(
         'button',
         owned
           ? 'Đã đồng hành'
-          : open
+          : canonical
+            ? route?acquisitionText7(unit.id):'Đến Chiêu hiền quán'
+            : open
             ? `Gặp gỡ · ${this.model.recruitFee(quest)} bạc nhập đội`
             : `Chưa mở · Chương ${unlockChapter}`
       );
@@ -857,11 +869,11 @@ export class App {
       button.dataset.recruitId = quest.id;
       button.disabled =
         owned ||
-        !open ||
+        (canonical?Boolean(route):!open) ||
         this.model.running ||
         Boolean(session.storyProgress.pendingEncounter);
       button.addEventListener('click', () =>
-        this.run(() => this.showRecruit(quest))
+        canonical&&!route?document.getElementById('roster-tab-gacha')?.click():this.run(() => this.showRecruit(quest))
       );
       const controls = node('div', undefined, 'controls');
       controls.append(button);
@@ -959,6 +971,9 @@ export class App {
     else el('dialogue-advance')?.focus({preventScroll:true});
   }
   showRecruit(quest) {
+    if(isDaiViet(this.model.session)){
+      this.setView('roster');this.usability.openRoster('recruit');this.toast(acquisitionText7(quest.companionId));return;
+    }
     const ready =
       this.model.session.storyProgress.questFlags[`challenge_${quest.id}`];
     const previous = this.model.session.storyProgress.decisions[quest.id];

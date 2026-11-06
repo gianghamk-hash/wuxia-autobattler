@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {NPC_KITS7} from '../src/data/NPCKits7.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -24,7 +25,7 @@ test('all 240 episodes use the rewrite, clear goals and concrete previous events
     assert.ok(q.chapterGoal && q.chapterSummary && q.previous);
     for (const [speaker, text] of q.lines) {
       assert.ok(!/\sBạn:\s/.test(text), q.id);
-      assert.ok(['Bạn', 'Người kể'].includes(speaker) || findNPC(speaker) || COMPANIONS.some(c => c.name === speaker || c.name.startsWith(speaker + ' ')), `${q.id}: ${speaker}`);
+      assert.ok(['Bạn', 'Người kể'].includes(speaker) || findNPC(speaker) || COMPANIONS.some(c => c.name === speaker || c.legacyName===speaker || c.legacyName?.startsWith(speaker+' ') || c.name.startsWith(speaker + ' ')), `${q.id}: ${speaker}`);
     }
     if (q.episode > 1) assert.equal(q.previous, CHAPTERS[q.chapter - 1].scenes[q.episode - 2][1]);
   }
@@ -49,11 +50,11 @@ test('all four endings use separate readable speaker turns with known character 
     assert.ok(lines.length >= 8);
     for (const [speaker, text] of lines) {
       assert.ok(!/\sBạn:\s/.test(text));
-      assert.ok(['Bạn', 'Người kể'].includes(speaker) || findNPC(speaker) || COMPANIONS.some(c => c.name === speaker || c.name.startsWith(speaker + ' ')), speaker);
+      assert.ok(['Bạn', 'Người kể'].includes(speaker) || findNPC(speaker) || COMPANIONS.some(c => c.name === speaker || c.legacyName===speaker || c.legacyName?.startsWith(speaker+' ') || c.name.startsWith(speaker + ' ')), speaker);
     }
   }
 });
-test('story bosses use their own names and portraits without changing statistics or underlying effects', () => {
+test('story bosses preserve encounter statistics and use stable role-specific signature kits', () => {
   for (const [chapter, id] of [[1, 'doi_truong'], [4, 'doc_le'], [5, 'kha_van'], [8, 'do_mau'], [11, 'trinh_nghiem']]) {
     const q = MAIN_QUESTS.find(q => q.chapter === chapter && q.boss);
     assert.ok(q);
@@ -61,7 +62,7 @@ test('story bosses use their own names and portraits without changing statistics
     const stats = structuredClone(unit.stats), effects = structuredClone(unit.skills.ultimate.effects);
     applyStoryIdentity(unit, npc);
     assert.equal(unit.characterId, id); assert.equal(unit.portrait, npc.portrait);
-    assert.deepEqual(unit.stats, stats); assert.deepEqual(unit.skills.ultimate.effects, effects);
+    assert.deepEqual(unit.stats, stats); assert.deepEqual(unit.skills.ultimate.effects,NPC_KITS7[id].ultimate.effects);const other=new Companion('companion_04');applyStoryIdentity(other,npc);assert.deepEqual(other.skills,unit.skills);
     assert.ok(getSkillVisual({ ownerId: id, skillId: unit.skills.ultimate.id }));
   }
 });

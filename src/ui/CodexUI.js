@@ -3,7 +3,10 @@ import { SECTS, SECT_IDS, getSectName } from '../data/SectsData.js';
 import { COMPANIONS, ROLE_LABELS } from '../data/CompanionsData.js';
 import { SYNERGIES, getActiveSynergies } from '../data/SynergiesData.js';
 import { EQUIPMENT, EQUIPMENT_SETS } from '../data/EquipmentData.js';
-import {storyPerson} from '../data/DaiVietCast.js';
+import {storyPerson,isDaiViet} from '../data/DaiVietCast.js';
+import {storyRecruit7,acquisitionText7} from '../data/Recruitment7.js';
+import {gearImage} from './GearArt.js';
+import {gearRarity} from '../data/GearCatalog.js';
 
 const STAT_LABELS = {
   maxHp: 'Sinh lực',
@@ -12,12 +15,12 @@ const STAT_LABELS = {
   physicalDef: 'Ngoại phòng',
   magicalDef: 'Nội phòng',
   attackSpeed: 'Tốc đánh',
-  attackRange: 'Tầm đánh'
+  attackRange: 'Tầm đánh',critRate:'Bạo kích',critDmg:'Bạo thương',dodgeRate:'Né tránh',blockRate:'Đỡ đòn',maxEnergy:'Nộ tối đa'
 };
 const SLOT_LABELS = {
   weapon: 'Vũ khí',
   armor: 'Áo giáp',
-  accessory: 'Phụ kiện'
+  accessory: 'Ngọc bội',helmet:'Mũ'
 };
 const fold = (text) =>
   text
@@ -35,12 +38,13 @@ function element(tag, text, className) {
 function statsText(stats) {
   return Object.entries(stats)
     .filter(([key]) => STAT_LABELS[key])
-    .map(([key, value]) => `${STAT_LABELS[key]} ${value}`)
+    .map(([key, value]) => `${STAT_LABELS[key]} ${key.endsWith('Rate')?Number((value*100).toFixed(2))+'%':value}`)
     .join(' · ');
 }
 function line(card, label, text) {
   card.append(element('p', `${label}: ${text}`));
 }
+function skillImage7(skill){const img=element('img');img.className='skill-art7';img.alt=skill.name;img.src=new URL('../../'+skill.icon,import.meta.url).href;img.loading='lazy';return img;}
 
 export function mountCodexUI({getState=()=>null}={}) {
   const view = document.getElementById('catalog-view');
@@ -76,6 +80,7 @@ export function mountCodexUI({getState=()=>null}={}) {
         ROLE_LABELS[item.role],
         item.role,
         item.recruitment?.description,
+        item.recruitment?acquisitionText7(item.id):null,
         item.skills?.ultimate.name,
         item.skills?.ultimate.description,
         item.description,
@@ -113,10 +118,11 @@ export function mountCodexUI({getState=()=>null}={}) {
         line(card, 'Cần đủ', item.requiredSects.map(getSectName).join(' + '));
         card.append(element('p', item.description));
       } else if (view.value === 'equipment') {
+        card.append(gearImage(item));
         line(
           card,
           'Loại',
-          `${SLOT_LABELS[item.slot]} · ${item.rarity === 'rare' ? 'Hiếm' : 'Thường'} · Bậc ${item.tier}`
+          `${SLOT_LABELS[item.slot]} · ${gearRarity(item).name} · Bậc ${item.tier}`
         );
         line(
           card,
@@ -124,8 +130,7 @@ export function mountCodexUI({getState=()=>null}={}) {
           item.sect ? getSectName(item.sect) : 'Dùng chung'
         );
         line(card, 'Cộng chỉ số', statsText(item.stats));
-        const set = EQUIPMENT_SETS.find((set) => set.id === item.setId);
-        if (set)
+        for (const set of EQUIPMENT_SETS.filter(set=>(set.setId??set.id)===item.setId))
           line(
             card,
             set.name,
@@ -138,23 +143,22 @@ export function mountCodexUI({getState=()=>null}={}) {
           `${getSectName(item.sect)} · ${ROLE_LABELS[item.role]}`
         );
         line(card, 'Tiểu sử', item.biography);
-        line(card, 'Chiêu mộ', item.recruitment.description);
+        line(card, 'Chiêu mộ', isDaiViet(getState())?acquisitionText7(item.id):storyRecruit7(item.id)?'Nhiệm vụ đồng hành · '+item.recruitment.description:'Chỉ có tại Chiêu hiền quán');
+        card.append(skillImage7(item.skills.ultimate));
         line(card, item.skills.ultimate.name, item.skills.ultimate.description);
         const details = element('details');
         details.append(element('summary', 'Chỉ số và đánh thường'));
-        details.append(element('p', statsText(item.baseStats)));
+        details.append(element('p', 'Chỉ số cấp 1: '+statsText(item.baseStats)),skillImage7(item.skills.autoAttack));
         details.append(
           element(
             'p',
-            item.skills.autoAttack.targetType === 'lowest_hp_ally'
-              ? 'Đánh thường hồi máu cho đồng đội yếu nhất; nhận 15 nộ.'
-              : 'Đánh thường nhận 15 nộ.'
+            item.skills.autoAttack.name+': '+item.skills.autoAttack.description
           )
         );
         details.append(
           element(
             'p',
-            `Tuyệt kỹ cần ${item.skills.ultimate.energyCost} nội lực. Chỉ số sẽ được cân bằng khi có chiến đấu.`
+            `Tuyệt kỹ cần ${item.skills.ultimate.energyCost} nộ. Chỉ số tăng theo cấp của nhân vật chính; xem hồ sơ để đọc chỉ số ở cấp hiện tại.`
           )
         );
         card.append(details);

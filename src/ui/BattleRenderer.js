@@ -3,7 +3,7 @@ import {portraitURL} from '../data/ArtURLs.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { SECT_ART } from './Visuals.js';
 import { getSkillVisual } from '../data/SkillVisualsData.js';
-import { paintSkillEffect } from './SkillEffects.js';
+import { paintSkillEffect,preloadSkillArt7 } from './SkillEffects.js';
 import { fighterKey, fighterURL } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
 const COLORS = { home: '#90ddbf', enemy: '#f4a18d' };
@@ -62,6 +62,7 @@ export class BattleRenderer {
   }
   setBattle(battle) {
     this.battle = battle;
+    if(battle){preloadSkillArt7(battle.units.flatMap(unit=>Object.values(unit.skills??{}).map(skill=>getSkillVisual({ownerId:unit.templateId??unit.sect??'hero',skillId:skill.id}))));for(const unit of battle.units)this.fighterImage(unit);}
     if (battle?.scene && this.environment.src !== battle.scene) {
       this.environment.src = battle.scene;
       this.backdrop = null;

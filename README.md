@@ -2,7 +2,15 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 6.0 — chiến đấu và tháp 100 tầng:** 265 trận chính truyện, địch 4–8 người, boss ba giai đoạn và lời thoại cô đọng. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 7.0 — đồng hành và chiến thuật:** 15 người nhận qua truyện, 45 người chỉ có trong vòng quay; 60 bộ chiêu riêng, mô hình khớp chân dung, bốn ô trang bị và tương khắc rõ hơn. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 7.0
+
+- Đúng 15 đồng hành theo mốc truyện, gồm một người bậc 5; 45 người còn lại chỉ quay. Tải bản cũ giữ người đã có và bổ sung các mốc truyện đã kiếm được, không phát lại XP/bạc/đồ hay đổi đội hình.
+- 60 bộ chiêu riêng, hồ sơ tiểu sử/chỉ số/hình chiêu; 80 bộ chuyển động mới cho 60 tướng và 20 vai truyện. Giữ và đối chiếu mười giai đoạn của nhân vật chính. 271 ảnh kỹ năng/nút võ học; hiệu ứng trong trận sử dụng hình thật.
+- Bốn ô gồm Vũ khí, Áo giáp, Ngọc bội, Mũ; 104 món, năm bộ vòng quay có mốc 2/3/4. Khắc hệ ×1,75 và bị khắc ×0,60; có gợi ý cộng thuộc tính theo phái và hướng build.
+- 20 nền chương đúng tuyến truyện mới, hai nền hiện đại riêng; quán ghi tác dụng từng món, dây có khảo sát vật tư hai lượt/ngày. Bỏ bộ chọn cỡ chữ, giữ dữ liệu đọc cũ.
+- [Quy tắc, 15 mốc nhận và giới hạn đo](docs/CAST_AND_GEAR_7_0.md). Các mục phiên bản bên dưới là lịch sử thay đổi; quy tắc 7.0 thay thế mô tả nguồn nhận, bộ chiêu và ba ô trang bị cũ.
 
 ## Bản 6.0
 

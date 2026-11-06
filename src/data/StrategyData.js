@@ -77,9 +77,9 @@ export const WEAKNESSES = {
   companion_20: 'Chiêu biến thiên; thiếu ổn định.'
 };
 export function elementMultiplier(source, target) {
-  const a = source.element ?? SECT_ELEMENT[source.sect],
-    b = target.element ?? SECT_ELEMENT[target.sect];
-  return ELEMENTS[a]?.beats === b ? 1.15 : ELEMENTS[b]?.beats === a ? 0.85 : 1;
+  const a = source?.element ?? SECT_ELEMENT[source?.sect],
+    b = target?.element ?? SECT_ELEMENT[target?.sect];
+  if(!a||!b)return 1;return ELEMENTS[a]?.beats === b ? 1.75 : ELEMENTS[b]?.beats === a ? .60 : 1;
 }
 export function sectBonuses(sects) {
   return Object.entries(

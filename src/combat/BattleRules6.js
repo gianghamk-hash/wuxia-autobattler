@@ -55,6 +55,7 @@ export function strengthenEnemy(
       ? "troop_duelist"
       : TROOP_SKINS[(chapter + index) % TROOP_SKINS.length];
   }
+  if (TROOP_SKINS.includes(unit.characterId)){unit.sect='TuDo';unit.element=({troop_spear:'Kim',troop_saber:'Hoa',troop_archer:'Moc',troop_medic:'Thuy',troop_raider:'Hoa',troop_duelist:'Tho',troop_heavy:'Kim',troop_shadow:'Moc'})[unit.characterId];}
   if (TROOP_SKINS.includes(unit.characterId))
     unit.portrait = "assets/images/enemies/" + unit.characterId + ".webp";
   return unit;
@@ -82,6 +83,8 @@ export function bossSequence(
 ) {
   const seeds = enemies.map((u) => ({
     template: u.templateId,
+    sect: u.sect,
+    element: u.element,
     stats: structuredClone(u.stats),
     skills: structuredClone(u.skills),
     passive: structuredClone(u.passive),
@@ -90,11 +93,16 @@ export function bossSequence(
     canon: u.canon,
     storyActorId: u.storyActorId,
   }));
+  // Cao Lệ is authored at the tail of the encounter. Keep his real kit for phase 3;
+  // earlier guards must not secretly cast the final general's signature.
+  const authoredLeader=seeds.find(s=>s.storyActorId==='cao_le');
+  const minionSeeds=authoredLeader?seeds.filter(s=>s!==authoredLeader):seeds;
   const decorate = (u, phase, index) => {
     if (index === 0) {
       u.name = (phase < 3 ? `Mini boss ${phase} · ` : "Boss cuối · ") + title;
       u.characterId =
         phase === 3 ? skin : phase === 1 ? "boss_captain" : "boss_river";
+      u.storyActorId=u.characterId==='doc_le'?'cao_le':'boss';
       u.stats.maxHp = Math.round(u.stats.maxHp * (phase === 3 ? 2 : 1.25));
       u.stats.hp = u.stats.maxHp;
       u.stats.physicalAtk *= phase === 3 ? 1.2 : 1.08;
@@ -110,7 +118,13 @@ export function bossSequence(
         : "assets/images/enemies/" + u.characterId + ".webp";
     return u;
   };
-  enemies.forEach((u, i) => decorate(u, 1, i));
+  enemies.forEach((u, i) => {
+    if(authoredLeader&&u.storyActorId==='cao_le'){
+      const s=minionSeeds[i%minionSeeds.length];
+      Object.assign(u,{...s,templateId:s.template,stats:structuredClone(s.stats),skills:structuredClone(s.skills),passive:structuredClone(s.passive)});
+    }
+    decorate(u, 1, i);
+  });
   return (phase) =>
     Array.from(
       {
@@ -118,7 +132,7 @@ export function bossSequence(
           phase === 3 ? Math.min(8, 6 + Math.floor((chapter - 1) / 8)) : 4,
       },
       (_, i) => {
-        const s = seeds[i % seeds.length],
+        const s = phase===3&&i===0&&authoredLeader?authoredLeader:minionSeeds[i % minionSeeds.length],
           u = new Companion(s.template, {
             id: `phase_${phase}_enemy_${i}`,
             team: "enemy",

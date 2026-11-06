@@ -1,3 +1,4 @@
+import {appendDossier7} from './Dossier7.js';
 import {icon} from './Visuals.js';
 import {remainingEntries,EXTRA_ENTRY_PRICE} from '../core/DungeonEntries.js';
 import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
@@ -187,7 +188,7 @@ export function mountWorldUI(app) {
       n('h2', 'Chuẩn bị trước trận'),
       n(
         'p',
-        'Kim khắc Mộc → Thổ → Thủy → Hỏa → Kim: sát thương +15%, bị khắc −15%. Tương sinh hỗ trợ nội lực. 2/4/6 người cùng phái tăng hiệu ứng đội. Ưu tiên mục tiêu áp dụng cho đòn đánh địch; y sư vẫn chữa người thiếu máu.',
+        'Kim khắc Mộc → Thổ → Thủy → Hỏa → Kim: sát thương ×1,75 khi khắc địch; ×0,60 khi bị địch khắc. Tương sinh hỗ trợ nội lực. 2/4/6 người cùng phái tăng hiệu ứng đội. Ưu tiên mục tiêu áp dụng cho đòn đánh địch; y sư vẫn chữa người thiếu máu.',
         'hint'
       )
     );
@@ -275,22 +276,22 @@ export function mountWorldUI(app) {
     const id = unit.id ?? 'hero',
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
     root.removeAttribute('data-tier');
-    const npc = unit.id==='hero'?null:isDaiViet(s)?(DAI_VIET_CAST_BY_ID[unit.storyActorId??unit.templateId??unit.id]??(unit.characterId?{...NPCS_BY_ID[unit.characterId],name:unit.name}:null)):NPCS_BY_ID[unit.characterId];
-    if (!npc) decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
+    const npc = unit.id==='hero'?null:isDaiViet(s)?(DAI_VIET_CAST_BY_ID[unit.storyActorId??unit.templateId??unit.id]??NPCS_BY_ID[unit.characterId]):NPCS_BY_ID[unit.characterId];
+    if (!npc||npc.kind==='companion') decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
     root.append(
       portrait(
-        unit.id==='hero'&&isDaiViet(s)?heroAppearance(s):npc ?? COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
+        unit.id==='hero'&&isDaiViet(s)?heroAppearance(s):unit.portrait?unit:npc ?? COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
         'sheet-portrait'
       ),
       n('h2', unit.name),
       n(
         'p',
-        unit.id==='hero'&&isDaiViet(s)?heroSectLabel(s):`${getSectName(sect)} · ${ELEMENTS[SECT_ELEMENT[sect] ?? 'Tho'].name}`
+        unit.id==='hero'&&isDaiViet(s)?heroSectLabel(s):npc&&!unit.skills?npc.role:`${getSectName(sect)} · ${ELEMENTS[unit.element??SECT_ELEMENT[sect] ?? 'Tho'].name}`
       ),
       n(
         'p',
-        unit.skills?.ultimate?.description ??
-          'Nâng võ công và trang bị trong Túi đồ.',
+        (unit.inCombat?unit.skills?.ultimate?.description:unit.skills?.ultimate?.name?'Tuyệt kỹ · '+unit.skills.ultimate.name:null) ??
+          (npc?.kind==='npc'?'Vai truyện riêng; không nằm trong vòng quay hoặc danh sách đồng hành.':'Nâng võ công và trang bị trong Túi đồ.'),
         'hint'
       ),
       n(
@@ -299,15 +300,9 @@ export function mountWorldUI(app) {
         'weakness'
       )
     );
-    if (npc) root.append(n('p', heroText([npc.role,npc.bio].filter(Boolean).join(' · '),s), 'hint'));
-    else if (COMPANIONS_BY_ID[unit.templateId ?? id])
-      root.append(
-        n(
-          'p',
-          `Bậc ${COMPANIONS_BY_ID[unit.templateId ?? id].tier} · ${COMPANIONS_BY_ID[unit.templateId ?? id].biography}`,
-          'hint'
-        )
-      );
+    if(!unit.skills&&!unit.stats)root.querySelector(':scope > .weakness')?.remove();
+    appendDossier7(root,unit,s);
+    if (npc && npc.kind!=='companion') root.append(n('p', heroText([npc.role,npc.bio].filter(Boolean).join(' · '),s), 'hint'));
     if (
       !app.model.running &&
       s.party.active.includes(id) &&
@@ -456,6 +451,7 @@ export function mountWorldUI(app) {
     }
     if (tab === 'shop') {
       root.append(roadsideShop);
+      roadsideShop.querySelector('.salvage7')?.remove();const salvage=button('Dùng 1 dây khảo sát · '+(2-(s.adventure.daily.salvage??0))+'/2 lượt hôm nay',()=>action('salvage'),(s.adventure.daily.salvage??0)>=2||count(s,'rope')<1);salvage.classList.add('salvage7');roadsideShop.append(salvage);
       renderEquipment(app,root);
       for (const [id, title, text, cost, disabled] of [
         [

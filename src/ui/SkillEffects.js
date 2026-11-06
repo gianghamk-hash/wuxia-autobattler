@@ -143,7 +143,12 @@ export function drawSkillMotif(c, motif, x, y, radius, t, primary, secondary) {
   c.restore();
 }
 
+const imageCache7=new Map();
+function skillBitmap7(profile){if(!profile.image||typeof Image==='undefined')return null;if(!imageCache7.has(profile.image)){const im=new Image();im.src=new URL('../../'+profile.image,import.meta.url).href;imageCache7.set(profile.image,im);}const im=imageCache7.get(profile.image);return im.complete&&im.naturalWidth?im:null;}
+export function preloadSkillArt7(profiles){return Promise.all(profiles.filter(Boolean).map(profile=>{skillBitmap7(profile);const im=imageCache7.get(profile.image);return im?im.decode().then(()=>true,()=>false):Promise.resolve(false);}));}
 export function paintSkillEffect(ctx, effect, t, project, reducedMotion = false) {
+  const bitmap=skillBitmap7(effect.profile);
+  if(bitmap){const p=effect.profile,origin=project(effect.origin),targets=effect.targets.length?effect.targets.map(target=>project(target.position)):[origin],progress=reducedMotion?1:Math.min(1,t/.3),size=(p.ultimate?130:54)*(reducedMotion?1:.75+Math.min(1,t*3)*.25);ctx.save();ctx.globalAlpha=Math.min(1,(1-t)*4);for(const target of targets){const x=p.path==='ward'?target.x:origin.x+(target.x-origin.x)*progress,y=(p.path==='ward'?target.y:origin.y+(target.y-origin.y)*progress)-18;ctx.drawImage(bitmap,x-size/2,y-size/2,size,size);}ctx.restore();return;}
   const p = effect.profile, origin = project(effect.origin);
   const targets = effect.targets.length ? effect.targets.map(target => project(target.position)) : [origin];
   ctx.save(); ctx.globalAlpha = Math.min(1, (1 - t) * 3);

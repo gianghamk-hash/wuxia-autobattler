@@ -35,7 +35,7 @@ export function mountGachaUI(app) {
       heading,
       n(
         'p',
-        isDaiViet(s)?'Vai chính được mời qua chính truyện và chỉ vào nhóm quay sau khi đã gặp. Mười nhân vật mới chỉ mở quay và nhiệm vụ mời sau lần gặp trong truyện. Các nhân vật còn lại có thể mời như thường; tỉ lệ bậc và bảo đảm được giữ, trong mỗi bậc chia đều người hiện có. Quay không tự đổi đội hình.':'Một chén trà, một cuộc gặp. 60 hiệp khách đều có thể kết nghĩa qua nhiệm vụ; quay không cộng kinh nghiệm hay tự đổi đội hình.',
+        isDaiViet(s)?'15 đồng hành gia nhập qua chính truyện, gồm đúng 1 người bậc 5. 45 người còn lại chỉ nhận tại vòng quay; nhân vật mới mở quay sau lần gặp trong truyện. Trong mỗi bậc chia đều những người đang có trong nhóm quay. Quay không tự đổi đội hình.':'Một chén trà, một cuộc gặp. 15 hiệp khách có tuyến nhận qua truyện, 45 người còn lại chỉ có trong vòng quay; quay không cộng kinh nghiệm hay tự đổi đội hình.',
         'hint'
       )
     );

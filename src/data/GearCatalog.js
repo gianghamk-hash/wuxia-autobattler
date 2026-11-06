@@ -1,22 +1,17 @@
 import {deepFreeze} from './DataUtils.js';
-export const GEAR_RARITIES=[
- {id:'common',name:'Thường',rate:60,color:'#aeb9b5',rank:1},
- {id:'rare',name:'Hiếm',rate:28,color:'#65b6ee',rank:2},
- {id:'excellent',name:'Xuất sắc',rate:10,color:'#bd8beb',rank:3},
- {id:'exceptional',name:'Trác việt',rate:2,color:'#e7bd62',rank:4}
-];
+export const GEAR_RARITIES=[{id:'common',name:'Thường',rate:60,color:'#aeb9b5',rank:1},{id:'rare',name:'Hiếm',rate:28,color:'#65b6ee',rank:2},{id:'excellent',name:'Xuất sắc',rate:10,color:'#bd8beb',rank:3},{id:'exceptional',name:'Trác việt',rate:2,color:'#e7bd62',rank:4}];
 export const GEAR_DRAW={singleCost:80,tenCost:720,excellentPity:10,exceptionalPity:50};
-const families=[
- {id:'phong_hanh',name:'Vân Hành',weapon:{physicalAtk:18,magicalAtk:14},armor:{maxHp:85,physicalDef:6},accessory:{attackSpeed:.025,physicalAtk:6},two:{physicalAtk:12,magicalAtk:10},three:{critRate:.03,attackSpeed:.04}},
- {id:'thiet_ve',name:'Thiết Vệ',weapon:{physicalAtk:14,physicalDef:5},armor:{maxHp:125,physicalDef:8},accessory:{maxHp:70,magicalDef:7},two:{maxHp:150,physicalDef:10},three:{blockRate:.035,magicalDef:15}},
- {id:'thanh_tam',name:'Thanh Tâm',weapon:{magicalAtk:20,physicalAtk:6},armor:{maxHp:95,magicalDef:8},accessory:{magicalAtk:8,magicalDef:6},two:{magicalAtk:14,magicalDef:8},three:{maxHp:120,attackSpeed:.04}}
+export const GEAR_FAMILIES7=[
+ {id:'phong_hanh',name:'Vân Hành',weapon:{physicalAtk:18,magicalAtk:14},armor:{maxHp:85,physicalDef:6},accessory:{attackSpeed:.025,physicalAtk:6},helmet:{maxHp:60,critRate:.01},two:{physicalAtk:12,magicalAtk:10},three:{critRate:.03,attackSpeed:.04},four:{physicalAtk:22,magicalAtk:16,maxHp:160,attackSpeed:.04},description:'Công kích và nhịp đánh linh hoạt.'},
+ {id:'thiet_ve',name:'Thiết Vệ',weapon:{physicalAtk:14,physicalDef:5},armor:{maxHp:125,physicalDef:8},accessory:{maxHp:70,magicalDef:7},helmet:{maxHp:100,magicalDef:6},two:{maxHp:150,physicalDef:10},three:{blockRate:.035,magicalDef:15},four:{maxHp:320,physicalDef:20,magicalDef:20,blockRate:.03},description:'Giữ tuyến, chống chịu và đỡ đòn.'},
+ {id:'thanh_tam',name:'Thanh Tâm',weapon:{magicalAtk:20,physicalAtk:6},armor:{maxHp:95,magicalDef:8},accessory:{magicalAtk:8,magicalDef:6},helmet:{maxHp:70,magicalAtk:5},two:{magicalAtk:14,magicalDef:8},three:{maxHp:120,attackSpeed:.04},four:{magicalAtk:30,maxHp:220,magicalDef:15},description:'Nội công, hồi phục và giữ mạch.'},
+ {id:'thien_loi',name:'Thiên Lôi',weapon:{magicalAtk:24,physicalAtk:3},armor:{maxHp:75,magicalDef:6},accessory:{magicalAtk:10,critRate:.015},helmet:{magicalAtk:8,critRate:.01},two:{magicalAtk:18,critRate:.02},three:{critDmg:.12,magicalDef:10},four:{magicalAtk:35,maxHp:180,critRate:.035},description:'Nội công bộc phát và bạo kích.'},
+ {id:'tam_anh',name:'Tầm Ảnh',weapon:{physicalAtk:22,magicalAtk:5},armor:{maxHp:70,physicalDef:5},accessory:{attackSpeed:.035,critRate:.01},helmet:{physicalAtk:6,dodgeRate:.01},two:{physicalAtk:16,attackSpeed:.02},three:{dodgeRate:.03,critRate:.02},four:{physicalAtk:28,maxHp:180,attackSpeed:.05},description:'Ngoại công tầm xa, tốc đánh và né.'}
 ];
-export const NEW_GEAR=families.flatMap(f=>GEAR_RARITIES.flatMap(r=>['weapon','armor','accessory'].map(slot=>({
- id:`gear_${f.id}_${r.id}_${slot}`,name:`${({weapon:'Binh khí',armor:'Áo',accessory:'Ngọc'})[slot]} ${f.name} · ${r.name}`,slot,rarity:r.id,tier:r.rank,sect:null,setId:f.id,
- stats:Object.fromEntries(Object.entries(f[slot]).map(([key,n])=>[key,n<1?Number((n*[0,1,1.45,2,2.7][r.rank]).toFixed(4)):Math.round(n*[0,1,1.45,2,2.7][r.rank])])),
- description:`Bộ ${f.name}; phối hợp hai và ba món kể cả khác phẩm chất. ${f.id==='phong_hanh'?'Ưu tiên nhịp đánh và công kích.':f.id==='thiet_ve'?'Ưu tiên sống sót và giữ tuyến.':'Ưu tiên nội công và hồi phục.'}`
-}))));
-export const NEW_GEAR_SETS=families.flatMap(f=>[2,3].map(n=>({id:f.id+'_'+n,setId:f.id,name:`${f.name} · ${n} món`,requiredPieces:n,stats:n===2?f.two:f.three})));
+export const NEW_GEAR=GEAR_FAMILIES7.flatMap(f=>GEAR_RARITIES.flatMap(r=>['weapon','armor','accessory','helmet'].map(slot=>({id:'gear_'+f.id+'_'+r.id+'_'+slot,name:({weapon:'Binh khí',armor:'Áo giáp',accessory:'Ngọc bội',helmet:'Mũ'})[slot]+' '+f.name+' · '+r.name,slot,rarity:r.id,tier:r.rank,sect:null,setId:f.id,stats:Object.fromEntries(Object.entries(f[slot]).map(([key,n])=>[key,n<1?Number((n*[0,1,1.45,2,2.7][r.rank]).toFixed(4)):Math.round(n*[0,1,1.45,2,2.7][r.rank])])),description:'Bộ '+f.name+': mốc 2, 3 và đủ 4 món cộng dồn, phối được khác phẩm chất. '+f.description}))));
+export const NEW_GEAR_SETS=GEAR_FAMILIES7.flatMap(f=>[2,3,4].map(n=>({id:f.id+'_'+n,setId:f.id,name:f.name+' · '+n+' món',requiredPieces:n,stats:n===2?f.two:n===3?f.three:f.four})));
 export const gearRarity=item=>GEAR_RARITIES.find(r=>r.id===item.rarity)??GEAR_RARITIES[0];
-export const STORY_GEAR={D03H10:'gear_thiet_ve_common_armor',D04H20:'gear_phong_hanh_rare_weapon',D08H20:'gear_thanh_tam_rare_accessory',D11H18:'gear_thanh_tam_excellent_weapon',D15H20:'gear_thiet_ve_excellent_armor'};
-for(const catalog of [GEAR_RARITIES,GEAR_DRAW,NEW_GEAR,NEW_GEAR_SETS,STORY_GEAR])deepFreeze(catalog);
+export const LEGACY_HELMETS7=['ThieuLam','VoDang','CaiBang','NgaMi','DuongMon'].map((sect,i)=>({id:sect.toLowerCase()+'_helmet',name:['Thiền Quan','Trúc Lâm Đạo Quan','Tản Viên Hộ Ngạch','Thất Sơn Liên Quan','Vân Đồn Ảnh Mão'][i],slot:'helmet',rarity:'rare',tier:2,sect,setId:sect.toLowerCase()+'_set',stats:{maxHp:65,physicalDef:5,magicalDef:5},description:'Mảnh thứ tư của bộ môn phái, kích hoạt thêm thưởng đủ bốn món.'}));
+export const LEGACY_FULL_SETS7=LEGACY_HELMETS7.map(h=>({id:h.setId+'_4',setId:h.setId,name:h.sect+' · 4 món',requiredPieces:4,stats:{maxHp:180,physicalAtk:12,magicalAtk:12}}));
+export const STORY_GEAR={D02H12:'starter_helmet',D03H10:'gear_thiet_ve_common_armor',D04H20:'gear_phong_hanh_rare_weapon',D08H20:'gear_thanh_tam_rare_accessory',D11H18:'gear_thanh_tam_excellent_weapon',D15H20:'gear_thiet_ve_excellent_armor',D16H08:'gear_thien_loi_excellent_helmet',D18H20:'gear_tam_anh_exceptional_helmet'};
+for(const v of [GEAR_RARITIES,GEAR_DRAW,GEAR_FAMILIES7,NEW_GEAR,NEW_GEAR_SETS,LEGACY_HELMETS7,LEGACY_FULL_SETS7,STORY_GEAR])deepFreeze(v);

@@ -1,0 +1,4 @@
+export const STORY_ACTORS7=Object.freeze({
+ dao_tinh:{template:'companion_02',sect:'VoDang',element:'Tho'},son_quan:{template:'companion_05',sect:'ThieuLam',element:'Kim'},bach_son:{template:'companion_01',sect:'CaiBang',element:'Hoa'},van_khach:{template:'companion_04',sect:'DuongMon',element:'Moc'},lien_su:{template:'companion_03',sect:'NgaMi',element:'Thuy'},
+ kha_van:{template:'companion_06',sect:'TuDo',element:'Kim'},quan_chu:{template:'companion_01',sect:'TuDo',element:'Tho'},tay_sai:{sect:'TuDo',element:'Kim'},cao_le:{sect:'TuDo',element:'Hoa'},trinh_nghiem:{sect:'TuDo',element:'Moc'},do_mau:{sect:'TuDo',element:'Tho'},tho_bay:{sect:'TuDo',element:'Kim'},be_na:{sect:'TuDo',element:'Thuy'},ba_tu:{sect:'TuDo',element:'Moc'},vu_binh:{sect:'TuDo',element:'Tho'},nguoi_lai_do:{sect:'TuDo',element:'Thuy'},nguoi_danh_xe:{sect:'TuDo',element:'Tho'},nguoi_phu:{sect:'TuDo',element:'Tho'},cam_tu:{sect:'TuDo',element:'Hoa'},luc_thu:{sect:'TuDo',element:'Tho'}
+});

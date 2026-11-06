@@ -1,0 +1,2642 @@
+[
+  {
+    "id": "companion_01",
+    "prompt": "Create a production wuxia RPG asset sheet on TRUE TRANSPARENT alpha=0 background, EXACT1536x1536 with 3 columns and3 rows of512x512 cells. The attached portrait is the exact character identity: preserve his elderly age, face, grey beard/topknot, ragged green-brown robes, wooden staff and warm expression. Extend to a coherent full body, do not rejuvenate or change costume. Painterly detailed 2.5D game art. Top TWO rows are SIX full-body poses, facing RIGHT, all parts safely within each cell, same size/baseline: row1 idle, run, staff strike; row2 ultimate staff sweep, hit recoil, fallen defeated without blood. Bottom row is THREE separate transparent skill illustrations, NO character bodies: left the staff thrust with a small orange fire streak (Hoành Côn Giữ Bến basic physical strike); middle a powerful circular fiery staff sweep protecting a harbor gate, sparks and golden ward arc (Lôi Côn Phá Lộ: physical area strike, brief stun, protective shield); right a compact distinctive fiery staff arc sigil for the ultimate impact. NO TEXT, labels, panels, backgrounds, floor, shadows, grid lines. Strong readable silhouettes. Leave clear alpha padding between every512 cell and around all figures.",
+    "reference": "assets/images/companions/companion_01.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_01.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "e293856c0ef23b09f89e1a643e1cc3b2fac9a3001c25daef80695e8d45e017ab"
+      },
+      {
+        "file": "assets/images/skills7/companion_01_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "45805034e9838582d8ac0908f0d58f47de6a42a1e4a68b129495380cc75d9d71"
+      },
+      {
+        "file": "assets/images/skills7/companion_01_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "42a4aee0cba9514b7bc5a91cbef6e123884026cc89ff76aad77645618d049544"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_01.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "9906f020b1185a767f97227a3439b53eb57fc6810424ec74c1f202f190e05ef7"
+      }
+    ]
+  },
+  {
+    "id": "companion_02",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Huyền Đạo Trưởng, role SubTank, element Tho, rarity tier3. Basic mechanics: Gây 100% nội công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: toàn đội. khiên 13% HP tối đa trong 4 giây; hồi 12 nộ. Tốn 95 nộ.. Signature motif: pale blue yin-yang flying swords around allied silhouettes. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_02.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_02.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "9563de2d64337ec1de7c37c26d9f91fe8be9b1396eae365d9a8a8b8e0c48da4f"
+      },
+      {
+        "file": "assets/images/skills7/companion_02_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "ef8208d80b8d3b14ce34972127084046867197d2196adad1ac9e1ff4912e9787"
+      },
+      {
+        "file": "assets/images/skills7/companion_02_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "d277f6585e6f87c7e4be38b8bccd96ded3f0f8f2dfe359e649bd8ece8a62762f"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_02.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "0b84207c78ace07b9a0c62dad0f89fb57d4bfc01336b8dd986547280dbfabfef"
+      }
+    ]
+  },
+  {
+    "id": "companion_03",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Thanh Lan, role Healer, element Thuy, rarity tier3. Basic mechanics: Gây 102.5% nội công lên địch gần nhất. 25% cơ hội hồi 20% nội công thành HP.. Ultimate mechanics: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. hồi 150% nội công thành HP; hồi 24% nội công mỗi giây trong 4 giây; giải độc, cháy, chảy máu, choáng, trói và nội thương. Tốn 95 nộ.. Signature motif: pink orchid acupuncture needles, clear blue water stream, healing threads. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_03.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_03.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "608a55da633645a0e9aa41573c19fb4f761d4e626bbea2875c1dc18b9487ea5a"
+      },
+      {
+        "file": "assets/images/skills7/companion_03_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "798580d5a5bffce743564a42ab08ce15c4f67ef6d12a814880db35ad241447e8"
+      },
+      {
+        "file": "assets/images/skills7/companion_03_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "9ae06be70b6bf9cb75e1087babc5517dff2488b53f69d8bf551304605ad40999"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_03.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "bef7549cd5c19deb228c2ecc3bb34f6612ee361b8da5c673cd57cf49911bdd7e"
+      }
+    ]
+  },
+  {
+    "id": "companion_04",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Đường Thập Nhị, role RangedDPS, element Moc, rarity tier3. Basic mechanics: Gây 105% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 105% ngoại công mỗi lần trúng. xuyên tối đa 3 địch; 1 tầng độc trong 4 giây; giảm 22% nộ nhận trong 3 giây. Tốn 95 nộ.. Signature motif: three purple steel darts, precise green poison trails. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_04.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_04.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "540ef2f982d1afc9c5147eb8f14c24521b7180a39f70903118975daabe552b8e"
+      },
+      {
+        "file": "assets/images/skills7/companion_04_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "4a4facd00f9a121236db6bdf8f5fe1654f627f9e3ac90867cdb95ecf0fb315c8"
+      },
+      {
+        "file": "assets/images/skills7/companion_04_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "109e09813d9513dada7cf09dde61125de503b7c922f94180e7001a3f3733c088"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_04.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "951a7a27b1818b23c0f9c61944dde7adb57c0247461dce9f6c1a476c237b3df6"
+      }
+    ]
+  },
+  {
+    "id": "companion_05",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Đại Lực Kim Cang, role Tank, element Kim, rarity tier4. Basic mechanics: Gây 110% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 126.5% ngoại công mỗi lần trúng. đánh vùng 3×3; khiêu khích 2 giây; khiên 23% HP tối đa cho bản thân trong 5 giây. Tốn 100 nộ.. Signature motif: massive bronze bell shockwave and golden palm barrier. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_05.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_05.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "dd46da83c34b9cffbf35ef54a9f74a2614eaf61496c07fb168dc45126bf70224"
+      },
+      {
+        "file": "assets/images/skills7/companion_05_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "ba145283389d977d84c9fa635c0477e2dff971e0be605e6c2f0c7a9f5b831e35"
+      },
+      {
+        "file": "assets/images/skills7/companion_05_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "5d6cecfcbfaae29015aa897c00915a993771cfc460a9340f7afd70af8cce4242"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_05.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "91c041c8652a8c1b1544389d47b9b32699836d32fd2025041dc6d477da08b449"
+      }
+    ]
+  },
+  {
+    "id": "companion_06",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Lý Độc Thủ, role Debuffer, element Moc, rarity tier2. Basic mechanics: Gây 107.5% nội công lên địch gần nhất. 20% cơ hội 1 tầng độc trong 3 giây.. Ultimate mechanics: Mục tiêu: địch có tỉ lệ HP thấp nhất. Gây 117% nội công mỗi lần trúng. 3 tầng độc trong 5 giây; giảm 40% nộ nhận trong 5 giây. Tốn 90 nộ.. Signature motif: jade green snake-shaped poison spiral and dark meridian knots. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_06.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_06.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "05e7e4922b7f6154ab9f81dea169f20f7cb667d829a4e0a431b8444c1b8537fc"
+      },
+      {
+        "file": "assets/images/skills7/companion_06_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "520cf9cdbe4b2617fbd4886094057e519894bc0e51c2ed06beab29ebea6ec4e5"
+      },
+      {
+        "file": "assets/images/skills7/companion_06_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "cf95e2e1e1df372aefba9808a34218c9d425fdc055f741e3f7bf7b9b001a5790"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_06.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "1ed2a9ffe31e1c4ab4d34851bf949d096ddb843a6d1b956b5cd47dc15618627c"
+      }
+    ]
+  },
+  {
+    "id": "companion_07",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Thôi Mệnh Thư Sinh, role BurstMage, element Tho, rarity tier3. Basic mechanics: Gây 95% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 280% nội công mỗi lần trúng. giữ chân 1.4 giây; giảm 35% nộ nhận trong 4 giây. Tốn 95 nộ.. Signature motif: dark blue ink brush sword beam, astronomical measuring rings. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_07.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_07.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "2275425e495d68bc54b23241138aa9df2e7092995a21d41daff15334ffc97516"
+      },
+      {
+        "file": "assets/images/skills7/companion_07_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "c33c6807487ce7f620e1e320f398234aee8aeaaf783028d8ec4b6870d944c3f5"
+      },
+      {
+        "file": "assets/images/skills7/companion_07_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "4c065c35c7211f13633e8f410263e74e2f0d3fb09bd1b1ae8d4b7bcaed638701"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_07.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "19e5ebf91be4177c51cd2599f713f42d9a7d78c1af77686a346a62e001eae79f"
+      }
+    ]
+  },
+  {
+    "id": "companion_08",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Hồng Nương Tử, role Assassin, element Hoa, rarity tier4. Basic mechanics: Gây 100% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch có tỉ lệ HP thấp nhất. Gây 109.2% ngoại công mỗi lần trúng. lướt tới mục tiêu; 3 lần đánh vào mỗi mục tiêu; giảm 20% chính xác trong 3 giây; khiên 8% HP tối đa cho bản thân trong 3 giây. Tốn 100 nộ.. Signature motif: crimson afterimage, three short blade cuts and red silk escape ribbon. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_08.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_08.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "e7f03cafeb8f94c5318e0dfcf97c9159a28999d3fda04fd3d5e0e1c9d7c6cd25"
+      },
+      {
+        "file": "assets/images/skills7/companion_08_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "ca672925a6acc139d0fb85d1af5e7cfa9ad10e4eb2d7b79f94fc9a392409fa02"
+      },
+      {
+        "file": "assets/images/skills7/companion_08_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "38daf1ff6a3897e8aa7419712608d092002809251288159eddf6c2a6ac158f07"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_08.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "252675e29426b4f867557342b8a291748091ffc3f0aef2ecfc28b846e2065310"
+      }
+    ]
+  },
+  {
+    "id": "companion_09",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Tịnh Không Sư Thái, role Buffer, element Thuy, rarity tier4. Basic mechanics: Gây 102.5% nội công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: toàn đội. hồi 34% nội công mỗi giây trong 4 giây; tăng 16% công kích trong 4 giây; giải độc, cháy, chảy máu, choáng, trói và nội thương. Tốn 100 nộ.. Signature motif: ivory wooden fish, turquoise lotus field and calm healing ripples. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_09.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_09.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "df660d9fd961b42170fb533a87a68f48bef2009d0e975e9dd6106e3c9eefbbdc"
+      },
+      {
+        "file": "assets/images/skills7/companion_09_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "702d4be7ea82aa483fd70a16e80a692e55e03ce3bb80e580438ad5bb4762fca3"
+      },
+      {
+        "file": "assets/images/skills7/companion_09_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "85d340ed7b37820aab4ecb45b518772e75d26b311a4307b11d0c6e1477f9a248"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_09.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "ac41f8e51b7e48e578ef5f26630babd27b3021c5871036eed48a63985c9d3aad"
+      }
+    ]
+  },
+  {
+    "id": "companion_10",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Bách Bộ Thần Thương, role RangedDPS, element Kim, rarity tier3. Basic mechanics: Gây 102.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 300% ngoại công mỗi lần trúng. giảm 25% ngoại phòng trong 4 giây; đẩy địch về phía sau. Tốn 95 nộ.. Signature motif: single blazing copper arrow, wind range marks, armor-breaking impact. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_10.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_10.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "f0077a1e65257fc43a9e8fcd5dda47a90a531025b8161b9633ab5bcf457cbc2c"
+      },
+      {
+        "file": "assets/images/skills7/companion_10_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "a4a7c7200856b036283aee85775aa1294ab17b2da00d35583e89d4dd90727dd1"
+      },
+      {
+        "file": "assets/images/skills7/companion_10_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "47ae0ab8db32e3bfcf03fba4fcaab4d88077afeb7da9ebbac5dce8927f108b04"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_10.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "4b962e0af8716b41d0613cd7032c7ac6834174548cac0b2f727b7e6338ded86a"
+      }
+    ]
+  },
+  {
+    "id": "companion_11",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Mộng Cô Bán Trà, role Support, element Thuy, rarity tier2. Basic mechanics: Gây 102.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. hồi 110% nội công thành HP; hồi 26 nộ; khiên 7% HP tối đa trong 3 giây. Tốn 90 nộ.. Signature motif: steaming green tea cup, white lotus vapor and small energy pearls. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_11.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_11.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "ec7bdeedc0c842957d58a05506ac75f70764ae0288661d7f080c7aa5f7428f3e"
+      },
+      {
+        "file": "assets/images/skills7/companion_11_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "579dff7978e4a3cf66f25e560d5d203cdd875cd18a1c0c161bf59dbc207b8690"
+      },
+      {
+        "file": "assets/images/skills7/companion_11_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "3581a94073028d9201c6be768a3a6f0f92cec6dce83d7184953baedf636e355a"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_11.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "5e14575ade1c52bd3875c192b5f4da75c2d302c9fc4ce1faa2d5a031dbb1610b"
+      }
+    ]
+  },
+  {
+    "id": "companion_12",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Bất Khắc Kiếm Khách, role DualDPS, element Tho, rarity tier4. Basic mechanics: Gây 110% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.. Ultimate mechanics: Mục tiêu: địch gần nhất. Gây 97.7% nội công mỗi lần trúng. 4 lần đánh vào mỗi mục tiêu; tăng 12% né cho bản thân trong 3 giây. Tốn 100 nộ.. Signature motif: four interlocking silver sword arcs, blue yin-yang counterstep. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_12.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_12.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "bdea8dfe6a17e605668b83c4326f8867a79bda7fab9cb377cb45349c27b5b9c1"
+      },
+      {
+        "file": "assets/images/skills7/companion_12_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "179e1e6e4ad1d1cedb7aca705e98da2d3eef01d8d581edc70264be2cf2ca4ae8"
+      },
+      {
+        "file": "assets/images/skills7/companion_12_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "426f3478c4ba487891ea4b13d35c933742dafe6413826de2a4979a72d10d2dd7"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_12.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "5fb0e84185a3e31257d3de0d4d4748836cf33c62fb58d23d89799d1a58ce33a0"
+      }
+    ]
+  },
+  {
+    "id": "companion_13",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Quy Tức Lão Nhân, role ReflectTank, element Kim, rarity tier4. Basic mechanics: Gây 112.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: bản thân. khiên 24% HP tối đa cho bản thân trong 5 giây; phản 42% sát thương cận chiến trong 5 giây; hồi 15% nội công mỗi giây trong 4 giây. Tốn 100 nộ.. Signature motif: ancient golden turtle shell, layered shield and reflected staff sparks. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_13.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_13.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "c69bdeaf4ad58c12e17d8187a2ed251910afce0e4d3a2b7f15b836d70c0be3cb"
+      },
+      {
+        "file": "assets/images/skills7/companion_13_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "a2af6604c274735b87ff1c3ce096c8752d94f2316620f218d96349f1959de055"
+      },
+      {
+        "file": "assets/images/skills7/companion_13_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "126e2bb8f09668b57e38679348c3dae0c468e61a053e6c096d719b54993cd18a"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_13.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "04c209939542743384126b02600e87c0c15dfff752878d1014671fd118dcab3d"
+      }
+    ]
+  },
+  {
+    "id": "companion_14",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Thiềm Thừ Bà Bà, role Poisoner, element Moc, rarity tier4. Basic mechanics: Gây 97.5% nội công lên địch gần nhất. 20% cơ hội 1 tầng độc trong 3 giây.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 92% nội công mỗi lần trúng. đánh vùng 3×3; 4 tầng độc trong 5 giây; giảm 16% chính xác trong 4 giây. Tốn 100 nộ.. Signature motif: jade toad silhouette, four poison spores and green-purple fog. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_14.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_14.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "6f408cd8a36300fc5ab24f4acacfa7f15dab75ecf03fb6fa3a385d1afa63eeb5"
+      },
+      {
+        "file": "assets/images/skills7/companion_14_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "18650e03179ea69cdc0fecc460e6c44dff21e9c7c19e9253bfd10cdd4d582dc1"
+      },
+      {
+        "file": "assets/images/skills7/companion_14_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "50c2227846076f58f8d0154ef026c57fc49111156e18d4f3df1a7adf126e883e"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_14.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d6765bdd4de9b49a1742213293d844abc19ea37bc35f839970ae7e20a4f07d9e"
+      }
+    ]
+  },
+  {
+    "id": "companion_15",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Phi Thiên Đạo Tặc, role EvasionDPS, element Moc, rarity tier2. Basic mechanics: Gây 95% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 171% ngoại công mỗi lần trúng. lướt tới mục tiêu; tăng 22% né cho bản thân trong 4 giây; hồi 10 nộ. Tốn 90 nộ.. Signature motif: small grappling hook, swift feather arc and teal evasive afterimage. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_15.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_15.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "823b791e00c02ea5f4f0039097a4167e71885ea2f7a462093251fa7d757ed876"
+      },
+      {
+        "file": "assets/images/skills7/companion_15_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "09a4bc448015ef06a5c20840d70e47ba226447f3b875b9a4d76828ef2417e945"
+      },
+      {
+        "file": "assets/images/skills7/companion_15_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "935214063f0b1ec8a073fa6c4a49680326e1d52655e7356c80903deb7765c812"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_15.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "2cfafde2ff152843ea659a7ab8556ec6925ce93b534e4327cf616e1f76158afd"
+      }
+    ]
+  },
+  {
+    "id": "companion_16",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Hoa Khôi Lầu Xanh, role CrowdControl, element Thuy, rarity tier3. Basic mechanics: Gây 100% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch gần nhất. Gây 100% nội công mỗi lần trúng. làm rối mục tiêu 1.5 giây; giữ chân 1 giây; giảm 24% chính xác trong 4 giây. Tốn 95 nộ.. Signature motif: rose silk ribbons, fan petals and precise red binding threads. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_16.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_16.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "4a2c31fb83d61477b540efa0ddc61938ed9909ef53423d91cbad02706dd0ec18"
+      },
+      {
+        "file": "assets/images/skills7/companion_16_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "863c3a2340a68b81e1b995100de21319354e37f22ac88ba28dc0694a7ff80e7c"
+      },
+      {
+        "file": "assets/images/skills7/companion_16_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "2f99726e71e7dacc726c12eed62c97b9d012d0beb8e5add3cf3eb543b1fb11b1"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_16.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d0aa3869809c923900cf0544df7d7b7deb5a06165bfc0561c5fa1de6e2010602"
+      }
+    ]
+  },
+  {
+    "id": "companion_17",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Luyện Đan Đồng Tử, role Battery, element Thuy, rarity tier2. Basic mechanics: Gây 100% nội công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: nhân vật chính. hồi 40 nộ; tăng 18% công kích trong 4 giây; khiên 8% HP tối đa trong 4 giây. Tốn 90 nộ.. Signature motif: amber medicine beads, small furnace flame and energy transfer thread. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_17.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_17.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "904403013d9fd82cf21e012cc266660d590823ca05b08155dca27c5b53aec764"
+      },
+      {
+        "file": "assets/images/skills7/companion_17_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "12e27662b236e2acaa3f47d1c7f9e04eab94beedb8c17196bc4c0f9f0723aaee"
+      },
+      {
+        "file": "assets/images/skills7/companion_17_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "8d0fbfe8c4c6f75b886808c0a991183614aaf20867a53cdf8e8e38141be8305c"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_17.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "f72f160f13e8950e7de4f64ade202febf7d6c34c5cb4822bb2b335724c4c9263"
+      }
+    ]
+  },
+  {
+    "id": "companion_18",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Thiết Đầu Công, role Disruptor, element Kim, rarity tier3. Basic mechanics: Gây 105% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch tiền tuyến. Gây 220% ngoại công mỗi lần trúng. đẩy địch về phía sau; choáng 1.2 giây; khiên 9% HP tối đa cho bản thân trong 3 giây. Tốn 95 nộ.. Signature motif: iron forehead charge, broken stone gate and short golden shock ring. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_18.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_18.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "4c20496b9fe8a1164eee7d4aee4b996fdcdddbf7046cfbec273c1a48727f4094"
+      },
+      {
+        "file": "assets/images/skills7/companion_18_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "4061850b72b255f8fb0869d5d71d83748c1ecf182bc6dc2fc5049e9420cb419c"
+      },
+      {
+        "file": "assets/images/skills7/companion_18_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "898e9089ee9ca3c65d20cd6d10382bd507ce3161f95ef04109ee31715bc1e3d9"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_18.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "5236ac0bdd4c26933230ba321d70a01f7b5eea98e003465954dd48d8b48d93f3"
+      }
+    ]
+  },
+  {
+    "id": "companion_19",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Vô Cực Kiếm Thần, role Finisher, element Kim, rarity tier5. Basic mechanics: Gây 112.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch có tỉ lệ HP thấp nhất. Gây 405% ngoại công mỗi lần trúng. lướt tới mục tiêu; kết liễu khi địch dưới 12% HP; khiên 7% HP tối đa cho bản thân trong 3 giây. Tốn 100 nộ.. Signature motif: broken black sword, bright silver execution cross and empty space. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_19.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_19.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "e24f2c489186f2b947381274820011dac021fbba29e3f44a80743ad320d0d1e1"
+      },
+      {
+        "file": "assets/images/skills7/companion_19_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "defd3e4f4bc2f11162dbe72d637d6a4ed92acfb9ebbc0980411bb0526d653330"
+      },
+      {
+        "file": "assets/images/skills7/companion_19_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "a21c632d6d6bc8abee187995ef2f949897476d8816de0cbefa6982bade1f27dc"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_19.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "365f8d2fb1980c771466315e2744033bee52a9c66e42a69fee37ff0bff6b605c"
+      }
+    ]
+  },
+  {
+    "id": "companion_20",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Tửu Tiên Vô Ảnh, role Wildcard, element Hoa, rarity tier5. Basic mechanics: Gây 115% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 101.3% ngoại công mỗi lần trúng. đánh vùng 3×3; 3 lần đánh vào mỗi mục tiêu; tăng 18% né cho bản thân trong 4 giây; cháy 4 giây. Tốn 100 nộ.. Signature motif: wine gourd splash, three fiery drunken staff circles. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_20.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_20.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "170b245935a43499fa2a8d5a91fb5adac096c45707d0235cc48e9aa6b2d90155"
+      },
+      {
+        "file": "assets/images/skills7/companion_20_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "c2500d6f0142a0d9e16d1feca579384acd5ee52d1758bf12286ecad0500bc9d5"
+      },
+      {
+        "file": "assets/images/skills7/companion_20_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "f34142e82ab0b77950386e9fead0e13232cfbdbfa4494bf7eb307c3a507f92ca"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_20.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "57dc9a7ddcabd05b0c8c6b9f5c764ee9e5fe0a41fa5a2ced77bedc5995224176"
+      }
+    ]
+  },
+  {
+    "id": "companion_21",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Chú Tễu Giữ Cầu, role Bruiser, element Hoa, rarity tier1. Basic mechanics: Gây 90% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.. Ultimate mechanics: Mục tiêu: địch tiền tuyến. Gây 127.5% ngoại công mỗi lần trúng. đẩy địch về phía sau. Tốn 85 nộ.. Signature motif: plain wooden paddle, small orange crescent and bridge water splash. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_21.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_21.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "0dbd2c2db5ae015854947f5ffa899217f88d8b6636e038cfc489339808bce297"
+      },
+      {
+        "file": "assets/images/skills7/companion_21_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "ca8e8845e3419dbd3bbaffac32fcd2816e579ff92527611d388274001a8b6f79"
+      },
+      {
+        "file": "assets/images/skills7/companion_21_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "66b4413f9b52d36322dfb906a8878f6d8d0e8f053d5c3ef330a5d8975509496c"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_21.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "5001be9f3ab56d09ff8617600630e143400f7a92fae60c0a9684e94fc5d339fe"
+      }
+    ]
+  },
+  {
+    "id": "companion_22",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Sen Non Gánh Thuốc, role Healer, element Thuy, rarity tier1. Basic mechanics: Gây 92.5% nội công lên địch gần nhất. 25% cơ hội hồi 20% nội công thành HP.. Ultimate mechanics: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. hồi 105% nội công thành HP; hồi 16% nội công mỗi giây trong 3 giây. Tốn 85 nộ.. Signature motif: fresh green medicinal leaves and small blue healing droplets. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_22.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_22.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "1399b62309e1f3fa91e1c74915acb7144cf0ac3ccea99519046889fb2773a708"
+      },
+      {
+        "file": "assets/images/skills7/companion_22_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "c83697fcb0e465a774e543ac6f080a917b9d358161d13c653f21777f64912af3"
+      },
+      {
+        "file": "assets/images/skills7/companion_22_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "6dd4e4a793b92d2502a1f56160a8716e4a1f0844d9866069d9ddaed2b7276738"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_22.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "a6655a9c90b79585fcd26c2839c6f20ff1d529abfa8a51ee8719eb3466708f97"
+      }
+    ]
+  },
+  {
+    "id": "companion_23",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Mộc An Quét Lá, role Tank, element Kim, rarity tier1. Basic mechanics: Gây 95% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.. Ultimate mechanics: Mục tiêu: địch gần nhất. Gây 90% ngoại công mỗi lần trúng. khiêu khích 1.2 giây; khiên 12% HP tối đa cho bản thân trong 3 giây. Tốn 85 nộ.. Signature motif: bamboo broom staff, low golden guard arc and falling leaves. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_23.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_23.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "61253bbc09e1e9817f04660783dce8b62c879c29a1a80b4b33e337b0b1815e28"
+      },
+      {
+        "file": "assets/images/skills7/companion_23_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "d4e7770e7f6dd0383736dbda73572ba0732d068965b8feabdf643a52fdd635ae"
+      },
+      {
+        "file": "assets/images/skills7/companion_23_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "2e0e796eaabafb4e1aec11b1cc03f84685c5a1cf9b42a743d7cbf8dea32f595b"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_23.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "775fa81ebce2486db81419782c7c55843eb0762f69aa0e6e7d18e20638de0580"
+      }
+    ]
+  },
+  {
+    "id": "companion_24",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Lam Nhi Học Kiếm, role DualDPS, element Tho, rarity tier1. Basic mechanics: Gây 97.5% nội công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch gần nhất. Gây 48.8% nội công mỗi lần trúng. 2 lần đánh vào mỗi mục tiêu; tăng 10% né cho bản thân trong 3 giây. Tốn 85 nộ.. Signature motif: plain wooden sword, two pale blue training arcs. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_24.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_24.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "bcc4bed08851449341297121dfd6f4b415b375b8bb3444a496ebe6e031b9b6f5"
+      },
+      {
+        "file": "assets/images/skills7/companion_24_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "4b386ea5858ba23fd3ef7d5779c041564f4f91a72b3fbc0da5c8831ef088765e"
+      },
+      {
+        "file": "assets/images/skills7/companion_24_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "9aa6045864bba2de7f8eba4ae0f59bcb4c9fee4d57027c4ddb937b071008a788"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_24.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "58bad3b05bc6f0e6648d5919766f8e263eef6497d89e865995672f631ed7063c"
+      }
+    ]
+  },
+  {
+    "id": "companion_25",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Tín Còi Đưa Thư, role RangedDPS, element Moc, rarity tier1. Basic mechanics: Gây 100% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 105% ngoại công mỗi lần trúng. xuyên tối đa 2 địch. Tốn 85 nộ.. Signature motif: folded letter darts, two thin amber travel trails. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_25.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_25.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "821c791fb00db944d366c5439c90919b2124a306fb30ec9699f1690df29c7184"
+      },
+      {
+        "file": "assets/images/skills7/companion_25_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "e3095f7f2373cce73a6be147badc25d8eb66e7a665a0a0fc65b0e320cfd28eb5"
+      },
+      {
+        "file": "assets/images/skills7/companion_25_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "6183b51095e41b7440c904d7a697ff0a45f361180ad5a6692ef4ab1d89a389fd"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_25.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "03ee0656781aa4cf8ae9a62e17d31878eea9fc8db6105aa16a1182dba1e855b9"
+      }
+    ]
+  },
+  {
+    "id": "companion_26",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Bàu Rách Gõ Mõ, role CrowdControl, element Hoa, rarity tier1. Basic mechanics: Gây 102.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: toàn đội. tăng 10% công kích trong 3 giây; hồi 8 nộ. Tốn 85 nộ.. Signature motif: old wooden percussion bowl, warm orange pulse reaching friends. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_26.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_26.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "d8557066afc8e1340fccabd853bfe450d9bbb08c950505aeb89860848da3d19b"
+      },
+      {
+        "file": "assets/images/skills7/companion_26_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "d2e42445356c06007748c89f4f4ce3e6d3468be8a3cee36a0675426d20ea0af8"
+      },
+      {
+        "file": "assets/images/skills7/companion_26_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "88f9311bf12b61f944e66b6fd0d02e1fa12cd5283a5851e8a262a527fb1fd8dd"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_26.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "6842840d9c8567910dbcbcbc57e4b669bfa2476b5ad886286048e1b5707ed1ea"
+      }
+    ]
+  },
+  {
+    "id": "companion_27",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Bảy Cò Giữ Bến, role Bruiser, element Hoa, rarity tier1. Basic mechanics: Gây 105% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.. Ultimate mechanics: Mục tiêu: địch tiền tuyến. Gây 112.5% ngoại công mỗi lần trúng. giữ chân 0.8 giây. Tốn 85 nộ.. Signature motif: weathered oar, taut mooring rope and small water barrier. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_27.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_27.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "4ae479d8afbee2a1a1d784afc071220df08912be8af5d73420f8b99b60400bb8"
+      },
+      {
+        "file": "assets/images/skills7/companion_27_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "96af22bae5dfe17f0e43b8824dbe2dae4b3f46f216e61294376231edc5a15ee3"
+      },
+      {
+        "file": "assets/images/skills7/companion_27_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "499da867b42d2b95aa16f07d8969c4750a4042fe140fb87ef11f9238760d3e69"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_27.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "9ce53b6caccfe5c6f9dd69514788d2a47ecf4e86d9c5edfcf66e6cb0414b30ca"
+      }
+    ]
+  },
+  {
+    "id": "companion_28",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Mận Chua Tung Đá, role RangedDPS, element Moc, rarity tier1. Basic mechanics: Gây 90% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 67.5% ngoại công mỗi lần trúng. đánh vùng 3×3; giảm 10% chính xác trong 2 giây. Tốn 85 nộ.. Signature motif: three ordinary pebbles, dusty green arc and market basket. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_28.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_28.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "ab40b4c992d890b8ef00a66fb897579863ac6e87e88e7e6c5c2678e5de54624c"
+      },
+      {
+        "file": "assets/images/skills7/companion_28_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "b6c7228cdb69c74eab655e5505ce5c017ba4db2dc71954235bfcb1e1e0ed24a5"
+      },
+      {
+        "file": "assets/images/skills7/companion_28_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "fff624c86e7d43d57ed65982989cc3fd58feeb3cfcb64dc23be7996b724c1861"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_28.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d48648bd5db0205172426c162ffe495cef7b8d9ba5e823295ed63b1331bbd96b"
+      }
+    ]
+  },
+  {
+    "id": "companion_29",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Tùng Gầy Gác Cổng, role Tank, element Kim, rarity tier1. Basic mechanics: Gây 92.5% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.. Ultimate mechanics: Mục tiêu: bản thân. khiên 18% HP tối đa cho bản thân trong 4 giây; phản 12% sát thương cận chiến trong 3 giây. Tốn 85 nộ.. Signature motif: simple wooden gate, small bronze palm shield. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_29.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_29.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "730bcc920fba5a9c84d3d1a5f6347af046c794c8e6a06482a89fdfd3841c642c"
+      },
+      {
+        "file": "assets/images/skills7/companion_29_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "311b13b320d97a2580f3a005ef00330b75aed776210314cd08ba66245c7d1139"
+      },
+      {
+        "file": "assets/images/skills7/companion_29_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "706dd6cfc2db7c31405b72db53b3e8cb2e99d0ce489c78b1b311c5a1dbe020a7"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_29.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "bcffa9791ec0788260a6d66e4488592074317a102abe4584b15557c3776f3842"
+      }
+    ]
+  },
+  {
+    "id": "companion_30",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Cúc Mộc Vá Áo, role Support, element Thuy, rarity tier1. Basic mechanics: Gây 95% nội công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. hồi 90% nội công thành HP; giải độc, cháy, chảy máu, choáng, trói và nội thương. Tốn 85 nộ.. Signature motif: needle and cloth thread, gentle blue stitch closing a small tear. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_30.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_30.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "92e0e4c66456bb5ec1a6253dcb027b763f024829d1d518216cf113f177aa9a40"
+      },
+      {
+        "file": "assets/images/skills7/companion_30_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "a3fe1ae36020bf4091c1ab1a812bebf29cac35cc3ad033426aebf0bf08b228e1"
+      },
+      {
+        "file": "assets/images/skills7/companion_30_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "8767809a216ff3c718104e93c3963994692f56b51fcd7a9de09e112e3fffedc8"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_30.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "0f9011f17b876dc7f8fe7ae4a753c3d20ed67eb42911ab1dd122877948df8155"
+      }
+    ]
+  },
+  {
+    "id": "companion_31",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Phúc Đồng Thiết Chưởng, role Disruptor, element Kim, rarity tier2. Basic mechanics: Gây 100% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch gần nhất. Gây 162% ngoại công mỗi lần trúng. choáng 1 giây; giảm 12% ngoại phòng trong 3 giây. Tốn 90 nộ.. Signature motif: heavy work hammer palm, cracked stone pillar and bronze impact. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_31.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_31.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "6cf7e9e266ff3baaae882abe44f4fc25309d0d68fdeb0d1fa9ae0180bbeb46d8"
+      },
+      {
+        "file": "assets/images/skills7/companion_31_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "b9deaad4c023702ab73b994cf381dbb93cd4723f5b20d318642709693dcd8aea"
+      },
+      {
+        "file": "assets/images/skills7/companion_31_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "be8ebcc47e4cf2c667d787ee33c242db0ea45def46df1d12067964712be166bd"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_31.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "7634c9a4dcd7b065f752488c1003d25e48082249b39455b569b1b1b48e880099"
+      }
+    ]
+  },
+  {
+    "id": "companion_32",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Liễu Thanh Kiếm Khách, role DualDPS, element Tho, rarity tier2. Basic mechanics: Gây 102.5% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 58.5% nội công mỗi lần trúng. 3 lần đánh vào mỗi mục tiêu; giảm 18% nộ nhận trong 3 giây. Tốn 90 nộ.. Signature motif: three willow-leaf sword rings and pale blue ink trail. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_32.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_32.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "2fccc9d384757617b65f5e89e5d751d9f424f212c46e5160df4ac41c62f0fea1"
+      },
+      {
+        "file": "assets/images/skills7/companion_32_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "651c1d7fdb828d3d2c540d6262784fa7aa27857a026eec962aeadc0c1283715f"
+      },
+      {
+        "file": "assets/images/skills7/companion_32_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "6ef8001396b03098512379da40312cd87a3c96f0f92526df291863f6e6e9240f"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_32.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "76cd62e8d3c79b7ccfb995e41d426138584a451cd155f96b5602759588a627d4"
+      }
+    ]
+  },
+  {
+    "id": "companion_33",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Trúc Yên Y Sư, role Healer, element Thuy, rarity tier2. Basic mechanics: Gây 105% nội công lên địch gần nhất. 25% cơ hội hồi 20% nội công thành HP.. Ultimate mechanics: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. hồi 125% nội công thành HP; khiên 11% HP tối đa trong 4 giây. Tốn 90 nộ.. Signature motif: green bamboo needles, cool blue shield around a healing pulse. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_33.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_33.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "ee6de49c73a9ae266b4daae8d3f41e2e63c2415fa1f2db72da8bb043ff39a6c7"
+      },
+      {
+        "file": "assets/images/skills7/companion_33_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "fc214a39926eb519f010510d5138e631b4f3c7e0f7970cd8d30dcf219f2d4047"
+      },
+      {
+        "file": "assets/images/skills7/companion_33_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "67fca91d25fcc01720e7a8a0ed438dd51cd07aa112a3dca31873aaa2930733d3"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_33.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "f3e15d9b710e503cbbba17d97d801c636eaae94470fd512d6cffbb55a23a85b9"
+      }
+    ]
+  },
+  {
+    "id": "companion_34",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Vân Rổ Đan Bẫy, role RangedDPS, element Moc, rarity tier2. Basic mechanics: Gây 107.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 144% ngoại công mỗi lần trúng. giữ chân 1.7 giây; 1 tầng độc trong 3 giây. Tốn 90 nộ.. Signature motif: woven bamboo snare, green cord lattice and warning knot. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_34.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_34.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "a55aeb89f8d6fd15372804d73764c462440c1891180ec9526368a3c246631990"
+      },
+      {
+        "file": "assets/images/skills7/companion_34_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "fe66b99cb60fe41d5a57b8164636668710456476c173054b1fcb4016a401bc47"
+      },
+      {
+        "file": "assets/images/skills7/companion_34_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "e3b12d100caeddeb10835a17d870134389d5513199540baf26b55486732682c7"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_34.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "0fc88747f8017d90924d1c24cb4f0f9c8581098dbef94c6ce2978f61c56d89bc"
+      }
+    ]
+  },
+  {
+    "id": "companion_35",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Sáu Chén Túy Quyền, role Bruiser, element Hoa, rarity tier2. Basic mechanics: Gây 92.5% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.. Ultimate mechanics: Mục tiêu: địch gần nhất. Gây 67.5% ngoại công mỗi lần trúng. 2 lần đánh vào mỗi mục tiêu; giảm 16% chính xác trong 4 giây; cháy 3 giây. Tốn 90 nộ.. Signature motif: two clay wine cups, staggered orange fist arcs. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_35.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_35.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "68f329b83a75f0c6ea92989c690e936aa99c2ddfd6d18d6385b787d2b61b6b8d"
+      },
+      {
+        "file": "assets/images/skills7/companion_35_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "b049bb56dcf22603fbcbf66ae031b6551265e52921e45acaeab004df8da8ba46"
+      },
+      {
+        "file": "assets/images/skills7/companion_35_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "171a352d0e2388880ee5cb7f0ae981a2373c56aba815d825f851102059c4ec53"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_35.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "b4459cb78282a1c0a142eaec51e8d2618da2c539f9a259565bf78b75ac2000fa"
+      }
+    ]
+  },
+  {
+    "id": "companion_36",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Hạc Nâu Tĩnh Tọa, role SubTank, element Tho, rarity tier2. Basic mechanics: Gây 95% nội công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: bản thân. khiên 20% HP tối đa cho bản thân trong 5 giây; hồi 22 nộ; giải độc, cháy, chảy máu, choáng, trói và nội thương. Tốn 90 nộ.. Signature motif: brown crane feathers, quiet blue circle and cleansing wind. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_36.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_36.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "2fb2183a4d94fe2ca1ee66a35945d98f30fd822df326f59598023a8a103e9fff"
+      },
+      {
+        "file": "assets/images/skills7/companion_36_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "e6a2965b83d28bb96428e2f4f8079cc8c9751b0229a7af3a2c0fcdd40d4ea493"
+      },
+      {
+        "file": "assets/images/skills7/companion_36_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "2c85a5a3d9bbc0c25a86235be30d3d41caee2f92a223742b55e5d9d2ae5eb72d"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_36.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "5879eddc701861d4293a8c45349f3d8c6390d70be6af00df8a385683b32f1301"
+      }
+    ]
+  },
+  {
+    "id": "companion_37",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Bạch Liên Châm Sư, role Healer, element Thuy, rarity tier3. Basic mechanics: Gây 100% nội công lên địch gần nhất. 25% cơ hội hồi 20% nội công thành HP.. Ultimate mechanics: Mục tiêu: toàn đội. hồi 65% nội công thành HP; hồi 20% nội công mỗi giây trong 4 giây; khiên 6% HP tối đa trong 3 giây. Tốn 95 nộ.. Signature motif: white lotus field, distributed silver needles and blue healing rings. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_37.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_37.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "b54cfa8aefef2a2517a52b9d564eb1bb11e7bb5d241ba45006ce993017bf62d6"
+      },
+      {
+        "file": "assets/images/skills7/companion_37_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "812af8d0197cf22203fa6369b5481e25060b23cf91ff7e0b8d989137771fe031"
+      },
+      {
+        "file": "assets/images/skills7/companion_37_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "be6ec42b24f0e09d050b5fb155d4a69252f68674866a9d51e1e32b688314489a"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_37.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "f6fd411cfd807e5f3cb117638cecfba319be089661e3100083ba50bc2e367ae4"
+      }
+    ]
+  },
+  {
+    "id": "companion_38",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Hải Âu Phi Tiêu, role RangedDPS, element Moc, rarity tier3. Basic mechanics: Gây 102.5% ngoại công lên địch gần nhất.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 125% ngoại công mỗi lần trúng. xuyên tối đa 4 địch; đẩy địch về phía sau. Tốn 95 nộ.. Signature motif: four feather-shaped steel darts carried by a sea wind. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_38.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_38.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "eee2102c5e43d3b33b1403a9de471572424714a10100a1059b11f2569b05112e"
+      },
+      {
+        "file": "assets/images/skills7/companion_38_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "777a8be72b693b1084ef36a37f016ad72342f6499d96f45e23bdf5fe5bb7f01e"
+      },
+      {
+        "file": "assets/images/skills7/companion_38_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "8e3bf16f29d090b6a333dc37088c8a99dcdecb80f839956de228b85284ad6ae1"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_38.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "6f5acd034103227b7e0f618c2e8b1e7950cb64b3db80431d51e00cfd7dcb1195"
+      }
+    ]
+  },
+  {
+    "id": "companion_39",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Minh Khuê Kiếm Sử, role BurstMage, element Tho, rarity tier3. Basic mechanics: Gây 105% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.. Ultimate mechanics: Mục tiêu: địch có tỉ lệ HP thấp nhất. Gây 230% nội công mỗi lần trúng. giảm 42% nộ nhận trong 4 giây; giảm 18% ngoại phòng trong 4 giây. Tốn 95 nộ.. Signature motif: silver sword and open ledger, two intersecting blue evidence seals. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_39.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_39.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "cf4d2858046d74289ee8e7e2d5d883d5881a9394d3e86dcc30ee4429e9bf6268"
+      },
+      {
+        "file": "assets/images/skills7/companion_39_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "c87187e061502fe7e279dd99b440354914cf14aeb2b2f986ca7cb9bedde6b5fd"
+      },
+      {
+        "file": "assets/images/skills7/companion_39_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "9b7efa3b43a8024da5e5774827c3461e4eaea34008e7a3b991b118bbb9d70dd3"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_39.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "45cf04288621684d6b32bb1d08326783c44b5c98b9cb18ae8102725b48faae6e"
+      }
+    ]
+  },
+  {
+    "id": "companion_40",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Sơn Lâm Hộ Viện, role ReflectTank, element Kim, rarity tier3. Basic mechanics: Gây 107.5% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 120% ngoại công mỗi lần trúng. đánh vùng 3×3; phản 30% sát thương cận chiến cho bản thân trong 4 giây; khiêu khích 1.5 giây. Tốn 95 nộ.. Signature motif: bronze temple bell, forest-root shield and returning shock rings. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_40.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_40.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "d1dbc5c03ecc1cbbede9765b58745ebb3934a58b88653e5d1714149731d2b67f"
+      },
+      {
+        "file": "assets/images/skills7/companion_40_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "e4277c4eee3434337a8560abbd5f1a7b8b9918e2f2cab123f263f04eaa667a1c"
+      },
+      {
+        "file": "assets/images/skills7/companion_40_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "4f2966ed744d143c16a3f86f8588d4fd4d086b70510798f7a620937db52b7f4e"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_40.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "547dd19808f411eb449af5e1bcd3494e6c8b9194948b9a41c3d34d1a699332eb"
+      }
+    ]
+  },
+  {
+    "id": "companion_41",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Đào Hồng Tửu Hiệp, role Assassin, element Hoa, rarity tier3. Basic mechanics: Gây 110% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 190% ngoại công mỗi lần trúng. lướt tới mục tiêu; cháy 5 giây; tăng 14% né cho bản thân trong 4 giây. Tốn 95 nộ.. Signature motif: pink peach branch, wine ribbon and a burning short-blade dash. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_41.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_41.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "4b332deb5f1d320815e4dfa7af6ff8614e5be07fe20a0a704232b5d9526f37c7"
+      },
+      {
+        "file": "assets/images/skills7/companion_41_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "b946027c8a50bbae0530975d03f84e96c8f92ee6775e3ceefc4d3298ccb8f54a"
+      },
+      {
+        "file": "assets/images/skills7/companion_41_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "f126e68d027ea56e0ea72c634940580f5a07e6dcc7b3271f44e33179099b40ca"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_41.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "8777fa56371692f148b4e4f4610f9d2e9861bbe9b74491c56e81bda87f25ad9a"
+      }
+    ]
+  },
+  {
+    "id": "companion_42",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Đỗ Quyên Huyền Châm, role Poisoner, element Moc, rarity tier3. Basic mechanics: Gây 95% nội công lên địch gần nhất. 20% cơ hội 1 tầng độc trong 3 giây.. Ultimate mechanics: Mục tiêu: địch xa nhất. Gây 190% nội công mỗi lần trúng. 2 tầng độc trong 6 giây; giảm 45% nộ nhận trong 5 giây; giữ chân 0.8 giây. Tốn 95 nộ.. Signature motif: black acupuncture needles, green meridian web and dark red flower. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.",
+    "reference": "assets/images/companions/companion_42.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_42.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "e75e1b474df760dce69e89bad179f605849071a97a0882c52ddb89da5db7fd16"
+      },
+      {
+        "file": "assets/images/skills7/companion_42_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "aaf62d3ce82ed56d44488994b5e486bfae698607f06b0bfa74ad18adf4d11e87"
+      },
+      {
+        "file": "assets/images/skills7/companion_42_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "64d175b9c32b3f741ae63bbb6204b9e77adc62955aaad7d449704a22848dc714"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_42.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "60e0a1cb2ff81da564097af311abcbe74ea51ee4aa1b9a60df1fc8119b66b064"
+      }
+    ]
+  },
+  {
+    "id": "companion_43",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Nguyệt Cầm Chưởng Môn, rarity 4/5, element Tho, role BurstMage. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 100% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.; ultimate: Mục tiêu: cụm địch quanh mục tiêu. Gây 276% nội công mỗi lần trúng. đánh vùng 3×3; giảm 35% nộ nhận trong 5 giây; khiên 12% HP tối đa cho bản thân trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif violet moon zither, concentric silver sword strings. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_43.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_43.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "484cd13679fca503097602eda10b511ad2c0797eb0aca564cf7f7b184b068670"
+      },
+      {
+        "file": "assets/images/skills7/companion_43_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "8c043b31489df4a3917df3fa2767260b1b9d1268651ffb7ebe7c20a6d93dd27b"
+      },
+      {
+        "file": "assets/images/skills7/companion_43_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "a491d1163d40ab6fe32848940ab4c57b2ee3a2036323c4bf0e60bb0ed983eceb"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_43.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "cdf5c46a6fbeb79ac0a131ebf0cafc3a617d02760f104e9a656cf37c1909a024"
+      }
+    ]
+  },
+  {
+    "id": "companion_44",
+    "prompt": "Production wuxia RPG asset sheet, TRUE TRANSPARENT alpha=0 empty background. EXACT1536x1536, THREE columns and THREE rows, nine equal512x512 cells. Attached portrait is the EXACT character: preserve face, AGE, gender, hair, garments and colors, including grey hair/wrinkles; extend lower body consistently. No rejuvenation, costume redesign or background from reference. Painterly detailed2.5D art. TOP TWO rows are six FULL BODY poses facing RIGHT, consistent scale/baseline with generous clear padding inside each512 cell: row1 idle, run, basic attack; row2 ultimate cast, hit recoil, fallen safely without blood. BOTTOM row THREE transparent skill illustrations, no bodies: left basic skill emblem, middle ultimate skill illustration, right unique ultimate impact sigil. Exact character Lôi Chấn Thiền Sư, role Tank, element Kim, rarity tier4. Basic mechanics: Gây 102.5% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.. Ultimate mechanics: Mục tiêu: cụm địch quanh mục tiêu. Gây 155.2% ngoại công mỗi lần trúng. đánh vùng 3×3; choáng 1.4 giây; khiên 25% HP tối đa cho bản thân trong 5 giây. Tốn 100 nộ.. Signature motif: towering bronze vajra bell, gold lightning and fortified palm ward. Use these precise weapons/shapes/colors for gestures and icons. Higher rarity has stronger but tight luminous motifs. NO TEXT, letters, labels, grid, panels, scenery, floor or painted backdrop. Keep every body, weapon and effect safely within its own512 cell; don't let effects spill across cells. Genuine transparent padding, not white/black background.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_44.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_44.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "8bad186d5db180f201373ebdd64fe0138c30caceea4fd78e5f9233fb5a542d7e"
+      },
+      {
+        "file": "assets/images/skills7/companion_44_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "d18d9fdd51a950e71f54014fb209e464250e6e3a9dcf2d5c3d3c4e46bbea9603"
+      },
+      {
+        "file": "assets/images/skills7/companion_44_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "53390ec9c26811ab5c9300490952e62c3d3b7f8a0ebbc504a8401778f9f6a601"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_44.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "2029d498ea6b9b02ed5448c1b8c5cb86ad3c57ea52e3846180795af488b20da4"
+      }
+    ]
+  },
+  {
+    "id": "companion_45",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Yên Vũ Thiên Cơ, rarity 4/5, element Moc, role RangedDPS. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 105% ngoại công lên địch gần nhất.; ultimate: Mục tiêu: địch xa nhất. Gây 74.7% ngoại công mỗi lần trúng. xuyên tối đa 5 địch; 2 tầng độc trong 4 giây; giảm 20% chính xác trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif five ornate purple crossbow bolts and green rain-thread formation. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_45.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_45.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "1e233a9820d766b178ca3f410f35b19d6963ff3ec2d227d4ef568e16177f24f1"
+      },
+      {
+        "file": "assets/images/skills7/companion_45_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "24efa77a0db983dc315734ae545a6360be729423120a7b822d54cd32f3c7e494"
+      },
+      {
+        "file": "assets/images/skills7/companion_45_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "faa25d915fe8effddf8ccc5c957789dc7711c11e3b2b15bd3ad47e4f57bf3619"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_45.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "5a141186dae7761ab4aece0562de58feede2d754e9a9b729375ced2235a6cc9b"
+      }
+    ]
+  },
+  {
+    "id": "companion_46",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Phong Trần Lãng Khách, rarity 4/5, element Hoa, role Assassin. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 107.5% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.; ultimate: Mục tiêu: địch có tỉ lệ HP thấp nhất. Gây 132.2% ngoại công mỗi lần trúng. lướt tới mục tiêu; 3 lần đánh vào mỗi mục tiêu; đẩy địch về phía sau; tăng 20% né cho bản thân trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif dark purple cloak afterimages and three curved blade escape cuts. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_46.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_46.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "3190a15fa19d1be8b174016bc0ec512737d2b88ca1e0be60f6162bc3b659822e"
+      },
+      {
+        "file": "assets/images/skills7/companion_46_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "076469c934833502887d8bfcc55300c550cd14c7f53fbb18905d412d2d773f16"
+      },
+      {
+        "file": "assets/images/skills7/companion_46_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "8daf727192f8580699d7945820a5f5c77e95939076bd69a6dde0eadffce3f355"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_46.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "31febb94cae450878d4fcfd50ca732622fdef917d9e7238231d8bd0ba402efe4"
+      }
+    ]
+  },
+  {
+    "id": "companion_47",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Tố Tâm Liên Sứ, rarity 4/5, element Thuy, role Buffer. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 110% nội công lên địch gần nhất.; ultimate: Mục tiêu: toàn đội. hồi 38% nội công mỗi giây trong 5 giây; tăng 22% công kích trong 5 giây; khiên 12% HP tối đa trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif lavender lotus lanterns, broad blue healing canopy and gold pollen. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_47.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_47.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "c59459b853d8f5e4e00163252aaa6c396687f240ab653781aa8e299b20028b22"
+      },
+      {
+        "file": "assets/images/skills7/companion_47_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "b0f222fe367399fd8db05d39c410b0f5dd96a636de7cefde319bcbebb1ed5fcb"
+      },
+      {
+        "file": "assets/images/skills7/companion_47_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "aad2e98cd81ac37bcefa5a98a7b529ad249dcac6762974872e8933bba666b20b"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_47.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d6a25a19807594a84f0ab95c62d2426f17cecd9adceb2e8121b99306f54fa7d4"
+      }
+    ]
+  },
+  {
+    "id": "companion_48",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Lạc Hồng Long Đế, rarity 5/5, element Kim, role Disruptor. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 115% ngoại công lên địch gần nhất.; ultimate: Mục tiêu: cụm địch quanh mục tiêu. Gây 364.5% ngoại công mỗi lần trúng. đánh vùng 3×3; choáng 1.8 giây; đẩy địch về phía sau; khiên 15% HP tối đa cho bản thân trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif imperial golden dragon fist, red martial robes and bronze shockwave. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_48.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_48.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "c8a33170bc4a44fcbabff527b0054801583b56b1a2f224a5618aad185b5ba0d0"
+      },
+      {
+        "file": "assets/images/skills7/companion_48_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "2ccd705a0157dabbc1e869758add0e803159574390f9308b73305c8171dea035"
+      },
+      {
+        "file": "assets/images/skills7/companion_48_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "0e9caf56d62525906582252d3267c16014af44e76fa6b877ebccfce005e9428d"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_48.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "c0e8499ad06146c5e1b033f53dd7a4da2c3eb736fc1a945ea74493f3f1cee44a"
+      }
+    ]
+  },
+  {
+    "id": "companion_49",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Thiên Hương Thánh Nữ, rarity 5/5, element Thuy, role Healer. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 100% nội công lên địch gần nhất. 25% cơ hội hồi 20% nội công thành HP.; ultimate: Mục tiêu: toàn đội. hồi 100% nội công thành HP; hồi 45% nội công mỗi giây trong 5 giây; giải độc, cháy, chảy máu, choáng, trói và nội thương; khiên 16% HP tối đa trong 5 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif golden phoenix wings, white orchid needles and blue-gold renewal field. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_49.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_49.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "0c290c354a78baa5f26e31aa532658dc4143f8042238cee15ba9e0f63286907a"
+      },
+      {
+        "file": "assets/images/skills7/companion_49_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "1e6b8b9e18851113217d0005f352b6796e4097da17d22eb868803c14d3965912"
+      },
+      {
+        "file": "assets/images/skills7/companion_49_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "c1ffed35b6f73f6ee088ae33c2fcf8890ada14d77e6b6bd1575aa39396d82328"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_49.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "4f4c8cd082c7f993147b79fc08cb433c94a5b9b9a1a8cfd73a68bcf637d593ae"
+      }
+    ]
+  },
+  {
+    "id": "companion_50",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Trường Sơn Kiếm Tôn, rarity 5/5, element Tho, role DualDPS. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 102.5% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.; ultimate: Mục tiêu: cụm địch quanh mục tiêu. Gây 148.5% nội công mỗi lần trúng. đánh vùng 3×3; 3 lần đánh vào mỗi mục tiêu; giảm 48% nộ nhận trong 5 giây; khiên 15% HP tối đa cho bản thân trong 5 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif vast silver flying-sword constellation and golden blue mountain rings. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_50.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_50.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "de0a62cb50511231c89e9d7db79fdc979a08b0341da1134313489864cf0a22b2"
+      },
+      {
+        "file": "assets/images/skills7/companion_50_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "79962b3265e7f0d8f673de4971e637f38f07a0b6e5cf9172f6bca006fea97ad6"
+      },
+      {
+        "file": "assets/images/skills7/companion_50_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "2704b9256d54a83c9d0d50541de52f6efe9ffe9b4b079f6cd3c17951fc764809"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_50.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "6148b14972a9c7ef2cc436dab9cc85814b3ce663d5a53e4cb02af8a8ffc3f6e2"
+      }
+    ]
+  },
+  {
+    "id": "companion_51",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Tiểu Sáo, rarity 1/5, element Moc, role RangedDPS. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 95% ngoại công lên địch gần nhất.; ultimate: Mục tiêu: địch xa nhất. Gây 97.5% ngoại công mỗi lần trúng. xuyên tối đa 2 địch; giảm 8% chính xác trong 2 giây. Tốn 85 nộ.; compact ultimate impact emblem. Motif two folded letter darts, small jade wind ribbons. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_51.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_51.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "46ef21f85ce8a242e4cc501f6d6ef61f39cb64eb15ed24a9a4d50f497c21d4d2"
+      },
+      {
+        "file": "assets/images/skills7/companion_51_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "48f53d986da8c57c0b492c2c3d4445e25a902d1b9afc5ba64705565d27e5634a"
+      },
+      {
+        "file": "assets/images/skills7/companion_51_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "70d55df5ccf40721707d0aae516472fcd8046c534f02d717e91899efaada9bda"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_51.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "a954c27a4c115694f154c7ffb4e885b91403807dbfb38decfd1623f8a7002a42"
+      }
+    ]
+  },
+  {
+    "id": "companion_52",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. A Lụa, rarity 1/5, element Hoa, role Buffer. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 97.5% ngoại công lên địch gần nhất.; ultimate: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. khiên 10% HP tối đa trong 3 giây; tăng 8% công kích trong 3 giây. Tốn 85 nộ.; compact ultimate impact emblem. Motif thick mooring rope knot, small orange protective lifeline. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_52.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_52.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "474db76507e381e5bc36b8aa24caff84ee8d83439ed0a3f5a2a98f6f21d4afaa"
+      },
+      {
+        "file": "assets/images/skills7/companion_52_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "f1267f702b782945eaf4d0935dec16f7571a4f3017c06712756dd9404af2557e"
+      },
+      {
+        "file": "assets/images/skills7/companion_52_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "27c979bec68ca60c24e43fd027ef4b7653738c74f8b212d1465c5d42a4e75e92"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_52.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "051f0a3953f61e458b58a78431aa0044c90c8bb049327f4df13f405ae01b3030"
+      }
+    ]
+  },
+  {
+    "id": "companion_53",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Thiết Yến, rarity 2/5, element Kim, role Tank. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 102.5% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.; ultimate: Mục tiêu: địch tiền tuyến. Gây 117% ngoại công mỗi lần trúng. khiêu khích 1.7 giây; khiên 18% HP tối đa cho bản thân trong 4 giây; đẩy địch về phía sau. Tốn 90 nộ.; compact ultimate impact emblem. Motif carpenter wooden brace, bronze shield and firm staff block. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_53.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_53.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "8d859eef0cd7068106cb4f583a953c21db2fd772be8afb86836ba2cd7f552f23"
+      },
+      {
+        "file": "assets/images/skills7/companion_53_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "0548f3182bf1607dc7ff8c7ee342a0482b2cd4e372173d0bbd5cb26ae0dc060f"
+      },
+      {
+        "file": "assets/images/skills7/companion_53_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "4eced103014c63c671cb9c18867b5aba8f0b58d95c1626240c2a074de19fd4f9"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_53.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "88bc781c694dc7051e87c1945c17dd40cddc6ae6d452ba176243a8a6d637520c"
+      }
+    ]
+  },
+  {
+    "id": "companion_54",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Vệ Thanh, rarity 2/5, element Tho, role SubTank. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 105% nội công lên địch gần nhất.; ultimate: Mục tiêu: địch tiền tuyến. Gây 144% nội công mỗi lần trúng. giữ chân 1.2 giây; khiên 13% HP tối đa cho bản thân trong 4 giây; giảm 18% nộ nhận trong 3 giây. Tốn 90 nộ.; compact ultimate impact emblem. Motif blue guard spear, straight gate ward and restrained earth seal. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_54.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_54.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "b6ae9d19be8c31afcca507410f7233cbacd9b5573f0515bb92749a8b425337bf"
+      },
+      {
+        "file": "assets/images/skills7/companion_54_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "425768b8a683fd7490747c61ad51b64208303f54d1b19fd8e5a2f8009120ca8b"
+      },
+      {
+        "file": "assets/images/skills7/companion_54_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "6b1d4afc55a8739ecad69967dcd682fa9decdd72f5a476e64dc14f7274a5b520"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_54.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d860d6f286e14d83ddee3621ae7c67db4388af2659e0b54d33f5592d34d543bd"
+      }
+    ]
+  },
+  {
+    "id": "companion_55",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Thanh Tâm, rarity 3/5, element Thuy, role Healer. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 110% nội công lên địch gần nhất. 25% cơ hội hồi 20% nội công thành HP.; ultimate: Mục tiêu: đồng đội có tỉ lệ HP thấp nhất. hồi 50% nội công mỗi giây trong 5 giây; giải độc, cháy, chảy máu, choáng, trói và nội thương; hồi 14 nộ. Tốn 95 nộ.; compact ultimate impact emblem. Motif green-robed healer needles, long blue pulse thread and quiet lotus. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_55.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_55.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "b3859e560454f2724a093080a4ed0a3ebd89c86947c53a75e602972ef289ce17"
+      },
+      {
+        "file": "assets/images/skills7/companion_55_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "64a6f84ebf0809432f500b9e547ab4733a569d848938b8e89b53abd03f3672df"
+      },
+      {
+        "file": "assets/images/skills7/companion_55_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "eccbe5731cd143eb05428ae6e9d6908733d5a9deff1af045b1b2765e1865bd76"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_55.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "66522a7b7ce803a139f1b91cbbc7ffed709829ff5367e945eb23d9410f744c05"
+      }
+    ]
+  },
+  {
+    "id": "companion_56",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Truy Phong, rarity 3/5, element Moc, role RangedDPS. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 95% ngoại công lên địch gần nhất.; ultimate: Mục tiêu: địch xa nhất. Gây 205% ngoại công mỗi lần trúng. xuyên tối đa 3 địch; giữ chân 0.9 giây; giảm 18% ngoại phòng trong 4 giây. Tốn 95 nộ.; compact ultimate impact emblem. Motif three marked arrows, wind compass and pale green route lines. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_56.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_56.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "e314e4753d786db20fd40d93570179d28aac5891d87116b408aa4c9391ef982a"
+      },
+      {
+        "file": "assets/images/skills7/companion_56_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "7ecce31112300b579961633d216c37cc09e8ca56510e260dc4e42e36aa42afa0"
+      },
+      {
+        "file": "assets/images/skills7/companion_56_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "406e41ce29ecd6fc4d9b936f719a92730bcc6960f9972183cdec397527bedf6a"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_56.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d3246620b8150727104d827f242b19857d71f6874acdbe9603f4cc3a77d4c274"
+      }
+    ]
+  },
+  {
+    "id": "companion_57",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Nguyệt Ảnh Kiếm Cơ, rarity 4/5, element Tho, role BurstMage. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 100% nội công lên địch gần nhất. 18% cơ hội giảm 15% nộ nhận trong 2 giây.; ultimate: Mục tiêu: địch xa nhất. Gây 304.7% nội công mỗi lần trúng. giảm 50% nộ nhận trong 5 giây; choáng 0.8 giây; khiên 12% HP tối đa cho bản thân trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif rose-silver mirror sword, reflected ink blade and moonlit evidence seal. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.\\nAlpha cleanup",
+    "reference": "assets/images/companions/companion_57.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_57.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "30a850fddb655f5ffdef1f861d6b35c6da130596a2188a625e7b66e2c10910c6"
+      },
+      {
+        "file": "assets/images/skills7/companion_57_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "99e30d59d7345b977d49c5c598646534dd1ff8f4777a5e493999486a91b4a2f7"
+      },
+      {
+        "file": "assets/images/skills7/companion_57_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "7f8c6bc6497ef5a9896ae8783dce802413298e1ac8222df6dc6ac78c608dcf25"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_57.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "7b6421bec52dd0071ef3fcb2f4b38c4d3cd2faa5519de8ada44ef1b5b6bafb1e"
+      }
+    ]
+  },
+  {
+    "id": "companion_58",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Hùng Côn Đại Hiệp, rarity 4/5, element Hoa, role Bruiser. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 102.5% ngoại công lên địch gần nhất. 18% cơ hội cháy 2 giây.; ultimate: Mục tiêu: cụm địch quanh mục tiêu. Gây 247.2% ngoại công mỗi lần trúng. đánh vùng 3×3; choáng 1.3 giây; cháy 5 giây; tăng 12% công kích cho bản thân trong 4 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif heavy leather-guard staff, broad orange shock arc and broken command seal. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_58.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_58.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "5480b360551600cf81a17115b81744ea7a3f46375eb0357f0d45cb31e32da7b9"
+      },
+      {
+        "file": "assets/images/skills7/companion_58_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "6ba59c39203b1fff2847e6e5052e9a35f7b8c789beae756c29b5502d5648b7f1"
+      },
+      {
+        "file": "assets/images/skills7/companion_58_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "ac25bd1949cf93ba05dd1ebb79e677ff012daae9a7e5cc0b5c167275e8cbf466"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_58.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "e787c97feb054cc5823d4d5f10044c40ba1eeeca3c5b3502138e5357ee5d715b"
+      }
+    ]
+  },
+  {
+    "id": "companion_59",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Kim Cang Thánh Mẫu, rarity 5/5, element Kim, role ReflectTank. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 107.5% ngoại công lên địch gần nhất. 20% cơ hội khiên 2.5% HP tối đa cho bản thân trong 2 giây.; ultimate: Mục tiêu: cụm địch quanh mục tiêu. Gây 202.5% ngoại công mỗi lần trúng. đánh vùng 3×3; khiêu khích 2.2 giây; khiên 28% HP tối đa cho bản thân trong 5 giây; phản 50% sát thương cận chiến cho bản thân trong 5 giây. Tốn 100 nộ.; compact ultimate impact emblem. Motif elderly woman golden vajra palm, great protective bell and reflected arcs. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_59.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_59.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "a7f5bd60da227ef2317549490f1dbd6c9663649e5a05215b73357f2814f569b8"
+      },
+      {
+        "file": "assets/images/skills7/companion_59_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "ba4ffeb87df52228c918ea3233b46524c696d97b38773b6c983c24a860d445c1"
+      },
+      {
+        "file": "assets/images/skills7/companion_59_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "a2de6794148373d88fa7915bfe0afe13b3f95665555e9dfd84cb1daf7575fa49"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_59.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "d8ca9857d9b9e018cd5c797d998266e85f0e0d1388559f27d08bdc0dba7ca6bd"
+      }
+    ]
+  },
+  {
+    "id": "companion_60",
+    "prompt": "Production painterly wuxia RPG sprite sheet, TRUE TRANSPARENT alpha background, EXACT square 3 columns x 3 rows. Reference is exact identity, preserve face, age, sex, hairstyle, colors and costume. Do not rejuvenate elderly characters. Extend coherent full body. Thiên Âm Thánh Sứ, rarity 5/5, element Thuy, role Battery. Top TWO rows SIX full-body poses facing RIGHT, same size baseline, row1 idle/run/basic attack, row2 ultimate/hit recoil/fallen without blood. Bottom row THREE transparent isolated skill illustrations: basic: Gây 110% nội công lên địch gần nhất.; ultimate: Mục tiêu: toàn đội. hồi 32 nộ; hồi 25% nội công mỗi giây trong 5 giây; tăng 25% công kích trong 5 giây; giải độc, cháy, chảy máu, choáng, trói và nội thương. Tốn 100 nộ.; compact ultimate impact emblem. Motif elderly river signal master, five golden water lanterns and connecting blue threads. 9 separate square cells with CLEAR EMPTY ALPHA PADDING. No text, frames, grid lines, floor, cast shadows, background or checkerboard. Every figure and effect stays strictly inside its cell. All faces match reference.",
+    "reference": "assets/images/companions/companion_60.webp",
+    "generator": "built-in image_gen",
+    "grid": [
+      3,
+      3
+    ],
+    "assets": [
+      {
+        "file": "assets/images/fighters7/companion_60.webp",
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "0bc99825d9ad45b9f13b7c4e6fe6af8d868b70c278eff557bce1b5a63240e685"
+      },
+      {
+        "file": "assets/images/skills7/companion_60_basic.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "5d2fba95fbd8adc8c816322461c08e8aa03860d673e8c5d4d94b93b7e232932e"
+      },
+      {
+        "file": "assets/images/skills7/companion_60_ult.webp",
+        "size": [
+          256,
+          256
+        ],
+        "sha256": "bd9bb17b3acdd2ba151b885aac5b4a5bf16ae7d6b8aa0c4bc3f9a258c23fef64"
+      },
+      {
+        "file": "assets/images/skill-fx7/companion_60.webp",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "b0ec59638960c1ae8e5af8a831d9de072570ebe87958a50500b18cff983dc209"
+      }
+    ]
+  }
+]
