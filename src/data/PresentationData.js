@@ -58,7 +58,10 @@ export function expressionFor(id, quest = {}) {
 }
 const CAST_FIGHTERS7=Array.from({length:60},(_,i)=>'companion_'+String(i+1).padStart(2,'0'));
 const NPC_FIGHTERS7=['kha_van','quan_chu','be_na','ba_tu','vu_binh','tay_sai','dao_tinh','tho_bay','son_quan','bach_son','van_khach','lien_su','nguoi_danh_xe','nguoi_lai_do','do_mau','trinh_nghiem','nguoi_phu','cam_tu','cao_le','luc_thu'];
-export const FIGHTERS = Object.freeze([...new Set([...CAST_FIGHTERS7,...NPC_FIGHTERS7,
+// These older-story identities share the exact portrait used to author the 7.0 atlas.
+// Resolve their model only; never change a character's story name or combat kit.
+const LEGACY_FIGHTERS = Object.freeze({truong_xom:'dao_tinh',doi_truong:'son_quan',cha_tieu_muoi:'van_khach',ba_cu_giu_kho:'bach_son',thu_lai:'luc_thu',co_gai:'lien_su'});
+export const FIGHTERS = Object.freeze([...new Set([...CAST_FIGHTERS7,...NPC_FIGHTERS7,...Object.keys(LEGACY_FIGHTERS),'tho_giay',
   'troop_spear','troop_saber','troop_archer','troop_medic','troop_raider','troop_duelist','troop_heavy','troop_shadow','boss_captain','boss_river','boss_marshal','boss_examiner',
   ...['modern','traveler','ThieuLam','VoDang','CaiBang','NgaMi','DuongMon','grief','commander','peace'].map(id=>'hero_'+id),
   'ThieuLam',
@@ -75,7 +78,13 @@ export function fighterKey(unit) {
   if(unit.canon==='dai-viet'&&NPC_FIGHTERS7.includes(unit.storyActorId)&&!unit.characterId?.startsWith('boss_')&&!unit.characterId?.startsWith('troop_'))return unit.storyActorId;
   const id =
     (unit.characterId==='mission_captive'?'nguoi_phu':unit.characterId) ??
-    (unit.id === 'hero' || unit.profile ? unit.sect : unit.templateId??unit.id);
+    (unit.id === 'hero' || unit.profile ? (unit.sect??'hero_traveler') : unit.templateId??unit.id);
   return FIGHTERS.includes(id) ? id : null;
 }
-export const fighterURL = (id) => asset((CAST_FIGHTERS7.includes(id)?'fighters7/':NPC_FIGHTERS7.includes(id)?'fighters7/npc_':'fighters/') + id + '.webp');
+export const fighterURL = (id) => {
+  const modelId=LEGACY_FIGHTERS[id]??id;
+  if(modelId==='tho_giay')return asset('npcs/tho_giay.webp');
+  return asset((CAST_FIGHTERS7.includes(modelId)?'fighters7/':NPC_FIGHTERS7.includes(modelId)||modelId==='tho_giay'?'fighters7/npc_':'fighters/') + modelId + '.webp');
+};
+// The paper artisan has portrait motion until her dedicated atlas is authored.
+export const fighterUsesPortrait = id => id==='tho_giay';

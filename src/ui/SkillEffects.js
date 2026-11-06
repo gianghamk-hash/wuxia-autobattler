@@ -148,7 +148,30 @@ function skillBitmap7(profile){if(!profile.image||typeof Image==='undefined')ret
 export function preloadSkillArt7(profiles){return Promise.all(profiles.filter(Boolean).map(profile=>{skillBitmap7(profile);const im=imageCache7.get(profile.image);return im?im.decode().then(()=>true,()=>false):Promise.resolve(false);}));}
 export function paintSkillEffect(ctx, effect, t, project, reducedMotion = false) {
   const bitmap=skillBitmap7(effect.profile);
-  if(bitmap){const p=effect.profile,origin=project(effect.origin),targets=effect.targets.length?effect.targets.map(target=>project(target.position)):[origin],progress=reducedMotion?1:Math.min(1,t/.3),size=(p.ultimate?130:54)*(reducedMotion?1:.75+Math.min(1,t*3)*.25);ctx.save();ctx.globalAlpha=Math.min(1,(1-t)*4);for(const target of targets){const x=p.path==='ward'?target.x:origin.x+(target.x-origin.x)*progress,y=(p.path==='ward'?target.y:origin.y+(target.y-origin.y)*progress)-18;ctx.drawImage(bitmap,x-size/2,y-size/2,size,size);}ctx.restore();return;}
+  if(bitmap){
+    const p=effect.profile,origin=project(effect.origin);
+    const targets=effect.targets.length?effect.targets.map(target=>project(target.position)):[origin];
+    const progress=reducedMotion?1:Math.min(1,t/.3);
+    const impact=Math.max(0,(t-.3)/.7);
+    const size=(p.ultimate?130:54)*(reducedMotion?1:.65+Math.min(1,t/.3)*.35+Math.sin(impact*Math.PI)*.18);
+    ctx.save();ctx.globalAlpha=Math.min(1,(1-t)*4);
+    // Wind-up, flight and impact all use the decoded skill artwork. Lobbed skills
+    // follow an arc; protective effects stay at the actual recipient.
+    if(!reducedMotion&&p.ultimate&&t<.22){
+      const charge=size*(.35+t);ctx.globalAlpha*=.55;
+      ctx.drawImage(bitmap,origin.x-charge/2,origin.y-20-charge/2,charge,charge);
+      ctx.globalAlpha=Math.min(1,(1-t)*4);
+    }
+    for(const target of targets){
+      const x=p.path==='ward'?target.x:origin.x+(target.x-origin.x)*progress;
+      const lift=!reducedMotion&&p.path==='lob'?Math.sin(progress*Math.PI)*65:0;
+      const y=(p.path==='ward'?target.y:origin.y+(target.y-origin.y)*progress)-18-lift;
+      ctx.save();ctx.translate(x,y);
+      if(!reducedMotion&&progress<1&&p.path==='projectile')ctx.rotate(Math.atan2(target.y-origin.y,target.x-origin.x));
+      ctx.drawImage(bitmap,-size/2,-size/2,size,size);ctx.restore();
+    }
+    ctx.restore();return;
+  }
   const p = effect.profile, origin = project(effect.origin);
   const targets = effect.targets.length ? effect.targets.map(target => project(target.position)) : [origin];
   ctx.save(); ctx.globalAlpha = Math.min(1, (1 - t) * 3);

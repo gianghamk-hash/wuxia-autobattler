@@ -4,8 +4,9 @@ import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { SECT_ART } from './Visuals.js';
 import { getSkillVisual } from '../data/SkillVisualsData.js';
 import { paintSkillEffect,preloadSkillArt7 } from './SkillEffects.js';
-import { fighterKey, fighterURL } from '../data/PresentationData.js';
+import { fighterKey, fighterURL, fighterUsesPortrait } from '../data/PresentationData.js';
 import { battleIntent } from '../combat/BattleIntent.js';
+import { fighterMotion } from './FighterMotion.js';
 const COLORS = { home: '#90ddbf', enemy: '#f4a18d' };
 function rounded(ctx, x, y, width, height, radius = 5) {
   ctx.beginPath();
@@ -77,10 +78,10 @@ export class BattleRenderer {
   }
   event(event) {
     const enabled = document.body.dataset.cardEffects !== 'false';
-    if (event.type === 'cast')
+    if (event.type === 'cast' || event.type === 'skill:cast' || event.type === 'boss:tell')
       this.poses.set(event.actorId, {
-        frame: event.ultimate ? 3 : 2,
-        life: event.ultimate ? 0.55 : 0.4
+        frame: event.ultimate || event.type === 'boss:tell' ? 3 : 2,
+        life: event.type === 'boss:tell' ? 3 : event.ultimate ? 0.55 : 0.4
       });
     if (event.type === 'damage') {
       this.poses.set(event.targetId, { frame: 4, life: 0.18 });
@@ -521,21 +522,23 @@ export class BattleRenderer {
     return this.fighters.get(id);
   }
   drawFighter(unit, p, image, frame, motion) {
+    const portrait=fighterUsesPortrait(fighterKey(unit));
     const ctx = this.ctx,
-      sw = image.naturalWidth / 3,
-      sh = image.naturalHeight / 2,
+      sw = image.naturalWidth / (portrait?1:3),
+      sh = image.naturalHeight / (portrait?1:2),
       w = this.portrait ? 98 : 114,
       h = w;
-    const facing = unit.team === 'home' ? 1 : -1,
-      walk = motion && frame === 1 ? Math.sin(this.visualTime * 14) : 0;
-    const lunge = motion && frame === 2 ? 7 : motion && frame === 4 ? -4 : 0;
+    const facing = unit.team === 'home' ? 1 : -1;
+    const phase=String(unit.id).split('').reduce((sum,c)=>sum+c.charCodeAt(0),0)*.37;
+    const pose=fighterMotion(frame,this.visualTime,phase,!motion);
     ctx.save();
-    ctx.translate(p.x + facing * lunge, p.y + 31 + Math.abs(walk) * -2);
-    ctx.scale(facing, 1);
+    ctx.translate(p.x + facing * pose.x, p.y + 31 + pose.y);
+    ctx.scale(facing*pose.scaleX, pose.scaleY);
+    ctx.rotate(pose.rotation);
     ctx.drawImage(
       image,
-      (frame % 3) * sw,
-      Math.floor(frame / 3) * sh,
+      portrait?0:(frame % 3) * sw,
+      portrait?0:Math.floor(frame / 3) * sh,
       sw,
       sh,
       -w / 2,
