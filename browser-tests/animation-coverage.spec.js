@@ -25,5 +25,5 @@ test('missing legacy NPC previews animate and portrait-only artisan is disclosed
  const leader=page.locator('[data-person="doi_truong"]');await leader.locator('summary').click();await leader.getByRole('button',{name:'Đánh thường',exact:true}).click();await expect(leader.locator('.model-preview7')).toHaveAttribute('data-motion','2');
  expect(await leader.locator('.model-preview7').evaluate(e=>getComputedStyle(e).animationName)).toBe('model-strike71');
  await page.emulateMedia({reducedMotion:'reduce'});expect(await leader.locator('.model-preview7').evaluate(e=>getComputedStyle(e).animationName)).toBe('none');
- const artisan=page.locator('[data-person="tho_giay"]');await expect(artisan).toContainText('bộ hình sáu tư thế riêng chưa có');await expect(artisan.locator('summary')).toHaveText('Chuyển động chân dung');
+ const artisan=page.locator('[data-person="tho_giay"]');await expect(artisan.getByRole('button',{name:'Tuyệt kỹ',exact:true})).toHaveCount(0);await expect(artisan.locator('summary')).toHaveText('Chuyển động chân dung');
 });
