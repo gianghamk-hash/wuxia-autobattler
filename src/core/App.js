@@ -1,3 +1,5 @@
+import {mountTeamEffects} from '../ui/TeamEffects.js';
+import {continuityFor} from '../data/StoryContinuity.js';
 import { mountGachaUI } from '../ui/GachaUI.js';
 import { storyLines } from '../data/StoryChaptersData.js';
 import { rarityLabel } from '../data/GachaData.js';
@@ -401,7 +403,7 @@ export class App {
       )
     );
     el('version-label').textContent =
-      `Phiên bản ${CONFIG.VERSION} · Chiến dịch ba hồi · Lưu ngoại tuyến trên thiết bị`;
+      `Phiên bản ${CONFIG.VERSION} · 20 chương · 400 hồi · Lưu ngoại tuyến trên thiết bị`;
   }
   unlockIfEnabled() {
     if (!this.model.session.settings.muted)
@@ -543,6 +545,13 @@ export class App {
     el('act-label').textContent =
       `CHƯƠNG ${session.storyProgress.currentChapter} · HỒI ${session.storyProgress.currentEpisode}/20`;
     el('campaign-label').textContent=this.model.catalog.title+(isDaiViet(session)?(session.storyProgress.decisions.D19H18==='home'?' · Nhánh trở về; hoạt động ngoài truyện là hồi ức.':''):' · Tiếp tục bản lưu truyện cũ.');
+    const context=continuityFor(quest,{returning:session.storyProgress.decisions.D19H18==='home'});
+    const locationNode=document.querySelector('.scene-location');
+    if(locationNode)locationNode.textContent=context?(quest.id==='D01H01'?'Trường quay · Hiện đại':context.place):quest?.location??'Hành trình đã khép lại';
+    const headline=document.querySelector('.scene-copy h1');if(headline)headline.textContent=isDaiViet(session)?quest?.chapterTitle??'Những lời hẹn còn lại':'Chốn giang hồ, gặp người tri kỷ.';
+    const subtitle=document.querySelector('.scene-copy > p:last-child');if(subtitle&&context)subtitle.textContent=context.time;
+    let guide=el('journey-guide');if(!guide){guide=node('aside',undefined,'journey-guide');guide.id='journey-guide';document.querySelector('.camp-scene').after(guide);}
+    guide.replaceChildren(node('strong','Bước tiếp theo'),node('span',!sectReady(session)?'Tiếp tục chính truyện để tìm hiểu thế giới và nhập môn ở chương 2. Bạn được đặt tên ngay từ đầu.':session.hero.freeAttributePoints||session.hero.freeSkillPoints?'Bạn còn điểm chưa dùng. Mở Túi đồ → Võ công / Thuộc tính để định hình cách đánh, rồi quay lại câu chuyện.':'Tiếp tục chính truyện; nếu gặp trận khó, kiểm tra vị trí, hiệu ứng đội hình và mốc 2–3 món trang bị trước khi luyện thêm.'));
     el('main-quest-title').textContent =
       quest?.title ?? 'Một đoạn đường đã khép lại';
     el('main-quest-note').textContent = quest
@@ -683,7 +692,7 @@ export class App {
       'aria-label',
       `${itemCount(this.model.session, 'silver')} bạc`
     );
-    stylePortrait(el('camp-hero-art'), artSect);
+    stylePortrait(el('camp-hero-art'), art);
     const completed = storyProgress.completedQuests.filter((id) =>
       this.model.catalog.quests.some((q) => q.id === id)
     ).length;
@@ -1108,6 +1117,7 @@ export class App {
       this.model.session.adventure.dungeon?.id
     );
     this.renderer.setBattle(battle);
+    let buffs=el('battle-team-effects');if(!buffs){buffs=node('div');buffs.id='battle-team-effects';document.querySelector('.battle-toolbar').after(buffs);}buffs.replaceChildren();mountTeamEffects(buffs,this.model.session);buffs.querySelector('details').open=false;
     el('battle-title').textContent = battle.encounterName;
     this.renderBattleCards();
     bus.emit(EVT.BATTLE_STATE_CHANGED, { running: true });

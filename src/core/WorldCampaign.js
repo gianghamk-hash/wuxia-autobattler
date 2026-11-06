@@ -31,6 +31,7 @@ import {
   teamId,
   validatePreparation
 } from './WorldProgress.js';
+import {useEntry} from './DungeonEntries.js';
 const fail = (t) => {
   throw new Error(t);
 };
@@ -211,6 +212,7 @@ export const worldMethods = {
     this._mutate((s) => {
       if (s.storyProgress.pendingEncounter) fail('Có trận chưa xử lý.');
       s.adventure.dungeon = makeDungeon(s, id, weekly, this.now());
+      useEntry(s,id);
       log(
         s,
         `Vào ${id}${weekly ? ' · thử thách tuần' : ''}; đội hình và sinh lực được giữ riêng cho lượt này.`,

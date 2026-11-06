@@ -1,0 +1,72 @@
+[
+  {
+    "id": "modern",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: olive modern stunt jacket, dark trousers. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-ec39a8fa-c4f6-4b41-af43-9c8b1fc23b3d.png",
+    "asset": "assets/images/fighters/hero_modern.webp",
+    "sha256": "ab47c5f7f3e664fb1aa53e6f7a3b39756c290b4f239623d80b4f9cd2f0294bbc"
+  },
+  {
+    "id": "traveler",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: worn brown wrap robe, rope strap, bare fists. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-6f828532-93c5-434f-b617-80fe48a56ef6.png",
+    "asset": "assets/images/fighters/hero_traveler.webp",
+    "sha256": "4483be9335924f16203141a67248ce71b836a2ee939b48077806c4bfc4f9cc64"
+  },
+  {
+    "id": "ThieuLam",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: saffron monk training robes, prayer beads, staff. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-f5685a91-df6d-4d61-be3e-b97b91c43a94.png",
+    "asset": "assets/images/fighters/hero_ThieuLam.webp",
+    "sha256": "6531e3ee75467c57a13fff7749f1ef64f16ecc682b9d3153fe55726eeaeda5f9"
+  },
+  {
+    "id": "VoDang",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: slate blue Taoist robe, straight sword. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-0371328a-006a-4d69-8678-e5fa894098fd.png",
+    "asset": "assets/images/fighters/hero_VoDang.webp",
+    "sha256": "1f8d62f12922443143ae3d2bf8a793f706d9bc64b459f11786ad659ffe8e739f"
+  },
+  {
+    "id": "CaiBang",
+    "prompt": "Edit target: the attached six-pose Cai Bang fighter atlas. Remove ONLY all the white/grey smoky background, stage lighting, fog, floor and background shadows, replacing them with actual fully transparent pixels. Preserve exactly the original 1536x1024 dimensions, 3 columns by 2 rows, the six characters, their positions, face, green patched clothing, staff and distinct poses. Keep a tight small golden energy arc only on the lower-left ultimate pose. All empty space between and around figures must be alpha=0, not white or checkerboard. No other visual changes. This is a production transparent sprite atlas used directly on a game battlefield.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36c0107e-700f-4265-a0dd-1956ee4727a4.png",
+    "asset": "assets/images/fighters/hero_CaiBang.webp",
+    "sha256": "293a5f54461c55eda0f9f541fdab5929bc1d78d81e5749eb854424b2b67331df"
+  },
+  {
+    "id": "NgaMi",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: muted rose and cream healer robe, slender sword. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-86eedfcc-982e-41d8-a4fb-81d432677c07.png",
+    "asset": "assets/images/fighters/hero_NgaMi.webp",
+    "sha256": "f1c56a58f2334ba8ba2b3f115dafdc13dcee14780b26bc8efa2c19822188c0d5"
+  },
+  {
+    "id": "DuongMon",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: dark plum layered leather tunic, bracers, dart. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-3c6b7e80-9f4e-4f5f-9f50-96e6a23703df.png",
+    "asset": "assets/images/fighters/hero_DuongMon.webp",
+    "sha256": "46ac534a83f308db2a8ca5d3dbb6350e9ac43563719ab6165645e5dfcb672bed"
+  },
+  {
+    "id": "grief",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: torn charcoal robe, bandaged forearm, sword. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-92f3c7bc-1917-494e-a582-940aa53a00d1.png",
+    "asset": "assets/images/fighters/hero_grief.webp",
+    "sha256": "2b53bc81b5caf18dc8ed08de14b9f628d4ed4910421b5858be83c6cca505638d"
+  },
+  {
+    "id": "commander",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: bronze lamellar armor over dark blue tunic, sword. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-a13122b7-861e-4343-8a37-ee9cbcc3dfb7.png",
+    "asset": "assets/images/fighters/hero_commander.webp",
+    "sha256": "d10411091c3f195bfb98b64e83555783fbf24c6f1f953b8161a033480a31f6a1"
+  },
+  {
+    "id": "peace",
+    "prompt": "Use case: stylized-concept. Production transparent game fighter sprite atlas, 1536x1024 landscape, EXACT 3 columns by 2 rows of equal 512x512 cells, no text, no borders. Reference image is identity and costume reference only, not edit target. Same adult Vietnamese male hero, tan skin, short swept black hair, strong brows and face as reference. Outfit: sage green robe, simple sash, sheathed sword. Full body illustrated 2.5D wuxia painted sprites, three quarter side view FACING RIGHT in every pose. Keep same scale and ground baseline in each cell with generous transparent padding. Top row: idle standing alert; forward running stride; powerful basic attack extended. Bottom row: ultimate attack with a compact golden qi arc; recoiling injured with raised arm; fallen defeated lying on ground. Six distinctly different poses, each figure entirely contained in its cell, no overlap or extra figures. Transparent background and floor. Detailed readable silhouettes for a mobile autobattler.",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-44879018-e715-4e31-95c2-69303296879e.png",
+    "asset": "assets/images/fighters/hero_peace.webp",
+    "sha256": "36198b514d8de91c90443c989206666a89e1c82394aaf80d53ec19552d80a46b"
+  }
+]

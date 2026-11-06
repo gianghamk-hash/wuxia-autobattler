@@ -1,0 +1,254 @@
+[
+  {
+    "id": "phong_hanh_common_weapon",
+    "asset": "assets/images/gear/phong_hanh_common_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "911b48477eb8a1c5bccc3fc16a1479a350d1baee2a972ceee5e1327cfa3d2787"
+  },
+  {
+    "id": "phong_hanh_common_armor",
+    "asset": "assets/images/gear/phong_hanh_common_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "6e99db19cfa2783a35d5708b8e99e43730bf39023a90031962ab7994dc84d750"
+  },
+  {
+    "id": "phong_hanh_common_accessory",
+    "asset": "assets/images/gear/phong_hanh_common_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "ac9c8217ed02809866d86628a89e469fba9fb5a668c41e14abc1247dcce2c692"
+  },
+  {
+    "id": "thiet_ve_common_weapon",
+    "asset": "assets/images/gear/thiet_ve_common_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "8b8623e412b030e3e4f2b78b32f7f8d5a0e0e3f5e5063a0affd48c53d7fe15e8"
+  },
+  {
+    "id": "thiet_ve_common_armor",
+    "asset": "assets/images/gear/thiet_ve_common_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "5ba441c8b399dd20f7742a804fc5eaaf149dbccace8b63f513a0319a94d2b3ea"
+  },
+  {
+    "id": "thiet_ve_common_accessory",
+    "asset": "assets/images/gear/thiet_ve_common_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "c6f0e652a71d42f93fc5838969de626835125b9c072a204a142202895f2cc973"
+  },
+  {
+    "id": "thanh_tam_common_weapon",
+    "asset": "assets/images/gear/thanh_tam_common_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "6fd555fbaa1773dbe08fa4ee824622e8d07fec67dd03699fe1533e7ece6afa05"
+  },
+  {
+    "id": "thanh_tam_common_armor",
+    "asset": "assets/images/gear/thanh_tam_common_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "9d2d66fb164d779bf55d5ffc1484c45bcf1d3f959add2c1015b15b1b04106880"
+  },
+  {
+    "id": "thanh_tam_common_accessory",
+    "asset": "assets/images/gear/thanh_tam_common_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-8414a6cb-c5c5-4361-b717-4b2f13400498.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity common: plain iron, wood, cloth, no magical glow, restrained grey metal. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "4270dfe40f56188db0d3c1e022e0becdc879c22ed27489c396bcd25813166f83"
+  },
+  {
+    "id": "phong_hanh_rare_weapon",
+    "asset": "assets/images/gear/phong_hanh_rare_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "e5c3ef80a8c1f3a4ca6b15ee1525ff0be59d0985490d5d1597f4ef805d9c81a4"
+  },
+  {
+    "id": "phong_hanh_rare_armor",
+    "asset": "assets/images/gear/phong_hanh_rare_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "51326d3b5a641ec2e16be7100d22de90aa09887f9cc8c0f79ab98e39def3e16e"
+  },
+  {
+    "id": "phong_hanh_rare_accessory",
+    "asset": "assets/images/gear/phong_hanh_rare_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "a594b79032a038add5f637568dcc8562648df0dcd8d64777245797401b8f8738"
+  },
+  {
+    "id": "thiet_ve_rare_weapon",
+    "asset": "assets/images/gear/thiet_ve_rare_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "63c2ab265c3f3c9938f675069d299452d08498121f5ba18d80096e19338e69e9"
+  },
+  {
+    "id": "thiet_ve_rare_armor",
+    "asset": "assets/images/gear/thiet_ve_rare_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "5fa81a34dad19e4c75875584a25132a49fec85c4e218096a7efad35c5cdbb22c"
+  },
+  {
+    "id": "thiet_ve_rare_accessory",
+    "asset": "assets/images/gear/thiet_ve_rare_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "3e7dee0851189c55fdb1abf071321631817e0c00e139afd3da04aa3ecf43bf0d"
+  },
+  {
+    "id": "thanh_tam_rare_weapon",
+    "asset": "assets/images/gear/thanh_tam_rare_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "19237ed752c215e67074ac5c0e1fe3524f9e6e7751d59f69654348da92a855a9"
+  },
+  {
+    "id": "thanh_tam_rare_armor",
+    "asset": "assets/images/gear/thanh_tam_rare_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "c47d26ee4823f257cc2de0a6cdba9c517f2deefab673ff91d75404be0625367a"
+  },
+  {
+    "id": "thanh_tam_rare_accessory",
+    "asset": "assets/images/gear/thanh_tam_rare_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-36f6b800-4af5-444a-8c14-62ebdc6354e7.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity rare: fine blue steel, azure gemstones, elegant silver trim and a small cool glow. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "644d6a7486f62e8d6583f91d883ab73a76f00e8f5c2ce8482fb9c610d459c5c2"
+  },
+  {
+    "id": "phong_hanh_excellent_weapon",
+    "asset": "assets/images/gear/phong_hanh_excellent_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "9a04feb7abe60231b2f71187ee024db5651d8a79e8b7cde61a56ff6f6ebc78c4"
+  },
+  {
+    "id": "phong_hanh_excellent_armor",
+    "asset": "assets/images/gear/phong_hanh_excellent_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "e7b56e46d2563a728b07b62ac685172ab4d74606efebc2e3f7d8fb5845777c78"
+  },
+  {
+    "id": "phong_hanh_excellent_accessory",
+    "asset": "assets/images/gear/phong_hanh_excellent_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "beb5463cb4d854998cd4d0c08f47b0ca60c4ba450ccb55f7d61145d7c750e9f1"
+  },
+  {
+    "id": "thiet_ve_excellent_weapon",
+    "asset": "assets/images/gear/thiet_ve_excellent_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "c84a4d87794d3427070ee0351f7cd5382fe6f92a6f524381937fc11199d05fc2"
+  },
+  {
+    "id": "thiet_ve_excellent_armor",
+    "asset": "assets/images/gear/thiet_ve_excellent_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "7aceb8bb3b9d502382c6e88d72e092bc2727ef5bd73ff23ca99cdad6b75392d4"
+  },
+  {
+    "id": "thiet_ve_excellent_accessory",
+    "asset": "assets/images/gear/thiet_ve_excellent_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "80bca7f72b03f50adb4512d18ad041a514258d67f71f05e699b4dfd3bc36deba"
+  },
+  {
+    "id": "thanh_tam_excellent_weapon",
+    "asset": "assets/images/gear/thanh_tam_excellent_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "6a600f643a2b7cabb36368065d5eec5c9f70989fb7d0ed033501a8338f81c61b"
+  },
+  {
+    "id": "thanh_tam_excellent_armor",
+    "asset": "assets/images/gear/thanh_tam_excellent_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "fec5af201fd0073c7c332fe40fae066887bf34f249643e1a81232f6ae57e6a2e"
+  },
+  {
+    "id": "thanh_tam_excellent_accessory",
+    "asset": "assets/images/gear/thanh_tam_excellent_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-5e9f4d50-1eec-4df8-8a10-efa91e48dccb.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity excellent: intricate purple crystal, violet jade, ornate polished metal with visible magical radiance. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "50c29709f3fde43aa86a549b883f4ea9e6123c6666a66e16bcc91882a5177ac7"
+  },
+  {
+    "id": "phong_hanh_exceptional_weapon",
+    "asset": "assets/images/gear/phong_hanh_exceptional_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "3fee8230617439dde1a7a0bf7093a298ee1061da007f2c55f34b254174b30f24"
+  },
+  {
+    "id": "phong_hanh_exceptional_armor",
+    "asset": "assets/images/gear/phong_hanh_exceptional_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "8cf2e292e17779307ba4a28dbc90f0dcfa4eade0054903b530822a06aa2a2620"
+  },
+  {
+    "id": "phong_hanh_exceptional_accessory",
+    "asset": "assets/images/gear/phong_hanh_exceptional_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "3b7ca940322ec851e82b6eb5fc9f7ace34fea08f94033a089196f7d80feca5c1"
+  },
+  {
+    "id": "thiet_ve_exceptional_weapon",
+    "asset": "assets/images/gear/thiet_ve_exceptional_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "5e11351ebd3dc85f2518fbe2b5d237340e6be7f949fad7c4d5008023e2cfcfa7"
+  },
+  {
+    "id": "thiet_ve_exceptional_armor",
+    "asset": "assets/images/gear/thiet_ve_exceptional_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "5c0f6faeb79338207e3bf43429ac4595c994eba41b6e56b6ecc8c22b757b8350"
+  },
+  {
+    "id": "thiet_ve_exceptional_accessory",
+    "asset": "assets/images/gear/thiet_ve_exceptional_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "7a6a3b0c31407f6630a9c3125cc8a330b6081023c21046583e98b09e889c01b7"
+  },
+  {
+    "id": "thanh_tam_exceptional_weapon",
+    "asset": "assets/images/gear/thanh_tam_exceptional_weapon.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "29fec91e18a209b12159b2c53f8e1d7561a08c327f3c332b5f28ef21199c1625"
+  },
+  {
+    "id": "thanh_tam_exceptional_armor",
+    "asset": "assets/images/gear/thanh_tam_exceptional_armor.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "c7feaebb3a867e909393012382320cc435649c381d8af9d7300214bc1e0a2167"
+  },
+  {
+    "id": "thanh_tam_exceptional_accessory",
+    "asset": "assets/images/gear/thanh_tam_exceptional_accessory.webp",
+    "source": "C:\\Users\\giang\\.codex\\generated_images\\01a1aab8-b5a9-7e00-b7b4-6d42c31f850f\\exec-9975149c-7aaf-4ff6-a8e2-f0d47a281062.png",
+    "prompt": "Use case: stylized-concept. One production equipment icon atlas for Vietnamese wuxia mobile RPG. Transparent square 1536x1536 canvas, exactly 3 columns and 3 rows of equal isolated 512x512 cells with generous padding. No labels, no borders, no backgrounds. All nine items drawn in polished hand-painted 3D game inventory illustration style. Rarity exceptional: spectacular imperial gold, brilliant amber gemstones, dragon filigree, luminous golden energy and tiny sparks. Top row: elegant wind saber, flowing light leather armor, wing-shaped jade pendant. Middle row: heavy guardian mace, lamellar guardian breastplate, shield-shaped jade amulet. Bottom row: healer ritual fan, silk healer robe, lotus jade necklace. Exact cell arrangement, one item per cell, centered, completely contained, no overlap, silhouettes large readable at 64 pixels. Higher quality game assets, consistent top-left lighting, actual alpha background.",
+    "sha256": "decf43411a83a823c14e9cffd2726b9dbbc58d5b3753f5f76431d0a9cdfdc5f0"
+  }
+]

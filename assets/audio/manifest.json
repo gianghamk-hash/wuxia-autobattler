@@ -1,0 +1,38 @@
+[
+  {
+    "asset": "assets/audio/good_b_music-melody-of-nature-main-6672.mp3",
+    "source": "User-provided MP3, copied without alteration",
+    "sha256": "e4e7dc57b736488d915c8df08128161ca401f681969a2f726fa4706ddaef62b7",
+    "bytes": 5823843
+  },
+  {
+    "asset": "assets/audio/nastelbom-asian-asian-china-chinese-music-452940.mp3",
+    "source": "User-provided MP3, copied without alteration",
+    "sha256": "6ef3ffd7a876bef3d22a5695fe2f17174055149d5b64444e980d6a5a11a8a051",
+    "bytes": 3130514
+  },
+  {
+    "asset": "assets/audio/nourishedbymusic-chinese-flute-sonata-174414.mp3",
+    "source": "User-provided MP3, copied without alteration",
+    "sha256": "bf9657dc56c53a7599e63658c343fb76c583a592814854dbeb78588b0b167649",
+    "bytes": 2920698
+  },
+  {
+    "asset": "assets/audio/soundgallerydt-chinese-china-music-175674.mp3",
+    "source": "User-provided MP3, copied without alteration",
+    "sha256": "1ddfc5767ffcc37b53aa19d8bcece6775c7a1eb83f3a2421fe79515ab6358feb",
+    "bytes": 4481358
+  },
+  {
+    "asset": "assets/audio/tunetank-china-chinese-asian-music-349489.mp3",
+    "source": "User-provided MP3, copied without alteration",
+    "sha256": "fa98ee6a07a3a3a88575cf2a407404a2ba6b11493999e353927082ca1119b165",
+    "bytes": 3873024
+  },
+  {
+    "asset": "assets/audio/tunetank-cinematic-china-chinese-music-348112.mp3",
+    "source": "User-provided MP3, copied without alteration",
+    "sha256": "2ea50eaf97c43526af421ab19e149c3c512dad68201cd33c8361fc2b7391d0ac",
+    "bytes": 5203200
+  }
+]

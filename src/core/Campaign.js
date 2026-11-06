@@ -1,3 +1,4 @@
+import {entryMethods} from './DungeonEntries.js';
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
 import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { MISSIONS } from '../data/MissionsData.js';
@@ -999,3 +1000,4 @@ Object.assign(Campaign.prototype, worldMethods);
 Object.assign(Campaign.prototype, gachaMethods);
 Object.assign(Campaign.prototype, journeyMethods);
 Object.assign(Campaign.prototype, lootMethods);
+Object.assign(Campaign.prototype, entryMethods);

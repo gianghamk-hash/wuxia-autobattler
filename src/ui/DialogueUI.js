@@ -1,3 +1,4 @@
+import {continuityFor} from '../data/StoryContinuity.js';
 import { COMPANIONS } from '../data/CompanionsData.js';
 import { portrait, icon } from './Visuals.js';
 import { findNPC } from '../data/NPCData.js';
@@ -74,6 +75,15 @@ export class DialogueUI {
     this.root.className = 'panel classic-dialogue';
     this.root.parentElement.classList.add('has-classic-dialogue');
     this.root.append(node('h2', title, 'classic-title'));
+    const returning=identitySession?.storyProgress.decisions.D19H18==='home';
+    const continuity=continuityFor(quest,{returning});
+    if(continuity){
+      const stamp=node('p',`${quest.id==='D01H01'?'Ngày gặp nạn · Trường quay':continuity.time+' · '+continuity.place}`,'story-time');this.root.append(stamp);
+      const logic=node('details',undefined,'story-logic');logic.append(node('summary','Việc đang theo đuổi và những gì đã rõ'),node('p',continuity.thread));
+      const known=readerKey?.startsWith('aftermath:')||identitySession?.storyProgress.completedQuests.includes(quest.id)?quest.episode:quest.episode-1;
+      for(const step of continuity.stages.filter(v=>v.at<=known))logic.append(node('p',step.label+': '+heroText(step.text,identitySession)));
+      this.root.append(logic);
+    }
     renderBattleBrief(this.root, brief);
     if (quest?.chapterGoal) {
       if(!continuous)this.root.append(

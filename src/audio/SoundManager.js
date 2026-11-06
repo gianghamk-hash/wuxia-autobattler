@@ -1,8 +1,11 @@
 import { getSkillVisual } from '../data/SkillVisualsData.js';
-/** Procedural pentatonic BGM and SFX. Audio is optional and unlocked only by a user gesture. */
+import { MUSIC_PLAYLIST } from './MusicPlaylist.js';
+/** Continuous recorded playlist and layered procedural combat SFX. Audio is optional and unlocked only by a user gesture. */
 export class SoundManager {
-  constructor({ AudioContext = globalThis.AudioContext ?? globalThis.webkitAudioContext } = {}) {
+  constructor({ AudioContext = globalThis.AudioContext ?? globalThis.webkitAudioContext, Audio = globalThis.Audio, storage } = {}) {
     this.Context = AudioContext; this.context = null; this.master = null; this.muted = true; this.volume = .35;
+    this.Audio = Audio; this.music = null; this.musicIndex = 0; this.musicError = null; this.disposed = false;
+    try {this.musicStorage=storage??globalThis.localStorage;const saved=JSON.parse(this.musicStorage?.getItem('wuxia:music:1')??'null');if(saved&&Number.isInteger(saved.index)&&saved.index>=0&&saved.index<MUSIC_PLAYLIST.length&&Number.isFinite(saved.time)&&saved.time>=0&&saved.time<=3600){this.musicIndex=saved.index;this.restoreTime=saved.time;}}catch{/* Music preferences must never block the game save. */}
     this.track = 'title'; this.timer = null; this.voices = new Set(); this.step = 0; this.nextNote = 0;
   }
   async unlock() {
@@ -10,14 +13,15 @@ export class SoundManager {
     if (!this.context) { this.context = new this.Context(); this.master = this.context.createGain(); this.master.connect(this.context.destination); }
     await this.context.resume(); this._gain(); this._start();
   }
-  _gain() { if (this.master) this.master.gain.setValueAtTime(this.muted ? 0 : this.volume, this.context.currentTime); }
+  _gain() { if (this.master) this.master.gain.setValueAtTime(this.muted ? 0 : this.volume, this.context.currentTime); if(this.music)this.music.volume=this.muted?0:this.volume*(this.track==='battle'?.65:.85); }
   setVolume(value) { if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error('Âm lượng không hợp lệ.'); this.volume = value; this._gain(); }
   setMuted(value) { this.muted = Boolean(value); this._gain(); if (this.muted) this._stop(); else this._start(); }
   setTrack(track) {
     if (!['title', 'camp', 'battle', 'ending'].includes(track)) throw new Error('Bản nhạc không tồn tại.');
-    if (this.track === track) return; this.track = track; this.step = 0;
-    this._stop(); this._start();
+    this.track = track; this._gain();
+    // A screen transition only ducks music for combat; it never changes the recording or seek position.
   }
+
   _note(frequency, duration, { when, type = 'sine', gain = .09, slide } = {}) {
     if (!this.context || this.context.state !== 'running' || this.muted || globalThis.document?.hidden || this.voices.size >= 24) return;
     const start = when ?? this.context.currentTime, oscillator = this.context.createOscillator(), envelope = this.context.createGain();
@@ -29,29 +33,42 @@ export class SoundManager {
     oscillator.start(start); oscillator.stop(start + duration + .02);
   }
   _start() {
-    if (this.timer || this.muted || !this.context || this.context.state !== 'running' || globalThis.document?.hidden) return;
-    this.nextNote = this.context.currentTime + .03;
-    this._schedule(); this.timer = setInterval(() => this._schedule(), 100);
-  }
-  _schedule() {
-    if (globalThis.document?.hidden) { this._stop(); return; }
-    const melodies = { title: [0, 4, 7, 9, 7, 4, 2, 0], camp: [0, 2, 4, 7, 4, 2, 9, 7], battle: [0, 7, 4, 9, 2, 7, 4, 12], ending: [12, 9, 7, 4, 7, 2, 4, 0] };
-    const beat = this.track === 'battle' ? .25 : .5;
-    while (this.nextNote < this.context.currentTime + .3) {
-      const note = melodies[this.track][this.step % 8];
-      this._note(220 * 2 ** (note / 12), beat * .9, { when: this.nextNote });
-      if(this.track==='battle'&&this.step%2===0)this._note(90,.14,{when:this.nextNote,gain:.15,type:'sine',slide:42});
-      if (this.step % 4 === 0) this._note(110, beat * 1.8, { when: this.nextNote, gain: .045, type: 'sine' });
-      this.nextNote += beat; this.step++;
+    if(this.disposed || this.muted || !this.context || this.context.state!=='running' || globalThis.document?.hidden || !this.Audio)return;
+    if(!this.music){
+      this.music=new this.Audio();this.music.preload='metadata';this.music.loop=false;
+      this.music.src=MUSIC_PLAYLIST[this.musicIndex].url;
+      this.music.onloadedmetadata=()=>{if(this.restoreTime>0&&Number.isFinite(this.music.duration)){this.music.currentTime=Math.min(this.restoreTime,Math.max(0,this.music.duration-.1));this.restoreTime=0;}};
+      this.music.ontimeupdate=()=>{const mark=Math.floor(this.music.currentTime/15);if(mark!==this.lastMusicMark){this.lastMusicMark=mark;this._rememberMusic();}};
+      this.music.onended=()=>{if(this.disposed)return;this.musicIndex=(this.musicIndex+1)%MUSIC_PLAYLIST.length;this.restoreTime=0;this.music.src=MUSIC_PLAYLIST[this.musicIndex].url;this._rememberMusic(0);this._start();};
+      this.music.onerror=()=>{this.musicError='Không tải được '+MUSIC_PLAYLIST[this.musicIndex].title;};
+      this.music.onplaying=()=>{this.musicError=null;};
     }
+    this._gain();
+    try{const play=this.music.play();play?.catch(error=>{if(!this.disposed&&error.name!=='AbortError')this.musicError=error.message;});}catch(error){this.musicError=error.message;}
+  }
+  _rememberMusic(time=this.music?.currentTime??0){try{this.musicStorage?.setItem('wuxia:music:1',JSON.stringify({index:this.musicIndex,time}));}catch{/* Optional position cache. */}}
+  _impact(power=1) {
+    this._note(105,.22,{gain:.15*power,type:'sine',slide:34});
+    this._note(210,.09,{gain:.045*power,type:'triangle',slide:48});
+    // Short band-limited noise adds contact without a harsh sustained buzz.
+    const c=this.context;if(!c?.createBuffer || this.muted || c.state!=='running' || globalThis.document?.hidden || this.voices.size>=24)return;
+    const buffer=c.createBuffer(1,Math.ceil(c.sampleRate*.12),c.sampleRate),data=buffer.getChannelData(0);
+    for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(1-i/data.length)**2;
+    const source=c.createBufferSource(),filter=c.createBiquadFilter(),gain=c.createGain();
+    source.buffer=buffer;filter.type='lowpass';filter.frequency.value=1450;gain.gain.value=.16*power;
+    source.connect(filter);filter.connect(gain);gain.connect(this.master);this.voices.add(source);
+    source.onended=()=>{this.voices.delete(source);source.disconnect();filter.disconnect();gain.disconnect();};source.start();
   }
   sfx(kind) {
     const sounds = { click: [660, .06], hit: [120, .09], magic: [740, .14], death: [82, .28], heal: [880, .17], ultimate: [440, .35], victory: [1046, .5], defeat: [146, .5] };
+    if(kind==='hit')this._impact(.7);
+    if(kind==='ultimate')this._impact(1.2);
     if(kind==='ultimate'){this._note(330,.35,{type:'triangle',gain:.06});this._note(660,.28,{type:'sine',gain:.05});}
     const sound = sounds[kind]; if (sound) this._note(sound[0], sound[1], { gain: .11, type: kind === 'hit' ? 'sawtooth' : 'sine' });
   }
   skill(event) {
     const p=getSkillVisual(event);if(!p)return;
+    if(p.ultimate)this._impact(1.15);else if(['sweep','dash','wave'].includes(p.path))this._impact(.45);
     // Stable pitch per technique plus different envelopes for its physical gesture.
     const hash=[...p.skillId].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,0),pitch=1+(hash%7)*.035;
     const bank={
@@ -62,14 +79,16 @@ export class SoundManager {
       beam:[900,.18,'triangle',1100],lob:[360,.24,'sine',120]
     };
     const [frequency,duration,type,slide]=bank[p.path]??bank.sweep;
-    this._note(frequency*pitch,duration,{type,slide:slide*pitch,gain:p.ultimate?.08:.035});
+    this._note(frequency*pitch,duration,{type,slide:slide*pitch,gain:p.ultimate?.12:.045});
     if(p.ultimate)this._note(frequency*pitch*1.5,duration*.8,{type:'sine',gain:.025});
   }
   _stop() {
+    if(this.music)this._rememberMusic();
+    this.music?.pause();
     if (this.timer) clearInterval(this.timer); this.timer = null;
     for (const voice of this.voices) { try { voice.stop(); } catch { /* already stopped */ } }
     this.voices.clear();
   }
   visibilityChanged() { if (globalThis.document?.hidden) this._stop(); else this._start(); }
-  async dispose() { this._stop(); if (this.context) await this.context.close(); this.context = null; this.master = null; }
+  async dispose() { this.disposed=true; this._stop(); if(this.music){this.music.onended=this.music.onerror=this.music.onloadedmetadata=this.music.ontimeupdate=this.music.onplaying=null;this.music.removeAttribute('src');this.music.load();this.music=null;} if (this.context) await this.context.close(); this.context = null; this.master = null; }
 }

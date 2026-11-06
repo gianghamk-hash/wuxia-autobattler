@@ -1,3 +1,4 @@
+import {gearImage} from './GearArt.js';
 import { bus, EVT } from '../core/EventBus.js';
 import { SECTS } from '../data/SectsData.js';
 import { SKILL_TREES } from '../data/SkillTreeData.js';
@@ -20,7 +21,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
   const say = (text, error = false) => { message.textContent = text; message.dataset.error = String(error); };
   for (const data of Object.values(SECTS)) { const option = element('option', data.name); option.value = data.id; sect.append(option); }
   el('btn-progress-train').hidden = el('btn-progress-gear').hidden = !allowTraining;
-  let controls = [];
+  let controls = [],branchChoice='attack';
   function locks() { for (const { node, disabled } of controls) node.disabled = disabled || !canEdit(); sect.disabled = !canEdit()||getState().storyProgress?.storyRevision===4; }
   function mutate(action, text) {
     if (!canEdit()) { say('Hãy kết thúc hoặc dựng lại bàn trước khi đổi hồ sơ.', true); return; }
@@ -46,13 +47,15 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
     const sectLabel=document.querySelector('label[for="progress-sect"]');if(sectLabel)sectLabel.hidden=storyMode;sect.hidden=storyMode;el('btn-progress-sect').hidden=storyMode;
     el('progress-summary').textContent = `Cấp ${hero.level}/${MAX_LEVEL} · XP ${hero.exp}/${hero.level === MAX_LEVEL ? 'Tối đa' : expToNextLevel(hero.level)} · Điểm kỹ năng ${hero.freeSkillPoints} · Điểm thuộc tính ${hero.freeAttributePoints}`;
     const tree = el('skill-tree'); tree.replaceChildren();
+    if(hero.sect)tree.append(element('p','Chọn hướng build: Sát lực dồn sát thương; Cân bằng vừa công vừa thủ; Phòng thủ giữ tuyến. Có thể phối nút, nhưng chỉ được học một tuyệt kỹ tầng 4. Hoàn điểm miễn phí để thử lại.','build-guide'));
     if (!hero.sect) tree.append(element('p', storyMode?'Bạn chưa nhập môn. Tìm hiểu năm viện và chọn phái trong chính truyện ở chương 2, hồi 10.':'Chọn môn phái để mở cây kỹ năng.'));
-    for (const node of SKILL_TREES[hero.sect] ?? []) {
+    if(hero.sect){const nav=element('nav',undefined,'build-tabs');nav.setAttribute('aria-label','Hướng võ công');for(const[id,label]of Object.entries({attack:'Sát lực',balanced:'Cân bằng',guard:'Phòng thủ'})){const button=element('button',label);button.type='button';button.dataset.buildBranch=id;button.setAttribute('aria-pressed',String(branchChoice===id));button.onclick=()=>{branchChoice=id;refresh();};nav.append(button);}tree.append(nav);}
+    for (const node of (SKILL_TREES[hero.sect] ?? []).filter(n=>n.branch===branchChoice)) {
       const learned = hero.allocatedSkills.includes(node.id);
       let reason = '';
       try { allocateSkill(hero, node.id, inventory); } catch (error) { reason = error.message; }
-      const card = element('article', undefined, 'skill-node'); card.dataset.learned = String(learned);
-      card.append(element('p', `Tầng ${node.tier} · ${node.branch === 'attack' ? 'Công pháp' : 'Hộ thân'}`, 'eyebrow'));
+      const card = element('article', undefined, 'skill-node'); card.dataset.learned = String(learned); card.dataset.branch=node.branch;
+      card.append(element('p', `Tầng ${node.tier} · ${({attack:'Sát lực',balanced:'Cân bằng',guard:'Phòng thủ'})[node.branch]}`, 'eyebrow'));
       card.append(element('h3', node.name)); card.append(element('p', node.description));
       card.append(element('p', statsText(node.stats)));
       card.append(element('p', `Cấp ${node.minLevel} · ${node.cost} điểm${node.prerequisites.length ? ' · Cần nút trước của cùng nhánh' : ''}`));
@@ -63,8 +66,9 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
       tree.append(card);
     }
     const attributes = el('attribute-grid'); attributes.replaceChildren();
+    const attributeHelp={canCot:'+25 HP mỗi điểm',khiHai:'+4 nội công, +1 nội phòng mỗi điểm',kinhLuc:'+4 ngoại công mỗi điểm',ngoTinh:'+0,5% bạo kích mỗi điểm (có trần trong trận)',thanPhap:'+1,5% nhịp đánh và +0,2% né mỗi điểm',coDuyen:'+0,2% bạo kích mỗi điểm'};
     for (const [key, label] of Object.entries(ATTRIBUTES)) {
-      const row = element('div', undefined, 'attribute-row'); row.append(element('span', `${label}: ${hero.attributes[key]}`));
+      const row = element('div', undefined, 'attribute-row'); const info=element('span', `${label}: ${hero.attributes[key]}`);info.append(element('small',attributeHelp[key],'attribute-help'));row.append(info);
       const button = element('button', '+1'); button.type = 'button'; button.dataset.attribute = key;
       button.setAttribute('aria-label', `Cộng 1 ${label}`);
       button.addEventListener('click', change((h, items) => allocateAttribute(h, key, items), `Đã cộng một điểm ${label}.`));
@@ -79,7 +83,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
       }
       select.value = hero.equippedGear[slot] ?? '';
       select.addEventListener('change', change((h, items) => equipItem(h, slot, select.value || null, items), 'Đã cập nhật trang bị.'));
-      controls.push({ node: select, disabled: !hero.sect }); row.append(select); gear.append(row);
+      controls.push({ node: select, disabled: !hero.sect }); const worn=EQUIPMENT.find(item=>item.id===hero.equippedGear[slot]);if(worn)row.append(gearImage(worn));row.append(select); gear.append(row);
     }
     if (hero.sect) {
       const instance = new Hero(hero.sect, { profile: hero, inventory });
