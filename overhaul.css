@@ -90,3 +90,15 @@ img.game-icon { object-fit:contain; image-rendering:auto; filter:drop-shadow(0 1
 /* Character dossiers, image skills and four-slot equipment. */
 .dossier7{clear:both;margin-block:1rem}.model-preview7{width:min(100%,240px);aspect-ratio:1;margin:auto;background-size:300% 200%;background-repeat:no-repeat;animation:model-breathe7 2.5s ease-in-out infinite}.model-controls7{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}.model-controls7 button{min-height:44px;padding:.4rem;font-size:.8rem}.skill-art7{width:72px;height:72px;object-fit:contain;flex-shrink:0}.skill-node>.skill-art7{float:right}.skill-detail7{display:flow-root;margin-block:.7rem;padding:.7rem;border:1px solid #597775;border-radius:12px}.skill-detail7>.skill-art7{float:left;margin:0 .7rem .5rem 0}.counter-guide7{padding:.7rem;background:#1d4343;border-left:3px solid #e4be6c}.item-purpose{display:block;font-size:.82rem;line-height:1.5;font-weight:400;max-width:30ch;margin:auto}.shop-items>button{white-space:normal;align-content:start;padding:.8rem;min-height:150px}.salvage7{grid-column:1/-1}.attribute-guide{grid-column:1/-1}.attribute-guide select{max-width:100%}.dossier-bio7{line-height:1.7}@keyframes model-breathe7{50%{transform:translateY(-3px)}}@media(prefers-reduced-motion:reduce){.model-preview7{animation:none}}@media(max-width:540px){.shop-items{grid-template-columns:1fr!important}.shop-items>button{min-height:120px}.model-controls7{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .model-preview-panel7>summary,.combat-dossier7>summary{min-height:44px;padding:.65rem;cursor:pointer;color:#f0d391}.model-preview-panel7{margin-block:1rem;border:1px solid #597775;border-radius:10px}.combat-dossier7{margin-block:.7rem}.model-preview-panel7[open]{padding-bottom:.6rem}
+.model-preview7{transform-origin:50% 90%}
+.model-preview7[data-motion="1"]{animation:model-walk71 .55s ease-in-out infinite}
+.model-preview7[data-motion="2"]{animation:model-strike71 1s ease-in-out infinite}
+.model-preview7[data-motion="3"]{animation:model-cast71 1.3s ease-in-out infinite}
+.model-preview7[data-motion="4"]{animation:model-hit71 .7s ease-in-out infinite}
+.model-preview7[data-motion="5"]{animation:none}
+@keyframes model-walk71{25%{transform:translate(2px,-4px) rotate(1deg)}75%{transform:translate(-2px,-4px) rotate(-1deg)}}
+@keyframes model-strike71{0%,70%,100%{transform:none}35%{transform:translateX(10px) rotate(3deg)}50%{transform:translateX(4px)}}
+@keyframes model-cast71{50%{transform:translateY(-6px) scale(1.025)}}
+@keyframes model-hit71{20%,60%{transform:translateX(-4px) rotate(-2deg)}40%{transform:translateX(3px)}}
+@media(prefers-reduced-motion:reduce){.model-preview7[data-motion]{animation:none;transform:none}}
+body[data-card-effects="false"] .model-preview7{animation:none;transform:none}

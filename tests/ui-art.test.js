@@ -26,7 +26,7 @@ test('new art stays inside the repo, has recorded prompts and hashes, and preser
  }
 });
 test('all 60 companions, 20 story actors, ten protagonist phases and existing troops have distinct motion identities',()=>{
- assert.equal(FIGHTERS.length,108);assert.equal(new Set(FIGHTERS).size,108);
+ assert.equal(FIGHTERS.length,115);assert.equal(new Set(FIGHTERS).size,115);
  assert.equal(fighterKey({characterId:'mission_captive'}),'nguoi_phu');
  for(const id of ['tay_sai','quan_chu','kha_van','do_mau','doc_le'])assert.equal(fighterKey({characterId:id}),id);
  for(const id of ['companion_02','companion_04','companion_08'])assert.equal(fighterKey({templateId:id}),id);
