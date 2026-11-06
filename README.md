@@ -2,7 +2,14 @@
 
 Auto-battler kiếm hiệp hài hước, thuần web (vanilla JavaScript ES modules, Canvas 2D, Web Audio), không dùng game engine hay dependency runtime.
 
-**Bản 4.0 — cốt truyện mới 20 chương × 20 hồi:** hành trình mặc định có 400 hồi liên kết, dùng lại hình ảnh hiện có. Bản lưu cũ tiếp tục 240 hồi quán Rồng Lửa. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+**Bản 4.1 — đọc liền mạch, 105 trận theo truyện:** 20 chương × 20 hồi, chân dung người kể riêng, dẫn vào trận rồi mới kể kết quả. Bản lưu cũ tiếp tục đúng tuyến đã chọn. [Chơi trên GitHub Pages](https://gianghamk-hash.github.io/wuxia-autobattler/).
+
+## Bản 4.1
+
+- Đọc tiếp từ hồi này sang hồi sau ngay trong khung thoại; nhắc lại và mục tiêu chương được thu gọn. Sau trận thắng có nút tiếp tục truyện, đọc diễn biến sau trận rồi chuyển sang cảnh tiếp theo.
+- Viết 67 đoạn dẫn trước trận và chuyển kết quả sang sau chiến thắng; bổ sung 38 trận/đối luyện có nguyên nhân và hậu quả riêng. Tổng 105 trận, trong đó 43 mục tiêu thật gồm thêm 12 bài luyện giữ vị trí/phá chốt.
+- Thêm chân dung người kể; giữ 25 chân dung nhân vật đã ghép vai. Dùng lại nền, mô hình và hiệu ứng chiến đấu.
+- Giữ mã 400 hồi, XP/bạc từng hồi, mốc chiêu mộ, lựa chọn và trận cũ đang chờ. Lưu vị trí đọc mới và phần sau trận; xem lại không nhận thêm thưởng. [Thiết kế, phạm vi và kiểm chứng](docs/STORY_FLOW_4_1.md).
 
 ## Bản 4.0
 

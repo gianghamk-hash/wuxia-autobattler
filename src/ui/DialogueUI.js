@@ -12,6 +12,7 @@ const node = (tag, text, className) => {
 };
 export function speakerPortrait(speaker, hero, quest) {
   const name = speaker.trim().normalize('NFC');
+  if(['Người kể','Trước đó'].includes(name))return portrait({id:'narrator',portrait:'assets/images/narrator.webp'},'classic-portrait');
   if (name === 'Bạn'||name==='Trần Phong')
     return portrait(hero?.sect ?? 'VoDang', 'classic-portrait');
   if(quest?.canon==='dai-viet'&&DAI_VIET_CAST_BY_NAME[name])return expressive(DAI_VIET_CAST_BY_NAME[name],quest);
@@ -57,7 +58,8 @@ export class DialogueUI {
     getReader,
     onRead,
     onFont,
-    brief
+    brief,
+    continuous = false
   }) {
     const pages = lines.length
       ? lines
@@ -72,7 +74,7 @@ export class DialogueUI {
     this.root.append(node('h2', title, 'classic-title'));
     renderBattleBrief(this.root, brief);
     if (quest?.chapterGoal) {
-      this.root.append(
+      if(!continuous)this.root.append(
         node('p', `Mục tiêu chương: ${quest.chapterGoal}`, 'classic-goal')
       );
       const recap = node('details', undefined, 'classic-recap');
@@ -80,6 +82,7 @@ export class DialogueUI {
         node('summary', 'Nhắc lại câu chuyện'),
         node('p', quest.chapterSummary)
       );
+      if(continuous)recap.append(node('p',quest.chapterGoal));
       this.root.append(recap);
     }
     const scene = node('div', undefined, 'classic-scene');
@@ -87,7 +90,10 @@ export class DialogueUI {
       'linear-gradient(0deg,#091f28aa,transparent),url("' +
       sceneFor(quest) +
       '")';
-    if(quest?.scene==='modern')scene.style.backgroundImage='linear-gradient(125deg,#28444f,#102c30)';
+    if(quest?.scene==='modern'){
+      scene.style.backgroundImage='linear-gradient(125deg,#28444f,#102c30)';
+      scene.classList.add('modern-scene');
+    }
     scene.setAttribute('aria-hidden', 'true');
     scene.append(
       node('span', quest?.location ?? 'Giang hồ ký sự', 'classic-location')
@@ -124,7 +130,7 @@ export class DialogueUI {
       b.type = 'button';
       b.dataset.choice = String(choice.id);
       b.disabled = choice.disabled === true;
-      b.addEventListener('click', () => onChoice(choice.id));
+      b.addEventListener('click', () => {if(this.root.contains(b))onChoice(choice.id);});
       buttons.append(b);
     }
     this.root.append(frame, controls, noteNode, buttons);

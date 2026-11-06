@@ -174,7 +174,7 @@ export class MissionDirector {
     if (this.outcome()) return;
     const c = this.c,
       type = this.definition.type;
-    if (type === 'hold')
+    if (type === 'hold' && !this.definition.noWaves)
       for (const at of [10, 20])
         if (c.elapsed >= at && !this.waves.has(at)) {
           this.waves.add(at);

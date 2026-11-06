@@ -373,6 +373,9 @@ export class App {
     el('btn-battle-camp').addEventListener('click', () =>
       this.run(() => this.setView('camp'))
     );
+    el('btn-story-next').addEventListener('click',()=>this.run(()=>{
+      if(this.view==='battle'&&this.model.lastResult?.winner==='home'&&this.model.lastResult.kind==='main')this.showMain();
+    }));
     el('btn-ending-camp').addEventListener('click', () =>
       this.run(() => this.setView('camp'))
     );
@@ -891,7 +894,24 @@ export class App {
         )
       );
   }
-  showMain() {
+  showMain({skipAftermath=false}={}) {
+    const s=this.model.session,canonical=isDaiViet(s),pageToken=Symbol('story-page');
+    this.storyPageToken=pageToken;
+    if(canonical&&!skipAftermath&&!s.storyProgress.pendingEncounter){
+      const last=this.model.catalog.quests.filter(q=>s.storyProgress.completedQuests.includes(q.id)).at(-1);
+      const key='aftermath:'+last?.id,position=s.journey.reader.positions[key];
+      if(last?.aftermath&&(position===undefined||position<last.aftermath.length-1)){
+        this.dialogue.show({
+          ...this.readerOptions(key),title:`Chương ${last.chapter} · Hồi ${last.episode}/20 · Sau trận`,
+          quest:last,hero:s.hero,lines:last.aftermath,continuous:true,
+          choices:[{id:'continue',text:'Đọc tiếp ▸'}],onBack:()=>this.setView('camp'),
+          onChoice:()=>this.run(()=>{if(this.storyPageToken===pageToken&&this.view==='dialogue')this.showMain({skipAftermath:true});})
+        });
+        if(this.view!=='dialogue')this.setView('dialogue');
+        else el('dialogue-advance')?.focus({preventScroll:true});
+        return;
+      }
+    }
     const quest = this.model.mainQuest();
     if (!quest) {
       this.setView('ending');
@@ -916,21 +936,23 @@ export class App {
           }));
     this.dialogue.show({
       brief: this.model.scoutMain(),
-      ...this.readerOptions('main:' + quest.id),
+      ...this.readerOptions((canonical?'flow:':'main:') + quest.id),
       title: `Chương ${quest.chapter} · Hồi ${quest.episode}/20 · ${quest.title}`,
       quest,
       hero: this.model.session.hero,
-      lines: [
+      continuous:canonical,
+      lines: canonical?storyLines(quest,this.model.session,this.model.catalog.quests,COMPANIONS_BY_ID):[
         ['Trước đó', quest.previous],
         ...storyLines(quest, this.model.session, this.model.catalog.quests, COMPANIONS_BY_ID)
       ],
-      choices,
+      choices:canonical&&!quest.ending?choices.map(c=>({...c,text:choices.length===1?(quest.encounter?'Vào trận ▸':'Đọc tiếp ▸'):c.text})):choices,
       note: quest.objective
         ? 'Mở mục Đồng đội ở doanh trại để giúp Lão Tam và Tiểu Muội trước khi tiếp tục.'
-        : quest.objectiveText,
+        : canonical?'':quest.objectiveText,
       onBack: () => this.setView('camp'),
       onChoice: (id) =>
         this.run(() => {
+          if(this.view!=='dialogue'||this.storyPageToken!==pageToken||this.model.mainQuest()?.id!==quest.id)return;
           this.sound.sfx('click');
           if (quest.ending) {
             this.model.chooseEnding(id);
@@ -940,13 +962,15 @@ export class App {
           this.clearBattle();
           const battle = this.model.chooseMain(id);
           if (battle) this.enterBattle();
+          else if(canonical)this.showMain({skipAftermath:true});
           else {
             this.setView('camp');
             this.toast('Nhiệm vụ hoàn tất. Đã nhận phần thưởng.');
           }
         })
     });
-    this.setView('dialogue');
+    if(this.view!=='dialogue')this.setView('dialogue');
+    else el('dialogue-advance')?.focus({preventScroll:true});
   }
   showRecruit(quest) {
     const ready =
@@ -1053,7 +1077,7 @@ export class App {
         q.title,
       quest: q,
       hero: s.hero,
-      lines: storyLines(q, s, this.model.catalog.quests, COMPANIONS_BY_ID),
+      lines: [...storyLines(q, s, this.model.catalog.quests, COMPANIONS_BY_ID),...(q.aftermath??[])],
       note: 'Xem lại nguồn đã hoàn thành; giữ nguyên lựa chọn và phần thưởng.',
       onBack: () => this.world.openCasebook()
     });
@@ -1318,6 +1342,7 @@ export class App {
     if (el('unit-sheet').open) el('unit-sheet').close();
     const result = this.model.lastResult;
     if (!result) return;
+    el('btn-story-next').hidden=!(isDaiViet(this.model.session)&&result.kind==='main'&&result.winner==='home');
     el('battle-result-panel').hidden = false;
     el('battle-result-panel').dataset.won = String(result.winner === 'home');
     const label =

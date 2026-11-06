@@ -19,6 +19,8 @@ export function validReaderKey(key) {
   return (
     !extra &&
     ((['main', 'archive'].includes(kind) && (Object.hasOwn(MAIN_BY_ID, id)||Object.hasOwn(DAI_VIET_BY_ID,id))) ||
+      (kind==='flow' && Object.hasOwn(DAI_VIET_BY_ID,id)) ||
+      (kind==='aftermath' && Boolean(DAI_VIET_BY_ID[id]?.aftermath)) ||
       (kind === 'recruit' && Object.hasOwn(RECRUIT_BY_ID, id)) ||
       (kind === 'bond' && BOND_STORIES.some((b) => b.id === id)))
   );
@@ -76,7 +78,7 @@ export function validateJourney(session) {
     j.version !== 1 ||
     !plain(j.reader) ||
     !plain(j.reader.positions) ||
-    Object.keys(j.reader.positions).length > 1000 ||
+    Object.keys(j.reader.positions).length > 1600 ||
     ![16, 18, 20, 22].includes(j.reader.fontSize) ||
     !Array.isArray(j.reader.history) ||
     j.reader.history.length > 60 ||
