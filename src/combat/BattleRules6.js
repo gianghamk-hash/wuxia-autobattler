@@ -71,7 +71,11 @@ export function bossSkin(chapter) {
           : "boss_captain";
 }
 /** Each new phase is a new hostile squad; surviving heroes retain HP, energy and status effects. */
-export function bossSequence(enemies, chapter) {
+export function bossSequence(
+  enemies,
+  chapter,
+  { title = BOSS_TITLES[chapter - 1], skin = bossSkin(chapter) } = {},
+) {
   const seeds = enemies.map((u) => ({
     template: u.templateId,
     stats: structuredClone(u.stats),
@@ -84,15 +88,9 @@ export function bossSequence(enemies, chapter) {
   }));
   const decorate = (u, phase, index) => {
     if (index === 0) {
-      u.name =
-        (phase < 3 ? `Mini boss ${phase} · ` : "Boss cuối · ") +
-        BOSS_TITLES[chapter - 1];
+      u.name = (phase < 3 ? `Mini boss ${phase} · ` : "Boss cuối · ") + title;
       u.characterId =
-        phase === 3
-          ? bossSkin(chapter)
-          : phase === 1
-            ? "boss_captain"
-            : "boss_river";
+        phase === 3 ? skin : phase === 1 ? "boss_captain" : "boss_river";
       u.stats.maxHp = Math.round(u.stats.maxHp * (phase === 3 ? 2 : 1.25));
       u.stats.hp = u.stats.maxHp;
       u.stats.physicalAtk *= phase === 3 ? 1.2 : 1.08;

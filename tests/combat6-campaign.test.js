@@ -166,3 +166,25 @@ test("all twelve six-pose enemy atlases have recorded prompts and immutable hash
     );
   }
 });
+
+test("dungeon bosses never reveal campaign antagonists before their story meeting", () => {
+  const c = developed();
+  c.enterDungeon("phong_nha");
+  const s = c.snapshot();
+  s.adventure.dungeon.floor = 89;
+  c.load(s);
+  c.chooseRoom(0);
+  const b = c.battle;
+  for (let phase = 1; phase <= 3; phase++) {
+    const enemies = b.units.filter((u) => u.team === "enemy" && u.alive);
+    assert.ok(
+      enemies.every(
+        (u) => !u.name.includes("Cao Lệ") && !u.name.includes("Trịnh Nghiêm"),
+      ),
+    );
+    assert.ok(!enemies.some((u) => u.characterId === "doc_le"));
+    for (const u of enemies) u.stats.hp = 0;
+    b.grid.removeDead();
+    b.checkResult();
+  }
+});

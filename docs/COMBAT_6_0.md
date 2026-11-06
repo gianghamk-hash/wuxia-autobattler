@@ -16,7 +16,7 @@ Có 20 tên boss chốt. Các trận ôn chương dùng cùng cấu trúc ba gia
 
 ## Tháp Bí cảnh
 
-Mỗi Bí cảnh mở lượt mới đều có 100 tầng. Địch tăng cấp theo từng bảy tầng, tăng hệ số theo từng tầng và tăng quân số ở các mốc 20. Tầng 10/20/…/100 có boss ba giai đoạn. Sau chiến thắng, đợi 1,2 giây rồi tự bắt đầu tầng kế nếu vẫn ở màn trận; quay về Bí cảnh sẽ tạm dừng leo. Tab bị ẩn sẽ không tự khởi trận tiếp; vào lại Bí cảnh và chọn tiếp tục. Không tự trả tiền hoặc mua lượt.
+Mỗi Bí cảnh mở lượt mới đều có 100 tầng. Địch tăng cấp theo từng bảy tầng, tăng hệ số theo từng tầng và tăng quân số ở các mốc 20. Tầng 10/20/…/100 có trấn thủ riêng ba giai đoạn; không dùng tên phản diện chính truyện để tránh lộ người chưa gặp. Sau chiến thắng, đợi 1,2 giây rồi tự bắt đầu tầng kế nếu vẫn ở màn trận; quay về Bí cảnh sẽ tạm dừng leo. Tab bị ẩn sẽ không tự khởi trận tiếp; vào lại Bí cảnh và chọn tiếp tục. Không tự trả tiền hoặc mua lượt.
 
 Thắng tầng hồi 25% HP tối đa cho mỗi người, kể cả người vừa bị hạ. Mốc 10 tầng hồi đầy toàn đội để bắt đầu chặng mới. Những lần hồi này chỉ diễn ra sau khi cả trận kết thúc; không áp dụng giữa ba giai đoạn boss. Đội hình, trang bị và cấp tham gia được chốt khi vào lượt, giữ quy tắc cũ.
 
