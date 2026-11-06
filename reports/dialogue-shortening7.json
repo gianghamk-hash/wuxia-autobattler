@@ -1,0 +1,134 @@
+{
+  "baselineCommit": "c9f910e70675cd1e21950ba23122b558740feaa8",
+  "scope": "Default campaign dialogue, before and after battle, whitespace-separated Vietnamese words; optional full reader excluded.",
+  "original": 39851,
+  "revised": 32337,
+  "reductionPercent": 18.86,
+  "chapters": [
+    {
+      "chapter": 1,
+      "before": 1735,
+      "after": 1544,
+      "reductionPercent": 11.01
+    },
+    {
+      "chapter": 2,
+      "before": 1852,
+      "after": 1584,
+      "reductionPercent": 14.47
+    },
+    {
+      "chapter": 3,
+      "before": 1805,
+      "after": 1591,
+      "reductionPercent": 11.86
+    },
+    {
+      "chapter": 4,
+      "before": 1889,
+      "after": 1644,
+      "reductionPercent": 12.97
+    },
+    {
+      "chapter": 5,
+      "before": 1895,
+      "after": 1644,
+      "reductionPercent": 13.25
+    },
+    {
+      "chapter": 6,
+      "before": 1952,
+      "after": 1692,
+      "reductionPercent": 13.32
+    },
+    {
+      "chapter": 7,
+      "before": 1932,
+      "after": 1663,
+      "reductionPercent": 13.92
+    },
+    {
+      "chapter": 8,
+      "before": 1945,
+      "after": 1665,
+      "reductionPercent": 14.4
+    },
+    {
+      "chapter": 9,
+      "before": 2000,
+      "after": 1709,
+      "reductionPercent": 14.55
+    },
+    {
+      "chapter": 10,
+      "before": 2042,
+      "after": 1679,
+      "reductionPercent": 17.78
+    },
+    {
+      "chapter": 11,
+      "before": 2086,
+      "after": 1663,
+      "reductionPercent": 20.28
+    },
+    {
+      "chapter": 12,
+      "before": 2038,
+      "after": 1613,
+      "reductionPercent": 20.85
+    },
+    {
+      "chapter": 13,
+      "before": 2091,
+      "after": 1671,
+      "reductionPercent": 20.09
+    },
+    {
+      "chapter": 14,
+      "before": 2093,
+      "after": 1682,
+      "reductionPercent": 19.64
+    },
+    {
+      "chapter": 15,
+      "before": 2092,
+      "after": 1618,
+      "reductionPercent": 22.66
+    },
+    {
+      "chapter": 16,
+      "before": 2050,
+      "after": 1570,
+      "reductionPercent": 23.41
+    },
+    {
+      "chapter": 17,
+      "before": 2111,
+      "after": 1668,
+      "reductionPercent": 20.99
+    },
+    {
+      "chapter": 18,
+      "before": 2162,
+      "after": 1675,
+      "reductionPercent": 22.53
+    },
+    {
+      "chapter": 19,
+      "before": 2057,
+      "after": 1380,
+      "reductionPercent": 32.91
+    },
+    {
+      "chapter": 20,
+      "before": 2024,
+      "after": 1382,
+      "reductionPercent": 31.72
+    }
+  ],
+  "home": {
+    "before": 1395,
+    "after": 1064,
+    "reductionPercent": 23.73
+  }
+}

@@ -1,4 +1,5 @@
 import {storyRecruitAt7} from './Recruitment7.js';
+import {conciseLine7} from './ConciseNarration7.js';
 import { EXPANSION_CAST } from "./ExpansionCast.js";
 /** Additional scenes are local obstacles or consensual drills, never new wars in the epilogue. */
 const plans = [
@@ -85,8 +86,8 @@ export function combatFocused(q) {
     return [narrator, quote].filter(Boolean);
   };
   // Choices and all original authored lines remain available in the optional full reader.
-  q.lines = compact(q.lines);
-  q.aftermath = compact(q.aftermath);
+  q.lines = compact(q.lines)?.map(line=>conciseLine7(line,q.id,'lines'));
+  q.aftermath = compact(q.aftermath)?.map(line=>conciseLine7(line,q.id,'aftermath'));
   const ending = q.aftermath ?? q.lines;
   const narration = ending.find((l) => l[0] === "Người kể");
   if (narration && q.handoff && !narration[1].includes(q.handoff)) {

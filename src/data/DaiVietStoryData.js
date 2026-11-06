@@ -1,4 +1,5 @@
 import {storyRecruitAt7} from './Recruitment7.js';
+import {HOME_NARRATION7} from './ConciseNarration7.js';
 import {combatFocused} from './CombatStory6.js';
 import {connectChapter} from './StoryContinuity.js';
 import c01 from './dai-viet/chapter01.js';
@@ -95,7 +96,7 @@ export function resolveDaiVietQuest(q,session){
  if(q?.canon!=='dai-viet')return q;
  let resolved=resolveRawDaiVietQuest(q,session);
  if(session.storyProgress.decisions.D19H18==='home'&&(q.chapter===20||q.chapter===19&&q.episode>=19)){
-  const original=resolved.lines,compact=[original[0],original.find(l=>l[0]!=='Người kể')].filter(Boolean);
+  const original=resolved.lines,compact=[original[0],original.find(l=>l[0]!=='Người kể')].filter(Boolean).map(line=>line[0]==='Người kể'&&HOME_NARRATION7[q.id]?[line[0],HOME_NARRATION7[q.id],...line.slice(2)]:line);
   resolved={...resolved,fullLines:original,fullAftermath:null,lines:compact};
   if(q.encounter)resolved={...resolved,combatContext:'memory',lines:[['Người kể','Hồi ức một buổi đối luyện ở Đại Việt. Hiện tại Phong đã về nhà; đây không phải một trận chiến mới ở hiện đại.'],['Trần Phong','Nhớ cách giữ người bên cạnh, không chỉ nhớ phần mình thắng.']],aftermath:compact,fullAftermath:original,fullLines:[['Người kể','Ôn lại một buổi tập đã trải qua; kết quả không đổi lựa chọn trở về.']]};
  }
