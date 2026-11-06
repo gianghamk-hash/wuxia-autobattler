@@ -11,3 +11,5 @@ Không đổi mã hồi, số trang đọc mặc định, lựa chọn, nhiệm 
 Rà soát ảnh: bộ sáu tư thế riêng của Thợ giấy vẫn là phần còn thiếu. Lần thử tạo ảnh trong đợt sửa này tiếp tục nhận HTTP 429 `usage_limit_reached`; vì vậy không ghi nhận có ảnh mới, không thay chân dung hiện có bằng nhân vật khác.
 
 Kiểm tra: `npm test`; `npx playwright test browser-tests/dialogue-layout7.spec.js browser-tests/dai-viet.spec.js browser-tests/combat6.spec.js`.
+
+Xuất bản: quy trình gói tệp runtime sạch tự chạy nếu lượt Pages mặc định thất bại, vẫn hỗ trợ chạy thủ công. Thay đổi chính cấu hình workflow trên main cũng kích hoạt một lượt để kiểm chứng. Lượt của commit đã bị main thay thế được bỏ qua, tránh bản cũ xuất bản đè bản mới.
