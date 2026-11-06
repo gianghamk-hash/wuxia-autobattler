@@ -179,7 +179,10 @@ test("dungeon bosses never reveal campaign antagonists before their story meetin
     const enemies = b.units.filter((u) => u.team === "enemy" && u.alive);
     assert.ok(
       enemies.every(
-        (u) => !u.name.includes("Cao Lệ") && !u.name.includes("Trịnh Nghiêm"),
+        (u) =>
+          !u.name.includes("Cao Lệ") &&
+          !u.name.includes("Trịnh Nghiêm") &&
+          !u.name.includes("Bạn tập"),
       ),
     );
     assert.ok(!enemies.some((u) => u.characterId === "doc_le"));

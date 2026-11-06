@@ -74,7 +74,11 @@ export function bossSkin(chapter) {
 export function bossSequence(
   enemies,
   chapter,
-  { title = BOSS_TITLES[chapter - 1], skin = bossSkin(chapter) } = {},
+  {
+    title = BOSS_TITLES[chapter - 1],
+    skin = bossSkin(chapter),
+    training = (chapter >= 2 && chapter <= 4) || chapter === 8 || chapter >= 19,
+  } = {},
 ) {
   const seeds = enemies.map((u) => ({
     template: u.templateId,
@@ -96,10 +100,7 @@ export function bossSequence(
       u.stats.physicalAtk *= phase === 3 ? 1.2 : 1.08;
       u.stats.magicalAtk *= phase === 3 ? 1.2 : 1.08;
     } else {
-      u.name =
-        (chapter <= 4 || chapter >= 19 ? "Bạn tập" : "Hộ vệ") +
-        " " +
-        (index + 1);
+      u.name = (training ? "Bạn tập" : "Hộ vệ") + " " + (index + 1);
       u.characterId = TROOP_SKINS[(chapter + index) % TROOP_SKINS.length];
       u.storyActorId = "troop";
     }

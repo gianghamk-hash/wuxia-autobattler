@@ -358,7 +358,7 @@ export const worldMethods = {
     }
     this.battleToken = pending.token;
     this.lastResult = null;
-    const nextBossWave=isBoss?bossSequence(units.filter(u=>u.team==='enemy'),chapter,pending.kind==='dungeon'?{title:title.replace(' · TRẤN THỦ',''),skin:d.floor<30?'boss_river':d.floor<60?'boss_captain':'boss_marshal'}:undefined):null;
+    const nextBossWave=isBoss?bossSequence(units.filter(u=>u.team==='enemy'),chapter,pending.kind==='dungeon'?{title:title.replace(' · TRẤN THỦ',''),training:false,skin:d.floor<30?'boss_river':d.floor<60?'boss_captain':'boss_marshal'}:undefined):null;
     this.battle = new CombatEngine({
       enemyLimit:8,nextBossWave,maxDuration:isBoss?360:150,
       units,
