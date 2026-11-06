@@ -5,15 +5,17 @@ import { SKILLS_BY_ID } from '../data/SkillTreeData.js';
 import { EQUIPMENT_BY_ID, EQUIPMENT_SETS } from '../data/EquipmentData.js';
 import { createHeroBuild, normalizeHeroBuild, allocateSkill, allocateAttribute, equipItem } from './HeroBuild.js';
 const ROLES = { ThieuLam: 'Tank', VoDang: 'SubTank', CaiBang: 'Bruiser', NgaMi: 'Healer', DuongMon: 'RangedDPS' };
+const UNTRAINED={baseStats:{...SECTS.ThieuLam.baseStats,maxHp:1450,hp:1450,physicalAtk:75,magicalAtk:20,physicalDef:55,magicalDef:40,attackSpeed:.85,blockRate:0,attackRange:1},growthPerLevel:SECTS.ThieuLam.growthPerLevel};
+const BASIC_SKILLS={autoAttack:{id:'untrained_attack',name:'Quyền Cơ Bản',type:'physical',targetType:'nearest_enemy',dmgMultiplier:1,energyGain:15,effects:[]},ultimate:{id:'untrained_guard',name:'Chưa học tuyệt kỹ',type:'physical',targetType:'self',dmgMultiplier:0,energyCost:10000,effects:[]}};
 export class Hero extends Unit {
   constructor(sectId, { name = 'Tiểu Hiệp', profile, inventory = [], ...options } = {}) {
-    if (!Object.hasOwn(SECTS, sectId)) throw new Error('Nhân vật chính cần chọn một trong năm môn phái.');
+    if (sectId!==null&&!Object.hasOwn(SECTS, sectId)) throw new Error('Môn phái chưa được hỗ trợ.');
     const build = normalizeHeroBuild(profile ?? createHeroBuild({ sect: sectId, name, level: options.level ?? 1 }), inventory);
     if (build.sect !== sectId) throw new Error('Hồ sơ không khớp môn phái chiến đấu.');
-    const sect = SECTS[sectId];
-    super({ id: 'hero', name: build.name, sect: sectId, role: ROLES[sectId], baseStats: sect.baseStats,
+    const sect = sectId===null?UNTRAINED:SECTS[sectId];
+    super({ id: 'hero', name: build.name, sect: sectId, role: ROLES[sectId]??'Bruiser', baseStats: sect.baseStats,
       growthPerLevel: sect.growthPerLevel }, { ...options, id: options.id ?? 'hero', level: build.level });
-    this.passive = structuredClone(sect.passive); this.skills = structuredClone(HERO_SKILLS[sectId]);
+    this.passive = structuredClone(sect.passive??null); this.skills = structuredClone(sectId===null?BASIC_SKILLS:HERO_SKILLS[sectId]);
     this.profile = build; this.inventory = structuredClone(inventory);
     this.attributes = structuredClone(build.attributes); this.allocatedSkills = [...build.allocatedSkills];
     this.equippedGear = structuredClone(build.equippedGear); this.activeEquipmentSets = [];

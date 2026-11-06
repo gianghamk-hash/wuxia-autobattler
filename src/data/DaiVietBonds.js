@@ -19,4 +19,5 @@ const rows=[
  ['companion_04',3,15,'Một châm đúng chỗ','Đường Thập Nhị muốn chuyển từ nhiều tia sang một mũi nhắm mục tiêu ít sức. Anh nhờ đội kiểm việc nhìn nhầm, không chỉ đo sức xuyên.','Ít mũi hơn thì càng phải biết mình đang chọn ai.','Tập xác nhận mục tiêu qua hai dấu.','Cho người khác gọi mục tiêu rồi kiểm lại cùng anh.','Anh giữ thời gian kiểm đủ và chấp nhận bỏ lượt nếu mất dấu. Biến thể mới được mở như một lựa chọn thay thế, không là quyền bắn mọi lúc.','Đội cùng học trách nhiệm chọn mục tiêu, anh không lấy lệnh người khác làm cách phủi phần phải kiểm. Chiêu mới có chỗ đúng để dùng.']
 ];
 const current=rows.map(([companionId,stage,chapter,title,scene,quote,a,b,yes,no])=>({id:`bond_${companionId}_${stage}`,companionId,stage,chapter,affinity:[30,60,100][stage-1],title,canon:'dai-viet',lines:[['Người kể',scene],[companionId==='companion_01'?'Lôi Nam':companionId==='companion_08'?'Mai Tước':({companion_02:'Huyền Đạo Trưởng',companion_03:'Tiểu Muội',companion_04:'Đường Thập Nhị'})[companionId],quote]],choices:[{id:'listen',text:a},{id:'stand',text:b}],endings:{listen:yes,stand:no}}));
-export function bondCatalog(session){return isDaiViet(session)?current:BOND_STORIES;}
+import {personalizeStory} from './HeroIdentity.js';
+export function bondCatalog(session){return isDaiViet(session)?personalizeStory(current,session):BOND_STORIES;}

@@ -195,7 +195,7 @@ export class CombatEngine {
           )
         )
           unit.energyGainMultiplier += 0.08;
-      const active = getActiveSynergies(members.map((u) => u.sect));
+      const active = getActiveSynergies(members.map((u) => u.sect).filter(Boolean));
       this.teamSynergies[team] = active.map((s) => s.id);
       for (const synergy of active) {
         for (const unit of members) {

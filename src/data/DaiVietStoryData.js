@@ -21,6 +21,7 @@ import c20 from './dai-viet/chapter20.js';
 import home from './dai-viet/chapter20home.js';
 import {deepFreeze} from './DataUtils.js';
 import {stageCombat} from './DaiVietCombatStory.js';
+import {personalizeStory} from './HeroIdentity.js';
 export const DAI_VIET_CHAPTERS=deepFreeze([c01,c02,c03,c04,c05,c06,c07,c08,c09,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20]);
 export const DAI_VIET_HOME_CHAPTER=deepFreeze(home);
 export const DAI_VIET_REVISION=4;
@@ -77,13 +78,14 @@ const returns={
  D19H19:{title:'Một bước qua ánh sáng',lines:[['Người kể','Phong chọn trở về, mang theo kỷ vật và những lá thư đã được cho phép giữ. Anh không bắt Mai hoặc Lôi bước thử cùng mình. Ở mép sáng cuối, ba người nói lời đã hẹn rồi buông tay.'],['Trần Phong','Nếu không có đường gửi tin, xin đừng để cả đời chỉ chờ tin của tôi.'],['Mai Tước','Ta sẽ nhớ, và vẫn sống tiếp. Huynh cũng phải làm vậy.'],['Lôi Nam','Về gặp mẹ đi. Ngồi ăn cho hết bữa, đừng lại hẹn lát nữa.']],objective:'Bước qua cổng theo lựa chọn trở về; không còn cảnh Phong điều quân ở Đại Việt.'},
  D19H20:{title:'Những người ở hai phía',lines:[['Người kể','Khoảng sáng tắt trước khi người ở lại biết Phong đã tới đâu. Mai, Lôi và Ngô Sách xuống núi với lá thư bàn giao; bên kia, Phong nghe tiếng người gọi tên mình giữa khung cảnh trường quay đã thay đổi. Không có tin nhắn nào qua lại được giữa hai nơi.'],['Mai Tước','Ta giữ phần việc đã nhận, không giữ một chỗ đời chỉ để đợi.'],['Lôi Nam','Ngày mai vẫn tới quán. Người còn ở đây vẫn cần bữa sáng.'],['Trần Phong','Xin cho tôi biết hôm nay là ngày nào. Và giúp tôi gọi về nhà.']],objective:'Bắt đầu hậu truyện trở về với đời sống riêng của những người ở lại.'}
 };
-export function resolveDaiVietQuest(q,session){
+function resolveRawDaiVietQuest(q,session){
  if(q?.canon!=='dai-viet')return q;
  const returning=session.storyProgress.decisions.D19H18==='home';
  if(returning&&returns[q.id]){const{objective,...scene}=returns[q.id];return{...q,...scene,objectiveText:objective};}
  if(returning&&q.chapter===20){const scene=home.scenes[q.episode-1],ancient=[4,7,8,10,12,15,17].includes(q.episode);return{...q,title:scene.title,chapterTitle:home.title,chapterSummary:home.summary,chapterGoal:home.goal,location:q.episode===19?'Hai thế giới · hai bữa cơm':ancient?'Đại Việt · sau cuộc chia tay':'Hiện đại · sau ngày trở về',scene:ancient?'jianghu-village':'modern',lines:scene.lines,objectiveText:scene.objective,previous:q.episode===1?returns.D19H20.lines[0][1]:home.scenes[q.episode-2].lines[0][1]};}
  return q;
 }
+export function resolveDaiVietQuest(q,session){return q?.canon==='dai-viet'?personalizeStory(resolveRawDaiVietQuest(q,session),session):q;}
 export function daiVietLines(quest,session){
  const q=resolveDaiVietQuest(quest,session),lines=q.lines.map(l=>[...l]);
  if(q.chapter===20&&session.storyProgress.decisions.D19H18!=='home'&&[3,13].includes(q.episode)){

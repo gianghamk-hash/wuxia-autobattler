@@ -329,11 +329,14 @@ export function resetCalendar(s, now) {
   if (week > w.weekly.week)
     w.weekly = { week, wins: 0, clears: 0, claimed: [], arenaClaims: [] };
 }
+import {heroText,sectReady} from '../data/HeroIdentity.js';
 export function log(s, text, now) {
+  text=heroText(text,s);
   s.adventure.journal.push({ time: now, text });
   if (s.adventure.journal.length > 200) s.adventure.journal.shift();
 }
 export function teamSnapshot(s) {
+  if(!sectReady(s))fail('Nhập môn trong chương 2 trước khi chia sẻ đội hình.');
   return validateTeam({
     name: s.hero.name.slice(0, 40),
     hero: structuredClone(s.hero),

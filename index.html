@@ -94,9 +94,11 @@
             <span class="eyebrow">CHỌN CON ĐƯỜNG CỦA BẠN</span>
             <h2>Hiệp khách xuất sơn</h2>
           </div>
-          <p class="hint">Chọn lối võ dự tuyển. Trần Phong dùng quyền cơ bản ở hồi mở đầu, rồi nhập môn trong chương 2.</p>
+          <div id="hero-origin-preview" class="hero-origin-preview"><span class="portrait" aria-hidden="true"></span><p>Người đóng thế lạc tới Đại Việt.<br>Hãy đặt tên để bắt đầu hành trình của bạn.</p></div>
+          <p id="start-story-hint" class="hint">Bạn chưa thuộc môn phái nào. Lời mời nhập môn đến ở chương 2, sau khi tìm hiểu năm viện.</p>
           <div
             id="sect-picker"
+            hidden
             class="sect-picker"
             role="group"
             aria-label="Chọn môn phái"
@@ -107,10 +109,10 @@
                 id="hero-name"
                 maxlength="80"
                 required
-                value="Trần Phong"
+                placeholder="Nhập tên nhân vật của bạn"
                 autocomplete="off"
             /></label>
-            <label for="hero-sect"
+            <label id="start-sect-field" for="hero-sect" hidden
               >Môn phái<select id="hero-sect">
                 <option value="ThieuLam">Thiếu Lâm · Đỡ đòn</option>
                 <option value="VoDang" selected>Võ Đang · Nội công</option>
@@ -313,11 +315,7 @@
             aria-labelledby="tab-attributes"
             hidden
           >
-            <p class="hint">
-              Kỹ năng và trang bị được áp dụng cho nhân vật chính trong chiến
-              dịch. Đổi phái hoàn điểm kỹ năng, tháo đồ riêng của phái cũ và giữ
-              nguyên túi đồ. Không đổi hồ sơ trong trận.
-            </p>
+            <p class="hint">Kỹ năng và trang bị áp dụng cho nhân vật chính. Tuyến truyện mới cho nhập môn ở chương 2, hồi 10. Không đổi hồ sơ trong trận.</p>
             <div class="controls">
               <label for="progress-sect">Môn phái</label>
               <select id="progress-sect">
