@@ -41,7 +41,7 @@ async function chapter(page, number = 12) {
     app.model.setParty(s.party.unlocked);
   }, number);
 }
-test('reader remembers the exact page and font after a real autosave/reload, history never advances story', async ({
+test('reader remembers its page after autosave/reload, preserves old font settings and exposes no font-size selector', async ({
   page
 }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -53,7 +53,7 @@ test('reader remembers the exact page and font after a real autosave/reload, his
     story = await page.evaluate(() =>
       JSON.stringify(window.__game.model.session.storyProgress)
     );
-  await page.getByLabel('Cỡ chữ lời thoại').selectOption('22');
+  await expect(page.getByLabel('Cỡ chữ lời thoại')).toHaveCount(0);
   await page.getByText('Lịch sử lời thoại', { exact: true }).click();
   await expect(page.locator('.reader-history li')).toHaveCount(3);
   await expect
@@ -68,13 +68,13 @@ test('reader remembers the exact page and font after a real autosave/reload, his
         }
       })
     )
-    .toBe(22);
+    .toBe(18);
   await page.reload();
   await expect(page.locator('#boot-status')).toBeHidden();
   await page.locator('#btn-continue').click();
   await page.locator('#btn-main-quest').click();
   await expect(page.locator('#dialogue-text')).toHaveText(line);
-  await expect(page.getByLabel('Cỡ chữ lời thoại')).toHaveValue('22');
+  await expect(page.getByLabel('Cỡ chữ lời thoại')).toHaveCount(0);
   expect(
     await page.evaluate(() =>
       JSON.stringify(window.__game.model.session.storyProgress)

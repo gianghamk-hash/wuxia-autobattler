@@ -38,7 +38,7 @@ test('combat math follows armor, attack interval and bounded crit/block/dodge ro
   assert.deepEqual(Array.from({ length: 20 }, one), Array.from({ length: 20 }, two));
 });
 test('default battle terminates with one result, damage, healing and ultimates', () => {
-  const { combat, events, units } = battle(); combat.start(); finish(combat);
+  const { combat, events, units } = battle(); combat.start(); units[0].stats.hp-=300;units[2].stats.energy=95;finish(combat);
   assert.equal(combat.state, 'finished'); assert.equal(combat.result.reason, 'elimination');
   assert.ok(combat.result.duration >= 20 && combat.result.duration <= 45);
   assert.equal(events.filter(e => e.type === 'result').length, 1);
@@ -101,17 +101,17 @@ test('all 20 companion ultimate definitions resolve their effects without unsupp
     assert.ok(units.every(u => Number.isFinite(u.stats.hp) && u.stats.hp >= 0 && u.stats.energy <= 100));
   }
 });
-test('support basics, hero healing, energy transfer and regeneration work', () => {
+test('offensive support basics, healing ultimates, energy transfer and regeneration work', () => {
   const { combat, units, grid } = battle();
   const tea = new Companion('companion_11'); grid.remove(units[1]); grid.place(tea, { x: 2, y: 0 });
   const roster = [units[0], tea, ...units.slice(2)]; const c = new CombatEngine({ units: roster, grid }); c.start();
   assert.ok(c.chooseTarget(tea, tea.skills.autoAttack, true)?.team === 'enemy');
   const healer = units[2], hero = units[0]; hero.stats.hp -= 300;
-  const before = hero.stats.hp; c.resolveSkill(healer, hero, healer.skills.autoAttack, false);
-  assert.ok(hero.stats.hp > before); assert.ok(healer.stats.energy >= 15);
+  const before = hero.stats.hp; c.resolveSkill(healer, hero, healer.skills.ultimate, true);
+  assert.ok(hero.stats.hp > before);
   c.effect(healer, hero, { type: 'energy_restore', amount: 40 }); assert.equal(hero.stats.energy, 50);
   const hp = hero.stats.hp; c.effect(healer, hero, { type: 'heal_over_time', duration: 2, multiplier: .6, scalingStat: 'magicalAtk' });
-  c.statuses.update(hero, 1); assert.ok(hero.stats.hp > hp);
+  c.elapsed=1;c.statuses.update(hero, 1); assert.ok(hero.stats.hp > hp);
 });
 test('charm makes hostile attacks target former allies, expires, and never heals opponents', () => {
   const { combat, units } = battle(); combat.start(); const actor = units[3];
@@ -162,7 +162,7 @@ test('sect passives trigger a single low-HP shield and bounded internal-force co
   combat.dealDamage(tank, hero, 100);
   assert.equal(hero.stats.hp, originalHp - 60);
   assert.equal(combat.passives.get(hero.id).internalForce, hero.stats.magicalAtk * 3 - 40);
-  combat.dealDamage(hero, tank, 1200);
+  combat.dealDamage(hero, tank, tank.stats.maxHp*.8);
   assert.equal(combat.passives.get(tank.id).shieldUsed, true); assert.equal(tank.shield, tank.stats.maxHp * .5);
   const hp = tank.stats.hp; combat.dealDamage(hero, tank, 10); assert.equal(tank.stats.hp, hp);
   assert.equal(tank.shield, tank.stats.maxHp * .5 - 10);

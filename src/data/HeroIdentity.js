@@ -6,7 +6,7 @@ export const sectReady=s=>Boolean(s?.hero?.sect)&&hasEnrollment(s);
 export function storyHeroBuild(s){
  if(!currentStory(s)||hasEnrollment(s))return s.hero;
  // Older saves may already contain a build. Preserve it on disk, but the opening remains untrained.
- return {...s.hero,sect:null,allocatedSkills:[],freeSkillPoints:s.hero.level,equippedGear:{weapon:null,armor:null,accessory:null}};
+ return {...s.hero,sect:null,allocatedSkills:[],freeSkillPoints:s.hero.level,equippedGear:{weapon:null,armor:null,accessory:null,helmet:null}};
 }
 export function heroAppearance(s,quest){
  if(!currentStory(s))return s?.hero?.sect??'VoDang';
@@ -22,9 +22,10 @@ export function heroText(text,s){
  if(!currentStory(s)||!s.hero?.name||typeof text!=='string')return text;
  const name=s.hero.name;
  // Protect a name already substituted (including a player's name containing "Phong").
- const aliases=[...new Set([name,'Trần Phong','Phong'])].sort((a,b)=>b.length-a.length).map(escape).join('|');
+ const preserved=['Truy Phong','Phong Trần Lãng Khách'];
+ const aliases=[...new Set([name,...preserved,'Trần Phong','Phong'])].sort((a,b)=>b.length-a.length).map(escape).join('|');
  const pattern=new RegExp(`(?<![\\p{L}\\p{N}_])(?:${aliases})(?![\\p{L}\\p{N}_]| Nha)`,'gu');
- return text.replace(pattern,()=>name);
+ return text.replace(pattern,matched=>preserved.includes(matched)?matched:name);
 }
 export function heroLines(lines,s){
  if(!currentStory(s)||!s.hero?.name)return lines;

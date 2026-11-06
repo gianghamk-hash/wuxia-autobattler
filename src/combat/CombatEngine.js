@@ -1,5 +1,6 @@
 import {
   ELEMENTS,
+  elementMultiplier,
   SECT_ELEMENT,
   sectBonuses,
   LIMITS
@@ -130,7 +131,7 @@ export class CombatEngine {
             source,
             unit,
             amount *
-              (effect.type === 'poison' ? 1 - (unit.poisonResistance ?? 0) : 1),
+              (effect.type === 'poison' ? 1 - (unit.poisonResistance ?? 0) : 1)*elementMultiplier(source,unit),
             { damageType: 'true', periodic: true, statusType: effect.type }
           );
       }
@@ -476,6 +477,9 @@ export class CombatEngine {
       const focus = enemies.find((u) => u.id === this.focusId);
       if (focus) return focus;
     }
+    if (skill.targetType === 'farthest_enemy')return enemies.sort((a,b)=>-distance(a,b))[0]??null;
+    if (skill.targetType === 'lowest_hp_enemy')return enemies.sort(hp)[0]??null;
+    if (skill.targetType === 'front_enemy')return enemies.sort((a,b)=>(actor.team==='home'?a.gridPosition.x-b.gridPosition.x:b.gridPosition.x-a.gridPosition.x)||distance(a,b))[0]??null;
     if (actor.targetPriority === 'weakest') return enemies.sort(hp)[0] ?? null;
     if (actor.targetPriority === 'rear')
       return (
@@ -670,7 +674,7 @@ export class CombatEngine {
           target,
           source,
           target.stats.magicalAtk *
-            0.3 *
+            0.3 * elementMultiplier(target,source) *
             (1000 /
               (1000 + source.stats.magicalDef * CONFIG.MATH.ARMOR_CONSTANT)),
           { damageType: 'magical', reaction: true }
@@ -700,6 +704,7 @@ export class CombatEngine {
   }
   effect(actor, target, effect) {
     if (!target.alive) return;
+    if(effect.chance!==undefined&&this.random()>=effect.chance)return;
     const apply = (data) =>
       this.statuses.apply(target, { ...data, sourceId: actor.id });
     switch (effect.type) {
@@ -739,11 +744,13 @@ export class CombatEngine {
           ratio: effect.ratio ?? 0.35
         });
         break;
+      case 'root':
       case 'stun':
       case 'taunt':
       case 'charm':
         apply({ type: effect.type, duration: effect.duration });
         break;
+      case 'physical_defense_down':
       case 'attack_up':
       case 'accuracy_down':
       case 'dodge_up':

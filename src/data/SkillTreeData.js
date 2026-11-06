@@ -1,3 +1,4 @@
+import {describeSkill7} from './CharacterKits7.js';
 import { deepFreeze } from './DataUtils.js';
 import { SECTS } from './SectsData.js';
 import { HERO_SKILLS } from './HeroSkillsData.js';
@@ -53,6 +54,7 @@ export const SKILL_TREES = deepFreeze(Object.fromEntries(Object.keys(SECTS).map(
    const rank=tier-4,stats=branch==='attack'?{[attack]:18+rank*7,critRate:.01}:branch==='guard'?{maxHp:100+rank*60,physicalDef:5+rank*3,magicalDef:5+rank*3}:{[attack]:10+rank*4,maxHp:70+rank*30,attackSpeed:.015};
    nodes.push({id:`${sect}_t${tier}_${branch}`,sect,tier,branch,name:({attack:['Kình khí liên hoàn','Phá giáp tâm pháp','Hội tâm quyết','Cực ý sát lực'],balanced:['Tụ khí hồi nguyên','Công thủ hợp nhất','Lưu chuyển chân khí','Cực ý trung hòa'],guard:['Thiết bích căn cơ','Giữ mạch hộ thân','Kiên tâm bất thoái','Cực ý thủ trận']})[branch][rank-1],minLevel:[10,12,15,18][rank-1],cost:[1,1,2,2][rank-1],prerequisites:[`${sect}_t${tier-1}_${branch}`],stats,description:'Chuyên sâu cùng hướng đã chọn; cần tuyệt kỹ tầng 4 của nhánh này. '+(tier===8?'Hoàn thiện sở trường bằng chỉ số thường trực.':'Tăng sức mạnh thường trực, không tự đổi tuyệt kỹ.'),exclusiveGroup:null});
   }
+  nodes.forEach(n=>{n.icon='assets/images/skills7/'+(n.ultimate?.id??n.id)+'.webp';if(n.ultimate){n.ultimate.description=describeSkill7(n.ultimate);}if(n.ultimate)n.ultimate.icon='assets/images/skills7/'+n.ultimate.id+'.webp';});
   return [sect, nodes.sort((a, b) => a.tier - b.tier || a.branch.localeCompare(b.branch))];
 })));
 export const SKILLS_BY_ID = deepFreeze(Object.fromEntries(Object.values(SKILL_TREES).flat().map(node => [node.id, node])));

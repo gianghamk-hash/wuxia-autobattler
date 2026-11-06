@@ -16,8 +16,8 @@ test('6v6 samples use one legal hero and five distinct companions, with exact re
       assert.equal(units.length, 6);
       assert.equal(grid.units.size, 6);
       assert.equal(units[0].profile.freeAttributePoints, 0);
-      if (scenario.gear) assert.equal(units[0].activeEquipmentSets.length, 1);
-      const expectedStat = ['VoDang', 'NgaMi', 'DuongMon'].includes(squad.sect) ? 'khiHai' : 'kinhLuc';
+      if (scenario.gear) assert.equal(units[0].activeEquipmentSets.length, 2);
+      const expectedStat = ['VoDang', 'NgaMi'].includes(squad.sect) ? 'khiHai' : 'kinhLuc';
       if (scenario.level > 1 && squad.build === 'attack') assert.ok(units[0].attributes[expectedStat] > 0);
       if (scenario.prepared) assert.ok(units.every(u => u.rowUltimate));
       assert.ok(units.every(u => Number.isFinite(u.stats.hp) && u.stats.hp === u.stats.maxHp));

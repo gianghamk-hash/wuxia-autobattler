@@ -25,12 +25,12 @@ test('new art stays inside the repo, has recorded prompts and hashes, and preser
   if(r.kind==='sprite'){assert.equal(r.width,1536);assert.equal(r.height,1024);assert.ok(FIGHTERS.includes(r.id));}
  }
 });
-test('twenty-seven motion identities include ten protagonist phases and the original seventeen fighters',()=>{
- assert.equal(FIGHTERS.length,39);assert.equal(new Set(FIGHTERS).size,39);
+test('all 60 companions, 20 story actors, ten protagonist phases and existing troops have distinct motion identities',()=>{
+ assert.equal(FIGHTERS.length,108);assert.equal(new Set(FIGHTERS).size,108);
  assert.equal(fighterKey({characterId:'mission_captive'}),'nguoi_phu');
  for(const id of ['tay_sai','quan_chu','kha_van','do_mau','doc_le'])assert.equal(fighterKey({characterId:id}),id);
  for(const id of ['companion_02','companion_04','companion_08'])assert.equal(fighterKey({templateId:id}),id);
- assert.equal(fighterKey({templateId:'companion_49'}),null);
+ assert.equal(fighterKey({templateId:'companion_49'}),'companion_49');
 });
 test('new expressions use authored story timing, including calm post-conflict ending faces',()=>{
  assert.match(expressionFor('vu_binh',{chapter:3,episode:3}),/worried/);

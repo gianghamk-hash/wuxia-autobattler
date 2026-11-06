@@ -1,7 +1,7 @@
 const asset = (path) =>
   new URL('../../assets/images/' + path, import.meta.url).href;
 export function sceneFor(quest = {}) {
-  if(quest.canon==='dai-viet')return asset(quest.scene==='jianghu-village'||quest.scene==='modern'?'jianghu-village.webp':`scenes/${quest.scene}.webp`);
+  if(quest.canon==='dai-viet')return asset('chapters7/'+(quest.scene==='modern'?(quest.chapter===1?'modern_set':'modern_home'):'chapter'+String(quest.chapter??1).padStart(2,'0'))+'.webp');
   if (quest.location?.includes('Quán Rồng Lửa'))
     return asset('jianghu-village.webp');
   const chapter = quest.chapter ?? 1;
@@ -56,7 +56,9 @@ export function expressionFor(id, quest = {}) {
   if(id==='doc_le')emotion=c<=4?'angry':'defeated';
   return emotion ? asset('expressions/' + id + '-' + emotion + '.webp') : null;
 }
-export const FIGHTERS = Object.freeze([
+const CAST_FIGHTERS7=Array.from({length:60},(_,i)=>'companion_'+String(i+1).padStart(2,'0'));
+const NPC_FIGHTERS7=['kha_van','quan_chu','be_na','ba_tu','vu_binh','tay_sai','dao_tinh','tho_bay','son_quan','bach_son','van_khach','lien_su','nguoi_danh_xe','nguoi_lai_do','do_mau','trinh_nghiem','nguoi_phu','cam_tu','cao_le','luc_thu'];
+export const FIGHTERS = Object.freeze([...new Set([...CAST_FIGHTERS7,...NPC_FIGHTERS7,
   'troop_spear','troop_saber','troop_archer','troop_medic','troop_raider','troop_duelist','troop_heavy','troop_shadow','boss_captain','boss_river','boss_marshal','boss_examiner',
   ...['modern','traveler','ThieuLam','VoDang','CaiBang','NgaMi','DuongMon','grief','commander','peace'].map(id=>'hero_'+id),
   'ThieuLam',
@@ -68,11 +70,12 @@ export const FIGHTERS = Object.freeze([
   'companion_03',
   'trinh_nghiem',
   'tay_sai','kha_van','do_mau','doc_le','quan_chu','companion_02','companion_04','companion_08','nguoi_phu'
-]);
+])]);
 export function fighterKey(unit) {
+  if(unit.canon==='dai-viet'&&NPC_FIGHTERS7.includes(unit.storyActorId)&&!unit.characterId?.startsWith('boss_')&&!unit.characterId?.startsWith('troop_'))return unit.storyActorId;
   const id =
     (unit.characterId==='mission_captive'?'nguoi_phu':unit.characterId) ??
-    (unit.id === 'hero' || unit.profile ? unit.sect : unit.templateId);
+    (unit.id === 'hero' || unit.profile ? unit.sect : unit.templateId??unit.id);
   return FIGHTERS.includes(id) ? id : null;
 }
-export const fighterURL = (id) => asset('fighters/' + id + '.webp');
+export const fighterURL = (id) => asset((CAST_FIGHTERS7.includes(id)?'fighters7/':NPC_FIGHTERS7.includes(id)?'fighters7/npc_':'fighters/') + id + '.webp');

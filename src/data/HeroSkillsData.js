@@ -1,10 +1,10 @@
-import { COMPANIONS_BY_ID } from './CompanionsData.js';
-import { deepFreeze } from './DataUtils.js';
-
-// Starter kits reuse the sect's existing companion mechanics. Sprint 6 adds skill trees.
-const templates = { ThieuLam: 'companion_05', VoDang: 'companion_02', CaiBang: 'companion_01', NgaMi: 'companion_03', DuongMon: 'companion_04' };
-export const HERO_SKILLS = deepFreeze(Object.fromEntries(Object.entries(templates).map(([sect, id]) => {
-  const skills = structuredClone(COMPANIONS_BY_ID[id].skills);
-  skills.autoAttack.id = `hero_${sect}_basic`; skills.ultimate.id = `hero_${sect}_ult`;
-  return [sect, skills];
-})));
+import {deepFreeze} from './DataUtils.js';
+const specs={
+ ThieuLam:{basic:'Kim Thân Quyền',type:'physical',power:1,ult:'Thiền Chung Hộ Mệnh',target:'enemy_area',hit:1.45,effects:[{type:'area_damage',width:3,height:3},{type:'stun',duration:.7},{type:'shield',maxHpRatio:.15,duration:4,recipient:'caster'}]},
+ VoDang:{basic:'Trúc Lâm Kiếm Khí',type:'magical',power:.95,ult:'Ngự Kiếm Định Tâm',target:'nearest_enemy',hit:2,effects:[{type:'row_damage'},{type:'internal_injury',ratio:.25,duration:4},{type:'energy_restore',amount:10,recipient:'caster'}]},
+ CaiBang:{basic:'Tản Viên Phá Quyền',type:'physical',power:1.05,ult:'Hỏa Côn Liên Hoàn',target:'nearest_enemy',hit:1.25,effects:[{type:'multi_hit',hits:2},{type:'burn',duration:4}]},
+ NgaMi:{basic:'Thất Sơn Thủy Châm',type:'magical',power:.8,ult:'Liên Tâm Hồi Nguyên',target:'lowest_hp_ally',hit:0,effects:[{type:'heal',scalingStat:'magicalAtk',multiplier:1.4},{type:'heal_over_time',scalingStat:'magicalAtk',multiplier:.25,duration:4},{type:'cleanse',statuses:['poison','burn','stun','root','internal_injury']}]},
+ DuongMon:{basic:'Vân Đồn Phi Châm',type:'physical',power:1,ult:'Bích Vũ Tỏa Mạch',target:'farthest_enemy',hit:.9,effects:[{type:'piercing_projectiles',count:3},{type:'poison',stacks:2,duration:4},{type:'internal_injury',ratio:.25,duration:3}]}
+};
+import {effectDescription} from './CharacterKits7.js';
+export const HERO_SKILLS=deepFreeze(Object.fromEntries(Object.entries(specs).map(([sect,s])=>[sect,{autoAttack:{id:'hero_'+sect+'_basic',name:s.basic,type:s.type,targetType:'nearest_enemy',dmgMultiplier:s.power,energyGain:15,effects:[],description:'Gây '+Math.round(s.power*100)+'% '+(s.type==='physical'?'ngoại công':'nội công')+' lên địch gần nhất; nhận 15 nộ.',icon:'assets/images/skills7/hero_'+sect+'_basic.webp'},ultimate:{id:'hero_'+sect+'_ult',name:s.ult,type:s.type,targetType:s.target,dmgMultiplier:s.hit,energyCost:100,effects:s.effects,description:'Mục tiêu: '+({enemy_area:'cụm địch quanh mục tiêu',nearest_enemy:'địch gần nhất',farthest_enemy:'địch xa nhất',lowest_hp_ally:'đồng đội có tỉ lệ HP thấp nhất'})[s.target]+'. '+(s.hit?'Gây '+Math.round(s.hit*100)+'% '+(s.type==='physical'?'ngoại công':'nội công')+' mỗi lần trúng. ':'')+s.effects.map(effectDescription).join('; ')+'. Tốn 100 nộ.',icon:'assets/images/skills7/hero_'+sect+'_ult.webp'}}])));

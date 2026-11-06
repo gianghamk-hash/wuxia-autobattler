@@ -6,7 +6,7 @@ import { EQUIPMENT_BY_ID, EQUIPMENT_SETS } from '../data/EquipmentData.js';
 import { createHeroBuild, normalizeHeroBuild, allocateSkill, allocateAttribute, equipItem } from './HeroBuild.js';
 const ROLES = { ThieuLam: 'Tank', VoDang: 'SubTank', CaiBang: 'Bruiser', NgaMi: 'Healer', DuongMon: 'RangedDPS' };
 const UNTRAINED={baseStats:{...SECTS.ThieuLam.baseStats,maxHp:1450,hp:1450,physicalAtk:75,magicalAtk:20,physicalDef:55,magicalDef:40,attackSpeed:.85,blockRate:0,attackRange:1},growthPerLevel:SECTS.ThieuLam.growthPerLevel};
-const BASIC_SKILLS={autoAttack:{id:'untrained_attack',name:'Quyền Cơ Bản',type:'physical',targetType:'nearest_enemy',dmgMultiplier:1,energyGain:15,effects:[]},ultimate:{id:'untrained_guard',name:'Chưa học tuyệt kỹ',type:'physical',targetType:'self',dmgMultiplier:0,energyCost:10000,effects:[]}};
+const BASIC_SKILLS={autoAttack:{id:'untrained_attack',icon:'assets/images/skills7/untrained_attack.webp',description:'Quyền cơ bản gây 100% ngoại công lên địch gần nhất; chưa có võ học môn phái.',name:'Quyền Cơ Bản',type:'physical',targetType:'nearest_enemy',dmgMultiplier:1,energyGain:15,effects:[]},ultimate:{id:'untrained_guard',icon:'assets/images/skills7/untrained_guard.webp',description:'Chưa nhập môn nên chưa sử dụng tuyệt kỹ. Chọn môn phái tại chương 2 hồi 10 để mở võ học.',name:'Chưa học tuyệt kỹ',type:'physical',targetType:'self',dmgMultiplier:0,energyCost:10000,effects:[]}};
 export class Hero extends Unit {
   constructor(sectId, { name = 'Tiểu Hiệp', profile, inventory = [], ...options } = {}) {
     if (sectId!==null&&!Object.hasOwn(SECTS, sectId)) throw new Error('Môn phái chưa được hỗ trợ.');

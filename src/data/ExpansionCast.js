@@ -1,15 +1,15 @@
 // Two new companions in each of the five existing rarity tiers.
 export const EXPANSION_CAST=[
- ['51','Đinh Sáo','DuongMon',1,4,'D03H02','Thư Qua Đường Hẹp','Người đưa thư học chữ cùng Na, giữ đường báo tin khi cờ hiệu bị giả.','Đưa túi thư qua chỗ chặn, giữ đúng người nhận.'],
- ['52','Lụa','CaiBang',1,9,'D04H12','Dây Neo Đón Bạn','Người học lái đò, hiểu ai thường đi qua bến và ai bị bỏ khỏi sổ chở.','Giúp đưa người xuống bến trước lúc nước đổi.'],
- ['53','Tạ Yến','ThieuLam',2,5,'D03H10','Nẹp Gỗ Chống Gãy','Học trò của Bảy, sửa trục xe và chỉ ra điều vật liệu không chịu nổi.','Bảo vệ dụng cụ và đưa thợ qua đoạn đường bị giữ.'],
- ['54','Vệ Bình','VoDang',2,2,'D05H01','Giáo Giữ Công Đường','Lính tuần trẻ, học cách bảo vệ người làm chứng thay vì bảo vệ lời quan nói trước.','Giữ đường cho người làm chứng tới nơi đối chiếu.'],
- ['55','Hồ Tâm','NgaMi',3,3,'D06H01','Mạch Sống Qua Đêm','Học trò y thuật của Liên Sư, phân biệt điều đã khám với điều người khác muốn kết luận.','Đưa người và hòm thuốc qua tuyến bị chặn.'],
- ['56','Trác Viễn','DuongMon',3,10,'D10H18','Dấu Chân Ngược Gió','Người đo đường, biết một khoảng trắng trên bản đồ có thể là cả một làng đang sống.','Mở lối trở về cho người thăm đường.'],
- ['57','Lê Nguyệt','VoDang',4,7,'D05H18','Minh Kính Phân Trần','Cháu Lục Thư, giữ thư nhà và đòi tìm đúng người gây án, không nhận một lời minh oan thay sự thật.','Giữ bản thư và người giao khỏi kẻ tìm cách lấy lại.'],
- ['58','Đào Bất Khuất','CaiBang',4,1,'D09H11','Trường Côn Chặn Lệnh','Cựu trưởng đoàn xe Vạn Lợi, phải đối diện những chuyến hàng mình đã hộ tống.','Giữ người giao sổ sống để làm chứng về phần việc của mình.'],
- ['59','Dương Tịnh','ThieuLam',5,13,'D08H16','Kiếm Dừng Trước Người','Võ sư tại gia, dạy giữ người sống và trao lại vị trí; không thuộc năm chưởng môn.','Cùng giữ một đường rút cho lớp học mới.'],
- ['60','Phan Uy','NgaMi',5,17,'D10H01','Hải Đăng Nối Tuyến','Cựu quản tuyến thủy, giỏi nối người và nguồn lực nhưng không thay người lái đò quyết con nước.','Bảo vệ trạm nối tin cho các thuyền tìm được nhau.']
+ ['51','Tiểu Sáo','DuongMon',1,4,'D03H02','Thư Qua Đường Hẹp','Người đưa thư học chữ cùng Na, giữ đường báo tin khi cờ hiệu bị giả.','Đưa túi thư qua chỗ chặn, giữ đúng người nhận.'],
+ ['52','A Lụa','CaiBang',1,9,'D04H12','Dây Neo Đón Bạn','Người học lái đò, hiểu ai thường đi qua bến và ai bị bỏ khỏi sổ chở.','Giúp đưa người xuống bến trước lúc nước đổi.'],
+ ['53','Thiết Yến','ThieuLam',2,5,'D03H10','Nẹp Gỗ Chống Gãy','Học trò của Bảy, sửa trục xe và chỉ ra điều vật liệu không chịu nổi.','Bảo vệ dụng cụ và đưa thợ qua đoạn đường bị giữ.'],
+ ['54','Vệ Thanh','VoDang',2,2,'D05H01','Giáo Giữ Công Đường','Lính tuần trẻ, học cách bảo vệ người làm chứng thay vì bảo vệ lời quan nói trước.','Giữ đường cho người làm chứng tới nơi đối chiếu.'],
+ ['55','Thanh Tâm','NgaMi',3,3,'D06H01','Mạch Sống Qua Đêm','Học trò y thuật của Liên Sư, phân biệt điều đã khám với điều người khác muốn kết luận.','Đưa người và hòm thuốc qua tuyến bị chặn.'],
+ ['56','Truy Phong','DuongMon',3,10,'D10H18','Dấu Chân Ngược Gió','Người đo đường, biết một khoảng trắng trên bản đồ có thể là cả một làng đang sống.','Mở lối trở về cho người thăm đường.'],
+ ['57','Nguyệt Ảnh Kiếm Cơ','VoDang',4,7,'D05H18','Minh Kính Phân Trần','Cháu Lục Thư, giữ thư nhà và đòi tìm đúng người gây án, không nhận một lời minh oan thay sự thật.','Giữ bản thư và người giao khỏi kẻ tìm cách lấy lại.'],
+ ['58','Hùng Côn Đại Hiệp','CaiBang',4,1,'D09H11','Trường Côn Chặn Lệnh','Cựu trưởng đoàn xe Vạn Lợi, phải đối diện những chuyến hàng mình đã hộ tống.','Giữ người giao sổ sống để làm chứng về phần việc của mình.'],
+ ['59','Kim Cang Thánh Mẫu','ThieuLam',5,13,'D08H16','Kiếm Dừng Trước Người','Võ sư tại gia, dạy giữ người sống và trao lại vị trí; không thuộc năm chưởng môn.','Cùng giữ một đường rút cho lớp học mới.'],
+ ['60','Thiên Âm Thánh Sứ','NgaMi',5,17,'D10H01','Hải Đăng Nối Tuyến','Cựu quản tuyến thủy, giỏi nối người và nguồn lực nhưng không thay người lái đò quyết con nước.','Bảo vệ trạm nối tin cho các thuyền tìm được nhau.']
 ].map(([n,name,sect,tier,template,meet,skill,bio,task])=>({id:'companion_'+n,name,sect,tier,template,meet,skill,bio,task,chapter:Number(meet.slice(1,3)),portrait:`assets/images/companions/companion_${n}.webp`}));
 export const EXPANSION_BY_ID=Object.fromEntries(EXPANSION_CAST.map(p=>[p.id,p]));
 const encounters={

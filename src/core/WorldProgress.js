@@ -64,6 +64,7 @@ export function freshWorld() {
       floors: 0,
       claimed: [],
       fishing: 0,
+      salvage: 0,
       practiceWins: 0,
       escorts: 0
     },
@@ -118,7 +119,7 @@ export function validateTeam(team) {
     !integer(team.level, 20) ||
     team.level < 1 ||
     !Array.isArray(team.inventory) ||
-    team.inventory.length > 30 ||
+    team.inventory.length > EQUIPMENT.length ||
     !team.inventory.every(
       (i) => EQUIPMENT.some((e) => e.id === i.itemId) && i.quantity === 1
     )
@@ -227,6 +228,7 @@ export function validateWorld(s) {
     !integer(w.daily.crafts) ||
     !integer(w.daily.floors) ||
     !integer(w.daily.streak, 365) ||
+    !integer(w.daily.salvage??0, 2) ||
     !integer(w.daily.fishing, 3) ||
     !Number.isSafeInteger(w.daily.checkIn) ||
     w.daily.checkIn < -1 ||
@@ -326,6 +328,7 @@ export function resetCalendar(s, now) {
       floors: 0,
       claimed: [],
       fishing: 0,
+      salvage: 0,
       practiceWins: 0,
       escorts: 0
     };
@@ -436,6 +439,10 @@ export function worldAction(s, action, arg, now) {
       w.daily.crafts++;
       message = 'Luyện được Dưỡng Khí Đan: +10% sinh lực trong một trận.';
       break;
+    case 'salvage':
+      if((w.daily.salvage??0)>=2)fail('Mỗi ngày chỉ khảo sát vật tư 2 lượt.');
+      pay(s,'rope',1);w.daily.salvage=(w.daily.salvage??0)+1;give(s,'ore',1);give(s,'herb',1);
+      message='Dùng một dây thừng khảo sát: nhận 1 quặng và 1 thảo dược.';break;
     case 'fish':
       if (w.daily.fishing >= 3) fail('Mỗi ngày chỉ câu 3 lượt.');
       pay(s, 'silver', 2);

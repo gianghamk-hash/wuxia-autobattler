@@ -1,0 +1,722 @@
+[
+  {
+    "id": "companion_01",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.44992955525716144
+  },
+  {
+    "id": "companion_02",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5378449757893881
+  },
+  {
+    "id": "companion_03",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.34180959065755206
+  },
+  {
+    "id": "companion_04",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5419883728027344
+  },
+  {
+    "id": "companion_05",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.42947642008463544
+  },
+  {
+    "id": "companion_06",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5346228281656901
+  },
+  {
+    "id": "companion_07",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5352865854899088
+  },
+  {
+    "id": "companion_08",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5873953501383463
+  },
+  {
+    "id": "companion_09",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.46719932556152344
+  },
+  {
+    "id": "companion_10",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4048913319905599
+  },
+  {
+    "id": "companion_11",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5352071126302084
+  },
+  {
+    "id": "companion_12",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.26061058044433594
+  },
+  {
+    "id": "companion_13",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4170525868733724
+  },
+  {
+    "id": "companion_14",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.2373809814453125
+  },
+  {
+    "id": "companion_15",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.3597952524820964
+  },
+  {
+    "id": "companion_16",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4897956848144531
+  },
+  {
+    "id": "companion_17",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5437266031901041
+  },
+  {
+    "id": "companion_18",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5620288848876953
+  },
+  {
+    "id": "companion_19",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4387594858805339
+  },
+  {
+    "id": "companion_20",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4114704132080078
+  },
+  {
+    "id": "companion_21",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.47159894307454425
+  },
+  {
+    "id": "companion_22",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.47208595275878906
+  },
+  {
+    "id": "companion_23",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4300149281819661
+  },
+  {
+    "id": "companion_24",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.3655007680257161
+  },
+  {
+    "id": "companion_25",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.3955891927083333
+  },
+  {
+    "id": "companion_26",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.3839530944824219
+  },
+  {
+    "id": "companion_27",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6060428619384766
+  },
+  {
+    "id": "companion_28",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4833488464355469
+  },
+  {
+    "id": "companion_29",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4800313313802083
+  },
+  {
+    "id": "companion_30",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.2278614044189453
+  },
+  {
+    "id": "companion_31",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.45378557840983075
+  },
+  {
+    "id": "companion_32",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.37137603759765625
+  },
+  {
+    "id": "companion_33",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5374323527018229
+  },
+  {
+    "id": "companion_34",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.46004486083984375
+  },
+  {
+    "id": "companion_35",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.46970876057942706
+  },
+  {
+    "id": "companion_36",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.43927001953125
+  },
+  {
+    "id": "companion_37",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.2963428497314453
+  },
+  {
+    "id": "companion_38",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.45526377360026044
+  },
+  {
+    "id": "companion_39",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5183944702148438
+  },
+  {
+    "id": "companion_40",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.44632403055826825
+  },
+  {
+    "id": "companion_41",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5053787231445312
+  },
+  {
+    "id": "companion_42",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5058619181315104
+  },
+  {
+    "id": "companion_43",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5566889444986979
+  },
+  {
+    "id": "companion_44",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5535717010498047
+  },
+  {
+    "id": "companion_45",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.19485346476236978
+  },
+  {
+    "id": "companion_46",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4812177022298177
+  },
+  {
+    "id": "companion_47",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4937731424967448
+  },
+  {
+    "id": "companion_48",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5926163991292318
+  },
+  {
+    "id": "companion_49",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.3242632548014323
+  },
+  {
+    "id": "companion_50",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5356318155924479
+  },
+  {
+    "id": "companion_51",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6564311981201172
+  },
+  {
+    "id": "companion_52",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6609967549641927
+  },
+  {
+    "id": "companion_53",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5607261657714844
+  },
+  {
+    "id": "companion_54",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5193010965983073
+  },
+  {
+    "id": "companion_55",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5316003163655599
+  },
+  {
+    "id": "companion_56",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5383027394612631
+  },
+  {
+    "id": "companion_57",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5289090474446615
+  },
+  {
+    "id": "companion_58",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4554557800292969
+  },
+  {
+    "id": "companion_59",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.48656972249348956
+  },
+  {
+    "id": "companion_60",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5377076466878256
+  },
+  {
+    "id": "npc_ba_tu",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6324405670166016
+  },
+  {
+    "id": "npc_bach_son",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6135794321695963
+  },
+  {
+    "id": "npc_be_na",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.7074241638183594
+  },
+  {
+    "id": "npc_cam_tu",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.682715098063151
+  },
+  {
+    "id": "npc_cao_le",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4528363545735677
+  },
+  {
+    "id": "npc_dao_tinh",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.3659820556640625
+  },
+  {
+    "id": "npc_do_mau",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6269092559814453
+  },
+  {
+    "id": "npc_kha_van",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6359157562255859
+  },
+  {
+    "id": "npc_lien_su",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6180610656738281
+  },
+  {
+    "id": "npc_luc_thu",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6575145721435547
+  },
+  {
+    "id": "npc_nguoi_danh_xe",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.676397959391276
+  },
+  {
+    "id": "npc_nguoi_lai_do",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5836022694905599
+  },
+  {
+    "id": "npc_nguoi_phu",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6499048868815104
+  },
+  {
+    "id": "npc_quan_chu",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5490862528483073
+  },
+  {
+    "id": "npc_son_quan",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6586252848307291
+  },
+  {
+    "id": "npc_tay_sai",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.4952710469563802
+  },
+  {
+    "id": "npc_tho_bay",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6552359263102213
+  },
+  {
+    "id": "npc_trinh_nghiem",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6265830993652344
+  },
+  {
+    "id": "npc_van_khach",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.5300076802571615
+  },
+  {
+    "id": "npc_vu_binh",
+    "size": [
+      1536,
+      1024
+    ],
+    "alphaMin": 0,
+    "clearRatio": 0.6609338124593099
+  }
+]

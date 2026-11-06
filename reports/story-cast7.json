@@ -1,0 +1,213 @@
+{
+  "version": "7.0",
+  "scope": "Deterministic level-20 party built exclusively from story companions (one highest rarity); four-piece exceptional gear, training/forging10. This is a reachability benchmark, not a random-player win rate.",
+  "roster": [
+    "companion_59",
+    "companion_03",
+    "companion_57",
+    "companion_08",
+    "companion_10"
+  ],
+  "records": [
+    {
+      "sect": "ThieuLam",
+      "chapter": 5,
+      "winner": "home",
+      "seconds": 43.45,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "ThieuLam",
+      "chapter": 10,
+      "winner": "home",
+      "seconds": 63.06666666666666,
+      "phase": 3,
+      "survivors": 3
+    },
+    {
+      "sect": "ThieuLam",
+      "chapter": 15,
+      "winner": "home",
+      "seconds": 62.78333333333333,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "ThieuLam",
+      "chapter": 18,
+      "winner": "home",
+      "seconds": 107.08333333333333,
+      "phase": 3,
+      "survivors": 3
+    },
+    {
+      "sect": "ThieuLam",
+      "chapter": 20,
+      "winner": "home",
+      "seconds": 116.26666666666667,
+      "phase": 3,
+      "survivors": 2
+    },
+    {
+      "sect": "VoDang",
+      "chapter": 5,
+      "winner": "home",
+      "seconds": 26.8,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "VoDang",
+      "chapter": 10,
+      "winner": "home",
+      "seconds": 33.416666666666664,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "VoDang",
+      "chapter": 15,
+      "winner": "home",
+      "seconds": 50.86666666666667,
+      "phase": 3,
+      "survivors": 5
+    },
+    {
+      "sect": "VoDang",
+      "chapter": 18,
+      "winner": "home",
+      "seconds": 84.11666666666666,
+      "phase": 3,
+      "survivors": 3
+    },
+    {
+      "sect": "VoDang",
+      "chapter": 20,
+      "winner": "home",
+      "seconds": 86.9,
+      "phase": 3,
+      "survivors": 3
+    },
+    {
+      "sect": "CaiBang",
+      "chapter": 5,
+      "winner": "home",
+      "seconds": 48.86666666666667,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "CaiBang",
+      "chapter": 10,
+      "winner": "home",
+      "seconds": 77.88333333333333,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "CaiBang",
+      "chapter": 15,
+      "winner": "home",
+      "seconds": 70.06666666666666,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "CaiBang",
+      "chapter": 18,
+      "winner": "home",
+      "seconds": 114.2,
+      "phase": 3,
+      "survivors": 2
+    },
+    {
+      "sect": "CaiBang",
+      "chapter": 20,
+      "winner": "home",
+      "seconds": 122.81666666666666,
+      "phase": 3,
+      "survivors": 2
+    },
+    {
+      "sect": "NgaMi",
+      "chapter": 5,
+      "winner": "home",
+      "seconds": 37.56666666666666,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "NgaMi",
+      "chapter": 10,
+      "winner": "home",
+      "seconds": 41.85,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "NgaMi",
+      "chapter": 15,
+      "winner": "home",
+      "seconds": 40.1,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "NgaMi",
+      "chapter": 18,
+      "winner": "home",
+      "seconds": 72.31666666666666,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "NgaMi",
+      "chapter": 20,
+      "winner": "home",
+      "seconds": 62.63333333333333,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "DuongMon",
+      "chapter": 5,
+      "winner": "home",
+      "seconds": 27.28333333333333,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "DuongMon",
+      "chapter": 10,
+      "winner": "home",
+      "seconds": 30.333333333333332,
+      "phase": 3,
+      "survivors": 5
+    },
+    {
+      "sect": "DuongMon",
+      "chapter": 15,
+      "winner": "home",
+      "seconds": 41.21666666666667,
+      "phase": 3,
+      "survivors": 6
+    },
+    {
+      "sect": "DuongMon",
+      "chapter": 18,
+      "winner": "home",
+      "seconds": 59.8,
+      "phase": 3,
+      "survivors": 4
+    },
+    {
+      "sect": "DuongMon",
+      "chapter": 20,
+      "winner": "home",
+      "seconds": 58.31666666666666,
+      "phase": 3,
+      "survivors": 4
+    }
+  ]
+}

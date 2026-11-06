@@ -72,6 +72,8 @@ const profiles = [], table = {};
 function add(ownerId, skill, art, ultimate, crest = '') {
   const [motif, primary, secondary, path, duration] = art;
   const profile = { id: `${ownerId}:${skill.id ?? skill.name}`, ownerId, skillId: skill.id ?? skill.name, name: skill.name, motif, primary, secondary, path, duration: ultimate ? duration : .34, ultimate, crest };
+  profile.image=skill.icon??(ownerId.startsWith('companion_')?'assets/images/skills7/'+skill.id+'.webp':skill.id?.startsWith('npc_')?'assets/images/skills7/'+skill.id+'.webp':null);
+  if(ownerId.startsWith('companion_')&&ultimate&&skill.id===ownerId+'_ult')profile.image='assets/images/skill-fx7/'+ownerId+'.webp';
   table[profile.id] = profile; profiles.push(profile);
 }
 COMPANIONS.forEach((c, i) => {
@@ -83,6 +85,7 @@ for (const [sect, skills] of Object.entries(HERO_SKILLS)) {
   add(sect, skills.autoAttack, starterArt[sect], false, sect);
   add(sect, skills.ultimate, starterArt[sect], true, sect);
 }
+for(const [id,name]of [['untrained_attack','Quyền Cơ Bản'],['untrained_guard','Chưa học tuyệt kỹ']])add('hero',{id,name,icon:'assets/images/skills7/'+id+'.webp'},starterArt.ThieuLam,false);
 const advanced = {
   'Trung Hòa Hộ Trận': ['dualTaiji', '#e8d39c', '#8ee0ce', 'wave', 1.5],
   'Kim Cang Trấn Sơn': ['goldenPeak', '#edc46c', '#fff1b8', 'wave', 1.5],

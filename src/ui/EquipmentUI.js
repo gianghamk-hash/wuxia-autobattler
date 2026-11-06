@@ -1,5 +1,5 @@
 import {gearImage} from './GearArt.js';
-import {GEAR_RARITIES,GEAR_DRAW,gearRarity} from '../data/GearCatalog.js';
+import {GEAR_RARITIES,GEAR_DRAW,gearRarity,NEW_GEAR} from '../data/GearCatalog.js';
 import {EQUIPMENT,EQUIPMENT_BY_ID,EQUIPMENT_SETS} from '../data/EquipmentData.js';
 import {equipItem} from '../entities/HeroBuild.js';
 import {sectReady} from '../data/HeroIdentity.js';
@@ -8,15 +8,15 @@ import {remainingEntries,EXTRA_ENTRY_PRICE} from '../core/DungeonEntries.js';
 import {count} from '../core/WorldProgress.js';
 const n=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
 const btn=(text,fn,disabled=false)=>{const e=n('button',text);e.type='button';e.disabled=disabled;e.onclick=fn;return e;};
-const labels={physicalAtk:'Ngoại công',magicalAtk:'Nội công',maxHp:'HP',physicalDef:'Ngoại phòng',magicalDef:'Nội phòng',critRate:'Bạo kích',blockRate:'Đỡ đòn',attackSpeed:'Tốc đánh'};
+const labels={physicalAtk:'Ngoại công',magicalAtk:'Nội công',maxHp:'HP',physicalDef:'Ngoại phòng',magicalDef:'Nội phòng',critRate:'Bạo kích',critDmg:'Sát thương bạo kích',dodgeRate:'Né tránh',blockRate:'Đỡ đòn',attackSpeed:'Tốc đánh'};
 const statsText=stats=>Object.entries(stats).map(([k,v])=>`${labels[k]??k} +${k==='attackSpeed'?v+' lần/giây':v<1?Number((v*100).toFixed(2))+'%':v}`).join(' · ');
 const wear=(app,item)=>app.run(()=>{const live=app.model.session;if(live.storyProgress.pendingEncounter)throw Error('Hãy kết thúc trận đang chờ.');app.model.updateProfile(equipItem(live.hero,item.slot,item.id,live.inventory),live.inventory);renderEquipmentRefresh(app);});
 export function renderEquipment(app,root){
  const s=app.model.session,l=s.loot??{total:0,sinceExcellent:0,sinceExceptional:0,history:[]},panel=n('section',undefined,'panel gear-panel');panel.id='equipment-panel';
  panel.append(n('h2','Vòng quay trang bị'),n('p',`Bạc: ${count(s,'silver')} · Đồ trùng cộng số lượng, không tự mặc hoặc tự bán.`, 'hint'));
  const rates=n('details'),summary=n('summary','Tỉ lệ và bảo đảm trang bị');rates.append(summary);
- for(const r of GEAR_RARITIES)rates.append(n('p',`${r.name}: ${r.rate}% · 9 món trong bậc, chia đều.`));
- rates.append(n('p','Trong 10 lượt liên tiếp có ít nhất một món Xuất sắc trở lên; trong 50 lượt có ít nhất một món Trác việt. Hai bộ đếm độc lập với vòng quay nhân vật. Mốc 2 và 3 món của bộ trang bị cộng dồn, chấp nhận phối đồ khác phẩm chất.'));panel.append(rates);
+ for(const r of GEAR_RARITIES)rates.append(n('p',`${r.name}: ${r.rate}% · ${NEW_GEAR.filter(e=>e.rarity===r.id).length} món trong bậc, chia đều.`));
+ rates.append(n('p','Trong 10 lượt liên tiếp có ít nhất một món Xuất sắc trở lên; trong 50 lượt có ít nhất một món Trác việt. Hai bộ đếm độc lập với vòng quay nhân vật. Mốc 2, 3 và đủ 4 món của bộ trang bị cộng dồn, chấp nhận phối đồ khác phẩm chất.'));panel.append(rates);
  panel.append(n('p',`Xuất sắc trở lên trong ${10-l.sinceExcellent} lượt · Trác việt trong ${50-l.sinceExceptional} lượt`,'gear-pity'));
  const controls=n('div',undefined,'controls');
  for(const[amount,cost]of [[1,GEAR_DRAW.singleCost],[5,GEAR_DRAW.tenCost]]){const b=btn(`Mở ${amount} rương · ${cost} bạc`,()=>app.run(()=>{app.model.drawEquipment(amount);app.toast('Trang bị đã vào túi; chọn món để mặc.');renderEquipmentRefresh(app);}),!sectReady(s)||app.model.running||Boolean(s.storyProgress.pendingEncounter)||count(s,'silver')<cost);b.dataset.equipmentDraw=amount;controls.append(b);}panel.append(controls);

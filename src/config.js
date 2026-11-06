@@ -2,7 +2,7 @@
  * Cấu hình hằng số trung tâm của game
  */
 export const CONFIG = {
-    VERSION: '6.0.0',
+    VERSION: '7.0.0',
     DEBUG: false,
     // All engine times are seconds. Legacy GAME/COMBAT values below use milliseconds.
     TIME: {

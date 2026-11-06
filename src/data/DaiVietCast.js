@@ -1,3 +1,4 @@
+import {storyRecruit7} from './Recruitment7.js';
 import {deepFreeze} from './DataUtils.js';
 import {heroText} from './HeroIdentity.js';
 import {EXPANSION_CAST,expansionAvailable} from './ExpansionCast.js';
@@ -16,6 +17,7 @@ const rows=[
  ['bach_son','Bạch Sơn','ba_cu_giu_kho','Chưởng môn Tản Viên, giữ nền tảng và quyền nghỉ của người học','npc'],
  ['van_khach','Vân Khách','cha_tieu_muoi','Chưởng môn Vân Đồn, người giữ đường thư và lối rút','npc'],
  ['lien_su','Liên Sư','co_gai','Chưởng môn Thất Sơn, giữ thuốc để cứu người','npc'],
+ ['companion_03','Thanh Lan','companion_03','Y sinh Thất Sơn theo dõi đối luyện, bảo vệ người có quyền nghỉ','companion'],
  ['companion_23','Mộc An','companion_23','Bạn học của Phong, cùng sửa lịch tập sau chấn thương','companion'],
  ['nguoi_danh_xe','Người đánh xe','nguoi_danh_xe','Người vận chuyển có thể xác nhận xe và phiếu hàng','npc'],
  ['nguoi_lai_do','Người lái đò','nguoi_lai_do','Người chỉ huy chuyến sông bằng hiểu biết con nước','npc'],
@@ -36,7 +38,7 @@ export const DAI_VIET_CAST_BY_NAME=deepFreeze(Object.fromEntries(DAI_VIET_CAST.m
 export const PLOT_COMPANIONS=deepFreeze(['companion_23','companion_08','companion_01','companion_07','companion_10']);
 export const PLOT_UNLOCKS=deepFreeze({companion_23:'D04H20',companion_08:'D05H10',companion_01:'D07H20',companion_10:'D11H18',companion_07:'D13H03'});
 export const isDaiViet=session=>session?.storyProgress?.storyRevision===4;
-function namedSkills(id,skills){const names={companion_01:['Côn Giữ Bến','Lôi Côn Phá Lộ'],companion_08:['Đoản Kích Vân Đồn','Hồng Ảnh Đổi Hướng']}[id];return !skills||!names?skills:{...skills,autoAttack:{...skills.autoAttack,name:names[0]},ultimate:{...skills.ultimate,name:skills.ultimate.id.endsWith('_bond_ult')?(id==='companion_01'?'Lôi Côn Hộ Bạn':'Hồng Ảnh Cản Đường'):names[1]}};}
-export function storyPerson(session,person){const p=DAI_VIET_CAST_BY_ID[person?.id];return isDaiViet(session)&&p?({...person,name:p.name,portrait:p.portrait,skills:namedSkills(person.id,person.skills),storyRole:heroText(p.role,session),biography:heroText(p.role,session),recruitment:{...person.recruitment,description:PLOT_COMPANIONS.includes(p.id)?'Tham gia theo các hồi chính truyện; không cần trả phí mời lại.':person.recruitment?.description}}):person;}
-export function storyPoolAllows(session,id){return expansionAvailable(session,id)&&(!isDaiViet(session)||!PLOT_COMPANIONS.includes(id)||session.party.unlocked.includes(id));}
+function namedSkills(id,skills){return skills;}
+export function storyPerson(session,person){const p=DAI_VIET_CAST_BY_ID[person?.id];return isDaiViet(session)&&p?({...person,name:p.name,portrait:p.portrait,skills:namedSkills(person.id,person.skills),storyRole:heroText(p.role,session),biography:heroText(person.biography??p.role,session),recruitment:{...person.recruitment,description:PLOT_COMPANIONS.includes(p.id)?'Tham gia theo các hồi chính truyện; không cần trả phí mời lại.':person.recruitment?.description}}):person;}
+export function storyPoolAllows(session,id){return (!storyRecruit7(id)||!isDaiViet(session))&&expansionAvailable(session,id)&&(!isDaiViet(session)||!PLOT_COMPANIONS.includes(id)||session.party.unlocked.includes(id));}
 export function applyDaiVietName(unit){const p=DAI_VIET_CAST_BY_ID[unit.templateId??unit.id];if(p){unit.name=p.name;unit.portrait=p.portrait;unit.storyActorId=p.id;unit.canon='dai-viet';unit.skills=namedSkills(p.id,unit.skills);}return unit;}

@@ -1,3 +1,6 @@
+import {NPC_KITS7} from './NPCKits7.js';
+import {effectDescription,describeSkill7} from './CharacterKits7.js';
+import {STORY_ACTORS7} from './StoryActors7.js';
 import { deepFreeze } from './DataUtils.js';
 import { DAI_VIET_CAST_BY_ID } from './DaiVietCast.js';
 const records = [
@@ -48,12 +51,18 @@ const moves = {
 };
 export const NPC_MOVES = deepFreeze(moves);
 export function applyStoryIdentity(unit, npc) {
+  const actorId=npc.actorId??Object.values(DAI_VIET_CAST_BY_ID).find(p=>p.kind==='npc'&&p.assetId===npc.id)?.id;
+  if(actorId){Object.assign(unit,STORY_ACTORS7[actorId]??{});unit.storyActorId=actorId;unit.canon='dai-viet';}
   unit.characterId = npc.id; unit.portrait = npc.portrait; unit.name = npc.name;
   if (moves[npc.id]) {
+    unit.skills=structuredClone(NPC_KITS7[npc.id]);
     unit.skills.autoAttack = { ...unit.skills.autoAttack, id: `npc_${npc.id}_basic`, name: moves[npc.id][0] };
     unit.skills.ultimate = { ...unit.skills.ultimate, id: `npc_${npc.id}_ult`, name: moves[npc.id][1] };
+    unit.skills.autoAttack.description='Gây '+Math.round(unit.skills.autoAttack.dmgMultiplier*100)+'% '+(unit.skills.autoAttack.type==='physical'?'ngoại công':'nội công')+' lên địch gần nhất; nhận 15 nộ.';
+    unit.skills.autoAttack.icon='assets/images/skills7/npc_'+npc.id+'_basic.webp';
+    unit.skills.ultimate.icon='assets/images/skills7/npc_'+npc.id+'_ult.webp';
     const names = { stun: 'điểm huyệt', poison: 'độc', bleed: 'chảy máu', taunt: 'khiêu khích', shield: 'hộ thuẫn', melee_reflect: 'phản chấn', multi_hit: 'liên kích', area_damage: 'đánh vùng', row_damage: 'đánh theo hàng', blink: 'áp sát', execute: 'kết liễu', internal_injury: 'nội thương', attack_up: 'tăng công', dodge_up: 'né tránh', heal: 'hồi máu', heal_over_time: 'hồi máu dần', energy_restore: 'tiếp nội lực', piercing_projectiles: 'ám khí xuyên mục tiêu' };
     const effects = unit.skills.ultimate.effects.map(e => names[e.type]).filter(Boolean);
-    unit.skills.ultimate.description = `${moves[npc.id][1]} của ${npc.name}${effects.length ? ': ' + effects.join(', ') : '.'}`;
+    unit.skills.ultimate.description=describeSkill7(unit.skills.ultimate);
   }
 }

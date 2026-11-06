@@ -1,6 +1,7 @@
 import {gearRarity} from '../data/GearCatalog.js';
 import {EQUIPMENT_BY_ID} from '../data/EquipmentData.js';
 export function gearArtPath(item){
+ if(['thien_loi','tam_anh'].includes(item.setId))return 'assets/images/gear/'+item.setId+'_'+gearRarity(item).id+'_'+item.slot+'.webp';
  const family=item.setId==='thiet_ve'?'thiet_ve':item.setId==='thanh_tam'?'thanh_tam':item.setId==='phong_hanh'?'phong_hanh':['ThieuLam','CaiBang'].includes(item.sect)?'thiet_ve':['NgaMi','VoDang'].includes(item.sect)?'thanh_tam':'phong_hanh';
  return `assets/images/gear/${family}_${gearRarity(item).id}_${item.slot}.webp`;
 }

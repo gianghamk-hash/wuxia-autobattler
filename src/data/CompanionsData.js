@@ -1,3 +1,4 @@
+import {specializeRoster7} from './CharacterKits7.js';
 import { expandCompanions } from './NewCompanionsData.js';
 import {expandStoryCompanions} from './ExpansionCast.js';
 import { deepFreeze } from './DataUtils.js';
@@ -1427,7 +1428,7 @@ const ORIGINAL_COMPANIONS = [
     "statusEffects": []
   }
 ];
-export const COMPANIONS = deepFreeze(expandStoryCompanions(expandCompanions(ORIGINAL_COMPANIONS)));
+export const COMPANIONS = deepFreeze(specializeRoster7(expandStoryCompanions(expandCompanions(ORIGINAL_COMPANIONS))));
 
 export const ROLE_LABELS = deepFreeze({"Bruiser": "Đấu sĩ", "SubTank": "Đỡ đòn phụ", "Healer": "Hồi máu", "RangedDPS": "Sát thương tầm xa", "Tank": "Đỡ đòn", "Debuffer": "Suy yếu địch", "BurstMage": "Nội công bộc phát", "Assassin": "Thích khách", "Buffer": "Cường hóa", "Support": "Hỗ trợ", "DualDPS": "Song kiếm", "ReflectTank": "Đỡ đòn / Phản sát thương", "Poisoner": "Độc sát", "EvasionDPS": "Né tránh", "CrowdControl": "Khống chế", "Battery": "Tiếp nộ", "Disruptor": "Phá đội hình", "Finisher": "Kết liễu", "Wildcard": "Biến số"});
 export const COMPANIONS_BY_ID = deepFreeze(Object.fromEntries(COMPANIONS.map(unit => [unit.id, unit])));
