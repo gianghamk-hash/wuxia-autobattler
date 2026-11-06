@@ -45,7 +45,7 @@
  .quest-feature { position:relative; inset:auto; margin-top:auto; width:100%; height:auto; flex-shrink:0; display:grid; grid-template-columns:1fr; gap:10px; padding:16px; }
  .quest-seal { display:none; }
  .quest-actions { display:grid; grid-template-columns:1fr; width:100%; }
- .quest-actions button { width:100%; }
+ .quest-actions button { width:100%; min-height:48px; }
  .formation-cell { min-height:88px; padding:8px 3px; }
  .formation-cell .portrait { width:46px; height:58px; }
  .formation-cell>span:last-child { font-size:.76rem; overflow-wrap:anywhere; }
