@@ -1,3 +1,4 @@
+import { BOARD_ROWS, HOME_COLUMNS, ENEMY_COLUMNS, ROW_ORDER } from './BoardGeometry.js';
 import { Unit } from '../entities/Unit.js';
 import { Companion } from '../entities/Companion.js';
 import { NPCS_BY_ID, applyStoryIdentity } from '../data/NPCData.js';
@@ -80,12 +81,12 @@ export class MissionDirector {
         : enemy
           ? 'assets/images/mission-lock.svg'
           : 'assets/images/mission-cart.svg';
-      // Eight troops can leave only one enemy-side cell. Locks may use any
-      // remaining board cell; objects do not count toward the troop limit.
-      const cells = captive ? [4, 5, 3] : enemy ? [5, 4, 3, 2, 1, 0] : [0, 1, 2];
+      // Prefer the expanded enemy half, with remaining board cells as fallback.
+      // Objects do not count toward the troop limit.
+      const cells = captive ? ENEMY_COLUMNS : enemy ? [...ENEMY_COLUMNS,...HOME_COLUMNS.toReversed()] : HOME_COLUMNS;
       let position;
       for (const x of cells)
-        for (const y of [1, 0, 2])
+        for (const y of ROW_ORDER)
           if (!position && !combat.grid.at({ x, y })) position = { x, y };
       if (!position) throw Error('Không đủ ô cho mục tiêu nhiệm vụ.');
       combat.grid.place(asset, position, { formation: false });
@@ -191,8 +192,8 @@ export class MissionDirector {
             )
               break;
             let cell;
-            for (const x of [5, 4, 3])
-              for (const y of [0, 2, 1])
+            for (const x of ENEMY_COLUMNS)
+              for (const y of ROW_ORDER)
                 if (!cell && !c.grid.at({ x, y })) cell = { x, y };
             if (!cell) break;
             const unit = new Companion(original.templateId, {
@@ -253,7 +254,7 @@ export class MissionDirector {
       this.moveCredit += dt * npc.stats.moveSpeed;
       if (this.moveCredit < 1) return;
       this.moveCredit = 0;
-      const routes = [0, 1, 2]
+      const routes = ROW_ORDER
         .map((y) => c.grid.findPath(npc, { x: 0, y }))
         .filter((p) => p?.length)
         .sort((a, b) => a.length - b.length);
@@ -264,7 +265,7 @@ export class MissionDirector {
         // Approach the furthest reachable column toward safety before asking a blocker to yield.
         const partial = [];
         for (let x = 0; x < npc.gridPosition.x; x++)
-          for (let y = 0; y < 3; y++) {
+          for (let y = 0; y < BOARD_ROWS; y++) {
             const p = c.grid.findPath(npc, { x, y });
             if (p?.length) partial.push({ x, p });
           }
@@ -277,7 +278,7 @@ export class MissionDirector {
     }
   }
   clearEscortPath(npc) {
-    return this.yieldForPath(npc,()=>[0,1,2].some(y=>this.c.grid.findPath(npc,{x:npc.gridPosition.x-1,y})!==null),npc.id);
+    return this.yieldForPath(npc,()=>ROW_ORDER.some(y=>this.c.grid.findPath(npc,{x:npc.gridPosition.x-1,y})!==null),npc.id);
   }
   yieldForPath(actor,opensPath,targetId) {
     const c = this.c;

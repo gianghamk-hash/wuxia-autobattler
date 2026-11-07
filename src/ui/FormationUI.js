@@ -1,3 +1,4 @@
+import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import {roleTag} from './RoleTagUI.js';
 import {mountTeamEffects} from './TeamEffects.js';
 import {equipmentAura} from './GearArt.js';
@@ -11,9 +12,9 @@ export function moveFormation(formation, id, cell) {
     !Number.isInteger(cell.x) ||
     !Number.isInteger(cell.y) ||
     cell.x < 0 ||
-    cell.x > 2 ||
+    cell.x >= HOME_WIDTH ||
     cell.y < 0 ||
-    cell.y > 2
+    cell.y >= BOARD_ROWS
   )
     throw new Error('Ô xếp trận không hợp lệ.');
   const result = structuredClone(formation),
@@ -64,7 +65,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
     grid.setAttribute('role', 'group');
     grid.setAttribute(
       'aria-label',
-      'Xếp trận ba cột ba hàng, tiền tuyến bên phải'
+      'Xếp trận bốn cột bốn hàng, tiền tuyến bên phải'
     );
     const place = (cell) => {
       try {
@@ -74,8 +75,8 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
         onError(error.message);
       }
     };
-    for (let y = 0; y < 3; y++)
-      for (let x = 0; x < 3; x++) {
+    for (let y = 0; y < BOARD_ROWS; y++)
+      for (let x = 0; x < HOME_WIDTH; x++) {
         const unit = ids.find(
           (id) =>
             session.party.formation[id].x === x &&

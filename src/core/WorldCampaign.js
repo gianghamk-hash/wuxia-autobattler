@@ -1,3 +1,4 @@
+import { mirrorPosition } from '../combat/BoardGeometry.js';
 import {ENEMY_CELLS,strengthenEnemy,bossSequence} from '../combat/BattleRules6.js';
 import {earlyDungeonFactor} from '../combat/EarlyDungeon.js';
 import {campaignEnemyMultiplier} from '../combat/EnemyDifficulty.js';
@@ -69,7 +70,7 @@ function fromTeam(team, side, grid) {
       applyQigong(u, team.tactics.qigong);
       u.stats.hp = u.stats.maxHp;
     }
-    grid.place(u, side === 'home' ? p : { x: 5 - p.x, y: p.y });
+    grid.place(u, side === 'home' ? p : mirrorPosition(p));
   }
   return units;
 }

@@ -10,7 +10,7 @@ import { COMPANIONS_BY_ID } from '../src/data/CompanionsData.js';
 
 function enemy(id, x, y, grid) {
   const unit = new Companion('companion_05', { id, team: 'enemy' });
-  grid.place(unit, { x, y }); return unit;
+  grid.place(unit, { x, y }, { formation: false }); return unit;
 }
 function setup(sect = 'ThieuLam') {
   const grid = new GridSystem(), hero = new Hero(sect); grid.place(hero, { x: 1, y: 1 });
@@ -48,7 +48,7 @@ test('grid validates bounds, formation sides, collisions and duplicate IDs atomi
   grid.place(hero, { x: 0, y: 1 }); assert.equal(grid.distance(hero.gridPosition, { x: 3, y: 1 }), 3);
   assert.equal(grid.distance({ x: 0, y: 0 }, { x: 1, y: 1 }), 1);
   const old = { ...hero.gridPosition };
-  assert.throws(() => grid.place(hero, { x: 3, y: 1 }));
+  assert.throws(() => grid.place(hero, { x: 4, y: 1 }));
   assert.throws(() => grid.place(hero, { x: -1, y: 1 }));
   assert.throws(() => grid.place(hero, { x: .5, y: 1 }));
   assert.throws(() => grid.place(new Hero('CaiBang'), { x: 1, y: 1 }));
@@ -68,7 +68,7 @@ test('BFS avoids occupied cells and cannot cut blocked corners', () => {
 });
 test('a blocked route terminates; clearing dead blockers releases occupancy', () => {
   const grid = new GridSystem(), hero = new Hero('CaiBang'); grid.place(hero, { x: 1, y: 1 });
-  const wall = [0, 1, 2].map(y => { const u = new Companion('companion_01', { id: `wall${y}` }); grid.place(u, { x: 2, y }); return u; });
+  const wall = [0, 1, 2, 3].map(y => { const u = new Companion('companion_01', { id: `wall${y}` }); grid.place(u, { x: 2, y }); return u; });
   assert.equal(grid.findPath(hero, { x: 5, y: 1 }), null);
   wall[1].takeDamage(99999); grid.removeDead();
   assert.equal(wall[1].gridPosition, null); assert.equal(grid.units.has(wall[1].id), false);

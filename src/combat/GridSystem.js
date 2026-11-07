@@ -1,6 +1,7 @@
+import { HOME_WIDTH } from './BoardGeometry.js';
 import { CONFIG } from '../config.js';
 
-/** Global x=0..5, y=0..2. Chebyshev distance: diagonal melee reaches one cell.
+/** Global x=0..7, y=0..3. Chebyshev distance: diagonal melee reaches one cell.
  * BFS allows eight directions, with no cutting diagonally through blocked corners.
  */
 export class GridSystem {
@@ -10,7 +11,7 @@ export class GridSystem {
     if (!this.isInside(a) || !this.isInside(b)) throw new Error('Tọa độ ngoài bàn cờ.');
     return Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y));
   }
-  isHomeSide(team, p) { return this.isInside(p) && (team === 'home' ? p.x <= 2 : team === 'enemy' && p.x >= 3); }
+  isHomeSide(team, p) { return this.isInside(p) && (team === 'home' ? p.x < HOME_WIDTH : team === 'enemy' && p.x >= HOME_WIDTH); }
   at(p) { return [...this.units.values()].find(u => u.alive && u.gridPosition?.x === p?.x && u.gridPosition?.y === p?.y) ?? null; }
   place(unit, p, { formation = true } = {}) {
     if (!this.isInside(p) || !unit?.alive || !['home', 'enemy'].includes(unit.team)) throw new Error('Không thể đặt nhân vật vào ô này.');

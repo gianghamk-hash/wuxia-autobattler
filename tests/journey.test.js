@@ -175,9 +175,9 @@ test('all five bond techniques apply their actual single-slot combat tradeoffs',
     applyBondVariant(actor, 'variant');
     enemy.stats.dodgeRate = 0;
     actor.stats.critRate = 0;
-    grid.place(actor, { x: 1, y: 1 });
-    grid.place(ally, { x: 2, y: 1 });
-    grid.place(enemy, { x: 3, y: 1 });
+    grid.place(actor, { x: 1, y: 1 }, { formation: false });
+    grid.place(ally, { x: 2, y: 1 }, { formation: false });
+    grid.place(enemy, { x: 3, y: 1 }, { formation: false });
     const battle = new CombatEngine({ units: [actor, ally, enemy], grid });
     battle.start();
     ally.stats.hp *= 0.5;
@@ -208,7 +208,7 @@ test('all five bond techniques apply their actual single-slot combat tradeoffs',
     }
     if (id === 'companion_08') {
       assert.ok(enemy.stats.hp < enemyHp);
-      assert.equal(enemy.gridPosition.x, 5);
+      assert.equal(enemy.gridPosition.x, 7);
       assert.deepEqual(actor.gridPosition, { x: 1, y: 1 });
     }
   }

@@ -35,6 +35,7 @@ export function actionKey({id='',text='',view,close,scale,focus,skill,attribute,
   return 'arrow';
 }
 export function decorateAction(element) {
+  if(element.hasAttribute('data-ready-cell'))return; // Transparent board hit areas are not labeled action buttons.
   const isSummary=element.tagName==='SUMMARY';
   const key=actionKey({id:element.id,text:element.getAttribute('aria-label')??element.textContent,view:element.dataset.view,close:element.dataset.closeSheet,scale:element.dataset.scale,focus:element.dataset.focus,skill:element.dataset.skillId,attribute:element.dataset.attribute,buy:element.dataset.buy,explicit:element.dataset.uiIcon});
   if(element.dataset.closeSheet&&element.textContent.trim()==='×')for(const child of [...element.childNodes])if(child.nodeType===3)child.remove();

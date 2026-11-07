@@ -41,9 +41,9 @@ test('canonical side recruitment cannot bypass the story/gacha ownership rules',
 
 test('equipment draws spend atomically, retain independent pity, and meet both real guarantees',()=>{
  const s=at(),before=structuredClone(s);assert.equal(GEAR_RARITIES.reduce((sum,r)=>sum+r.rate,0),100);assert.equal(NEW_GEAR.length,80);
- const ten=drawEquipment(s,5,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-200+ten.refund);assert.equal(ten.refund,128);assert.equal(ten.results.length,5);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'common');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
+ const ten=drawEquipment(s,5,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-400+ten.refund);assert.equal(ten.refund,256);assert.equal(ten.results.length,5);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'common');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
  let next=s;for(let i=0;i<50;i++)next=drawEquipment(next,1,{random:()=>0,now:i}).session;assert.equal(NEW_GEAR.find(e=>e.id===next.loot.history.at(-1).id).rarity,'exceptional');validateLoot(next.loot);
- assert.throws(()=>drawEquipment(s,5,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=44;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
+ assert.throws(()=>drawEquipment(s,5,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=89;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
  const bad=structuredClone(next);bad.loot.sinceExceptional=50;assert.throws(()=>validateCampaign(bad));
 });
 test('sets activate actual two/three-slot bonuses across rarities without counting spare copies or leaking stats after removal',()=>{

@@ -59,8 +59,8 @@ function fixture(id, offset = 0) {
     u.stats.maxHp = 10000;
     u.stats.hp = 10000;
   }
-  grid.place(hero, { x: 2, y: 1 });
-  grid.place(enemy, { x: 5, y: 2 });
+  grid.place(hero, { x: 2, y: 1 }, { formation: false });
+  grid.place(enemy, { x: 5, y: 2 }, { formation: false });
   const battle = new CombatEngine({
     units: [hero, enemy],
     grid,

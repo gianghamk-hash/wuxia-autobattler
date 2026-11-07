@@ -1,3 +1,4 @@
+import { BOARD_COLS, BOARD_ROWS, HOME_WIDTH } from '../combat/BoardGeometry.js';
 import { bus, EVT } from '../core/EventBus.js';
 import { CombatEngine } from '../combat/CombatEngine.js';
 import { Hero } from '../entities/Hero.js';
@@ -20,7 +21,7 @@ export function mountTacticsUI({ engine }) {
   Object.values(SECTS).forEach(sect => option(heroSelect, sect.id, sect.name));
   for (const unit of COMPANIONS) { option(ally1, unit.id, unit.name); option(ally2, unit.id, unit.name); }
   heroSelect.value = 'VoDang'; ally1.value = 'companion_01'; ally2.value = 'companion_03';
-  for (let y = 0; y < 3; y++) for (let x = 0; x < 6; x++) option(cellSelect, `${x},${y}`, `(${x}, ${y}) · ${x < 3 ? 'Sân nhà' : 'Sân địch'}`);
+  for (let y = 0; y < BOARD_ROWS; y++) for (let x = 0; x < BOARD_COLS; x++) option(cellSelect, `${x},${y}`, `(${x}, ${y}) · ${x < HOME_WIDTH ? 'Sân nhà' : 'Sân địch'}`);
   cellSelect.value = '1,1'; strategy.value = 'role';
   let grid, units, selectedId = 'hero', orders = new Map(), infoTime = 0;
   let combat = null, floating = [], savedBuild = null;
@@ -86,7 +87,7 @@ export function mountTacticsUI({ engine }) {
       new Companion('companion_08', { id: 'enemy_03', team: 'enemy' })];
     nextUnits[3].name = 'Địch đỡ đòn'; nextUnits[4].name = 'Địch hậu tuyến'; nextUnits[5].name = 'Địch ít máu';
     nextUnits[3].stats.hp *= .8; nextUnits[5].stats.hp *= .25;
-    const positions = [{ x: 1, y: 1 }, { x: 2, y: 0 }, { x: 0, y: 2 }, { x: 3, y: 1 }, { x: 5, y: 0 }, { x: 4, y: 2 }];
+    const positions = [{ x: 1, y: 1 }, { x: 2, y: 0 }, { x: 0, y: 2 }, { x: 4, y: 1 }, { x: 7, y: 0 }, { x: 6, y: 3 }];
     nextUnits.forEach((unit, i) => nextGrid.place(unit, positions[i]));
     combat?.abort(); combat = null; floating = [];
     el('battle-result').textContent = 'Sẵn sàng khai chiến · Trận thử không nhận thưởng hay thay đổi cốt truyện.';

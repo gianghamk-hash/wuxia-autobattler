@@ -19,8 +19,8 @@ function fixture(id = 'doi_truong') {
     u.stats.maxHp = 100000;
     u.stats.hp = 100000;
   }
-  grid.place(hero, { x: 2, y: 1 });
-  grid.place(boss, { x: 3, y: 1 });
+  grid.place(hero, { x: 2, y: 1 }, { formation: false });
+  grid.place(boss, { x: 3, y: 1 }, { formation: false });
   const battle = new CombatEngine({
     units: [hero, boss],
     grid,
@@ -138,13 +138,13 @@ test('endgame pressure is symmetric, gradual and optional; damage, healing and d
 test('blocked teammates can yield one legal cell without crossing enemies, overlap, root or windup', () => {
   const grid = new GridSystem(),
     hero = new Hero('CaiBang'),
-    friends = [0, 1, 2].map(
+    friends = [0, 1, 2, 3].map(
       (i) => new Companion('companion_01', { id: 'friend' + i })
     ),
     enemy = new Companion('companion_01', { id: 'enemy', team: 'enemy' });
-  grid.place(hero, { x: 0, y: 1 });
-  friends.forEach((u, i) => grid.place(u, { x: 1, y: i }));
-  grid.place(enemy, { x: 3, y: 1 });
+  grid.place(hero, { x: 0, y: 1 }, { formation: false });
+  friends.forEach((u, i) => grid.place(u, { x: 1, y: i }, { formation: false }));
+  grid.place(enemy, { x: 3, y: 1 }, { formation: false });
   const b = new CombatEngine({ units: [hero, ...friends, enemy], grid });
   b.start();
   assert.equal(grid.pathToRange(hero, enemy, 1), null);
@@ -184,7 +184,7 @@ test('coach uses recorded facts and does not assign unsupported causes to defeat
   assert.ok(notes.some((n) => n.includes('5/10')));
   assert.ok(
     formationAdvice([
-      { role: 'Healer', name: 'Y', position: { x: 2, y: 1 } }
+      { role: 'Healer', name: 'Y', position: { x: 3, y: 1 } }
     ]).some((n) => n.includes('tuyến trước'))
   );
 });

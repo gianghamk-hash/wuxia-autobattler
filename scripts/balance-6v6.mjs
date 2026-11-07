@@ -1,3 +1,4 @@
+import { mirrorPosition } from '../src/combat/BoardGeometry.js';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -64,7 +65,7 @@ export function makeSquad(squad, scenario, side, grid) {
   for (let i = 0; i < units.length; i++) {
     const unit = units[i], cell = cells[squad.order[i]];
     unit.team = side; unit.id = `${side}_${i}`;
-    grid.place(unit, side === 'home' ? cell : { x: 5 - cell.x, y: cell.y });
+    grid.place(unit, side === 'home' ? cell : mirrorPosition(cell));
   }
   return units;
 }

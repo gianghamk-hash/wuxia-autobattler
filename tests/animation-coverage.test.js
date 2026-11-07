@@ -25,8 +25,8 @@ test('actual cast events for all companions, hero schools and NPC signatures res
  const units=[...COMPANIONS.map(c=>new Companion(c.id)),...[null,'ThieuLam','VoDang','CaiBang','NgaMi','DuongMon'].map(s=>new Hero(s))];
  for(const id of ['quan_chu','doi_truong','doc_le','kha_van','do_mau','trinh_nghiem','tay_sai']){const u=new Companion('companion_05');applyStoryIdentity(u,NPCS_BY_ID[id]);units.push(u);}
  for(const actor of units)for(const [key,skill]of Object.entries(actor.skills)){
-  const grid=new GridSystem(),enemy=new Companion('companion_05',{id:'target',team:'enemy'});grid.place(actor,{x:2,y:1});grid.place(enemy,{x:3,y:1});enemy.stats.maxHp=enemy.stats.hp=100000;actor.stats.hp*=.5;
-  const ally=new Hero('VoDang',{id:'ally'});grid.place(ally,{x:1,y:1});ally.stats.hp*=.5;
+  const grid=new GridSystem(),enemy=new Companion('companion_05',{id:'target',team:'enemy'});grid.place(actor,{x:2,y:1}, { formation: false });grid.place(enemy,{x:3,y:1}, { formation: false });enemy.stats.maxHp=enemy.stats.hp=100000;actor.stats.hp*=.5;
+  const ally=new Hero('VoDang',{id:'ally'});grid.place(ally,{x:1,y:1}, { formation: false });ally.stats.hp*=.5;
   const events=[];const battle=new CombatEngine({units:[actor,ally,enemy],grid,seed:72,onEvent:e=>events.push(e)});battle.start();if(skill.targetType==='stunned_ally')battle.statuses.apply(ally,{type:'stun',duration:3,sourceId:enemy.id});const target=battle.chooseTarget(actor,skill,false);assert.ok(target,skill.id);battle.resolveSkill(actor,target,skill,key==='ultimate');
   const cast=events.find(e=>e.type==='skill:cast'&&e.actorId===actor.id);assert.ok(cast,skill.id);const profile=getSkillVisual(cast);assert.ok(profile?.image,skill.id);assert.ok(existsSync(profile.image),skill.id);
  }

@@ -253,8 +253,8 @@ test('boss warnings, focus controls, falling frames and reduced-motion battle ar
       u.stats.physicalAtk = 0;
       u.stats.magicalAtk = 0;
     }
-    grid.place(home, { x: 2, y: 1 });
-    grid.place(boss, { x: 3, y: 1 });
+    grid.place(home, { x: 2, y: 1 }, { formation: false });
+    grid.place(boss, { x: 3, y: 1 }, { formation: false });
     const battle = new CombatEngine({
       units: [home, boss],
       grid,
@@ -403,7 +403,7 @@ test('real six versus six battle produces a motion review clip with independent 
         applyStoryIdentity(team[5], NPCS_BY_ID.trinh_nghiem);
       team.forEach((u, i) => {
         const p = { x: i < 3 ? 2 : 1, y: i % 3 };
-        grid.place(u, side === 'home' ? p : { x: 5 - p.x, y: p.y });
+        grid.place(u, side === 'home' ? p : { x: 5 - p.x, y: p.y }, { formation: false });
         units.push(u);
       });
     }

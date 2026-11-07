@@ -1,3 +1,4 @@
+import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import { validateRanks } from '../data/ProgressionBalance.js';
 import {storyRecruit7,STORY_RECRUITS7} from '../data/Recruitment7.js';
 import {entryMethods} from './DungeonEntries.js';
@@ -102,8 +103,8 @@ function setFormation(session) {
       next[id] = { ...desired };
       occupied.add(key);
     } else
-      for (let x = 2; x >= 0 && !next[id]; x--)
-        for (let y = 0; y < 3 && !next[id]; y++)
+      for (let x = HOME_WIDTH-1; x >= 0 && !next[id]; x--)
+        for (let y = 0; y < BOARD_ROWS && !next[id]; y++)
           if (!occupied.has(`${x},${y}`)) {
             next[id] = { x, y };
             occupied.add(`${x},${y}`);
@@ -256,9 +257,9 @@ export function validateCampaign(session) {
       !Number.isInteger(p.x) ||
       !Number.isInteger(p.y) ||
       p.x < 0 ||
-      p.x > 2 ||
+      p.x >= HOME_WIDTH ||
       p.y < 0 ||
-      p.y > 2 ||
+      p.y >= BOARD_ROWS ||
       occupied.has(`${p.x},${p.y}`)
     )
       fail('Vị trí đội hình bị trùng hoặc ngoài sân.');

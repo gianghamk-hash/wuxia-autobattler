@@ -1,3 +1,4 @@
+import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import { fishingReward } from './Fishing.js';
 import { gainExperience } from '../entities/HeroBuild.js';
 import { validateRanks } from '../data/ProgressionBalance.js';
@@ -145,8 +146,8 @@ export function validateTeam(team) {
     const p = team.formation[id];
     if (
       !p ||
-      !integer(p.x, 2) ||
-      !integer(p.y, 2) ||
+      !integer(p.x, HOME_WIDTH-1) ||
+      !integer(p.y, BOARD_ROWS-1) ||
       occupied.has(`${p.x},${p.y}`)
     )
       fail('Ô đội hình bị trùng hoặc ngoài sân.');

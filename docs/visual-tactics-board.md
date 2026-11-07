@@ -1,0 +1,10 @@
+# Visual tactics and expanded battlefield
+
+- The ready screen renders the actual CombatEngine units with the same BattleRenderer, fighter atlases, auras, environment and positions as the live fight. It does not simulate or reroll anything.
+- Select an allied fighter, then tap a cell to move/swap; desktop also supports drag/drop. Enemy cells select the comparison target. The map has accessible cell buttons and a compact selected-fighter panel; longer elemental/synergy details are closed by default.
+- Green ▲ +N% and red ▼ −N% appear over fighters in both readiness and live combat. They follow the current hostile target (nearest hostile fallback before targeting), elemental counters, current attack buffs and team/preparation damage modifiers. Percentages are relative to that fighter's intrinsic neutral damage, excluding random crit/dodge and the fighter's built-in balance coefficient. Healing/objective/dead units are omitted. Rendering consumes no combat RNG.
+- Board size is 8 columns × 4 rows, with 4×4 deployment space per side. BoardGeometry centralizes sides, mirroring, spawn cells and visual projection sizes. Movement, waves, summons, knockback, rescue routing, formation controls and save validators use the expanded limits.
+- Existing 3×3 home coordinates remain valid without moving the player’s saved units. Schema v1 remains; new corner positions survive save, resume, tower squad and shared-team round trips.
+- Companion draws now cost 70 / 300 silver for 1 / 5 results. Equipment draws cost 90 / 400. Rates, pity and historical refunds are preserved.
+
+Validation includes full Node regressions, actual decoded fighter models at 320/390/1280px, canvas checks for both indicator colors/numbers and target changes, frozen readiness time, interactive movement into the new corner, IndexedDB reload/resume, and save/share compatibility. Combat-skill fixtures explicitly permit mid-fight placement across either half; dedicated grid tests still reject deployment on the wrong side.

@@ -42,8 +42,8 @@ export const RARITIES = deepFreeze([
   }
 ]);
 export const GACHA = deepFreeze({
-  singleCost: 35,
-  tenCost: 150,
+  singleCost: 70,
+  tenCost: 300,
   epicPity: 10,
   legendaryPity: 80,
   historyLimit: 50

@@ -40,7 +40,7 @@ test('balanced ultimate shields its caster exactly once, never the enemy; all fi
  for(const sect of ['ThieuLam','VoDang','CaiBang','NgaMi','DuongMon']){
   let profile=createHeroBuild({sect,level:20});for(let tier=1;tier<=4;tier++)profile=allocateSkill(profile,`${sect}_t${tier}_balanced`,[]);
   assert.throws(()=>allocateSkill(profile,`${sect}_t4_attack`,[]));
-  const hero=new Hero(sect,{profile}),enemy=new Companion('companion_06',{id:'enemy',team:'enemy',level:20}),grid=new GridSystem();grid.place(hero,{x:2,y:1});grid.place(enemy,{x:3,y:1});const battle=new CombatEngine({units:[hero,enemy],grid,seed:12});
+  const hero=new Hero(sect,{profile}),enemy=new Companion('companion_06',{id:'enemy',team:'enemy',level:20}),grid=new GridSystem();grid.place(hero,{x:2,y:1}, { formation: false });grid.place(enemy,{x:3,y:1}, { formation: false });const battle=new CombatEngine({units:[hero,enemy],grid,seed:12});
   hero.stats.energy=100;const before=hero.shield;battle.resolveSkill(hero,enemy,hero.skills.ultimate,true);assert.ok(hero.shield>=before+hero.stats.maxHp*.2-1);assert.equal(enemy.shield,0);
  }
 });

@@ -1,3 +1,5 @@
+import { BOARD_COLS, BOARD_ROWS, HOME_WIDTH, CELL_WIDTH, CELL_HEIGHT, boardLayout } from '../combat/BoardGeometry.js';
+import { damageIndicator } from '../combat/DamageIndicator.js';
 import { milestone, AURA_COLORS } from '../data/ProgressionBalance.js';
 import {equipmentAura} from './GearArt.js';
 import {portraitURL} from '../data/ArtURLs.js';
@@ -27,10 +29,11 @@ function rounded(ctx, x, y, width, height, radius = 5) {
   ctx.quadraticCurveTo(x, y, x + r, y);
   ctx.closePath();
 }
-/** Visual projection only: combat still uses the original six-column tactical grid. */
+/** Visual projection only: uses the same expanded 8×4 tactical grid as deployment. */
 export class BattleRenderer {
   constructor(canvas) {
     this.canvas = canvas;
+    this.damageIndicators = new Map();
     this.ctx = canvas.getContext('2d');
     if (!this.ctx) throw new Error('Trình duyệt không hỗ trợ Canvas 2D.');
     this.battle = null;
@@ -39,8 +42,8 @@ export class BattleRenderer {
     this.effects = [];
     this.skillEffects = [];
     this.portrait = false;
-    this.width = 960;
-    this.height = 540;
+    this.width = 1260;
+    this.height = 680;
     this.companionImages = new Map();
     this.fighters = new Map();
     this.poses = new Map();
@@ -127,8 +130,7 @@ export class BattleRenderer {
   resize() {
     const cssWidth = this.canvas.getBoundingClientRect().width || 960;
     this.portrait = cssWidth < 600;
-    this.width = this.portrait ? 600 : 960;
-    this.height = this.portrait ? 800 : 540;
+    Object.assign(this,boardLayout(this.portrait));
     this.canvas.style.aspectRatio = `${this.width} / ${this.height}`;
     const scale =
       (Math.min(globalThis.devicePixelRatio || 1, 3) * cssWidth) / this.width;
@@ -147,10 +149,10 @@ export class BattleRenderer {
   project(position) {
     return this.portrait
       ? {
-          x: 30 + (position.y + 0.5) * 180,
-          y: 69 + (5 - position.x + 0.5) * 110
+          x: 30 + (position.y + 0.5) * CELL_WIDTH,
+          y: 69 + (BOARD_COLS - 1 - position.x + 0.5) * CELL_HEIGHT
         }
-      : { x: 30 + (position.x + 0.5) * 150, y: 72 + (position.y + 0.5) * 130 };
+      : { x: 30 + (position.x + 0.5) * CELL_WIDTH, y: 72 + (position.y + 0.5) * CELL_HEIGHT };
   }
   drawBoard() {
     if (this.backdrop) return this.backdrop;
@@ -180,19 +182,19 @@ export class BattleRenderer {
       ctx.globalAlpha = 1;
     }
     ctx.lineWidth = 1;
-    for (let col = 0; col < 6; col++)
-      for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < BOARD_COLS; col++)
+      for (let row = 0; row < BOARD_ROWS; row++) {
         const center = this.project({ x: col, y: row }),
-          w = this.portrait ? 180 : 150,
-          h = this.portrait ? 110 : 130;
+          w = CELL_WIDTH,
+          h = CELL_HEIGHT;
         const x = center.x - w / 2 + 3,
           y = center.y - h / 2 + 3;
         rounded(ctx, x, y + 3, w - 6, h - 6, 7);
         ctx.fillStyle = '#09292766';
         ctx.fill();
         const slab = ctx.createLinearGradient(x, y, x, y + h);
-        slab.addColorStop(0, col < 3 ? '#71948045' : '#ab91714a');
-        slab.addColorStop(1, col < 3 ? '#345a4b77' : '#5e504a66');
+        slab.addColorStop(0, col < HOME_WIDTH ? '#71948045' : '#ab91714a');
+        slab.addColorStop(1, col < HOME_WIDTH ? '#345a4b77' : '#5e504a66');
         rounded(ctx, x, y, w - 6, h - 8, 7);
         ctx.fillStyle = slab;
         ctx.fill();
@@ -207,11 +209,11 @@ export class BattleRenderer {
     ctx.setLineDash([4, 7]);
     ctx.beginPath();
     if (this.portrait) {
-      ctx.moveTo(38, 398);
-      ctx.lineTo(562, 398);
+      ctx.moveTo(38, 69 + HOME_WIDTH * CELL_HEIGHT);
+      ctx.lineTo(this.width-38, 69 + HOME_WIDTH * CELL_HEIGHT);
     } else {
-      ctx.moveTo(480, 82);
-      ctx.lineTo(480, 450);
+      ctx.moveTo(30 + HOME_WIDTH * CELL_WIDTH, 82);
+      ctx.lineTo(30 + HOME_WIDTH * CELL_WIDTH, this.height-70);
     }
     ctx.stroke();
     ctx.setLineDash([]);
@@ -219,14 +221,14 @@ export class BattleRenderer {
     ctx.font = '600 15px Georgia, serif';
     ctx.fillStyle = '#f7d0ad';
     if (this.portrait) {
-      ctx.fillText('ĐỐI THỦ', 300, 32);
+      ctx.fillText('ĐỐI THỦ', this.width/2, 32);
       ctx.fillStyle = '#c1edcf';
-      ctx.fillText('ĐỘI NHÀ', 300, 768);
+      ctx.fillText('ĐỘI NHÀ', this.width/2, this.height-32);
     } else {
       ctx.fillStyle = '#c1edcf';
-      ctx.fillText('ĐỘI NHÀ', 170, 32);
+      ctx.fillText('ĐỘI NHÀ', this.width/4, 32);
       ctx.fillStyle = '#f7d0ad';
-      ctx.fillText('ĐỐI THỦ', 790, 32);
+      ctx.fillText('ĐỐI THỦ', this.width*3/4, 32);
     }
     ctx.font = 'italic 12px Georgia, serif';
     ctx.fillStyle = '#e8d3a4';
@@ -250,6 +252,7 @@ export class BattleRenderer {
     }
     ctx.drawImage(this.drawBoard(), 0, 0);
     if (!this.battle) return;
+    this.damageIndicators.clear();
     for (const unit of this.battle.units.filter(
       (u) => u.alive && u.gridPosition
     )) {
@@ -378,21 +381,32 @@ export class BattleRenderer {
         rounded(ctx, p.x - w * 0.7, top - 5, w * 1.4, h + 10, 8);
         ctx.stroke();
       }
+      const enemyIntent=unit.team==='enemy'?battleIntent(this.battle,unit):null;
+      const importantIntent=enemyIntent&&['Chuẩn bị','Hồi máu','Hỗ trợ','Tuyệt kỹ','Giữ chân'].includes(enemyIntent.short);
+      const indicator=damageIndicator(this.battle,unit,unit.team==='home'?this.previewOpponentId:this.previewHomeId);
+      if(indicator){
+        this.damageIndicators.set(unit.id,indicator);
+        const text=(indicator.percent>0?'▲ +':'▼ ')+indicator.percent+'%';
+        ctx.save();ctx.font='bold '+(this.portrait?20:16)+'px system-ui';ctx.textAlign='center';
+        const badgeWidth=ctx.measureText(text).width+14,badgeX=p.x-(importantIntent?24:0);
+        rounded(ctx,badgeX-badgeWidth/2,top-35,badgeWidth,26,7);ctx.fillStyle='#071d24ef';ctx.fill();
+        ctx.fillStyle=indicator.kind==='up'?'#70ffa3':'#ff7585';ctx.fillText(text,badgeX,top-16);ctx.restore();
+      }
       const labelY = p.y + (this.portrait ? 34 : 43);
       if(unit.team==='enemy') {
-        const intent=battleIntent(this.battle,unit);
+        const intent=enemyIntent;
         if(['Chuẩn bị','Hồi máu','Hỗ trợ','Tuyệt kỹ','Giữ chân'].includes(intent.short)) {
-          ctx.font='600 11px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102c31';ctx.strokeText(intent.short,p.x,top-7);
-          ctx.fillStyle='#ffe4ae';ctx.fillText(intent.short,p.x,top-7);
+          ctx.font='600 11px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102c31';ctx.strokeText(intent.short,p.x+(indicator?50:0),top-(indicator?16:7),indicator?44:140);
+          ctx.fillStyle='#ffe4ae';ctx.fillText(intent.short,p.x+(indicator?50:0),top-(indicator?16:7),indicator?44:140);
         }
       }
       ctx.font = '600 12px system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.lineWidth = 3;
       ctx.strokeStyle = '#102c31';
-      ctx.strokeText(unit.name, p.x, labelY, this.portrait ? 166 : 140);
+      ctx.strokeText(unit.name, p.x, labelY, 142);
       ctx.fillStyle = '#fff2d6';
-      ctx.fillText(unit.name, p.x, labelY, this.portrait ? 166 : 140);
+      ctx.fillText(unit.name, p.x, labelY, 142);
       const barWidth = this.portrait ? 92 : 94,
         barX = p.x - barWidth / 2,
         barY = labelY + 6;

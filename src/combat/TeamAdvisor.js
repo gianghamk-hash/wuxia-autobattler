@@ -1,7 +1,8 @@
+import { HOME_WIDTH } from './BoardGeometry.js';
 /** Descriptive observations, never a claim that one change guarantees a win. */
 export function formationAdvice(members) {
   const notes = [];
-  const front = members.filter((u) => u.position?.x === 2);
+  const front = members.filter((u) => u.position?.x === HOME_WIDTH-1);
   if (!front.length)
     notes.push(
       'Tuyến trước đang trống. Có thể đặt người chịu đòn ở cột sát đối thủ.'
