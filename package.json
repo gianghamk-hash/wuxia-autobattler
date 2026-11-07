@@ -8,7 +8,8 @@
     "serve": "python3 -m http.server 8000",
     "balance": "node scripts/balance.mjs reports/balance-current.json",
     "balance:6v6": "node scripts/balance-6v6.mjs",
-    "balance:audit": "node scripts/balance-lab/audit.mjs"
+    "balance:audit": "node scripts/balance-lab/audit.mjs",
+    "balance:matched": "node scripts/balance-lab/matched.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
