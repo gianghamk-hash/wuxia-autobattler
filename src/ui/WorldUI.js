@@ -69,6 +69,9 @@ export function mountWorldUI(app) {
   const roadsideShop=el('roadside-shop');roadsideShop.remove();
   let tab = 'shop',
     roomOption = 0,
+    bauSelection = 'bau',
+    bauStake = '10',
+    bauResult = null,
     inspectedId = null;
   const run = (action) =>
     app.run(() => {
@@ -412,7 +415,7 @@ export function mountWorldUI(app) {
       );
       daily.append(
         button(
-          `Điểm danh · chuỗi ${w.daily.streak} ngày`,
+          `Điểm danh · chuỗi ${w.daily.streak} ngày · Thưởng x3`,
           () => action('checkin'),
           w.daily.checkIn >= calendar(app.model.now()).day
         )
@@ -421,7 +424,7 @@ export function mountWorldUI(app) {
         const board = task.id.startsWith('daily') ? w.daily : w.weekly;
         daily.append(
           button(
-            `${task.label}: ${board[task.metric]}/${task.target} · ${task.silver} bạc${board.claimed.includes(task.id) ? ' · Đã nhận' : ''}`,
+            `${task.label}: ${board[task.metric]}/${task.target} · ${task.silver * 3} bạc (x3)${board.claimed.includes(task.id) ? ' · Đã nhận' : ''}`,
             () => action('claim', task.id),
             board.claimed.includes(task.id) || board[task.metric] < task.target
           )
@@ -704,10 +707,61 @@ export function mountWorldUI(app) {
       root.append(p);
       return;
     }
-    const bau=panel('Bầu Cua · bạc giang hồ','Đặt 5 bạc ảo/lượt, tối đa 3 lượt/ngày. Trúng một mặt trả 10 bạc. Không đổi ra tiền thật.');
-    bau.append(n('p','Còn '+(3-(w.daily.bauCua??0))+'/3 lượt hôm nay · Bạc: '+count(s,'silver'),'hint'));
-    for(const [face,label] of [['bau','🎃 Bầu'],['cua','🦀 Cua'],['tom','🦐 Tôm'],['ca','🐟 Cá'],['ga','🐓 Gà'],['nai','🦌 Nai']])
-      bau.append(button(label+' · 5 bạc',()=>action('bau_cua',face),(w.daily.bauCua??0)>=3||count(s,'silver')<5));
+    const faces=[['bau','🎃','Bầu'],['cua','🦀','Cua'],['tom','🦐','Tôm'],['ca','🐟','Cá'],['ga','🐓','Gà'],['nai','🦌','Nai']];
+    const faceMap=Object.fromEntries(faces.map(([id,emoji])=>[id,emoji]));
+    const wallet=count(s,'silver'),maxStake=Math.min(wallet,Math.floor(Number.MAX_SAFE_INTEGER/6));
+    const bau=panel('Bầu Cua · vận may giang hồ','Đặt số bạc tùy ý trong túi. Trúng 1/2/3 mặt nhận 2x/4x/6x tiền cược; nếu không trúng sẽ mất cược. Tối đa 3 lượt/ngày, chỉ dùng bạc ảo.');
+    bau.classList.add('dungeon-gamble');
+    const banner=n('div',undefined,'dungeon-gamble-banner');
+    const bannerImage=n('img');bannerImage.src='assets/images/scenes/willow_ferry.webp';bannerImage.alt='Bến sông giang hồ';bannerImage.loading='lazy';banner.append(bannerImage,n('span','🎲 BẦU CUA · VẬN MAY'));
+    bau.prepend(banner);
+    bau.append(n('p','Còn '+Math.max(0,3-(w.daily.bauCua??0))+'/3 lượt hôm nay · Bạc hiện có: '+wallet.toLocaleString('vi-VN'),'hint'));
+    const faceGrid=n('div',undefined,'bau-face-grid');
+    for(const [id,emoji,label] of faces){
+      const pick=button(emoji+' '+label,()=>{
+        bauSelection=id;
+        faceGrid.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.bauFace===id)));
+      });
+      pick.dataset.bauFace=id;pick.dataset.uiIcon='coin';
+      pick.setAttribute('aria-pressed',String(bauSelection===id));
+      faceGrid.append(pick);
+    }
+    bau.append(faceGrid);
+    const stakeRow=n('div',undefined,'bau-stake-row'),stakeLabel=n('label','Số bạc đặt cược');
+    const stakeInput=n('input');stakeInput.type='number';stakeInput.min='1';stakeInput.max=String(maxStake);stakeInput.step='1';stakeInput.value=bauStake;stakeInput.id='bau-stake';stakeInput.setAttribute('inputmode','numeric');
+    stakeInput.addEventListener('input',()=>{bauStake=stakeInput.value;});
+    stakeLabel.htmlFor='bau-stake';stakeRow.append(stakeLabel,stakeInput);bau.append(stakeRow);
+    const quick=n('div',undefined,'bau-quick-stakes');
+    for(const [value,label] of [[10,'10'],[50,'50'],[100,'100'],[500,'500'],[maxStake,'MAX']]){
+      const b=button(label,()=>{bauStake=String(value);stakeInput.value=bauStake;},value<1||value>maxStake);
+      b.dataset.bauQuick=label;quick.append(b);
+    }
+    bau.append(quick);
+    const play=button('🎲 Lắc Bầu Cua',()=>{
+      const stake=Number(bauStake);
+      const result=action('bau_cua',{face:bauSelection,stake});
+      if(typeof result==='string'){
+        const match=result.match(/^Bầu Cua: ([a-z,]+); chọn ([a-z]+); cược (\\d+); trúng (\\d+); thưởng (\\d+); lãi (-?\\d+)\\.$/);
+        if(match)bauResult={rolls:match[1].split(','),face:match[2],stake:Number(match[3]),hits:Number(match[4]),payout:Number(match[5]),net:Number(match[6])};
+        renderDungeon();
+      }
+    },(w.daily.bauCua??0)>=3||wallet<1);
+    play.dataset.bauPlay='true';play.dataset.uiIcon='coin';bau.append(play);
+    if(bauResult){
+      const resultBox=n('section',undefined,'bau-outcome');
+      resultBox.setAttribute('role','status');resultBox.setAttribute('aria-live','polite');
+      resultBox.append(n('h3',bauResult.hits?'🎉 Trúng '+bauResult.hits+' mặt!':'Chưa trúng lần này'));
+      const dice=n('div',undefined,'bau-dice');
+      for(const rolled of bauResult.rolls){
+        const die=n('span',faceMap[rolled]??'🎲','bau-die');
+        die.dataset.winning=String(rolled===bauResult.face);die.title=faces.find(x=>x[0]===rolled)?.[2]??rolled;
+        dice.append(die);
+      }
+      resultBox.append(dice);
+      resultBox.append(n('p','Cược: '+bauResult.stake.toLocaleString('vi-VN')+' bạc · Trả thưởng: '+bauResult.payout.toLocaleString('vi-VN')+' bạc ('+(bauResult.hits*2)+'x)'));
+      const net=n('strong',(bauResult.net>=0?'+':'')+bauResult.net.toLocaleString('vi-VN')+' bạc','bau-net');
+      net.dataset.positive=String(bauResult.net>=0);resultBox.append(net);bau.append(resultBox);
+    }
     root.append(bau);
     const week = calendar(app.model.now()).week,
       featured = DUNGEONS[((week % 5) + 5) % 5];
@@ -719,31 +773,27 @@ export function mountWorldUI(app) {
       )
     );
     root.append(n('p','Mỗi bí cảnh có 2 lượt/ngày. Thường và tuần dùng chung lượt. Mua thêm tối đa 1 lượt/bí cảnh với 60 bạc; đặt lại lúc 00:00 giờ Việt Nam. Phí vào cửa vẫn áp dụng. Thua/rút lui vẫn tính lượt.','hint'));
+    const tiles=n('div',undefined,'dungeon-card-grid');
     for (const def of DUNGEONS) {
       const remaining=remainingEntries(s,def.id);
-      const p = panel(
-        def.name,
-        `100 tầng · hồi 25% HP khi thắng, hồi toàn đội mỗi 10 tầng · kỷ lục ${w.towerBest?.[def.id]??0}/100 · cấp mở ${def.level} · phí ${def.fee} bạc. ${def.description} Lần đầu: bí kíp ${def.relic} + vật liệu/trang bị hiếm.`
-      );
-      p.append(n('p',`Còn ${remaining} lượt hôm nay`));
-      if(remaining===0&&!w.daily.entryPurchases?.[def.id])p.append(button('Mua thêm 1 lượt · 60 bạc',()=>run(()=>app.model.buyDungeonEntry(def.id)),count(s,'silver')<EXTRA_ENTRY_PRICE));
-      p.append(
-        button(
-          w.clears.includes(def.id) ? 'Khám phá lại' : 'Vào bí cảnh',
-          () => fight(() => {app.model.enterDungeon(def.id);app.model.chooseRoom(0);}),
-          s.hero.level < def.level || remaining<=0
-        )
-      );
-      if (def.id === featured.id)
-        p.append(
-          button(
-            'Thử thách tuần · quái +2 cấp',
-            () => fight(() => {app.model.enterDungeon(def.id,true);app.model.chooseRoom(0);}),
-            s.hero.level < def.level + 2 || remaining<=0
-          )
-        );
-      root.append(p);
+      const p=panel(def.name,'100 tầng · cấp mở '+def.level+' · phí '+def.fee+' bạc. '+def.description);
+      p.classList.add('dungeon-tile');
+      p.dataset.dungeonId=def.id;
+      const picture=n('img');picture.src='assets/images/scenes/'+def.id+'.webp';picture.alt='Minh họa '+def.name;picture.loading='lazy';picture.decoding='async';picture.className='dungeon-tile-image';
+      p.prepend(picture);
+      const stats=n('p','Còn '+remaining+' lượt · kỷ lục '+(w.towerBest?.[def.id]??0)+'/100','dungeon-tile-stats');
+      p.append(stats);
+      const enter=button(w.clears.includes(def.id)?'Khám phá lại':'Vào bí cảnh',
+        ()=>fight(()=>{app.model.enterDungeon(def.id);app.model.chooseRoom(0);}),
+        s.hero.level<def.level||remaining<=0);
+      enter.dataset.uiIcon='flag';p.append(enter);
+      if(remaining===0&&!w.daily.entryPurchases?.[def.id])
+        p.append(button('Mua thêm lượt · 60 bạc',()=>run(()=>app.model.buyDungeonEntry(def.id)),count(s,'silver')<EXTRA_ENTRY_PRICE));
+      if(def.id===featured.id)
+        p.append(button('Thử thách tuần · quái +2 cấp',()=>fight(()=>{app.model.enterDungeon(def.id,true);app.model.chooseRoom(0);}),s.hero.level<def.level+2||remaining<=0));
+      tiles.append(p);
     }
+    root.append(tiles);
   }
   return {
     openCasebook() {app.setView('tavern');tab='casebook';renderWorld();},
