@@ -1,0 +1,27 @@
+name: Balance 8 priority verification
+on:
+  push:
+    branches: ['feature/balance-8-screening']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Re-check priority six with 100 paired fixtures each
+        run: |
+          mkdir -p reports/balance-8/verification
+          for id in 10 50 05 06 01 40; do
+            node scripts/balance-lab/matched.mjs --candidate "companion_$id" --pairs 100 --scenario level8 --output "reports/balance-8/verification/companion_$id.json"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: balance8-verify-100-${{ github.run_id }}
+          path: reports/balance-8/verification/
+          retention-days: 30
