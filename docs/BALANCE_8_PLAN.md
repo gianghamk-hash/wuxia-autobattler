@@ -24,3 +24,29 @@ The audit may also read the historical `reports/balance-7.json`, but those outpu
 ## Release gates
 
 No unreviewed bulk buffs/nerfs. Before merge: Node + Playwright checks green; controlled scenario differences documented; legacy saves and gacha pity preserved; no hidden changes to live `main`.
+
+## Stage 2: matched replacement evaluation
+
+```sh
+# One role-matched comparison: same teammates, opponent, formation and mirrored seed
+npm run balance:matched -- --candidate companion_03 --pairs 100 --scenario level8
+
+# All 60 characters, each against a role-matched comparator
+npm run balance:matched -- --all --pairs 20 --scenario level8 --output reports/balance-8/matched.json
+```
+
+The simulation runs the real 6v6 combat engine. Every fixture replays candidate and control
+against the same opposing six-person squad, with home/enemy reversal in both cases
+(four battles per fixture). Fixture-level deltas are bootstrapped for a paired confidence
+interval. Opponents and four fixed teammates are sampled using seeded PRNG.
+
+**Interpretation boundaries:** role-group comparisons can still span rarity tiers (the
+generated report warns when they differ); seed reuse does not eliminate all RNG divergence.
+The script measures replacement-effect difference, not independent win-rate or intrinsic
+unit strength. A 20-fixture screening run does not justify production nerfs.
+Review at levels 1/8/20, with and without equipment/preparation, and validate 200+
+fixtures for finalists. Before changing a character, inspect ability effects and
+counter-matchups, confirm the same rarity, then create a separate measured balance patch.
+
+The `--all` run performs 60 independent character-vs-control evaluations, each
+with four battles per fixture; it does not attempt the full 60×59 matchup matrix.
