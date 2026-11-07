@@ -41,15 +41,15 @@ test('canonical side recruitment cannot bypass the story/gacha ownership rules',
 
 test('equipment draws spend atomically, retain independent pity, and meet both real guarantees',()=>{
  const s=at(),before=structuredClone(s);assert.equal(GEAR_RARITIES.reduce((sum,r)=>sum+r.rate,0),100);assert.equal(NEW_GEAR.length,80);
- const ten=drawEquipment(s,5,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-720+ten.refund);assert.equal(ten.refund,461);assert.equal(ten.results.length,5);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'common');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
+ const ten=drawEquipment(s,5,{random:()=>0,now:1});assert.equal(itemCount(ten.session,'silver'),itemCount(s,'silver')-200+ten.refund);assert.equal(ten.refund,128);assert.equal(ten.results.length,5);assert.equal(NEW_GEAR.find(e=>e.id===ten.results.at(-1).id).rarity,'common');assert.deepEqual(ten.session.gacha,s.gacha);assert.deepEqual(ten.session.hero,s.hero);assert.deepEqual(s,before);
  let next=s;for(let i=0;i<50;i++)next=drawEquipment(next,1,{random:()=>0,now:i}).session;assert.equal(NEW_GEAR.find(e=>e.id===next.loot.history.at(-1).id).rarity,'exceptional');validateLoot(next.loot);
- assert.throws(()=>drawEquipment(s,5,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=79;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
+ assert.throws(()=>drawEquipment(s,5,{random:()=>NaN}));assert.deepEqual(s,before);const poor=structuredClone(s);poor.inventory.find(i=>i.itemId==='silver').quantity=44;const balance=structuredClone(poor);assert.throws(()=>drawEquipment(poor,1));assert.deepEqual(poor,balance);
  const bad=structuredClone(next);bad.loot.sinceExceptional=50;assert.throws(()=>validateCampaign(bad));
 });
 test('sets activate actual two/three-slot bonuses across rarities without counting spare copies or leaking stats after removal',()=>{
  const s=at(),family='thiet_ve',items=NEW_GEAR.filter(e=>e.setId===family),find=(slot,rarity)=>items.find(e=>e.slot===slot&&e.rarity===rarity);for(const item of items)s.inventory.push({itemId:item.id,quantity:3});
  const weapon=find('weapon','common'),armor=find('armor','rare'),accessory=find('accessory','excellent');let h=equipItem(s.hero,'weapon',weapon.id,s.inventory);let one=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.equal(one.activeEquipmentSets.length,0);
- h=equipItem(h,'armor',armor.id,s.inventory);const two=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.deepEqual(two.activeEquipmentSets,['thiet_ve_2']);assert.equal(two.stats.maxHp,one.stats.maxHp+armor.stats.maxHp+150);
+ h=equipItem(h,'armor',armor.id,s.inventory);const two=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.deepEqual(two.activeEquipmentSets,['thiet_ve_2']);assert.equal(two.stats.maxHp,one.stats.maxHp+(armor.stats.maxHp+150)*1.15);
  h=equipItem(h,'accessory',accessory.id,s.inventory);const three=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.deepEqual(three.activeEquipmentSets,['thiet_ve_2','thiet_ve_3']);assert.ok(three.stats.blockRate>two.stats.blockRate);
  h=equipItem(h,'accessory',null,s.inventory);assert.deepEqual(new Hero(h.sect,{profile:h,inventory:s.inventory}).stats,two.stats);assert.throws(()=>equipItem(h,'weapon',armor.id,s.inventory));
 });

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 async function start(page) {
   await page.goto('/?story=legacy');
   await expect(page.locator('#boot-status')).toBeHidden();

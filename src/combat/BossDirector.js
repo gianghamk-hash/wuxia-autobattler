@@ -157,6 +157,8 @@ export class BossDirector {
     return u;
   }
   resolve(b) {
+    const tell=b.tell;
+    if(!tell)return;
     const c = this.combat,
       id = b.unit.characterId;
     const targets = b.tell.targets
@@ -200,7 +202,7 @@ export class BossDirector {
       actorId: b.unit.id,
       ownerId: id,
       skillId: 'npc_' + id + '_ult',
-      name: b.tell.name,
+      name: tell.name,
       ultimate: true,
       origin: { ...b.unit.gridPosition },
       targets: targets.map((u) => ({
@@ -211,7 +213,7 @@ export class BossDirector {
     c.emit({
       type: 'boss:phase',
       actorId: b.unit.id,
-      name: b.tell.name,
+      name: tell.name,
       phase: b.phase
     });
   }

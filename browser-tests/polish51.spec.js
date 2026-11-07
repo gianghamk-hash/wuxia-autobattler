@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function fresh(page){await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Hải An');await page.locator('#btn-new-game').click();await page.evaluate(()=>window.__game.engine.stop());}
 for(const width of [320,390,1280])test('camp is focused; relocated shop keeps one working purchase handler across tabs at '+width+'px',async({page},info)=>{
  await page.setViewportSize({width,height:900});const errors=[];page.on('pageerror',e=>errors.push(e.message));await fresh(page);

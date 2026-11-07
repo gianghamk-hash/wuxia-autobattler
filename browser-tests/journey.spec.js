@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 import { writeFile } from 'node:fs/promises';
 async function start(page) {
   await page.goto('/?story=legacy');

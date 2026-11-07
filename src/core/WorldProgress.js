@@ -1,3 +1,6 @@
+import { fishingReward } from './Fishing.js';
+import { gainExperience } from '../entities/HeroBuild.js';
+import { validateRanks } from '../data/ProgressionBalance.js';
 import {
   DUNGEONS,
   DAILY_TASKS,
@@ -117,7 +120,7 @@ export function validateTeam(team) {
     team.active.length > 5 ||
     new Set(team.active).size !== team.active.length ||
     !team.active.every((id) => Object.hasOwn(COMPANIONS_BY_ID, id)) ||
-    !integer(team.level, 20) ||
+    !integer(team.level, 30) ||
     team.level < 1 ||
     !Array.isArray(team.inventory) ||
     team.inventory.length > EQUIPMENT.length ||
@@ -126,6 +129,7 @@ export function validateTeam(team) {
     )
   )
     fail('Mã đội hình không hợp lệ.');
+  validateRanks(team.ranks, team.active, COMPANIONS_BY_ID);
   normalizeHeroBuild(team.hero, team.inventory);
   if (
     !Object.hasOwn(SECT_ELEMENT, team.hero.sect) ||
@@ -226,7 +230,7 @@ export function validateWorld(s) {
   }
   if (
     !integer(w.daily.practiceWins) ||
-     !integer(w.daily.bauCua??0,3) ||
+     !integer(w.daily.bauCua??0,Number.MAX_SAFE_INTEGER) ||
     !integer(w.daily.escorts, 2) ||
     !integer(w.daily.crafts) ||
     !integer(w.daily.floors) ||
@@ -274,7 +278,7 @@ export function validateWorld(s) {
     w.escort !== null &&
     (!w.escort ||
       !['safe', 'fast'].includes(w.escort.route) ||
-      !integer(w.escort.level, 20) ||
+      !integer(w.escort.level, 30) ||
       w.escort.level < 1)
   )
     fail('Chuyến tiêu không hợp lệ.');
@@ -352,6 +356,7 @@ export function teamSnapshot(s) {
     hero: structuredClone(s.hero),
     level: s.hero.level,
     active: [...s.party.active],
+    ranks: Object.fromEntries(s.party.active.filter(id=>s.party.ranks?.[id]).map(id=>[id,s.party.ranks[id]])),
     formation: structuredClone(s.party.formation),
     inventory: s.inventory
       .filter((i) => EQUIPMENT.some((e) => e.id === i.itemId))
@@ -448,14 +453,18 @@ export function worldAction(s, action, arg, now) {
       if((w.daily.salvage??0)>=2)fail('Mỗi ngày chỉ khảo sát vật tư 2 lượt.');
       pay(s,'rope',1);w.daily.salvage=(w.daily.salvage??0)+1;give(s,'ore',1);give(s,'herb',1);
       message='Dùng một dây thừng khảo sát: nhận 1 quặng và 1 thảo dược.';break;
-    case 'fish':
+    case 'fish': {
       if (w.daily.fishing >= 3) fail('Mỗi ngày chỉ câu 3 lượt.');
       pay(s, 'silver', 2);
       w.daily.fishing++;
       give(s, 'food_fish', 1);
-      give(s, w.daily.fishing === 3 ? 'ore' : 'herb', 1);
-      message = 'Câu được cá và vật liệu ven bờ.';
+      const reward = fishingReward();
+      if(reward.itemId)give(s,reward.itemId,reward.quantity);
+      if(reward.xp)s.hero=gainExperience(s.hero,reward.xp,s.inventory);
+      if(reward.materials){give(s,'ore',3);give(s,'herb',3);}
+      message = 'Câu cá: 1 cá bảo đảm + '+reward.label+'. Đã nhận vào túi (XP mở ngay).';
       break;
+    }
     case 'bau_cua': {
       const faces=['bau','cua','tom','ca','ga','nai'];
       const face=typeof arg==='string'?arg:arg?.face;
@@ -463,7 +472,6 @@ export function worldAction(s, action, arg, now) {
       if(!faces.includes(face))fail('Mặt Bầu Cua không hợp lệ.');
       if(!Number.isSafeInteger(stake)||stake<1||stake>Math.floor(Number.MAX_SAFE_INTEGER/6))
         fail('Tiền cược phải là số bạc nguyên dương hợp lệ.');
-      if((w.daily.bauCua??0)>=3)fail('Mỗi ngày chỉ có 3 lượt Bầu Cua.');
       if(s.storyProgress.pendingEncounter||w.dungeon)fail('Kết thúc trận/bí cảnh trước.');
       if(!globalThis.crypto?.getRandomValues)fail('Thiết bị thiếu bộ tạo số ngẫu nhiên an toàn.');
       pay(s,'silver',stake);
@@ -575,7 +583,7 @@ export function makeDungeon(s, id, weekly, now) {
     seed,
     training: s.adventure.training,
     forging: s.adventure.forging,
-    floor: 0,
+    floor: Math.min(99, s.adventure.towerBest?.[id] ?? 0),
     rooms:Array.from({length:100},(_,i)=>Array(2).fill((i+1)%10===0?'boss':'battle')),
     selected: null,
     squad,

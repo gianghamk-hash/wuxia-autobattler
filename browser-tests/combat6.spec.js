@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures.js";
 import { developed } from "../scripts/balance-campaign6.mjs";
 async function ready(page, view = "dungeons") {
   await page.goto("/");
@@ -145,7 +145,7 @@ test("tower victory starts the next floor automatically and returns to Bi canh",
     animations: "disabled",
   });
 });
-test("five companion results keep the old bundle price and preserve the selected party", async ({
+test("five companion results keep the reduced bundle price and preserve the selected party", async ({
   page,
 }) => {
   await ready(page, "roster");
@@ -160,7 +160,7 @@ test("five companion results keep the old bundle price and preserve the selected
     }),
   }));
   await expect(page.locator('[data-draw="10"]')).toHaveCount(0);
-  await expect(page.locator('[data-draw="5"]')).toContainText("540");
+  await expect(page.locator('[data-draw="5"]')).toContainText("150");
   await page.locator('[data-draw="5"]').click();
   const after = await page.evaluate(() => ({
     silver: window.__game.model.session.inventory.find(
@@ -176,7 +176,7 @@ test("five companion results keep the old bundle price and preserve the selected
       .reduce((n, r) => n + r.refund, 0),
   }));
   expect(after).toEqual({
-    silver: before.silver - 540 + after.refunds,
+    silver: before.silver - 150 + after.refunds,
     refunds: after.refunds,
     party: before.party,
     total: 5,

@@ -1,7 +1,7 @@
 import {roleTag} from './RoleTagUI.js';
 import {mountTeamEffects} from './TeamEffects.js';
 import {equipmentAura} from './GearArt.js';
-import { portrait,icon } from './Visuals.js';
+import { portrait,icon,decorateRarity } from './Visuals.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import {storyPerson} from '../data/DaiVietCast.js';
 import {heroAppearance} from '../data/HeroIdentity.js';
@@ -97,6 +97,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
           label.setAttribute('aria-hidden', 'true');
           button.append(label);
         }
+        if(unit)decorateRarity(button,unit==='hero'?{level:session.hero.level}:storyPerson(session,COMPANIONS_BY_ID[unit]));
         if(unit==='hero'){const aura=equipmentAura(session.hero.equippedGear);button.dataset.equipmentAura=aura.rank;button.style.setProperty('--aura-color',aura.color);}
         button.dataset.occupied = String(Boolean(unit));
         button.dataset.selected = String(unit === selected);

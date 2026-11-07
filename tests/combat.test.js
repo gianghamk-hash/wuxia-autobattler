@@ -33,7 +33,7 @@ test('combat math follows armor, attack interval and bounded crit/block/dodge ro
   assert.equal(hit.amount, a.stats.physicalAtk * 2 * 1000 / (1000 + b.stats.physicalDef * 3.5));
   b.stats.dodgeRate = .5; assert.equal(calculateDamage(a, b, skill, () => 0).missed, true);
   a.attributes = { thanPhap: 20, ngoTinh: 1000, kinhLuc: 10 };
-  assert.equal(attackInterval(a), 2 / 1.3 / a.stats.attackSpeed);
+  assert.equal(attackInterval(a), 2 / 1.6 / a.stats.attackSpeed);
   const one = seededRandom(0), two = seededRandom(0);
   assert.deepEqual(Array.from({ length: 20 }, one), Array.from({ length: 20 }, two));
 });

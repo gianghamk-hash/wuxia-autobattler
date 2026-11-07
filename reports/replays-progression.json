@@ -1,0 +1,506 @@
+{
+  "version": "progression",
+  "note": "Deterministic fixtures after attribute/passive rebalance; original 7.0 replays retained.",
+  "scenarios": [
+    {
+      "id": "level1",
+      "level": 1,
+      "records": [
+        {
+          "seed": 20261105,
+          "a": {
+            "sect": "ThieuLam",
+            "build": "defense",
+            "companions": [
+              "companion_12",
+              "companion_22",
+              "companion_16",
+              "companion_30",
+              "companion_13"
+            ],
+            "order": [
+              5,
+              0,
+              2,
+              4,
+              1,
+              3
+            ]
+          },
+          "b": {
+            "sect": "VoDang",
+            "build": "mixed",
+            "companions": [
+              "companion_06",
+              "companion_24",
+              "companion_43",
+              "companion_07",
+              "companion_21"
+            ],
+            "order": [
+              2,
+              3,
+              4,
+              0,
+              1,
+              5
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 36.516666666666666
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 40.28333333333333
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level8",
+      "level": 8,
+      "records": [
+        {
+          "seed": 20361105,
+          "a": {
+            "sect": "CaiBang",
+            "build": "attack",
+            "companions": [
+              "companion_04",
+              "companion_24",
+              "companion_09",
+              "companion_30",
+              "companion_37"
+            ],
+            "order": [
+              4,
+              1,
+              3,
+              0,
+              2,
+              5
+            ]
+          },
+          "b": {
+            "sect": "NgaMi",
+            "build": "defense",
+            "companions": [
+              "companion_12",
+              "companion_35",
+              "companion_50",
+              "companion_23",
+              "companion_19"
+            ],
+            "order": [
+              3,
+              0,
+              1,
+              4,
+              5,
+              2
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 23.65
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 18.666666666666668
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level20",
+      "level": 20,
+      "records": [
+        {
+          "seed": 20461105,
+          "a": {
+            "sect": "NgaMi",
+            "build": "defense",
+            "companions": [
+              "companion_39",
+              "companion_45",
+              "companion_15",
+              "companion_37",
+              "companion_43"
+            ],
+            "order": [
+              4,
+              2,
+              5,
+              3,
+              1,
+              0
+            ]
+          },
+          "b": {
+            "sect": "NgaMi",
+            "build": "mixed",
+            "companions": [
+              "companion_26",
+              "companion_37",
+              "companion_15",
+              "companion_04",
+              "companion_12"
+            ],
+            "order": [
+              2,
+              5,
+              3,
+              4,
+              0,
+              1
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 31.316666666666666
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 37.81666666666666
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level8-equipped",
+      "level": 8,
+      "gear": true,
+      "records": [
+        {
+          "seed": 20561105,
+          "a": {
+            "sect": "ThieuLam",
+            "build": "defense",
+            "companions": [
+              "companion_35",
+              "companion_05",
+              "companion_21",
+              "companion_49",
+              "companion_19"
+            ],
+            "order": [
+              1,
+              3,
+              2,
+              5,
+              4,
+              0
+            ]
+          },
+          "b": {
+            "sect": "VoDang",
+            "build": "attack",
+            "companions": [
+              "companion_49",
+              "companion_08",
+              "companion_42",
+              "companion_06",
+              "companion_15"
+            ],
+            "order": [
+              5,
+              4,
+              2,
+              0,
+              3,
+              1
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 27.716666666666665
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 42.416666666666664
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level20-prepared",
+      "level": 20,
+      "gear": true,
+      "prepared": true,
+      "records": [
+        {
+          "seed": 20661105,
+          "a": {
+            "sect": "ThieuLam",
+            "build": "mixed",
+            "companions": [
+              "companion_23",
+              "companion_37",
+              "companion_21",
+              "companion_11",
+              "companion_38"
+            ],
+            "order": [
+              2,
+              0,
+              4,
+              5,
+              1,
+              3
+            ]
+          },
+          "b": {
+            "sect": "VoDang",
+            "build": "attack",
+            "companions": [
+              "companion_05",
+              "companion_11",
+              "companion_10",
+              "companion_27",
+              "companion_40"
+            ],
+            "order": [
+              4,
+              1,
+              5,
+              2,
+              3,
+              0
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 72.41666666666667
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 52.583333333333336
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level20-sect2",
+      "level": 20,
+      "gear": true,
+      "prepared": true,
+      "tier": 2,
+      "records": [
+        {
+          "seed": 20761105,
+          "a": {
+            "sect": "CaiBang",
+            "build": "mixed",
+            "companions": [
+              "companion_26",
+              "companion_14",
+              "companion_15",
+              "companion_02",
+              "companion_31"
+            ],
+            "order": [
+              5,
+              1,
+              2,
+              3,
+              0,
+              4
+            ]
+          },
+          "b": {
+            "sect": "NgaMi",
+            "build": "defense",
+            "companions": [
+              "companion_49",
+              "companion_48",
+              "companion_12",
+              "companion_20",
+              "companion_42"
+            ],
+            "order": [
+              5,
+              2,
+              1,
+              0,
+              3,
+              4
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 38.13333333333333
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 47.36666666666667
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level20-sect4",
+      "level": 20,
+      "gear": true,
+      "prepared": true,
+      "tier": 4,
+      "records": [
+        {
+          "seed": 20861105,
+          "a": {
+            "sect": "ThieuLam",
+            "build": "mixed",
+            "companions": [
+              "companion_23",
+              "companion_13",
+              "companion_29",
+              "companion_34",
+              "companion_47"
+            ],
+            "order": [
+              4,
+              5,
+              2,
+              3,
+              1,
+              0
+            ]
+          },
+          "b": {
+            "sect": "DuongMon",
+            "build": "mixed",
+            "companions": [
+              "companion_14",
+              "companion_38",
+              "companion_45",
+              "companion_44",
+              "companion_08"
+            ],
+            "order": [
+              5,
+              4,
+              2,
+              1,
+              0,
+              3
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 69.21666666666667
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 74.61666666666666
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "level20-sect6",
+      "level": 20,
+      "gear": true,
+      "prepared": true,
+      "tier": 6,
+      "records": [
+        {
+          "seed": 20961105,
+          "a": {
+            "sect": "ThieuLam",
+            "build": "attack",
+            "companions": [
+              "companion_31",
+              "companion_48",
+              "companion_05",
+              "companion_18",
+              "companion_44"
+            ],
+            "order": [
+              3,
+              2,
+              4,
+              5,
+              1,
+              0
+            ]
+          },
+          "b": {
+            "sect": "CaiBang",
+            "build": "mixed",
+            "companions": [
+              "companion_46",
+              "companion_21",
+              "companion_27",
+              "companion_41",
+              "companion_26"
+            ],
+            "order": [
+              5,
+              4,
+              3,
+              0,
+              2,
+              1
+            ]
+          },
+          "games": [
+            {
+              "swapped": false,
+              "winner": "enemy",
+              "reason": "elimination",
+              "duration": 76.03333333333333
+            },
+            {
+              "swapped": true,
+              "winner": "home",
+              "reason": "elimination",
+              "duration": 76.03333333333333
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

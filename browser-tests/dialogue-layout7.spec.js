@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 
 for(const width of [320,390])test('story extras follow dialogue, controls and choices at '+width+'px',async({page},info)=>{
  await page.setViewportSize({width,height:900});await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Giang Doan');await page.locator('#btn-new-game').click();await page.locator('#btn-main-quest').click();

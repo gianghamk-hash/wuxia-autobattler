@@ -42,21 +42,21 @@ test('skill allocation rejects missing prerequisites, wrong sect, repeated nodes
   for (let i = 1; i < 4; i++) low = allocateSkill(low, `VoDang_t${i}_attack`, starter);
   assert.throws(() => allocateSkill(low, 'VoDang_t4_attack', starter));
 });
-test('point budgets cannot be overspent or forged and tier-four choices are exclusive', () => {
+test('point budgets cannot be overspent or forged and tier-four choices can be learned independently', () => {
   const hero = allocateSkill(createHeroBuild({ sect: 'CaiBang' }), 'CaiBang_t1_attack', starter);
   assert.equal(hero.freeSkillPoints, 0); assert.throws(() => allocateSkill(hero, 'CaiBang_t1_guard', starter));
   assert.throws(() => normalizeHeroBuild({ ...hero, freeSkillPoints: 99 }, starter));
   let high = createHeroBuild({ sect: 'VoDang', level: 20 });
   for (const branch of ['attack', 'guard']) for (let tier = 1; tier <= 3; tier++) high = allocateSkill(high, `VoDang_t${tier}_${branch}`, starter);
   high = allocateSkill(high, 'VoDang_t4_attack', starter);
-  assert.throws(() => allocateSkill(high, 'VoDang_t4_guard', starter));
+  assert.ok(allocateSkill(high, 'VoDang_t4_guard', starter).allocatedSkills.includes('VoDang_t4_guard'));
 });
-test('XP grants exact point budgets, honors the curve, and caps at level 20', () => {
+test('XP grants exact point budgets, honors the curve, and caps at level 30', () => {
   let hero = gainExperience(createHeroBuild({ sect: 'NgaMi' }), 100, starter);
   assert.equal(hero.level, 2); assert.equal(hero.exp, 0); assert.equal(hero.freeAttributePoints, 2); assert.equal(hero.freeSkillPoints, 2);
   hero = gainExperience(hero, 199, starter); assert.equal(hero.level, 2); assert.equal(hero.exp, 199);
   hero = gainExperience(hero, 1, starter); assert.equal(hero.level, 3); assert.equal(hero.freeAttributePoints, 4);
-  hero = gainExperience(hero, 1000000, starter); assert.equal(hero.level, 20); assert.equal(hero.exp, 0); assert.equal(hero.freeAttributePoints, 38);
+  hero = gainExperience(hero, 1000000, starter); assert.equal(hero.level, 30); assert.equal(hero.exp, 0); assert.equal(hero.freeAttributePoints, 58);
   assert.deepEqual(gainExperience(hero, 10, starter), hero);
   assert.throws(() => gainExperience(hero, -1, starter));
 });
@@ -65,8 +65,8 @@ test('attributes consume available points, affect stats and refund without dupli
   profile = allocateAttribute(profile, 'canCot', starter); profile = allocateAttribute(profile, 'khiHai', starter);
   assert.equal(profile.freeAttributePoints, 0); assert.throws(() => allocateAttribute(profile, 'canCot', starter));
   const unit = new Hero('ThieuLam', { profile, inventory: starter });
-  assert.equal(unit.stats.maxHp, SECTS.ThieuLam.baseStats.maxHp + SECTS.ThieuLam.growthPerLevel.maxHp + 25);
-  assert.equal(unit.stats.magicalAtk, SECTS.ThieuLam.baseStats.magicalAtk + SECTS.ThieuLam.growthPerLevel.magicalAtk + 4);
+  assert.equal(unit.stats.maxHp, SECTS.ThieuLam.baseStats.maxHp + SECTS.ThieuLam.growthPerLevel.maxHp + 100);
+  assert.equal(unit.stats.magicalAtk, SECTS.ThieuLam.baseStats.magicalAtk + SECTS.ThieuLam.growthPerLevel.magicalAtk + 12);
   const reset = resetAttributes(profile, starter); assert.equal(reset.freeAttributePoints, 2);
   assert.deepEqual(resetAttributes(reset, starter), reset);
 });

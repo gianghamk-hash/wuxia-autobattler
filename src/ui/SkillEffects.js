@@ -168,7 +168,7 @@ export function paintSkillEffect(ctx, effect, t, project, reducedMotion = false)
       const y=(p.path==='ward'?target.y:origin.y+(target.y-origin.y)*progress)-18-lift;
       ctx.save();ctx.translate(x,y);
       if(!reducedMotion&&progress<1&&p.path==='projectile')ctx.rotate(Math.atan2(target.y-origin.y,target.x-origin.x));
-      ctx.drawImage(bitmap,-size/2,-size/2,size,size);ctx.restore();
+      const enhancedSize=size*(effect.promotionScale??1);if(effect.divine){ctx.shadowColor='#fff2a4';ctx.shadowBlur=20;}ctx.drawImage(bitmap,-enhancedSize/2,-enhancedSize/2,enhancedSize,enhancedSize);ctx.restore();
     }
     ctx.restore();return;
   }
@@ -180,7 +180,7 @@ export function paintSkillEffect(ctx, effect, t, project, reducedMotion = false)
     ctx.restore(); return;
   }
   ctx.shadowColor = p.primary; ctx.shadowBlur = p.ultimate ? 9 : 2;
-  const radius = p.ultimate ? 62 : 15;
+  const radius = (p.ultimate ? 62 : 15)*(effect.promotionScale??1);
   if (t < .35) drawSkillMotif(ctx, p.motif, origin.x, origin.y - 10, radius * .6, t, p.secondary, p.primary);
   for (const target of targets) {
     const progress = Math.min(1, t / .35);

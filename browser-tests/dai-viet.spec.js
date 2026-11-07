@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function start(page){await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Trần Phong');await page.locator('#btn-new-game').click();await page.evaluate(()=>window.__game.engine.stop());}
 async function read(page){for(let i=0;i<30&&await page.locator('#dialogue-next').isEnabled();i++)await page.locator('#dialogue-next').click();await expect(page.locator('#dialogue-next')).toBeDisabled();}
 async function at(page,id,route='stay',romance='friends'){

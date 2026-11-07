@@ -9,7 +9,7 @@ export const freshLoot=()=>({version:1,total:0,sinceExcellent:0,sinceExceptional
 export function validateLoot(l){
  if(!l||l.version!==1||![l.total,l.sinceExcellent,l.sinceExceptional].every(integer)||l.sinceExcellent>=10||l.sinceExceptional>=50||l.sinceExcellent>l.sinceExceptional||l.sinceExceptional>l.total||!Array.isArray(l.history)||l.history.length!==Math.min(l.total,40)||!l.bossWins||Object.getPrototypeOf(l.bossWins)!==Object.prototype)fail('Tiến trình trang bị không hợp lệ.');
  for(const[k,n]of Object.entries(l.bossWins))if(!/^([1-9]|1[0-9]|20)$/.test(k)||!integer(n)||n<1)fail('Lượt boss không hợp lệ.');
- l.history.forEach((r,i)=>{if(r?.duplicate!==undefined&&(typeof r.duplicate!=='boolean'||!integer(r.refund)||r.refund>GEAR_DRAW.tenCost||!r.duplicate&&r.refund!==0))fail('Hoàn bạc trang bị không hợp lệ.');const item=NEW_GEAR.find(e=>e.id===r?.id);if(!r||r.pull!==l.total-l.history.length+i+1||!item||!integer(r.time)||!['none','excellent','exceptional'].includes(r.guarantee)||r.guarantee==='excellent'&&item.tier<3||r.guarantee==='exceptional'&&item.tier!==4)fail('Lịch sử vòng quay trang bị không hợp lệ.');});
+ l.history.forEach((r,i)=>{if(r?.duplicate!==undefined&&(typeof r.duplicate!=='boolean'||!integer(r.refund)||r.refund>720||!r.duplicate&&r.refund!==0))fail('Hoàn bạc trang bị không hợp lệ.');const item=NEW_GEAR.find(e=>e.id===r?.id);if(!r||r.pull!==l.total-l.history.length+i+1||!item||!integer(r.time)||!['none','excellent','exceptional'].includes(r.guarantee)||r.guarantee==='excellent'&&item.tier<3||r.guarantee==='exceptional'&&item.tier!==4)fail('Lịch sử vòng quay trang bị không hợp lệ.');});
 }
 const secureRandom=()=>{if(!globalThis.crypto?.getRandomValues)fail('Thiết bị chưa hỗ trợ quay an toàn.');return globalThis.crypto.getRandomValues(new Uint32Array(1))[0]/4294967296;};
 export function drawEquipment(session,count,{random=secureRandom,now=Date.now()}={}){
@@ -35,7 +35,7 @@ export function chapterBossRewards(s,c){const factor=Math.max(.1,1-Math.max(0,s.
 export function bossLoot(s,chapter,seed,{story=false}={}){
  s.loot??=freshLoot();const random=seededRandom((seed^0x78a91b3)>>>0),first=!s.loot.bossWins[chapter];s.loot.bossWins[chapter]=(s.loot.bossWins[chapter]??0)+1;
  const drops=[];
- if(first||story||random()<.35){const floor=chapter>=15?2:1,ceiling=chapter<=4?2:chapter<=10?3:4,rank=first?Math.min(4,Math.max(2,Math.ceil(chapter/6))):Math.min(ceiling,random()<.03?4:random()<.20?3:random()<.55?2:floor),pool=NEW_GEAR.filter(e=>e.tier===rank),weights=pool.map(e=>e.slot==='helmet'?1.5:1),total=weights.reduce((a,b)=>a+b,0);let ticket=random()*total;const item=pool.find((e,i)=>(ticket-=weights[i])<0)??pool.at(-1);give(s,item.id,1);drops.push(item.id);}
+ if(first||story||random()<.45){const floor=chapter>=15?2:1,ceiling=chapter<=4?2:chapter<=10?3:4,rank=first?Math.min(4,Math.max(2,Math.ceil(chapter/6))):Math.min(ceiling,random()<.03?4:random()<.20?3:random()<.55?2:floor),pool=NEW_GEAR.filter(e=>e.tier===rank),weights=pool.map(e=>e.slot==='helmet'?1.5:1),total=weights.reduce((a,b)=>a+b,0);let ticket=random()*total;const item=pool.find((e,i)=>(ticket-=weights[i])<0)??pool.at(-1);give(s,item.id,1);drops.push(item.id);}
  return drops;
 }
 export function storyEquipment(s,q,seed){

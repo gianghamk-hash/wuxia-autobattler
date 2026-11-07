@@ -1,4 +1,5 @@
 import { LIMITS, elementMultiplier } from '../data/StrategyData.js';
+import { AGILITY_TEMPO } from '../data/ProgressionBalance.js';
 import { CONFIG } from '../config.js';
 export function modifier(unit, type) {
   return unit.statusEffects
@@ -10,7 +11,7 @@ export function attackInterval(unit) {
   return (
     CONFIG.COMBAT.BASE_ATTACK_INTERVAL /
     1000 /
-    (1 + agility * 0.015) /
+    (1 + agility * AGILITY_TEMPO) /
     unit.stats.attackSpeed
   );
 }
@@ -28,7 +29,7 @@ export function calculateDamage(attacker, defender, skill, random) {
     random() <
     Math.min(
       LIMITS.crit,
-      attacker.stats.critRate + (attacker.attributes?.ngoTinh ?? 0) * 0.005
+      attacker.stats.critRate
     );
   const blocked = random() < defender.stats.blockRate;
   const physical = skill.type === 'physical';
@@ -42,7 +43,7 @@ export function calculateDamage(attacker, defender, skill, random) {
       : 1);
   const critMultiplier = Math.min(
     LIMITS.critDamage,
-    attacker.stats.critDmg + (attacker.attributes?.kinhLuc ?? 0) * 0.004
+    attacker.stats.critDmg
   );
   const amount =
     attack *

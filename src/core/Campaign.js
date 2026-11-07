@@ -1,3 +1,4 @@
+import { validateRanks } from '../data/ProgressionBalance.js';
 import {storyRecruit7,STORY_RECRUITS7} from '../data/Recruitment7.js';
 import {entryMethods} from './DungeonEntries.js';
 import {bossSequence} from '../combat/BattleRules6.js';
@@ -163,6 +164,7 @@ export function createCampaign({ name, sect = null, story = 'legacy' } = {}) {
   };
 }
 export function validateCampaign(session) {
+  validateRanks(session.party?.ranks, session.party?.unlocked ?? [], COMPANIONS_BY_ID);
   const catalog=storyCatalog(session),{quests:MAIN_QUESTS,byId:MAIN_BY_ID,endings:ENDINGS}=catalog;
   validateJourney(session);
   if (
@@ -588,8 +590,8 @@ export class Campaign {
       if(!next.storyProgress.completedQuests.includes(recruit.id))next.storyProgress.completedQuests.push(recruit.id);
     }
     Object.assign(next.storyProgress.questFlags, quest.flags ?? {});
-    next.hero = gainExperience(next.hero, quest.xp, next.inventory);
-    if (quest.silver) give(next, 'silver', quest.silver);
+    next.hero = gainExperience(next.hero, quest.encounter ? Math.round(quest.xp * 1.6) : quest.xp, next.inventory);
+    if (quest.silver) give(next, 'silver', quest.encounter ? Math.round(quest.silver * 1.75) : quest.silver);
     if (quest.gearReward)
       for (const item of EQUIPMENT.filter(
         (item) => item.sect === next.hero.sect
@@ -738,8 +740,8 @@ export class Campaign {
         next.party.active.push(quest.companionId);
       setFormation(next);
       next.storyProgress.completedQuests.push(id);
-      next.hero = gainExperience(next.hero, quest.xp, next.inventory);
-      give(next, 'silver', quest.silver);
+      next.hero = gainExperience(next.hero, quest.encounter ? Math.round(quest.xp * 1.6) : quest.xp, next.inventory);
+      give(next, 'silver', quest.encounter ? Math.round(quest.silver * 1.75) : quest.silver);
     }, 'recruit');
   }
   _pending(next, kind, questId) {
@@ -825,7 +827,7 @@ export class Campaign {
         profile: combatBuild,
         inventory: this.session.inventory
       }),
-      ...this.session.party.active.map((id) => new Companion(id, { level }))
+      ...this.session.party.active.map((id) => new Companion(id, { level, rank: this.session.party.ranks?.[id] }))
     ];
     if(quest?.canon==='dai-viet'&&quest.chapter===1){
       const hero=units[0];hero.passive=null;hero.stats.attackRange=1;hero.stats.physicalAtk=Math.max(hero.stats.physicalAtk,hero.stats.magicalAtk*.8);
@@ -933,8 +935,8 @@ export class Campaign {
         );
       if (pending.kind === 'main') {
         const q = MAIN_BY_ID[pending.questId];
-        rewards.xp = q.xp;
-        rewards.silver = q.silver;
+        rewards.xp = Math.round(q.xp * 1.6);
+        rewards.silver = Math.round(q.silver * 1.75);
         rewards.gear=this._completeMain(next, q,pending.seed);
       } else if (pending.kind === 'recruit')
         this._markChallenge(next, RECRUIT_BY_ID[pending.questId]);

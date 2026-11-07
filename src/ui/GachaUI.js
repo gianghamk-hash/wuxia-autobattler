@@ -84,7 +84,7 @@ export function mountGachaUI(app) {
     const table = n('table');
     table.className = 'gacha-rates';
     const head = n('tr');
-    for (const text of ['Bậc', 'Tỉ lệ gốc', 'Hoàn khi trùng'])
+    for (const text of ['Bậc', 'Tỉ lệ gốc', 'Trùng: +1 bậc (tối đa 6) và hoàn'])
       head.append(n('th', text));
     table.append(head);
     for (const r of RARITIES) {
@@ -101,12 +101,12 @@ export function mountGachaUI(app) {
       table,
       n(
         'p',
-        'Mỗi người cùng bậc có xác suất bằng nhau. Lượt thứ 10 liên tiếp chưa có bậc 4+ nâng kết quả thấp lên bậc 4; tỉ lệ bậc 5 vẫn 1%. Lượt thứ 80 chưa có bậc 5 bảo đảm bậc 5. Bậc 5 đặt lại cả hai bộ đếm; bậc 4 chỉ đặt lại mốc 10. Kết quả trùng vẫn tính bảo đảm. Hai mốc tính xuyên qua mọi lần mời, được lưu cùng tiến trình.',
+        'Mỗi người cùng bậc có xác suất bằng nhau. Lượt thứ 10 liên tiếp chưa có bậc 4+ nâng kết quả thấp lên bậc 4; tỉ lệ bậc 5 là 2%. Lượt thứ 80 chưa có bậc 5 bảo đảm bậc 5. Bậc 5 đặt lại cả hai bộ đếm; bậc 4 chỉ đặt lại mốc 10. Kết quả trùng vẫn tính bảo đảm. Hai mốc tính xuyên qua mọi lần mời, được lưu cùng tiến trình.',
         'hint'
       ),
       n(
         'p',
-        'Gói mời 5 kết quả giá 540 bạc; lượt đơn giá 60 bạc. Tỉ lệ mỗi kết quả và bộ đếm bảo đảm được giữ. Phải đủ toàn bộ bạc trước khi mời; hoàn trùng áp dụng sau khi trừ giá. Đây là tiền trong game.',
+        'Gói mời 5 kết quả giá 150 bạc; lượt đơn giá 35 bạc. Tỉ lệ mỗi kết quả và bộ đếm bảo đảm được giữ. Phải đủ toàn bộ bạc trước khi mời; hoàn trùng áp dụng sau khi trừ giá. Đây là tiền trong game.',
         'hint'
       )
     );
@@ -129,7 +129,7 @@ export function mountGachaUI(app) {
           n(
             'small',
             r.duplicate
-              ? `Đã có · hoàn ${r.refund} bạc`
+              ? `Trùng · bậc ${r.promotedTier ?? u.tier} · hoàn ${r.refund} bạc`
               : 'Mới · đã vào bộ sưu tập'
           )
         );

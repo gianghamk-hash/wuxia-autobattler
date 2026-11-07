@@ -1,7 +1,7 @@
 import { SECTS } from '../data/SectsData.js';
 import { SKILLS_BY_ID } from '../data/SkillTreeData.js';
 import { EQUIPMENT, EQUIPMENT_BY_ID } from '../data/EquipmentData.js';
-export const MAX_LEVEL = 20;
+export const MAX_LEVEL = 30;
 export const ATTRIBUTES = Object.freeze({ canCot: 'Căn Cốt', khiHai: 'Khí Hải', kinhLuc: 'Kình Lực', ngoTinh: 'Ngộ Tính', thanPhap: 'Thân Pháp', coDuyen: 'Cơ Duyên' });
 export const GEAR_SLOTS = Object.freeze({ weapon: 'Vũ khí', armor: 'Áo giáp', accessory: 'Ngọc bội', helmet: 'Mũ' });
 const owns = (inventory, id) => inventory.some(item => item.itemId === id && Number.isSafeInteger(item.quantity) && item.quantity > 0);

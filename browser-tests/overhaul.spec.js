@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function fresh(page){await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Hải An');await page.locator('#btn-new-game').click();await page.evaluate(()=>window.__game.engine.stop());}
 async function fixture(page,id='D16H01'){
  await page.evaluate(async id=>{

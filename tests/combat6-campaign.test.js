@@ -96,17 +96,17 @@ test("boss waves are continuous: no free HP/energy reset, no early result, and a
   assert.equal(b.result.bossPhases, 3);
   assert.equal(b.events.filter((e) => e.type === "boss:wave").length, 2);
 });
-test("five-result bundles retain their old prices and ten-draw guarantees carry across two calls", () => {
+test("five-result bundles use reduced prices and ten-draw guarantees carry across two calls", () => {
   const s = developed().snapshot(),
     one = rollGacha(s, 5, { random: () => 0 }),
     two = rollGacha(one.session, 5, { random: () => 0 });
-  assert.equal(one.price, 540);
+  assert.equal(one.price, 150);
   assert.equal(one.results.length, 5);
   assert.equal(two.results.at(-1).tier, 4);
   assert.throws(() => rollGacha(s, 10));
   const gear1 = drawEquipment(s, 5, { random: () => 0 }),
     gear2 = drawEquipment(gear1.session, 5, { random: () => 0 });
-  assert.equal(gear1.price, 720);
+  assert.equal(gear1.price, 200);
   assert.equal(gear1.results.length, 5);
   assert.equal(
     NEW_GEAR.find((e) => e.id === gear2.results.at(-1).id).rarity,

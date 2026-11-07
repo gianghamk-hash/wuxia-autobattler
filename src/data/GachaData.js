@@ -4,7 +4,7 @@ export const RARITIES = deepFreeze([
     tier: 1,
     name: 'Mộc',
     color: 'Xám',
-    rate: 50,
+    rate: 46,
     refund: 12,
     frame: 'Gỗ mộc và vải cũ'
   },
@@ -20,7 +20,7 @@ export const RARITIES = deepFreeze([
     tier: 3,
     name: 'Ngân',
     color: 'Xanh lam',
-    rate: 15,
+    rate: 16,
     refund: 24,
     frame: 'Bạc chạm góc'
   },
@@ -28,7 +28,7 @@ export const RARITIES = deepFreeze([
     tier: 4,
     name: 'Tử ngọc',
     color: 'Tím',
-    rate: 6,
+    rate: 8,
     refund: 30,
     frame: 'Mạ vàng khảm ngọc tím'
   },
@@ -36,17 +36,17 @@ export const RARITIES = deepFreeze([
     tier: 5,
     name: 'Long phượng',
     color: 'Vàng kim',
-    rate: 1,
+    rate: 2,
     refund: 36,
     frame: 'Rồng phượng mạ vàng'
   }
 ]);
 export const GACHA = deepFreeze({
-  singleCost: 60,
-  tenCost: 540,
+  singleCost: 35,
+  tenCost: 150,
   epicPity: 10,
   legendaryPity: 80,
   historyLimit: 50
 });
 export const rarityLabel = (tier) =>
-  `Bậc ${tier} · ${RARITIES[tier - 1]?.name ?? ''}`;
+  `Bậc ${tier} · ${(tier===6?'Thần Thánh':RARITIES[tier - 1]?.name) ?? ''}`;

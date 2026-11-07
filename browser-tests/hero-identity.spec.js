@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function start(page,name='Phong An'){
  await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();
  await expect(page.locator('#sect-picker')).toBeHidden();await expect(page.locator('#hero-sect')).toBeHidden();

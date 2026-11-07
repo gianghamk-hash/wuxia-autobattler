@@ -1,3 +1,4 @@
+import { showPrebattle } from '../ui/PrebattleUI.js';
 import {MAX_AFFINITY7} from '../data/MaxAffinity7.js';
 import {roleTag} from '../ui/RoleTagUI.js';
 import {mountTeamEffects} from '../ui/TeamEffects.js';
@@ -159,7 +160,7 @@ export class App {
       onRename: (name) => this.model.rename(name)
     });
     this.engine.addUpdater((dt) =>
-      this.model.update(dt * (this.cinematicRemaining > 0 ? 0.35 : 1))
+      !this.awaitingBattle && this.model.update(dt * (this.cinematicRemaining > 0 ? 0.35 : 1))
     );
     this.engine.addRenderer((_alpha, dt) => {
       if (!this.engine.paused)
@@ -1050,6 +1051,8 @@ export class App {
     this.setView('dialogue');
   }
   clearBattle() {
+    this.awaitingBattle=false;
+    document.getElementById('prebattle-dialog')?.remove();
     el('battle-log').replaceChildren();
     el('battle-stats').replaceChildren();
     el('battle-result-panel').hidden = true;
@@ -1110,6 +1113,7 @@ export class App {
     bus.emit(EVT.BATTLE_STATE_CHANGED, { running: true });
     this.setView('battle');
     this.updateBattleStatus();
+    showPrebattle(this);
     if (this.engine.paused)
       this.toast('Trận đã sẵn sàng. Bấm Tiếp tục để giao chiến.');
   }
@@ -1122,6 +1126,7 @@ export class App {
     for (const unit of battle.units.filter(u=>u.team!=='enemy'||!battle.bossPhase||u.alive)) {
       const card = node('article', undefined, 'battle-unit-card');
       card.dataset.team = unit.team;
+      decorateRarity(card,unit);
       const status = node('p'),
         inspect = node(
           'button',

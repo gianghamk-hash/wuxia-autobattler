@@ -1,3 +1,4 @@
+import { scalePromotedSkill } from './ProgressionBalance.js';
 import { deepFreeze } from './DataUtils.js';
 export const BOND_TITLES = deepFreeze({
   companion_01: 'Người giữ đường về',
@@ -298,6 +299,6 @@ export const BOND_VARIANTS = deepFreeze({
 });
 export function applyBondVariant(unit, mode) {
   if (mode === 'variant' && BOND_VARIANTS[unit.templateId])
-    unit.skills.ultimate = structuredClone(BOND_VARIANTS[unit.templateId]);
+    unit.skills.ultimate = scalePromotedSkill(structuredClone(BOND_VARIANTS[unit.templateId]), unit.promotionSkillBoost ?? 1);
   unit.bondConfigured = true;
 }

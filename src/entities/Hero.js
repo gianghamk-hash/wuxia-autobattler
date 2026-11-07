@@ -1,3 +1,4 @@
+import { ATTRIBUTE_BONUSES, SECT_PASSIVES } from '../data/ProgressionBalance.js';
 import { Unit } from './Unit.js';
 import { HERO_SKILLS } from '../data/HeroSkillsData.js';
 import { SECTS } from '../data/SectsData.js';
@@ -21,8 +22,7 @@ export class Hero extends Unit {
     this.equippedGear = structuredClone(build.equippedGear); this.activeEquipmentSets = [];
     const add = bonuses => { for (const [key, amount] of Object.entries(bonuses)) this.stats[key] += amount; };
     const a = this.attributes;
-    add({ maxHp: a.canCot * 25, magicalAtk: a.khiHai * 4, magicalDef: a.khiHai,
-      physicalAtk: a.kinhLuc * 4, dodgeRate: a.thanPhap * .002, critRate: a.coDuyen * .002 });
+    for (const [key, count] of Object.entries(a)) add(Object.fromEntries(Object.entries(ATTRIBUTE_BONUSES[key]).map(([stat, value]) => [stat, value * count])));
     for (const id of this.allocatedSkills) {
       const node = SKILLS_BY_ID[id]; add(node.stats);
       if (node.ultimate) this.skills.ultimate = structuredClone(node.ultimate);
@@ -32,6 +32,11 @@ export class Hero extends Unit {
     for (const set of EQUIPMENT_SETS) if (items.filter(item => item.setId === (set.setId??set.id)).length >= set.requiredPieces) {
       add(set.stats); this.activeEquipmentSets.push(set.id);
     }
+    this.sectPassives = (SECT_PASSIVES[sectId] ?? []).filter(p => build.level >= p.level);
+    for (const passive of this.sectPassives) {
+      for (const [key, ratio] of Object.entries(passive.ratios ?? {})) this.stats[key] *= 1 + ratio;
+      add(passive.stats ?? {});
+    }
     this.stats.hp = this.stats.maxHp;
   }
   getBuild() { return structuredClone(this.profile); }
@@ -39,7 +44,7 @@ export class Hero extends Unit {
     if (this.inCombat) throw new Error('Không thể đổi kỹ năng hoặc trang bị trong trận.');
     const replacement = new Hero(this.sect, { profile: next, inventory: this.inventory, id: this.id, team: this.team });
     // Recompute from base stats, never add bonuses repeatedly to an existing instance.
-    for (const key of ['stats', 'skills', 'profile', 'attributes', 'allocatedSkills', 'equippedGear', 'activeEquipmentSets']) this[key] = replacement[key];
+    for (const key of ['stats', 'skills', 'profile', 'attributes', 'allocatedSkills', 'equippedGear', 'activeEquipmentSets', 'sectPassives']) this[key] = replacement[key];
     return this.getBuild();
   }
   learnSkill(id) { return this._replaceBuild(allocateSkill(this.profile, id, this.inventory)); }
