@@ -110,5 +110,5 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 .unit-role-tag[data-role="support"] { color:#a6e8ca; background:#204b41; }
 .unit-role-tag[data-role="damage"] { color:#ffb2ac; background:#5a2d36; }
 .formation-units button { flex-wrap:wrap; }
-.formation-units button>.unit-role-tag { flex:0 0 auto; max-width:none; overflow:visible; }
-.formation-cell>.unit-role-tag { display:inline-flex; max-width:100%; overflow:visible; font-size:.65rem; padding:2px 4px; -webkit-line-clamp:unset; }
+.formation-units button>span.unit-role-tag { flex:0 0 auto; max-width:none; overflow:visible; }
+.formation-cell>span.unit-role-tag { display:inline-flex; max-width:100%; overflow:visible; font-size:.65rem; padding:2px 4px; -webkit-line-clamp:unset; }
