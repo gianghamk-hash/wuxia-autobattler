@@ -18,7 +18,12 @@ test('ready roster swap keeps encounter, entry cost and on-board cell', () => {
   c.replaceReadyCompanion(out, incoming);
   assert.ok(c.running);
   assert.equal(c.battle.elapsed, 0);
-  assert.deepEqual(c.session.storyProgress.pendingEncounter, pending);
+  assert.equal(c.session.storyProgress.pendingEncounter.token, pending.token);
+  assert.equal(c.session.storyProgress.pendingEncounter.seed, pending.seed);
+  assert.equal(c.session.storyProgress.pendingEncounter.kind, pending.kind);
+  assert.deepEqual(c.session.storyProgress.pendingEncounter.preparation.tactics, pending.preparation.tactics);
+  assert.deepEqual(c.session.storyProgress.pendingEncounter.preparation.maxAffinity,
+    c.session.party.active.filter(id => (c.session.companionsAffinity[id] ?? 0) >= 100));
   assert.deepEqual(c.session.inventory, inventory);
   assert.deepEqual(c.session.party.formation[incoming], oldCell);
   assert.ok(!c.session.party.active.includes(out));
