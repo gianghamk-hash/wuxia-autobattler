@@ -14,8 +14,10 @@ for(const width of [320,390,1280]){
     const cards=page.locator('.dungeon-tile');
     await expect(cards).toHaveCount(5);
     await expect(page.locator('.dungeon-tile-image')).toHaveCount(5);
-    const loaded=await cards.locator('img').evaluateAll(nodes=>nodes.every(im=>im.complete&&im.naturalWidth>0));
-    expect(loaded).toBe(true);
+    for(const image of await cards.locator('img').all()){
+      await image.scrollIntoViewIfNeeded();
+      await expect.poll(()=>image.evaluate(im=>im.complete&&im.naturalWidth>0)).toBe(true);
+    }
     const cols=await page.locator('.dungeon-card-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length);
     expect(cols).toBe(width<700?2:3);
     await page.locator('[data-bau-quick="50"]').click();
