@@ -1,5 +1,6 @@
 import { COMPANIONS } from './CompanionsData.js';
 import { DAI_VIET_CAST_BY_ID } from './DaiVietCast.js';
+import { COMPANION_SCENES_CHAPTER_ONE_BY_ID } from './CompanionScenesChapterOne.js';
 // Narrative content stage 1: no gameplay mutation. Every entry is anchored
 // to the canonical companion ID and reuses the character's actual portrait.
 const CHARACTER_ARCS = [
@@ -402,5 +403,14 @@ function buildMemory(arc) {
     ]
   };
 }
-export const COMPANION_MEMORIES = Object.freeze(CHARACTER_ARCS.map(buildMemory));
+export const COMPANION_MEMORIES = Object.freeze(CHARACTER_ARCS.map(arc => {
+  const memory=buildMemory(arc);
+  const authored=COMPANION_SCENES_CHAPTER_ONE_BY_ID[arc.id];
+  if(!authored) return memory;
+  return {...memory,cinematic:{place:authored.place,tone:authored.tone,prop:authored.prop},chapters:memory.chapters.map(chapter=>{
+    const scene=authored.scenes.find(s=>s.at===chapter.at);
+    if(!scene) return chapter;
+    return {...chapter,storyboard:scene.shots,...(scene.objective?{quest:{...chapter.quest,objective:scene.objective,failForward:scene.failForward}}:{}),...(scene.choices?{choices:scene.choices}:{}),...(scene.ending?{epilogue:scene.ending}:{})};
+  })};
+}));
 export const COMPANION_MEMORIES_BY_ID = Object.freeze(Object.fromEntries(COMPANION_MEMORIES.map(m=>[m.id,m])));
