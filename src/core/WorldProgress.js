@@ -148,6 +148,7 @@ export function validateTeam(team) {
     occupied.add(`${p.x},${p.y}`);
   }
   validateTactics(team.tactics, ids);
+  if(team.maxAffinity!==undefined&&(!Array.isArray(team.maxAffinity)||team.maxAffinity.length>5||new Set(team.maxAffinity).size!==team.maxAffinity.length||team.maxAffinity.some(id=>!team.active.includes(id))))fail('Duyên phận đội chia sẻ không hợp lệ.');
   if (team.variants !== undefined) {
     if (!team.variants || typeof team.variants !== 'object' || Array.isArray(team.variants)) fail('Biến thể đội chia sẻ không hợp lệ.');
     for (const [id, mode] of Object.entries(team.variants)) if (!team.active.includes(id) || !Object.hasOwn(BOND_VARIANTS, id) || !['base', 'variant'].includes(mode)) fail('Biến thể đội chia sẻ không hợp lệ.');
@@ -353,6 +354,7 @@ export function teamSnapshot(s) {
       .filter((i) => EQUIPMENT.some((e) => e.id === i.itemId))
       .map((i) => ({ itemId: i.itemId, quantity: 1 })),
     tactics: structuredClone(s.adventure.tactics),
+    maxAffinity:s.party.active.filter(id=>(s.companionsAffinity[id]??0)>=100),
     variants: Object.fromEntries(Object.entries(s.journey?.bonds.modes ?? {}).filter(([id]) => s.party.active.includes(id)))
   });
 }
@@ -545,6 +547,7 @@ export function makeDungeon(s, id, weekly, now) {
   };
 }
 export function validatePreparation(p) {
+  if(p?.maxAffinity!==undefined&&(!Array.isArray(p.maxAffinity)||p.maxAffinity.length>5||new Set(p.maxAffinity).size!==p.maxAffinity.length||p.maxAffinity.some(id=>!Object.hasOwn(COMPANIONS_BY_ID,id))))fail('Duyên phận chuẩn bị không hợp lệ.');
   if (!p || !integer(p.training, 10) || !integer(p.forging, 10))
     fail('Khí công trước trận không hợp lệ.');
   validateTactics(p.tactics, []);

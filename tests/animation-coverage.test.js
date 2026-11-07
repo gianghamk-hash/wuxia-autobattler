@@ -12,10 +12,10 @@ import {GridSystem} from '../src/combat/GridSystem.js';
 import {getSkillVisual} from '../src/data/SkillVisualsData.js';
 import {fighterMotion} from '../src/ui/FighterMotion.js';
 
-test('every classic NPC and canonical actor resolves a real asset; only paper artisan discloses portrait mode',()=>{
+test('every classic NPC and canonical actor resolves a real asset; all have six-pose atlases',()=>{
  for(const p of [...NPCS,...DAI_VIET_CAST]){const unit={id:p.id,characterId:p.id};assert.ok(fighterKey(unit),p.id);assert.ok(existsSync(new URL(fighterURL(fighterKey(unit)))),p.id);}
  for(const id of FIGHTERS)assert.ok(existsSync(new URL(fighterURL(id))),id);
- assert.deepEqual(FIGHTERS.filter(fighterUsesPortrait),['tho_giay']);
+ assert.deepEqual(FIGHTERS.filter(fighterUsesPortrait),[]);
  assert.equal(fighterKey(new Hero(null)),'hero_traveler');
  assert.match(fighterURL('doi_truong'),/npc_son_quan/);
  assert.match(fighterURL('truong_xom'),/npc_dao_tinh/);

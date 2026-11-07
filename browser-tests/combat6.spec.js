@@ -24,6 +24,10 @@ test("boss phase HUD follows three continuous squads and settles one reward on m
   await ready(page);
   await page.evaluate(() => {
     const a = window.__game;
+    // Isolate phase continuity from the newly unlocked healing passives.
+    const snapshot=a.model.snapshot();
+    for(const id of snapshot.party.active)snapshot.companionsAffinity[id]=15;
+    a.model.load(snapshot);
     a.model.startChapterBoss(18);
     a.enterBattle();
     a.engine.stop();

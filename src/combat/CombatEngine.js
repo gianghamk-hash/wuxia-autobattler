@@ -1,3 +1,4 @@
+import {MaxAffinityDirector} from './MaxAffinityDirector.js';
 import {
   ELEMENTS,
   elementMultiplier,
@@ -141,12 +142,14 @@ export class CombatEngine {
           );
       }
     });
+    this.maxAffinity = new MaxAffinityDirector(this);
   }
   emit(event) {
     const entry = { ...event, time: this.elapsed };
     this.events.push(entry);
     if (this.events.length > 200) this.events.shift();
     this.onEvent(entry);
+    this.maxAffinity?.event(entry);
   }
   start() {
     if (this.state !== 'idle') return false;
@@ -239,6 +242,7 @@ export class CombatEngine {
       for (const unit of this.units) this.statuses.update(unit, step);
       this.director.update();
       this.mission?.update(step);
+      this.maxAffinity.tick();
       this.grid.removeDead();
       if (this.checkResult()) break;
       // Stable initiative order; speed controls never alter iteration or random calls.
@@ -635,7 +639,7 @@ export class CombatEngine {
         source.gainEnergy(CONFIG.COMBAT.ENERGY_ON_KILL);
         this.records.get(source.id).kills++;
       }
-      this.emit({ type: 'death', targetId: target.id });
+      this.emit({ type: 'death', actorId:source?.id,targetId: target.id });
       this.director.onDeath(target);
     }
     if (

@@ -83,8 +83,7 @@ export function fighterKey(unit) {
 }
 export const fighterURL = (id) => {
   const modelId=LEGACY_FIGHTERS[id]??id;
-  if(modelId==='tho_giay')return asset('npcs/tho_giay.webp');
   return asset((CAST_FIGHTERS7.includes(modelId)?'fighters7/':NPC_FIGHTERS7.includes(modelId)||modelId==='tho_giay'?'fighters7/npc_':'fighters/') + modelId + '.webp');
 };
-// The paper artisan has portrait motion until her dedicated atlas is authored.
-export const fighterUsesPortrait = id => id==='tho_giay';
+// All registered characters now resolve six-pose atlases.
+export const fighterUsesPortrait = () => false;

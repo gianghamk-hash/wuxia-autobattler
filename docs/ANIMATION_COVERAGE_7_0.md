@@ -12,9 +12,9 @@ Bảy NPC của tuyến truyện cũ chưa có khóa mô hình trước lần s�
 | Bà cụ giữ kho | Dùng atlas Bạch Sơn, cùng chân dung gốc |
 | Thư lại | Dùng atlas Lục Thư, cùng chân dung gốc |
 | Con gái Đỗ Mậu | Dùng atlas Liên Sư, cùng chân dung gốc |
-| Thợ giấy | Chuyển động từ chân dung gốc; chưa có atlas sáu tư thế riêng |
+| Thợ giấy | Đã bổ sung atlas riêng sáu tư thế dân sự, nền trong suốt; xem paper-artisan-manifest.json |
 
-Không đổi tên truyện, chiêu, chỉ số hay luật chiến đấu theo atlas dùng chung. Thợ giấy là vai dân sự; giao diện ghi rõ đây là chuyển động chân dung và không trình bày như mô hình sáu tư thế. Tạo atlas riêng đã bị dịch vụ image_gen từ chối do hết hạn mức; không ghi nhận ảnh mới hoặc dùng ảnh nhân vật khác thay thế.
+Không đổi tên truyện, chiêu, chỉ số hay luật chiến đấu theo atlas dùng chung. Thợ giấy là vai dân sự; sau khi hạn mức tạo ảnh hồi lại đã bổ sung atlas riêng sáu tư thế làm giấy, không gán tuyệt kỹ chiến đấu. Nguồn tham chiếu, prompt, kích thước, độ trong suốt và SHA-256 được ghi trong paper-artisan-manifest.json.
 
 Renderer bổ sung nhịp thở, bước chạy, đà đánh, vận công và trúng đòn theo tư thế sẵn có. Khung xem mô hình chuyển động theo tư thế được chọn; gục/nghỉ giữ tĩnh. Đây là biến đổi 2D trên các tư thế đã có, không phải các khung hình vẽ mới. Cả renderer và khung xem tuân thủ giảm chuyển động. Cast từ boss/script cũng kích hoạt tư thế ra chiêu. Hiệu ứng ảnh có vận chiêu, bay và nở khi tác động; đường ném có độ cong, hộ thuẫn ở người nhận.
 
