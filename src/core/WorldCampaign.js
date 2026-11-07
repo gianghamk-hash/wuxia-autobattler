@@ -58,6 +58,7 @@ function fromTeam(team, side, grid) {
   ];
   for (const u of units) {
     applyBondVariant(u, team.variants?.[u.templateId] ?? 'base');
+    u.maxAffinity=(team.maxAffinity??[]).includes(u.templateId);
     const original =
         u.id === 'enemy_hero' ? 'hero' : u.id.replace(/^enemy_/, ''),
       p = team.formation[original];
@@ -131,6 +132,7 @@ export const worldMethods = {
     };
     for (const u of units.filter((u) => u.team === 'home')) {
       if(isDaiViet(this.session)&&u.id==='hero')Object.assign(u,heroAppearance(this.session));
+      if(this.session?.party?.active?.includes(u.id)){const locked=pending.preparation?.maxAffinity??(pending.kind==='dungeon'?this.session.adventure.dungeon?.squad.maxAffinity:undefined);u.maxAffinity=locked?locked.includes(u.templateId):(this.session.companionsAffinity[u.id]??0)>=100;}
       if (!u.bondConfigured) applyBondVariant(u, this.session?.journey?.bonds.modes[u.templateId] ?? 'base');
       if(isDaiViet(this.session)&&u.id!=='guide')applyDaiVietName(u);
       u.sect = isDaiViet(this.session)&&u.id==='hero'&&!hasEnrollment(this.session)?null:prep.tactics.affiliations[u.id] ?? u.sect;

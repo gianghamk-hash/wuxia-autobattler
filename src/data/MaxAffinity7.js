@@ -1,0 +1,72 @@
+import {deepFreeze} from './DataUtils.js';
+const a=(type,target,value=0,duration=4)=>({type,target,value,duration});
+const rows=[
+ ['Côn Giữ Tình Thâm','attack',[a('damage','row_enemies',.25),a('shield','self',.06)],{every:3,cd:6}],
+ ['Thái Cực Đồng Tâm','ally_low',[a('shield','weakest_ally',.16),a('cleanse','self')],{cd:12}],
+ ['Lan Hương Tiếp Mạch','heal',[a('energy','event_target',12)],{cd:5}],
+ ['Tinh Tiêu Lưu Độc','attack',[a('poison','back_enemy',.1)],{every:4,cd:7}],
+ ['Kim Chung Tái Khởi','shield_break',[a('root','nearest_enemy',0,1.2),a('shield','self',.1)],{cd:12}],
+ ['Thanh Xà Đoạn Khí','ultimate',[a('physical_defense_down','strongest_enemy',.2,5),a('drain','strongest_enemy',15)],{cd:8}],
+ ['Thiên Cơ Cộng Chấn','crit',[a('damage','row_enemies',.35)],{cd:6}],
+ ['Hồng Ảnh Tái Vũ','kill',[a('dodge_up','self',.2),a('energy','self',18)],{cd:6}],
+ ['Tịnh Liên Sơ Trận','start',[a('regen','adjacent_allies',.03)],{limit:1}],
+ ['Bách Bộ Đinh Phong','attack',[a('root','back_enemy',0,1.5),a('damage','back_enemy',.3)],{every:5,cd:8}],
+ ['Chén Trà Tri Kỷ','interval',[a('heal','weakest_ally',.08),a('energy','weakest_ally',10)],{interval:10}],
+ ['Song Kiếm Đồng Hành','attack',[a('attack_up','self',.12),a('damage','event_target',.3)],{every:4,cd:6}],
+ ['Quy Giáp Hồi Âm','hurt',[a('melee_reflect','self',.15)],{every:6,cd:8}],
+ ['Cổ Vũ Tàn Đăng','ultimate',[a('poison','row_enemies',.15,5),a('drain','weakest_enemy',8)],{cd:9}],
+ ['Yến Lược Hộ Thân','dodge',[a('shield','self',.08),a('energy','self',12)],{cd:7}],
+ ['Lụa Khóa Chiến Ý','enemy_ultimate',[a('charm','event_actor',0,1.3)],{cd:14}],
+ ['Lò Đan Truyền Hỏa','ally_ultimate',[a('energy','lowest_energy_ally',25)],{cd:8}],
+ ['Thiết Ngạch Khai Mạch','attack',[a('physical_defense_down','strongest_enemy',.12)],{every:3,cd:7}],
+ ['Kiếm Phán Dư Âm','enemy_low',[a('damage','weakest_enemy',.8)],{cd:10,limit:3}],
+ ['Tri Kỷ Ba Chén','ultimate',[a('heal','self',.06),a('dodge_up','self',.12),a('attack_up','self',.1)],{cd:10}],
+ ['Mái Chèo Hộ Bến','hurt',[a('root','nearest_enemy',0,1),a('shield','self',.08)],{every:4,cd:9}],
+ ['Lá Lành Che Bạn','ally_low',[a('regen','weakest_ally',.04),a('cleanse','weakest_ally')],{cd:12}],
+ ['Mộc Hàng Bền Chặt','start',[a('shield','front_allies',.1,6)],{limit:1}],
+ ['Lam Kiếm Lưu Ngân','attack',[a('bleed','event_target',.14),a('energy','self',8)],{every:3,cd:7}],
+ ['Tin Đến Trước Gió','start',[a('energy','hero',20),a('accuracy_down','nearest_enemy',.12,5)],{limit:1}],
+ ['Mõ Gọi Người Còn','ally_death',[a('energy','all_allies',15),a('stun','nearest_enemy',0,.8)],{limit:1}],
+ ['Khép Mạn Giữ Người','outnumbered',[a('shield','self',.18,6),a('attack_up','self',.15,6)],{limit:1}],
+ ['Sỏi Rơi Rối Hàng','crit',[a('accuracy_down','row_enemies',.14),a('damage','row_enemies',.2)],{cd:8}],
+ ['Cửa Còn Người Giữ','self_low',[a('cleanse','self'),a('shield','self',.25,6)],{limit:1}],
+ ['Mũi Vá Hồi Duyên','receive_heal',[a('shield','self',.07),a('energy','lowest_energy_ally',8)],{cd:7}],
+ ['Nện Trụ Ngắt Thế','enemy_ultimate',[a('physical_defense_down','event_actor',.25,5),a('root','event_actor',0,1)],{cd:12}],
+ ['Liễu Diệp Tán Hoàn','attack',[a('damage','all_enemies',.2)],{every:5,cd:9}],
+ ['Trúc Yên Gột Độc','heal',[a('cleanse','event_target'),a('regen','event_target',.015)],{cd:8}],
+ ['Giỏ Đan Chặn Lối','start',[a('root','back_enemy',0,2),a('dodge_up','self',.1)],{limit:1}],
+ ['Chén Cạn Chưa Lui','hurt',[a('energy','self',20),a('bleed','nearest_enemy',.12)],{every:5,cd:8}],
+ ['Tĩnh Hạc Che Cánh','interval',[a('shield','adjacent_allies',.06),a('cleanse','adjacent_allies')],{interval:12}],
+ ['Liên Châm Song Hộ','ally_low',[a('heal','weakest_ally',.1),a('shield','self',.06)],{cd:12,limit:3}],
+ ['Hải Âu Cắt Gió','attack',[a('drain','back_enemy',12),a('damage','back_enemy',.4)],{every:4,cd:8}],
+ ['Minh Khuê Định Chứng','ultimate',[a('internal_injury','strongest_enemy',.25,5),a('damage','strongest_enemy',.25)],{cd:10}],
+ ['Lâm Chung Hậu Hộ','shield_break',[a('root','adjacent_enemies',0,1.2),a('regen','self',.03)],{cd:12}],
+ ['Lạc Anh Tiếp Sức','kill',[a('energy','weakest_ally',15),a('heal','self',.1)],{cd:7}],
+ ['Huyền Châm Song Độc','poison_damage',[a('burn','weakest_enemy',.08,3)],{cd:8}],
+ ['Nguyệt Luân Yểm Ảnh','ultimate',[a('accuracy_down','all_enemies',.15)],{cd:10}],
+ ['Thiên Chung Cộng Vệ','start',[a('melee_reflect','all_allies',.08,6)],{limit:1}],
+ ['Thiên Cơ Xuyên Trụ','attack',[a('damage','column_enemies',.25),a('physical_defense_down','column_enemies',.08,3)],{every:3,cd:8}],
+ ['Lãng Ảnh Phản Bộ','dodge',[a('stun','nearest_enemy',0,.7),a('damage','nearest_enemy',.4)],{cd:8}],
+ ['Vạn Liên Giữ Lời','ally_death',[a('regen','all_allies',.025),a('cleanse','all_allies')],{limit:1}],
+ ['Long Mạch Tĩnh Chiến','ultimate',[a('drain','all_enemies',10),a('shield','self',.1)],{cd:12}],
+ ['Phượng Hương Hộ Mệnh','ally_low',[a('shield','weakest_ally',.12,6),a('heal','weakest_ally',.1),a('cleanse','weakest_ally')],{limit:1}],
+ ['Trường Sơn Nối Kiếm','kill',[a('damage','nearest_enemy',.6),a('energy','self',15)],{cd:8}],
+ ['Tiếng Sáo Dẫn Đường','start',[a('dodge_up','weakest_ally',.2,5)],{limit:1}],
+ ['Sợi Lụa Nối Mạch','ally_ultimate',[a('shield','event_actor',.1),a('regen','event_actor',.02,3)],{cd:9}],
+ ['Thiết Yến Chia Lực','hurt',[a('energy','lowest_energy_ally',12),a('shield','self',.08)],{every:3,cd:9}],
+ ['Vệ Thanh Giữ Cửa','enemy_ultimate',[a('shield','front_allies',.08),a('cleanse','weakest_ally')],{cd:12}],
+ ['Thanh Tâm Đêm Dài','interval',[a('heal','all_allies',.035),a('energy','self',8)],{interval:9}],
+ ['Truy Phong Khóa Đuôi','attack',[a('root','rear_pair',0,1),a('bleed','rear_pair',.08,3)],{every:5,cd:10}],
+ ['Minh Kính Hồi Chiếu','crit',[a('drain','event_target',18),a('heal','self',.04)],{cd:8}],
+ ['Hùng Phong Bất Khuất','self_low',[a('stun','row_enemies',0,1),a('attack_up','self',.2,5)],{limit:1}],
+ ['Thánh Mẫu Giữ Đội','ally_death',[a('physical_defense_down','nearest_enemy',.2),a('shield','all_allies',.09)],{limit:1}],
+ ['Liên Đăng Đồng Thanh','ally_ultimate',[a('energy','all_allies',8),a('cleanse','event_actor')],{cd:10}]
+];
+const targets={self:'bản thân',weakest_ally:'đồng minh có tỉ lệ HP thấp nhất',lowest_energy_ally:'đồng minh ít nộ nhất',all_allies:'cả đội còn sống',adjacent_allies:'đồng minh trong 1 ô',front_allies:'đồng minh ở cột tiền tuyến',hero:'nhân vật chính',nearest_enemy:'địch gần nhất',back_enemy:'địch ở xa tuyến mình nhất',strongest_enemy:'địch có công cao nhất',weakest_enemy:'địch có tỉ lệ HP thấp nhất',all_enemies:'toàn bộ địch',adjacent_enemies:'địch trong 1 ô',row_enemies:'địch cùng hàng với mục tiêu gần nhất',column_enemies:'địch cùng cột với mục tiêu gần nhất',rear_pair:'hai địch xa tuyến mình nhất',event_actor:'người vừa ra chiêu',event_target:'mục tiêu vừa bị tác động'};
+const pct=n=>Number((n*100).toFixed(2))+'%';
+const triggerText={start:'Vào trận',attack:'Ra chiêu thường',ally_low:'Khi có đồng minh dưới 35% HP',self_low:'Khi bản thân dưới 35% HP',enemy_low:'Khi có địch dưới 30% HP',heal:'Khi hồi được HP cho đồng minh',receive_heal:'Khi nhận hồi máu',ultimate:'Khi dùng tuyệt kỹ',crit:'Khi gây sát thương bạo kích',kill:'Khi hạ địch',hurt:'Khi nhận sát thương HP',dodge:'Khi địch đánh trượt bản thân',shield_break:'Khi đòn đánh phá hết khiên bản thân',enemy_ultimate:'Khi địch ra tuyệt kỹ',ally_ultimate:'Khi đồng đội khác ra tuyệt kỹ',ally_death:'Khi một đồng đội khác gục',outnumbered:'Khi số quân địch còn sống nhiều hơn đội mình',poison_damage:'Khi độc của bản thân gây sát thương',interval:'Theo thời gian giao chiến'};
+export function affinityActionText(e){const t=targets[e.target],v=pct(e.value);return({damage:`gây sát thương chuẩn bằng ${v} công cao nhất của người kích hoạt lên ${t}`,heal:`hồi ${v} HP tối đa cho ${t}`,shield:`tạo khiên bằng ${v} HP tối đa cho ${t} trong ${e.duration}s`,energy:`tiếp ${e.value} nộ cho ${t}`,drain:`rút tối đa ${e.value} nộ của ${t}`,cleanse:`thanh tẩy khống chế và độc trên ${t}`,regen:`hồi ${v} HP tối đa mỗi giây cho ${t} trong ${e.duration}s`,poison:`gây độc bằng ${v} công mỗi giây lên ${t} trong ${e.duration}s`,burn:`thiêu đốt ${t} bằng ${v} công mỗi giây trong ${e.duration}s`,bleed:`gây chảy máu bằng ${v} công mỗi giây lên ${t} trong ${e.duration}s`,root:`trói ${t} trong ${e.duration}s`,stun:`làm choáng ${t} trong ${e.duration}s`,charm:`mê hoặc ${t} trong ${e.duration}s`,attack_up:`tăng ${v} công cho ${t} trong ${e.duration}s`,dodge_up:`tăng ${v} né tránh cho ${t} trong ${e.duration}s`,melee_reflect:`cho ${t} phản ${v} sát thương cận chiến trong ${e.duration}s`,accuracy_down:`giảm ${v} chính xác của ${t} trong ${e.duration}s`,physical_defense_down:`giảm ${v} ngoại phòng của ${t} trong ${e.duration}s`,internal_injury:`giảm ${v} lượng nộ nhận vào của ${t} trong ${e.duration}s`})[e.type];}
+export const MAX_AFFINITY7=deepFreeze(Object.fromEntries(rows.map(([name,trigger,actions,rule],i)=>{
+ const id='companion_'+String(i+1).padStart(2,'0');
+ return[id,{id,name,trigger,actions,cd:rule.cd??0,every:rule.every??1,interval:rule.interval??0,limit:rule.limit??null,description:`${triggerText[trigger]}${rule.every?' (mỗi '+rule.every+' lần)':''}${rule.interval?' (mỗi '+rule.interval+'s)':''}: ${actions.map(affinityActionText).join('; ')}.${rule.cd?' Hồi '+rule.cd+'s.':''}${rule.limit?' Tối đa '+rule.limit+' lần/trận.':''}`}];
+})));

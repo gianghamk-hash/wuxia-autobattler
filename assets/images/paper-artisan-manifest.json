@@ -1,0 +1,24 @@
+{
+  "id": "tho_giay",
+  "file": "assets/images/fighters7/npc_tho_giay.webp",
+  "reference": "assets/images/npcs/tho_giay.webp",
+  "styleReference": "assets/images/fighters7/npc_tho_bay.webp",
+  "generator": "built-in image_gen",
+  "width": 1536,
+  "height": 1024,
+  "grid": [
+    3,
+    2
+  ],
+  "poses": [
+    "idle",
+    "walk",
+    "talk",
+    "help",
+    "surprise",
+    "rest"
+  ],
+  "sha256": "a40f5e276eff99a1b739763854e45d1ba82715f6f9e98d0be8ff93debb4c8bd5",
+  "transparentRatio": 0.7036991119384766,
+  "prompt": "Six-pose full-body female Vietnamese paper artisan sprite atlas, exact 3-column 2-row 1536x1024 grid. Preserve original portrait identity, indigo tunic, beige apron, dark bun and ribbon. Standing, walking, talking, offering paper, surprised, seated resting. Painterly historical RPG, true transparent alpha outside silhouettes, no text, no scene. Background extraction follow-up removes all backdrop while preserving pose layout."
+}

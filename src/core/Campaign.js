@@ -753,7 +753,8 @@ export class Campaign {
       preparation: {
         tactics: structuredClone(next.adventure.tactics),
         training: next.adventure.training,
-        forging: next.adventure.forging
+        forging: next.adventure.forging,
+        maxAffinity:next.party.active.filter(id=>(next.companionsAffinity[id]??0)>=100)
       }
     };
     if (['main','recruit'].includes(kind) && Object.hasOwn(MISSIONS, questId))
@@ -767,7 +768,8 @@ export class Campaign {
           autoUltimate: next.adventure.tactics.autoUltimate
         },
         training: d.training,
-        forging: d.forging
+        forging: d.forging,
+        maxAffinity:[...(d.squad.maxAffinity??d.squad.active.filter(id=>(next.companionsAffinity[id]??0)>=100))]
       };
     }
     if (next.adventure.tactics.food)

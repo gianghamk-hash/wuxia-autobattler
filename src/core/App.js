@@ -1,3 +1,4 @@
+import {MAX_AFFINITY7} from '../data/MaxAffinity7.js';
 import {roleTag} from '../ui/RoleTagUI.js';
 import {mountTeamEffects} from '../ui/TeamEffects.js';
 import {continuityFor} from '../data/StoryContinuity.js';
@@ -743,6 +744,7 @@ export class App {
       fill.style.width = `${session.companionsAffinity[id] ?? 0}%`;
       meter.append(fill);
       body.append(meter);
+      const bondPerk=MAX_AFFINITY7[id];if(bondPerk){const active=(session.companionsAffinity[id]??0)>=100;body.append(node('p',`${active?'Duyên phận tối đa đã kích hoạt':'Duyên phận 100/100 mở'} · ${bondPerk.name}`,'max-affinity-label'));}
       const controls = node('div', undefined, 'controls'),
         toggle = node(
           'button',
@@ -1272,10 +1274,10 @@ export class App {
     const effects =
       (this.model.session.settings.effects ?? true) &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (event.type === 'ultimate' && effects) {
-      this.cinematicRemaining = 0.32;
+    if (['ultimate','affinity:proc'].includes(event.type) && effects) {
+      if(event.type==='ultimate')this.cinematicRemaining = 0.32;
       const banner = el('ultimate-banner');
-      banner.textContent = event.name;
+      banner.textContent = (event.type==='affinity:proc'?'Duyên phận · ':'')+event.name;
       banner.classList.remove('show');
       void banner.offsetWidth;
       banner.classList.add('show');
@@ -1323,6 +1325,7 @@ export class App {
       text = `${name(event.targetId)} nhận ${Math.ceil(event.amount)} sát thương${event.crit ? ' bạo kích' : ''}${event.absorbed ? `; khiên đỡ ${Math.ceil(event.absorbed)}` : ''}`;
     if (event.type === 'heal')
       text = `${name(event.targetId)} hồi ${Math.ceil(event.amount)} HP`;
+    if(event.type==='affinity:proc')text=`${name(event.actorId)} kích hoạt duyên phận · ${event.name}`;
     if (event.type === 'ultimate')
       text = `${name(event.actorId)} tung ${event.name}`;
     if (event.type === 'death') text = `${name(event.targetId)} bị hạ`;

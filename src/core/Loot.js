@@ -1,6 +1,7 @@
 import {GEAR_RARITIES,GEAR_DRAW,NEW_GEAR,STORY_GEAR} from '../data/GearCatalog.js';
 import {sectReady} from '../data/HeroIdentity.js';
-import {pay,give} from './WorldProgress.js';
+import {EQUIPMENT_BY_ID} from '../data/EquipmentData.js';
+import {pay,give,count as itemCount,log} from './WorldProgress.js';
 import {useEntry} from './DungeonEntries.js';
 import {seededRandom} from '../combat/CombatMath.js';
 const fail=t=>{throw Error(t);},integer=n=>Number.isSafeInteger(n)&&n>=0;
@@ -8,23 +9,26 @@ export const freshLoot=()=>({version:1,total:0,sinceExcellent:0,sinceExceptional
 export function validateLoot(l){
  if(!l||l.version!==1||![l.total,l.sinceExcellent,l.sinceExceptional].every(integer)||l.sinceExcellent>=10||l.sinceExceptional>=50||l.sinceExcellent>l.sinceExceptional||l.sinceExceptional>l.total||!Array.isArray(l.history)||l.history.length!==Math.min(l.total,40)||!l.bossWins||Object.getPrototypeOf(l.bossWins)!==Object.prototype)fail('Tiến trình trang bị không hợp lệ.');
  for(const[k,n]of Object.entries(l.bossWins))if(!/^([1-9]|1[0-9]|20)$/.test(k)||!integer(n)||n<1)fail('Lượt boss không hợp lệ.');
- l.history.forEach((r,i)=>{const item=NEW_GEAR.find(e=>e.id===r?.id);if(!r||r.pull!==l.total-l.history.length+i+1||!item||!integer(r.time)||!['none','excellent','exceptional'].includes(r.guarantee)||r.guarantee==='excellent'&&item.tier<3||r.guarantee==='exceptional'&&item.tier!==4)fail('Lịch sử vòng quay trang bị không hợp lệ.');});
+ l.history.forEach((r,i)=>{if(r?.duplicate!==undefined&&(typeof r.duplicate!=='boolean'||!integer(r.refund)||r.refund>GEAR_DRAW.tenCost||!r.duplicate&&r.refund!==0))fail('Hoàn bạc trang bị không hợp lệ.');const item=NEW_GEAR.find(e=>e.id===r?.id);if(!r||r.pull!==l.total-l.history.length+i+1||!item||!integer(r.time)||!['none','excellent','exceptional'].includes(r.guarantee)||r.guarantee==='excellent'&&item.tier<3||r.guarantee==='exceptional'&&item.tier!==4)fail('Lịch sử vòng quay trang bị không hợp lệ.');});
 }
 const secureRandom=()=>{if(!globalThis.crypto?.getRandomValues)fail('Thiết bị chưa hỗ trợ quay an toàn.');return globalThis.crypto.getRandomValues(new Uint32Array(1))[0]/4294967296;};
 export function drawEquipment(session,count,{random=secureRandom,now=Date.now()}={}){
  if(![1,5].includes(count)||!sectReady(session))fail('Nhập môn trước khi quay trang bị; chọn 1 hoặc 5 lượt.');
  if(session.storyProgress.pendingEncounter)fail('Kết thúc trận đang chờ trước khi quay trang bị.');
  const s=structuredClone(session);s.loot??=freshLoot();validateLoot(s.loot);const price=count===5?GEAR_DRAW.tenCost:GEAR_DRAW.singleCost;pay(s,'silver',price);
+ let refund=0,duplicates=0;
  const roll=()=>{const n=random();if(!Number.isFinite(n)||n<0||n>=1)fail('Kết quả quay không hợp lệ.');return n;},results=[];
  for(let i=0;i<count;i++){
   const l=s.loot;let n=roll()*100,rank=4;
   for(const r of GEAR_RARITIES){n-=r.rate;if(n<0){rank=r.rank;break;}}
   const guarantee=l.sinceExceptional===49?'exceptional':l.sinceExcellent===9?'excellent':'none';
   if(guarantee==='exceptional')rank=4;else if(guarantee==='excellent')rank=Math.max(3,rank);
-  const pool=NEW_GEAR.filter(e=>e.tier===rank),item=pool[Math.floor(roll()*pool.length)];give(s,item.id,1);l.total++;l.sinceExcellent=rank>=3?0:l.sinceExcellent+1;l.sinceExceptional=rank===4?0:l.sinceExceptional+1;
-  const row={pull:l.total,id:item.id,time:Math.max(0,Math.floor(now)),guarantee};l.history.push(row);if(l.history.length>40)l.history.shift();results.push(row);
+  const pool=NEW_GEAR.filter(e=>e.tier===rank),item=pool[Math.floor(roll()*pool.length)],duplicate=itemCount(s,item.id)>0;
+  const nextRefund=duplicate?Math.round(price*.8*(++duplicates)/count):refund,rowRefund=nextRefund-refund;refund=nextRefund;
+  if(rowRefund)give(s,'silver',rowRefund);give(s,item.id,1);l.total++;l.sinceExcellent=rank>=3?0:l.sinceExcellent+1;l.sinceExceptional=rank===4?0:l.sinceExceptional+1;
+  const row={pull:l.total,id:item.id,time:Math.max(0,Math.floor(now)),guarantee,duplicate,refund:rowRefund};l.history.push(row);if(l.history.length>40)l.history.shift();results.push(row);
  }
- validateLoot(s.loot);return{session:s,results,price};
+ validateLoot(s.loot);return{session:s,results,price,refund};
 }
 export const chapterBossAvailable=(s,c)=>s.storyProgress.storyRevision===4&&sectReady(s)&&Number.isInteger(c)&&c>=1&&c<=20&&s.storyProgress.completedQuests.includes(`D${String(c).padStart(2,'0')}H20`);
 export function chapterBossRewards(s,c){const factor=Math.max(.1,1-Math.max(0,s.hero.level-Math.min(20,c+1)-2)*.1);return{xp:Math.max(1,Math.round((20+c*8)*factor)),silver:Math.max(1,Math.round((12+c*3)*factor))};}
@@ -40,7 +44,10 @@ export function storyEquipment(s,q,seed){
  if(q.boss&&q.encounter)drops.push(...bossLoot(s,q.chapter,seed,{story:true}));
  return drops;
 }
+export const gearSalePrice=item=>({common:12,rare:28,excellent:60,exceptional:120})[item?.rarity]??12;
+export const spareEquipment=(s,id)=>Math.max(0,itemCount(s,id)-(Object.values(s.hero.equippedGear).includes(id)?1:0));
 export const lootMethods={
+ sellEquipment(id,quantity=1){this._guard();const item=typeof id==='string'&&Object.hasOwn(EQUIPMENT_BY_ID,id)?EQUIPMENT_BY_ID[id]:null;if(!item||!Number.isSafeInteger(quantity)||quantity<1)fail('Trang bị hoặc số lượng bán không hợp lệ.');let silver=0;this._mutate(s=>{if(s.storyProgress.pendingEncounter||s.adventure.dungeon)fail('Kết thúc trận hoặc lượt bí cảnh trước khi bán.');if(quantity>spareEquipment(s,id))fail('Không đủ đồ dư; giữ lại trang bị đang mặc.');silver=gearSalePrice(item)*quantity;pay(s,id,quantity);give(s,'silver',silver);log(s,`Bán ${quantity} ${item.name}: +${silver} bạc.`,this.now());},'gear-sale');return{quantity,silver};},
  drawEquipment(count){this._guard();const r=drawEquipment(this.snapshot(),count,{now:this.now()});this._commit(r.session,'gear-draw');return r;},
  startChapterBoss(chapter){this._guard();if(!chapterBossAvailable(this.session,chapter))fail('Hoàn thành chương này trước khi nhận thử thách boss.');this._mutate(s=>{if(s.storyProgress.pendingEncounter||s.adventure.dungeon)fail('Hãy kết thúc hành trình đang chờ.');useEntry(s,'boss_'+chapter);this._pending(s,'chapterBoss',String(chapter));},'encounter');return this.retryEncounter();}
 };
