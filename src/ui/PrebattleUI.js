@@ -1,3 +1,5 @@
+import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
+import { storyPerson } from '../data/DaiVietCast.js';
 import { ELEMENTS, SECT_ELEMENT, elementMultiplier } from '../data/StrategyData.js';
 import { SYNERGIES } from '../data/SynergiesData.js';
 import { BOARD_COLS, BOARD_ROWS, HOME_WIDTH, CELL_WIDTH, CELL_HEIGHT } from '../combat/BoardGeometry.js';
@@ -16,11 +18,55 @@ export function showPrebattle(app){
  const battle=app.model.battle,home=battle.units.filter(u=>u.team==='home'&&!u.isObject&&u.alive),enemies=battle.units.filter(u=>u.team==='enemy'&&!u.isObject&&u.alive);
  let selected=home.find(u=>u.id==='hero')??home[0],opponent=enemies[0];
  const dialog=node('dialog');dialog.id='prebattle-dialog';dialog.setAttribute('aria-label','Trinh sát và xếp trận');
- const title=node('h2','Xếp trận · 8 × 4'),hint=node('p','Chọn tướng ta → chọn ô để đổi chỗ. Chạm tướng địch để xem khắc hệ.','ready-hint');
- dialog.append(title,hint);
+ const toolbar=node('div',undefined,'ready-toolbar');
+ const title=node('h2','Xếp trận · 8 × 4'),hint=node('p','Chọn tướng ta → chọn ô để đổi chỗ. Chạm tướng địch để xem khắc hệ. Chọn tướng trên sân rồi chọn đồng hành dự bị để thay.','ready-hint');
+ const exit=node('button','← Thoát xếp trận');exit.type='button';exit.dataset.exitReady='true';
+ toolbar.append(title,exit);dialog.append(toolbar,hint);
  const map=node('div',undefined,'ready-map'),canvas=node('canvas');canvas.id='ready-canvas';canvas.setAttribute('role','img');canvas.setAttribute('aria-label','Đội hình thực tế hai bên trên sân 8 cột 4 hàng');
  const cells=node('div',undefined,'ready-cells');cells.setAttribute('role','group');cells.setAttribute('aria-label','Các ô xếp trận');map.append(canvas,cells);dialog.append(map);
  const selectedInfo=node('div',undefined,'ready-selection');selectedInfo.setAttribute('aria-live','polite');dialog.append(selectedInfo);
+ const reserveArea=node('section',undefined,'ready-reserves');
+ reserveArea.setAttribute('aria-label','Kho đồng hành dự bị');
+ const reserveHead=node('div',undefined,'ready-reserve-heading');
+ reserveHead.append(node('strong','Đồng hành dự bị'));
+ const reserveSearch=node('input');reserveSearch.type='search';reserveSearch.placeholder='Tìm đồng hành đã sở hữu…';
+ reserveSearch.setAttribute('aria-label','Tìm đồng hành dự bị');reserveHead.append(reserveSearch);
+ const reserveHint=node('p',undefined,'ready-reserve-hint');
+ const reserveList=node('div',undefined,'ready-reserve-list');
+ reserveArea.append(reserveHead,reserveHint,reserveList);dialog.append(reserveArea);
+ const lockedEncounter=!['main','practice','recruit'].includes(app.model.session.storyProgress.pendingEncounter?.kind);
+ const renderReserves=()=>{
+  reserveList.replaceChildren();
+  const session=app.model.session;
+  const available=session.party.unlocked.filter(id=>!session.party.active.includes(id));
+  const query=reserveSearch.value.trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const choices=available.filter(id=>{
+   const name=storyPerson(session,COMPANIONS_BY_ID[id]).name;
+   return !query||name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(query);
+  });
+  reserveHint.textContent=lockedEncounter
+   ? 'Đội hình thử thách đang khóa. Có thể đổi tại Kho nhân vật trước khi vào lượt tiếp theo.'
+   : available.length
+    ? 'Chọn một đồng hành trên sân (không phải tướng chính), rồi chọn nhân vật dự bị để thay ngay.'
+    : 'Chưa có đồng hành dự bị trong kho.';
+  for(const id of choices){
+   const definition=COMPANIONS_BY_ID[id],person=storyPerson(session,definition);
+   const button=node('button',undefined,'ready-reserve-unit');
+   button.type='button';button.dataset.reserveId=id;
+   button.setAttribute('aria-label','Thay bằng '+person.name);
+   const label=node('span',person.name);
+   button.append(portrait(person),label);
+   button.disabled=lockedEncounter||!selected||selected.id==='hero'||!session.party.active.includes(selected.id);
+   button.onclick=()=>app.run(()=>{
+    const outId=selected.id;
+    app.model.replaceReadyCompanion(outId,id);
+    cleanup();dialog.close();dialog.remove();app.enterBattle();
+   });
+   reserveList.append(button);
+  }
+  if(!choices.length&&available.length)reserveList.append(node('p','Không tìm thấy đồng hành phù hợp.'));
+ };
+ reserveSearch.addEventListener('input',renderReserves);
  const legend=node('div',undefined,'ready-legend');legend.append(node('span','▲ +% Tăng sát thương','damage-up'),node('span','▼ −% Giảm sát thương','damage-down'));dialog.append(legend);
  const details=node('details',undefined,'ready-details');details.append(node('summary','Chi tiết ngũ hành & tương trợ'));
  for(const line of matchupText(home,enemies))details.append(node('p',line));
@@ -37,6 +83,7 @@ export function showPrebattle(app){
    chip.append(portrait(u),node('strong',u.name),node('small',ELEMENTS[element(u)]?.name??'Không hệ'));
    if(badge)chip.append(node('b',(badge.percent>0?'+':'')+badge.percent+'%',badge.kind==='up'?'damage-up':'damage-down'));selectedInfo.append(chip);
   }
+  renderReserves();
   cells.replaceChildren();
   for(let y=0;y<BOARD_ROWS;y++)for(let x=0;x<BOARD_COLS;x++){
    const p={x,y},u=battle.grid.at(p),b=node('button');b.type='button';b.dataset.readyCell=`${x},${y}`;b.dataset.team=x<HOME_WIDTH?'home':'enemy';if(u)b.dataset.readyUnit=u.id;
@@ -59,6 +106,14 @@ export function showPrebattle(app){
    cells.append(b);
   }
  };
+ const closeReady=()=>app.run(()=>{
+  const kind=app.model.leaveReadyBattle();
+  cleanup();dialog.close();dialog.remove();app.awaitingBattle=false;
+  app.clearBattle();
+  app.setView(kind==='dungeon'?'dungeons':'camp');
+  app.toast('Đã trở lại. Trận đang chờ được giữ nguyên để tiếp tục.');
+ });
+ exit.onclick=closeReady;
  const start=node('button','Bắt đầu giao chiến');start.type='button';start.dataset.startBattle='true';dialog.append(start);
  let frame=0;const observer=new ResizeObserver(()=>{renderer.resize();update();});
  const cleanup=()=>{cancelAnimationFrame(frame);observer.disconnect();};
@@ -68,7 +123,7 @@ export function showPrebattle(app){
   if(next.adventure.dungeon)for(const id of ['hero',...next.adventure.dungeon.squad.active]){const u=home.find(u=>u.id===id);if(u)next.adventure.dungeon.squad.formation[id]={...u.gridPosition};}
   for(const u of home)battle.startingCells.set(u.id,{...u.gridPosition});app.model._commit(next,'formation');cleanup();app.awaitingBattle=false;dialog.close();dialog.remove();
  };
- dialog.addEventListener('cancel',e=>e.preventDefault());document.body.append(dialog);app.awaitingBattle=true;dialog.showModal();renderer.resize();update();observer.observe(map);
+ dialog.addEventListener('cancel',e=>{e.preventDefault();closeReady();});document.body.append(dialog);app.awaitingBattle=true;dialog.showModal();renderer.resize();update();observer.observe(map);
  let last=performance.now();const paint=now=>{if(!dialog.isConnected){cleanup();return;}renderer.render(Math.min(.1,(now-last)/1000));last=now;frame=requestAnimationFrame(paint);};frame=requestAnimationFrame(paint);
  title.tabIndex=-1;title.focus({preventScroll:true});dialog.scrollTop=0;
 }
