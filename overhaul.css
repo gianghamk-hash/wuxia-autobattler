@@ -249,7 +249,7 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 
 
 /* Illustrated world navigation — aligned with Quán & Rèn picture-card design. */
-#world-tabs.world-tabs {
+#world-tabs {
  display:grid;
  grid-template-columns:repeat(5,minmax(0,1fr));
  gap:12px;
@@ -316,13 +316,13 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 #world-tabs .world-image-card:focus-visible {outline:3px solid #f2d18b;outline-offset:3px;}
 #world-tabs .world-image-card>.game-icon {position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
 @media(max-width:1100px){
- #world-tabs.world-tabs {grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;}
+ #world-tabs {grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;}
 }
 @media(max-width:900px){
- #world-tabs.world-tabs {grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+ #world-tabs {grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
 }
 @media(max-width:699px){
- #world-tabs.world-tabs {
+ #world-tabs {
   position:relative;
   top:auto;
   z-index:auto;
