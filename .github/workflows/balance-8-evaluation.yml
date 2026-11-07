@@ -1,0 +1,42 @@
+name: Balance 8 paired simulation
+on:
+  workflow_dispatch:
+    inputs:
+      pairs:
+        description: Matched fixtures per companion (1-200)
+        required: true
+        default: '20'
+        type: choice
+        options: ['5', '20', '50', '100', '200']
+      scenario:
+        description: Existing simulation scenario
+        required: true
+        default: 'level8'
+        type: choice
+        options: ['level1', 'level8', 'level20', 'level8-equipped', 'level20-prepared']
+  push:
+    branches: ['feature/balance-8-*']
+permissions:
+  contents: read
+jobs:
+  matched-evaluation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run deterministic 60-companion matched smoke study
+        env:
+          MATCH_PAIRS: ${{ github.event.inputs.pairs || '5' }}
+          MATCH_SCENARIO: ${{ github.event.inputs.scenario || 'level8' }}
+        run: |
+          node scripts/balance-lab/matched.mjs --all --pairs "$MATCH_PAIRS" --scenario "$MATCH_SCENARIO" --output reports/balance-8/matched.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: balance-8-matched-${{ github.run_id }}
+          path: |
+            reports/balance-8/matched.json
+            reports/balance-8/matched.md
+          retention-days: 30
