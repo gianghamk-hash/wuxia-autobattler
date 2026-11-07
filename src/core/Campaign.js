@@ -5,7 +5,7 @@ import {campaignEnemyMultiplier,scaleEnemyStats} from '../combat/EnemyDifficulty
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
 import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { MISSIONS } from '../data/MissionsData.js';
-import { enemyLineup } from './EncounterFactory.js';
+import { enemyLineup, encounterSeed, storyEnemyCount, storyWaveCounts } from './EncounterFactory.js';
 import { bossGuide } from '../combat/BossDirector.js';
 import {STORY_ACTORS7} from '../data/StoryActors7.js';
 import { applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
@@ -652,10 +652,10 @@ export class Campaign {
       rules:isDaiViet(this.session)?6:null,
       quest,
       encounter,
-      count: isDaiViet(this.session)&&quest.boss?4:Math.min(MISSIONS[quest.id]?.type==='breach'?6:8,encounter.count??encounter.templates.length),
+      count: isDaiViet(this.session)?storyEnemyCount(quest,pending?.kind==='main'&&pending.questId===quest.id?pending.seed:encounterSeed(this.session.storyProgress.attemptCounter+1)):Math.min(MISSIONS[quest.id]?.type==='breach'?6:8,encounter.count??encounter.templates.length),
       main: true
     });
-    if(isDaiViet(this.session)&&quest.boss)bossSequence(enemies,quest.chapter);
+    if(isDaiViet(this.session)&&quest.boss)bossSequence(enemies,quest.chapter,{normalizeWaveSize:quest.chapter<=2,waveCounts:storyWaveCounts(quest,pending?.kind==='main'&&pending.questId===quest.id?pending.seed:encounterSeed(this.session.storyProgress.attemptCounter+1))});
     if(isDaiViet(this.session))for(const unit of enemies)scaleEnemyStats(unit,campaignEnemyMultiplier(quest.chapter));
     const missionId = pending
       ? pending.kind === 'main'
@@ -749,7 +749,7 @@ export class Campaign {
       token: next.storyProgress.attemptCounter,
       kind,
       questId,
-      seed: (20261105 + next.storyProgress.attemptCounter * 2654435761) >>> 0,
+      seed: encounterSeed(next.storyProgress.attemptCounter),
       preparation: {
         tactics: structuredClone(next.adventure.tactics),
         training: next.adventure.training,
@@ -879,7 +879,7 @@ export class Campaign {
         rules:isDaiViet(this.session)?6:null,
         quest,
         encounter,
-        count: isDaiViet(this.session)&&quest?.boss&&pending.kind==='main'?4:Math.min(MISSIONS[pending.missionId]?.type==='breach'?6:8,enemyCount),
+        count: isDaiViet(this.session)&&pending.kind==='main'?storyEnemyCount(quest,pending.seed):Math.min(MISSIONS[pending.missionId]?.type==='breach'?6:8,enemyCount),
         grid,
         main: pending.kind === 'main'
       })
@@ -889,7 +889,7 @@ export class Campaign {
     this.lastResult = null;
     this.battleToken = pending.token;
     const boss=Boolean(isDaiViet(this.session)&&quest?.boss&&pending.kind==='main');
-    const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter):null;
+    const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter,{normalizeWaveSize:quest.chapter<=2,waveCounts:storyWaveCounts(quest,pending.seed)}):null;
     this.battle = new CombatEngine({
       enemyStatMultiplier:isDaiViet(this.session)?campaignEnemyMultiplier(pending.kind==='main'?quest.chapter:this.session.storyProgress.currentChapter):1,
       enemyLimit:8,nextBossWave,maxDuration:boss?360:150,

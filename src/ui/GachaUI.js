@@ -1,3 +1,4 @@
+import {roleTag} from './RoleTagUI.js';
 import {storyPerson,isDaiViet} from '../data/DaiVietCast.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { GACHA, RARITIES, rarityLabel } from '../data/GachaData.js';
@@ -122,6 +123,7 @@ export function mountGachaUI(app) {
         decorateRarity(card, u);
         card.append(
           portrait(u),
+          roleTag(u),
           n('strong', u.name),
           n('span', rarityLabel(u.tier)),
           n(

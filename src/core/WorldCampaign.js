@@ -1,4 +1,5 @@
 import {ENEMY_CELLS,strengthenEnemy,bossSequence} from '../combat/BattleRules6.js';
+import {earlyDungeonFactor} from '../combat/EarlyDungeon.js';
 import {campaignEnemyMultiplier} from '../combat/EnemyDifficulty.js';
 import {NEW_GEAR} from '../data/GearCatalog.js';
 import { gainExperience } from '../entities/HeroBuild.js';
@@ -331,6 +332,7 @@ export const worldMethods = {
         def.level + Math.floor(d.floor/(d.mode==='tower'?7:2))+(d.weekly?2:0)
       );
       scale=d.mode==='tower'?(.48+d.floor*.0045)*(boss?.8:1)*(d.weekly?1.1:1):(.65+d.floor*.045)*(boss?1.25:1);
+      if(isDaiViet(s))scale*=earlyDungeonFactor(d.floor);
       templates = [
         ['companion_05', 'companion_06', 'companion_08'],
         ['companion_14', 'companion_09', 'companion_01'],

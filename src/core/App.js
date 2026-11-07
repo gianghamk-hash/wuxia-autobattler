@@ -1,3 +1,4 @@
+import {roleTag} from '../ui/RoleTagUI.js';
 import {mountTeamEffects} from '../ui/TeamEffects.js';
 import {continuityFor} from '../data/StoryContinuity.js';
 import { mountGachaUI } from '../ui/GachaUI.js';
@@ -734,6 +735,7 @@ export class App {
       body.append(
         meta,
         node('h3', unit.name),
+        roleTag(unit),
         node('p', unit.skills.ultimate.description, 'card-description')
       );
       const meter = node('div', undefined, 'affinity-meter'),
@@ -853,6 +855,7 @@ export class App {
       body.append(
         meta,
         node('h3', unit.name),
+        roleTag(unit),
         node('p', canonical?acquisitionText7(unit.id)+' · '+unit.biography:quest.description, 'card-description')
       );
       const button = node(

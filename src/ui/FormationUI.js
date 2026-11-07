@@ -1,3 +1,4 @@
+import {roleTag} from './RoleTagUI.js';
 import {mountTeamEffects} from './TeamEffects.js';
 import {equipmentAura} from './GearArt.js';
 import { portrait,icon } from './Visuals.js';
@@ -39,6 +40,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
           COMPANIONS_BY_ID[id].sect);
     const name = (id) =>
       id === 'hero' ? session.hero.name : storyPerson(session,COMPANIONS_BY_ID[id]).name;
+    const taggedUnit = id => id==='hero' ? {id,sect:session.hero.sect} : COMPANIONS_BY_ID[id];
     for (const id of ids) {
       const button = document.createElement('button');
       button.type = 'button';
@@ -46,7 +48,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
       label.textContent = name(id);
       button.append(
         portrait(id === 'hero' ? heroAppearance(session) : storyPerson(session,COMPANIONS_BY_ID[id])),
-        label
+        label, roleTag(taggedUnit(id))
       );
       button.setAttribute('aria-pressed', String(selected === id));
       button.disabled = !canEdit();
@@ -87,7 +89,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
           label.textContent = name(unit);
           button.append(
             portrait(unit === 'hero' ? heroAppearance(session) : storyPerson(session,COMPANIONS_BY_ID[unit])),
-            label
+            label, roleTag(taggedUnit(unit))
           );
         } else {
           const label = document.createElement('span');
@@ -101,7 +103,7 @@ export function mountFormationUI({ root, getState, onMove, canEdit, onError }) {
         button.dataset.cell = `${x},${y}`;
         button.setAttribute(
           'aria-label',
-          `Cột ${x}, hàng ${y}: ${unit ? name(unit) : 'trống'}`
+          `Cột ${x}, hàng ${y}: ${unit ? name(unit)+' · '+roleTag(taggedUnit(unit)).textContent : 'trống'}`
         );
         button.disabled = !canEdit();
         button.draggable = Boolean(unit && canEdit());

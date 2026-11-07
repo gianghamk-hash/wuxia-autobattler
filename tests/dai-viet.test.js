@@ -42,7 +42,7 @@ function snapshotAt(id){
  s.party.active=s.party.unlocked.slice(0,5);s.party.formation=Object.fromEntries(['hero',...s.party.active].map((id,i)=>[id,[{x:1,y:1},{x:2,y:1},{x:0,y:1},{x:0,y:0},{x:1,y:2},{x:2,y:0}][i]]));return s;
 }
 
-test('all 265 fights separate setup from aftermath and retain every existing per-episode reward',()=>{
+test('all 265 fights separate setup from aftermath and increase every per-episode XP/silver reward by 15%',()=>{
  assert.equal(Object.keys(COMBAT_APPROACHES).length,67);assert.equal(Object.keys(EXTRA_COMBAT).length,38);
  const xp=[260,360,500,650,850,1050,1250,1450,1650,1850,2000,2100,2200,2300,2300,2300,2400,2500,500,500],money=[70,80,100,115,125,135,150,165,180,195,210,220,225,230,240,250,260,280,100,100];
  for(const c of DAI_VIET_CHAPTERS){
@@ -50,7 +50,7 @@ test('all 265 fights separate setup from aftermath and retain every existing per
   const divide=budget=>{const v=weights.map(w=>Math.floor(budget*w/sum));v[19]+=budget-v.reduce((a,b)=>a+b,0);return v;};
   const ex=divide(xp[c.number-1]),sil=divide(money[c.number-1]);
   for(const q of DAI_VIET_QUESTS.filter(q=>q.chapter===c.number)){
-   assert.equal(q.xp,q.ending?0:ex[q.episode-1]);assert.equal(q.silver,q.ending?0:sil[q.episode-1]);
+   assert.equal(q.xp,q.ending?0:Math.round(ex[q.episode-1]*1.15));assert.equal(q.silver,q.ending?0:Math.round(sil[q.episode-1]*1.15));
    if(q.encounter){assert.ok(q.aftermath?.length);assert.notEqual(q.lines[0][1],q.aftermath[0][1]);}
    for(const [speaker,text]of [...q.lines,...(q.aftermath??[])]){assert.ok(text);assert.ok(['Người kể','Trần Phong'].includes(speaker)||DAI_VIET_CAST_BY_NAME[speaker],q.id+' '+speaker);}
   }
@@ -79,9 +79,9 @@ test('400 full authored episodes have distinct scenes, complete speaker portrait
  assert.equal(DAI_VIET_HOME_CHAPTER.scenes.length,20);
  assert.equal(DAI_VIET_QUESTS[0].scene,'modern');assert.match(DAI_VIET_QUESTS[0].location,/Hiện đại/);assert.match(DAI_VIET_QUESTS[1].location,/Tây Bắc/);
 });
-test('all five selected paths play the actual four-enemy unarmed opening without prematurely learning an ultimate',()=>{
+test('all five selected paths play the actual randomized unarmed opening without prematurely learning an ultimate',()=>{
  for(const sect of SECT_IDS){const c=fresh(sect);while(c.mainQuest().id!=='D01H06'){if(c.chooseMain('continue'))fight(c);}const before=itemCount(c.session,'silver');const b=c.chooseMain('continue');
-  assert.equal(b.units.filter(u=>u.team==='enemy').length,4);assert.equal(b.units[0].skills.autoAttack.name,'Quyền Cơ Bản');assert.equal(b.units[0].stats.attackRange,1);assert.equal(b.units[0].passive,null);
+  assert.ok(b.units.filter(u=>u.team==='enemy').length>=4&&b.units.filter(u=>u.team==='enemy').length<=8);assert.equal(b.units[0].skills.autoAttack.name,'Quyền Cơ Bản');assert.equal(b.units[0].stats.attackRange,1);assert.equal(b.units[0].passive,null);
   assert.equal(fight(c).winner,'home',sect);assert.equal(c.mainQuest().id,'D01H07');assert.ok(itemCount(c.session,'silver')>before);
   assert.throws(()=>c.chooseEnding('actor'));assert.ok(!c.availableRecruitQuests().some(q=>PLOT_COMPANIONS.includes(q.companionId)));
  }

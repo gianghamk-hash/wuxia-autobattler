@@ -1,3 +1,4 @@
+import {roleTag} from './RoleTagUI.js';
 import {appendDossier7} from './Dossier7.js';
 import {icon} from './Visuals.js';
 import {remainingEntries,EXTRA_ENTRY_PRICE} from '../core/DungeonEntries.js';
@@ -284,6 +285,7 @@ export function mountWorldUI(app) {
         'sheet-portrait'
       ),
       n('h2', unit.name),
+      roleTag(unit),
       n(
         'p',
         unit.id==='hero'&&isDaiViet(s)?heroSectLabel(s):npc&&!unit.skills?npc.role:`${getSectName(sect)} · ${ELEMENTS[unit.element??SECT_ELEMENT[sect] ?? 'Tho'].name}`
