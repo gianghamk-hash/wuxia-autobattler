@@ -35,6 +35,9 @@ for(const width of [320,390,1280]){
     await expect(dialog.getByRole('heading',{name:'Trinh sát và xếp trận',exact:true})).toBeInViewport();
     expect(await dialog.evaluate(e=>e.scrollTop)).toBe(0);
     await expect(dialog).toContainText('khắc (+75% sát thương)');
+    const avatar=dialog.locator('.prebattle-card .portrait').first();
+    expect(await avatar.evaluate(e=>{const r=e.getBoundingClientRect();return r.width>=64&&r.height>=64;})).toBe(true);
+    await expect.poll(()=>avatar.evaluate(async e=>{const url=getComputedStyle(e).backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1];if(!url)return false;const im=new Image();im.src=url;try{await im.decode();return im.naturalWidth>0;}catch{return false;}})).toBe(true);
     await expect(dialog.locator('.prebattle-card[data-team="enemy"]')).not.toHaveCount(0);
     const before=await page.evaluate(()=>window.__game.model.battle.elapsed);
     // Real animation frames run while readiness prevents simulation updates.
