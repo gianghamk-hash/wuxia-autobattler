@@ -73,7 +73,6 @@ export function freshWorld() {
     training: 0,
     forging: 0,
     practiceWins: 0,
-      bauCua: 0,
     journal: [],
     dungeon: null,
     clears: [],
@@ -408,8 +407,8 @@ export function worldAction(s, action, arg, now) {
       w.daily.streak =
         w.daily.checkIn === day - 1 ? Math.min(365, w.daily.streak + 1) : 1;
       w.daily.checkIn = day;
-      give(s, 'silver', Math.min(16, 6 + w.daily.streak));
-      give(s, 'herb', 1);
+      give(s, 'silver', Math.min(16, 6 + w.daily.streak) * 3);
+      give(s, 'herb', 3);
       message = `Điểm danh ngày ${w.daily.streak}: nhận bạc và thảo dược.`;
       break;
     case 'claim': {
@@ -419,8 +418,8 @@ export function worldAction(s, action, arg, now) {
       if (board.claimed.includes(arg) || board[task.metric] < task.target)
         fail('Chưa đủ điều kiện hoặc đã nhận thưởng.');
       board.claimed.push(arg);
-      give(s, 'silver', task.silver);
-      message = `Nhận ${task.silver} bạc: ${task.label}.`;
+      give(s, 'silver', task.silver * 3);
+      message = `Nhận ${task.silver * 3} bạc: ${task.label}.`;
       break;
     }
     case 'train':
@@ -459,16 +458,27 @@ export function worldAction(s, action, arg, now) {
       break;
     case 'bau_cua': {
       const faces=['bau','cua','tom','ca','ga','nai'];
-      if (!faces.includes(arg)) fail('Mặt Bầu Cua không hợp lệ.');
-      if ((w.daily.bauCua??0)>=3) fail('Mỗi ngày chỉ có 3 lượt Bầu Cua.');
-      if (s.storyProgress.pendingEncounter || w.dungeon) fail('Kết thúc trận/bí cảnh trước.');
-      if (!globalThis.crypto?.getRandomValues) fail('Thiết bị thiếu bộ tạo số ngẫu nhiên an toàn.');
-      pay(s,'silver',5);
-      const dice=new Uint32Array(3);globalThis.crypto.getRandomValues(dice);
-      const rolls=Array.from(dice,v=>faces[v%6]),matches=rolls.filter(face=>face===arg).length;
-      if(matches)give(s,'silver',10*matches);
+      const face=typeof arg==='string'?arg:arg?.face;
+      const stake=typeof arg==='string'?5:arg?.stake;
+      if(!faces.includes(face))fail('Mặt Bầu Cua không hợp lệ.');
+      if(!Number.isSafeInteger(stake)||stake<1||stake>Math.floor(Number.MAX_SAFE_INTEGER/6))
+        fail('Tiền cược phải là số bạc nguyên dương hợp lệ.');
+      if((w.daily.bauCua??0)>=3)fail('Mỗi ngày chỉ có 3 lượt Bầu Cua.');
+      if(s.storyProgress.pendingEncounter||w.dungeon)fail('Kết thúc trận/bí cảnh trước.');
+      if(!globalThis.crypto?.getRandomValues)fail('Thiết bị thiếu bộ tạo số ngẫu nhiên an toàn.');
+      pay(s,'silver',stake);
+      const dice=new Uint32Array(3),limit=0x100000000-(0x100000000%faces.length);
+      const rolls=[];
+      for(let i=0;i<3;i++){
+        let value;
+        do{globalThis.crypto.getRandomValues(dice);value=dice[i];}while(value>=limit);
+        rolls.push(faces[value%faces.length]);
+      }
+      const matches=rolls.filter(value=>value===face).length;
+      const payout=stake*matches*2;
+      if(payout)give(s,'silver',payout);
       w.daily.bauCua=(w.daily.bauCua??0)+1;
-      message=`Bầu Cua: ${rolls.join(' · ')}. Chọn ${arg}, trúng ${matches} mặt, nhận ${10*matches} bạc (đặt 5).`;
+      message=`Bầu Cua: ${rolls.join(',')}; chọn ${face}; cược ${stake}; trúng ${matches}; thưởng ${payout}; lãi ${payout-stake}.`;
       break;
     }
     case 'martial_train': {
