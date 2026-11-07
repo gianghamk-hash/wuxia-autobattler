@@ -6,6 +6,7 @@ import {
   LIMITS
 } from '../data/StrategyData.js';
 import { CONFIG } from '../config.js';
+import { scaleEnemyStats } from './EnemyDifficulty.js';
 import { AIBehavior } from './AIBehavior.js';
 import { StatusEngine } from './StatusEngine.js';
 import { TargetSelector } from './TargetSelector.js';
@@ -33,6 +34,7 @@ export class CombatEngine {
     yielding = true,
     missionId = null,
     enemyLimit = 6,
+    enemyStatMultiplier = 1,
     nextBossWave = null,
     onEvent = () => {}
   }) {
@@ -45,6 +47,7 @@ export class CombatEngine {
       seed > 0xffffffff ||
       !Number.isFinite(maxDuration) ||
       maxDuration <= 0 ||
+      ![1, 2].includes(enemyStatMultiplier) ||
       (missionId !== null && !Object.hasOwn(MISSIONS, missionId))
     ) {
       throw new Error('Cấu hình trận đấu không hợp lệ.');
@@ -68,6 +71,8 @@ export class CombatEngine {
     this.healWindows = new Map();
     this.healTotals = new Map();
     this.units = units;
+    this.enemyStatMultiplier = enemyStatMultiplier;
+    for (const unit of units) this.scaleEnemy(unit);
     this.grid = grid;
     this.mission = missionId
       ? new MissionDirector(this, MISSIONS[missionId])
@@ -360,6 +365,9 @@ export class CombatEngine {
       }
     return false;
   }
+  scaleEnemy(unit) {
+    return scaleEnemyStats(unit, this.enemyStatMultiplier);
+  }
   addUnit(unit, cell) {
     if (
       this.units.some((u) => u.id === unit.id) ||
@@ -367,6 +375,7 @@ export class CombatEngine {
     )
       return false;
     this.grid.place(unit, cell, { formation: false });
+    this.scaleEnemy(unit);
     this.units.push(unit);
     unit.inCombat = true;
     unit.damageMultiplier = 1;

@@ -132,13 +132,16 @@ export class BossDirector {
       team: 'enemy',
       level: b.unit.level
     });
+    // Scale base-only defenses/speeds once. HP/attacks below inherit an already
+    // scaled boss, so they must not receive another multiplier on addUnit.
+    c.scaleEnemy(u);
     if (seal) {
       u.name = 'Ấn thu tô';
       u.isObject = true;
       u.sect = 'TuDo';
       u.role = 'Object';
       u.characterId = 'tax_seal';
-      u.stats.maxHp = Math.max(100, b.unit.stats.maxHp * 0.18);
+      u.stats.maxHp = Math.max(100 * c.enemyStatMultiplier, b.unit.stats.maxHp * 0.18);
       u.portrait = 'assets/images/tax-seal.svg';
     } else {
       applyStoryIdentity(u, NPCS_BY_ID.tay_sai);

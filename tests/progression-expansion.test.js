@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {reinforceStoryParty} from './helpers/story-flow.js';
 import assert from 'node:assert/strict';
 import {storyRecruit7} from '../src/data/Recruitment7.js';
 import {developed} from '../scripts/balance-campaign7.mjs';
@@ -25,7 +26,7 @@ function at(id='D19H18'){
  s.companionsAffinity=Object.fromEntries(s.party.unlocked.map(id=>[id,15]));s.party.formation=Object.fromEntries(['hero',...s.party.active].map((id,i)=>[id,[{x:1,y:1},{x:2,y:1},{x:0,y:1},{x:0,y:0},{x:1,y:2},{x:2,y:0}][i]]));
  return s;
 }
-function fight(c){for(let i=0;i<22500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
+function fight(c){reinforceStoryParty(c);for(let i=0;i<22500&&c.running;i++)c.update(1/60);assert.equal(c.running,false);return c.lastResult;}
 test('ten new companions have two per rarity and recurring concrete main-story scenes; unlocking waits for the first encounter',()=>{
  assert.equal(EXPANSION_CAST.length,10);for(let tier=1;tier<=5;tier++)assert.equal(EXPANSION_CAST.filter(p=>p.tier===tier).length,2);
  for(const p of EXPANSION_CAST){assert.ok(COMPANIONS_BY_ID[p.id]);const appearances=Object.entries(EXPANSION_SCENES).filter(([,lines])=>lines.some(l=>l[0]===p.name));assert.ok(appearances.length>=3,p.name);assert.equal(appearances[0][0],p.meet,p.name);assert.ok(Object.entries(EXPANSION_SCENES).some(([id,lines])=>Number(id.slice(1,3))>=17&&lines.some(l=>l[0]===p.name||l[1].includes(p.name))),p.name);
@@ -66,7 +67,7 @@ test('the ten archived recruitment missions remain data-compatible but cannot gr
  const c=fresh();c.load(at());for(const p of EXPANSION_CAST){const before=c.snapshot();assert.throws(()=>c.challengeRecruit('recruit_'+p.id.slice(-2)));assert.deepEqual(c.snapshot(),before);}
 });
 
-test('all twenty chapter bosses are playable after the ending and grant their first clear equipment without reopening story progress',()=>{
+test('all twenty chapter bosses preserve post-ending entry and first-clear rewards with a controlled victory fixture',()=>{
  const c=fresh(),s=at('D20H20'),max=developed().snapshot();s.party=max.party;s.companionsAffinity=max.companionsAffinity;
  for(const item of NEW_GEAR.filter(e=>e.setId==='phong_hanh'&&e.rarity==='exceptional'))s.inventory.push({itemId:item.id,quantity:1});
  let h=s.hero;while(h.freeAttributePoints)h=allocateAttribute(h,'khiHai',s.inventory);for(const node of SKILL_TREES.VoDang.filter(n=>n.branch==='attack')){try{h=allocateSkill(h,node.id,s.inventory);}catch{}}
