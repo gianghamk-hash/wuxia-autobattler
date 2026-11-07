@@ -140,9 +140,9 @@ export const worldMethods = {
         prep.tactics.priorities[u.id] ?? u.targetPriority ?? 'nearest';
       u.element = u.sect==='TuDo'?(u.element??'Tho'):SECT_ELEMENT[u.sect];
       if (u.id === 'hero') {
-        u.stats.maxHp *= 1 + prep.training * 0.02 + Math.min(20,this.session.adventure.guild.contributions) * .015;
-        u.stats.physicalAtk *= 1 + prep.training * 0.01 + prep.forging * 0.03 + Math.min(20,this.session.adventure.guild.contributions) * .01;
-        u.stats.magicalAtk *= 1 + prep.training * 0.01 + prep.forging * 0.03 + Math.min(20,this.session.adventure.guild.contributions) * .01;
+        u.stats.maxHp *= 1 + prep.training * 0.02 + Math.min(20,(this.session?.adventure?.guild?.contributions??0)) * .015;
+        u.stats.physicalAtk *= 1 + prep.training * 0.01 + prep.forging * 0.03 + Math.min(20,(this.session?.adventure?.guild?.contributions??0)) * .01;
+        u.stats.magicalAtk *= 1 + prep.training * 0.01 + prep.forging * 0.03 + Math.min(20,(this.session?.adventure?.guild?.contributions??0)) * .01;
       }
       applyQigong(u, prep.tactics.qigong);
       if (prep.tactics.food === 'tea')
