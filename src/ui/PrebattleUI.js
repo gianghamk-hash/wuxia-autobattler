@@ -1,5 +1,5 @@
 import { ELEMENTS, SECT_ELEMENT, elementMultiplier } from '../data/StrategyData.js';
-import { getActiveSynergies } from '../data/SynergiesData.js';
+import { SYNERGIES } from '../data/SynergiesData.js';
 import { portrait, decorateRarity } from './Visuals.js';
 const node = (tag, text) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; return e; };
 const element = u => u.element ?? SECT_ELEMENT[u.sect];
@@ -7,8 +7,8 @@ export function matchupText(home, enemies) {
   return home.map(u => {
     const strong = enemies.filter(e => elementMultiplier(u,e) > 1).map(e=>e.name);
     const weak = enemies.filter(e => elementMultiplier(u,e) < 1).map(e=>e.name);
-    const fed = home.filter(a=>a!==u && ELEMENTS[element(a)]?.feeds===element(u)).map(a=>a.name);
-    return `${u.name} · ${ELEMENTS[element(u)]?.name ?? 'Chưa có hệ'}: khắc (+75% sát thương) ${strong.join(', ') || 'không có'}; bị khắc (−40% sát thương) ${weak.join(', ') || 'không có'}. Tương sinh từ ${fed.join(', ') || 'không có'} (quan hệ ngũ hành; buff thực tế xem bên dưới).`;
+    const fed = home.filter(a=>a!==u && element(u) && ELEMENTS[element(a)]?.feeds===element(u)).map(a=>a.name);
+    return `${u.name} · ${ELEMENTS[element(u)]?.name ?? 'Chưa có hệ'}: khắc (+75% sát thương) ${strong.join(', ') || 'không có'}; bị khắc (−40% sát thương) ${weak.join(', ') || 'không có'}. Tương sinh từ ${fed.join(', ') || 'không có'}${fed.length?' · +8% nộ nhận, không cộng dồn theo số người':''}.`;
   });
 }
 export function showPrebattle(app) {
@@ -19,10 +19,10 @@ export function showPrebattle(app) {
   const render=()=>{
     content.replaceChildren();
     const grid=node('div');grid.className='prebattle-grid';
-    for(const u of [...home,...enemies]){const card=node('article');card.className='prebattle-card';card.dataset.team=u.team;decorateRarity(card,u);card.append(portrait(u),node('strong',u.name),node('small',`${u.team==='home'?'Ta':'Địch'} · ${ELEMENTS[element(u)]?.name??'Không hệ'} · ô ${u.gridPosition.x},${u.gridPosition.y} · HP ${Math.round(u.stats.maxHp)}`));grid.append(card);}
+    for(const u of [...home,...enemies]){const card=node('article');card.className='prebattle-card';card.dataset.team=u.team;decorateRarity(card,u);card.append(portrait(u),node('strong',u.name),node('small',`${u.team==='home'?'Ta':'Địch'} · ${ELEMENTS[element(u)]?.name??'Không hệ'} · ô ${u.gridPosition.x+1},${u.gridPosition.y+1} · HP ${Math.round(u.stats.maxHp)}`));grid.append(card);}
     content.append(grid);
     for(const line of matchupText(home,enemies))content.append(node('p',line));
-    for(const synergy of getActiveSynergies(home.filter(u=>u.id!=='guide').map(u=>u.sect).filter(Boolean).slice(0,6)))content.append(node('p','Tương trợ đã kích hoạt: '+synergy.name+' · '+synergy.description));
+    for(const synergy of SYNERGIES.filter(s=>(battle.teamSynergies.home??[]).includes(s.id)))content.append(node('p','Tương trợ đã kích hoạt: '+synergy.name+' · '+synergy.description));
     content.append(node('h3','Sắp vị trí đội ta'));
     for(const u of home.filter(u=>Object.hasOwn(app.model.session.party.formation,u.id))){const label=node('label',u.name+' '),select=node('select');select.setAttribute('aria-label','Vị trí '+u.name);
       for(let y=0;y<3;y++)for(let x=0;x<3;x++){const occupied=battle.grid.at({x,y});const savedFormation=app.model.session.adventure.dungeon?.squad.formation??app.model.session.party.formation;const reserved=Object.entries(savedFormation).some(([id,p])=>p.x===x&&p.y===y&&!home.some(a=>a.id===id));if(reserved)continue;if(occupied&&(occupied.isObject||!Object.hasOwn(app.model.session.party.formation,occupied.id)))continue;const o=node('option',`Cột ${x+1}, hàng ${y+1}${occupied?' · '+occupied.name:''}`);o.value=`${x},${y}`;select.append(o);}

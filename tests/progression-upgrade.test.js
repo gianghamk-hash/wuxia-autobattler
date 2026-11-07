@@ -123,3 +123,12 @@ test('boss resolution keeps the telegraph and last position if reflected damage 
   assert.doesNotThrow(()=>director.resolve(b));
   const event=events.find(e=>e.type==='skill:cast');assert.equal(event.name,'Cơn phản kích');assert.deepEqual(event.origin,{x:4,y:1});
 });
+
+test('ready-screen elemental advice reports the actual nonstacking energy bonus and directional counters',async()=>{
+  const {matchupText}=await import('../src/ui/PrebattleUI.js');
+  const home=[{name:'Kim',element:'Kim'},{name:'Thủy',element:'Thuy'},{name:'Kim thứ hai',element:'Kim'}],enemy=[{name:'Mộc địch',element:'Moc'},{name:'Hỏa địch',element:'Hoa'}];
+  const lines=matchupText(home,enemy);
+  assert.match(lines[0],/khắc \(\+75% sát thương\) Mộc địch/);assert.match(lines[0],/bị khắc \(−40% sát thương\) Hỏa địch/);
+  assert.match(lines[1],/\+8% nộ nhận, không cộng dồn/);assert.ok(!lines[1].includes('+16%'));
+  assert.ok(!matchupText([{name:'Chưa nhập môn'},{name:'Người thường'}],[]).join('').includes('+8%'));
+});
