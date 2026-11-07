@@ -20,9 +20,9 @@ for(const width of [320,390,1280]){
   expect(columnCount).toBe(width<700?2:4);
   await expect(page.locator('#equipment-panel .gacha-hero')).toBeVisible();
   await expect(page.locator('[data-equipment-draw="1"]')).toBeVisible();
-  const oldHistory=await page.evaluate(()=>window.__game.model.session.loot.total);
+  const oldHistory=await page.evaluate(()=>(window.__game.model.session.loot?.total??0));
   await page.locator('[data-equipment-draw="1"]').click();
-  expect(await page.evaluate(()=>window.__game.model.session.loot.total)).toBe(oldHistory+1);
+  expect(await page.evaluate(()=>(window.__game.model.session.loot?.total??0))).toBe(oldHistory+1);
   await page.locator('[data-shop-menu="vault"]').click();
   const vault=page.locator('#equipment-vault');
   await expect(vault).toBeVisible();
