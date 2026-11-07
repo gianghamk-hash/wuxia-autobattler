@@ -369,3 +369,4 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 @media(prefers-reduced-motion:reduce){[data-tier="6"]{animation:none}}
 
 body[data-card-effects="false"] [data-tier="6"]{animation:none}
+.prebattle-card .portrait{display:block;width:64px;height:64px;flex:none;border-radius:10px;background-size:cover;background-position:center 18%;border:1px solid #97b5aa66}
