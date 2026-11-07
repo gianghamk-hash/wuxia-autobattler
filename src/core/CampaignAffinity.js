@@ -23,7 +23,7 @@ export function validateAffinityLedgers(session) {
   for (const [id, ledger] of Object.entries(ledgers)) {
     if (!session.party.unlocked.includes(id) || !ledger || !Number.isInteger(ledger.points100)
       || ledger.points100 < 0 || ledger.points100 > 10000
-      || Math.abs(session.companionsAffinity[id] * 100 - ledger.points100) > 0.001
+      || session.companionsAffinity[id] * 100 + 0.001 < ledger.points100
       || !ledger.daily || typeof ledger.daily.day !== 'string'
       || !Number.isInteger(ledger.daily.battle) || !Number.isInteger(ledger.daily.gift)
       || ledger.daily.battle < 0 || ledger.daily.battle > 300
