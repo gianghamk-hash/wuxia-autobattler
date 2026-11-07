@@ -21,6 +21,7 @@ test('daily check-in triples both silver and herb; only one grant per day',()=>{
 });
 test('daily and weekly task silver payouts are exactly tripled with claim idempotence',()=>{
   const c=setup();
+  c.action('checkin'); // initialize Vietnam day/week before modifying task counters
   c.session.adventure.daily.wins=3;
   const silver=itemCount(c.session,'silver');
   c.action('claim','daily_battle');
