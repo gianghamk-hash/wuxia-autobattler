@@ -11,15 +11,24 @@ const btn=(text,fn,disabled=false)=>{const e=n('button',text);e.type='button';e.
 const labels={physicalAtk:'Ngoại công',magicalAtk:'Nội công',maxHp:'HP',physicalDef:'Ngoại phòng',magicalDef:'Nội phòng',critRate:'Bạo kích',critDmg:'Sát thương bạo kích',dodgeRate:'Né tránh',blockRate:'Đỡ đòn',attackSpeed:'Tốc đánh'};
 const statsText=stats=>Object.entries(stats).map(([k,v])=>`${labels[k]??k} +${k==='attackSpeed'?v+' lần/giây':v<1?Number((v*100).toFixed(2))+'%':v}`).join(' · ');
 const wear=(app,item)=>app.run(()=>{const live=app.model.session;if(live.storyProgress.pendingEncounter)throw Error('Hãy kết thúc trận đang chờ.');app.model.updateProfile(equipItem(live.hero,item.slot,item.id,live.inventory),live.inventory);renderEquipmentRefresh(app);});
-export function renderEquipment(app,root){
+export function renderEquipment(app,root,onOpenCatalog){
  const s=app.model.session,l=s.loot??{total:0,sinceExcellent:0,sinceExceptional:0,history:[]},panel=n('section',undefined,'panel gear-panel');panel.id='equipment-panel';
- panel.append(n('h2','Vòng quay trang bị'),n('p',`Bạc: ${count(s,'silver')} · Đồ trùng vẫn vào túi và hoàn 80% giá thực trả/lượt. Gói 5 chia đều giá gói; hoàn bạc làm tròn theo tổng số lượt trùng. Đồ dư có thể bán; giữ lại món đang mặc.`, 'hint'));
+ const hero=n('div',undefined,'gacha-hero');
+ const heroCopy=n('div',undefined,'gacha-hero-copy');
+ heroCopy.append(n('p','KHO TÀNG GIANG HỒ','gacha-eyebrow'),n('h2','Vòng quay trang bị'),n('p','Thử vận may cùng 80 báu vật thuộc 5 bộ trang bị, từ Thường đến Trác việt.','gacha-subtitle'),n('strong','Bạc: '+count(s,'silver').toLocaleString('vi-VN'),'gacha-wallet'));
+ const showcase=n('div',undefined,'gacha-showcase');
+ for(const id of ['gear_thien_loi_exceptional_weapon','gear_thanh_tam_exceptional_helmet','gear_phong_hanh_excellent_armor']){
+   const item=EQUIPMENT_BY_ID[id];if(item){const picture=gearImage(item);picture.classList.add('gacha-showcase-piece');showcase.append(picture);}
+ }
+ hero.append(heroCopy,showcase);panel.append(hero);
+ panel.append(n('p','Đồ trùng vẫn vào túi và hoàn 80% giá thực trả/lượt. Gói 5 chia đều giá gói; hoàn bạc làm tròn theo tổng số lượt trùng. Đồ dư có thể bán; giữ lại món đang mặc.','hint'));
  const rates=n('details'),summary=n('summary','Tỉ lệ và bảo đảm trang bị');rates.append(summary);
  for(const r of GEAR_RARITIES)rates.append(n('p',`${r.name}: ${r.rate}% · ${NEW_GEAR.filter(e=>e.rarity===r.id).length} món trong bậc, chia đều.`));
  rates.append(n('p','Trong 10 lượt liên tiếp có ít nhất một món Xuất sắc trở lên; trong 50 lượt có ít nhất một món Trác việt. Hai bộ đếm độc lập với vòng quay nhân vật. Mốc 2, 3 và đủ 4 món của bộ trang bị cộng dồn, chấp nhận phối đồ khác phẩm chất.'));panel.append(rates);
  panel.append(n('p',`Xuất sắc trở lên trong ${10-l.sinceExcellent} lượt · Trác việt trong ${50-l.sinceExceptional} lượt`,'gear-pity'));
- const controls=n('div',undefined,'controls');
- for(const[amount,cost]of [[1,GEAR_DRAW.singleCost],[5,GEAR_DRAW.tenCost]]){const b=btn(`Mở ${amount} rương · ${cost} bạc`,()=>app.run(()=>{const result=app.model.drawEquipment(amount);app.toast(`Trang bị đã vào túi${result.refund?' · Hoàn '+result.refund+' bạc do trùng':''}.`);renderEquipmentRefresh(app);}),!sectReady(s)||app.model.running||Boolean(s.storyProgress.pendingEncounter)||count(s,'silver')<cost);b.dataset.equipmentDraw=amount;controls.append(b);}panel.append(controls);
+ const controls=n('div',undefined,'controls gacha-draw-controls');
+ for(const[amount,cost]of [[1,GEAR_DRAW.singleCost],[5,GEAR_DRAW.tenCost]]){const b=btn(`Mở ${amount} rương · ${cost} bạc`,()=>app.run(()=>{const result=app.model.drawEquipment(amount);app.toast(`Trang bị đã vào túi${result.refund?' · Hoàn '+result.refund+' bạc do trùng':''}.`);renderEquipmentRefresh(app);}),!sectReady(s)||app.model.running||Boolean(s.storyProgress.pendingEncounter)||count(s,'silver')<cost);b.dataset.equipmentDraw=amount;b.classList.add('gacha-draw-button');controls.append(b);}panel.append(controls);
+ if(onOpenCatalog){const link=btn('Xem kho đồ · 80 trang bị có thể quay ra',onOpenCatalog);link.className='gacha-vault-link';link.dataset.uiIcon='bag';panel.append(link);}
  const history=n('div',undefined,'gear-results');history.id='equipment-results';history.tabIndex=0;history.setAttribute('role','region');history.setAttribute('aria-label','Kết quả vòng quay trang bị gần đây');
  for(const row of [...l.history].slice(-5).reverse()){const item=EQUIPMENT_BY_ID[row.id],r=gearRarity(item),card=n('article',undefined,'gear-card'),equipped=s.hero.equippedGear[item.slot]===item.id;card.dataset.gearRarity=r.id;card.style.setProperty('--gear-color',r.color);card.append(gearImage(item),n('strong',item.name),n('span',r.name,'gear-grade'),n('p',statsText(item.stats)),n('p',row.duplicate?'Trùng · Hoàn '+row.refund+' bạc':row.duplicate===false?'Trang bị mới':'Kết quả đã lưu trước cập nhật','gear-refund'),btn(equipped?'Đang mặc':count(s,item.id)?'Mặc món này':'Đã bán hết',()=>wear(app,item),equipped||count(s,item.id)===0||!sectReady(s)||Boolean(s.storyProgress.pendingEncounter)));history.append(card);}panel.append(history);
  const owned=n('details');owned.className='gear-owned';owned.open=app.equipmentInventoryOpen??false;owned.addEventListener('toggle',()=>{if(owned.isConnected)app.equipmentInventoryOpen=owned.open;});owned.append(n('summary','Trang bị đang sở hữu · chọn để mặc'));const list=n('div',undefined,'gear-inventory');
