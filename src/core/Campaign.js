@@ -1,3 +1,4 @@
+import { awardCampaignAffinity, validateAffinityLedgers } from './CampaignAffinity.js';
 import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import { validateRanks } from '../data/ProgressionBalance.js';
 import {storyRecruit7,STORY_RECRUITS7} from '../data/Recruitment7.js';
@@ -165,6 +166,7 @@ export function createCampaign({ name, sect = null, story = 'legacy' } = {}) {
   };
 }
 export function validateCampaign(session) {
+  validateAffinityLedgers(session);
   validateRanks(session.party?.ranks, session.party?.unlocked ?? [], COMPANIONS_BY_ID);
   const catalog=storyCatalog(session),{quests:MAIN_QUESTS,byId:MAIN_BY_ID,endings:ENDINGS}=catalog;
   validateJourney(session);
@@ -604,11 +606,12 @@ export class Campaign {
         fail('Đồng đội chưa được chiêu mộ.');
       if ((next.companionsAffinity[id] ?? 0) >= 100)
         fail('Duyên nợ đã đạt tối đa.');
+      // The daily gift cap is enforced before consuming tea.
+      const now = this.now();
+      const eventId = `gift:${id}:${next.affinityLedgers?.[id]?.seenEventIds.filter(e => e.startsWith('gift:')).length ?? 0}`;
+      const earned = awardCampaignAffinity(next, id, 'gift', eventId, now);
+      if (!earned) fail('Hôm nay đồng hành đã nhận đủ duyên phận từ quà.');
       consume(next, 'tea', 1);
-      next.companionsAffinity[id] = Math.min(
-        100,
-        (next.companionsAffinity[id] ?? 0) + 5
-      );
     }, 'gift');
   }
   _decision(next, questId, choiceId, karma) {
@@ -977,11 +980,7 @@ export class Campaign {
       next.adventure.daily.wins++;
       next.adventure.weekly.wins++;
       for (const id of next.party.active)
-        next.companionsAffinity[id] = Math.min(
-          100,
-          (next.companionsAffinity[id] ?? 0) +
-            (pending.kind === 'practice' ? 1 : 5)
-        );
+        awardCampaignAffinity(next, id, 'battle', `battle:${pending.token}`, this.now());
       if (pending.kind === 'main') {
         const q = MAIN_BY_ID[pending.questId];
         rewards.xp = Math.round(q.xp * 1.6);
