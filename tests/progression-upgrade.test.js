@@ -113,3 +113,13 @@ test('repeat boss equipment chance is moderately increased and escort victory pa
   assert.equal(itemCount(c.session,'silver'),silver-10+75);
   const paid=c.snapshot();assert.throws(()=>c.settleBattle());assert.deepEqual(c.snapshot(),paid);
 });
+
+test('boss resolution keeps the telegraph and last position if reflected damage removes its caster',async()=>{
+  const {BossDirector}=await import('../src/combat/BossDirector.js');
+  const events=[],boss={characterId:'trinh_nghiem',id:'boss',stats:{magicalAtk:100},gridPosition:{x:4,y:1}},target={id:'target',alive:true,gridPosition:{x:1,y:1}};
+  const b={unit:boss,phase:2,tell:{name:'Cơn phản kích',targets:['target']}};
+  const director=Object.create(BossDirector.prototype);
+  director.combat={units:[target],statuses:{apply(){}},dealDamage(){b.tell=null;boss.gridPosition=null;},emit:event=>events.push(event)};
+  assert.doesNotThrow(()=>director.resolve(b));
+  const event=events.find(e=>e.type==='skill:cast');assert.equal(event.name,'Cơn phản kích');assert.deepEqual(event.origin,{x:4,y:1});
+});

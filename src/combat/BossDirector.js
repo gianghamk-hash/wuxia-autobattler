@@ -157,7 +157,7 @@ export class BossDirector {
     return u;
   }
   resolve(b) {
-    const tell=b.tell;
+    const tell=b.tell, origin={...b.unit.gridPosition};
     if(!tell)return;
     const c = this.combat,
       id = b.unit.characterId;
@@ -204,7 +204,7 @@ export class BossDirector {
       skillId: 'npc_' + id + '_ult',
       name: tell.name,
       ultimate: true,
-      origin: { ...b.unit.gridPosition },
+      origin,
       targets: targets.map((u) => ({
         id: u.id,
         position: { ...u.gridPosition }
