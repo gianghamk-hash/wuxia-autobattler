@@ -4,6 +4,7 @@ import {icon} from './Visuals.js';
 import {remainingEntries,EXTRA_ENTRY_PRICE} from '../core/DungeonEntries.js';
 import {storyPerson,isDaiViet,DAI_VIET_CAST_BY_ID} from '../data/DaiVietCast.js';
 import {renderEquipment,renderChapterBosses} from './EquipmentUI.js';
+import {renderGearCatalog} from './GearCatalogUI.js';
 import {sectReady,heroText,heroAppearance,heroSectLabel} from '../data/HeroIdentity.js';
 import {casebook} from '../core/Casebook.js';
 import { renderStoryArchive } from './StoryArchive.js';
@@ -68,6 +69,7 @@ function select(options, value, callback) {
 export function mountWorldUI(app) {
   const roadsideShop=el('roadside-shop');roadsideShop.remove();
   let tab = 'shop',
+    shopView = 'gear',
     roomOption = 0,
     bauSelection = 'bau',
     bauStake = '10',
@@ -462,48 +464,59 @@ export function mountWorldUI(app) {
       root.append(escort);
     }
     if (tab === 'shop') {
-      root.append(roadsideShop);
-      roadsideShop.querySelector('.salvage7')?.remove();const salvage=button('Dùng 1 dây khảo sát · '+(2-(s.adventure.daily.salvage??0))+'/2 lượt hôm nay',()=>action('salvage'),(s.adventure.daily.salvage??0)>=2||count(s,'rope')<1);salvage.classList.add('salvage7');roadsideShop.append(salvage);
-      renderEquipment(app,root);
-      for (const [id, title, text, cost, disabled] of [
-        [
-          'train',
-          `Tu luyện · bậc ${w.training}/10`,
-          'Mỗi bậc: Main +2% HP và +1% công, lâu dài.',
-          `${50 + w.training * 65} bạc`,
-          w.training >= 10
-        ],
-        [
-          'forge',
-          `Rèn vũ khí · bậc ${w.forging}/10`,
-          'Mỗi bậc: Main +3% công. Cần đang trang bị vũ khí.',
-          `${70 + w.forging * 80} bạc + ${2 + w.forging} quặng`,
-          w.forging >= 10
-        ],
-        [
-          'alchemy',
-          'Luyện Dưỡng Khí Đan',
-          'Mỗi viên +10% HP trong một trận.',
-          '12 bạc + 2 thảo dược',
-          false
-        ]
-      ]) {
-        const p = panel(title, text);
-        p.append(button(`Thực hiện · ${cost}`, () => action(id), disabled));
-        root.append(p);
+      const tabs=n('nav',undefined,'tavern-image-nav');
+      tabs.setAttribute('aria-label','Chức năng Quán & Rèn');
+      const cards=[
+        ['gear','Vòng quay trang bị','Thử vận may · báu vật hiếm','assets/images/gear/thien_loi_exceptional_weapon.webp'],
+        ['vault','Kho đồ','80 món có thể quay ra','assets/images/gear/thanh_tam_exceptional_helmet.webp'],
+        ['store','Tạp hóa','Mua vật tư · khảo sát','assets/images/scenes/willow_ferry.webp'],
+        ['train','Tu luyện','Nâng sinh lực · nội công','assets/images/scenes/yen_tu.webp'],
+        ['forge','Rèn vũ khí','Tăng sức tấn công','assets/images/scenes/hoa_lu.webp'],
+        ['alchemy','Luyện Dưỡng Khí Đan','Bào chế linh dược','assets/images/scenes/u_minh.webp'],
+        ['news','Tụ quán nghe tin','Lời đồn · nhật ký','assets/images/scenes/binh_dinh.webp']
+      ];
+      for(const [id,label,detail,image] of cards){
+        const card=button('',()=>{shopView=id;renderWorld();});
+        card.className='tavern-image-card';
+        card.dataset.shopMenu=id;
+        card.setAttribute('aria-label',label);
+        card.setAttribute('aria-pressed',String(shopView===id));
+        const artwork=n('img');artwork.src=image;artwork.alt='';artwork.loading='lazy';artwork.decoding='async';artwork.className='tavern-image-art';
+        const info=n('span',undefined,'tavern-image-caption');
+        info.append(n('strong',label),n('small',detail));
+        card.append(artwork,info);
+        tabs.append(card);
       }
-      const news = panel(
-        'Tửu quán nghe tin',
-        '2 bạc/mẩu tin, mỗi mẩu chỉ mua một lần. Tin đã nghe có trong Nhật ký.'
-      );
-      news.append(
-        button(
-          `Nghe tin · ${w.newsRead.length}/5`,
-          () => action('news'),
-          w.newsRead.length === LOCAL_LORE.length
-        )
-      );
-      root.append(news);
+      root.append(tabs);
+      const content=n('div',undefined,'tavern-active-content');
+      content.dataset.shopContent=shopView;
+      content.id='tavern-active-panel';
+      root.append(content);
+      if(shopView==='gear') {
+        renderEquipment(app,content,()=>{shopView='vault';renderWorld();});
+      } else if(shopView==='vault') {
+        renderGearCatalog(app,content);
+      } else if(shopView==='store') {
+        content.append(roadsideShop);
+        roadsideShop.querySelector('.salvage7')?.remove();
+        const salvage=button('Dùng 1 dây khảo sát · '+(2-(s.adventure.daily.salvage??0))+'/2 lượt hôm nay',()=>action('salvage'),(s.adventure.daily.salvage??0)>=2||count(s,'rope')<1);
+        salvage.classList.add('salvage7');
+        roadsideShop.append(salvage);
+      } else if(['train','forge','alchemy'].includes(shopView)) {
+        const actions={
+          train:[`Tu luyện · bậc ${w.training}/10`,'Mỗi bậc: Main +2% HP và +1% công, lâu dài.',`${50+w.training*65} bạc`,w.training>=10],
+          forge:[`Rèn vũ khí · bậc ${w.forging}/10`,'Mỗi bậc: Main +3% công. Cần đang trang bị vũ khí.',`${70+w.forging*80} bạc + ${2+w.forging} quặng`,w.forging>=10],
+          alchemy:['Luyện Dưỡng Khí Đan','Mỗi viên +10% HP trong một trận.','12 bạc + 2 thảo dược',false]
+        };
+        const [heading,description,cost,disabled]=actions[shopView];
+        const p=panel(heading,description);
+        p.append(button('Thực hiện · '+cost,()=>action(shopView),disabled));
+        content.append(p);
+      } else if(shopView==='news') {
+        const news=panel('Tụ quán nghe tin','2 bạc/mẩu tin, mỗi mẩu chỉ mua một lần. Tin đã nghe có trong Nhật ký.');
+        news.append(button('Nghe tin · '+w.newsRead.length+'/'+LOCAL_LORE.length,()=>action('news'),w.newsRead.length===LOCAL_LORE.length));
+        content.append(news);
+      }
     }
     if (tab === 'arena') {
       const arena = panel(
