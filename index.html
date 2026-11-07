@@ -267,7 +267,7 @@
               aria-selected="false"
             >
               Trang bị
-            </button>
+            </button><button type="button" role="tab" id="tab-inventory" data-profile-tab="inventory" aria-controls="profile-inventory" aria-selected="false">Vật phẩm</button>
           </div>
           <div
             id="profile-attributes"
@@ -329,8 +329,8 @@
             <p id="progress-set"></p>
             <p id="progress-stats"></p>
             <p id="progress-ultimate"></p>
-            <div id="world-bag"></div>
           </div>
+          <div id="profile-inventory" role="tabpanel" aria-labelledby="tab-inventory" hidden><h3>Túi vật phẩm</h3><div id="world-bag"></div></div>
           <p id="progress-message" role="status" aria-live="polite"></p>
         </section>
       </section>
