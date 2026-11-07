@@ -32,6 +32,8 @@ for(const width of [320,390,1280]){
     await expect(page.locator('.formation-cell[data-level-aura="30"]')).toHaveCount(6);
     await page.evaluate(()=>{const a=window.__game;a.model.practice();a.enterBattle();});
     const dialog=page.locator('#prebattle-dialog');await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole('heading',{name:'Trinh sát và xếp trận',exact:true})).toBeInViewport();
+    expect(await dialog.evaluate(e=>e.scrollTop)).toBe(0);
     await expect(dialog).toContainText('khắc (+75% sát thương)');
     await expect(dialog.locator('.prebattle-card[data-team="enemy"]')).not.toHaveCount(0);
     const before=await page.evaluate(()=>window.__game.model.battle.elapsed);

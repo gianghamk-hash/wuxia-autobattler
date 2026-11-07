@@ -41,5 +41,5 @@ export function showPrebattle(app) {
     for(const u of home)battle.startingCells.set(u.id,{...u.gridPosition});
     app.model._commit(next,'formation');app.awaitingBattle=false;dialog.close();dialog.remove();
   };
-  dialog.addEventListener('cancel',event=>event.preventDefault());dialog.append(start);document.body.append(dialog);app.awaitingBattle=true;dialog.showModal();
+  dialog.addEventListener('cancel',event=>event.preventDefault());dialog.append(start);document.body.append(dialog);app.awaitingBattle=true;dialog.showModal();const heading=dialog.querySelector('h2');heading.tabIndex=-1;heading.focus({preventScroll:true});dialog.scrollTop=0;
 }
