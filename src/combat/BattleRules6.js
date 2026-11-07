@@ -79,6 +79,8 @@ export function bossSequence(
     title = BOSS_TITLES[chapter - 1],
     skin = bossSkin(chapter),
     training = (chapter >= 2 && chapter <= 4) || chapter === 8 || chapter >= 19,
+    waveCounts = null,
+    normalizeWaveSize = false,
   } = {},
 ) {
   const seeds = enemies.map((u) => ({
@@ -98,6 +100,11 @@ export function bossSequence(
   const authoredLeader=seeds.find(s=>s.storyActorId==='cao_le');
   const minionSeeds=authoredLeader?seeds.filter(s=>s!==authoredLeader):seeds;
   const decorate = (u, phase, index) => {
+    if(normalizeWaveSize&&waveCounts&&phase>1){
+      const ratio=waveCounts[0]/waveCounts[phase-1];
+      u.stats.maxHp=Math.round(u.stats.maxHp*ratio);u.stats.hp=u.stats.maxHp;
+      u.stats.physicalAtk*=ratio;u.stats.magicalAtk*=ratio;
+    }
     if (index === 0) {
       u.name = (phase < 3 ? `Mini boss ${phase} · ` : "Boss cuối · ") + title;
       u.characterId =
@@ -129,7 +136,7 @@ export function bossSequence(
     Array.from(
       {
         length:
-          phase === 3 ? Math.min(8, 6 + Math.floor((chapter - 1) / 8)) : 4,
+          waveCounts?.[phase - 1] ?? (phase === 3 ? Math.min(8, 6 + Math.floor((chapter - 1) / 8)) : 4),
       },
       (_, i) => {
         const s = phase===3&&i===0&&authoredLeader?authoredLeader:minionSeeds[i % minionSeeds.length],

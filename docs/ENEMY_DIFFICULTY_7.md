@@ -1,6 +1,6 @@
 # Enemy stats from chapter 3
 
-The current Đại Việt campaign applies an **additional ×2 to every finite numeric enemy stat from chapter 3 through chapter 20**, relative to the existing encounter, level, equipment, and boss-phase scaling. Chapters 1–2 retain their existing stats.
+The current Đại Việt campaign applies an **additional ×2 to every finite numeric enemy stat from chapter 3 through chapter 20**, relative to the existing encounter, level, equipment, and boss-phase scaling. Chapters 1–2 do not receive this additional multiplier. See FORMATION_AND_BALANCE_7.md for the subsequent randomized early-party HP/attack budget and dungeon relief.
 
 The 15 current fields are hp, maxHp, energy, maxEnergy, physicalAtk, magicalAtk, physicalDef, magicalDef, attackSpeed, moveSpeed, attackRange, critRate, critDmg, dodgeRate, and blockRate. The scaler covers actual fields dynamically; see baseStats in SectsData for the authoritative schema.
 

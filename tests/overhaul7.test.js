@@ -1,3 +1,4 @@
+import {reinforceStoryParty} from './helpers/story-flow.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -40,7 +41,7 @@ test('each of the 15 actual story encounters grants its companion once, with no 
   Object.assign(s.storyProgress,{completedQuests:done.map(q=>q.id),decisions:Object.fromEntries(done.map(q=>[q.id,q.choices[0]?.id??'continue'])),activeQuestId:q.id,currentChapter:q.chapter,currentEpisode:q.episode,currentAct:q.act,endingId:null});
   for(const p of STORY_RECRUITS7.filter(p=>done.some(q=>q.id===p.meet))){if(!s.party.unlocked.includes(p.id))s.party.unlocked.push(p.id);s.companionsAffinity[p.id]=15;s.storyProgress.completedQuests.push('recruit_'+p.id.slice(-2));}
   s.party.unlocked=s.party.unlocked.filter(id=>id!==person.id&&(s.party.active.includes(id)||STORY_RECRUITS7.some(p=>p.id===id&&done.some(q=>q.id===p.meet))));s.companionsAffinity=Object.fromEntries(s.party.unlocked.map(id=>[id,15]));c.load(s);assert.ok(!c.session.party.unlocked.includes(person.id));
-  if(c.chooseMain(q.choices[0].id))assert.equal(fight(c).winner,'home',q.id);
+  if(c.chooseMain(q.choices[0].id)){reinforceStoryParty(c);assert.equal(fight(c).winner,'home',q.id);}
   assert.equal(c.session.party.unlocked.filter(id=>id===person.id).length,1,q.id);const paid=c.snapshot();c.load(paid);assert.deepEqual(c.snapshot(),paid);validateCampaign(c.snapshot());
  }
 });

@@ -80,7 +80,9 @@ export class MissionDirector {
         : enemy
           ? 'assets/images/mission-lock.svg'
           : 'assets/images/mission-cart.svg';
-      const cells = captive ? [4, 5, 3] : enemy ? [5, 4, 3] : [0, 1, 2];
+      // Eight troops can leave only one enemy-side cell. Locks may use any
+      // remaining board cell; objects do not count toward the troop limit.
+      const cells = captive ? [4, 5, 3] : enemy ? [5, 4, 3, 2, 1, 0] : [0, 1, 2];
       let position;
       for (const x of cells)
         for (const y of [1, 0, 2])

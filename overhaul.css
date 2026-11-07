@@ -102,3 +102,13 @@ img.game-icon { object-fit:contain; image-rendering:auto; filter:drop-shadow(0 1
 @keyframes model-hit71{20%,60%{transform:translateX(-4px) rotate(-2deg)}40%{transform:translateX(3px)}}
 @media(prefers-reduced-motion:reduce){.model-preview7[data-motion]{animation:none;transform:none}}
 body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
+
+/* Clear role text stays visible on narrow formation cells as well as roster cards. */
+.unit-role-tag { display:inline-flex; align-items:center; justify-content:center; width:fit-content; max-width:100%; padding:3px 7px; border:1px solid currentColor; border-radius:6px; font-size:.72rem; font-weight:700; line-height:1.35; white-space:nowrap; }
+.unit-role-tag[hidden] { display:none; }
+.unit-role-tag[data-role="frontline"] { color:#f4cb82; background:#5c411f; }
+.unit-role-tag[data-role="support"] { color:#a6e8ca; background:#204b41; }
+.unit-role-tag[data-role="damage"] { color:#ffb2ac; background:#5a2d36; }
+.formation-units button { flex-wrap:wrap; }
+.formation-units button>span.unit-role-tag { flex:0 0 auto; max-width:none; overflow:visible; }
+.formation-cell>span.unit-role-tag { display:inline-flex; max-width:100%; overflow:visible; font-size:.65rem; padding:2px 4px; -webkit-line-clamp:unset; }

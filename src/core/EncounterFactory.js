@@ -17,6 +17,13 @@ export function enemyLineup({ quest, encounter, count, grid, main,rules }) {
     unit.stats.hp = unit.stats.maxHp;
     unit.stats.physicalAtk *= encounter.attackScale;
     unit.stats.magicalAtk *= encounter.attackScale;
+    // Random headcounts must not turn the untrained opening into an eight-unit wall.
+    // Keep the original four-troop HP/attack budget until chapter 3.
+    if(advanced&&main&&quest.chapter<=2){
+      const budget=4/templates.length;
+      unit.stats.maxHp=Math.round(unit.stats.maxHp*budget);unit.stats.hp=unit.stats.maxHp;
+      unit.stats.physicalAtk*=budget;unit.stats.magicalAtk*=budget;
+    }
     unit.name = COMPANIONS_BY_ID[id].name;
     if (main) {
       const identity = storyEnemy(quest, index, templates.length);
@@ -36,3 +43,13 @@ export function enemyLineup({ quest, encounter, count, grid, main,rules }) {
     return unit;
   });
 }
+
+/** Stable across scouting, reload and retry, while new attempts get a fresh roster. */
+export const encounterSeed = attempt => (20261105 + attempt * 2654435761) >>> 0;
+export function storyEnemyCount(quest, seed, phase = 1) {
+  let hash = 2166136261;
+  for (const ch of `${quest.id}:${seed}:${phase}`) hash = Math.imul(hash ^ ch.charCodeAt(0), 16777619) >>> 0;
+  hash ^= hash >>> 16;
+  return 4 + (hash >>> 0) % 5;
+}
+export const storyWaveCounts = (quest, seed) => [1,2,3].map(phase => storyEnemyCount(quest, seed, phase));
