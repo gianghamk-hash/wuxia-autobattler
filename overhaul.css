@@ -367,3 +367,5 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 .fishing-result,.sect-passive{padding:12px;border:1px solid #bdc878;border-radius:8px;background:#304b3b}
 @media(max-width:600px){.prebattle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#prebattle-dialog{padding:12px}}
 @media(prefers-reduced-motion:reduce){[data-tier="6"]{animation:none}}
+
+body[data-card-effects="false"] [data-tier="6"]{animation:none}

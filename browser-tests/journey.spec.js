@@ -263,7 +263,7 @@ test('boss warnings, focus controls, falling frames and reduced-motion battle ar
     app.model.battle = battle;
     battle.encounterName = 'Hoa Lư · thử cơ chế Ấn';
     battle.start();
-    app.enterBattle();
+    app.enterBattle();document.querySelector('#prebattle-dialog [data-start-battle]')?.click();
     app.renderer.environment.src = new URL(
       '/assets/images/scenes/hoa_lu.webp',
       location.href
@@ -416,7 +416,7 @@ test('real six versus six battle produces a motion review clip with independent 
     app.model.battle = battle;
     battle.encounterName = 'Yên Tử · giao chiến 6 đấu 6';
     battle.start();
-    app.enterBattle();
+    app.enterBattle();document.querySelector('#prebattle-dialog [data-start-battle]')?.click();
     const { sceneFor } = await import('/src/data/PresentationData.js');
     app.renderer.environment.src = sceneFor({ chapter: 11 });
     app.renderer.resize();

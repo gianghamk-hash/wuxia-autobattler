@@ -25,7 +25,7 @@ export function showPrebattle(app) {
     for(const synergy of getActiveSynergies(home.filter(u=>u.id!=='guide').map(u=>u.sect).filter(Boolean).slice(0,6)))content.append(node('p','Tương trợ đã kích hoạt: '+synergy.name+' · '+synergy.description));
     content.append(node('h3','Sắp vị trí đội ta'));
     for(const u of home.filter(u=>Object.hasOwn(app.model.session.party.formation,u.id))){const label=node('label',u.name+' '),select=node('select');select.setAttribute('aria-label','Vị trí '+u.name);
-      for(let y=0;y<3;y++)for(let x=0;x<3;x++){const occupied=battle.grid.at({x,y});if(occupied&&(occupied.isObject||!Object.hasOwn(app.model.session.party.formation,occupied.id)))continue;const o=node('option',`Cột ${x+1}, hàng ${y+1}${occupied?' · '+occupied.name:''}`);o.value=`${x},${y}`;select.append(o);}
+      for(let y=0;y<3;y++)for(let x=0;x<3;x++){const occupied=battle.grid.at({x,y});const savedFormation=app.model.session.adventure.dungeon?.squad.formation??app.model.session.party.formation;const reserved=Object.entries(savedFormation).some(([id,p])=>p.x===x&&p.y===y&&!home.some(a=>a.id===id));if(reserved)continue;if(occupied&&(occupied.isObject||!Object.hasOwn(app.model.session.party.formation,occupied.id)))continue;const o=node('option',`Cột ${x+1}, hàng ${y+1}${occupied?' · '+occupied.name:''}`);o.value=`${x},${y}`;select.append(o);}
       select.value=`${u.gridPosition.x},${u.gridPosition.y}`;
       select.onchange=()=>{const [x,y]=select.value.split(',').map(Number),other=battle.grid.at({x,y}),old={...u.gridPosition};battle.grid.remove(u);if(other)battle.grid.remove(other);battle.grid.place(u,{x,y});if(other)battle.grid.place(other,old);app.renderer.positions.clear();render();};
       label.append(select);content.append(label);
@@ -34,6 +34,7 @@ export function showPrebattle(app) {
   const content=node('div');dialog.append(content);render();
   const start=node('button','Bắt đầu giao chiến');start.type='button';start.dataset.startBattle='true';
   start.onclick=()=>{
+    if(app.model.battle!==battle || !app.model.running || battle.elapsed>0){app.awaitingBattle=false;dialog.close();dialog.remove();return;}
     const next=app.model.snapshot();
     for(const id of ['hero',...next.party.active]){const u=home.find(u=>u.id===id);if(u)next.party.formation[id]={...u.gridPosition};}
     if(next.adventure.dungeon){for(const id of ['hero',...next.adventure.dungeon.squad.active]){const u=home.find(u=>u.id===id);if(u)next.adventure.dungeon.squad.formation[id]={...u.gridPosition};}}

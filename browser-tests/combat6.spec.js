@@ -29,7 +29,7 @@ test("boss phase HUD follows three continuous squads and settles one reward on m
     for(const id of snapshot.party.active)snapshot.companionsAffinity[id]=15;
     a.model.load(snapshot);
     a.model.startChapterBoss(18);
-    a.enterBattle();
+    a.enterBattle();document.querySelector('#prebattle-dialog [data-start-battle]')?.click();
     a.engine.stop();
     a.model.battle.units[0].stats.hp = 777;
   });
@@ -108,7 +108,7 @@ test("tower victory starts the next floor automatically and returns to Bi canh",
     const a = window.__game;
     a.model.enterDungeon("phong_nha");
     a.model.chooseRoom(0);
-    a.enterBattle();
+    a.enterBattle();document.querySelector('#prebattle-dialog [data-start-battle]')?.click();
     a.engine.stop();
     for (let i = 0; i < 22500 && a.model.running; i++) a.model.update(1 / 60);
   });

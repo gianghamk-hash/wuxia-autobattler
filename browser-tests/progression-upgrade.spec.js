@@ -69,13 +69,15 @@ test('mission carts and locks decode as actual battlefield assets',async({page})
     const {CombatEngine}=await import('/src/combat/CombatEngine.js');
     const {GridSystem}=await import('/src/combat/GridSystem.js');
     const canvas=document.createElement('canvas');canvas.width=960;canvas.height=540;const renderer=new BattleRenderer(canvas);
+    const reports=[];for(const type of ['protect','breach']){
     const home=new Hero('VoDang'),enemy=new Companion('companion_01',{team:'enemy'}),grid=new GridSystem();grid.place(home,{x:1,y:1});grid.place(enemy,{x:4,y:1});
-    const {MISSIONS}=await import('/src/data/MissionsData.js');const missionId=Object.keys(MISSIONS).find(id=>MISSIONS[id].type==='protect');
+    const {MISSIONS}=await import('/src/data/MissionsData.js');const missionId=Object.keys(MISSIONS).find(id=>MISSIONS[id].type===type);
     const battle=new CombatEngine({units:[home,enemy],grid,seed:15,missionId});battle.start();
     renderer.setBattle(battle);renderer.render(.1);
     const cart=battle.units.find(u=>u.missionAsset);const image=renderer.companionImages.get(cart.characterId);await image.decode();
     let objectDraws=0;const draw=renderer.ctx.drawImage.bind(renderer.ctx);renderer.ctx.drawImage=(im,...args)=>{if(im===image)objectDraws++;return draw(im,...args);};renderer.render(.1);
-    return {src:image.src,width:image.naturalWidth,objectDraws};
+    reports.push({src:image.src,width:image.naturalWidth,objectDraws});
+    }return reports;
   });
-  expect(report.src).toContain('mission-cart.svg');expect(report.width).toBeGreaterThan(0);expect(report.objectDraws).toBeGreaterThan(0);
+  expect(report[0].src).toContain('mission-cart.svg');expect(report[1].src).toContain('mission-lock.svg');for(const r of report){expect(r.width).toBeGreaterThan(0);expect(r.objectDraws).toBeGreaterThan(0);}
 });
