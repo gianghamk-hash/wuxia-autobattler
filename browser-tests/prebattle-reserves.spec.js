@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures.js';
+import { test, expect } from '@playwright/test';
 import { developed } from '../scripts/balance-campaign7.mjs';
 
 async function enterReady(page, width=390) {
