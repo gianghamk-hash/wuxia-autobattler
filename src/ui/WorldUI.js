@@ -788,7 +788,7 @@ export function mountWorldUI(app) {
         s.hero.level<def.level||remaining<=0);
       enter.dataset.uiIcon='flag';p.append(enter);
       if(remaining===0&&!w.daily.entryPurchases?.[def.id])
-        p.append(button('Mua thêm lượt · 60 bạc',()=>run(()=>app.model.buyDungeonEntry(def.id)),count(s,'silver')<EXTRA_ENTRY_PRICE));
+        p.append(button('Mua thêm 1 lượt · 60 bạc',()=>run(()=>app.model.buyDungeonEntry(def.id)),count(s,'silver')<EXTRA_ENTRY_PRICE));
       if(def.id===featured.id)
         p.append(button('Thử thách tuần · quái +2 cấp',()=>fight(()=>{app.model.enterDungeon(def.id,true);app.model.chooseRoom(0);}),s.hero.level<def.level+2||remaining<=0));
       tiles.append(p);
