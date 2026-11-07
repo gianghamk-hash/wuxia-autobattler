@@ -741,7 +741,7 @@ export function mountWorldUI(app) {
       const stake=Number(bauStake);
       const result=action('bau_cua',{face:bauSelection,stake});
       if(typeof result==='string'){
-        const match=result.match(/^Bầu Cua: ([a-z,]+); chọn ([a-z]+); cược (\\d+); trúng (\\d+); thưởng (\\d+); lãi (-?\\d+)\\.$/);
+        const match=result.match(/^Bầu Cua: ([a-z,]+); chọn ([a-z]+); cược ([0-9]+); trúng ([0-9]+); thưởng ([0-9]+); lãi (-?[0-9]+)[.]$/);
         if(match)bauResult={rolls:match[1].split(','),face:match[2],stake:Number(match[3]),hits:Number(match[4]),payout:Number(match[5]),net:Number(match[6])};
         renderDungeon();
       }
