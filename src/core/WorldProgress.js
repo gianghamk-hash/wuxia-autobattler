@@ -66,12 +66,14 @@ export function freshWorld() {
       fishing: 0,
       salvage: 0,
       practiceWins: 0,
+      bauCua: 0,
       escorts: 0
     },
     weekly: { week: -1, wins: 0, clears: 0, claimed: [], arenaClaims: [] },
     training: 0,
     forging: 0,
     practiceWins: 0,
+      bauCua: 0,
     journal: [],
     dungeon: null,
     clears: [],
@@ -225,6 +227,7 @@ export function validateWorld(s) {
   }
   if (
     !integer(w.daily.practiceWins) ||
+     !integer(w.daily.bauCua??0,3) ||
     !integer(w.daily.escorts, 2) ||
     !integer(w.daily.crafts) ||
     !integer(w.daily.floors) ||
@@ -331,6 +334,7 @@ export function resetCalendar(s, now) {
       fishing: 0,
       salvage: 0,
       practiceWins: 0,
+      bauCua: 0,
       escorts: 0
     };
   if (week > w.weekly.week)
@@ -453,6 +457,29 @@ export function worldAction(s, action, arg, now) {
       give(s, w.daily.fishing === 3 ? 'ore' : 'herb', 1);
       message = 'Câu được cá và vật liệu ven bờ.';
       break;
+    case 'bau_cua': {
+      const faces=['bau','cua','tom','ca','ga','nai'];
+      if (!faces.includes(arg)) fail('Mặt Bầu Cua không hợp lệ.');
+      if ((w.daily.bauCua??0)>=3) fail('Mỗi ngày chỉ có 3 lượt Bầu Cua.');
+      if (s.storyProgress.pendingEncounter || w.dungeon) fail('Kết thúc trận/bí cảnh trước.');
+      if (!globalThis.crypto?.getRandomValues) fail('Thiết bị thiếu bộ tạo số ngẫu nhiên an toàn.');
+      pay(s,'silver',5);
+      const dice=new Uint32Array(3);globalThis.crypto.getRandomValues(dice);
+      const rolls=Array.from(dice,v=>faces[v%6]),matches=rolls.filter(face=>face===arg).length;
+      if(matches)give(s,'silver',10*matches);
+      w.daily.bauCua=(w.daily.bauCua??0)+1;
+      message=`Bầu Cua: ${rolls.join(' · ')}. Chọn ${arg}, trúng ${matches} mặt, nhận ${10*matches} bạc (đặt 5).`;
+      break;
+    }
+    case 'martial_train': {
+      if(s.storyProgress.pendingEncounter || w.dungeon)fail('Kết thúc trận/bí cảnh trước.');
+      const level=w.guild.contributions;
+      if(level>=20)fail('Võ Đạo Các đã đạt bậc 20.');
+      pay(s,'silver',40+level*35);pay(s,'ore',1+Math.floor(level/5));
+      w.guild.contributions++;w.guild.points+=10;
+      message=`Võ Đạo Các bậc ${w.guild.contributions}: Main +1,5% HP và +1% công mỗi bậc.`;
+      break;
+    }
     case 'guild_create':
       if (w.guild.name) fail('Đã có bang hội bản địa.');
       if (typeof arg !== 'string' || !arg.trim() || arg.trim().length > 32)
