@@ -3759,7 +3759,7 @@ body[data-card-effects="false"] .rarity-ornament:after {
 .bau-stake-row label {font-weight:700;color:var(--paper);}
 .bau-stake-row input {width:100%;min-width:0;margin:0;padding:12px;border:1px solid var(--line);border-radius:9px;background:#0a2529;color:var(--paper);font-size:1rem;}
 .bau-quick-stakes {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
-.bau-quick-stakes button {min-height:42px;padding:6px 3px;font-size:.78rem;}
+.bau-quick-stakes button {min-height:45px;padding:6px 3px;font-size:.78rem;}
 .dungeon-gamble [data-bau-play] {width:100%;margin:14px 0 4px;min-height:53px;font-size:1rem;}
 .bau-outcome {margin-top:15px;padding:14px;border-radius:12px;background:#102f30;border:1px solid #b999594f;text-align:center;}
 .bau-outcome h3 {margin:0 0 10px;font-size:1.1rem;}
