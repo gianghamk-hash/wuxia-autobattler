@@ -1,0 +1,23 @@
+name: Balance 8 visual integrity
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: ['feature/balance-8-*']
+permissions:
+  contents: read
+jobs:
+  guard:
+    if: ${{ startsWith(github.head_ref || github.ref_name, 'feature/balance-8-') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify protected models, images, animation and VFX unchanged
+        run: node scripts/balance-lab/visual-guard.mjs origin/main
+      - name: Run balance-only regression tests
+        run: node --test tests/balance-*.test.js
