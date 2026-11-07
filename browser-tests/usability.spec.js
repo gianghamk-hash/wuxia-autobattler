@@ -22,7 +22,7 @@ for(const width of [320,390,768,1280])test('all main screens and function icons 
  await page.locator('[data-view="profile"]').first().click();
  for(const id of ['skills','attributes','gear']){await page.locator('[data-profile-tab="'+id+'"]').click();await audit(page);}
  await page.locator('[data-view="tavern"]').first().click();
- for(const label of ['Hoạt động','Quán & Rèn','Đại hội','Bang hội','Truyện ký','Sổ đầu mối','Đồng hành','Người đã gặp','Nhật ký']){
+ for(const label of ['Boss chương','Điểm danh & Nhiệm vụ','Câu cá','Vận tiêu','Quán & Rèn','Đại hội','Võ Đạo Các','Truyện ký','Sổ đầu mối','Đồng hành','Người đã gặp','Nhật ký']){
   await page.locator('#world-tabs').getByRole('button',{name:label,exact:true}).click();await audit(page);
  }
  await shot(page,info,'world-'+width+'.png');
