@@ -1,4 +1,5 @@
 import {ENEMY_CELLS,strengthenEnemy,bossSequence} from '../combat/BattleRules6.js';
+import {campaignEnemyMultiplier} from '../combat/EnemyDifficulty.js';
 import {NEW_GEAR} from '../data/GearCatalog.js';
 import { gainExperience } from '../entities/HeroBuild.js';
 import { applyBondVariant } from '../data/BondsData.js';
@@ -360,6 +361,7 @@ export const worldMethods = {
     this.lastResult = null;
     const nextBossWave=isBoss?bossSequence(units.filter(u=>u.team==='enemy'),chapter,pending.kind==='dungeon'?{title:title.replace(' · TRẤN THỦ',''),training:false,skin:d.floor<30?'boss_river':d.floor<60?'boss_captain':'boss_marshal'}:undefined):null;
     this.battle = new CombatEngine({
+      enemyStatMultiplier:isDaiViet(s)?campaignEnemyMultiplier(pending.kind==='chapterBoss'?Number(pending.questId):s.storyProgress.currentChapter):1,
       enemyLimit:8,nextBossWave,maxDuration:isBoss?360:150,
       units,
       grid,

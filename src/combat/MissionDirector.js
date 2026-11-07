@@ -199,6 +199,7 @@ export class MissionDirector {
               level: original.level
             });
             applyStoryIdentity(unit, NPCS_BY_ID.tay_sai);
+            c.scaleEnemy(unit);
             unit.name =
               'Toán truy bắt ' + (at === 10 ? 'I' : 'II') + ' · ' + (i + 1);
             unit.stats.maxHp = original.stats.maxHp * 0.55;

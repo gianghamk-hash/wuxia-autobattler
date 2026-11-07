@@ -114,7 +114,7 @@ test("five-result bundles retain their old prices and ten-draw guarantees carry 
   );
   assert.throws(() => drawEquipment(s, 10));
 });
-test("all five towers have 100 combat floors, preserve deterministic checkpoints, and developed squads can beat the final three phases", () => {
+test("all five towers retain 100 floors, deterministic reloads and correct rewards or losses under the stronger difficulty", () => {
   for (const def of DUNGEONS) {
     const c = developed();
     c.enterDungeon(def.id);
@@ -134,8 +134,11 @@ test("all five towers have 100 combat floors, preserve deterministic checkpoints
     copy.load(pending);
     copy.retryEncounter();
     assert.equal(copy.battle.seed, b.seed);
-    const r = fight(c);
-    assert.equal(r.winner, "home", def.id);
+    assert.equal(b.enemyStatMultiplier,2);
+    const r = fight(c), repeated=fight(copy);
+    assert.equal(r.winner,repeated.winner,def.id);
+    assert.deepEqual(r.rewards,repeated.rewards,def.id);
+    if(r.winner!=="home"){assert.equal(r.rewards.xp,0);assert.ok(!c.session.adventure.clears.includes(def.id));validateCampaign(c.snapshot());continue;}
     assert.equal(r.bossPhases, 3);
     assert.equal(c.session.adventure.dungeon, null);
     assert.equal(c.session.adventure.towerBest[def.id], 100);

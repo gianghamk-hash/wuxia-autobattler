@@ -1,6 +1,7 @@
 import {storyRecruit7,STORY_RECRUITS7} from '../data/Recruitment7.js';
 import {entryMethods} from './DungeonEntries.js';
 import {bossSequence} from '../combat/BattleRules6.js';
+import {campaignEnemyMultiplier,scaleEnemyStats} from '../combat/EnemyDifficulty.js';
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
 import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { MISSIONS } from '../data/MissionsData.js';
@@ -655,6 +656,7 @@ export class Campaign {
       main: true
     });
     if(isDaiViet(this.session)&&quest.boss)bossSequence(enemies,quest.chapter);
+    if(isDaiViet(this.session))for(const unit of enemies)scaleEnemyStats(unit,campaignEnemyMultiplier(quest.chapter));
     const missionId = pending
       ? pending.kind === 'main'
         ? pending.missionId
@@ -889,6 +891,7 @@ export class Campaign {
     const boss=Boolean(isDaiViet(this.session)&&quest?.boss&&pending.kind==='main');
     const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter):null;
     this.battle = new CombatEngine({
+      enemyStatMultiplier:isDaiViet(this.session)?campaignEnemyMultiplier(pending.kind==='main'?quest.chapter:this.session.storyProgress.currentChapter):1,
       enemyLimit:8,nextBossWave,maxDuration:boss?360:150,
       units,
       grid,
