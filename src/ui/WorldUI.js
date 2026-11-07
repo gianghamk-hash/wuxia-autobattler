@@ -781,7 +781,7 @@ export function mountWorldUI(app) {
       p.dataset.dungeonId=def.id;
       const picture=n('img');picture.src='assets/images/scenes/'+def.id+'.webp';picture.alt='Minh họa '+def.name;picture.loading='lazy';picture.decoding='async';picture.className='dungeon-tile-image';
       p.prepend(picture);
-      const stats=n('p','Còn '+remaining+' lượt · kỷ lục '+(w.towerBest?.[def.id]??0)+'/100','dungeon-tile-stats');
+      const stats=n('p','Còn '+remaining+' lượt hôm nay · kỷ lục '+(w.towerBest?.[def.id]??0)+'/100','dungeon-tile-stats');
       p.append(stats);
       const enter=button(w.clears.includes(def.id)?'Khám phá lại':'Vào bí cảnh',
         ()=>fight(()=>{app.model.enterDungeon(def.id);app.model.chooseRoom(0);}),
