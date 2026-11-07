@@ -35,7 +35,7 @@ export function chapterBossRewards(s,c){const factor=Math.max(.1,1-Math.max(0,s.
 export function bossLoot(s,chapter,seed,{story=false}={}){
  s.loot??=freshLoot();const random=seededRandom((seed^0x78a91b3)>>>0),first=!s.loot.bossWins[chapter];s.loot.bossWins[chapter]=(s.loot.bossWins[chapter]??0)+1;
  const drops=[];
- if(first||story||random()<.35){const floor=chapter>=15?2:1,ceiling=chapter<=4?2:chapter<=10?3:4,rank=first?Math.min(4,Math.max(2,Math.ceil(chapter/6))):Math.min(ceiling,random()<.03?4:random()<.20?3:random()<.55?2:floor),pool=NEW_GEAR.filter(e=>e.tier===rank),item=pool[Math.floor(random()*pool.length)];give(s,item.id,1);drops.push(item.id);}
+ if(first||story||random()<.35){const floor=chapter>=15?2:1,ceiling=chapter<=4?2:chapter<=10?3:4,rank=first?Math.min(4,Math.max(2,Math.ceil(chapter/6))):Math.min(ceiling,random()<.03?4:random()<.20?3:random()<.55?2:floor),pool=NEW_GEAR.filter(e=>e.tier===rank),weights=pool.map(e=>e.slot==='helmet'?1.5:1),total=weights.reduce((a,b)=>a+b,0);let ticket=random()*total;const item=pool.find((e,i)=>(ticket-=weights[i])<0)??pool.at(-1);give(s,item.id,1);drops.push(item.id);}
  return drops;
 }
 export function storyEquipment(s,q,seed){
