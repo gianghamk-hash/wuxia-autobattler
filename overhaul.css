@@ -117,3 +117,132 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 .max-affinity-label,.gear-refund { color:var(--gold); font-weight:600; overflow-wrap:anywhere; }
 .gear-sale-hint { font-size:.8rem; overflow-wrap:anywhere; }
 .gear-card [data-sell-gear] { width:100%; white-space:normal; }
+
+
+/* Illustrated Quán & Rèn navigation: full-frame artwork rather than glyph-only tabs. */
+.tavern-image-nav {
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:12px;
+ margin:0 0 20px;
+}
+.tavern-image-card {
+ position:relative;
+ display:flex;
+ flex-direction:column;
+ justify-content:flex-end;
+ overflow:hidden;
+ isolation:isolate;
+ min-width:0;
+ min-height:145px;
+ padding:0;
+ border:2px solid #a58b545c;
+ border-radius:14px;
+ background:#133739;
+ color:#fff1d0;
+ text-align:left;
+ box-shadow:0 7px 18px #0004;
+ transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.tavern-image-card .tavern-image-art{
+ position:absolute;
+ inset:0;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ object-position:center;
+ z-index:-1;
+ filter:brightness(.74) saturate(1.12);
+ transition:transform .25s ease;
+}
+.tavern-image-card[data-shop-menu="gear"] .tavern-image-art,
+.tavern-image-card[data-shop-menu="vault"] .tavern-image-art{
+ object-fit:contain;
+ padding:5px 0 25px;
+ background:radial-gradient(ellipse at 50% 35%,#56604d,#173339 70%);
+}
+.tavern-image-card::after{
+ position:absolute;content:"";inset:0;z-index:-1;
+ background:linear-gradient(180deg,transparent 22%,#06212344 45%,#031f25ee 100%);
+ pointer-events:none;
+}
+.tavern-image-caption{display:flex;flex-direction:column;gap:3px;width:100%;padding:48px 12px 12px;text-shadow:0 2px 6px #000c;}
+.tavern-image-caption strong{font-size:.95rem;line-height:1.25;color:#ffe1a0;}
+.tavern-image-caption small{font-size:.68rem;color:#d2e1d9;line-height:1.35;}
+.tavern-image-card[aria-pressed="true"]{border-color:#f4cc77;box-shadow:0 0 0 1px #f4cc77,0 5px 25px #efc26355;transform:translateY(-2px);}
+.tavern-image-card:focus-visible{outline:3px solid #f2d18b;outline-offset:3px;}
+.tavern-image-card:hover .tavern-image-art{transform:scale(1.07);}
+.tavern-image-card .action-symbol{display:none;}
+.tavern-active-content{min-width:0;}
+/* Equipment draw center is the visual focal point of Quán & Rèn. */
+.gear-panel{
+ border-color:#b69a5788;
+ background:linear-gradient(170deg,#173b3a 0%,#0e2a2b 55%,#0c2226 100%);
+ box-shadow:inset 0 1px #e5cd7538,0 18px 36px #0003;
+}
+.gacha-hero{
+ position:relative;
+ display:grid;
+ grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+ align-items:center;
+ gap:12px;
+ padding:24px;
+ margin-bottom:16px;
+ border-radius:14px;
+ border:1px solid #d7ba7063;
+ background:radial-gradient(ellipse at 75% 50%,#5c552eaa 0%,#163a39 54%,#0b292e 100%);
+ overflow:hidden;
+}
+.gacha-eyebrow,.vault-kicker{font-size:.7rem;letter-spacing:.17em;font-weight:800;color:#ffce75;margin:0 0 7px;}
+.gacha-hero-copy h2{font:bold clamp(1.5rem,2.6vw,2.6rem) Georgia,serif;color:#ffebbb;margin:0 0 12px;}
+.gacha-subtitle{font-size:.84rem;color:#e4e5d8;line-height:1.65;}
+.gacha-wallet{display:inline-block;margin-top:14px;padding:9px 13px;border:1px solid #e0c27955;border-radius:9px;color:#ffda86;background:#fff5d80c;}
+.gacha-showcase{display:flex;align-items:center;justify-content:center;gap:0;}
+.gacha-showcase .gear-art{width:100px;height:100px;flex-shrink:1;transform:rotate(-9deg);box-shadow:0 9px 24px #0008,0 0 25px #e7bd6266;}
+.gacha-showcase .gear-art:nth-child(2){width:122px;height:122px;z-index:2;transform:rotate(0deg);}
+.gacha-showcase .gear-art:nth-child(3){transform:rotate(9deg);}
+.gacha-draw-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:17px 0 12px;}
+.gacha-draw-controls .gacha-draw-button{width:100%;min-height:58px;border:1px solid #e8c879aa;background:linear-gradient(130deg,#4c5235,#4d3a24);color:#ffe8ad;font-size:.95rem;font-weight:700;}
+.gacha-draw-controls .gacha-draw-button:last-child{background:linear-gradient(135deg,#786037,#4b3427);box-shadow:0 0 19px #e5a65a30;}
+.gacha-draw-controls .gacha-draw-button:disabled{opacity:.48;box-shadow:none;}
+.gacha-vault-link{display:block;width:100%;min-height:49px;border:1px solid #9fbcaa72;background:#1c4441;color:#f5db9a;margin:7px 0 16px;}
+/* Every item in the real equipment gacha pool, sorted from lowest rarity up. */
+.tavern-vault{min-width:0;}
+.vault-header{padding:20px 22px;border:1px solid #c9a86670;border-radius:14px;margin-bottom:14px;background:linear-gradient(110deg,#3b3c2a,#173d3b 60%,#123139);}
+.vault-header h2{margin:0 0 8px;font:bold 1.7rem Georgia,serif;color:#ffe2a5;}
+.vault-header .hint{margin:0;line-height:1.55;}
+.vault-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.vault-filters select,.vault-filters input[type="search"]{width:100%;min-width:0;margin:0;padding:11px 9px;border:1px solid #86a59d62;border-radius:8px;background:#0a262b;color:#eef4e8;font-size:.82rem;}
+.vault-owned-label{display:flex;align-items:center;gap:6px;font-size:.8rem;min-height:43px;}
+.vault-counter{font-size:.75rem;color:#e7d19d;margin:13px 0;}
+.vault-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;}
+.vault-gear{display:flex;flex-direction:column;align-items:center;gap:9px;min-width:0;padding:13px 9px;background:linear-gradient(140deg,#193c3a,#0d292d);border:1px solid var(--gear-color);border-radius:12px;}
+.vault-gear .vault-gear-image{width:100%;height:auto;max-width:136px;aspect-ratio:1;padding:8px;}
+.vault-gear-image img{width:100%;height:100%;object-fit:contain;}
+.vault-gear-info{display:flex;flex-direction:column;gap:5px;align-items:center;min-width:0;text-align:center;font-size:.77rem;}
+.vault-gear-info strong{color:#f4e4b9;line-height:1.4;overflow-wrap:anywhere;}
+.vault-gear-rarity{font-weight:750;color:var(--gear-color);}
+.vault-gear-details{font-size:.67rem;color:#b9d0cb;line-height:1.4;}
+.vault-gear-owned{font-size:.68rem;color:#d9c395;}
+@media(max-width:1000px){
+ .tavern-image-nav{grid-template-columns:repeat(3,minmax(0,1fr));}
+ .vault-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media(max-width:699px){
+ .tavern-image-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+ .tavern-image-card{min-height:133px;}
+ .tavern-image-caption{padding:48px 9px 10px;}
+ .tavern-image-caption strong{font-size:.86rem;}
+ .tavern-image-caption small{font-size:.66rem;}
+ .gacha-hero{grid-template-columns:1fr;padding:15px;}
+ .gacha-showcase .gear-art{width:83px;height:83px;}
+ .gacha-showcase .gear-art:nth-child(2){width:104px;height:104px;}
+ .gacha-draw-controls{gap:8px;}
+ .gacha-draw-controls .gacha-draw-button{padding:8px 5px;font-size:.77rem;min-height:55px;}
+ .vault-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+ .vault-gear{padding:9px 5px;}
+ .vault-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}
+ .vault-header{padding:14px;}
+ .vault-header h2{font-size:1.35rem;}
+}
+@media(prefers-reduced-motion:reduce){.tavern-image-card,.tavern-image-art{transition:none!important;}}
