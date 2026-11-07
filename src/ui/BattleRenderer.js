@@ -381,21 +381,23 @@ export class BattleRenderer {
         rounded(ctx, p.x - w * 0.7, top - 5, w * 1.4, h + 10, 8);
         ctx.stroke();
       }
+      const enemyIntent=unit.team==='enemy'?battleIntent(this.battle,unit):null;
+      const importantIntent=enemyIntent&&['Chuẩn bị','Hồi máu','Hỗ trợ','Tuyệt kỹ','Giữ chân'].includes(enemyIntent.short);
       const indicator=damageIndicator(this.battle,unit,unit.team==='home'?this.previewOpponentId:this.previewHomeId);
       if(indicator){
         this.damageIndicators.set(unit.id,indicator);
         const text=(indicator.percent>0?'▲ +':'▼ ')+indicator.percent+'%';
         ctx.save();ctx.font='bold '+(this.portrait?20:16)+'px system-ui';ctx.textAlign='center';
-        const badgeWidth=ctx.measureText(text).width+14;
-        rounded(ctx,p.x-badgeWidth/2,top-35,badgeWidth,26,7);ctx.fillStyle='#071d24ef';ctx.fill();
-        ctx.fillStyle=indicator.kind==='up'?'#70ffa3':'#ff7585';ctx.fillText(text,p.x,top-16);ctx.restore();
+        const badgeWidth=ctx.measureText(text).width+14,badgeX=p.x-(importantIntent?24:0);
+        rounded(ctx,badgeX-badgeWidth/2,top-35,badgeWidth,26,7);ctx.fillStyle='#071d24ef';ctx.fill();
+        ctx.fillStyle=indicator.kind==='up'?'#70ffa3':'#ff7585';ctx.fillText(text,badgeX,top-16);ctx.restore();
       }
       const labelY = p.y + (this.portrait ? 34 : 43);
       if(unit.team==='enemy') {
-        const intent=battleIntent(this.battle,unit);
+        const intent=enemyIntent;
         if(['Chuẩn bị','Hồi máu','Hỗ trợ','Tuyệt kỹ','Giữ chân'].includes(intent.short)) {
-          ctx.font='600 11px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102c31';ctx.strokeText(intent.short,p.x,top-7);
-          ctx.fillStyle='#ffe4ae';ctx.fillText(intent.short,p.x,top-7);
+          ctx.font='600 11px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#102c31';ctx.strokeText(intent.short,p.x+(indicator?50:0),top-(indicator?16:7),indicator?44:140);
+          ctx.fillStyle='#ffe4ae';ctx.fillText(intent.short,p.x+(indicator?50:0),top-(indicator?16:7),indicator?44:140);
         }
       }
       ctx.font = '600 12px system-ui, sans-serif';

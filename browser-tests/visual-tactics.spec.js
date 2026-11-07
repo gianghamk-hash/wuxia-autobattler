@@ -32,9 +32,9 @@ test('live canvas paints green positive and red negative numbers above real figh
   const {Hero}=await import('/src/entities/Hero.js'),{Companion}=await import('/src/entities/Companion.js'),{GridSystem}=await import('/src/combat/GridSystem.js'),{CombatEngine}=await import('/src/combat/CombatEngine.js'),{BattleRenderer}=await import('/src/ui/BattleRenderer.js');
   const a=new Hero('ThieuLam'),b=new Companion('companion_04',{id:'foe',team:'enemy'}),grid=new GridSystem();grid.place(a,{x:3,y:1});grid.place(b,{x:4,y:1});a.element='Kim';b.element='Moc';
   const battle=new CombatEngine({units:[a,b],grid});battle.start();const canvas=document.createElement('canvas');canvas.width=1260;canvas.height=680;const r=new BattleRenderer(canvas);r.setBattle(battle);
-  await Promise.all([...r.fighters.values()].map(im=>im.decode()));const paints=[],original=r.ctx.fillText.bind(r.ctx);r.ctx.fillText=(text,...args)=>{if(/^[▲▼]/.test(text))paints.push({text,color:r.ctx.fillStyle});return original(text,...args);};r.render(.1);
-  const first=[...r.damageIndicators.entries()];b.element='Hoa';r.render(.1);return{paints,first,after:r.damageIndicators.get(a.id)};
+  await Promise.all([...r.fighters.values()].map(im=>im.decode()));const paints=[],hud=[],original=r.ctx.fillText.bind(r.ctx);r.ctx.fillText=(text,...args)=>{if(/^[▲▼]/.test(text))paints.push({text,color:r.ctx.fillStyle});if(/^[▲▼]/.test(text)||text==='Tuyệt kỹ')hud.push({text,x:args[0],y:args[1]});return original(text,...args);};r.render(.1);
+  const first=[...r.damageIndicators.entries()];b.element='Hoa';r.render(.1);const after=r.damageIndicators.get(a.id);b.element='Moc';battle.brains.get(b.id).action={target:a,skill:b.skills.ultimate,ultimate:true};r.render(.1);return{paints,first,after,intent:hud.findLast(p=>p.text==='Tuyệt kỹ'),badge:hud.findLast(p=>p.text==='▼ -40%')};
  });
  expect(result.paints).toContainEqual({text:'▲ +75%',color:'#70ffa3'});expect(result.paints).toContainEqual({text:'▼ -40%',color:'#ff7585'});
- expect(result.first.find(([id])=>id==='hero')[1].targetId).toBe('foe');expect(result.after.percent).toBe(-40);
+ expect(result.first.find(([id])=>id==='hero')[1].targetId).toBe('foe');expect(result.after.percent).toBe(-40);expect(result.intent.x-result.badge.x).toBeGreaterThan(60);expect(result.intent.y).toBe(result.badge.y);
 });
