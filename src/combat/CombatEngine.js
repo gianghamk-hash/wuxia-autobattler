@@ -1,3 +1,4 @@
+import { ENEMY_SPAWN_CELLS, HOME_COLUMNS, ENEMY_COLUMNS } from './BoardGeometry.js';
 import {MaxAffinityDirector} from './MaxAffinityDirector.js';
 import {
   ELEMENTS,
@@ -171,6 +172,7 @@ export class CombatEngine {
         ['CaiBang', 'DuongMon'].includes(unit.sect)
       )
         unit.damageMultiplier *= 0.72;
+      unit.intrinsicDamageMultiplier = unit.damageMultiplier;
       unit.element ??= SECT_ELEMENT[unit.sect];
       unit.damageMultiplier *= unit.preparedDamage ?? 1;
       unit.energyGainMultiplier += unit.preparedEnergy ?? 0;
@@ -271,7 +273,7 @@ export class CombatEngine {
       for(const u of this.units.filter(u=>u.team==='home'&&u.alive&&this.startingCells.has(u.id)))this.grid.remove(u);
       for(const u of this.units.filter(u=>u.team==='home'&&u.alive&&this.startingCells.has(u.id))){this.grid.place(u,this.startingCells.get(u.id),{formation:false});this.brains.get(u.id).action=null;}
       for(const [i,u]of this.nextBossWave(this.bossPhase).entries()){
-        const cell=[{x:3,y:1},{x:5,y:0},{x:4,y:2},{x:3,y:2},{x:4,y:0},{x:5,y:2},{x:3,y:0},{x:5,y:1}][i];
+        const cell=ENEMY_SPAWN_CELLS[i];
         if(!this.addUnit(u,cell))throw Error('Không thể mở phase boss.');
       }
       this.director=new BossDirector(this);this.emit({type:'boss:wave',phase:this.bossPhase,total:3,name:`Phase ${this.bossPhase}/3`});return false;
@@ -383,6 +385,7 @@ export class CombatEngine {
     this.units.push(unit);
     unit.inCombat = true;
     unit.damageMultiplier = 1;
+    unit.intrinsicDamageMultiplier = 1;
     unit.energyGainMultiplier = 1;
     this.brains.set(unit.id, new AIBehavior(unit));
     this.records.set(unit.id, {
@@ -789,7 +792,7 @@ export class CombatEngine {
         target.gainEnergy(effect.amount);
         break;
       case 'knockback': {
-        const columns = target.team === 'enemy' ? [5, 4, 3] : [0, 1, 2];
+        const columns = target.team === 'enemy' ? ENEMY_COLUMNS : HOME_COLUMNS;
         const cell = columns
           .map((x) => ({ x, y: target.gridPosition.y }))
           .find((p) => !this.grid.at(p));

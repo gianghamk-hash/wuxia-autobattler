@@ -160,7 +160,7 @@ test("five companion results keep the reduced bundle price and preserve the sele
     }),
   }));
   await expect(page.locator('[data-draw="10"]')).toHaveCount(0);
-  await expect(page.locator('[data-draw="5"]')).toContainText("150");
+  await expect(page.locator('[data-draw="5"]')).toContainText("300");
   await page.locator('[data-draw="5"]').click();
   const after = await page.evaluate(() => ({
     silver: window.__game.model.session.inventory.find(
@@ -176,7 +176,7 @@ test("five companion results keep the reduced bundle price and preserve the sele
       .reduce((n, r) => n + r.refund, 0),
   }));
   expect(after).toEqual({
-    silver: before.silver - 150 + after.refunds,
+    silver: before.silver - 300 + after.refunds,
     refunds: after.refunds,
     party: before.party,
     total: 5,

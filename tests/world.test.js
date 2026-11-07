@@ -153,8 +153,8 @@ test('new statuses tick deterministically, injury suppresses energy and expires;
   const grid = new GridSystem(),
     a = new Hero('VoDang'),
     b = new Companion('companion_01', { team: 'enemy' });
-  grid.place(a, { x: 2, y: 1 });
-  grid.place(b, { x: 3, y: 1 });
+  grid.place(a, { x: 2, y: 1 }, { formation: false });
+  grid.place(b, { x: 3, y: 1 }, { formation: false });
   const battle = new CombatEngine({ units: [a, b], grid });
   battle.start();
   a.stats.hp = 1;
@@ -287,10 +287,10 @@ test('row ultimates hit an entire rank, not another rank; priorities select rear
     b = new Companion('companion_01', { id: 'b', team: 'enemy' }),
     c = new Companion('companion_05', { id: 'c', team: 'enemy' }),
     d = new Companion('companion_04', { id: 'd', team: 'enemy' });
-  grid.place(a, { x: 2, y: 1 });
-  grid.place(b, { x: 3, y: 0 });
-  grid.place(c, { x: 3, y: 1 });
-  grid.place(d, { x: 5, y: 2 });
+  grid.place(a, { x: 2, y: 1 }, { formation: false });
+  grid.place(b, { x: 3, y: 0 }, { formation: false });
+  grid.place(c, { x: 3, y: 1 }, { formation: false });
+  grid.place(d, { x: 5, y: 2 }, { formation: false });
   for (const u of [b, c, d]) u.stats.dodgeRate = u.stats.blockRate = 0;
   const battle = new CombatEngine({ units: [a, b, c, d], grid });
   battle.start();
@@ -323,8 +323,8 @@ test('crit damage and lifetime healing caps prevent unlimited scaling, and dange
   const grid = new GridSystem(),
     a = new Hero('VoDang'),
     b = new Companion('companion_01', { team: 'enemy' });
-  grid.place(a, { x: 2, y: 1 });
-  grid.place(b, { x: 3, y: 1 });
+  grid.place(a, { x: 2, y: 1 }, { formation: false });
+  grid.place(b, { x: 3, y: 1 }, { formation: false });
   const battle = new CombatEngine({ units: [a, b], grid });
   battle.start();
   b.stats.dodgeRate = b.stats.blockRate = 0;

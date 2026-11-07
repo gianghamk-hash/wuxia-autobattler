@@ -1,3 +1,4 @@
+import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import { validateCampaign } from './Campaign.js';
 import { normalizeHeroBuild } from '../entities/HeroBuild.js';
 import {COMPANIONS} from '../data/CompanionsData.js';
@@ -50,7 +51,7 @@ export function validateSnapshot(data) {
   for (const [id, position] of Object.entries(data.party.formation)) {
     if (id !== 'hero' && !data.party.active.includes(id)) fail('Vị trí của nhân vật ngoài đội hình.');
     if (!plain(position) || !Number.isInteger(position.x) || !Number.isInteger(position.y) ||
-        position.x < 0 || position.x > 2 || position.y < 0 || position.y > 2) fail('Ô đội hình không hợp lệ.');
+        position.x < 0 || position.x >= HOME_WIDTH || position.y < 0 || position.y >= BOARD_ROWS) fail('Ô đội hình không hợp lệ.');
     const key = `${position.x},${position.y}`;
     if (occupied.has(key)) fail('Các nhân vật không thể đứng cùng một ô.');
     occupied.add(key);

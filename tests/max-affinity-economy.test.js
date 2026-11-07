@@ -15,7 +15,7 @@ import {equipItem} from '../src/entities/HeroBuild.js';
 import {developed} from '../scripts/balance-campaign7.mjs';
 import {fighterURL,fighterUsesPortrait,FIGHTERS} from '../src/data/PresentationData.js';
 
-function fixture(id,unlocked=true){const u=new Companion(id,{level:5}),hero=new Hero('DuongMon',{id:'hero'}),enemy=new Companion('companion_05',{id:'enemy',team:'enemy',level:5}),rear=new Companion('companion_04',{id:'rear',team:'enemy',level:5}),grid=new GridSystem();u.maxAffinity=unlocked;for(const[v,p]of [[u,{x:2,y:1}],[hero,{x:1,y:1}],[enemy,{x:3,y:1}],[rear,{x:5,y:1}]]){grid.place(v,p);v.stats.hp*=.5;}const c=new CombatEngine({units:[u,hero,enemy,rear],grid});c.start();return{u,hero,enemy,rear,c};}
+function fixture(id,unlocked=true){const u=new Companion(id,{level:5}),hero=new Hero('DuongMon',{id:'hero'}),enemy=new Companion('companion_05',{id:'enemy',team:'enemy',level:5}),rear=new Companion('companion_04',{id:'rear',team:'enemy',level:5}),grid=new GridSystem();u.maxAffinity=unlocked;for(const[v,p]of [[u,{x:2,y:1}],[hero,{x:1,y:1}],[enemy,{x:3,y:1}],[rear,{x:5,y:1}]]){grid.place(v,p, { formation: false });v.stats.hp*=.5;}const c=new CombatEngine({units:[u,hero,enemy,rear],grid});c.start();return{u,hero,enemy,rear,c};}
 
 test('sixty max-affinity passives have distinct names AND distinct trigger/action mechanics; every action executes against real combat units',()=>{
  const perks=Object.values(MAX_AFFINITY7);assert.equal(perks.length,60);assert.equal(new Set(perks.map(p=>p.name)).size,60);assert.equal(new Set(perks.map(p=>JSON.stringify([p.trigger,p.actions.map(a=>[a.type,a.target])]))).size,60);
@@ -39,11 +39,11 @@ test('affinity unlocks only at 100 and survives pending retries, dungeon snapsho
  c.enterDungeon('phong_nha');const s=c.snapshot();for(const id of s.party.active)s.companionsAffinity[id]=15;c.load(s);c.chooseRoom(0);assert.equal(c.battle.maxAffinity.entries.length,5);
 });
 
-test('single duplicates refund 36; five duplicates refund exactly 160 and are retained; same-bundle repeats count as duplicates',()=>{
+test('single duplicates refund 72; five duplicates refund exactly 320 and are retained; same-bundle repeats count as duplicates',()=>{
  const s=developed().snapshot(),item='gear_phong_hanh_common_weapon',before=structuredClone(s);
- const first=drawEquipment(s,5,{random:()=>0,now:1});assert.deepEqual(s,before);assert.equal(first.refund,128);assert.equal(first.results.filter(r=>r.duplicate).length,4);assert.equal(itemCount(first.session,item),5);assert.equal(itemCount(first.session,'silver'),itemCount(s,'silver')-200+128);
- const single=drawEquipment(first.session,1,{random:()=>0,now:2});assert.equal(single.refund,36);assert.equal(single.results[0].refund,36);
- const owned=structuredClone(s);for(const gear of NEW_GEAR)give(owned,gear.id,1);const all=drawEquipment(owned,5,{random:()=>0,now:3});assert.equal(all.refund,160);assert.equal(all.results.reduce((n,r)=>n+r.refund,0),160);assert.equal(itemCount(all.session,item),6);validateCampaign(all.session);
+ const first=drawEquipment(s,5,{random:()=>0,now:1});assert.deepEqual(s,before);assert.equal(first.refund,256);assert.equal(first.results.filter(r=>r.duplicate).length,4);assert.equal(itemCount(first.session,item),5);assert.equal(itemCount(first.session,'silver'),itemCount(s,'silver')-400+256);
+ const single=drawEquipment(first.session,1,{random:()=>0,now:2});assert.equal(single.refund,72);assert.equal(single.results[0].refund,72);
+ const owned=structuredClone(s);for(const gear of NEW_GEAR)give(owned,gear.id,1);const all=drawEquipment(owned,5,{random:()=>0,now:3});assert.equal(all.refund,320);assert.equal(all.results.reduce((n,r)=>n+r.refund,0),320);assert.equal(itemCount(all.session,item),6);validateCampaign(all.session);
  const legacy=structuredClone(all.session);for(const r of legacy.loot.history){delete r.duplicate;delete r.refund;}validateLoot(legacy.loot);
  const corrupt=structuredClone(all.session.loot);corrupt.history[0].duplicate=false;corrupt.history[0].refund=64;assert.throws(()=>validateLoot(corrupt));
  let i=0;assert.throws(()=>drawEquipment(first.session,5,{random:()=>++i===5?NaN:0}));assert.equal(itemCount(first.session,item),5);

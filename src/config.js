@@ -13,7 +13,7 @@ export const CONFIG = {
         MAX_STEPS_PER_FRAME: 24,
         TICK_LOG_INTERVAL: 1
     },
-    GRID: { COLS: 6, ROWS: 3, HOME_COLS: [0, 1, 2] },
+    GRID: { COLS: 8, ROWS: 4, HOME_COLS: [0, 1, 2, 3] },
     VIEW: { WIDTH: 960, HEIGHT: 540 },
     COLORS: {
         mist: '#0f172a', jade: '#6fb59b', seal: '#e17a69',
@@ -25,8 +25,8 @@ export const CONFIG = {
         VERSION: "6.0.0"
     },
     COMBAT: {
-        GRID_COLS: 6, // 3 Cột phe ta, 3 cột phe địch
-        GRID_ROWS: 3, // Tiền - Trung - Hậu tuyến
+        GRID_COLS: 8, // 4 cột mỗi phe
+        GRID_ROWS: 4, // Bốn hàng ngang
         BASE_ATTACK_INTERVAL: 2000, // 2 giây (Chưa tính thân pháp)
         MAX_ENERGY: 100, // Thanh nộ tối đa
         ENERGY_PER_HIT: 15, // Đánh trúng +15 Nộ

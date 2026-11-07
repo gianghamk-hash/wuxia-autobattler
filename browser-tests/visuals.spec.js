@@ -110,7 +110,7 @@ test('real battle effects use NPC identity and actual targets; off/reduced setti
     const actor = new Companion('companion_12', { id: 'boss', team: 'enemy' });
     applyStoryIdentity(actor, NPCS_BY_ID.trinh_nghiem);
     const target = new Companion('companion_05', { id: 'home' });
-    grid.place(actor, { x: 3, y: 1 }); grid.place(target, { x: 2, y: 1 });
+    grid.place(actor, { x: 3, y: 1 }, { formation: false }); grid.place(target, { x: 2, y: 1 }, { formation: false });
     const battle = new CombatEngine({ units: [actor, target], grid, onEvent: e => renderer.event(e) });
     renderer.setBattle(battle); battle.start(); battle.resolveSkill(actor, target, actor.skills.ultimate, true);
     const effect = renderer.skillEffects.find(e => e.profile.ultimate);

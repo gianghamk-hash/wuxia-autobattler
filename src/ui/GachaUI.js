@@ -106,7 +106,7 @@ export function mountGachaUI(app) {
       ),
       n(
         'p',
-        'Gói mời 5 kết quả giá 150 bạc; lượt đơn giá 35 bạc. Tỉ lệ mỗi kết quả và bộ đếm bảo đảm được giữ. Phải đủ toàn bộ bạc trước khi mời; hoàn trùng áp dụng sau khi trừ giá. Đây là tiền trong game.',
+        'Gói mời 5 kết quả giá 300 bạc; lượt đơn giá 70 bạc. Tỉ lệ mỗi kết quả và bộ đếm bảo đảm được giữ. Phải đủ toàn bộ bạc trước khi mời; hoàn trùng áp dụng sau khi trừ giá. Đây là tiền trong game.',
         'hint'
       )
     );

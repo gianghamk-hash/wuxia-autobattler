@@ -50,10 +50,10 @@ test("difficulty applies a reproducible twofold HP/attack budget and eight hosti
     h = new Hero("VoDang"),
     enemies = ENEMY_CELLS.map((p, i) => {
       const u = new Companion("companion_05", { id: "e" + i, team: "enemy" });
-      grid.place(u, p);
+      grid.place(u, p, { formation: false });
       return u;
     });
-  grid.place(h, { x: 1, y: 1 });
+  grid.place(h, { x: 1, y: 1 }, { formation: false });
   const b = new CombatEngine({ units: [h, ...enemies], grid, enemyLimit: 8 });
   assert.equal(b.start(), true);
   assert.equal(b.units.filter((u) => u.team === "enemy").length, 8);
@@ -64,10 +64,10 @@ test("boss waves are continuous: no free HP/energy reset, no early result, and a
     h = new Hero("VoDang"),
     enemies = ENEMY_CELLS.slice(0, 4).map((p, i) => {
       const u = new Companion("companion_05", { id: "e" + i, team: "enemy" });
-      grid.place(u, p);
+      grid.place(u, p, { formation: false });
       return u;
     });
-  grid.place(h, { x: 1, y: 1 });
+  grid.place(h, { x: 1, y: 1 }, { formation: false });
   const nextBossWave = bossSequence(enemies, 18),
     b = new CombatEngine({
       units: [h, ...enemies],
@@ -100,13 +100,13 @@ test("five-result bundles use reduced prices and ten-draw guarantees carry acros
   const s = developed().snapshot(),
     one = rollGacha(s, 5, { random: () => 0 }),
     two = rollGacha(one.session, 5, { random: () => 0 });
-  assert.equal(one.price, 150);
+  assert.equal(one.price, 300);
   assert.equal(one.results.length, 5);
   assert.equal(two.results.at(-1).tier, 4);
   assert.throws(() => rollGacha(s, 10));
   const gear1 = drawEquipment(s, 5, { random: () => 0 }),
     gear2 = drawEquipment(gear1.session, 5, { random: () => 0 });
-  assert.equal(gear1.price, 200);
+  assert.equal(gear1.price, 400);
   assert.equal(gear1.results.length, 5);
   assert.equal(
     NEW_GEAR.find((e) => e.id === gear2.results.at(-1).id).rarity,

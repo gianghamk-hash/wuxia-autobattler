@@ -106,7 +106,7 @@ test('all ten tier-four variants execute in the combat engine with observable da
     const profile = build(sect, 8, branch), hero = new Hero(sect, { profile, inventory: starter });
     assert.equal(hero.skills.ultimate.id, `hero_${sect}_t4_${branch}`);
     const enemy = new Companion('companion_01', { id: 'enemy', team: 'enemy' }), grid = new GridSystem();
-    grid.place(hero, { x: 2, y: 1 }); grid.place(enemy, { x: 3, y: 1 });
+    grid.place(hero, { x: 2, y: 1 }, { formation: false }); grid.place(enemy, { x: 3, y: 1 }, { formation: false });
     const combat = new CombatEngine({ units: [hero, enemy], grid }); combat.start(); hero.stats.hp *= .5;
     const target = combat.chooseTarget(hero, hero.skills.ultimate);
     combat.resolveSkill(hero, target, hero.skills.ultimate, true);

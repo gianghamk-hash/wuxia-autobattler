@@ -1,3 +1,4 @@
+import { ENEMY_COLUMNS, ROW_ORDER } from './BoardGeometry.js';
 import { Companion } from '../entities/Companion.js';
 import { applyStoryIdentity, NPCS_BY_ID } from '../data/NPCData.js';
 const RULES = {
@@ -115,8 +116,8 @@ export class BossDirector {
   }
   freeCell() {
     const c = this.combat;
-    for (const x of [5, 4, 3])
-      for (const y of [0, 2, 1]) if (!c.grid.at({ x, y })) return { x, y };
+    for (const x of ENEMY_COLUMNS)
+      for (const y of ROW_ORDER) if (!c.grid.at({ x, y })) return { x, y };
     return null;
   }
   summon(b, seal = false) {

@@ -37,7 +37,7 @@ test('all 265 story encounters can roll every count 4–8 and boss waves vary de
 test('full six-person parties fit eight enemy troops plus all three breach objectives without overlapping cells',()=>{
  for(const q of DAI_VIET_QUESTS.filter(q=>MISSIONS[q.id]?.type==='breach')){
   const grid=new GridSystem(),units=[new Hero('VoDang'),...Array.from({length:5},(_,i)=>new Companion('companion_05',{id:'home_'+i}))];
-  units.forEach((u,i)=>grid.place(u,{x:i%3,y:Math.floor(i/3)}));
+  units.forEach((u,i)=>grid.place(u,{x:i%3,y:Math.floor(i/3)}, { formation: false }));
   const foes=enemyLineup({quest:q,encounter:ENCOUNTERS[q.encounter],count:8,grid,main:true,rules:6});
   const b=new CombatEngine({units:[...units,...foes],grid,missionId:q.id,enemyLimit:8});b.start();
   assert.equal(foes.length,8);assert.equal(b.mission.assets.length,3);assert.equal(new Set(b.units.map(u=>JSON.stringify(u.gridPosition))).size,17,q.id);

@@ -44,7 +44,7 @@ test('single and five draws spend atomically, own first copy, refund duplicates,
     one = rollGacha(before, 1, { random: () => 0, now: 10 });
   assert.equal(
     itemCount(one.session, 'silver'),
-    itemCount(before, 'silver') - 35
+    itemCount(before, 'silver') - 70
   );
   assert.equal(one.results[0].tier, 1);
   assert.equal(one.results[0].duplicate, false);
@@ -57,10 +57,10 @@ test('single and five draws spend atomically, own first copy, refund duplicates,
   assert.equal(repeated.results[0].refund, 12);
   assert.equal(
     itemCount(repeated.session, 'silver'),
-    itemCount(one.session, 'silver') - 23
+    itemCount(one.session, 'silver') - 58
   );
   const ten = rollGacha(before, 5, { random: () => 0, now: 12 });
-  assert.equal(ten.price, 150);
+  assert.equal(ten.price, 300);
   assert.equal(ten.results.at(-1).tier, 1);
   assert.equal(ten.session.gacha.sinceEpic, 5);
   assert.equal(ten.session.gacha.total, 5);
@@ -84,7 +84,7 @@ test('pity carries over calls, natural legendary resets both, and legendary take
 });
 test('insufficient funds, invalid count/RNG, pending encounters and pre-tutorial draws change nothing', () => {
   const s = fixture().snapshot();
-  s.inventory.find((i) => i.itemId === 'silver').quantity = 149;
+  s.inventory.find((i) => i.itemId === 'silver').quantity = 299;
   const original = structuredClone(s);
   assert.throws(() => rollGacha(s, 5));
   for (const count of [0, 2, 10, -1, 1.5, '1'])
@@ -145,9 +145,9 @@ test('each newly authored ultimate resolves through the actual combat engine', (
         team: 'enemy',
         level: 8
       });
-    grid.place(hero, { x: 2, y: 1 });
-    grid.place(friend, { x: 1, y: 1 });
-    grid.place(enemy, { x: 3, y: 1 });
+    grid.place(hero, { x: 2, y: 1 }, { formation: false });
+    grid.place(friend, { x: 1, y: 1 }, { formation: false });
+    grid.place(enemy, { x: 3, y: 1 }, { formation: false });
     friend.stats.hp *= 0.4;
     hero.stats.energy = 100;
     const battle = new CombatEngine({

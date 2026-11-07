@@ -32,19 +32,18 @@ for(const width of [320,390,1280]){
     await expect(page.locator('.formation-cell[data-level-aura="30"]')).toHaveCount(6);
     await page.evaluate(()=>{const a=window.__game;a.model.practice();a.enterBattle();});
     const dialog=page.locator('#prebattle-dialog');await expect(dialog).toBeVisible();
-    await expect(dialog.getByRole('heading',{name:'Trinh sát và xếp trận',exact:true})).toBeInViewport();
+    await expect(dialog.getByRole('heading',{name:'Xếp trận · 8 × 4',exact:true})).toBeInViewport();
     expect(await dialog.evaluate(e=>e.scrollTop)).toBe(0);
-    await expect(dialog).toContainText('khắc (+75% sát thương)');
-    const avatar=dialog.locator('.prebattle-card .portrait').first();
-    expect(await avatar.evaluate(e=>{const r=e.getBoundingClientRect();return r.width>=64&&r.height>=64;})).toBe(true);
-    await expect.poll(()=>avatar.evaluate(async e=>{const url=getComputedStyle(e).backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1];if(!url)return false;const im=new Image();im.src=url;try{await im.decode();return im.naturalWidth>0;}catch{return false;}})).toBe(true);
-    await expect(dialog.locator('.prebattle-card[data-team="enemy"]')).not.toHaveCount(0);
+    await expect(dialog.locator('#ready-canvas')).toBeVisible();
+    await expect(dialog.locator('[data-ready-cell]')).toHaveCount(32);
+    await expect(dialog.locator('.ready-legend')).toContainText('Tăng sát thương');
+    await expect.poll(()=>page.evaluate(()=>[...window.__game.readyRenderer.fighters.values()].every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
     const before=await page.evaluate(()=>window.__game.model.battle.elapsed);
     // Real animation frames run while readiness prevents simulation updates.
     await expect.poll(()=>page.evaluate(()=>window.__game.awaitingBattle)).toBe(true);
     await page.waitForTimeout(350);
     expect(await page.evaluate(()=>window.__game.model.battle.elapsed)).toBe(before);
-    const position=dialog.getByLabel('Vị trí Thử sức mạnh mới',{exact:true});await position.selectOption('0,0');
+    await dialog.locator('[data-ready-unit="hero"]').click();await dialog.locator('[data-ready-cell="0,0"]').click();
     await page.screenshot({path:info.outputPath('ready-'+width+'.png'),fullPage:true,animations:'disabled'});
     await dialog.getByRole('button',{name:'Bắt đầu giao chiến',exact:true}).click();
     await expect(dialog).toHaveCount(0);
@@ -75,7 +74,7 @@ test('mission carts and locks decode as actual battlefield assets',async({page})
     const {GridSystem}=await import('/src/combat/GridSystem.js');
     const canvas=document.createElement('canvas');canvas.width=960;canvas.height=540;const renderer=new BattleRenderer(canvas);
     const reports=[];for(const type of ['protect','breach']){
-    const home=new Hero('VoDang'),enemy=new Companion('companion_01',{team:'enemy'}),grid=new GridSystem();grid.place(home,{x:1,y:1});grid.place(enemy,{x:4,y:1});
+    const home=new Hero('VoDang'),enemy=new Companion('companion_01',{team:'enemy'}),grid=new GridSystem();grid.place(home,{x:1,y:1}, { formation: false });grid.place(enemy,{x:4,y:1}, { formation: false });
     const {MISSIONS}=await import('/src/data/MissionsData.js');const missionId=Object.keys(MISSIONS).find(id=>MISSIONS[id].type===type);
     const battle=new CombatEngine({units:[home,enemy],grid,seed:15,missionId});battle.start();
     renderer.setBattle(battle);renderer.render(.1);

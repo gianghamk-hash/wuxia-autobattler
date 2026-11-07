@@ -15,14 +15,14 @@ function battle(seed = 12345) {
     new Companion('companion_04', { id: 'enemy_02', team: 'enemy' }),
     new Companion('companion_08', { id: 'enemy_03', team: 'enemy' })];
   const cells = [{ x: 1, y: 1 }, { x: 2, y: 0 }, { x: 0, y: 2 }, { x: 3, y: 1 }, { x: 5, y: 0 }, { x: 4, y: 2 }];
-  units.forEach((u, i) => grid.place(u, cells[i]));
+  units.forEach((u, i) => grid.place(u, cells[i], { formation: false }));
   const events = []; const combat = new CombatEngine({ units, grid, seed, onEvent: e => events.push(e) });
   return { combat, units, grid, events };
 }
 function finish(combat) { for (let i = 0; i < 22500 && combat.state === 'running'; i++) combat.update(1 / 60); }
 function duel() {
   const grid = new GridSystem(), a = new Hero('CaiBang'), b = new Companion('companion_01', { id: 'enemy', team: 'enemy' });
-  grid.place(a, { x: 2, y: 1 }); grid.place(b, { x: 3, y: 1 });
+  grid.place(a, { x: 2, y: 1 }, { formation: false }); grid.place(b, { x: 3, y: 1 }, { formation: false });
   a.stats.dodgeRate = b.stats.dodgeRate = 0; a.stats.blockRate = b.stats.blockRate = 0; a.stats.critRate = b.stats.critRate = 0;
   return { a, b, grid, combat: new CombatEngine({ units: [a, b], grid }) };
 }
@@ -67,7 +67,7 @@ test('rage is spent on ultimate impact, normal hits charge rage and a dead targe
   combat.update(.4); assert.ok(a.stats.energy < 100); assert.equal(combat.records.get(a.id).ultimates, 1);
   const second = duel(); second.combat.start(); second.combat.update(.3);
   assert.ok(second.a.stats.energy >= 15);
-  const c = new Companion('companion_01', { id: 'enemy2', team: 'enemy' }); grid.place(c, { x: 4, y: 0 });
+  const c = new Companion('companion_01', { id: 'enemy2', team: 'enemy' }); grid.place(c, { x: 4, y: 0 }, { formation: false });
   combat.units.push(c); // For cancellation assertion only; no extra simulation of unregistered brains.
   const brain = combat.brains.get(a.id); brain.cooldown = 0; a.stats.energy = 100;
   brain.update(1 / 60, combat); assert.ok(brain.action);
@@ -92,7 +92,7 @@ test('all 20 companion ultimate definitions resolve their effects without unsupp
     const grid = new GridSystem(), caster = new Companion(definition.id), hero = new Hero('ThieuLam'), ally = new Companion('companion_02', { id: 'ally' });
     const foes = [0, 1, 2].map(i => new Companion('companion_01', { id: `enemy${i}`, team: 'enemy' }));
     const units = [caster, hero, ally, ...foes];
-    [{ x: 2, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 2 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 2 }].forEach((p, i) => grid.place(units[i], p));
+    [{ x: 2, y: 1 }, { x: 0, y: 0 }, { x: 1, y: 2 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 2 }].forEach((p, i) => grid.place(units[i], p, { formation: false }));
     const combat = new CombatEngine({ units, grid }); combat.start();
     hero.stats.hp *= .5; combat.statuses.apply(hero, { type: 'stun', duration: 3 });
     const target = combat.chooseTarget(caster, caster.skills.ultimate); assert.ok(target, definition.name);
@@ -103,7 +103,7 @@ test('all 20 companion ultimate definitions resolve their effects without unsupp
 });
 test('offensive support basics, healing ultimates, energy transfer and regeneration work', () => {
   const { combat, units, grid } = battle();
-  const tea = new Companion('companion_11'); grid.remove(units[1]); grid.place(tea, { x: 2, y: 0 });
+  const tea = new Companion('companion_11'); grid.remove(units[1]); grid.place(tea, { x: 2, y: 0 }, { formation: false });
   const roster = [units[0], tea, ...units.slice(2)]; const c = new CombatEngine({ units: roster, grid }); c.start();
   assert.ok(c.chooseTarget(tea, tea.skills.autoAttack, true)?.team === 'enemy');
   const healer = units[2], hero = units[0]; hero.stats.hp -= 300;
@@ -123,7 +123,7 @@ test('charm makes hostile attacks target former allies, expires, and never heals
 test('synergies grant the GDD shield/energy/damage modifiers and poison detonates at five stacks', () => {
   const { grid, units } = battle();
   const healer = new Hero('NgaMi'), poison = new Companion('companion_04'), beggar = new Companion('companion_01');
-  [0, 1, 2].forEach(i => grid.remove(units[i])); [healer, poison, beggar].forEach((u, i) => grid.place(u, { x: i, y: 0 }));
+  [0, 1, 2].forEach(i => grid.remove(units[i])); [healer, poison, beggar].forEach((u, i) => grid.place(u, { x: i, y: 0 }, { formation: false }));
   const c = new CombatEngine({ grid, units: [healer, poison, beggar, ...units.slice(3)] }); c.start();
   assert.ok(Math.abs(poison.damageMultiplier - 1.02) < 1e-9); assert.ok(c.teamSynergies.home.includes('doc_ba_vo_lam'));
   const target = units[3]; target.stats.dodgeRate = target.stats.blockRate = 0; poison.stats.critRate = 0;
@@ -148,7 +148,7 @@ test('all companion roles participate in a full automatic battle without throwin
     const setup = battle(77), index = definition.id === 'companion_01' ? 1 : 2;
     setup.grid.remove(setup.units[index]);
     const member = new Companion(definition.id);
-    setup.units[index] = member; setup.grid.place(member, index === 1 ? { x: 2, y: 0 } : { x: 0, y: 2 });
+    setup.units[index] = member; setup.grid.place(member, index === 1 ? { x: 2, y: 0 } : { x: 0, y: 2 }, { formation: false });
     const c = new CombatEngine({ units: setup.units, grid: setup.grid, seed: 77 }); c.start();
     assert.doesNotThrow(() => finish(c), definition.name);
     assert.equal(c.state, 'finished', definition.name);

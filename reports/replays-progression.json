@@ -1,6 +1,6 @@
 {
-  "version": "progression",
-  "note": "Deterministic fixtures after attribute/passive rebalance; original 7.0 replays retained.",
+  "version": "expanded-board",
+  "note": "Deterministic fixtures for the 8×4 board.",
   "scenarios": [
     {
       "id": "level1",
@@ -51,13 +51,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 36.516666666666666
+              "duration": 47.21666666666667
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 40.28333333333333
+              "duration": 47.53333333333333
             }
           ]
         }
@@ -112,13 +112,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 23.65
+              "duration": 25.3
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 18.666666666666668
+              "duration": 25.3
             }
           ]
         }
@@ -173,13 +173,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 31.316666666666666
+              "duration": 43.416666666666664
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 37.81666666666666
+              "duration": 44.266666666666666
             }
           ]
         }
@@ -235,13 +235,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 27.716666666666665
+              "duration": 40.85
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 42.416666666666664
+              "duration": 45.46666666666667
             }
           ]
         }
@@ -296,15 +296,15 @@
           "games": [
             {
               "swapped": false,
-              "winner": "home",
+              "winner": "enemy",
               "reason": "elimination",
-              "duration": 72.41666666666667
+              "duration": 74.06666666666666
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 52.583333333333336
+              "duration": 71.93333333333334
             }
           ]
         }
@@ -362,13 +362,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 38.13333333333333
+              "duration": 39.36666666666667
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 47.36666666666667
+              "duration": 44.81666666666666
             }
           ]
         }
@@ -426,13 +426,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 69.21666666666667
+              "duration": 48.13333333333333
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 74.61666666666666
+              "duration": 70.28333333333333
             }
           ]
         }
@@ -490,13 +490,13 @@
               "swapped": false,
               "winner": "enemy",
               "reason": "elimination",
-              "duration": 76.03333333333333
+              "duration": 68.6
             },
             {
               "swapped": true,
               "winner": "home",
               "reason": "elimination",
-              "duration": 76.03333333333333
+              "duration": 63.916666666666664
             }
           ]
         }

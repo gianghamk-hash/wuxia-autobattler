@@ -13,10 +13,10 @@ import {createHeroBuild} from '../src/entities/HeroBuild.js';
 import {developed} from '../scripts/balance-campaign6.mjs';
 
 function fixture(multiplier,{waves=false,boss=false,mission=false}={}){
- const hero=new Hero('VoDang'),grid=new GridSystem();hero.stats.maxHp=hero.stats.hp=100000;grid.place(hero,{x:2,y:1});
+ const hero=new Hero('VoDang'),grid=new GridSystem();hero.stats.maxHp=hero.stats.hp=100000;grid.place(hero,{x:2,y:1}, { formation: false });
  const enemies=Array.from({length:waves?4:1},(_,i)=>new Companion('companion_05',{id:'enemy_'+i,team:'enemy',level:5}));
  if(boss)applyStoryIdentity(enemies[0],NPCS_BY_ID.doi_truong);
- for(const[u,i]of enemies.map((u,i)=>[u,i]))grid.place(u,ENEMY_CELLS[i]);
+ for(const[u,i]of enemies.map((u,i)=>[u,i]))grid.place(u,ENEMY_CELLS[i], { formation: false });
  const nextBossWave=waves?bossSequence(enemies,12):null;
  const c=new CombatEngine({units:[hero,...enemies],grid,enemyLimit:8,enemyStatMultiplier:multiplier,nextBossWave,missionId:mission?'C01H09':null});c.start();return c;
 }

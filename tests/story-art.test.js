@@ -78,7 +78,7 @@ test('real skill cast events carry immutable origin and actual target positions,
   const grid = new GridSystem();
   const caster = new Companion('companion_04', { id: 'caster' });
   const enemies = [0, 1, 2].map(i => new Companion('companion_05', { id: `enemy${i}`, team: 'enemy' }));
-  grid.place(caster, { x: 2, y: 1 }); enemies.forEach((u, i) => grid.place(u, { x: 3, y: i }));
+  grid.place(caster, { x: 2, y: 1 }, { formation: false }); enemies.forEach((u, i) => grid.place(u, { x: 3, y: i }, { formation: false }));
   const battle = new CombatEngine({ units: [caster, ...enemies], grid });
   battle.start(); battle.resolveSkill(caster, enemies[1], caster.skills.ultimate, true);
   const cast = battle.events.find(e => e.type === 'skill:cast');

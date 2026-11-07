@@ -1,14 +1,5 @@
 import { Companion } from "../entities/Companion.js";
-export const ENEMY_CELLS = [
-  { x: 3, y: 1 },
-  { x: 5, y: 0 },
-  { x: 4, y: 2 },
-  { x: 3, y: 2 },
-  { x: 4, y: 0 },
-  { x: 5, y: 2 },
-  { x: 3, y: 0 },
-  { x: 5, y: 1 },
-];
+export { ENEMY_SPAWN_CELLS as ENEMY_CELLS } from './BoardGeometry.js';
 export const DIFFICULTY = { power: 2, hp: 1.6, attack: 1.25 };
 export const BOSS_TITLES = [
   "Đội trưởng chặn hội",
