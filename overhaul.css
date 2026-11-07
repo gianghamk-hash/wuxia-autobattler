@@ -385,3 +385,19 @@ body[data-card-effects="false"] [data-tier="6"]{animation:none}
 .ready-legend{display:flex;justify-content:center;gap:18px;font-size:.8rem;margin:6px}.damage-up{color:#70ffa3}.damage-down{color:#ff7585}
 .ready-details{font-size:.8rem;margin:8px 0}.ready-details p{margin:8px 0}
 @media(max-width:600px){#prebattle-dialog{padding:8px}.formation-grid{gap:4px;padding:6px}.formation-cell{min-width:0}.formation-cell .portrait{max-width:100%}.ready-selected-unit{padding:5px;grid-template-columns:30px 1fr;font-size:.72rem}.ready-selected-unit .portrait{width:30px;height:38px}}
+
+
+/* Prebattle bench: HUD-only; never alters fighter artwork, animations or VFX. */
+.ready-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ready-toolbar [data-exit-ready]{min-height:40px;padding:7px 12px;border:1px solid #c7b676;border-radius:8px;background:#193d3a;color:#fff3d0}
+.ready-reserves{margin:10px 0;padding:10px;border:1px solid #8fae9c66;border-radius:10px;background:#103233}
+.ready-reserve-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ready-reserve-heading input{min-height:40px;min-width:160px;max-width:100%;flex:1 1 200px}
+.ready-reserve-hint{font-size:.8rem;margin:5px 0;color:#dce9d9}
+.ready-reserve-list{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;padding:5px 1px 9px;scrollbar-width:thin}
+.ready-reserve-unit{display:flex;flex:0 0 116px;align-items:center;flex-direction:column;gap:4px;padding:6px;border:1px solid #80aa9788;border-radius:9px;background:#284b42;color:#f5efdc;font-size:.75rem;min-height:100px}
+.ready-reserve-unit .portrait{width:62px;height:62px;display:block;background-size:cover;background-position:center 20%;border-radius:7px}
+.ready-reserve-unit span{overflow-wrap:anywhere;text-align:center}
+.ready-reserve-unit:disabled{opacity:.56;cursor:not-allowed}
+.ready-reserve-unit:not(:disabled):hover,.ready-reserve-unit:not(:disabled):focus-visible{outline:2px solid #ffe09c}
+@media(max-width:600px){.ready-toolbar [data-exit-ready]{width:100%}.ready-reserve-unit{flex-basis:94px}.ready-reserve-unit .portrait{width:54px;height:54px}}
