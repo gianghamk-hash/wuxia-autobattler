@@ -279,8 +279,10 @@ export function validateCampaign(session) {
     Object.entries(session.companionsAffinity).some(
       ([id, value]) =>
         !session.party.unlocked.includes(id) ||
-        !nonnegative(value) ||
-        value > 100
+        !Number.isFinite(value) ||
+        value < 0 ||
+        value > 100 ||
+        Math.abs(value * 100 - Math.round(value * 100)) > 0.000001
     )
   )
     fail('Duyên nợ đồng đội không hợp lệ.');
