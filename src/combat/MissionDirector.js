@@ -81,8 +81,8 @@ export class MissionDirector {
         : enemy
           ? 'assets/images/mission-lock.svg'
           : 'assets/images/mission-cart.svg';
-      // Eight troops can leave only one enemy-side cell. Locks may use any
-      // remaining board cell; objects do not count toward the troop limit.
+      // Prefer the expanded enemy half, with remaining board cells as fallback.
+      // Objects do not count toward the troop limit.
       const cells = captive ? ENEMY_COLUMNS : enemy ? [...ENEMY_COLUMNS,...HOME_COLUMNS.toReversed()] : HOME_COLUMNS;
       let position;
       for (const x of cells)

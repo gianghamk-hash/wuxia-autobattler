@@ -48,6 +48,9 @@ test('green/red head indicators match directional damage multipliers including a
 test('damage indicators follow actual attack targets and omit healing, objectives and dead units',()=>{
  const {a,b,battle}=duel();const brain=battle.brains.get(a.id);brain.action={target:a};assert.equal(damageIndicator(battle,a),null);
  brain.action={target:b};assert.equal(damageIndicator(battle,a).targetId,b.id);
+ b.isObject=true;assert.equal(damageIndicator(battle,a).targetId,b.id); // Breach targets still use their actual modifiers.
+ b.isObject=false;b.team='home';brain.action={target:b,skill:{dmgMultiplier:1}};assert.equal(damageIndicator(battle,a).targetId,b.id); // Charm can make an ally the real attack target.
+ brain.action={target:b,skill:{dmgMultiplier:0,targetType:'lowest_hp_ally'}};assert.equal(damageIndicator(battle,a),null);
  a.stats.hp=0;assert.equal(damageIndicator(battle,a),null);a.stats.hp=1;a.isObject=true;assert.equal(damageIndicator(battle,a),null);
 });
 test('both single and five-result draw prices are exactly doubled',()=>{
