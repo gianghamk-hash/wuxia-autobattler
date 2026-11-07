@@ -62,7 +62,7 @@ test('side battles use story progress rather than tower floor; replayed chapter 
   const q=DAI_VIET_QUESTS.filter(q=>q.chapter===chapter).at(-1),c=campaignAt(q);
   c.session.inventory.find(i=>i.itemId==='silver').quantity=1000;
   if(mode==='practice')c.practice();else if(mode==='arena')c.startArena('npc_0');else if(mode==='escort')c.startEscort('safe');else {c.enterDungeon('phong_nha');const s=c.snapshot();s.adventure.dungeon.floor=99;c.load(s);c.chooseRoom(0);}
-  assert.equal(c.battle.enemyStatMultiplier,chapter>=3?2:1,`${mode} chapter ${chapter}`);
+  assert.equal(c.battle.enemyStatMultiplier,mode==='practice'?1:chapter>=3?2:1,`${mode} chapter ${chapter}`);
  }
  for(const chapter of[1,2,3,19]){const c=developed();c.startChapterBoss(chapter);assert.equal(c.battle.enemyStatMultiplier,chapter>=3?2:1,`replay ${chapter}`);}
 });

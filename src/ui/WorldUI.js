@@ -374,10 +374,13 @@ export function mountWorldUI(app) {
     root.replaceChildren();
     tabs.replaceChildren();
     for (const [id, label] of Object.entries({
-      activities: 'Hoạt động',
+      activities: 'Boss chương',
+      checkin: 'Điểm danh & Nhiệm vụ',
+      fishing: 'Câu cá',
+      escort: 'Vận tiêu',
       shop: 'Quán & Rèn',
       arena: 'Đại hội',
-      guild: 'Bang hội',
+      guild: 'Võ Đạo Các',
       story: 'Truyện ký',
       casebook: 'Sổ đầu mối',
       bonds: 'Đồng hành',
@@ -390,19 +393,19 @@ export function mountWorldUI(app) {
         renderWorld();
       });
       b.setAttribute('aria-pressed', String(tab === id));
-      b.dataset.uiIcon=({activities:'flag',shop:'tea',arena:'sword',guild:'roster',story:'scroll',casebook:'codex',bonds:'heart',characters:'profile',journal:'scroll'})[id];
+      b.dataset.uiIcon=({activities:'flag',checkin:'check',fishing:'fish',escort:'coin',shop:'tea',arena:'sword',guild:'lotus',story:'scroll',casebook:'codex',bonds:'heart',characters:'profile',journal:'scroll'})[id];
       tabs.append(b);
     }
     const activeTab=tabs.querySelector('[aria-pressed="true"]');
-    if(isDaiViet(s)&&!sectReady(s)&&['activities','arena','guild'].includes(tab)){
+    if(isDaiViet(s)&&!sectReady(s)&&['activities','checkin','fishing','escort','arena','guild'].includes(tab)){
       root.append(panel('Hành trình của người chưa nhập môn','Tiếp tục chính truyện để tìm hiểu năm viện. Sau khi chọn phái ở chương 2, bạn có thể tham gia các thử thách ngoài truyện.'));
       return;
     }
     if(activeTab&&tabs.clientWidth)tabs.scrollLeft+=activeTab.getBoundingClientRect().left-tabs.getBoundingClientRect().left-(tabs.clientWidth-activeTab.clientWidth)/2;
     if (tab === 'bonds') renderBonds(app, root);
     if (tab === 'casebook') renderCasebook(app,root);
-    if (tab === 'activities') {
-      renderChapterBosses(app,root);
+    if (tab === 'activities') renderChapterBosses(app,root);
+    if (tab === 'checkin') {
       const daily = panel(
         'Điểm danh & nhiệm vụ',
         'Ngày/tuần theo giờ Việt Nam. Điểm danh trên máy này, chưa có tài khoản đăng nhập máy chủ.'
@@ -425,6 +428,8 @@ export function mountWorldUI(app) {
         );
       }
       root.append(daily);
+    }
+    if (tab === 'fishing') {
       const fish = panel(
         'Thả câu bên bến',
         `2 bạc/lượt: 1 cá và vật liệu. Còn ${3 - w.daily.fishing}/3 lượt hôm nay.`
@@ -433,6 +438,8 @@ export function mountWorldUI(app) {
         button('Buông cần · 2 bạc', () => action('fish'), w.daily.fishing >= 3)
       );
       root.append(fish);
+    }
+    if (tab === 'escort') {
       const escort = panel(
         'Tiêu cục Thanh Khê',
         `Còn ${2 - w.daily.escorts}/2 chuyến/ngày. Cọc mất nếu thua/rút lui. Đường quan yếu hơn; đường tắt đánh đội ngang cấp.`
@@ -553,28 +560,11 @@ export function mountWorldUI(app) {
       root.append(codes);
     }
     if (tab === 'guild') {
-      const guild = panel(
-        w.guild.name || 'Lập bang giữ nghĩa',
-        'Bang hội ngoại tuyến, lưu trên máy này. Chưa có thành viên người chơi khác, chat hay đồng bộ máy chủ.'
-      );
-      if (!w.guild.name) {
-        const input = n('input');
-        input.maxLength = 32;
-        input.placeholder = 'Tên bang';
-        input.setAttribute('aria-label', 'Tên bang');
-        guild.append(
-          input,
-          button('Lập bang · 80 bạc', () => action('guild_create', input.value))
-        );
-      } else
-        guild.append(
-          n(
-            'p',
-            `Công đức ${w.guild.points} · ${w.guild.contributions} lần góp`
-          ),
-          button('Góp 25 bạc → công đức + quặng', () => action('guild_donate'))
-        );
-      root.append(guild);
+      const level=Math.min(20,w.guild.contributions),cost=40+level*35,ore=1+Math.floor(level/5);
+      const academy=panel('Võ Đạo Các · bậc '+level+'/20','Tu luyện vĩnh viễn cho Main. Mỗi bậc +1,5% HP, +1% công. Giữ bản lưu bang hội cũ.');
+      academy.append(n('p','Đã nhận: +'+(level*1.5).toFixed(1)+'% HP · +'+level+'% công','hint'));
+      academy.append(button('Đột phá · '+cost+' bạc + '+ore+' quặng',()=>action('martial_train'),level>=20||count(s,'silver')<cost||count(s,'ore')<ore||Boolean(s.storyProgress.pendingEncounter)||Boolean(w.dungeon)));
+      root.append(academy);
     }
     if (tab === 'characters') {
       const cast = panel('Người đã gặp', 'Hoàn thành hồi truyện để ghi thêm nhân vật. Chọn Truyện ký để đọc lại những việc đã xảy ra.');
@@ -714,6 +704,11 @@ export function mountWorldUI(app) {
       root.append(p);
       return;
     }
+    const bau=panel('Bầu Cua · bạc giang hồ','Đặt 5 bạc ảo/lượt, tối đa 3 lượt/ngày. Trúng một mặt trả 10 bạc. Không đổi ra tiền thật.');
+    bau.append(n('p','Còn '+(3-(w.daily.bauCua??0))+'/3 lượt hôm nay · Bạc: '+count(s,'silver'),'hint'));
+    for(const [face,label] of [['bau','🎃 Bầu'],['cua','🦀 Cua'],['tom','🦐 Tôm'],['ca','🐟 Cá'],['ga','🐓 Gà'],['nai','🦌 Nai']])
+      bau.append(button(label+' · 5 bạc',()=>action('bau_cua',face),(w.daily.bauCua??0)>=3||count(s,'silver')<5));
+    root.append(bau);
     const week = calendar(app.model.now()).week,
       featured = DUNGEONS[((week % 5) + 5) % 5];
     root.append(

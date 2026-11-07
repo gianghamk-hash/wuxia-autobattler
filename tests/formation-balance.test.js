@@ -51,7 +51,7 @@ test('randomized main boss phases honor their three seeded counts, retaining the
 });
 
 test('first twenty dungeon floors use the smaller HP/attack budget; later floors and other modes retain theirs',()=>{
- assert.deepEqual([0,9,10,19,20,99].map(earlyDungeonFactor),[.85,.85,.9,.9,1,1]);
+ assert.deepEqual([0,9,10,19,20,99].map(earlyDungeonFactor),[.65,.65,.75,.75,.9,1]);
  for(const floor of[0,9,10,19,20]){
   const c=developed();c.enterDungeon('phong_nha');const s=c.snapshot();s.adventure.dungeon.floor=floor;c.load(s);c.chooseRoom(0);
   const u=c.battle.units.find(u=>u.team==='enemy'),level=Math.min(20,2+Math.floor(floor/7)),base=new Companion('companion_05',{team:'enemy',level}),boss=(floor+1)%10===0;

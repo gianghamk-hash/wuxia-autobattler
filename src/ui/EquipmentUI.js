@@ -33,7 +33,7 @@ export function renderEquipment(app,root){
   card.append(n('p',`Có thể bán: ${spare} · ${gearSalePrice(item)} bạc/món${equipped?' · Giữ lại 1 món đang mặc':''}`,'gear-sale-hint'));
   for(const amount of [...new Set([1,...(spare>1?[spare]:[])])]){const sell=btn(`Bán ${amount===1?'1 món':amount+' món dư'} · +${gearSalePrice(item)*amount} bạc`,()=>app.run(()=>{const result=app.model.sellEquipment(item.id,amount);app.toast(`Đã bán ${result.quantity} món · +${result.silver} bạc`);renderEquipmentRefresh(app);}),blocked||amount>spare);sell.dataset.sellGear=item.id;sell.dataset.sellQuantity=amount;card.append(sell);}
   list.append(card);
- }owned.append(list);panel.append(owned);root.append(panel);
+ }owned.append(list);const reveal=btn('Bán trang bị dư',()=>{owned.open=true;owned.scrollIntoView({block:'nearest'});});reveal.dataset.uiIcon='coin';panel.append(reveal,owned);root.append(panel);
 }
 function renderEquipmentRefresh(app){app.world.render();}
 export function renderChapterBosses(app,root){

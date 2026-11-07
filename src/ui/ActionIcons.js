@@ -6,7 +6,7 @@ const IDS={
  'btn-retry-save':'refresh','btn-rescue-export':'upload','btn-latest-save':'download','btn-new-session':'plus',
  'btn-practice':'sword','btn-pause':'pause','btn-retreat':'back','btn-battle-mode':'settings','btn-rescue-mission':'heart',
  'dialogue-previous':'back','dialogue-next':'arrow','dialogue-advance':'arrow',
- 'tab-skills':'sword','tab-attributes':'plus','tab-gear':'bag'
+ 'tab-skills':'sword','tab-attributes':'plus','tab-gear':'shield','tab-inventory':'bag'
 };
 /** Every label remains in the DOM; icons are decorative and never become the accessible name. */
 export function actionKey({id='',text='',view,close,scale,focus,skill,attribute,buy,explicit}) {

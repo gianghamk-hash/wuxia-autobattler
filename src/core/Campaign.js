@@ -814,8 +814,8 @@ export class Campaign {
               pending.kind === 'practice'
                 ? ['companion_01', 'companion_06']
                 : ['companion_05', 'companion_06'],
-            hpScale: 0.7,
-            attackScale: 0.65
+            hpScale: pending.kind === 'practice' ? 0.48 : 0.7,
+            attackScale: pending.kind === 'practice' ? 0.45 : 0.65
           };
     const combatBuild=storyHeroBuild(this.session);
     const grid = new GridSystem(),
@@ -893,7 +893,7 @@ export class Campaign {
     const boss=Boolean(isDaiViet(this.session)&&quest?.boss&&pending.kind==='main');
     const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter,{normalizeWaveSize:quest.chapter<=2,waveCounts:storyWaveCounts(quest,pending.seed)}):null;
     this.battle = new CombatEngine({
-      enemyStatMultiplier:isDaiViet(this.session)?campaignEnemyMultiplier(pending.kind==='main'?quest.chapter:this.session.storyProgress.currentChapter):1,
+      enemyStatMultiplier:isDaiViet(this.session)?campaignEnemyMultiplier(pending.kind==='main'?quest.chapter:pending.kind==='practice'?1:this.session.storyProgress.currentChapter):1,
       enemyLimit:8,nextBossWave,maxDuration:boss?360:150,
       units,
       grid,
@@ -939,11 +939,11 @@ export class Campaign {
       } else if (pending.kind === 'recruit')
         this._markChallenge(next, RECRUIT_BY_ID[pending.questId]);
       else if (pending.kind === 'practice') {
-        rewards.xp = Math.min(300, 50 + next.hero.level * 10);
+        rewards.xp = Math.min(450, Math.round((50 + next.hero.level * 10) * 1.5));
         rewards.silver = Math.max(
           1,
           Math.round(
-            (3 + next.hero.level * 0.7) *
+            (3 + next.hero.level * 0.7) * 1.35 *
               (next.adventure.daily.practiceWins < 3 ? 1 : 0.2)
           )
         );
