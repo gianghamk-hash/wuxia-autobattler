@@ -52,6 +52,7 @@ function fromTeam(team, side, grid) {
         new Companion(id, {
           id: side === 'home' ? id : `enemy_${id}`,
           team: side,
+          rank: team.ranks?.[id],
           level: team.level
         })
     )
@@ -319,8 +320,8 @@ export const worldMethods = {
     if (pending.kind === 'escort') {
       const safe = pending.questId === 'safe';
       title = safe ? 'Tiêu cục · đường quan' : 'Tiêu cục · đường tắt U Minh';
-      scale = safe ? 0.55 : 1;
-      level = Math.max(1, s.hero.level - (safe ? 1 : 0));
+      scale = safe ? 0.25 : 0.4;
+      level = Math.max(1, s.hero.level - (safe ? 3 : 2));
       templates = safe
         ? ['companion_01', 'companion_04']
         : ['companion_14', 'companion_05', 'companion_12'];
@@ -383,10 +384,10 @@ export const worldMethods = {
       won = result.winner === 'home';
     if (pending.kind === 'escort') {
       if (won) {
-        rewards.xp = 30 + s.hero.level * 5;
-        rewards.silver = pending.questId === 'safe' ? 24 : 55;
+        rewards.xp = 90 + s.hero.level * 10;
+        rewards.silver = pending.questId === 'safe' ? 75 : 150;
         give(s, 'silver', rewards.silver);
-        give(s, 'ore', pending.questId === 'safe' ? 1 : 2);
+        give(s, 'ore', pending.questId === 'safe' ? 3 : 5);
         give(s, 'herb', 1);
       }
       w.escort = null;

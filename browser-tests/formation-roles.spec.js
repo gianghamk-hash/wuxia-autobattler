@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 import {developed} from '../scripts/balance-campaign7.mjs';
 for(const width of[320,390,1280])test('formation role tags stay readable and agree with roster and dossier at '+width+'px',async({page},info)=>{
  await page.setViewportSize({width,height:900});await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Đội thử vai trò');await page.locator('#btn-new-game').click();

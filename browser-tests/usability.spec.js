@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 import {writeFile} from 'node:fs/promises';
 async function start(page) {await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Trần Phong');await page.locator('#btn-new-game').click();await page.evaluate(async()=>{
  const a=window.__game,{DAI_VIET_QUESTS}=await import('/src/data/DaiVietStoryData.js'),s=a.model.snapshot(),at=DAI_VIET_QUESTS.findIndex(q=>q.id==='D02H10'),done=DAI_VIET_QUESTS.slice(0,at);

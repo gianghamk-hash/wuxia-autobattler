@@ -1,3 +1,4 @@
+import { ATTRIBUTE_BONUSES, SECT_PASSIVES } from '../data/ProgressionBalance.js';
 import {ATTRIBUTE_PLANS7,ATTRIBUTE_REASONS7} from '../data/BuildGuides7.js';
 import {LIMITS} from '../data/StrategyData.js';
 import {gearImage} from './GearArt.js';
@@ -49,7 +50,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
     const sectLabel=document.querySelector('label[for="progress-sect"]');if(sectLabel)sectLabel.hidden=storyMode;sect.hidden=storyMode;el('btn-progress-sect').hidden=storyMode;
     el('progress-summary').textContent = `Cấp ${hero.level}/${MAX_LEVEL} · XP ${hero.exp}/${hero.level === MAX_LEVEL ? 'Tối đa' : expToNextLevel(hero.level)} · Điểm kỹ năng ${hero.freeSkillPoints} · Điểm thuộc tính ${hero.freeAttributePoints}`;
     const tree = el('skill-tree'); tree.replaceChildren();
-    if(hero.sect)tree.append(element('p','Chọn hướng build: Sát lực dồn sát thương; Cân bằng vừa công vừa thủ; Phòng thủ giữ tuyến. Có thể phối nút, nhưng chỉ được học một tuyệt kỹ tầng 4. Hoàn điểm miễn phí để thử lại.','build-guide'));
+    if(hero.sect)tree.append(element('p','Chọn hướng build: Sát lực dồn sát thương; Cân bằng vừa công vừa thủ; Phòng thủ giữ tuyến. Mỗi nhánh mở độc lập theo nút trước cùng nhánh; có thể hoàn thiện một nhánh rồi học nhánh khác. Tuyệt kỹ học sau cùng được sử dụng. Hoàn điểm miễn phí để thử lại.','build-guide'));
     if (!hero.sect) tree.append(element('p', storyMode?'Bạn chưa nhập môn. Tìm hiểu năm viện và chọn phái trong chính truyện ở chương 2, hồi 10.':'Chọn môn phái để mở cây kỹ năng.'));
     if(hero.sect){const nav=element('nav',undefined,'build-tabs');nav.setAttribute('aria-label','Hướng võ công');for(const[id,label]of Object.entries({attack:'Sát lực',balanced:'Cân bằng',guard:'Phòng thủ'})){const button=element('button',label);button.type='button';button.dataset.buildBranch=id;button.dataset.uiIcon=({attack:'sword',balanced:'lotus',guard:'shield'})[id];button.setAttribute('aria-pressed',String(branchChoice===id));button.onclick=()=>{branchChoice=id;refresh();};nav.append(button);}tree.append(nav);}
     for (const node of (SKILL_TREES[hero.sect] ?? []).filter(n=>n.branch===branchChoice)) {
@@ -69,7 +70,7 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
     }
     const attributes = el('attribute-grid'); attributes.replaceChildren();
     if(hero.sect){const guide=element('section',undefined,'attribute-guide panel'),picker=element('select');picker.setAttribute('aria-label','Hướng cộng thuộc tính');for(const[id,label]of [['attack','Sát lực'],['balanced','Cân bằng'],['guard','Phòng thủ']]){const o=element('option',label);o.value=id;picker.append(o);}picker.value=attributePlan;picker.onchange=()=>{attributePlan=picker.value;refresh();};const keys=ATTRIBUTE_PLANS7[hero.sect][picker.value];guide.append(element('strong','Gợi ý sau nhập môn'),picker,element('p',ATTRIBUTE_REASONS7[hero.sect]),element('p','Ưu tiên: '+keys.map(k=>ATTRIBUTES[k]).join(' → ')+'. Mỗi 5 điểm có thể thử: 3 điểm '+ATTRIBUTES[keys[0]]+', 1 điểm '+ATTRIBUTES[keys[1]]+', 1 điểm '+ATTRIBUTES[keys[2]]+'. Bạn tự chọn điểm để cộng.'));attributes.append(guide);}
-    const attributeHelp={canCot:'+25 HP mỗi điểm',khiHai:'+4 nội công, +1 nội phòng mỗi điểm',kinhLuc:'+4 ngoại công mỗi điểm',ngoTinh:'+0,5% bạo kích mỗi điểm (có trần trong trận)',thanPhap:'+1,5% nhịp đánh và +0,2% né mỗi điểm',coDuyen:'+0,2% bạo kích mỗi điểm'};
+    const attributeHelp=Object.fromEntries(Object.entries(ATTRIBUTE_BONUSES).map(([key, stats])=>[key, statsText(stats)+(key==='thanPhap'?' · +3% nhịp đánh':'')+' mỗi điểm']));
     for (const [key, label] of Object.entries(ATTRIBUTES)) {
       const row = element('div', undefined, 'attribute-row'); const info=element('span', `${label}: ${hero.attributes[key]}`);info.append(element('small',attributeHelp[key],'attribute-help'));row.append(info);
       const button = element('button', '+1'); button.type = 'button'; button.dataset.attribute = key;
@@ -90,7 +91,8 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
     }
     if (hero.sect) {
       const instance = new Hero(hero.sect, { profile: hero, inventory });
-      el('progress-stats').textContent = `HP ${instance.stats.maxHp} · Ngoại công ${instance.stats.physicalAtk} · Nội công ${instance.stats.magicalAtk} · Ngoại phòng ${instance.stats.physicalDef} · Nội phòng ${instance.stats.magicalDef} · Bạo kích ${Math.round(Math.min(LIMITS.crit, instance.stats.critRate + hero.attributes.ngoTinh * .005) * 100)}%`;
+      el('progress-stats').textContent = `HP ${instance.stats.maxHp} · Ngoại công ${instance.stats.physicalAtk} · Nội công ${instance.stats.magicalAtk} · Ngoại phòng ${instance.stats.physicalDef} · Nội phòng ${instance.stats.magicalDef} · Bạo kích ${Math.round(Math.min(LIMITS.crit, instance.stats.critRate) * 100)}%`;
+      for (const passive of SECT_PASSIVES[hero.sect] ?? []) tree.append(element('p', `Bị động cấp ${passive.level} · ${passive.name}: ${passive.description} · ${hero.level>=passive.level?'Đã mở':'Chưa mở'}`, 'sect-passive'));
       el('progress-ultimate').textContent = `Tuyệt kỹ hiện tại: ${instance.skills.ultimate.name}`;
       el('progress-set').textContent = instance.activeEquipmentSets.length ? `Đủ bộ: ${instance.activeEquipmentSets.map(id => EQUIPMENT_SETS.find(set => set.id === id).name).join(', ')}` : 'Chưa đủ mốc bộ. Bộ mới có mốc 2, 3 và 4 món; bộ phái có mốc 3 và 4 món.';
     } else {

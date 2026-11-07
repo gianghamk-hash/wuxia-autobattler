@@ -1,3 +1,4 @@
+import { milestone, AURA_COLORS } from '../data/ProgressionBalance.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { NPCS_BY_ID } from '../data/NPCData.js';
 import {portraitURL} from '../data/ArtURLs.js';
@@ -18,6 +19,7 @@ export function icon(name) {
  im.alt='';im.setAttribute('aria-hidden','true');im.className='game-icon';im.dataset.iconName=key;im.width=im.height=24;im.decoding='async';im.draggable=false;return im;
 }
 export function decorateRarity(element, unit) {
+  if (unit?.level) {element.dataset.levelAura=String(milestone(unit.level));element.style.setProperty('--level-aura',AURA_COLORS[milestone(unit.level)]);}
   if (!unit?.tier) return;
   element.dataset.tier = String(unit.tier);
   if (!element.querySelector(':scope > .rarity-ornament') && unit.tier >= 3) {
@@ -25,7 +27,7 @@ export function decorateRarity(element, unit) {
     ornament.className = 'rarity-ornament';
     ornament.setAttribute('aria-hidden', 'true');
     element.append(ornament);
-    if (unit.tier === 5) {
+    if (unit.tier >= 5) {
       const petals = document.createElement('span');
       petals.className = 'rarity-petals';
       petals.setAttribute('aria-hidden', 'true');

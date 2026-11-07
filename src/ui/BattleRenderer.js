@@ -1,3 +1,4 @@
+import { milestone, AURA_COLORS } from '../data/ProgressionBalance.js';
 import {equipmentAura} from './GearArt.js';
 import {portraitURL} from '../data/ArtURLs.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
@@ -104,7 +105,8 @@ export class BattleRenderer {
           this.skillEffects.filter((e) => !e.profile.ultimate).length >= 8
         )
           return;
-        this.skillEffects.push({ ...event, profile, life: profile.duration });
+        const actor=this.battle?.units.find(u=>u.id===event.actorId);
+        this.skillEffects.push({ ...event, promotionScale:Math.min(1.8,actor?.promotionSkillBoost??1), divine:actor?.tier===6, profile, life: profile.duration });
         if (this.skillEffects.length > 18)
           this.skillEffects.splice(
             this.skillEffects.findIndex((e) => !e.profile.ultimate) >= 0
@@ -277,9 +279,23 @@ export class BattleRenderer {
       ctx.save();
       const aura=equipmentAura(unit.equippedGear);
       if(aura.rank>=2){ctx.save();ctx.strokeStyle=aura.color;ctx.globalAlpha=.5;ctx.shadowColor=aura.color;ctx.shadowBlur=aura.rank*4;ctx.lineWidth=aura.rank;ctx.beginPath();ctx.ellipse(p.x,p.y+22,w*.55,10+aura.rank,0,0,Math.PI*2);ctx.stroke();if(aura.rank>=3)for(let i=0;i<aura.rank*2;i++){const a=i*Math.PI/aura.rank+(motion?this.visualTime*.7:0);ctx.fillStyle=aura.color;ctx.beginPath();ctx.arc(p.x+Math.cos(a)*w*.58,p.y+5+Math.sin(a)*25,1.5,0,Math.PI*2);ctx.fill();}ctx.restore();}
+      const levelAura=milestone(unit.level),rareAura=unit.tier>=4;
+      if(!unit.isObject&&(levelAura||rareAura)){
+        ctx.save();const color=unit.tier===6?'#fff0aa':unit.tier===5?'#ffd465':unit.tier===4?'#c88aff':AURA_COLORS[levelAura];
+        ctx.strokeStyle=color;ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=unit.tier===6?24:12;ctx.lineWidth=unit.tier===6?4:2;
+        ctx.beginPath();ctx.ellipse(p.x,p.y+25,w*.65,12,0,0,Math.PI*2);ctx.stroke();
+        ctx.strokeStyle=AURA_COLORS[levelAura];ctx.globalAlpha=.55;
+        ctx.beginPath();ctx.ellipse(p.x,p.y-6,w*.65,45+levelAura/3,0,0,Math.PI*2);ctx.stroke();
+        for(let i=0;i<Math.max(4,levelAura/2);i++){const a=i*Math.PI*2/Math.max(4,levelAura/2)+(motion?this.visualTime*.7:0);ctx.beginPath();ctx.arc(p.x+Math.cos(a)*w*.65,p.y-6+Math.sin(a)*48,unit.tier===6?3:1.5,0,Math.PI*2);ctx.fill();}
+        ctx.restore();
+      }
       const fighter = this.fighterImage(unit);
       const spriteReady = fighter?.complete && fighter.naturalWidth;
-      if (spriteReady) {
+      if (unit.missionAsset && !unit.isCaptive) {
+        let objectImage=this.companionImages.get(unit.characterId);
+        if(!objectImage){objectImage=new Image();objectImage.src=new URL('../../'+unit.portrait,import.meta.url).href;this.companionImages.set(unit.characterId,objectImage);}
+        if(objectImage.complete&&objectImage.naturalWidth)ctx.drawImage(objectImage,p.x-w*.6,top,w*1.2,h);
+      } else if (spriteReady) {
         const pose = motion
           ? (this.poses.get(unit.id)?.frame ??
             (unit.state === 'MOVE'

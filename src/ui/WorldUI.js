@@ -1,3 +1,4 @@
+import { FISHING_LOOT } from '../core/Fishing.js';
 import {roleTag} from './RoleTagUI.js';
 import {appendDossier7} from './Dossier7.js';
 import {icon} from './Visuals.js';
@@ -283,7 +284,7 @@ export function mountWorldUI(app) {
       sect = s.adventure.tactics.affiliations[id] ?? unit.sect;
     root.removeAttribute('data-tier');
     const npc = unit.id==='hero'?null:isDaiViet(s)?(DAI_VIET_CAST_BY_ID[unit.storyActorId??unit.templateId??unit.id]??NPCS_BY_ID[unit.characterId]):NPCS_BY_ID[unit.characterId];
-    if (!npc||npc.kind==='companion') decorateRarity(root, COMPANIONS_BY_ID[unit.templateId ?? unit.id]);
+    if (!npc||npc.kind==='companion') decorateRarity(root, storyPerson(s,COMPANIONS_BY_ID[unit.templateId ?? unit.id]));
     root.append(
       portrait(
         unit.id==='hero'&&isDaiViet(s)?heroAppearance(s):unit.portrait?unit:npc ?? COMPANIONS_BY_ID[unit.templateId ?? unit.id] ?? sect,
@@ -445,26 +446,28 @@ export function mountWorldUI(app) {
     if (tab === 'fishing') {
       const fish = panel(
         'Thả câu bên bến',
-        `2 bạc/lượt: 1 cá và vật liệu. Còn ${3 - w.daily.fishing}/3 lượt hôm nay.`
+        `2 bạc/lượt: luôn nhận 1 cá và thêm phần thưởng theo bảng tỉ lệ. Còn ${3 - w.daily.fishing}/3 lượt hôm nay.`
       );
       fish.append(
         button('Buông cần · 2 bạc', () => action('fish'), w.daily.fishing >= 3)
       );
+      const table=n('table');table.className='fishing-rates';const head=n('tr');head.append(n('th','Phần thưởng thêm'),n('th','Tỉ lệ'));table.append(head);for(const reward of FISHING_LOOT){const row=n('tr');row.append(n('td',reward.label),n('td',reward.rate+'%'));table.append(row);}fish.append(table);
+      const last=w.journal.findLast(entry=>entry.text.startsWith('Câu cá:'));if(last){const result=n('p',last.text,'fishing-result');result.setAttribute('role','status');fish.append(result);}
       root.append(fish);
     }
     if (tab === 'escort') {
       const escort = panel(
         'Tiêu cục Thanh Khê',
-        `Còn ${2 - w.daily.escorts}/2 chuyến/ngày. Cọc mất nếu thua/rút lui. Đường quan yếu hơn; đường tắt đánh đội ngang cấp.`
+        `Còn ${2 - w.daily.escorts}/2 chuyến/ngày. Cọc mất nếu thua/rút lui. Đường quan nhẹ nhàng; đường tắt có địch yếu hơn 2 cấp. Thắng nhận thêm XP và nguyên liệu.`
       );
       escort.append(
         button(
-          'Đường quan · cọc 10 → thắng nhận 24 bạc',
+          'Đường quan · cọc 10 → thắng nhận 75 bạc',
           () => fight(() => app.model.startEscort('safe')),
           w.daily.escorts >= 2
         ),
         button(
-          'Đường tắt · cọc 20 → thắng nhận 55 bạc',
+          'Đường tắt · cọc 20 → thắng nhận 150 bạc',
           () => fight(() => app.model.startEscort('fast')),
           w.daily.escorts >= 2
         )
@@ -731,12 +734,12 @@ export function mountWorldUI(app) {
     const faces=[['bau','🎃','Bầu'],['cua','🦀','Cua'],['tom','🦐','Tôm'],['ca','🐟','Cá'],['ga','🐓','Gà'],['nai','🦌','Nai']];
     const faceMap=Object.fromEntries(faces.map(([id,emoji])=>[id,emoji]));
     const wallet=count(s,'silver'),maxStake=Math.min(wallet,Math.floor(Number.MAX_SAFE_INTEGER/6));
-    const bau=panel('Bầu Cua · vận may giang hồ','Đặt số bạc tùy ý trong túi. Trúng 1/2/3 mặt nhận 2x/4x/6x tiền cược; nếu không trúng sẽ mất cược. Tối đa 3 lượt/ngày, chỉ dùng bạc ảo.');
+    const bau=panel('Bầu Cua · vận may giang hồ','Đặt số bạc tùy ý trong túi. Trúng 1/2/3 mặt nhận 2x/4x/6x tiền cược; nếu không trúng sẽ mất cược. Không giới hạn lượt/ngày, chỉ dùng bạc ảo.');
     bau.classList.add('dungeon-gamble');
     const banner=n('div',undefined,'dungeon-gamble-banner');
     const bannerImage=n('img');bannerImage.src='assets/images/scenes/willow_ferry.webp';bannerImage.alt='Bến sông giang hồ';bannerImage.loading='lazy';banner.append(bannerImage,n('span','🎲 BẦU CUA · VẬN MAY'));
     bau.prepend(banner);
-    bau.append(n('p','Còn '+Math.max(0,3-(w.daily.bauCua??0))+'/3 lượt hôm nay · Bạc hiện có: '+wallet.toLocaleString('vi-VN'),'hint'));
+    bau.append(n('p','Không giới hạn lượt · Đã chơi '+(w.daily.bauCua??0)+' lượt hôm nay · Bạc hiện có: '+wallet.toLocaleString('vi-VN'),'hint'));
     const faceGrid=n('div',undefined,'bau-face-grid');
     for(const [id,emoji,label] of faces){
       const pick=button(emoji+' '+label,()=>{
@@ -766,7 +769,7 @@ export function mountWorldUI(app) {
         if(match)bauResult={rolls:match[1].split(','),face:match[2],stake:Number(match[3]),hits:Number(match[4]),payout:Number(match[5]),net:Number(match[6])};
         renderDungeon();
       }
-    },(w.daily.bauCua??0)>=3||wallet<1);
+    },wallet<1);
     play.dataset.bauPlay='true';play.dataset.uiIcon='coin';bau.append(play);
     if(bauResult){
       const resultBox=n('section',undefined,'bau-outcome');
@@ -802,7 +805,7 @@ export function mountWorldUI(app) {
       p.dataset.dungeonId=def.id;
       const picture=n('img');picture.src='assets/images/scenes/'+def.id+'.webp';picture.alt='Minh họa '+def.name;picture.loading='lazy';picture.decoding='async';picture.className='dungeon-tile-image';
       p.prepend(picture);
-      const stats=n('p','Còn '+remaining+' lượt hôm nay · kỷ lục '+(w.towerBest?.[def.id]??0)+'/100','dungeon-tile-stats');
+      const stats=n('p','Còn '+remaining+' lượt hôm nay · kỷ lục '+(w.towerBest?.[def.id]??0)+'/100 · Tiếp tục tầng '+(Math.min(99,w.towerBest?.[def.id]??0)+1),'dungeon-tile-stats');
       p.append(stats);
       const enter=button(w.clears.includes(def.id)?'Khám phá lại':'Vào bí cảnh',
         ()=>fight(()=>{app.model.enterDungeon(def.id);app.model.chooseRoom(0);}),

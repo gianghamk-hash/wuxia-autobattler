@@ -340,3 +340,32 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 @media(prefers-reduced-motion:reduce){
  #world-tabs .world-image-card,#world-tabs .world-image-art {transition:none!important;}
 }
+/* Advancement remains legible with reduced motion; rarity and level are independent. */
+[data-tier="4"]{border:2px solid #d291ff!important;box-shadow:0 0 0 2px #47225b,inset 0 0 24px #a052bf33,0 0 18px #b47de666;position:relative}
+[data-tier="5"]{border:3px double #ffe18a!important;box-shadow:0 0 0 2px #926320,inset 0 0 26px #e3b94c44,0 0 22px #ffc94f99;position:relative}
+[data-tier="6"]{border:4px double #fff4ba!important;background-image:linear-gradient(135deg,#24164b,#12383f,#4b2b14)!important;box-shadow:0 0 0 2px #c786ff,0 0 24px #ffda72,inset 0 0 35px #97ffff55;position:relative;animation:divine-glow 3s ease-in-out infinite}
+[data-tier="6"] .rarity-ornament{inset:4px;border:1px solid #fff8b8;box-shadow:inset 0 0 18px #dcb8ff;pointer-events:none}
+[data-tier="6"] .rarity-petals i{background:#fff5aa;box-shadow:0 0 12px #9bffff}
+[data-tier="6"] .portrait{filter:drop-shadow(0 0 7px #f8e594)}
+@keyframes divine-glow{50%{box-shadow:0 0 0 3px #99ffff,0 0 32px #d79aff,inset 0 0 35px #ffda7277}}
+.formation-cell[data-occupied="true"]{position:relative;isolation:isolate}
+.formation-cell[data-level-aura]:not([data-level-aura="0"])::after,.formation-cell[data-tier="4"]::after,.formation-cell[data-tier="5"]::after,.formation-cell[data-tier="6"]::after{content:"";position:absolute;bottom:5px;left:14%;width:72%;height:18%;border:2px solid var(--level-aura,#d08dff);border-radius:50%;box-shadow:0 0 12px var(--level-aura,#d08dff);pointer-events:none;z-index:-1}
+.formation-cell[data-level-aura="10"] .portrait{filter:drop-shadow(0 0 4px #68cfff)}
+.formation-cell[data-level-aura="15"] .portrait{filter:drop-shadow(0 0 6px #bc98ff)}
+.formation-cell[data-level-aura="20"] .portrait{filter:drop-shadow(0 0 8px #ffcf69)}
+.formation-cell[data-level-aura="25"] .portrait{filter:drop-shadow(0 0 10px #ff91bb)}
+.formation-cell[data-level-aura="30"] .portrait{filter:drop-shadow(0 0 12px #d9ffff)}
+#prebattle-dialog{width:min(960px,calc(100vw - 24px));max-height:90dvh;box-sizing:border-box;overflow:auto;color:#eaf4ef;background:#102e33;border:2px solid #e0b76f;border-radius:16px;padding:20px}
+#prebattle-dialog::backdrop{background:#031a20dd}
+.prebattle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.prebattle-card{display:flex;flex-direction:column;gap:6px;background:#173d42;padding:10px;border-radius:10px;min-width:0;overflow-wrap:anywhere}
+.prebattle-card[data-team="enemy"]{background:#432c32}
+#prebattle-dialog label{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+#prebattle-dialog select{max-width:100%}
+#prebattle-dialog [data-start-battle]{position:sticky;bottom:0;width:100%;background:#315e4e;min-height:48px}
+.fishing-rates{width:100%;border-collapse:collapse}.fishing-rates td,.fishing-rates th{padding:8px;text-align:left;border-bottom:1px solid #8ba99b44}
+.fishing-result,.sect-passive{padding:12px;border:1px solid #bdc878;border-radius:8px;background:#304b3b}
+@media(max-width:600px){.prebattle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#prebattle-dialog{padding:12px}}
+@media(prefers-reduced-motion:reduce){[data-tier="6"]{animation:none}}
+
+body[data-card-effects="false"] [data-tier="6"]{animation:none}

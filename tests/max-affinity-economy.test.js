@@ -39,11 +39,11 @@ test('affinity unlocks only at 100 and survives pending retries, dungeon snapsho
  c.enterDungeon('phong_nha');const s=c.snapshot();for(const id of s.party.active)s.companionsAffinity[id]=15;c.load(s);c.chooseRoom(0);assert.equal(c.battle.maxAffinity.entries.length,5);
 });
 
-test('single duplicates refund 64; five duplicates refund exactly 576 and are retained; same-bundle repeats count as duplicates',()=>{
+test('single duplicates refund 36; five duplicates refund exactly 160 and are retained; same-bundle repeats count as duplicates',()=>{
  const s=developed().snapshot(),item='gear_phong_hanh_common_weapon',before=structuredClone(s);
- const first=drawEquipment(s,5,{random:()=>0,now:1});assert.deepEqual(s,before);assert.equal(first.refund,461);assert.equal(first.results.filter(r=>r.duplicate).length,4);assert.equal(itemCount(first.session,item),5);assert.equal(itemCount(first.session,'silver'),itemCount(s,'silver')-720+461);
- const single=drawEquipment(first.session,1,{random:()=>0,now:2});assert.equal(single.refund,64);assert.equal(single.results[0].refund,64);
- const owned=structuredClone(s);for(const gear of NEW_GEAR)give(owned,gear.id,1);const all=drawEquipment(owned,5,{random:()=>0,now:3});assert.equal(all.refund,576);assert.equal(all.results.reduce((n,r)=>n+r.refund,0),576);assert.equal(itemCount(all.session,item),6);validateCampaign(all.session);
+ const first=drawEquipment(s,5,{random:()=>0,now:1});assert.deepEqual(s,before);assert.equal(first.refund,128);assert.equal(first.results.filter(r=>r.duplicate).length,4);assert.equal(itemCount(first.session,item),5);assert.equal(itemCount(first.session,'silver'),itemCount(s,'silver')-200+128);
+ const single=drawEquipment(first.session,1,{random:()=>0,now:2});assert.equal(single.refund,36);assert.equal(single.results[0].refund,36);
+ const owned=structuredClone(s);for(const gear of NEW_GEAR)give(owned,gear.id,1);const all=drawEquipment(owned,5,{random:()=>0,now:3});assert.equal(all.refund,160);assert.equal(all.results.reduce((n,r)=>n+r.refund,0),160);assert.equal(itemCount(all.session,item),6);validateCampaign(all.session);
  const legacy=structuredClone(all.session);for(const r of legacy.loot.history){delete r.duplicate;delete r.refund;}validateLoot(legacy.loot);
  const corrupt=structuredClone(all.session.loot);corrupt.history[0].duplicate=false;corrupt.history[0].refund=64;assert.throws(()=>validateLoot(corrupt));
  let i=0;assert.throws(()=>drawEquipment(first.session,5,{random:()=>++i===5?NaN:0}));assert.equal(itemCount(first.session,item),5);

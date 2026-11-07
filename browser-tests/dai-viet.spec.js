@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function start(page){await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Trần Phong');await page.locator('#btn-new-game').click();await page.evaluate(()=>window.__game.engine.stop());}
 async function read(page){for(let i=0;i<30&&await page.locator('#dialogue-next').isEnabled();i++)await page.locator('#dialogue-next').click();await expect(page.locator('#dialogue-next')).toBeDisabled();}
 async function at(page,id,route='stay',romance='friends'){
@@ -66,7 +66,7 @@ for(const width of [320,390,1280])test('default 400-episode story has readable c
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(errors).toEqual([]);
 });
 test('new unarmed opening battle checkpoints reload with the same seed and randomized enemy count',async({page})=>{
- await start(page);await at(page,'D01H06');await page.evaluate(()=>{const a=window.__game;a.model.chooseMain('continue');a.enterBattle();a.engine.stop();});
+ await start(page);await at(page,'D01H06');await page.evaluate(()=>{const a=window.__game;a.model.chooseMain('continue');a.enterBattle();document.querySelector('#prebattle-dialog [data-start-battle]')?.click();a.engine.stop();});
  const pending=await page.evaluate(()=>window.__game.model.session.storyProgress.pendingEncounter);await expect(page.locator('#view-battle')).toBeVisible();
  const count=await page.evaluate(()=>window.__game.model.battle.units.filter(u=>u.team==='enemy').length);expect(count).toBeGreaterThanOrEqual(4);expect(count).toBeLessThanOrEqual(8);
  await expect.poll(()=>page.evaluate(async()=>{const {StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.storyProgress.pendingEncounter?.seed;}finally{m.db?.close();}})).toBe(pending.seed);

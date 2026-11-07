@@ -141,7 +141,7 @@ test('pending encounters survive export/reload; rewards and moral decisions cann
   assert.equal(won.storyProgress.karmaScore, karma);
   assert.throws(() => resumed.chooseMain('protect'));
   assert.equal(won.hero.level, 2);
-  assert.equal(itemCount(won, 'silver'), 30 + MAIN_QUESTS[0].silver);
+  assert.equal(itemCount(won, 'silver'), 30 + Math.round(MAIN_QUESTS[0].silver * 1.75));
 });
 test('retreat clears the encounter without rewards; retries do not farm karma', () => {
   const c = new Campaign();

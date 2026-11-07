@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function start(page,id='D19H18'){
  await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Minh An');await page.locator('#btn-new-game').click();
  await page.evaluate(async id=>{
@@ -12,10 +12,10 @@ async function read(page){for(let i=0;i<30&&await page.locator('#dialogue-next')
 
 for(const width of [320,1280])test('equipment rates, actual draw, rarity frames and autosave work at '+width+'px',async({page},info)=>{
  await page.setViewportSize({width,height:900});const errors=[];page.on('pageerror',e=>errors.push(e.message));await start(page);await shop(page);
- await page.getByText('Tỉ lệ và bảo đảm trang bị',{exact:true}).click();for(const text of ['Thường: 60%','Hiếm: 28%','Xuất sắc: 10%','Trác việt: 2%'])await expect(page.locator('#equipment-panel')).toContainText(text);
+ await page.getByText('Tỉ lệ và bảo đảm trang bị',{exact:true}).click();for(const text of ['Thường: 55%','Hiếm: 29%','Xuất sắc: 13%','Trác việt: 3%'])await expect(page.locator('#equipment-panel')).toContainText(text);
  const before=await page.evaluate(()=>({silver:window.__game.model.session.inventory.find(i=>i.itemId==='silver').quantity,hero:JSON.stringify(window.__game.model.session.hero),gacha:JSON.stringify(window.__game.model.session.gacha)}));
  await page.locator('[data-equipment-draw="5"]').click();await expect(page.locator('#equipment-results .gear-card')).toHaveCount(5);expect(await page.evaluate(()=>window.__game.model.session.loot.total)).toBe(5);
- const refund=await page.evaluate(()=>window.__game.model.session.loot.history.slice(-5).reduce((n,r)=>n+(r.refund??0),0));expect(await page.evaluate(()=>window.__game.model.session.inventory.find(i=>i.itemId==='silver').quantity)).toBe(before.silver-720+refund);expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.hero))).toBe(before.hero);expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.gacha))).toBe(before.gacha);
+ const refund=await page.evaluate(()=>window.__game.model.session.loot.history.slice(-5).reduce((n,r)=>n+(r.refund??0),0));expect(await page.evaluate(()=>window.__game.model.session.inventory.find(i=>i.itemId==='silver').quantity)).toBe(before.silver-200+refund);expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.hero))).toBe(before.hero);expect(await page.evaluate(()=>JSON.stringify(window.__game.model.session.gacha))).toBe(before.gacha);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect.poll(()=>page.evaluate(async()=>{const{StorageManager}=await import('/src/core/StorageManager.js');const m=new StorageManager();try{return(await m.load(0))?.data.loot?.total;}finally{m.db?.close();}})).toBe(5);await page.screenshot({path:info.outputPath('equipment-'+width+'.png'),fullPage:true,animations:'disabled'});expect(errors).toEqual([]);
  await page.reload();await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#btn-continue').click();await shop(page);await expect(page.locator('#equipment-results .gear-card')).toHaveCount(5);await page.locator('[data-equipment-draw="5"]').click();await expect(page.locator('#equipment-results .gear-card')).toHaveCount(5);expect(await page.evaluate(()=>window.__game.model.session.loot.total)).toBe(10);
 });

@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 import {developed} from '../scripts/balance-campaign7.mjs';
 async function ready(page,{all=false}={}){
  await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();await page.locator('#hero-name').fill('Lan An');await page.locator('#btn-new-game').click();const s=developed().snapshot();s.hero.name='Lan An';

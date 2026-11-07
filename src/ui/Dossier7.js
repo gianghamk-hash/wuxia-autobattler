@@ -19,11 +19,11 @@ export function appendDossier7(root,unit,session){
  if(base&&MAX_AFFINITY7[base.id]){const perk=MAX_AFFINITY7[base.id],active=(session.companionsAffinity?.[base.id]??0)>=100,card=node('article',undefined,'max-affinity-card');card.dataset.active=String(active);card.dataset.affinityId=base.id;card.append(node('h3','Duyên phận tối đa · '+perk.name),node('p',active?'Đã kích hoạt · 100/100':'Mở khi duyên phận đạt 100/100'),node('p',perk.description));section.append(card);}
  if(base){section.append(node('p',person.biography,'dossier-bio7'));if(isDaiViet(session))section.append(node('p','Nguồn sở hữu: '+acquisitionText7(base.id),'hint'));}
  if(unit.id==='hero'&&isDaiViet(session))section.append(node('p','Một diễn viên đóng thế lạc đến Đại Việt sau tai nạn trường quay. Học võ để tự bảo vệ mình, rồi tìm hiểu đường lương bị chặn và tìm lối trở về.','dossier-bio7'));
- const stats=unit.stats??(base?new Companion(base.id,{level:session.hero.level}).stats:null);
+ const stats=unit.stats??(base?new Companion(base.id,{level:session.hero.level,rank:session.party.ranks?.[base.id]}).stats:null);
  if(stats){section.append(node('h3','Chỉ số · cấp '+(unit.level??session.hero.level)),node('p',[['HP','maxHp'],['Ngoại công','physicalAtk'],['Nội công','magicalAtk'],['Ngoại phòng','physicalDef'],['Nội phòng','magicalDef'],['Tốc đánh','attackSpeed'],['Tầm đánh','attackRange']].filter(([,k])=>Number.isFinite(stats[k])).map(([label,k])=>label+' '+Number(stats[k].toFixed(2))).join(' · ')));}
  const element=unit.element??base?.element;
  if(element&&ELEMENTS[element]){const vulnerable=Object.entries(ELEMENTS).find(([,v])=>v.beats===element)?.[0];section.append(node('p',`Khắc ${ELEMENTS[ELEMENTS[element].beats].name}: +75% sát thương. Gặp ${ELEMENTS[vulnerable].name}: −40%. Mục tiêu khác, hồi máu và khiên giữ nguyên.`, 'counter-guide7'));}
- const skills=unit.skills??base?.skills;
+ const skills=unit.stats?unit.skills:base?new Companion(base.id,{level:session.hero.level,rank:session.party.ranks?.[base.id]}).skills:unit.skills;
  if(skills)for(const[key,label]of [['autoAttack','Chiêu thường'],['ultimate','Tuyệt kỹ']]){const skill=skills[key];if(!skill)continue;const card=node('article',undefined,'skill-detail7');if(skill.icon){const im=node('img');im.className='skill-art7';im.src=new URL('../../'+skill.icon,import.meta.url).href;im.alt=skill.name;im.loading='lazy';card.append(im);}card.append(node('h3',label+' · '+skill.name),node('p',skill.description??'Chiêu cơ bản của nhân vật.'));section.append(card);}
  if(preview)section.append(preview);
  if(unit.inCombat){const details=node('details',undefined,'combat-dossier7');details.append(node('summary','Tiểu sử, chỉ số và hình kỹ năng'),section);root.append(details);}else root.append(section);

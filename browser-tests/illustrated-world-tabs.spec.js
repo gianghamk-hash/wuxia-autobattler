@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 async function ready(page){
  await page.goto('/');
  await expect(page.locator('#boot-status')).toBeHidden();

@@ -37,13 +37,13 @@ test('Võ Đạo upgrade cannot charge money during a pending encounter',()=>{
   assert.throws(()=>c.action('martial_train'));
   assert.deepEqual(c.snapshot(),before);
 });
-test('Bầu Cua is virtual-currency-only and limited to 3 daily rounds',()=>{
+test('Bầu Cua is virtual-currency-only and allows unlimited daily rounds',()=>{
   const c=fixture();
   for(let i=0;i<3;i++)c.action('bau_cua','cua');
   assert.equal(c.session.adventure.daily.bauCua,3);
   const save=c.snapshot();
-  assert.throws(()=>c.action('bau_cua','cua'));
-  assert.deepEqual(c.snapshot(),save);
+  c.action('bau_cua','cua');
+  assert.equal(c.session.adventure.daily.bauCua,4);
   const reloaded=fixture();reloaded.load(save);
   assert.equal(reloaded.session.adventure.daily.bauCua,3);
 });

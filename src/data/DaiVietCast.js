@@ -1,3 +1,4 @@
+import { effectiveTier } from './ProgressionBalance.js';
 import {storyRecruit7} from './Recruitment7.js';
 import {deepFreeze} from './DataUtils.js';
 import {heroText} from './HeroIdentity.js';
@@ -39,6 +40,6 @@ export const PLOT_COMPANIONS=deepFreeze(['companion_23','companion_08','companio
 export const PLOT_UNLOCKS=deepFreeze({companion_23:'D04H20',companion_08:'D05H10',companion_01:'D07H20',companion_10:'D11H18',companion_07:'D13H03'});
 export const isDaiViet=session=>session?.storyProgress?.storyRevision===4;
 function namedSkills(id,skills){return skills;}
-export function storyPerson(session,person){const p=DAI_VIET_CAST_BY_ID[person?.id];return isDaiViet(session)&&p?({...person,name:p.name,portrait:p.portrait,skills:namedSkills(person.id,person.skills),storyRole:heroText(p.role,session),biography:heroText(person.biography??p.role,session),recruitment:{...person.recruitment,description:PLOT_COMPANIONS.includes(p.id)?'Tham gia theo các hồi chính truyện; không cần trả phí mời lại.':person.recruitment?.description}}):person;}
+export function storyPerson(session,person){if(person)person={...person,tier:effectiveTier(session,person),level:session.hero.level};const p=DAI_VIET_CAST_BY_ID[person?.id];return isDaiViet(session)&&p?({...person,name:p.name,portrait:p.portrait,skills:namedSkills(person.id,person.skills),storyRole:heroText(p.role,session),biography:heroText(person.biography??p.role,session),recruitment:{...person.recruitment,description:PLOT_COMPANIONS.includes(p.id)?'Tham gia theo các hồi chính truyện; không cần trả phí mời lại.':person.recruitment?.description}}):person;}
 export function storyPoolAllows(session,id){return (!storyRecruit7(id)||!isDaiViet(session))&&expansionAvailable(session,id)&&(!isDaiViet(session)||!PLOT_COMPANIONS.includes(id)||session.party.unlocked.includes(id));}
 export function applyDaiVietName(unit){const p=DAI_VIET_CAST_BY_ID[unit.templateId??unit.id];if(p){unit.name=p.name;unit.portrait=p.portrait;unit.storyActorId=p.id;unit.canon='dai-viet';unit.skills=namedSkills(p.id,unit.skills);}return unit;}

@@ -30,6 +30,7 @@ export function validateGacha(g) {
       r.pull !== last ||
       !Object.hasOwn(COMPANIONS_BY_ID, r.id) ||
       r.tier !== COMPANIONS_BY_ID[r.id].tier ||
+      (r.promotedTier !== undefined && (!Number.isInteger(r.promotedTier) || r.promotedTier < r.tier || r.promotedTier > 6)) ||
       typeof r.duplicate !== 'boolean' ||
       r.refund !== (r.duplicate ? RARITIES[r.tier - 1].refund : 0) ||
       !['none', 'epic', 'legendary'].includes(r.guarantee) ||
@@ -105,6 +106,8 @@ export function rollGacha(
       duplicate = next.party.unlocked.includes(unit.id),
       refund = duplicate ? RARITIES[tier - 1].refund : 0;
     if (duplicate) {
+      next.party.ranks ??= {};
+      next.party.ranks[unit.id] = Math.min(6, (next.party.ranks[unit.id] ?? unit.tier) + 1);
       let silver = next.inventory.find((i) => i.itemId === 'silver');
       if (silver) silver.quantity += refund;
       else next.inventory.push({ itemId: 'silver', quantity: refund });
@@ -120,6 +123,7 @@ export function rollGacha(
       id: unit.id,
       tier,
       duplicate,
+      promotedTier: next.party.ranks?.[unit.id] ?? tier,
       refund,
       guarantee,
       time: Math.max(0, Math.floor(now))

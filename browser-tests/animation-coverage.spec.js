@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect} from './fixtures.js';
 
 test('every registered character decodes and all six poses render without leaking canvas transforms',async({page})=>{
  test.setTimeout(90000);await page.goto('/');await expect(page.locator('#boot-status')).toBeHidden();

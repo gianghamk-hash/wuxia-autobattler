@@ -44,7 +44,7 @@ test('variable Bau Cua stake pays 2x for each matching die, and never allows ove
     const snapshot=c.snapshot();assert.throws(()=>c.action('bau_cua',invalid));assert.deepEqual(c.snapshot(),snapshot);
   }
   c.action('bau_cua',{face:'bau',stake:50});c.action('bau_cua',{face:'nai',stake:100});
-  const saved=c.snapshot();assert.throws(()=>c.action('bau_cua',{face:'tom',stake:1}));assert.deepEqual(c.snapshot(),saved);
+  const saved=c.snapshot();c.action('bau_cua',{face:'tom',stake:1});assert.equal(c.session.adventure.daily.bauCua,4);
   const next=setup();next.load(saved);assert.equal(next.session.adventure.daily.bauCua,3);
 });
 test('legacy Bau Cua string action still uses five silver for backward compatibility',()=>{

@@ -1,6 +1,6 @@
 import {deepFreeze} from './DataUtils.js';
-export const GEAR_RARITIES=[{id:'common',name:'Thường',rate:60,color:'#aeb9b5',rank:1},{id:'rare',name:'Hiếm',rate:28,color:'#65b6ee',rank:2},{id:'excellent',name:'Xuất sắc',rate:10,color:'#bd8beb',rank:3},{id:'exceptional',name:'Trác việt',rate:2,color:'#e7bd62',rank:4}];
-export const GEAR_DRAW={singleCost:80,tenCost:720,excellentPity:10,exceptionalPity:50};
+export const GEAR_RARITIES=[{id:'common',name:'Thường',rate:55,color:'#aeb9b5',rank:1},{id:'rare',name:'Hiếm',rate:29,color:'#65b6ee',rank:2},{id:'excellent',name:'Xuất sắc',rate:13,color:'#bd8beb',rank:3},{id:'exceptional',name:'Trác việt',rate:3,color:'#e7bd62',rank:4}];
+export const GEAR_DRAW={singleCost:45,tenCost:200,excellentPity:10,exceptionalPity:50};
 export const GEAR_FAMILIES7=[
  {id:'phong_hanh',name:'Vân Hành',weapon:{physicalAtk:18,magicalAtk:14},armor:{maxHp:85,physicalDef:6},accessory:{attackSpeed:.025,physicalAtk:6},helmet:{maxHp:60,critRate:.01},two:{physicalAtk:12,magicalAtk:10},three:{critRate:.03,attackSpeed:.04},four:{physicalAtk:22,magicalAtk:16,maxHp:160,attackSpeed:.04},description:'Công kích và nhịp đánh linh hoạt.'},
  {id:'thiet_ve',name:'Thiết Vệ',weapon:{physicalAtk:14,physicalDef:5},armor:{maxHp:125,physicalDef:8},accessory:{maxHp:70,magicalDef:7},helmet:{maxHp:100,magicalDef:6},two:{maxHp:150,physicalDef:10},three:{blockRate:.035,magicalDef:15},four:{maxHp:320,physicalDef:20,magicalDef:20,blockRate:.03},description:'Giữ tuyến, chống chịu và đỡ đòn.'},
