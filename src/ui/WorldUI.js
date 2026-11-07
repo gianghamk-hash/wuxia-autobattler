@@ -378,27 +378,35 @@ export function mountWorldUI(app) {
       tabs = el('world-tabs');
     root.replaceChildren();
     tabs.replaceChildren();
-    for (const [id, label] of Object.entries({
-      activities: 'Boss chương',
-      checkin: 'Điểm danh & Nhiệm vụ',
-      fishing: 'Câu cá',
-      escort: 'Vận tiêu',
-      shop: 'Quán & Rèn',
-      arena: 'Đại hội',
-      guild: 'Võ Đạo Các',
-      story: 'Truyện ký',
-      casebook: 'Sổ đầu mối',
-      bonds: 'Đồng hành',
-      characters: 'Người đã gặp',
-      journal: 'Nhật ký'
-    })) {
-      const b = button(label, () => {
-        tab = id;
+    const navCards=[
+      ['activities','Boss chương','Hồi ức · đối đầu thủ lĩnh','assets/images/chapters7/chapter18.webp'],
+      ['checkin','Điểm danh & Nhiệm vụ','Nhiệm vụ ngày · thưởng x3','assets/images/scenes/hoa_lu.webp'],
+      ['fishing','Câu cá','Bến nước · tài nguyên','assets/images/scenes/willow_ferry.webp'],
+      ['escort','Vận tiêu','Hộ tống · chuyến hàng','assets/images/chapters7/chapter06.webp'],
+      ['shop','Quán & Rèn','Rương báu · tu luyện · rèn','assets/images/scenes/binh_dinh.webp'],
+      ['arena','Đại hội','Luận võ · so tài','assets/images/chapters7/chapter11.webp'],
+      ['guild','Võ Đạo Các','Bí pháp · tăng sức mạnh','assets/images/scenes/yen_tu.webp'],
+      ['story','Truyện ký','Chính truyện · ký ức','assets/images/chapters7/chapter01.webp'],
+      ['casebook','Sổ đầu mối','Manh mối · điều tra','assets/images/chapters7/chapter08.webp'],
+      ['bonds','Đồng hành','Bằng hữu · duyên phận','assets/images/companions/companion_01.webp'],
+      ['characters','Người đã gặp','Nhân vật · chân dung','assets/images/chapters7/chapter04.webp'],
+      ['journal','Nhật ký','Ghi chép · hành trình','assets/images/chapters7/chapter14.webp']
+    ];
+    for (const [id,label,description,image] of navCards) {
+      const b=button('',()=>{
+        tab=id;
         refreshCalendar();
         renderWorld();
       });
-      b.setAttribute('aria-pressed', String(tab === id));
+      b.dataset.worldMenu=id;
+      b.className='world-image-card';
       b.dataset.uiIcon=({activities:'flag',checkin:'check',fishing:'fish',escort:'coin',shop:'tea',arena:'sword',guild:'lotus',story:'scroll',casebook:'codex',bonds:'heart',characters:'profile',journal:'scroll'})[id];
+      b.setAttribute('aria-label',label);
+      b.setAttribute('aria-pressed',String(tab===id));
+      const img=n('img');img.src=image;img.alt='';img.decoding='async';img.loading='lazy';img.className='world-image-art';img.setAttribute('aria-hidden','true');
+      const words=n('span',undefined,'world-image-caption');
+      words.append(n('strong',label),n('small',description));
+      b.append(img,words);
       tabs.append(b);
     }
     const activeTab=tabs.querySelector('[aria-pressed="true"]');
