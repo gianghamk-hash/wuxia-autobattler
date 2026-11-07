@@ -541,6 +541,54 @@ export class Campaign {
       next.party.formation = structuredClone(formation);
     }, 'formation');
   }
+  /**
+   * Replace one party companion before the first combat tick, retaining the
+   * pending encounter token, seed, consumed supplies and enemy composition.
+   * Do not modify dungeon/arena/escort boss squads, which are locked snapshots.
+   */
+  replaceReadyCompanion(outId, inId) {
+    const pending = this.session.storyProgress.pendingEncounter;
+    if (!this.running || !this.battle || this.battle.elapsed !== 0 ||
+        !pending || this.battleToken !== pending.token)
+      fail('Chỉ được đổi đồng hành trước khi giao chiến.');
+    if (!['main', 'practice', 'recruit'].includes(pending.kind))
+      fail('Đội hình thử thách này đã khóa; hãy đổi đồng hành trước khi vào trận.');
+    if (outId === 'hero' || !this.session.party.active.includes(outId) ||
+        !this.session.party.unlocked.includes(inId) ||
+        this.session.party.active.includes(inId) ||
+        !has(COMPANIONS_BY_ID, inId))
+      fail('Đồng hành dự bị không hợp lệ.');
+    const next = this.snapshot();
+    const index = next.party.active.indexOf(outId);
+    const position = next.party.formation[outId];
+    next.party.active[index] = inId;
+    delete next.party.formation[outId];
+    next.party.formation[inId] = { ...position };
+    next.storyProgress.pendingEncounter.preparation.maxAffinity =
+      next.party.active.filter(id => (next.companionsAffinity[id] ?? 0) >= 100);
+    validateCampaign(next);
+    // No settlement, reward or new encounter: replay the identical seed with
+    // a new squad. The old battle is discarded before any combat tick.
+    this.battle.abort();
+    this.battle = null;
+    this.battleToken = null;
+    this._commit(next, 'formation');
+    return this.retryEncounter();
+  }
+  /**
+   * Leave the ready screen without surrendering or spending another entry.
+   * The pending encounter can be resumed unchanged from the hub.
+   */
+  leaveReadyBattle() {
+    const pending = this.session.storyProgress.pendingEncounter;
+    if (!this.running || !this.battle || this.battle.elapsed !== 0 ||
+        !pending || this.battleToken !== pending.token)
+      fail('Chỉ có thể trở lại trước khi trận đấu bắt đầu.');
+    this.battle.abort();
+    this.battle = null;
+    this.battleToken = null;
+    return pending.kind;
+  }
   buy(itemId) {
     const prices = { rope: 5, food_fish: 5, tea: 8 };
     const price = has(prices, itemId) ? prices[itemId] : null;
