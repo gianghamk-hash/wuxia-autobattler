@@ -9,9 +9,15 @@ export const AFFINITY_MILESTONES = Object.freeze([25,50,75,100]);
 function specialty(definition) {
   const role = String(definition.role ?? '').toLowerCase();
   const effects = definition.skills?.ultimate?.effects ?? [];
-  if (/heal|medic/.test(role) || effects.some(e => ['heal','heal_over_time'].includes(e.type))) return 'healing';
-  if (/tank|guard|protect|reflect/.test(role) || effects.some(e => e.type === 'shield')) return 'shield';
-  if (/battery/.test(role) || effects.some(e => e.type === 'energy_restore')) return 'energy';
+  if (/heal|medic/.test(role)) return 'healing';
+  if (/battery/.test(role)) return 'energy';
+  if (/tank|guard|protect|reflect/.test(role)) return 'shield';
+  // Secondary ward effects on an assassin/bruiser must not turn its
+  // professional damage bonus into a shield bonus.
+  if (/dps|assassin|mage|bruiser|poison|debuff|finisher|disrupt|wildcard/.test(role)) return 'damage';
+  if (effects.some(e => ['heal','heal_over_time'].includes(e.type))) return 'healing';
+  if (effects.some(e => e.type === 'energy_restore')) return 'energy';
+  if (effects.some(e => e.type === 'shield')) return 'shield';
   return 'damage';
 }
 function mainStat(definition) {
