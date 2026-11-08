@@ -28,7 +28,7 @@ for(const width of [320,390])test('portrait UI, synchronized hero art, all three
  await expect(page.locator('#camp-hero-art')).toHaveAttribute('data-character-id','hero_commander');
  await page.evaluate(()=>window.__game.setView('roster'));const hero=page.locator('.formation-cell[data-selected="true"] .portrait');await expect(hero).toHaveAttribute('data-character-id','hero_commander');await expect(page.locator('.formation-cell[data-selected="true"]')).toHaveAttribute('data-equipment-aura','4');
  await expect(page.locator('.team-effects').first()).toBeVisible();
- await page.evaluate(()=>window.__game.setView('profile'));await page.locator('#tab-skills').click();
+ await page.evaluate(()=>window.__game.setView('profile'));await page.locator('#tab-skills').click();await page.locator('.hero-tree-drawer > summary').click();await expect(page.locator('.hero-tree-drawer')).toHaveAttribute('open','');
  for(const branch of ['attack','balanced','guard']){await page.locator(`[data-build-branch="${branch}"]`).click();await expect(page.locator('.skill-node:visible')).toHaveCount(8);await expect(page.locator('.skill-node:visible').first()).toHaveAttribute('data-branch',branch);}
  await page.locator('#tab-gear').click();await expect(page.locator('#gear-slots .gear-art img')).toHaveCount(3);await page.screenshot({path:info.outputPath('profile-'+width+'.png'),fullPage:true,animations:'disabled'});
  for(const view of ['camp','roster','profile','tavern','dungeons','settings','saves']){await page.evaluate(view=>window.__game.setView(view),view);const spill=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);expect(spill,view).toBe(false);}

@@ -19,7 +19,7 @@ for(const width of [320,390,1280]){
     await expect(page.locator('#attribute-grid')).toContainText('HP +100');
     await page.getByLabel('Cộng 1 Căn Cốt',{exact:true}).click();
     await expect(page.locator('#attribute-grid')).toContainText('Căn Cốt: 1');
-    await page.locator('#tab-skills').click();await expect(page.locator('.sect-passive')).toHaveCount(2);
+    await page.locator('#tab-skills').click();await expect(page.locator('.hero-passive-grid .hero-skill-tile')).toHaveCount(3);await page.locator('.hero-tree-drawer > summary').click();await expect(page.locator('.skill-node:visible')).toHaveCount(8);
     for(let i=1;i<=8;i++)await page.locator(`[data-skill-id="VoDang_t${i}_attack"]`).click();
     await page.locator('[data-build-branch="guard"]').click();
     for(let i=1;i<=4;i++)await page.locator(`[data-skill-id="VoDang_t${i}_guard"]`).click();

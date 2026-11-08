@@ -17,3 +17,90 @@
 .hero-stat-row[open] summary{padding-bottom:7px;border-bottom:1px solid rgba(194,209,198,.2)}
 .hero-stat-source{font-size:.82rem;line-height:1.45;color:#c6d8d1;margin:5px 0;overflow-wrap:anywhere}
 @media(max-width:480px){.hero-set-group{padding:9px}.hero-readout-card{padding:9px}.hero-stat-details{grid-template-columns:1fr}}
+
+
+/* Compact hero banner: all live combat values appear directly beneath the portrait/name. */
+.profile-hero:has(> .hero-top-stats){flex-wrap:wrap;align-items:center;row-gap:6px}
+.profile-hero:has(> .hero-top-stats) > .portrait{flex-shrink:0}
+.hero-top-stats{flex:0 0 100%;min-width:0;width:100%;position:relative;z-index:1;margin-top:3px;
+ border-top:1px solid rgba(220,202,158,.28);padding-top:12px}
+.hero-top-stat-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+ margin-bottom:9px;color:#eed4a1}
+.hero-top-stat-heading strong{font-size:.77rem;letter-spacing:.08em}
+.hero-top-stat-heading span{font-size:.67rem;color:#b6d3ca}
+.hero-top-stat-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;min-width:0}
+.hero-top-stat{min-width:0;border-radius:8px;border:1px solid rgba(197,207,184,.28);
+ background:rgba(1,26,28,.77);overflow:visible}
+.hero-top-stat > summary{display:flex;flex-direction:column;gap:3px;min-width:0;padding:8px 7px;
+ list-style:none;cursor:pointer}
+.hero-top-stat > summary::-webkit-details-marker{display:none}
+.hero-top-stat-name{font-size:.63rem;line-height:1.3;color:#aec8c1;overflow-wrap:anywhere}
+.hero-top-stat-value{font-size:.93rem;font-weight:700;color:#f6e5c1;overflow-wrap:anywhere}
+.hero-top-stat[open]{grid-column:span 2;border-color:#6fc7a6;background:rgba(1,30,30,.95)}
+.hero-top-stat-sources{padding:5px 8px 8px;border-top:1px solid rgba(197,207,184,.22)}
+.hero-top-stat-source{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+ font-size:.7rem;line-height:1.45;margin:4px 0}
+.hero-top-stat-source span{color:#bdd0c8}
+.hero-top-stat-source strong{color:#f0e5c7;text-align:right;white-space:nowrap}
+
+/* The equipped arts are the actual per-skill files from SkillTreeData / HeroSkillsData. */
+.hero-skill-section-heading{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px;
+ align-items:baseline}
+.hero-skill-section-heading h3{margin:10px 0 2px;color:#e5c586;font-size:1.08rem}
+.hero-skill-section-heading p{font-size:.73rem;margin:0;color:#a8c5bb}
+.hero-compact-skill-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;min-width:0}
+.hero-skill-tile{min-width:0;border:1px solid rgba(199,208,186,.29);border-radius:9px;
+ background:rgba(3,27,30,.55);overflow:hidden}
+.hero-skill-tile[data-active="false"]{opacity:.65}
+.hero-skill-tile[open]{grid-column:span 2;border-color:rgba(111,199,166,.7)}
+.hero-skill-tile > summary{display:flex;align-items:center;gap:9px;padding:8px;
+ list-style:none;cursor:pointer;min-height:66px}
+.hero-skill-tile > summary::-webkit-details-marker{display:none}
+.hero-skill-icon,.hero-skill-monogram{display:block;flex:0 0 47px;width:47px;height:47px;
+ border:1px solid rgba(220,194,141,.5);border-radius:8px;background:rgba(36,71,65,.55)}
+.hero-skill-icon{object-fit:cover}
+.hero-skill-monogram{display:flex;align-items:center;justify-content:center;
+ color:#d8c58b;font-size:1.45rem}
+.hero-skill-title{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.hero-skill-title small{font-size:.64rem;line-height:1.25;color:#93bdae}
+.hero-skill-title strong{font-size:.81rem;line-height:1.35;overflow-wrap:anywhere;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hero-skill-chevron{color:#aec8c1;font-size:1rem;flex:none}
+.hero-skill-tile[open] .hero-skill-chevron{transform:rotate(180deg)}
+.hero-skill-tile-body{padding:0 11px 12px;border-top:1px solid rgba(211,223,197,.18)}
+.hero-skill-tile-body p{font-size:.79rem;line-height:1.5;margin:8px 0 0;overflow-wrap:anywhere}
+.hero-skill-tile-body .hero-skill-meta{color:#b5d2c5}
+.hero-learned-drawer,.hero-tree-drawer{margin-top:11px;border:1px solid rgba(209,198,159,.28);
+ border-radius:10px;padding:0 10px 10px;background:rgba(4,29,31,.33)}
+.hero-learned-drawer > summary,.hero-tree-drawer > summary{padding:12px 3px;
+ cursor:pointer;list-style:none;font-weight:700;color:#efd79f;font-size:.9rem}
+.hero-learned-drawer > summary::-webkit-details-marker,.hero-tree-drawer > summary::-webkit-details-marker{display:none}
+.hero-learned-drawer > summary::after,.hero-tree-drawer > summary::after{content:" ▾";color:#98c9b7}
+.hero-learned-drawer[open] > summary::after,.hero-tree-drawer[open] > summary::after{content:" ▴"}
+.hero-tree-drawer .skill-tree{margin-top:8px}
+@media(max-width:980px){
+ .hero-top-stat-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .hero-compact-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ .profile-hero:has(> .hero-top-stats){padding:13px 13px 15px;gap:10px;row-gap:5px}
+ .profile-hero:has(> .hero-top-stats) > .portrait{width:88px;height:132px}
+ .profile-hero:has(> .hero-top-stats) .profile-info h1{font-size:1.35rem}
+ .hero-top-stats{padding-top:10px;margin-top:3px}
+ .hero-top-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .hero-top-stat-name{font-size:.59rem}
+ .hero-top-stat-value{font-size:.84rem}
+ .hero-top-stat > summary{padding:7px 6px}
+ .hero-top-stat-heading span{font-size:.6rem}
+ .hero-compact-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .hero-skill-tile > summary{padding:7px 6px;gap:6px;min-height:62px}
+ .hero-skill-icon,.hero-skill-monogram{width:40px;height:40px;flex-basis:40px}
+ .hero-skill-title strong{font-size:.72rem}
+ .hero-skill-title small{font-size:.61rem}
+ .hero-skill-chevron{font-size:.8rem}
+ .hero-learned-drawer,.hero-tree-drawer{padding:0 8px 8px}
+}
+@media(max-width:350px){
+ .hero-top-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero-skill-icon,.hero-skill-monogram{width:35px;height:35px;flex-basis:35px}
+}
