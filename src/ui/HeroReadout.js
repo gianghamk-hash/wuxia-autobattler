@@ -30,7 +30,7 @@ export function equipmentSetProgress(build){
  }));
 }
 export function heroStatBreakdown(hero,build){
- const base=structuredClone(SECTS[build.sect]?.baseStats??{});
+ const base=structuredClone(SECTS[build.sect]?.baseStats??hero.stats);
  const growth=SECTS[build.sect]?.growthPerLevel??{};
  const baseline={...base};add(baseline,growth,build.level-1);
  const attributes={};for(const [key,points] of Object.entries(build.attributes??{}))add(attributes,ATTRIBUTE_BONUSES[key],points);
@@ -51,8 +51,76 @@ function appendReadoutCard(root,title,body,status){
  if(status)card.dataset.active=String(status==='active');
  card.append(n('h4',title),n('p',body,'hero-readout-description'));root.append(card);return card;
 }
-export function renderHeroReadout({hero,build,statsRoot,setsRoot,skillsRoot}){
- // Display-only: no profile writes, mutations or combat changes.
+
+const STAT_ORDER=['maxHp','physicalAtk','magicalAtk','physicalDef','magicalDef','attackSpeed',
+ 'critRate','critDmg','dodgeRate','blockRate','maxEnergy','moveSpeed','attackRange'];
+const BREAKDOWN_LABELS=[['base','Gốc + tăng trưởng cấp'],['attributes','Điểm thuộc tính'],
+ ['skills','Võ công đã học'],['gear','Trang bị'],['set','Hiệu quả bộ trang bị'],['passive','Nội tại môn phái']];
+
+export function renderHeroStats(root,hero,build){
+ // Hero header is rendered after every profile update; the numbers must come from the live Hero.
+ const wasOpen=new Set([...root.querySelectorAll('.hero-top-stat[open]')].map(e=>e.dataset.statKey));
+ const heading=n('div',undefined,'hero-top-stat-heading');
+ heading.append(n('strong','CHỈ SỐ CHIẾN ĐẤU'),n('span','Chạm vào chỉ số để xem nguồn cộng'));
+ const grid=n('div',undefined,'hero-top-stat-grid');grid.dataset.heroStats='full';
+ const rows=heroStatBreakdown(hero,build).sort((a,b)=>
+  (STAT_ORDER.indexOf(a.key)<0?99:STAT_ORDER.indexOf(a.key))-
+  (STAT_ORDER.indexOf(b.key)<0?99:STAT_ORDER.indexOf(b.key)));
+ for(const row of rows){
+  const details=n('details',undefined,'hero-top-stat');details.dataset.statKey=row.key;
+  if(wasOpen.has(row.key))details.open=true;
+  const summary=n('summary');
+  summary.append(n('span',row.label,'hero-top-stat-name'),
+   n('strong',formatHeroStat(row.key,row.total),'hero-top-stat-value'));
+  details.append(summary);
+  const sources=n('div',undefined,'hero-top-stat-sources');
+  for(const [key,label] of BREAKDOWN_LABELS){
+   const amount=row[key];
+   if(key!=='base'&&Math.abs(amount)<1e-9)continue;
+   const line=n('div',undefined,'hero-top-stat-source');
+   line.append(n('span',label),n('strong',(amount>0?'+':'')+formatHeroStat(row.key,amount)));
+   sources.append(line);
+  }
+  details.append(sources);
+  grid.append(details);
+ }
+ root.replaceChildren(heading,grid);
+}
+const skillImg=path=>{
+ if(typeof path!=='string'||!/^assets\/images\/skills7\/[a-zA-Z0-9_-]+\.webp$/.test(path))return null;
+ const img=n('img');img.className='hero-skill-icon';img.alt='';
+ img.loading='lazy';img.decoding='async';img.src=new URL('../../'+path,import.meta.url).href;
+ return img;
+};
+function skillTile(root,{title,kicker,description,iconPath,details=[],active=true,id}){
+ const card=n('details',undefined,'hero-skill-tile');
+ if(id)card.dataset.skillId=id;
+ card.dataset.active=String(active);
+ const summary=n('summary',undefined,'hero-skill-tile-heading');
+ const image=skillImg(iconPath);
+ if(image)summary.append(image);
+ else summary.append(n('span','✦','hero-skill-monogram'));
+ const text=n('span',undefined,'hero-skill-title');
+ text.append(n('small',kicker),n('strong',title));
+ summary.append(text,n('span','⌄','hero-skill-chevron'));
+ const body=n('div',undefined,'hero-skill-tile-body');
+ if(description)body.append(n('p',description));
+ for(const value of details.filter(Boolean))body.append(n('p',value,'hero-skill-meta'));
+ card.append(summary,body);root.append(card);
+ return card;
+}
+function skillDetails(skill){
+ return [
+  skill.dmgMultiplier
+   ? 'Sát thương: '+number(skill.dmgMultiplier*100)+'% '+(skill.type==='magical'?'nội công':'ngoại công')
+   : 'Không gây sát thương trực tiếp',
+  skill.energyGain!==undefined?'Nhận nộ: '+number(skill.energyGain):'',
+  skill.energyCost!==undefined?'Tiêu hao nộ: '+number(skill.energyCost):'',
+  (skill.effects??[]).length?'Hiệu ứng: '+skill.effects.map(effectDescription).join('; '):''
+ ];
+}
+export function renderHeroReadout({hero,build,setsRoot,skillsRoot}){
+ // Display-only: preserve save schema, combat calculations, images and animation.
  const groups=equipmentSetProgress(build);
  setsRoot.replaceChildren(n('h3','Hiệu quả bộ trang bị'));
  if(!groups.length)setsRoot.append(n('p','Chưa mặc trang bị thuộc bộ nào. Hãy mặc các món cùng bộ để mở mốc cộng dồn.','hint'));
@@ -69,44 +137,41 @@ export function renderHeroReadout({hero,build,statsRoot,setsRoot,skillsRoot}){
   }
   setsRoot.append(panel);
  }
- statsRoot.replaceChildren(n('h3','Toàn bộ chỉ số chiến đấu'),n('p','Chỉ số tổng lấy từ nhân vật chiến đấu. Mở từng chỉ số để xem các nguồn cộng trước và sau nội tại môn phái.','hint'));
- const list=n('div',undefined,'hero-stat-details');list.dataset.heroStats='full';
- for(const row of heroStatBreakdown(hero,build)){
-  const details=n('details',undefined,'hero-stat-row');
-  const summary=n('summary',row.label+' · '+formatHeroStat(row.key,row.total));details.append(summary);
-  for(const [label,value] of [['Gốc + tăng trưởng cấp',row.base],['Điểm thuộc tính',row.attributes],['Võ công đã học',row.skills],['Từng món trang bị',row.gear],['Mốc bộ trang bị',row.set],['Nội tại môn phái',row.passive]]){
-   details.append(n('p',label+': '+(value>=0?'+':'')+formatHeroStat(row.key,value),'hero-stat-source'));
-  }
-  if(Math.abs(row.passive)>1e-7)details.append(n('small','Nội tại phần trăm tính sau các nguồn cộng; số hiển thị đã làm tròn.','hint'));
-  list.append(details);
- }
- const resource=n('p','Đầu trận: HP '+formatHeroStat('maxHp',hero.stats.maxHp)+'/'+formatHeroStat('maxHp',hero.stats.maxHp)+' · Nộ '+formatHeroStat('maxEnergy',0)+'/'+formatHeroStat('maxEnergy',hero.stats.maxEnergy),'hint');
- statsRoot.append(resource,list);
- skillsRoot.replaceChildren(n('h3','Kỹ năng chủ động'));
+ skillsRoot.replaceChildren();
+ const equippedHeading=n('div',undefined,'hero-skill-section-heading');
+ equippedHeading.append(n('h3','Võ công đang dùng'),n('p','Chạm vào hình hoặc tên để đọc chi tiết.'));
+ const equippedGrid=n('div',undefined,'hero-compact-skill-grid');
  for(const [key,kind] of [['autoAttack','Đánh thường'],['ultimate','Tuyệt kỹ']]){
   const skill=hero.skills?.[key];if(!skill)continue;
-  const card=appendReadoutCard(skillsRoot,kind+' · '+skill.name,skill.description??'');
-  card.dataset.heroSkill=key;
-  const lines=[
-   skill.dmgMultiplier?('Hệ số sát thương: '+number(skill.dmgMultiplier*100)+'% '+(skill.type==='magical'?'nội công':'ngoại công')):'Không có hệ số sát thương trực tiếp',
-   skill.energyGain!==undefined?'Nhận nộ: '+number(skill.energyGain):'',
-   skill.energyCost!==undefined?'Tiêu hao nộ: '+number(skill.energyCost):'',
-   skill.targetType?'Mục tiêu (mã engine): '+skill.targetType:'',
-   (skill.effects??[]).length?'Hiệu ứng: '+skill.effects.map(effectDescription).join(' · '):'Không có hiệu ứng phụ'
-  ];for(const line of lines.filter(Boolean))card.append(n('p',line,'hero-skill-meta'));
+  skillTile(equippedGrid,{id:key,title:skill.name,kicker:kind,iconPath:skill.icon,
+   description:skill.description,details:skillDetails(skill)});
  }
- skillsRoot.append(n('h3','Nội tại và võ công đã học'));
- const inherent=SECTS[build.sect]?.passive;
- if(inherent)appendReadoutCard(skillsRoot,'Nội tại môn phái · '+inherent.name,inherent.description,'active');
+ skillsRoot.append(equippedHeading,equippedGrid);
+ const passiveHeading=n('h3','Nội tại môn phái');
+ const passiveGrid=n('div',undefined,'hero-compact-skill-grid hero-passive-grid');
+ const innate=SECTS[build.sect]?.passive;
+ if(innate)skillTile(passiveGrid,{id:innate.id,title:innate.name,kicker:'Nội tại đặc trưng',
+  description:innate.description,details:['Tự động phát động theo cơ chế môn phái.']});
  for(const passive of SECT_PASSIVES[build.sect]??[]){
   const active=build.level>=passive.level;
-  appendReadoutCard(skillsRoot,(active?'✓ Đã mở':'○ Chưa mở')+' · Cấp '+passive.level+' · '+passive.name,passive.description,active?'active':'inactive');
+  skillTile(passiveGrid,{id:'passive-'+passive.level,title:passive.name,
+   kicker:(active?'✓ Đã mở':'○ Cấp '+passive.level+' · Chưa mở'),
+   description:passive.description,details:[active?'Đã cộng vào chỉ số chiến đấu.':'Mở ở cấp '+passive.level+'.'],
+   active});
  }
- if(!(build.allocatedSkills??[]).length)skillsRoot.append(n('p','Chưa học nút võ công nào.','hint'));
- for(const id of build.allocatedSkills??[]){
-  const skill=SKILLS_BY_ID[id];if(!skill)continue;
-  const card=appendReadoutCard(skillsRoot,'Tầng '+skill.tier+' · '+skill.name,skill.description??'','active');
-  if(Object.keys(skill.stats??{}).length)card.append(n('p','Chỉ số: '+statList(skill.stats),'hero-skill-meta'));
-  if(skill.ultimate)card.append(n('p','Tuyệt kỹ được học: '+skill.ultimate.name+' (chỉ tuyệt kỹ học gần nhất được trang bị).','hero-skill-meta'));
+ if(passiveGrid.childElementCount)skillsRoot.append(passiveHeading,passiveGrid);
+ const learned=build.allocatedSkills??[];
+ const drawer=n('details',undefined,'hero-learned-drawer');
+ drawer.dataset.learnedSkills=String(learned.length);
+ drawer.append(n('summary','Võ công đã học · '+learned.length+' chiêu (chạm để xem)'));
+ const grid=n('div',undefined,'hero-compact-skill-grid hero-learned-grid');
+ if(!learned.length)grid.append(n('p','Chưa học nút võ công nào.','hint'));
+ for(const id of learned){
+  const node=SKILLS_BY_ID[id];if(!node)continue;
+  const meta=[Object.keys(node.stats??{}).length?'Chỉ số: '+statList(node.stats):'',
+   node.ultimate?'Tuyệt kỹ đã học: '+node.ultimate.name+'. Tuyệt kỹ học sau cùng được sử dụng.':''];
+  skillTile(grid,{id:node.id,title:node.name,kicker:'Tầng '+node.tier+' · '+({attack:'Sát lực',guard:'Phòng thủ',balanced:'Cân bằng'})[node.branch],
+   iconPath:node.icon,description:node.description,details:meta});
  }
+ drawer.append(grid);skillsRoot.append(drawer);
 }
