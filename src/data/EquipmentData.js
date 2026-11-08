@@ -1,5 +1,5 @@
 import { deepFreeze } from './DataUtils.js';
-import {NEW_GEAR,NEW_GEAR_SETS,LEGACY_HELMETS7,LEGACY_FULL_SETS7} from './GearCatalog.js';
+import {NEW_GEAR,NEW_GEAR_SETS,LEGACY_HELMETS7,LEGACY_FULL_SETS7,boostedSetStats} from './GearCatalog.js';
 
 export const EQUIPMENT = deepFreeze([...NEW_GEAR,...LEGACY_HELMETS7,{id:"starter_helmet",name:"Mũ Vải Đi Đường",slot:"helmet",rarity:"common",tier:1,sect:null,setId:null,stats:{maxHp:35,physicalDef:3},description:"Mũ khởi hành dùng chung, không yêu cầu môn phái."},
   {
@@ -253,41 +253,31 @@ export const EQUIPMENT_SETS = deepFreeze([...NEW_GEAR_SETS,...LEGACY_FULL_SETS7,
     "id": "thieulam_set",
     "name": "Bộ Thiếu Lâm",
     "requiredPieces": 3,
-    "stats": {
-      "maxHp": 200
-    }
+    "stats": boostedSetStats({ maxHp: 200 }, 3)
   },
   {
     "id": "vodang_set",
     "name": "Bộ Võ Đang",
     "requiredPieces": 3,
-    "stats": {
-      "magicalAtk": 20
-    }
+    "stats": boostedSetStats({ magicalAtk: 20 }, 3)
   },
   {
     "id": "caibang_set",
     "name": "Bộ Cái Bang",
     "requiredPieces": 3,
-    "stats": {
-      "physicalAtk": 20
-    }
+    "stats": boostedSetStats({ physicalAtk: 20 }, 3)
   },
   {
     "id": "ngami_set",
     "name": "Bộ Nga Mi",
     "requiredPieces": 3,
-    "stats": {
-      "magicalAtk": 20
-    }
+    "stats": boostedSetStats({ magicalAtk: 20 }, 3)
   },
   {
     "id": "duongmon_set",
     "name": "Bộ Đường Môn",
     "requiredPieces": 3,
-    "stats": {
-      "attackSpeed": 0.1
-    }
+    "stats": boostedSetStats({ attackSpeed: 0.1 }, 3)
   }
 ]);
 export const EQUIPMENT_BY_ID = deepFreeze(Object.fromEntries(EQUIPMENT.map(item => [item.id, item])));
