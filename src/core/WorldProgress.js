@@ -600,6 +600,11 @@ export function makeDungeon(s, id, weekly, now) {
   };
 }
 export function validatePreparation(p) {
+  if(p?.affinityLevels!==undefined){
+    const levels=p.affinityLevels;
+    if(!levels||Array.isArray(levels)||Object.getPrototypeOf(levels)!==Object.prototype)fail('Mốc duyên phận trước trận không hợp lệ.');
+    for(const [id,n] of Object.entries(levels))if(!Object.hasOwn(COMPANIONS_BY_ID,id)||typeof n!=='number'||!Number.isFinite(n)||n<0||n>100)fail('Mốc duyên phận trước trận không hợp lệ.');
+  }
   if(p?.maxAffinity!==undefined&&(!Array.isArray(p.maxAffinity)||p.maxAffinity.length>5||new Set(p.maxAffinity).size!==p.maxAffinity.length||p.maxAffinity.some(id=>!Object.hasOwn(COMPANIONS_BY_ID,id))))fail('Duyên phận chuẩn bị không hợp lệ.');
   if (!p || !integer(p.training, 10) || !integer(p.forging, 10))
     fail('Khí công trước trận không hợp lệ.');
