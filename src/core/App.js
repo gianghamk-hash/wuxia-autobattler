@@ -21,6 +21,7 @@ import { getSectName, SECTS } from '../data/SectsData.js';
 import { getActiveSynergies } from '../data/SynergiesData.js';
 import { changeSect, expToNextLevel } from '../entities/HeroBuild.js';
 import { Hero } from '../entities/Hero.js';
+import { renderHeroStats } from '../ui/HeroReadout.js';
 import {
   portrait,
   decorateRarity,
@@ -677,23 +678,18 @@ export class App {
         isDaiViet(this.model.session)?sectLabel:`${getSectName(artSect)} · ${SECT_ART[artSect]?.sigil ?? 'Hiệp'} tâm bất diệt`
       )
     );
+    let fullStats = null;
     if (hero.sect||isDaiViet(this.model.session)) {
-      const build=storyHeroBuild(this.model.session),unit = new Hero(build.sect, { profile: build, inventory }),
-        stats = node('div', undefined, 'profile-mini-stats');
-      for (const [label, value] of [
-        ['Sinh lực', unit.stats.maxHp],
-        ['Ngoại công', unit.stats.physicalAtk],
-        ['Nội công', unit.stats.magicalAtk]
-      ]) {
-        const stat = node('span', label);
-        stat.append(node('strong', Math.round(value).toLocaleString('vi-VN')));
-        stats.append(stat);
-      }
-      profile.append(stats);
+      const build=storyHeroBuild(this.model.session);
+      const unit=new Hero(build.sect,{profile:build,inventory});
+      fullStats=node('section',undefined,'hero-top-stats');
+      fullStats.id='hero-top-stats';
+      renderHeroStats(fullStats,unit,build);
     }
     const level = node('span', 'Cấp ', 'hero-level');
     level.append(node('strong', hero.level));
     root.append(profile, level);
+    if(fullStats)root.append(fullStats);
   }
   renderRoster() {
     renderJourneyRoster(this);
