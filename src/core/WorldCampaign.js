@@ -297,6 +297,15 @@ export const worldMethods = {
       grid = new GridSystem(),
       d = s.adventure.dungeon,
       team = pending.kind === 'dungeon' ? d.squad : teamSnapshot(s);
+    // Arena and escort fights must replay the original ready-screen affinity
+    // snapshot, not the potentially changed live session after a reload.
+    if(pending.kind!=='dungeon'&&pending.preparation){
+      const levels=pending.preparation.affinityLevels,locked=pending.preparation.maxAffinity;
+      if(levels||locked){
+        team.affinityLevels=Object.fromEntries(team.active.map(id=>[id,levels?.[id]??(locked?.includes(id)?100:Math.min(99.999,team.affinityLevels?.[id]??0))]));
+        team.maxAffinity=team.active.filter(id=>team.affinityLevels[id]>=100);
+      }
+    }
     const units = fromTeam(team, 'home', grid);
     let title = '',
       level = s.hero.level,
