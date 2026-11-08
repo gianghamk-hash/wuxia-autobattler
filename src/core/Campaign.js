@@ -1,3 +1,4 @@
+import {companionJourneyMethods,recordCompanionQuestBattle} from './CompanionJourneys.js';
 import { awardCampaignAffinity, validateAffinityLedgers } from './CampaignAffinity.js';
 import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import { validateRanks } from '../data/ProgressionBalance.js';
@@ -981,6 +982,7 @@ export class Campaign {
     if (result.winner === 'home') {
       next.adventure.daily.wins++;
       next.adventure.weekly.wins++;
+      recordCompanionQuestBattle(next,this.battle.units.filter(u=>u.team==='home'&&u.templateId?.startsWith('companion_')&&!u.missionAsset).map(u=>u.templateId));
       for (const id of next.party.active)
         awardCampaignAffinity(next, id, 'battle', `battle:${pending.token}`, this.now());
       if (pending.kind === 'main') {
@@ -1076,5 +1078,6 @@ Object.assign(Campaign.prototype, worldMethods);
 
 Object.assign(Campaign.prototype, gachaMethods);
 Object.assign(Campaign.prototype, journeyMethods);
+Object.assign(Campaign.prototype, companionJourneyMethods);
 Object.assign(Campaign.prototype, lootMethods);
 Object.assign(Campaign.prototype, entryMethods);
