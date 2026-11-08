@@ -12,6 +12,7 @@ import {COMPANIONS_BY_ID} from '../src/data/CompanionsData.js';
 import {rollGacha} from '../src/core/Gacha.js';
 import {drawEquipment,validateLoot,chapterBossAvailable,bossLoot,chapterBossRewards} from '../src/core/Loot.js';
 import {NEW_GEAR,GEAR_RARITIES} from '../src/data/GearCatalog.js';
+import {EQUIPMENT_SETS} from '../src/data/EquipmentData.js';
 import {Hero} from '../src/entities/Hero.js';
 import {createHeroBuild,equipItem,allocateAttribute,allocateSkill} from '../src/entities/HeroBuild.js';
 import {SKILL_TREES} from '../src/data/SkillTreeData.js';
@@ -49,7 +50,7 @@ test('equipment draws spend atomically, retain independent pity, and meet both r
 test('sets activate actual two/three-slot bonuses across rarities without counting spare copies or leaking stats after removal',()=>{
  const s=at(),family='thiet_ve',items=NEW_GEAR.filter(e=>e.setId===family),find=(slot,rarity)=>items.find(e=>e.slot===slot&&e.rarity===rarity);for(const item of items)s.inventory.push({itemId:item.id,quantity:3});
  const weapon=find('weapon','common'),armor=find('armor','rare'),accessory=find('accessory','excellent');let h=equipItem(s.hero,'weapon',weapon.id,s.inventory);let one=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.equal(one.activeEquipmentSets.length,0);
- h=equipItem(h,'armor',armor.id,s.inventory);const two=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.deepEqual(two.activeEquipmentSets,['thiet_ve_2']);assert.equal(two.stats.maxHp,one.stats.maxHp+(armor.stats.maxHp+150)*1.15);
+ h=equipItem(h,'armor',armor.id,s.inventory);const two=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.deepEqual(two.activeEquipmentSets,['thiet_ve_2']);assert.equal(two.stats.maxHp,one.stats.maxHp+(armor.stats.maxHp+EQUIPMENT_SETS.find(set=>set.id==='thiet_ve_2').stats.maxHp)*1.15);
  h=equipItem(h,'accessory',accessory.id,s.inventory);const three=new Hero(h.sect,{profile:h,inventory:s.inventory});assert.deepEqual(three.activeEquipmentSets,['thiet_ve_2','thiet_ve_3']);assert.ok(three.stats.blockRate>two.stats.blockRate);
  h=equipItem(h,'accessory',null,s.inventory);assert.deepEqual(new Hero(h.sect,{profile:h,inventory:s.inventory}).stats,two.stats);assert.throws(()=>equipItem(h,'weapon',armor.id,s.inventory));
 });
