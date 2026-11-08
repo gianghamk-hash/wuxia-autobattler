@@ -1,6 +1,5 @@
 import { ATTRIBUTE_BONUSES } from '../data/ProgressionBalance.js';
 import {ATTRIBUTE_PLANS7,ATTRIBUTE_REASONS7} from '../data/BuildGuides7.js';
-import {LIMITS} from '../data/StrategyData.js';
 import {gearImage} from './GearArt.js';
 import { bus, EVT } from '../core/EventBus.js';
 import { SECTS } from '../data/SectsData.js';
