@@ -45,6 +45,11 @@ test('mobile skill gallery uses true skill art, compact collapsed lists and corr
  await expect(ultimate.locator('img.hero-skill-icon')).toHaveAttribute('src',/skills7\/hero_DuongMon_(ult|t4_(attack|guard|balanced))\.webp$/);
  expect(await attack.locator('img').evaluate(async img=>{await img.decode();return img.naturalWidth>0;})).toBe(true);
  expect(await ultimate.locator('img').evaluate(async img=>{await img.decode();return img.naturalWidth>0;})).toBe(true);
+ const passiveArts=panel.locator('.hero-passive-grid .hero-skill-icon');
+ await expect(passiveArts).toHaveCount(3);
+ const passiveSources=await passiveArts.evaluateAll(images=>images.map(img=>img.src));
+ expect(passiveSources.every(src=>src.startsWith('data:image/svg+xml'))).toBe(true);
+ expect(new Set(passiveSources).size).toBe(3);
  const learned=panel.locator('.hero-learned-drawer');
  await expect(learned).not.toHaveAttribute('open','');
  await expect(page.locator('.hero-tree-drawer')).not.toHaveAttribute('open','');
