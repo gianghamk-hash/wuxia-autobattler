@@ -227,6 +227,11 @@ export class CombatEngine {
         this.emit({ type: 'synergy', team, name: synergy.name });
       }
     }
+    // Apply the 50/100 professional bonus AFTER sect/team synergies to avoid overwrites.
+    for(const unit of this.units){
+      if(unit.affinityProfession==='healing')unit.healMultiplier=(unit.healMultiplier??1)*1.10;
+      if(unit.affinityProfession==='damage')unit.damageMultiplier*=1.10;
+    }
     this.emit({ type: 'start', seed: this.seed });
     this.checkResult();
     return true;
@@ -742,7 +747,7 @@ export class CombatEngine {
         apply({
           type: 'shield',
           duration: effect.duration,
-          amount: target.stats.maxHp * effect.maxHpRatio
+          amount: target.stats.maxHp * effect.maxHpRatio * (actor.affinityProfession==='shield'?1.10:1)
         });
         break;
       case 'burn':
@@ -789,7 +794,7 @@ export class CombatEngine {
         this.statuses.cleanse(target, effect.statuses);
         break;
       case 'energy_restore':
-        target.gainEnergy(effect.amount);
+        target.gainEnergy(effect.amount * (actor.affinityProfession==='energy'?1.10:1));
         break;
       case 'knockback': {
         const columns = target.team === 'enemy' ? ENEMY_COLUMNS : HOME_COLUMNS;

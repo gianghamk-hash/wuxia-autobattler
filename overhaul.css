@@ -112,8 +112,8 @@ body[data-card-effects="false"] .model-preview7{animation:none;transform:none}
 .formation-units button { flex-wrap:wrap; }
 .formation-units button>span.unit-role-tag { flex:0 0 auto; max-width:none; overflow:visible; }
 .formation-cell>span.unit-role-tag { display:inline-flex; max-width:100%; overflow:visible; font-size:.65rem; padding:2px 4px; -webkit-line-clamp:unset; }
-.max-affinity-card { padding:12px; margin:12px 0; border:1px solid #8b957f; border-radius:10px; }
-.max-affinity-card[data-active="true"] { border-color:#efcc7f; background:#65502a33; }
+.max-affinity-card,.affinity-milestone-card { padding:12px; margin:12px 0; border:1px solid #8b957f; border-radius:10px; }
+.max-affinity-card[data-active="true"],.affinity-milestone-card[data-active="true"] { border-color:#efcc7f; background:#65502a33; }
 .max-affinity-label,.gear-refund { color:var(--gold); font-weight:600; overflow-wrap:anywhere; }
 .gear-sale-hint { font-size:.8rem; overflow-wrap:anywhere; }
 .gear-card [data-sell-gear] { width:100%; white-space:normal; }

@@ -1,3 +1,4 @@
+import {freshCompanionJourneys,validateCompanionJourneys} from './CompanionJourneys.js';
 import { BOND_STORIES, BOND_VARIANTS } from '../data/BondsData.js';
 import { MAIN_BY_ID, RECRUIT_BY_ID } from '../data/QuestsData.js';
 import { DAI_VIET_BY_ID } from '../data/DaiVietStoryData.js';
@@ -7,7 +8,8 @@ export const freshJourney = () => ({
   version: 1,
   reader: { positions: {}, history: [], fontSize: 18 },
   loadouts: [null, null, null],
-  bonds: { completed: [], choices: {}, modes: {} }
+  bonds: { completed: [], choices: {}, modes: {} },
+  companionJourneys: freshCompanionJourneys()
 });
 const fail = (message) => {
   throw Error(message);
@@ -121,6 +123,7 @@ export function validateJourney(session) {
     )
       fail('Tiến trình đồng hành không hợp lệ.');
   }
+  validateCompanionJourneys(j.companionJourneys);
   for (const [id, mode] of Object.entries(j.bonds.modes))
     if (
       !Object.hasOwn(BOND_VARIANTS, id) ||

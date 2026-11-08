@@ -1,3 +1,4 @@
+import {affinityMilestoneDetails} from './AffinityMilestones.js';
 import { COMPANIONS } from './CompanionsData.js';
 import { DAI_VIET_CAST_BY_ID } from './DaiVietCast.js';
 // Narrative content stage 1: no gameplay mutation. Every entry is anchored
@@ -370,32 +371,36 @@ function buildMemory(arc) {
   const c=byId[arc.id];
   if(!c) throw new Error('Missing canonical companion: '+arc.id);
   const canonical=DAI_VIET_CAST_BY_ID[arc.id];
+  const name=canonical?.name ?? c.name;
+  // Legacy nicknames in the authored arc must not leak into the canonical Đại Việt roster.
+  const turn=arc.id==='companion_01'?arc.turn.replaceAll('Lão Tam',name):arc.turn;
   const portrait=canonical?.portrait ?? c.portrait ?? `assets/images/companions/${arc.id}.webp`;
   const skill=c.skills?.ultimate?.name ?? 'Tuyệt kỹ';
   const motive=canonical?.role ?? c.biography ?? c.recruitment?.description ?? '';
   const mission=c.recruitment?.description ?? '';
   const questId=`bond_${arc.id}_50`;
+  const rewards=affinityMilestoneDetails(arc.id);
   return {
-    ...arc, name:canonical?.name ?? c.name, sect:c.sect, portrait, motive, skill,
+    ...arc, turn, name, sect:c.sect, portrait, motive, skill,
     unlocks:bondMilestones,
     chapters: [
-      {at:25,id:`memory_${arc.id}_25`,title:'Một lời thật lòng',
-       text:`${c.name} kể về điều mình vẫn giấu sau những chuyến đi. ${motive} Người chơi có thể lắng nghe mà không cần phán xét.`,
-       dialogue:[{speaker:c.name,text:arc.turn},{speaker:'Trần Phong',text:'Ta muốn nghe chính lời ngươi, không nghe lời đồn.'}]},
-      {at:50,id:`memory_${arc.id}_50`,title:arc.title,
-       text:`Từ câu chuyện cũ, một việc chưa giải quyết buộc ${c.name} trở lại nơi từng lảng tránh. ${arc.turn}`,
-       quest:{id:questId,objective:mission||arc.turn,requiresCompanion:arc.id,
+      {at:25,reward:rewards[0],id:`memory_${arc.id}_25`,title:'Một lời thật lòng',
+       text:`${name} kể về điều mình vẫn giấu sau những chuyến đi. ${motive} Người chơi có thể lắng nghe mà không cần phán xét.`,
+       dialogue:[{speaker:name,text:turn},{speaker:'Trần Phong',text:'Ta muốn nghe chính lời ngươi, không nghe lời đồn.'}]},
+      {at:50,reward:rewards[1],id:`memory_${arc.id}_50`,title:arc.title,
+       text:`Từ câu chuyện cũ, một việc chưa giải quyết buộc ${name} trở lại nơi từng lảng tránh. ${turn}`,
+       quest:{id:questId,objective:mission||turn,requiresCompanion:arc.id,
         completionFlag:`bond_quest_completed_${arc.id}`}},
-      {at:75,id:`memory_${arc.id}_75`,title:'Ngã rẽ của người đồng hành',
-       text:`Giữa lúc ${arc.title.toLowerCase()}, ${c.name} phải quyết định điều nào đáng giữ hơn chiến thắng trước mắt.`,
+      {at:75,reward:rewards[2],id:`memory_${arc.id}_75`,title:'Ngã rẽ của người đồng hành',
+       text:`Giữa lúc ${arc.title.toLowerCase()}, ${name} phải quyết định điều nào đáng giữ hơn chiến thắng trước mắt.`,
        choices:[
          {id:`bond_${arc.id}_mercy`,label:'Giữ người và lời hứa',gain:'Tăng lòng tin của dân và đồng đội',cost:'Chậm một lượt hành trình; bỏ lỡ tài nguyên trước mắt'},
          {id:`bond_${arc.id}_truth`,label:'Giữ chứng cứ và sự thật',gain:'Mở thêm thông tin cho nhiệm vụ sau',cost:'Mất cơ hội nhận phần thưởng tức thời'}
        ]},
-      {at:100,id:`memory_${arc.id}_100`,title:'Sinh Tử Bất Phụ — '+arc.title,
-       text:`${arc.turn} Lần này ${c.name} không phải bước một mình. ${skill} trở thành dấu ấn của hành trình ấy.`,
+      {at:100,reward:rewards[3],id:`memory_${arc.id}_100`,title:'Sinh Tử Bất Phụ — '+arc.title,
+       text:`${turn} Lần này ${name} không phải bước một mình. ${skill} trở thành dấu ấn của hành trình ấy.`,
        cutscene:{id:`bond_cutscene_${arc.id}`,portrait,background:'assets/images/world/world_map.webp',
-        beats:[{kind:'portrait',text:arc.turn},{kind:'dialogue',speaker:c.name,text:'Ta từng nghĩ đoạn đường này chỉ có một mình.'},
+        beats:[{kind:'portrait',text:turn},{kind:'dialogue',speaker:name,text:'Ta từng nghĩ đoạn đường này chỉ có một mình.'},
          {kind:'dialogue',speaker:'Trần Phong',text:'Giang hồ rộng lớn. Từ nay cùng đi.'},
          {kind:'skill',skillName:skill,text:'Duyên phận đã thành. Không quên lời hẹn.'}],
         skippable:true,replayable:true,reducedMotion:true}}

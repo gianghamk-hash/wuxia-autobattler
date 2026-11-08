@@ -1,7 +1,8 @@
 import {MAX_AFFINITY7} from '../data/MaxAffinity7.js';
+import {MID_AFFINITY75} from '../data/AffinityMilestones.js';
 /** Battle-local progress. Perk reactions do not recursively trigger other perks. */
 export class MaxAffinityDirector {
- constructor(combat){this.c=combat;this.busy=false;this.entries=combat.units.filter(u=>u.maxAffinity&&MAX_AFFINITY7[u.templateId]&&!u.missionAsset).map(unit=>({unit,perk:MAX_AFFINITY7[unit.templateId],seen:0,used:0,ready:0,next:MAX_AFFINITY7[unit.templateId].interval}));}
+ constructor(combat){this.c=combat;this.busy=false;this.entries=combat.units.filter(u=>(u.maxAffinity||u.midAffinity)&&MAX_AFFINITY7[u.templateId]&&!u.missionAsset).map(unit=>{const perk=unit.maxAffinity?MAX_AFFINITY7[unit.templateId]:MID_AFFINITY75[unit.templateId];return{unit,perk,seen:0,used:0,ready:0,next:perk.interval};});}
  allies(u){return this.c.units.filter(v=>v.team===u.team&&v.alive&&!v.missionAsset&&!v.isObject);}
  enemies(u){return this.c.units.filter(v=>v.team!==u.team&&v.alive&&!v.missionAsset&&!v.isObject);}
  matches(r,e){const u=r.unit,other=this.c.units.find(v=>v.id===e.actorId),victim=this.c.units.find(v=>v.id===e.targetId);switch(r.perk.trigger){
@@ -56,10 +57,10 @@ export class MaxAffinityDirector {
    for(const{a,targets}of actions)for(const target of targets){if(!target.alive)continue;visual.set(target.id,target);const duration=a.duration;
     if(a.type==='damage')c.dealDamage(u,target,power*a.value,{damageType:'true',affinityProc:true});
     else if(a.type==='heal')c.heal(u,target,target.stats.maxHp*a.value);
-    else if(a.type==='energy')target.gainEnergy(a.value);
+    else if(a.type==='energy')target.gainEnergy(a.value*(u.affinityProfession==='energy'?1.10:1));
     else if(a.type==='drain')target.stats.energy=Math.max(0,target.stats.energy-a.value);
     else if(a.type==='cleanse')c.statuses.cleanse(target);
-    else if(a.type==='shield')c.statuses.apply(target,{type:'shield',duration,amount:target.stats.maxHp*a.value,sourceId:u.id});
+    else if(a.type==='shield')c.statuses.apply(target,{type:'shield',duration,amount:target.stats.maxHp*a.value*(u.affinityProfession==='shield'?1.10:1),sourceId:u.id});
     else if(['poison','burn','bleed','regen'].includes(a.type))c.statuses.apply(target,{type:a.type,duration,damagePerStack:a.type==='regen'?target.stats.maxHp*a.value:power*a.value,sourceId:u.id});
     else c.statuses.apply(target,{type:a.type,duration,ratio:a.value,sourceId:u.id});
    }

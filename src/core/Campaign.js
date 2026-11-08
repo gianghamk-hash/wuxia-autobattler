@@ -1,3 +1,4 @@
+import {companionJourneyMethods,recordCompanionQuestBattle} from './CompanionJourneys.js';
 import { awardCampaignAffinity, validateAffinityLedgers } from './CampaignAffinity.js';
 import { HOME_WIDTH, BOARD_ROWS } from '../combat/BoardGeometry.js';
 import { validateRanks } from '../data/ProgressionBalance.js';
@@ -570,6 +571,8 @@ export class Campaign {
     next.party.formation[inId] = { ...position };
     next.storyProgress.pendingEncounter.preparation.maxAffinity =
       next.party.active.filter(id => (next.companionsAffinity[id] ?? 0) >= 100);
+    next.storyProgress.pendingEncounter.preparation.affinityLevels =
+      Object.fromEntries(next.party.active.map(id=>[id,next.companionsAffinity[id]??0]));
     validateCampaign(next);
     // No settlement, reward or new encounter: replay the identical seed with
     // a new squad. The old battle is discarded before any combat tick.
@@ -810,7 +813,8 @@ export class Campaign {
         tactics: structuredClone(next.adventure.tactics),
         training: next.adventure.training,
         forging: next.adventure.forging,
-        maxAffinity:next.party.active.filter(id=>(next.companionsAffinity[id]??0)>=100)
+        maxAffinity:next.party.active.filter(id=>(next.companionsAffinity[id]??0)>=100),
+        affinityLevels:Object.fromEntries(next.party.active.map(id=>[id,next.companionsAffinity[id]??0]))
       }
     };
     if (['main','recruit'].includes(kind) && Object.hasOwn(MISSIONS, questId))
@@ -825,7 +829,8 @@ export class Campaign {
         },
         training: d.training,
         forging: d.forging,
-        maxAffinity:[...(d.squad.maxAffinity??d.squad.active.filter(id=>(next.companionsAffinity[id]??0)>=100))]
+        maxAffinity:[...(d.squad.maxAffinity??d.squad.active.filter(id=>(next.companionsAffinity[id]??0)>=100))],
+        affinityLevels:{...(d.squad.affinityLevels??Object.fromEntries(d.squad.active.map(id=>[id,next.companionsAffinity[id]??0])))}
       };
     }
     if (next.adventure.tactics.food)
@@ -981,6 +986,7 @@ export class Campaign {
     if (result.winner === 'home') {
       next.adventure.daily.wins++;
       next.adventure.weekly.wins++;
+      recordCompanionQuestBattle(next,this.battle.units.filter(u=>u.team==='home'&&u.templateId?.startsWith('companion_')&&!u.missionAsset).map(u=>u.templateId));
       for (const id of next.party.active)
         awardCampaignAffinity(next, id, 'battle', `battle:${pending.token}`, this.now());
       if (pending.kind === 'main') {
@@ -1076,5 +1082,6 @@ Object.assign(Campaign.prototype, worldMethods);
 
 Object.assign(Campaign.prototype, gachaMethods);
 Object.assign(Campaign.prototype, journeyMethods);
+Object.assign(Campaign.prototype, companionJourneyMethods);
 Object.assign(Campaign.prototype, lootMethods);
 Object.assign(Campaign.prototype, entryMethods);

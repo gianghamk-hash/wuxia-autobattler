@@ -1,3 +1,4 @@
+import {appendCompanionMemoryRoster} from './CompanionJourneyUI.js';
 import { COMPANIONS_BY_ID } from '../data/CompanionsData.js';
 import { BOND_VARIANTS, BOND_TITLES } from '../data/BondsData.js';
 import { Hero } from '../entities/Hero.js';
@@ -93,6 +94,7 @@ export function renderBonds(app, root) {
       isDaiViet(app.model.session)?'Các cuộc trò chuyện có mốc thân tình 30 / 60 / 100 và chương riêng trên từng nút. Lôi Nam và Mai Tước xuất hiện theo chính truyện; mốc cuối mở biến thể chiêu hiện có, không cộng thêm tuyệt kỹ.':'Năm người bạn đầu tiên có ba mốc thân tình: 30 / 60 / 100, ở chương 2 / 6 / 10. Mốc cuối mở một danh hiệu và biến thể tuyệt kỹ; chỉ dùng một phiên bản mỗi lần.'
     )
   );
+  appendCompanionMemoryRoster(app,root);
   for (const id of Object.keys(BOND_VARIANTS)) {
     const person = storyPerson(app.model.session,COMPANIONS_BY_ID[id]),
       card = n('article', undefined, 'panel bond-card'),
