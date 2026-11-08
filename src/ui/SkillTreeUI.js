@@ -1,4 +1,4 @@
-import { ATTRIBUTE_BONUSES, SECT_PASSIVES } from '../data/ProgressionBalance.js';
+import { ATTRIBUTE_BONUSES } from '../data/ProgressionBalance.js';
 import {ATTRIBUTE_PLANS7,ATTRIBUTE_REASONS7} from '../data/BuildGuides7.js';
 import {LIMITS} from '../data/StrategyData.js';
 import {gearImage} from './GearArt.js';
@@ -92,14 +92,13 @@ export function mountSkillTreeUI({ getState, onChange, canEdit, allowTraining = 
     }
     if (hero.sect) {
       const instance = new Hero(hero.sect, { profile: hero, inventory });
-      el('progress-stats').textContent = `HP ${instance.stats.maxHp} · Ngoại công ${instance.stats.physicalAtk} · Nội công ${instance.stats.magicalAtk} · Ngoại phòng ${instance.stats.physicalDef} · Nội phòng ${instance.stats.magicalDef} · Bạo kích ${Math.round(Math.min(LIMITS.crit, instance.stats.critRate) * 100)}%`;
-      for (const passive of SECT_PASSIVES[hero.sect] ?? []) tree.append(element('p', `Bị động cấp ${passive.level} · ${passive.name}: ${passive.description} · ${hero.level>=passive.level?'Đã mở':'Chưa mở'}`, 'sect-passive'));
+      el('progress-stats').textContent = '';
       el('progress-ultimate').textContent = `Tuyệt kỹ hiện tại: ${instance.skills.ultimate.name}`;
       el('progress-set').textContent = instance.activeEquipmentSets.length ? `Đủ bộ: ${instance.activeEquipmentSets.map(id => EQUIPMENT_SETS.find(set => set.id === id).name).join(', ')}` : 'Chưa đủ mốc bộ. Bộ mới có mốc 2, 3 và 4 món; bộ phái có mốc 3 và 4 món.';
-      renderHeroReadout({hero:instance,build:hero,statsRoot:el('hero-all-stats'),setsRoot:el('hero-set-details'),skillsRoot:el('hero-skill-details')});
+      renderHeroReadout({hero:instance,build:hero,setsRoot:el('hero-set-details'),skillsRoot:el('hero-skill-details')});
     } else {
       el('progress-stats').textContent = 'Chưa chọn môn phái.'; el('progress-ultimate').textContent = ''; el('progress-set').textContent = '';
-      for(const id of ['hero-all-stats','hero-set-details','hero-skill-details'])el(id).replaceChildren(element('p','Nhập môn để xem thông tin chiến đấu chi tiết.','hint'));
+      for(const id of ['hero-set-details','hero-skill-details'])el(id).replaceChildren(element('p','Nhập môn để xem thông tin chiến đấu chi tiết.','hint'));
     }
     for (const [id, disabled] of [['btn-progress-sect', false], ['btn-progress-train', !allowTraining || !hero.sect || hero.level >= MAX_LEVEL],
       ['btn-progress-respec', !hero.allocatedSkills.length], ['btn-progress-reset-attributes', Object.values(hero.attributes).every(n => n === 0)], ['btn-progress-gear', !allowTraining || !hero.sect]]) controls.push({ node: el(id), disabled });
