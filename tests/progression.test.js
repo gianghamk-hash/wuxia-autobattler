@@ -7,6 +7,7 @@ import { GridSystem } from '../src/combat/GridSystem.js';
 import { CombatEngine } from '../src/combat/CombatEngine.js';
 import { SKILL_TREES } from '../src/data/SkillTreeData.js';
 import { SECTS } from '../src/data/SectsData.js';
+import { EQUIPMENT_SETS } from '../src/data/EquipmentData.js';
 import { StorageManager } from '../src/core/StorageManager.js';
 const starter = ['starter_weapon', 'starter_armor', 'starter_accessory'].map(itemId => ({ itemId, quantity: 1 }));
 function build(sect = 'VoDang', level = 8, branch = 'attack') {
@@ -84,11 +85,12 @@ test('equipping and unequipping repeatedly recomputes stats; three pieces apply 
   const inventory = trialEquipment(profile, starter); assert.deepEqual(trialEquipment(profile, inventory), inventory);
   for (const slot of ['weapon', 'armor', 'accessory']) profile = equipItem(profile, slot, `vodang_${slot}`, inventory);
   const unit = new Hero('VoDang', { profile, inventory });
-  assert.equal(unit.stats.magicalAtk, SECTS.VoDang.baseStats.magicalAtk + 25 + 20);
+  const vodangBonus=EQUIPMENT_SETS.find(set=>set.id==='vodang_set').stats.magicalAtk;
+  assert.equal(unit.stats.magicalAtk, SECTS.VoDang.baseStats.magicalAtk + 25 + vodangBonus);
   assert.equal(unit.stats.maxHp, SECTS.VoDang.baseStats.maxHp + 200);
   assert.deepEqual(unit.activeEquipmentSets, ['vodang_set']);
   for (let i = 0; i < 30; i++) { unit.equip('weapon', null); unit.equip('weapon', 'vodang_weapon'); }
-  assert.equal(unit.stats.magicalAtk, SECTS.VoDang.baseStats.magicalAtk + 45);
+  assert.equal(unit.stats.magicalAtk, SECTS.VoDang.baseStats.magicalAtk + 25 + vodangBonus);
   unit.equip('accessory', null); assert.deepEqual(unit.activeEquipmentSets, []);
   assert.equal(unit.stats.magicalAtk, SECTS.VoDang.baseStats.magicalAtk + 25);
 });
