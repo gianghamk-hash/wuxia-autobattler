@@ -146,7 +146,7 @@ function passiveEmblem(sect,level){
 }
 function skillTile(root,{title,kicker,description,iconPath,passiveSect,passiveLevel,details=[],active=true,id}){
  const card=n('details',undefined,'hero-skill-tile');
- if(id)card.dataset.skillId=id;
+ if(id)card.dataset.readoutSkillId=id;
  card.dataset.active=String(active);
  const summary=n('summary',undefined,'hero-skill-tile-heading');
  const image=skillImg(iconPath)??(passiveSect?passiveEmblem(passiveSect,passiveLevel):null);
