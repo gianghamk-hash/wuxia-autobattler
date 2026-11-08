@@ -81,7 +81,7 @@ test('a four-piece original sect set stacks the boosted 3- and 4-piece bonuses',
  const hero=new Hero('ThieuLam',{profile:build,inventory});
  const rows=heroStatBreakdown(hero,build);
  assert.deepEqual(hero.activeEquipmentSets,['thieulam_set_4','thieulam_set']);
- assert.equal(rows.find(row=>row.key==='maxHp').set,660);
+ assert.equal(rows.find(row=>row.key==='maxHp').set,710); // 350 from 3 pieces + 360 from 4 pieces
  assert.equal(rows.find(row=>row.key==='physicalAtk').set,24);
  assert.equal(rows.find(row=>row.key==='magicalAtk').set,24);
 });
