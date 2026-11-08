@@ -39,12 +39,12 @@ test('mobile skill gallery uses true skill art, compact collapsed lists and corr
  await page.setViewportSize({width:390,height:850});await openProfile(page);
  await page.locator('#tab-skills').click();
  const panel=page.locator('#hero-skill-details');
- const attack=panel.locator('[data-skill-id="autoAttack"]');
- const ultimate=panel.locator('[data-skill-id="ultimate"]');
+ const attack=panel.locator('[data-readout-skill-id="autoAttack"]');
+ const ultimate=panel.locator('[data-readout-skill-id="ultimate"]');
  await expect(attack.locator('img.hero-skill-icon')).toHaveAttribute('src',/hero_DuongMon_basic\.webp$/);
  await expect(ultimate.locator('img.hero-skill-icon')).toHaveAttribute('src',/skills7\/hero_DuongMon_(ult|t4_(attack|guard|balanced))\.webp$/);
- expect(await attack.locator('img').evaluate(async img=>{await img.decode();return img.naturalWidth>0;})).toBe(true);
- expect(await ultimate.locator('img').evaluate(async img=>{await img.decode();return img.naturalWidth>0;})).toBe(true);
+ expect(await attack.locator('img.hero-skill-icon').evaluate(async img=>{await img.decode();return img.naturalWidth>0;})).toBe(true);
+ expect(await ultimate.locator('img.hero-skill-icon').evaluate(async img=>{await img.decode();return img.naturalWidth>0;})).toBe(true);
  const passiveArts=panel.locator('.hero-passive-grid .hero-skill-icon');
  await expect(passiveArts).toHaveCount(3);
  const passiveSources=await passiveArts.evaluateAll(images=>images.map(img=>img.src));
