@@ -37,6 +37,12 @@ export function heroStatBreakdown(hero,build){
  const skills={};for(const id of build.allocatedSkills??[])add(skills,SKILLS_BY_ID[id]?.stats);
  const gear={};for(const id of Object.values(build.equippedGear??{}))if(id)add(gear,EQUIPMENT_BY_ID[id]?.stats);
  const sets={};for(const group of equipmentSetProgress(build))for(const milestone of group.milestones)if(milestone.active)add(sets,milestone.stats);
+ // Before enrollment, use the live untrained stats minus equipment and allocated bonuses;
+ // avoid mislabeling those amounts as a sect passive.
+ if(!SECTS[build.sect]){
+  for(const [key,value] of Object.entries(hero.stats))
+   baseline[key]=value-(attributes[key]??0)-(skills[key]??0)-(gear[key]??0)-(sets[key]??0);
+ }
  const all=new Set([...Object.keys(hero.stats),...Object.keys(baseline),...Object.keys(attributes),...Object.keys(skills),...Object.keys(gear),...Object.keys(sets)]);
  return [...all].filter(key=>key!=='hp'&&key!=='energy').map(key=>{
   const original=baseline[key]??0,attr=attributes[key]??0,skill=skills[key]??0,equipment=gear[key]??0,set=sets[key]??0;
