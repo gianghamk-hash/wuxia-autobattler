@@ -1,7 +1,8 @@
 import {MAX_AFFINITY7} from '../data/MaxAffinity7.js';
+import {MID_AFFINITY75} from '../data/AffinityMilestones.js';
 /** Battle-local progress. Perk reactions do not recursively trigger other perks. */
 export class MaxAffinityDirector {
- constructor(combat){this.c=combat;this.busy=false;this.entries=combat.units.filter(u=>u.maxAffinity&&MAX_AFFINITY7[u.templateId]&&!u.missionAsset).map(unit=>({unit,perk:MAX_AFFINITY7[unit.templateId],seen:0,used:0,ready:0,next:MAX_AFFINITY7[unit.templateId].interval}));}
+ constructor(combat){this.c=combat;this.busy=false;this.entries=combat.units.filter(u=>(u.maxAffinity||u.midAffinity)&&MAX_AFFINITY7[u.templateId]&&!u.missionAsset).map(unit=>{const perk=unit.maxAffinity?MAX_AFFINITY7[unit.templateId]:MID_AFFINITY75[unit.templateId];return{unit,perk,seen:0,used:0,ready:0,next:perk.interval};});}
  allies(u){return this.c.units.filter(v=>v.team===u.team&&v.alive&&!v.missionAsset&&!v.isObject);}
  enemies(u){return this.c.units.filter(v=>v.team!==u.team&&v.alive&&!v.missionAsset&&!v.isObject);}
  matches(r,e){const u=r.unit,other=this.c.units.find(v=>v.id===e.actorId),victim=this.c.units.find(v=>v.id===e.targetId);switch(r.perk.trigger){
