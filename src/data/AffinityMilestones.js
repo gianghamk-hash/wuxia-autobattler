@@ -61,8 +61,10 @@ export const MID_AFFINITY75=deepFreeze(Object.fromEntries(Object.entries(MAX_AFF
   const cd=Math.max(12,p.cd+5);
   const every=['attack','hurt'].includes(p.trigger)?Math.max(3,p.every):p.every;
   const name='Dư Âm · '+p.name;
+  const triggerText=p.description.split(':')[0].replace(/\\(mỗi \\d+(?:s| lần)\\)/g,'').trim();
+  const cadence=interval?' (mỗi '+interval+'s)':every>1?' (mỗi '+every+' lần)':'';
   return [id,{id:id+'_75',ownerId:id,name,trigger:p.trigger,actions,cd,every,interval,limit:2,
-    description:'Khi '+p.description.split(':')[0].toLowerCase()+': '+affinityActionText(actions[0])+'. Hồi '+cd+'s; tối đa 2 lần/trận.'}];
+    description:triggerText+cadence+': '+affinityActionText(actions[0])+'. Hồi '+cd+'s; tối đa 2 lần/trận.'}];
 })));
 export function applyAffinityMilestones(unit, affinity) {
   if(!unit||!AFFINITY_SPECIALTIES[unit.templateId])return unit;
