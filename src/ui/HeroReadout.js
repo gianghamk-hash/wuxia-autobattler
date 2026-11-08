@@ -98,12 +98,58 @@ const skillImg=path=>{
  img.loading='lazy';img.decoding='async';img.src=new URL('../../'+path,import.meta.url).href;
  return img;
 };
-function skillTile(root,{title,kicker,description,iconPath,details=[],active=true,id}){
+
+/* No dedicated passive portraits exist in the asset catalog. Draw an accurate
+   sect-and-effect emblem instead of reusing the artwork of an unrelated skill. */
+const PASSIVE_ART=Object.freeze({
+ ThieuLam:[
+  '<path d="M36 10 54 18v15q0 18-18 28Q18 51 18 33V18z"/><path d="M24 33h24M36 21v26"/>',
+  '<path d="M19 53V32l5-4 4 4V19l6-3 4 3v12l4-5 5 4v19z"/><path d="M22 48h28"/>',
+  '<circle cx="36" cy="35" r="18"/><path d="M36 18c11 9 11 26 0 35-11-9-11-26 0-35z"/><path d="M18 35h36"/>'
+ ],
+ VoDang:[
+  '<circle cx="36" cy="36" r="23"/><path d="M36 13c-23 0-23 23 0 23s23 23 0 23"/><circle cx="36" cy="24" r="3"/><circle cx="36" cy="48" r="3"/>',
+  '<path d="M18 47c10-20 28-27 38-18M16 36c10-17 26-20 40-10M19 54c12-7 26-3 35 4"/><circle cx="36" cy="37" r="6"/>',
+  '<path d="M36 10 54 18v18q-3 15-18 25Q21 51 18 36V18z"/><path d="M25 35c8-10 14-10 22 0-8 10-14 10-22 0z"/>'
+ ],
+ CaiBang:[
+  '<path d="M16 55 49 14M24 57l32-40M20 20l8 9M46 45l9 10"/><circle cx="34" cy="37" r="5"/>',
+  '<path d="M18 48c7-15 16-20 20-12 6-8 13-5 17 8M18 48q19 14 37-4"/><path d="M26 24l8-9 8 10"/>',
+  '<path d="M17 48c6-20 14-20 19-11 4-13 13-16 20-21M17 56q21-5 38-18"/><circle cx="49" cy="23" r="4"/>'
+ ],
+ NgaMi:[
+  '<path d="M36 56q-21-11 0-32 21 21 0 32z"/><path d="M36 56q-32-2-20-23 22 0 20 23zM36 56q32-2 20-23-22 0-20 23z"/>',
+  '<path d="M36 56V16M26 44l10 10 10-10"/><path d="M15 35q9-20 20 1M57 35q-9-20-20 1"/><circle cx="36" cy="22" r="7"/>',
+  '<path d="M36 59 18 38q-6-13 6-17 8-2 12 8 4-10 12-8 12 4 6 17z"/><path d="M36 30v20M26 40h20"/>'
+ ],
+ DuongMon:[
+  '<path d="M16 56 55 17M25 19l30-2-3 30M24 47l11 3 3 11"/><path d="M21 32q7 5 0 11-7-6 0-11z"/>',
+  '<path d="m16 51 36-34m-20 1 20-1-1 20M18 34l29-13M27 45l29-13"/><path d="m49 13 10 1-1 10"/>',
+  '<path d="M15 27q23-20 40 0-5 10-22 10-18 0-15 16 3 9 21 3M23 18q13-10 29-3"/><path d="M44 46q9-10 16-3"/>'
+ ]
+});
+const PASSIVE_COLORS=Object.freeze({ThieuLam:'#e6bc71',VoDang:'#81cbdf',CaiBang:'#f0b777',NgaMi:'#f0a8c5',DuongMon:'#a4d597'});
+function passiveEmblem(sect,level){
+ const index=level===5?1:level===10?2:0;
+ const drawing=PASSIVE_ART[sect]?.[index];if(!drawing)return null;
+ const color=PASSIVE_COLORS[sect];
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">'
+  +'<defs><radialGradient id="a"><stop stop-color="#345451"/><stop offset="1" stop-color="#0c2b2b"/></radialGradient></defs>'
+  +'<rect width="72" height="72" rx="11" fill="url(#a)"/>'
+  +'<circle cx="36" cy="36" r="29" fill="none" stroke="'+color+'" opacity=".3"/>'
+  +'<g fill="none" stroke="'+color+'" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">'
+  +drawing+'</g></svg>';
+ const img=n('img');img.className='hero-skill-icon';
+ img.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+ img.alt='';img.loading='lazy';img.decoding='async';
+ return img;
+}
+function skillTile(root,{title,kicker,description,iconPath,passiveSect,passiveLevel,details=[],active=true,id}){
  const card=n('details',undefined,'hero-skill-tile');
  if(id)card.dataset.skillId=id;
  card.dataset.active=String(active);
  const summary=n('summary',undefined,'hero-skill-tile-heading');
- const image=skillImg(iconPath);
+ const image=skillImg(iconPath)??(passiveSect?passiveEmblem(passiveSect,passiveLevel):null);
  if(image)summary.append(image);
  else summary.append(n('span','✦','hero-skill-monogram'));
  const text=n('span',undefined,'hero-skill-title');
@@ -156,11 +202,11 @@ export function renderHeroReadout({hero,build,setsRoot,skillsRoot}){
  const passiveHeading=n('h3','Nội tại môn phái');
  const passiveGrid=n('div',undefined,'hero-compact-skill-grid hero-passive-grid');
  const innate=SECTS[build.sect]?.passive;
- if(innate)skillTile(passiveGrid,{id:innate.id,title:innate.name,kicker:'Nội tại đặc trưng',
+ if(innate)skillTile(passiveGrid,{id:innate.id,title:innate.name,kicker:'Nội tại đặc trưng',passiveSect:build.sect,passiveLevel:0,
   description:innate.description,details:['Tự động phát động theo cơ chế môn phái.']});
  for(const passive of SECT_PASSIVES[build.sect]??[]){
   const active=build.level>=passive.level;
-  skillTile(passiveGrid,{id:'passive-'+passive.level,title:passive.name,
+  skillTile(passiveGrid,{id:'passive-'+passive.level,title:passive.name,passiveSect:build.sect,passiveLevel:passive.level,
    kicker:(active?'✓ Đã mở':'○ Cấp '+passive.level+' · Chưa mở'),
    description:passive.description,details:[active?'Đã cộng vào chỉ số chiến đấu.':'Mở ở cấp '+passive.level+'.'],
    active});
