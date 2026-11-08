@@ -740,7 +740,7 @@ export class CombatEngine {
         apply({
           type: 'regen',
           duration: effect.duration,
-          damagePerStack: actor.stats[effect.scalingStat] * effect.multiplier * (actor.affinityProfession==='healing'?1.10:1)
+          damagePerStack: actor.stats[effect.scalingStat] * effect.multiplier
         });
         break;
       case 'shield':
