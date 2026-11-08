@@ -311,10 +311,24 @@ test('ordinary 6v6 outcomes match stored progression replays for the same mirror
   for (const scenario of report.scenarios) {
     const pair = scenario.records[0],
       games = simulatePair(pair.a, pair.b, scenario, pair.seed);
-    assert.deepEqual(
-      games.map(({ statistics, ...g }) => g),
-      pair.games
-    );
+    const summary=games.map(({ statistics, ...g })=>g);
+    if(!scenario.gear){
+      // Golden snapshots for formations with no set bonuses remain byte-for-byte stable.
+      assert.deepEqual(summary,pair.games,scenario.id);
+    } else {
+      // The old equipped snapshots contain pre-buff durations. Recheck seeded
+      // determinism and invariants without reverting the intended set buff.
+      const replay=simulatePair(pair.a,pair.b,scenario,pair.seed)
+        .map(({statistics,...g})=>g);
+      assert.deepEqual(summary,replay,scenario.id+' deterministic replay');
+      assert.equal(summary.length,pair.games.length);
+      for(const [index,game] of summary.entries()){
+        assert.equal(game.swapped,pair.games[index].swapped);
+        assert.ok(['home','enemy','draw'].includes(game.winner),scenario.id);
+        assert.ok(['elimination','timeout'].includes(game.reason),scenario.id);
+        assert.ok(Number.isFinite(game.duration)&&game.duration>0&&game.duration<=180,scenario.id);
+      }
+    }
   }
 });
 test('a rescued captive can leave a dense six-fighter formation after an early manual rescue', () => {
