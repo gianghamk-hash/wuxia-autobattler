@@ -14,7 +14,7 @@ export function appendCompanionMemoryRoster(app,root){
  const s=app.model.session,progress=s.journey.companionJourneys??{battleWins:{},questDone:[],crossroads:{},watched:[]};
  const owned=COMPANION_MEMORIES.filter(m=>s.party.unlocked.includes(m.id));
  const group=n('details',undefined,'panel companion-journeys');group.append(n('summary','Kỷ niệm và duyên phận · '+owned.length+'/60 đồng hành'));
- group.append(n('p','Mốc 25 mở ký ức và +5% chỉ số chủ lực; 50 mở nhiệm vụ 2 trận thắng và +10% chuyên môn; 75 mở ngã rẽ và bị động giới hạn 2 lần/trận; 100 mở hoạt cảnh và nội tại độc bản. Mọi phần thưởng chiến đấu kích hoạt theo duyên phận; nhiệm vụ và lựa chọn chỉ mở thêm nội dung truyện.'));
+ group.append(n('p','Mỗi đồng hành có một nhiệm vụ thực chiến riêng tại mốc 50, hai con đường đánh đổi chỉ số tại mốc 75, và hoạt cảnh theo chân dung nhân vật ở mốc 100. Thưởng duyên phận và 60 nội tại độc bản vẫn được giữ nguyên.'));
  for(const m of COMPANION_MEMORIES){
   const has=owned.includes(m),points=s.companionsAffinity[m.id]??0,levels=affinityMilestoneDetails(m.id);
   const card=n('details',undefined,'companion-memory-card');card.dataset.companionId=m.id;
@@ -34,16 +34,18 @@ export function appendCompanionMemoryRoster(app,root){
    }
    if(chapter.at===50){
     const wins=progress.battleWins?.[m.id]??0,done=progress.questDone?.includes(m.id);
-    row.append(n('p',done?'Nhiệm vụ đã hoàn thành.':'Tiến độ thực chiến: '+wins+'/2 trận thắng cùng đồng hành.'),
+    const evidence=progress.questEvidence?.[m.id]??(progress.questEvidence===undefined&&wins>=2?chapter.quest.required:0);
+    row.append(n('p',chapter.quest.objective),n('p',done?'Đã hoàn thành nhiệm vụ cá nhân.':'Mục tiêu hoàn thành: '+evidence+'/'+chapter.quest.required+' lần · Thắng trận và đáp ứng điều kiện riêng.'),
       action('Đọc nhiệm vụ cá nhân',()=>{
-       moment(app,m,chapter,[['Người kể',chapter.text],[m.name,m.turn],['Người kể','Mục tiêu: '+chapter.quest.objective],['Trần Phong','Ta sẽ cùng ngươi vượt qua hai trận chiến.']]);
+       moment(app,m,chapter,[['Người kể',chapter.text],[m.name,m.turn],['Người kể','Mục tiêu: '+chapter.quest.objective],['Trần Phong','Hãy cho ta thấy cách ngươi lựa chọn hành động trong trận.']]);
       },!unlock));
-    if(unlock&&!done)row.append(action('Hoàn thành nhiệm vụ',()=>app.run(()=>app.model.completeCompanionQuest(m.id)),wins<2||locked(app)));
+    if(unlock&&!done)row.append(action('Hoàn thành nhiệm vụ',()=>app.run(()=>app.model.completeCompanionQuest(m.id)),evidence<chapter.quest.required||locked(app)));
    }
    if(chapter.at===75){
     const selected=progress.crossroads?.[m.id];
     const chosen=chapter.choices.find(c=>c.id===selected);
-    if(chosen)row.append(n('p','Đã chọn: '+chosen.label+' — '+chosen.gain+'; '+chosen.cost));
+    row.append(n('p','Mỗi hướng đều tăng một năng lực và đánh đổi một năng lực khác; tác dụng chỉ áp dụng cho đồng hành khi tham chiến.'));
+    if(chosen)row.append(n('p','Đã chọn: '+chosen.label+' · '+chosen.gain+' · '+chosen.cost));
     row.append(action(chosen?'Xem lại ngã rẽ':'Đọc và chọn ngã rẽ',()=>{
      const lines=[['Người kể',chapter.text],[m.name,m.turn],['Trần Phong','Cách nào cũng có giá phải trả. Ta sẽ tôn trọng lựa chọn của ngươi.']];
      if(chosen){moment(app,m,chapter,[...lines,['Người kể','Ngã rẽ đã chọn: '+chosen.label+'. '+chosen.gain+'. '+chosen.cost+'.']]);return;}
@@ -56,7 +58,7 @@ export function appendCompanionMemoryRoster(app,root){
     row.append(action(played?'Xem lại hoạt cảnh riêng':'Xem hoạt cảnh và tuyệt kỹ độc bản',()=>{
       if(!played)app.run(()=>app.model.watchCompanionCutscene(m.id));
       const beats=chapter.cutscene.beats.map(b=>[b.speaker??'Người kể',b.text]);
-      moment(app,m,chapter,[['Người kể',chapter.text],...beats],{});
+      moment(app,m,chapter,[['Người kể',chapter.text],...beats],{storyboard:chapter.cutscene});
     },!unlock||locked(app)));
    }
    info.append(row);
