@@ -8,15 +8,15 @@
  */
 const CHAPTER_CURVE = Object.freeze([
   {end:2, power:0.78},
-  {end:6, power:0.88},
-  {end:10,power:0.96},
-  {end:14,power:1.04},
-  {end:17,power:1.10},
-  {end:20,power:1.16}
+  {end:6, power:0.93},
+  {end:10,power:1.02},
+  {end:14,power:1.11},
+  {end:17,power:1.18},
+  {end:20,power:1.25}
 ]);
 export function campaignEnemyMultiplier(chapter) {
   if(!Number.isInteger(chapter)||chapter<1)return 1;
-  return CHAPTER_CURVE.find(t=>chapter<=t.end)?.power??1.16;
+  return CHAPTER_CURVE.find(t=>chapter<=t.end)?.power??1.25;
 }
 
 /**
@@ -40,15 +40,18 @@ export function scaleEnemyStats(unit,multiplier=1) {
   return unit;
 }
 
-/** Ease every player-facing campaign mode without changing neutral PvP simulators. */
+/** Moderate challenge after the accessibility pass. Keep chapter 1-2 unchanged;
+ * side activities remain gentler than story fights at the same progression.
+ * All values are battle-local and never change player-owned stat data.
+ */
 export function modeEnemyMultiplier(mode,chapter) {
   const base=campaignEnemyMultiplier(chapter);
   switch(mode){
-    case 'practice':return 0.72;
-    case 'arena':return 0.72;
-    case 'escort':return 0.70;
-    case 'dungeon':return Number((base*.80).toFixed(4));
-    case 'chapterBoss':return Number((base*.85).toFixed(4));
+    case 'practice':return Math.min(.79,Number((base*.94).toFixed(4)));
+    case 'arena':return Math.min(.80,Number((base*.94).toFixed(4)));
+    case 'escort':return Math.min(.78,Number((base*.92).toFixed(4)));
+    case 'dungeon':return Number((base*.85).toFixed(4));
+    case 'chapterBoss':return Number((base*.89).toFixed(4));
     case 'main':return base;
     default:return base;
   }
