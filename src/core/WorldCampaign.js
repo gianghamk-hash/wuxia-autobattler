@@ -427,7 +427,7 @@ export const worldMethods = {
         return;
       }
       for (const unit of this.battle.units.filter((u) => u.team === 'home'))
-        d.hp[unit.id] = Math.max(0, Math.min(1,unit.hpRatio+(d.mode==='tower'?.25:0)));
+        d.hp[unit.id] = Math.max(0, Math.min(1,unit.hpRatio+(d.mode==='tower'?.35:0)));
       w.daily.floors++;
       rewards.xp = Math.max(
         10,
