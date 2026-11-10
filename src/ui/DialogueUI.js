@@ -62,7 +62,8 @@ export class DialogueUI {
     onFont,
     brief,
     continuous = false,
-    identitySession
+    identitySession,
+    storyboard = null
   }) {
     const pages = heroLines(lines.length
       ? lines
@@ -110,10 +111,23 @@ export class DialogueUI {
       scene.style.backgroundImage='linear-gradient(125deg,#28444f,#102c30)';
       scene.classList.add('modern-scene');
     }
+    if(storyboard?.portrait&&storyboard?.background){
+      const backdrop=new URL('../../'+storyboard.background,import.meta.url).href;
+      scene.style.backgroundImage='linear-gradient(90deg,#091f28dd,#091f2866),url("'+backdrop+'")';
+      scene.classList.add('companion-storyboard-scene');
+    }
     scene.setAttribute('aria-hidden', 'true');
     scene.append(
       node('span', quest?.location ?? 'Giang hồ ký sự', 'classic-location')
     );
+    let storyboardLabel=null;
+    if(storyboard?.portrait){
+      const actorImage=node('img',undefined,'companion-storyboard-portrait');
+      actorImage.src=new URL('../../'+storyboard.portrait,import.meta.url).href;
+      actorImage.alt='';actorImage.loading='lazy';
+      storyboardLabel=node('span',title,'companion-storyboard-label');
+      scene.append(actorImage,storyboardLabel);
+    }
     this.root.append(scene);
     const frame = node('button', undefined, 'classic-line');
     frame.type = 'button';
@@ -139,6 +153,11 @@ export class DialogueUI {
     next.type = 'button';
     next.id = 'dialogue-next';
     controls.append(previous, count, next);
+    if(storyboard?.skippable){
+      const skip=node('button','Bỏ qua hoạt cảnh ▸','companion-storyboard-skip');
+      skip.type='button';skip.addEventListener('click',()=>{index=pages.length-1;draw();});
+      controls.append(skip);
+    }
     const noteNode = node('p', note, 'hint classic-note');
     const buttons = node('div', undefined, 'dialogue-choices');
     for (const choice of choices) {
@@ -177,6 +196,11 @@ export class DialogueUI {
     const draw = () => {
       const [speaker, line,actor] = pages[index],
         last = index === pages.length - 1;
+      if(storyboardLabel){
+        const beat=storyboard.beats[index-1];
+        scene.dataset.storyBeat=beat?.kind??'opening';
+        storyboardLabel.textContent=beat?.kind==='skill'?beat.skillName:(beat?.kind==='climax'?'Lời hẹn đã thành':title);
+      }
       frame.replaceChildren(
         speakerPortrait(speaker, hero, quest,actor,identitySession),
         copy,

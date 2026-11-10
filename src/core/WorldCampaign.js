@@ -1,4 +1,5 @@
 import {applyAffinityMilestones} from '../data/AffinityMilestones.js';
+import {applyCompanionCrossroad} from '../combat/CompanionBattleBranches.js';
 import { mirrorPosition } from '../combat/BoardGeometry.js';
 import {ENEMY_CELLS,strengthenEnemy,bossSequence} from '../combat/BattleRules6.js';
 import {earlyDungeonFactor} from '../combat/EarlyDungeon.js';
@@ -137,6 +138,10 @@ export const worldMethods = {
       if(isDaiViet(this.session)&&u.id==='hero')Object.assign(u,heroAppearance(this.session));
       if(this.session?.party?.active?.includes(u.id)&&u.affinityStage===undefined){const locked=pending.preparation?.maxAffinity??(pending.kind==='dungeon'?this.session.adventure.dungeon?.squad.maxAffinity:undefined);const affinity=pending.preparation?.affinityLevels?.[u.id]??this.session.companionsAffinity[u.id]??0;applyAffinityMilestones(u,locked&&!locked.includes(u.templateId)?Math.min(99.999,affinity):affinity);}
       if (!u.bondConfigured) applyBondVariant(u, this.session?.journey?.bonds.modes[u.templateId] ?? 'base');
+      if(u.templateId?.startsWith('companion_') && u.affinityStage>=75){
+        const branch=this.session?.journey?.companionJourneys?.crossroads?.[u.templateId];
+        if(branch)applyCompanionCrossroad(u,branch);
+      }
       if(isDaiViet(this.session)&&u.id!=='guide')applyDaiVietName(u);
       u.sect = isDaiViet(this.session)&&u.id==='hero'&&!hasEnrollment(this.session)?null:prep.tactics.affiliations[u.id] ?? u.sect;
       u.targetPriority =

@@ -1,4 +1,5 @@
 import {affinityMilestoneDetails} from './AffinityMilestones.js';
+import {COMPANION_JOURNEY_DESIGNS,branchTradeoffText} from './CompanionJourneyDesigns.js';
 import { COMPANIONS } from './CompanionsData.js';
 import { DAI_VIET_CAST_BY_ID } from './DaiVietCast.js';
 // Narrative content stage 1: no gameplay mutation. Every entry is anchored
@@ -380,6 +381,8 @@ function buildMemory(arc) {
   const mission=c.recruitment?.description ?? '';
   const questId=`bond_${arc.id}_50`;
   const rewards=affinityMilestoneDetails(arc.id);
+  const design=COMPANION_JOURNEY_DESIGNS[arc.id];
+  if(!design)throw new Error('Thiếu hành trình riêng: '+arc.id);
   return {
     ...arc, turn, name, sect:c.sect, portrait, motive, skill,
     unlocks:bondMilestones,
@@ -387,23 +390,30 @@ function buildMemory(arc) {
       {at:25,reward:rewards[0],id:`memory_${arc.id}_25`,title:'Một lời thật lòng',
        text:`${name} kể về điều mình vẫn giấu sau những chuyến đi. ${motive} Người chơi có thể lắng nghe mà không cần phán xét.`,
        dialogue:[{speaker:name,text:turn},{speaker:'Trần Phong',text:'Ta muốn nghe chính lời ngươi, không nghe lời đồn.'}]},
-      {at:50,reward:rewards[1],id:`memory_${arc.id}_50`,title:arc.title,
-       text:`Từ câu chuyện cũ, một việc chưa giải quyết buộc ${name} trở lại nơi từng lảng tránh. ${turn}`,
-       quest:{id:questId,objective:mission||turn,requiresCompanion:arc.id,
-        completionFlag:`bond_quest_completed_${arc.id}`}},
-      {at:75,reward:rewards[2],id:`memory_${arc.id}_75`,title:'Ngã rẽ của người đồng hành',
-       text:`Giữa lúc ${arc.title.toLowerCase()}, ${name} phải quyết định điều nào đáng giữ hơn chiến thắng trước mắt.`,
-       choices:[
-         {id:`bond_${arc.id}_mercy`,label:'Giữ người và lời hứa',gain:'Tăng lòng tin của dân và đồng đội',cost:'Chậm một lượt hành trình; bỏ lỡ tài nguyên trước mắt'},
-         {id:`bond_${arc.id}_truth`,label:'Giữ chứng cứ và sự thật',gain:'Mở thêm thông tin cho nhiệm vụ sau',cost:'Mất cơ hội nhận phần thưởng tức thời'}
-       ]},
+      {at:50,reward:rewards[1],id:`memory_${arc.id}_50`,title:design.quest.title,
+       text:`${design.quest.context}. ${turn}`,
+       quest:{...design.quest,id:questId,requiresCompanion:arc.id,completionFlag:`bond_quest_completed_${arc.id}`}},
+      {at:75,reward:rewards[2],id:`memory_${arc.id}_75`,title:design.branch.title,
+       text:design.branch.context+' '+turn,
+       choices:design.branch.choices.map((choice)=>({
+         ...choice,gain:branchTradeoffText(Object.fromEntries(Object.entries(choice.statChanges).filter(([,n])=>n>0))),
+         cost:branchTradeoffText(Object.fromEntries(Object.entries(choice.statChanges).filter(([,n])=>n<0)))
+       }))},
       {at:100,reward:rewards[3],id:`memory_${arc.id}_100`,title:'Sinh Tử Bất Phụ — '+arc.title,
-       text:`${turn} Lần này ${name} không phải bước một mình. ${skill} trở thành dấu ấn của hành trình ấy.`,
-       cutscene:{id:`bond_cutscene_${arc.id}`,portrait,background:'assets/images/world/world_map.webp',
-        beats:[{kind:'portrait',text:turn},{kind:'dialogue',speaker:name,text:'Ta từng nghĩ đoạn đường này chỉ có một mình.'},
-         {kind:'dialogue',speaker:'Trần Phong',text:'Giang hồ rộng lớn. Từ nay cùng đi.'},
-         {kind:'skill',skillName:skill,text:'Duyên phận đã thành. Không quên lời hẹn.'}],
-        skippable:true,replayable:true,reducedMotion:true}}
+       text:`${design.scene.frame}. ${design.scene.climax}. ${skill} trở thành dấu ấn hành trình của ${name}.`,
+       cutscene:{
+         id:design.scene.id,portrait,
+         background:`assets/images/chapters7/chapter${String(design.scene.chapter).padStart(2,'0')}.webp`,
+         beats:[
+          {kind:'landscape',speaker:'Người kể',text:design.scene.frame+'.'},
+          {kind:'flashback',speaker:'Người kể',text:turn},
+          {kind:'confession',speaker:name,text:design.scene.confession+'.'},
+          {kind:'response',speaker:'Trần Phong',text:'Ta đã nghe điều ngươi cất giữ. Hôm nay hãy tự chọn con đường ấy, ta sẽ đi bên ngươi.'},
+          {kind:'climax',speaker:'Người kể',text:design.scene.climax+'.'},
+          {kind:'skill',speaker:name,skillName:skill,text:skill+' — từ nay ta dùng nó để giữ lời đã chọn.'}
+         ],skippable:true,replayable:true,reducedMotion:true
+       }}
+
     ]
   };
 }

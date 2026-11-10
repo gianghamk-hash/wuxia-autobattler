@@ -986,7 +986,7 @@ export class Campaign {
     if (result.winner === 'home') {
       next.adventure.daily.wins++;
       next.adventure.weekly.wins++;
-      recordCompanionQuestBattle(next,this.battle.units.filter(u=>u.team==='home'&&u.templateId?.startsWith('companion_')&&!u.missionAsset).map(u=>u.templateId));
+      recordCompanionQuestBattle(next,this.battle.units.filter(u=>u.team==='home'&&u.id===u.templateId&&u.templateId?.startsWith('companion_')&&!u.missionAsset),result);
       for (const id of next.party.active)
         awardCampaignAffinity(next, id, 'battle', `battle:${pending.token}`, this.now());
       if (pending.kind === 'main') {

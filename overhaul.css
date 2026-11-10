@@ -401,3 +401,14 @@ body[data-card-effects="false"] [data-tier="6"]{animation:none}
 .ready-reserve-unit:disabled{opacity:.56;cursor:not-allowed}
 .ready-reserve-unit:not(:disabled):hover,.ready-reserve-unit:not(:disabled):focus-visible{outline:2px solid #ffe09c}
 @media(max-width:600px){.ready-toolbar [data-exit-ready]{width:100%}.ready-reserve-unit{flex-basis:94px}.ready-reserve-unit .portrait{width:54px;height:54px}}
+
+/* Sixty companion memory storyboards — all portraits and backdrops are existing
+   game assets. The text and controls remain usable without animations. */
+.companion-storyboard-scene{position:relative;min-height:220px;isolation:isolate;overflow:hidden;background-size:cover;background-position:center}
+.companion-storyboard-portrait{position:absolute;right:4%;bottom:0;max-width:42%;height:100%;max-height:235px;object-fit:contain;object-position:bottom;filter:drop-shadow(-8px 7px 12px #041c23bb);pointer-events:none}
+.companion-storyboard-label{position:absolute;left:3%;bottom:12px;max-width:52%;padding:7px 12px;border-radius:7px;background:#092024d9;color:#ffe7ae;font-size:.9rem;font-weight:700;text-wrap:balance;overflow-wrap:anywhere}
+.companion-storyboard-scene[data-story-beat="skill"] .companion-storyboard-label{color:#fff4c3;border:1px solid #d4af37}
+.companion-storyboard-skip{margin-left:auto;min-height:38px}
+.companion-memory-stage{margin:8px 0}
+@media (max-width:600px){.companion-storyboard-scene{min-height:164px}.companion-storyboard-portrait{max-width:46%;max-height:174px}.companion-storyboard-label{max-width:52%;font-size:.72rem;padding:6px}.companion-storyboard-skip{margin-left:0}}
+@media (prefers-reduced-motion:reduce){.companion-storyboard-scene,.companion-storyboard-portrait,.companion-storyboard-label{animation:none!important;transition:none!important}}
