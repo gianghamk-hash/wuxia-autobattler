@@ -670,7 +670,7 @@ export function mountWorldUI(app) {
       const def = DUNGEONS.find((v) => v.id === d.id),
         p = panel(
           `${def.name} · tầng ${d.floor+1}/${d.mode==='tower'?100:def.floors}`,
-          d.mode==='tower'?'Đội và cấp đã chốt lúc vào. Thắng tầng hồi 25% HP cho cả người bị hạ; mốc 10 hồi đầy toàn đội. Trong ba phase boss không hồi miễn phí. Thua/rút lui kết thúc lượt.':'Đội và cấp đã chốt lúc vào. HP giữ qua tầng; tướng bị hạ không được hồi sinh tại quán nghỉ. Thua/rút lui kết thúc lượt.'
+          d.mode==='tower'?'Đội và cấp đã chốt lúc vào. Thắng tầng hồi 35% HP cho cả người bị hạ; mốc 10 hồi đầy toàn đội. Trong ba phase boss không hồi miễn phí. Thua/rút lui kết thúc lượt.':'Đội và cấp đã chốt lúc vào. HP giữ qua tầng; tướng bị hạ không được hồi sinh tại quán nghỉ. Thua/rút lui kết thúc lượt.'
         );
       const path = n('div', undefined, 'dungeon-path');
       d.rooms.forEach((_, i) => {
@@ -696,7 +696,7 @@ export function mountWorldUI(app) {
             fight(() => app.model.retryEncounter())
           )
         );
-      else if(d.mode==='tower'){p.append(n('p','Tháp 100 tầng · hồi 25% HP khi thắng, hồi toàn đội mỗi 10 tầng: địch mạnh dần, boss ba phase mỗi 10 tầng. Thắng tự chuyển tầng; giữ HP và đội đã chốt. Thua/rút lui kết thúc lượt.'));p.append(button('Tiếp tục tầng '+(d.floor+1),()=>fight(()=>app.model.chooseRoom(0))));p.append(button('Rời tháp',()=>run(()=>app.model.leaveDungeon())));}
+      else if(d.mode==='tower'){p.append(n('p','Tháp 100 tầng · hồi 35% HP khi thắng, hồi toàn đội mỗi 10 tầng: địch mạnh dần, boss ba phase mỗi 10 tầng. Thắng tự chuyển tầng; giữ HP và đội đã chốt. Thua/rút lui kết thúc lượt.'));p.append(button('Tiếp tục tầng '+(d.floor+1),()=>fight(()=>app.model.chooseRoom(0))));p.append(button('Rời tháp',()=>run(()=>app.model.leaveDungeon())));}
       else {
         const choice = select(
           {
