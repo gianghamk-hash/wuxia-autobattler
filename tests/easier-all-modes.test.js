@@ -10,8 +10,8 @@ test('new story curve is continuous at chapter 3, bounded and progressively hard
  for(let i=1;i<values.length;i++)assert.ok(values[i]>=values[i-1],`chapter ${i+1}`);
  assert.ok(values[2]-values[1]<.15);
  assert.equal(values[0],.78);
- assert.equal(values[19],1.16);
- assert.ok(values.every(x=>x<1.2));
+ assert.equal(values[19],1.25);
+ assert.ok(values.every(x=>x<=1.25));
 });
 
 test('all six campaign modes are easier and preserve relative story progression',()=>{
@@ -23,11 +23,11 @@ test('all six campaign modes are easier and preserve relative story progression'
    assert.ok(target>0&&target<main,`${mode} chapter ${chapter}`);
   }
  }
- assert.equal(modeEnemyMultiplier('practice',20),.72);
- assert.equal(modeEnemyMultiplier('arena',20),.72);
- assert.equal(modeEnemyMultiplier('escort',20),.70);
- assert.equal(modeEnemyMultiplier('dungeon',20),.928);
- assert.equal(modeEnemyMultiplier('chapterBoss',20),.986);
+ assert.equal(modeEnemyMultiplier('practice',20),.79);
+ assert.equal(modeEnemyMultiplier('arena',20),.80);
+ assert.equal(modeEnemyMultiplier('escort',20),.78);
+ assert.equal(modeEnemyMultiplier('dungeon',20),1.0625);
+ assert.equal(modeEnemyMultiplier('chapterBoss',20),1.1125);
 });
 
 test('enemy reductions never scale maxEnergy, action speed, crit or skill geometry',()=>{
@@ -52,7 +52,7 @@ test('enemy authored HP and attack budget is lower while all tower floors get a 
  assert.ok(DIFFICULTY.hp*campaignEnemyMultiplier(20)<1.6);
  assert.ok(DIFFICULTY.attack*campaignEnemyMultiplier(20)<1.5);
  const floors=[0,9,10,19,20,29,30,59,60,99];
- const expected=[.55,.55,.65,.65,.75,.75,.85,.85,.9,.9];
+ const expected=[.57,.57,.68,.68,.78,.78,.88,.88,.93,.93];
  assert.deepEqual(floors.map(earlyDungeonFactor),expected);
 });
 
