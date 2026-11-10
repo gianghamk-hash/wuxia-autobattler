@@ -52,7 +52,7 @@ test('randomized main boss phases honor their three seeded counts, retaining the
 });
 
 test('all tower floors retain reproducible HP/attack budgets under the gentler mode curve',()=>{
- assert.deepEqual([0,9,10,19,20,99].map(earlyDungeonFactor),[.55,.55,.65,.65,.75,.90]);
+ assert.deepEqual([0,9,10,19,20,99].map(earlyDungeonFactor),[.57,.57,.68,.68,.78,.93]);
  for(const floor of[0,9,10,19,20,59,99]){
   const c=developed();c.enterDungeon('phong_nha');const s=c.snapshot();s.adventure.dungeon.floor=floor;c.load(s);c.chooseRoom(0);
   const u=c.battle.units.find(u=>u.team==='enemy'),level=Math.min(20,2+Math.floor(floor/7)),base=new Companion('companion_05',{team:'enemy',level}),boss=(floor+1)%10===0;

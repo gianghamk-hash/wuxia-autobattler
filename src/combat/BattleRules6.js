@@ -101,10 +101,10 @@ export function bossSequence(
       u.characterId =
         phase === 3 ? skin : phase === 1 ? "boss_captain" : "boss_river";
       u.storyActorId=u.characterId==='doc_le'?'cao_le':'boss';
-      u.stats.maxHp = Math.round(u.stats.maxHp * (phase === 3 ? 1.45 : 1.10));
+      u.stats.maxHp = Math.round(u.stats.maxHp * (phase === 3 ? 1.50 : 1.10));
       u.stats.hp = u.stats.maxHp;
-      u.stats.physicalAtk *= phase === 3 ? 1.10 : 1.03;
-      u.stats.magicalAtk *= phase === 3 ? 1.10 : 1.03;
+      u.stats.physicalAtk *= phase === 3 ? 1.12 : 1.03;
+      u.stats.magicalAtk *= phase === 3 ? 1.12 : 1.03;
     } else {
       u.name = (training ? "Bạn tập" : "Hộ vệ") + " " + (index + 1);
       u.characterId = TROOP_SKINS[(chapter + index) % TROOP_SKINS.length];

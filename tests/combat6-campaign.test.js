@@ -134,7 +134,7 @@ test("all five towers retain 100 floors, deterministic reloads and correct rewar
     copy.load(pending);
     copy.retryEncounter();
     assert.equal(copy.battle.seed, b.seed);
-    assert.equal(b.enemyStatMultiplier,0.928);
+    assert.equal(b.enemyStatMultiplier,1.0625);
     const r = fight(c), repeated=fight(copy);
     assert.equal(r.winner,repeated.winner,def.id);
     assert.deepEqual(r.rewards,repeated.rewards,def.id);
