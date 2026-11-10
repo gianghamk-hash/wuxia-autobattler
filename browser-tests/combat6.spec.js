@@ -58,7 +58,7 @@ test("boss phase HUD follows three continuous squads and settles one reward on m
           (u) => u.team === "enemy" && u.alive,
         ).length,
     ),
-  ).toBe(8);
+  ).toBe(5);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -78,9 +78,9 @@ test("boss phase HUD follows three continuous squads and settles one reward on m
   });
   await page
     .locator("#game-canvas")
-    .screenshot({ path: info.outputPath("eight-enemies-board.png") });
+    .screenshot({ path: info.outputPath("five-enemies-board.png") });
   await page.screenshot({
-    path: info.outputPath("eight-enemies-boss3.png"),
+    path: info.outputPath("five-enemies-boss3.png"),
     animations: "disabled",
   });
   await page.evaluate(() => {

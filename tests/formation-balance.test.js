@@ -6,7 +6,8 @@ import {DAI_VIET_QUESTS} from '../src/data/DaiVietStoryData.js';
 import {ENCOUNTERS} from '../src/data/EnemiesData.js';
 import {MISSIONS} from '../src/data/MissionsData.js';
 import {storyEnemyCount,storyWaveCounts,encounterSeed,enemyLineup} from '../src/core/EncounterFactory.js';
-import {bossSequence} from '../src/combat/BattleRules6.js';
+import {bossSequence,DIFFICULTY} from '../src/combat/BattleRules6.js';
+import {modeEnemyMultiplier} from '../src/combat/EnemyDifficulty.js';
 import {CombatEngine} from '../src/combat/CombatEngine.js';
 import {GridSystem} from '../src/combat/GridSystem.js';
 import {Hero} from '../src/entities/Hero.js';
@@ -50,15 +51,17 @@ test('randomized main boss phases honor their three seeded counts, retaining the
  const next=bossSequence(enemies,q.chapter,{waveCounts:counts});assert.equal(enemies.length,counts[0]);assert.equal(next(2).length,counts[1]);assert.equal(next(3).length,counts[2]);
 });
 
-test('first twenty dungeon floors use the smaller HP/attack budget; later floors and other modes retain theirs',()=>{
- assert.deepEqual([0,9,10,19,20,99].map(earlyDungeonFactor),[.65,.65,.75,.75,.9,1]);
- for(const floor of[0,9,10,19,20]){
+test('all tower floors retain reproducible HP/attack budgets under the gentler mode curve',()=>{
+ assert.deepEqual([0,9,10,19,20,99].map(earlyDungeonFactor),[.55,.55,.65,.65,.75,.90]);
+ for(const floor of[0,9,10,19,20,59,99]){
   const c=developed();c.enterDungeon('phong_nha');const s=c.snapshot();s.adventure.dungeon.floor=floor;c.load(s);c.chooseRoom(0);
   const u=c.battle.units.find(u=>u.team==='enemy'),level=Math.min(20,2+Math.floor(floor/7)),base=new Companion('companion_05',{team:'enemy',level}),boss=(floor+1)%10===0;
   const scale=(.48+floor*.0045)*(boss?.8:1)*earlyDungeonFactor(floor);
-  let hp=Math.round(Math.round(base.stats.maxHp*scale)*1.6);if(boss)hp=Math.round(hp*1.25);
-  assert.equal(u.stats.maxHp,hp*2,`floor ${floor+1}`);
-  assert.equal(u.stats.physicalAtk,base.stats.physicalAtk*scale*1.25*(boss?1.08:1)*2);
-  assert.equal(c.battle.enemyStatMultiplier,2);
+  const modeMultiplier=modeEnemyMultiplier('dungeon',c.session.storyProgress.currentChapter);
+  let hp=Math.round(Math.round(base.stats.maxHp*scale)*DIFFICULTY.hp);if(boss)hp=Math.round(hp*1.10);
+  assert.ok(Math.abs(u.stats.maxHp-hp*modeMultiplier)<1e-8,`floor ${floor+1}`);
+  const atk=base.stats.physicalAtk*scale*DIFFICULTY.attack*(boss?1.03:1)*modeMultiplier;
+  assert.ok(Math.abs(u.stats.physicalAtk-atk)<1e-8,`floor ${floor+1} attack`);
+  assert.equal(c.battle.enemyStatMultiplier,modeMultiplier);
  }
 });

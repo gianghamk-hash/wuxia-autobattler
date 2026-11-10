@@ -49,7 +49,7 @@ export class CombatEngine {
       seed > 0xffffffff ||
       !Number.isFinite(maxDuration) ||
       maxDuration <= 0 ||
-      ![1, 2].includes(enemyStatMultiplier) ||
+      !Number.isFinite(enemyStatMultiplier) || enemyStatMultiplier < 0.25 || enemyStatMultiplier > 2 ||
       (missionId !== null && !Object.hasOwn(MISSIONS, missionId))
     ) {
       throw new Error('Cấu hình trận đấu không hợp lệ.');

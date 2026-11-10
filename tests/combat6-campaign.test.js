@@ -38,14 +38,14 @@ test("the 6.0 campaign has 265 fights, twenty chapter closers and concise safe s
       );
   }
 });
-test("difficulty applies a reproducible twofold HP/attack budget and eight hostile cells fit without exceeding the home-party cap", () => {
+test("difficulty uses the easier authored enemy budget and eight hostile cells still fit", () => {
   const u = new Companion("companion_05", { team: "enemy" }),
     before = structuredClone(u.stats);
   strengthenEnemy(u);
-  assert.equal(u.stats.maxHp, Math.round(before.maxHp * 1.6));
-  assert.equal(u.stats.physicalAtk, before.physicalAtk * 1.25);
-  assert.equal(u.stats.magicalAtk, before.magicalAtk * 1.25);
-  assert.equal(DIFFICULTY.hp * DIFFICULTY.attack, 2);
+  assert.equal(u.stats.maxHp, Math.round(before.maxHp * 1.25));
+  assert.equal(u.stats.physicalAtk, before.physicalAtk * 1.10);
+  assert.equal(u.stats.magicalAtk, before.magicalAtk * 1.10);
+  assert.equal(DIFFICULTY.hp * DIFFICULTY.attack, 1.375);
   const grid = new GridSystem(),
     h = new Hero("VoDang"),
     enemies = ENEMY_CELLS.map((p, i) => {
@@ -134,7 +134,7 @@ test("all five towers retain 100 floors, deterministic reloads and correct rewar
     copy.load(pending);
     copy.retryEncounter();
     assert.equal(copy.battle.seed, b.seed);
-    assert.equal(b.enemyStatMultiplier,2);
+    assert.equal(b.enemyStatMultiplier,0.928);
     const r = fight(c), repeated=fight(copy);
     assert.equal(r.winner,repeated.winner,def.id);
     assert.deepEqual(r.rewards,repeated.rewards,def.id);

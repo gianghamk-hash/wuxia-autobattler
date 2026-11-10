@@ -1,6 +1,6 @@
 import { Companion } from "../entities/Companion.js";
 export { ENEMY_SPAWN_CELLS as ENEMY_CELLS } from './BoardGeometry.js';
-export const DIFFICULTY = { power: 2, hp: 1.6, attack: 1.25 };
+export const DIFFICULTY = { power: 1.375, hp: 1.25, attack: 1.10 };
 export const BOSS_TITLES = [
   "Đội trưởng chặn hội",
   "Chủ khảo năm viện",
@@ -101,10 +101,10 @@ export function bossSequence(
       u.characterId =
         phase === 3 ? skin : phase === 1 ? "boss_captain" : "boss_river";
       u.storyActorId=u.characterId==='doc_le'?'cao_le':'boss';
-      u.stats.maxHp = Math.round(u.stats.maxHp * (phase === 3 ? 2 : 1.25));
+      u.stats.maxHp = Math.round(u.stats.maxHp * (phase === 3 ? 1.45 : 1.10));
       u.stats.hp = u.stats.maxHp;
-      u.stats.physicalAtk *= phase === 3 ? 1.2 : 1.08;
-      u.stats.magicalAtk *= phase === 3 ? 1.2 : 1.08;
+      u.stats.physicalAtk *= phase === 3 ? 1.10 : 1.03;
+      u.stats.magicalAtk *= phase === 3 ? 1.10 : 1.03;
     } else {
       u.name = (training ? "Bạn tập" : "Hộ vệ") + " " + (index + 1);
       u.characterId = TROOP_SKINS[(chapter + index) % TROOP_SKINS.length];

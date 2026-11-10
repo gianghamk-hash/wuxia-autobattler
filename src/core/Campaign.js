@@ -5,7 +5,7 @@ import { validateRanks } from '../data/ProgressionBalance.js';
 import {storyRecruit7,STORY_RECRUITS7} from '../data/Recruitment7.js';
 import {entryMethods} from './DungeonEntries.js';
 import {bossSequence} from '../combat/BattleRules6.js';
-import {campaignEnemyMultiplier,scaleEnemyStats} from '../combat/EnemyDifficulty.js';
+import {modeEnemyMultiplier,scaleEnemyStats} from '../combat/EnemyDifficulty.js';
 import { freshGacha, validateGacha, gachaMethods } from './Gacha.js';
 import { freshJourney, validateJourney, journeyMethods } from './Journey.js';
 import { MISSIONS } from '../data/MissionsData.js';
@@ -714,8 +714,8 @@ export class Campaign {
       count: isDaiViet(this.session)?storyEnemyCount(quest,pending?.kind==='main'&&pending.questId===quest.id?pending.seed:encounterSeed(this.session.storyProgress.attemptCounter+1)):Math.min(MISSIONS[quest.id]?.type==='breach'?6:8,encounter.count??encounter.templates.length),
       main: true
     });
-    if(isDaiViet(this.session)&&quest.boss)bossSequence(enemies,quest.chapter,{normalizeWaveSize:quest.chapter<=2,waveCounts:storyWaveCounts(quest,pending?.kind==='main'&&pending.questId===quest.id?pending.seed:encounterSeed(this.session.storyProgress.attemptCounter+1))});
-    if(isDaiViet(this.session))for(const unit of enemies)scaleEnemyStats(unit,campaignEnemyMultiplier(quest.chapter));
+    if(isDaiViet(this.session)&&quest.boss)bossSequence(enemies,quest.chapter,{normalizeWaveSize:true,waveCounts:storyWaveCounts(quest,pending?.kind==='main'&&pending.questId===quest.id?pending.seed:encounterSeed(this.session.storyProgress.attemptCounter+1))});
+    if(isDaiViet(this.session))for(const unit of enemies)scaleEnemyStats(unit,modeEnemyMultiplier('main',quest.chapter));
     const missionId = pending
       ? pending.kind === 'main'
         ? pending.missionId
@@ -952,9 +952,9 @@ export class Campaign {
     this.lastResult = null;
     this.battleToken = pending.token;
     const boss=Boolean(isDaiViet(this.session)&&quest?.boss&&pending.kind==='main');
-    const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter,{normalizeWaveSize:quest.chapter<=2,waveCounts:storyWaveCounts(quest,pending.seed)}):null;
+    const nextBossWave=boss?bossSequence(units.filter(u=>u.team==='enemy'),quest.chapter,{normalizeWaveSize:true,waveCounts:storyWaveCounts(quest,pending.seed)}):null;
     this.battle = new CombatEngine({
-      enemyStatMultiplier:isDaiViet(this.session)?campaignEnemyMultiplier(pending.kind==='main'?quest.chapter:pending.kind==='practice'?1:this.session.storyProgress.currentChapter):1,
+      enemyStatMultiplier:isDaiViet(this.session)?modeEnemyMultiplier(pending.kind,pending.kind==='main'?quest.chapter:this.session.storyProgress.currentChapter):1,
       enemyLimit:8,nextBossWave,maxDuration:boss?360:150,
       units,
       grid,
