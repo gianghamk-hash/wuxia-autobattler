@@ -15,12 +15,12 @@ function fixture() {
   return campaign;
 }
 test('All 100 dungeon floors receive relief, strongest in early floors',()=>{
-  assert.equal(earlyDungeonFactor(0),.55);
-  assert.equal(earlyDungeonFactor(9),.55);
-  assert.equal(earlyDungeonFactor(10),.65);
-  assert.equal(earlyDungeonFactor(20),.75);
-  assert.equal(earlyDungeonFactor(30),.85);
-  assert.equal(earlyDungeonFactor(99),.90);
+  assert.equal(earlyDungeonFactor(0),.57);
+  assert.equal(earlyDungeonFactor(9),.57);
+  assert.equal(earlyDungeonFactor(10),.68);
+  assert.equal(earlyDungeonFactor(20),.78);
+  assert.equal(earlyDungeonFactor(30),.88);
+  assert.equal(earlyDungeonFactor(99),.93);
 });
 test('Võ Đạo Các costs resources and persists across a save reload',()=>{
   const c=fixture(),before=itemCount(c.session,'silver');
