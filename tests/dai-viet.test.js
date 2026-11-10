@@ -63,7 +63,7 @@ test('first chapters remain winnable and later training follows a smooth, access
  let laterLosses=0;
  for(const sect of SECT_IDS)for(const q of DAI_VIET_QUESTS.filter(q=>q.chapter<=4&&q.combatType)){
   const c=fresh(sect),s=snapshotAt(q.id);s.hero=createHeroBuild({name:'Trần Phong',sect,level:q.level});c.load(s);
-  c.chooseMain('continue');assert.equal(c.battle.enemyStatMultiplier,q.chapter<=2?.78:.88);const r=fight(c);if(q.chapter<=2)assert.equal(r.winner,'home',sect+' '+q.id+' '+r.reason);else if(r.winner==='enemy')laterLosses++;
+  c.chooseMain('continue');assert.equal(c.battle.enemyStatMultiplier,q.chapter<=2?.78:.93);const r=fight(c);if(q.chapter<=2)assert.equal(r.winner,'home',sect+' '+q.id+' '+r.reason);else if(r.winner==='enemy')laterLosses++;
   if(DAI_VIET_MISSIONS[q.id]?.noWaves){if(r.winner==='home')assert.ok(r.duration>=12);assert.equal(c.battle.mission.waves.size,0);}
  }
  assert.ok(laterLosses>=0); // A gentle training curve need not force player losses.
