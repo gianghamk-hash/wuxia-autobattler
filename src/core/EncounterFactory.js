@@ -17,9 +17,11 @@ export function enemyLineup({ quest, encounter, count, grid, main,rules }) {
     unit.stats.hp = unit.stats.maxHp;
     unit.stats.physicalAtk *= encounter.attackScale;
     unit.stats.magicalAtk *= encounter.attackScale;
-    // Random headcounts must not turn the untrained opening into an eight-unit wall.
-    // Keep the original four-troop HP/attack budget until chapter 3.
-    if(advanced&&main&&quest.chapter<=2){
+    // Random headcounts and three boss waves should keep a four-troop
+    // aggregate power budget instead of multiplying boss difficulty by eight.
+    // Apply the budget before strengthenEnemy/campaign scaling so scouting,
+    // retries and actual battles remain deterministic.
+    if(advanced&&main&&(quest.chapter<=2||quest.boss)){
       const budget=4/templates.length;
       unit.stats.maxHp=Math.round(unit.stats.maxHp*budget);unit.stats.hp=unit.stats.maxHp;
       unit.stats.physicalAtk*=budget;unit.stats.magicalAtk*=budget;
