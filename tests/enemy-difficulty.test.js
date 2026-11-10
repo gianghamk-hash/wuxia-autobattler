@@ -23,7 +23,7 @@ function fixture(multiplier,{waves=false,boss=false,mission=false}={}){
 function twice(actual,base){const keys=['maxHp','hp','physicalAtk','magicalAtk','physicalDef','magicalDef'];for(const[key,value]of Object.entries(base.stats))assert.equal(actual.stats[key],keys.includes(key)?value*2:value,key);}
 
 test('only enemy survival/damage stats scale once; energy, speed, allies and objectives are not changed',()=>{
- assert.deepEqual([1,2,3,7,11,15,20].map(campaignEnemyMultiplier),[.78,.78,.88,.96,1.04,1.10,1.16]);
+ assert.deepEqual([1,2,3,7,11,15,20].map(campaignEnemyMultiplier),[.78,.78,.93,1.02,1.11,1.18,1.25]);
  const a=fixture(1),b=fixture(2);twice(b.units[1],a.units[1]);assert.deepEqual(b.units[0].stats,a.units[0].stats);
  const before=structuredClone(b.units[1].stats);b.scaleEnemy(b.units[1]);assert.deepEqual(b.units[1].stats,before);
  const objective={team:'enemy',missionAsset:true,stats:{hp:300,maxHp:300}};scaleEnemyStats(objective,2);assert.equal(objective.stats.hp,300);
