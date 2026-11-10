@@ -56,7 +56,7 @@ for(const width of [390,1280])test('sixty companion dossiers, meaningful choices
  await page.locator('#world-tabs').getByRole('button',{name:'Quán & Rèn',exact:true}).click();
  await page.getByRole('button',{name:'Đồng hành',exact:true}).click();
  const roster=page.locator('.companion-journeys');
- if(!await roster.evaluate(el=>el.open))await roster.locator('> summary').click();
+ if(!await roster.evaluate(el=>el.open))await roster.locator(':scope > summary').click();
  const again=page.locator('[data-companion-id="'+id+'"].companion-memory-card');
  if(!await again.evaluate(el=>el.open))await again.locator('summary').click();
  await again.locator('[data-milestone="100"] button').click();
